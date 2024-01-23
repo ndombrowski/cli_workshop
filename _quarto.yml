@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: docs
+
+execute:
+  freeze: auto  # re-render only when source changes
+
+website:
+  title: "Introduction to the cli"
+  
+  sidebar:
+  - id: "Welcome page"
+    style: "docked"
+    search: true
+    collapse: true
+
+    contents:
+      - text: "Welcome page"
+        href: index.qmd
+
+      - section: "Cli basics"
+        contents:
+          - source/installation.qmd
+          - source/code_documentation.qmd
+          -  source/bash_intro.qmd
+      
+      - section: "Using an HPC"
+        contents:
+          - source/hpc_intro.qmd
+          - source/hpc_howto.qmd
+
+  page-navigation: true
+  page-footer:  
+    center: | 
+      Copyright 2024, Nina Dombrowski,    
+      Last modified: {{< meta date >}} 
+
+
+format:
+  html:
+    theme:
+      light: lumen
+      dark: cyborg
+    date: last-modified
+    toc: true
+    toc-expand: true
+    toc-depth: 4
+    link-external-newwindow: true
+
+

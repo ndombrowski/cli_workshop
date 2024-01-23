@@ -1,0 +1,16 @@
+{
+  "hash": "e0562f7e60fac7f48826ce3dcd33950d",
+  "result": {
+    "markdown": "---\ncode-block-bg: true\ncode-block-border-left: \"#31BAE9\"\nexecute:\n  eval: false\nengine: knitr\nbibliography: references.bib\n---\n\n\n<div style=\"text-align: justify\">\n\n## Installing a terminal\n",
+    "supporting": [
+      "installation_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
