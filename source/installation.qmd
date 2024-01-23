@@ -9,4 +9,58 @@ bibliography: references.bib
 
 <div style="text-align: justify">
 
-## Installing a terminal
+# Setting up a terminal
+
+## Terminology
+
+The **Linux command-line interface (CLI)** is an alternative to a graphical user interface (GUI) with which you are likely more familiar. Both interfaces allow a user to interact with an operating system. The key difference between the CLI and GUI is that the interaction with CLI is based on issuing commands. In contrast, the interaction with a GUI involves visual elements, such as windows, buttons, etc. CLI is often also referred to as the shell, terminal, console, prompt or various other names
+
+**Bash** is a type of interpreter that processes shell commands. A shell interpreter takes commands in plain text format and calls the operating system to do something, for example changing a directory or modifying the content of some files. Bash itself stands for Bourne Again Shell and it is one of the popular command-line shells used to run other programs, many of which are useful for bioinformatic workflows.
+
+
+## Installation guides
+
+### Linux
+
+The default shell is usually Bash and there is usually no need to install anything to be able to follow this tutorial. On most versions of Linux, th shell accessible by running the Gnome Terminal or KDE Konsole or xterm, which can be found via the applications menu or the search bar. If your machine is set up to use something other than Bash, you can run it by opening a terminal and typing bash.
+
+### Mac
+
+For Mac running macOS Mojave or earlier releases, the default Unix Shell is Bash. For a Mac computer running macOS Catalina or later releases, the default Unix Shell is Zsh. To open a terminal, try one or both of the following:
+
+- In Finder, select the Go menu, then select Utilities. Locate Terminal in the Utilities folder and open it.
+-  Use the Mac ‘Spotlight’ computer search function. Search for: Terminal and press Return.
+
+To ensure that we work with a consistent shell and to check if your machine is set up to use something other than Bash, type `echo $SHELL` in your terminal window.
+
+If your machine is set up to use something other than Bash, you can try switching to Bash by opening a terminal and typing `bash`. To check if that worked type `echo $SHELL` again.
+
+
+### Windows
+
+Operating systems like macOS and Linux come with a native command-line terminal, making it straightforward to run bash commands. However, for Windows users you need to install some software first to be able to use bash, below you find three options:
+
+One option to access the bash shell commands is using **Git Bash**, for detailed installation instructions please have a look at the [carpenties website](https://carpentries.github.io/workshop-template/install_instructions/#shell-windows).
+
+A second option is **Mobaxterm**, which enables Windows users to execute basic Linux/Unix commands on their local machine, connect to an HPC with SSH and to transfer files with SCP/SFTP (more on that later). Installation instructions can be found [here](https://hpc.ncsu.edu/Documents/mobaxterm.php).
+
+A final option is to use Windows and Linux at the same time on a Windows machine. The **Windows Subsystem for Linux (WSL2)** lets users install a Linux distribution (such as Ubuntu, which is the default Linux distribution, which we recommend to use) and use Linux applications, utilities, and Bash command-line tools directly on Windows. This option allows you to use all the tools available but since you more or less are installing a separating system on your PC needs to have enough memory to run this. Installation instructions can be found [here](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+::: {.callout-note}
+I am myself mostly familiar with WSL and the following tutorial is tailored towards the location of things when using WSL and Linux and your folder structure might be slightly different when using Git Bash or Mobaxterm.
+
+Similarly, I am mainly familiar with the bash not the zsh shell. For Mac users that have a newer MAC and have trouble switching to bash this might create some issues when using wildcards.
+
+For both issues: If parts of the tutorial do not work for you due to that, feel free to contact me and I can adjust the tutorial accordingly.
+:::
+
+
+## Sanity check
+
+After you set everything up and opened a terminal you should see something like this and are good to go if you want to follow the tutorial:
+
+<p align="center">
+  <img width="500"  src="../img/terminal.png">
+</p>
+
+

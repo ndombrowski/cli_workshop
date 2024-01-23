@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -77,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../source/installation.html">Cli basics</a></li><li class="breadcrumb-item"><a href="../source/code_documentation.html">code_documentation.html</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../source/installation.html">Cli basics</a></li><li class="breadcrumb-item"><a href="../source/code_documentation.html">Documenting code</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -105,29 +139,31 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Welcome page</span></span>
-  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome page</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Cli basics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../source/installation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing a terminal</span></a>
+ <span class="menu-text">Setting up a terminal</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../source/code_documentation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">code_documentation.html</span></a>
+ <span class="menu-text">Documenting code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -140,13 +176,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Using an HPC</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../source/hpc_intro.html" class="sidebar-item-text sidebar-link">
@@ -167,17 +203,160 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#documenting-code" id="toc-documenting-code" class="nav-link active" data-scroll-target="#documenting-code">Documenting code</a></li>
+  <li><a href="#choose-your-editor" id="toc-choose-your-editor" class="nav-link" data-scroll-target="#choose-your-editor">Choose Your Editor</a></li>
+  <li><a href="#markdown-for-documentation" id="toc-markdown-for-documentation" class="nav-link" data-scroll-target="#markdown-for-documentation">Markdown for Documentation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 
+<div style="text-align: justify">
+
+<section id="documenting-code" class="level2">
+<h2 class="anchored" data-anchor-id="documenting-code">Documenting code</h2>
+<p>Documenting your code is crucial for both your future self and anyone else who might work with your code. Documentation serves as a roadmap for your code. It helps others (and your future self) understand the purpose, functionality, and usage of your code.</p>
+<p><a href="https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf">A Guide to Reproducible Code in Ecology and Evolution</a> gives detailed information on how to organize project folders and how to write clear and reproducible code. The examples are mainly based on R code but most are general enough to apply to other computational langauges (and scientific disciplines).</p>
+<p>If you want to see an example for documented code, check out [this example file]<strong>tba</strong>. The example file is a markdown file (qmd) generated with VSCode. Some examples for text editors to use can be found below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The information in this section is not part of the actual tutorial but was added to give you a starting point for how to document your code.</p>
+<p>If you follow the in-person tutorial it is best to record your notes using a plain text editor but feel free to explore the more advanced options after the tutorial.</p>
+</div>
+</div>
+</section>
+<section id="choose-your-editor" class="level2">
+<h2 class="anchored" data-anchor-id="choose-your-editor">Choose Your Editor</h2>
+<section id="plain-text-editor" class="level3">
+<h3 class="anchored" data-anchor-id="plain-text-editor">Plain text editor</h3>
+<p>When documenting code, its best to avoid visual editors, such as word, as they are not designed for writing code and easily destroy the formating by for example changing ` to ’, which when writing code is quite a big difference.</p>
+<p>Instead you can use a plain text editor, such as TextEdit (Mac) or Notepad (Windows). This is the easiest to get started but you will loose some functionality, such as adding headers or writing text in bold.</p>
+<p>Alternatives, that offer more functionality, are for example RStudio or VScode.</p>
+</section>
+<section id="rmarkdown-in-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="rmarkdown-in-rstudio">Rmarkdown in RStudio</h3>
+<p>RMarkdown is an extension of Markdown that allows you to integrate R code directly into your documentation.</p>
+<p>If you have not install R and Rstudio, follow <a href="https://rstudio-education.github.io/hopr/starting.html">these instructions</a>.</p>
+<p>In RStudio you can create an R Markdown File by:</p>
+<ul>
+<li>In RStudio, go to File -&gt; New File -&gt; R Markdown</li>
+<li>Choose a title, author, and output format</li>
+<li>Knit the Document:
+<ul>
+<li>Click the “Knit” button to render your R Markdown document into the chosen output format.</li>
+</ul></li>
+</ul>
+<p>For more information visit <a href="https://rmarkdown.rstudio.com/lesson-1.html">the RMarkdown tutorial</a>.</p>
+</section>
+<section id="quarto-in-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-in-rstudio">Quarto in Rstudio</h3>
+<p>Quarto is an alternative to RMarkdown for creating dynamic documents in RStudio but can be read by other editors, such as VScode. Compared to RMarkdown it provides enhanced features for document creation and includes many more built in output formats (and many more options for customizing each format).</p>
+<p>It is installed by default on newer R installations.</p>
+<ul>
+<li>In RStudio, go to File -&gt; New File -&gt; Quarto document</li>
+<li>Choose a title, author, and output format</li>
+<li>Render the Document:
+<ul>
+<li>Click the “Render” button to render your R Markdown document into the chosen output format.</li>
+</ul></li>
+</ul>
+<p>For more information (and more functionality) visit <a href="https://quarto.org/docs/get-started/hello/rstudio.html">the Quarto website</a>.</p>
+</section>
+<section id="vscode" class="level3">
+<h3 class="anchored" data-anchor-id="vscode">VSCode</h3>
+<p>Visual Studio Code (VSCode) is a versatile and user-friendly code editor. It provides excellent support for various programming languages, extensions, and a built-in terminal but might take a bit of work to setup to work with different compuational languages.</p>
+<ol type="1">
+<li>Installation:
+<ul>
+<li>Download and install VSCode from <a href="https://code.visualstudio.com/">here</a>.</li>
+</ul></li>
+<li>Extensions:
+<ul>
+<li>Install extensions relevant to your programming language (e.g., Python, R). These extensions enhance code highlighting and provide additional features.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="markdown-for-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="markdown-for-documentation">Markdown for Documentation</h2>
+<p>Markdown is a lightweight markup language that’s easy to read and write. It allows you to add formatting elements to plain text documents.</p>
+<p><strong>Headers:</strong></p>
+<p>Use <code>#</code> for headers. The more <code>#</code> symbols, the smaller the header. When writing a header make sure to always put a space between the <code>#</code> and the header name.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Main Header</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subheader</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Lists:</strong></p>
+<p>Use <code>-</code> or <code>*</code> for unordered lists and numbers for ordered lists.</p>
+<p>Ordered lists are created by using numbers followed by periods. The numbers don’t have to be in numerical order, but the list should start with the number one.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>First item</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Second item</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Third item</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Fourth item </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>First item</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Second item</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Third item</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ss">    1. </span>Indented item</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    2. </span>Indented item</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Fourth item </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Unordered lists are created using dashes (<code>-</code>), asterisks (<code>*</code>), or plus signs (<code>+</code>) in front of line items. Indent one or more items to create a nested list.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>First item</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Second item</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Third item</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fourth item </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>First item</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Second item</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Third item</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Indented item</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Indented item</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fourth item </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also combine ordered with unordered lists:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>First item</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Second item</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Third item</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Indented item</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Indented item</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Fourth item</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Code Blocks:</strong></p>
+<p>Enclose code snippets in triple backticks.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"control"</span> downloads/Experiment1.txt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Links:</strong></p>
+<p>Create links to external resources or within your documentation.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Link Text</span><span class="co">](https://www.example.com)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Emphasis:</strong></p>
+<p>Use <code>*</code> or <code>_</code> for italic and <code>**</code> or <code>__</code> for bold.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>*italic*</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>**bold**</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Pictures</strong></p>
+<p>You can easily add images to your documentation as well:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Alt Text](path/to/your/image.jpg)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, replace <code>Alt Text</code> with a descriptive alternative text for your image, and <code>path/to/your/image.jpg</code> with the actual path or URL of your image.</p>
+<p><strong>Tables</strong></p>
+<p>Tables can be useful for organizing information. Here’s a simple table:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>| Header 1 | Header 2 |</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>| ---------| ---------|</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>| Content 1| Content 2|</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>| Content 3| Content 4|</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 
-</main> <!-- /main -->
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -543,7 +722,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../source/installation.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Installing a terminal</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Setting up a terminal</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

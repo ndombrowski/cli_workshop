@@ -4,4 +4,47 @@ toc-depth: 2
 
 ## Welcome page
 
-On this website you find ...
+On this website you will find a short tutorial that will provide guidance in how to use bash and the command line interface.
+
+The first few pages called `Setting up a terminal` and `Documenting your code` will provide some help in installing a terminal and document your code.
+
+Afterwards, the actual tutorial will begin, in which we will download some sequencing data and work learn how to explore the data using bash, Specifically,we will learn the following in two sections:
+
+- **Section 1** can be followed on your own computer and will guide you through the following steps:
+  - Locating what directory we are working and what files are in the folder we are working in
+  - Moving around the filesystem
+  - Generating new folders
+  - Downloading example data
+  - Explore the content of compressed sequence files
+  - Generating new files 
+  - Viewing (and editing) files
+  - Exploring sequence files and finding patterns inside
+  - Combining multiple files into one
+
+
+- **Section 2** will introduce how to use an HPC. This section is specifically designed for users working at the University of Amsterdam (UvA). This section will guide you through the following steps:
+  - Getting access to the UvA Crunchomics HPC
+  - Learning about what an HPC can be used for
+  - Logging into an HPC 
+  - Uploading (and downloading) files
+  - Submitting job via slurm part1 in which we use pre-installed software to explore sequence quality
+  - Installing the seqkit software that is not pre-installed using conda
+  - Submit a job via slurm part 2 in which we use conda installed software to the number of reads in our sequence files
+
+Finally, there will be an optional section with more advanced material that is giving a pre-view into what else you can do with the command line. Here, you find information about:
+
+  - sed and awk that can be used to manipulate large + numerous files
+  - git + github + zenodo that are useful for sharing code + data
+  - How to access the Crunchomics application server to use Rstudio
+
+
+
+
+ ----------
+
+To do:
+
+- Work on tutorial pages
+- Download of current example data takes 8 min (reduce size)
+- Get familiar with Mobaxterm
+- Get familiar with FileZila (added notes in the surf documentation)
