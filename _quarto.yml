@@ -22,7 +22,7 @@ website:
         contents:
           - source/installation.qmd
           - source/code_documentation.qmd
-          -  source/bash_intro.qmd
+          - source/bash_intro.qmd
       
       - section: "Using an HPC"
         contents:

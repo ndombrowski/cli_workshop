@@ -1,5 +1,6 @@
 data/
 /.quarto/
+data_analysis/
 
 .DS_Store
 
@@ -12,3 +13,7 @@ data/
 
 # User-specific files
 .Ruserdata
+
+
+# exceptions
+!data/seq_project.tar.gz

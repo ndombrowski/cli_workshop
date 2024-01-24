@@ -1,0 +1,169 @@
+---
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+execute:
+  eval: false
+engine: knitr
+bibliography: references.bib
+---
+
+<div style="text-align: justify">
+
+# Introduction to Bash
+
+## `pwd`: Finding out where we are
+
+After installing the terminal, let's orient ourselves by typing our first command, `pwd`, into the terminal and pressing enter. `pwd` prints the location of the current working directory and basically tells you where exactly you are. 
+
+When we login we start from what is called our home directory.
+
+```{bash}
+pwd
+```
+
+::: {.callout-tip title="Tip: finding the desktop on different user systems" collapse=true}
+
+Your home directory will be something like /Users/YourUserName but might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces:
+
+For MAC users:  
+
+- The home directory should be `/Users/YourUserName`
+- To access the current folder in Finder you can try using `open .`
+- Your desktop should be here `/Users/YourUserName/Desktop`
+
+For Mobaxterm users:  
+
+- Your home directory is `/home/mobaxterm`
+- By default this home directory is in the Temp folder, which gets deleted evertime you exit Mobaxterm, To give this a persistent home, do the following:
+  - Settings --> Configuration --> General 
+  - In there set Persistent home directory to a folder of your choice
+-  To access the file explorer and get used to where you are you can type `explorer.exe .`
+-  The path to the desktop would be something like this `/mnt/c/Users/YourUserName/OneDrive/Desktop` or `/mnt/c/Users/YourUserName/Desktop`
+
+For WSL2 users:  
+
+-  The home directory is `/home/YourUserName`
+-  To access the file explorer and get used to where you are you can type `explorer.exe .`
+-  You see that the Ubuntu environment is launched separated from your Windows environment
+-  The path to the desktop would be something like this `/mnt/c/Users/YourUserName/OneDrive/Desktop` or `/mnt/c/Users/YourUserName/Desktop`
+:::
+
+## `ls`: List the content of a directory 
+
+Now that we know where we are, let's see how to move around by first seeing what files and folders exist in our home directory. For this we can use the `ls` command, which stands for list directory contents:
+
+```{bash}
+ls
+```
+
+In my case this returns something like this:
+
+<p align="left">
+<img src="../img/ls.png" width="500"/>
+</p>
+
+This might look a bit different for your system in terms of color for file/folder names but what we basically see are the files (in bold text) and folders (green-highlighted text).
+
+
+## The structure of a command
+
+Since this can easily become over-whelming if we deal with a lot of files and folders, lets look a bit closer into how we can optimize our commands.
+
+Let´s start with looking at the general structure of a command:
+
+<p align="left">
+<img src="../img/unix_command.png" width="500"/>
+</p>
+
+
+Now, let's look a bit closer into the `ls` command and use it with an option `-l`, an option we can use that makes ls use a long listing format.
+
+```{bash}
+ls -l
+```
+
+After running this, we should see our files and folders but in what is called the long format (which gives more detailed information and structures our output a bit better):
+
+<p align="left">
+<img src="../img/ls2.png" width="500"/>
+</p>
+
+
+If you are unsure what options come with a program its always a good idea to check out the manual. You can do this with:
+
+```{bash}
+man ls
+```
+
+You can exit the manual by pressing `q`.
+
+In case you want to check what a program does or what options there are, depending on the program there might be different ways how to do this. These most common ways are:
+
+-   `man ls`
+-   `ls --help`
+-   `ls -h`
+
+
+## `cd`: Moving around folders
+
+Most of the time you do not want to perform your analyses in the home directory but elsewhere. We can use the `cd` command to move around the file system. 
+
+The Unix file system is a hierarchical file system to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (/) character. All other files are "descendants" of root. To move from the root, we can go via the descendants to reach the john folder as follows: `/users/john`
+
+<p align="center">
+<img src="../img/filesystem.png" width="500"/>
+</p>
+
+For our analyses, we will move into any of the folders that we see listed after we have used `ls -l`. In my case I want to move into the source directory:
+
+```{bash}
+cd source/
+```
+
+If you use `pwd` afterwards, then you should see that we moved into another directory. 
+
+We can also move back to our original directory using `cd ..`, which will move the user up one directory (and move us out of the source and back into the home directory). 
+
+```{bash}
+cd ..
+```
+
+We can also move around multiple levels. In the example below, I am going into the source folder, then back to the home directory and then into the docs folder. 
+
+```{bash}
+cd source/../docs
+```
+
+Another useful way to move around quickly is using the tilde symbol, i.e. `~`, which can be used as a shortcut to move directly into our home directory:
+
+```{bash}
+cd ~
+```
+
+::: {.callout-caution collapse="false" title="Exercise"}
+Explore your current location with `pwd` and `ls` and move around with `cd` and try to get used to these three commands. If you are more comfortable, try finding your Deskop based on the tips in the section introducing `pwd`
+:::
+
+
+## `mkdir`: Making new folders
+
+Now that we know how to explore our surroundings, let us make a new folder in which we start our data analysios. For this we use the `mkdir` command.
+
+To do this, we will first move into our home directory and create a new folder and move into that folder as follows:
+
+```{bash}
+#go into the folder from which you want to work (i.e. the home directory)
+cd ~
+
+#make a new folder (in the directory we currently are in, name it new_older)
+mkdir data_analysis
+
+#check if new folder was generated
+ls
+
+#next we move into the newly generated folder
+cd data_analysis
+
+#check if we correctly changed our location
+pwd
+```

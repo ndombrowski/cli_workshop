@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-23">
+<meta name="dcterms.date" content="2024-01-24">
 
 <title>Introduction to the cli – bash_intro</title>
 <style>
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -77,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Basics</a></li><li class="breadcrumb-item"><a href="../source/bash_intro.html">bash_intro.html</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../source/installation.html">Cli basics</a></li><li class="breadcrumb-item"><a href="../source/bash_intro.html">Introduction to Bash</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -105,10 +139,16 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome page</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Basics</span></a>
+ <span class="menu-text">Cli basics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -116,26 +156,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bash_intro</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../source/installation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">installation.html</span></a>
+ <span class="menu-text">Setting up a terminal</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../source/code_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">code_documentation.html</span></a>
+ <span class="menu-text">Documenting code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../source/bash_intro.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">bash_intro.html</span></a>
+ <span class="menu-text">Introduction to Bash</span></a>
   </div>
 </li>
       </ul>
@@ -169,17 +203,162 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-bash" id="toc-introduction-to-bash" class="nav-link active" data-scroll-target="#introduction-to-bash">Introduction to Bash</a>
+  <ul>
+  <li><a href="#pwd-finding-out-where-we-are" id="toc-pwd-finding-out-where-we-are" class="nav-link" data-scroll-target="#pwd-finding-out-where-we-are"><code>pwd</code>: Finding out where we are</a></li>
+  <li><a href="#ls-list-the-content-of-a-directory" id="toc-ls-list-the-content-of-a-directory" class="nav-link" data-scroll-target="#ls-list-the-content-of-a-directory"><code>ls</code>: List the content of a directory</a></li>
+  <li><a href="#the-structure-of-a-command" id="toc-the-structure-of-a-command" class="nav-link" data-scroll-target="#the-structure-of-a-command">The structure of a command</a></li>
+  <li><a href="#cd-moving-around-folders" id="toc-cd-moving-around-folders" class="nav-link" data-scroll-target="#cd-moving-around-folders"><code>cd</code>: Moving around folders</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 
+<div style="text-align: justify">
+
+<section id="introduction-to-bash" class="level1">
+<h1>Introduction to Bash</h1>
+<section id="pwd-finding-out-where-we-are" class="level2">
+<h2 class="anchored" data-anchor-id="pwd-finding-out-where-we-are"><code>pwd</code>: Finding out where we are</h2>
+<p>After installing the terminal, let’s orient ourselves by typing our first command, <code>pwd</code>, into the terminal and pressing enter. <code>pwd</code> prints the location of the current working directory and basically tells you where exactly you are.</p>
+<p>When we login we start from what is called our home directory.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: finding the desktop on different user systems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip: finding the desktop on different user systems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Your home directory will be something like /Users/YourUserName but might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces:</p>
+<p>For MAC users:</p>
+<ul>
+<li>The home directory should be <code>/Users/YourUserName</code></li>
+<li>To access the current folder in Finder you can try using <code>open .</code></li>
+<li>Your desktop should be here <code>/Users/YourUserName/Desktop</code></li>
+</ul>
+<p>For Mobaxterm users:</p>
+<ul>
+<li>Your home directory is <code>/home/mobaxterm</code></li>
+<li>By default this home directory is in the Temp folder, which gets deleted evertime you exit Mobaxterm, To give this a persistent home, do the following:
+<ul>
+<li>Settings –&gt; Configuration –&gt; General</li>
+<li>In there set Persistent home directory to a folder of your choice</li>
+</ul></li>
+<li>To access the file explorer and get used to where you are you can type <code>explorer.exe .</code></li>
+<li>The path to the desktop would be something like this <code>/mnt/c/Users/YourUserName/OneDrive/Desktop</code> or <code>/mnt/c/Users/YourUserName/Desktop</code></li>
+</ul>
+<p>For WSL2 users:</p>
+<ul>
+<li>The home directory is <code>/home/YourUserName</code></li>
+<li>To access the file explorer and get used to where you are you can type <code>explorer.exe .</code></li>
+<li>You see that the Ubuntu environment is launched separated from your Windows environment</li>
+<li>The path to the desktop would be something like this <code>/mnt/c/Users/YourUserName/OneDrive/Desktop</code> or <code>/mnt/c/Users/YourUserName/Desktop</code></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="ls-list-the-content-of-a-directory" class="level2">
+<h2 class="anchored" data-anchor-id="ls-list-the-content-of-a-directory"><code>ls</code>: List the content of a directory</h2>
+<p>Now that we know where we are, let’s see how to move around by first seeing what files and folders exist in our home directory. For this we can use the <code>ls</code> command, which stands for list directory contents:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In my case this returns something like this:</p>
+<p align="left">
+<img src="../img/ls.png" width="500">
+</p>
+<p>This might look a bit different for your system in terms of color for file/folder names but what we basically see are the files (in bold text) and folders (green-highlighted text).</p>
+</section>
+<section id="the-structure-of-a-command" class="level2">
+<h2 class="anchored" data-anchor-id="the-structure-of-a-command">The structure of a command</h2>
+<p>Since this can easily become over-whelming if we deal with a lot of files and folders, lets look a bit closer into how we can optimize our commands.</p>
+<p>Let´s start with looking at the general structure of a command:</p>
+<p align="left">
+<img src="../img/unix_command.png" width="500">
+</p>
+<p>Now, let’s look a bit closer into the <code>ls</code> command and use it with an option <code>-l</code>, an option we can use that makes ls use a long listing format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After running this, we should see our files and folders but in what is called the long format (which gives more detailed information and structures our output a bit better):</p>
+<p align="left">
+<img src="../img/ls2.png" width="500">
+</p>
+<p>If you are unsure what options come with a program its always a good idea to check out the manual. You can do this with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can exit the manual by pressing <code>q</code>.</p>
+<p>In case you want to check what a program does or what options there are, depending on the program there might be different ways how to do this. These most common ways are:</p>
+<ul>
+<li><code>man ls</code></li>
+<li><code>ls --help</code></li>
+<li><code>ls -h</code></li>
+</ul>
+</section>
+<section id="cd-moving-around-folders" class="level2">
+<h2 class="anchored" data-anchor-id="cd-moving-around-folders"><code>cd</code>: Moving around folders</h2>
+<p>Most of the time you do not want to perform your analyses in the home directory but elsewhere. We can use the <code>cd</code> command to move around the file system.</p>
+<p>The Unix file system is a hierarchical file system to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (/) character. All other files are “descendants” of root. To move from the root, we can go via the descendants to reach the john folder as follows: <code>/users/john</code></p>
+<p align="center">
+<img src="../img/filesystem.png" width="500">
+</p>
+<p>For our analyses, we will move into any of the folders that we see listed after we have used <code>ls -l</code>. In my case I want to move into the source directory:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> source/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you use <code>pwd</code> afterwards, then you should see that we moved into another directory.</p>
+<p>We can also move back to our original directory using <code>cd ..</code>, which will move the user up one directory (and move us out of the source and back into the home directory).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can also move around multiple levels. In the example below, I am going into the source folder, then back to the home directory and then into the docs folder.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> source/../docs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Another useful way to move around quickly is using the tilde symbol, i.e.&nbsp;<code>~</code>, which can be used as a shortcut to move directly into our home directory:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Explore your current location with <code>pwd</code> and <code>ls</code> and move around with <code>cd</code> and try to get used to these three commands. If you are more comfortable, try finding your Deskop based on the tips in the section introducing <code>pwd</code></p>
+</div>
+</div>
+</div>
 
 
+</section>
+</section>
 
-</main> <!-- /main -->
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -545,7 +724,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../source/code_documentation.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">code_documentation.html</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Documenting code</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -561,7 +740,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>   
     <div class="nav-footer-center">Copyright 2024, Nina Dombrowski,<br>
-Last modified: January 23, 2024</div>
+Last modified: January 24, 2024</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

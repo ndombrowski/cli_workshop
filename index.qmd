@@ -48,3 +48,11 @@ To do:
 - Download of current example data takes 8 min (reduce size)
 - Get familiar with Mobaxterm
 - Get familiar with FileZila (added notes in the surf documentation)
+
+
+Mobaxterm
+
+- [Download](https://mobaxterm.mobatek.net/download-home-edition.html)
+- Start local terminal
+- You should not store anything in MobaXterm HOME directory (/home/mobaxterm): with your current settings, this folder is not "persistent", so it will be cleared at each MobaXterm restart. If you want to set a "persistent" HOME directory which will not be cleared at each MobaXterm startup, go to MobaXterm settings window and choose a folder in which to store MobaXterm home files.
+- Install nano with ` apt install nano`

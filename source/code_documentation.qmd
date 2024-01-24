@@ -172,7 +172,7 @@ You can easily add images to your documentation as well:
 ![Alt Text](path/to/your/image.jpg)
 ```
 
-Here, replace `Alt Text` with a descriptive alternative text for your image, and `path/to/your/image.jpg` with the actual path or URL of your image.
+Here, replace `Alt Text` with a descriptive alternative text for your image, and `path/to/your/ifrom spamage.jpg` with the actual path or URL of your image.
 
 
 **Tables**
