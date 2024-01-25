@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-24">
+<meta name="dcterms.date" content="2024-01-25">
 
 <title>Introduction to the cli – bash_intro</title>
 <style>
@@ -206,32 +206,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#introduction-to-bash" id="toc-introduction-to-bash" class="nav-link active" data-scroll-target="#introduction-to-bash">Introduction to Bash</a>
-  <ul>
-  <li><a href="#pwd-finding-out-where-we-are" id="toc-pwd-finding-out-where-we-are" class="nav-link" data-scroll-target="#pwd-finding-out-where-we-are"><code>pwd</code>: Finding out where we are</a></li>
+  <ul class="collapse">
+  <li><a href="#pwd-find-out-where-we-are" id="toc-pwd-find-out-where-we-are" class="nav-link" data-scroll-target="#pwd-find-out-where-we-are"><code>pwd</code>: Find out where we are</a></li>
   <li><a href="#ls-list-the-content-of-a-directory" id="toc-ls-list-the-content-of-a-directory" class="nav-link" data-scroll-target="#ls-list-the-content-of-a-directory"><code>ls</code>: List the content of a directory</a></li>
   <li><a href="#the-structure-of-a-command" id="toc-the-structure-of-a-command" class="nav-link" data-scroll-target="#the-structure-of-a-command">The structure of a command</a></li>
-  <li><a href="#cd-moving-around-folders" id="toc-cd-moving-around-folders" class="nav-link" data-scroll-target="#cd-moving-around-folders"><code>cd</code>: Moving around folders</a></li>
-  <li><a href="#mkdir-making-new-folders" id="toc-mkdir-making-new-folders" class="nav-link" data-scroll-target="#mkdir-making-new-folders"><code>mkdir</code>: Making new folders</a></li>
-  <li><a href="#wget-downloading-data" id="toc-wget-downloading-data" class="nav-link" data-scroll-target="#wget-downloading-data"><code>wget</code>: Downloading data</a></li>
-  <li><a href="#tar-working-with-tar-files" id="toc-tar-working-with-tar-files" class="nav-link" data-scroll-target="#tar-working-with-tar-files"><code>tar</code>: Working with tar files</a></li>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting help</a></li>
+  <li><a href="#cd-move-around-folders" id="toc-cd-move-around-folders" class="nav-link" data-scroll-target="#cd-move-around-folders"><code>cd</code>: Move around folders</a></li>
+  <li><a href="#mkdir-make-new-folders" id="toc-mkdir-make-new-folders" class="nav-link" data-scroll-target="#mkdir-make-new-folders"><code>mkdir</code>: Make new folders</a></li>
+  <li><a href="#wget-download-data" id="toc-wget-download-data" class="nav-link" data-scroll-target="#wget-download-data"><code>wget</code>: Download data</a></li>
+  <li><a href="#tar-work-with-tar-files" id="toc-tar-work-with-tar-files" class="nav-link" data-scroll-target="#tar-work-with-tar-files"><code>tar</code>: Work with tar files</a></li>
+  <li><a href="#rm-remove-files-and-folders" id="toc-rm-remove-files-and-folders" class="nav-link" data-scroll-target="#rm-remove-files-and-folders"><code>rm</code>: Remove files and folders</a></li>
   <li><a href="#wildcards" id="toc-wildcards" class="nav-link" data-scroll-target="#wildcards">Wildcards</a></li>
-  <li><a href="#gzip-decompressing-files" id="toc-gzip-decompressing-files" class="nav-link" data-scroll-target="#gzip-decompressing-files"><code>gzip</code>: (De)compressing files</a></li>
   <li><a href="#io-redirection-to-new-files" id="toc-io-redirection-to-new-files" class="nav-link" data-scroll-target="#io-redirection-to-new-files">I/O redirection to new files</a></li>
-  <li><a href="#cut-extracting-sections-from-tables" id="toc-cut-extracting-sections-from-tables" class="nav-link" data-scroll-target="#cut-extracting-sections-from-tables"><code>cut</code>: extracting sections from tables</a></li>
-  <li><a href="#exploring-the-content-of-text-files" id="toc-exploring-the-content-of-text-files" class="nav-link" data-scroll-target="#exploring-the-content-of-text-files">Exploring the content of text files</a>
-  <ul class="collapse">
-  <li><a href="#using-head" id="toc-using-head" class="nav-link" data-scroll-target="#using-head">Using <code>head</code></a></li>
-  <li><a href="#using-tail" id="toc-using-tail" class="nav-link" data-scroll-target="#using-tail">Using <code>tail</code></a></li>
-  <li><a href="#using-less" id="toc-using-less" class="nav-link" data-scroll-target="#using-less">Using <code>less</code></a></li>
-  <li><a href="#using-cat" id="toc-using-cat" class="nav-link" data-scroll-target="#using-cat">Using <code>cat</code></a></li>
-  </ul></li>
-  <li><a href="#exploring-the-content-of-compressed-fastq-files" id="toc-exploring-the-content-of-compressed-fastq-files" class="nav-link" data-scroll-target="#exploring-the-content-of-compressed-fastq-files">Exploring the content of compressed fastq files</a>
-  <ul class="collapse">
-  <li><a href="#zcat-to-compress-and-print-to-screen" id="toc-zcat-to-compress-and-print-to-screen" class="nav-link" data-scroll-target="#zcat-to-compress-and-print-to-screen"><code>zcat</code> to compress and print to screen</a></li>
+  <li><a href="#exploring-the-content-of-text-files" id="toc-exploring-the-content-of-text-files" class="nav-link" data-scroll-target="#exploring-the-content-of-text-files">Exploring the content of text files</a></li>
+  <li><a href="#wc-count-things" id="toc-wc-count-things" class="nav-link" data-scroll-target="#wc-count-things"><code>wc</code>: Count things</a></li>
   <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes">Pipes</a></li>
-  </ul></li>
+  <li><a href="#cut-extracting-elements-from-strings" id="toc-cut-extracting-elements-from-strings" class="nav-link" data-scroll-target="#cut-extracting-elements-from-strings"><code>cut</code>: Extracting elements from strings</a></li>
+  <li><a href="#sort-and-uniq-create-unique-lists" id="toc-sort-and-uniq-create-unique-lists" class="nav-link" data-scroll-target="#sort-and-uniq-create-unique-lists"><code>sort</code> and <code>uniq</code>: Create unique lists</a></li>
+  <li><a href="#cat-read-and-combine-files" id="toc-cat-read-and-combine-files" class="nav-link" data-scroll-target="#cat-read-and-combine-files"><code>cat</code>: Read and combine files</a></li>
+  <li><a href="#exploring-the-content-of-compressed-fastq-files" id="toc-exploring-the-content-of-compressed-fastq-files" class="nav-link" data-scroll-target="#exploring-the-content-of-compressed-fastq-files">Exploring the content of compressed fastq files</a></li>
+  <li><a href="#grep-find-patterns-in-data" id="toc-grep-find-patterns-in-data" class="nav-link" data-scroll-target="#grep-find-patterns-in-data"><code>grep</code>: Find patterns in data</a></li>
   <li><a href="#wc-with-how-much-data-do-we-work" id="toc-wc-with-how-much-data-do-we-work" class="nav-link" data-scroll-target="#wc-with-how-much-data-do-we-work"><code>wc</code>: With how much data do we work</a></li>
   <li><a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">For-loops</a></li>
   </ul></li>
@@ -247,13 +243,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction-to-bash" class="level1">
 <h1>Introduction to Bash</h1>
-<section id="pwd-finding-out-where-we-are" class="level2">
-<h2 class="anchored" data-anchor-id="pwd-finding-out-where-we-are"><code>pwd</code>: Finding out where we are</h2>
-<p>After installing the terminal, let’s orient ourselves by typing our first command, <code>pwd</code>, into the terminal and pressing enter. <code>pwd</code> prints the location of the current working directory and basically tells you where exactly you are.</p>
-<p>When we login we start from what is called our home directory.</p>
+<section id="pwd-find-out-where-we-are" class="level2">
+<h2 class="anchored" data-anchor-id="pwd-find-out-where-we-are"><code>pwd</code>: Find out where we are</h2>
+<p>After installing and starting the terminal, let’s orient ourselves by typing our first command, <code>pwd</code>, into the terminal and pressing enter.</p>
+<p><code>pwd</code> prints the location of the current working directory and basically tells you where exactly you are in the file system.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>When we login we start from what is called our home directory.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: finding the desktop on different user systems">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -266,7 +263,7 @@ Tip: finding the desktop on different user systems
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Your home directory will be something like /Users/YourUserName but might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces:</p>
+<p>Your home directory will be something like /Users/YourUserName but the path might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces:</p>
 <p>For MAC users:</p>
 <ul>
 <li>The home directory should be <code>/Users/YourUserName</code></li>
@@ -276,7 +273,7 @@ Tip: finding the desktop on different user systems
 <p>For Mobaxterm users:</p>
 <ul>
 <li>Your home directory is <code>/home/mobaxterm</code></li>
-<li>By default this home directory is in the Temp folder, which gets deleted evertime you exit Mobaxterm, To give this a persistent home, do the following:
+<li>By default this home directory is in a temporary folder, which gets deleted every time you exit Mobaxterm, To give this folder a persistent home, do the following:
 <ul>
 <li>Settings –&gt; Configuration –&gt; General</li>
 <li>In there set Persistent home directory to a folder of your choice</li>
@@ -303,49 +300,53 @@ Tip: finding the desktop on different user systems
 </div>
 <p>In my case this returns something like this:</p>
 <p align="left">
-<img src="../img/ls.png" width="500">
-</p>
-<p>This might look a bit different for your system in terms of color for file/folder names but what we basically see are the files (in bold text) and folders (green-highlighted text).</p>
+</p><p><img src="../img/ls.png" width="500"></p>
+<p></p>
+<p>This might look a bit different for your system in terms of color for file and folder names but what you see are all files (in bold text) and folders (green-highlighted text) in the directory you currently are in.</p>
+<p>Since this output can easily become over-whelming if we deal with a lot of files and folders, lets look a bit closer into how we can optimize our commands.</p>
 </section>
 <section id="the-structure-of-a-command" class="level2">
 <h2 class="anchored" data-anchor-id="the-structure-of-a-command">The structure of a command</h2>
-<p>Since this can easily become over-whelming if we deal with a lot of files and folders, lets look a bit closer into how we can optimize our commands.</p>
-<p>Let´s start with looking at the general structure of a command:</p>
+<p>Let´s start with looking at the general structure of a command, which generally consists of three elements, the command itself and some optional options and arguments:</p>
 <p align="left">
-<img src="../img/unix_command.png" width="500">
-</p>
-<p>Now, let’s look a bit closer into the <code>ls</code> command and use it with an option <code>-l</code>, an option we can use that makes ls use a long listing format.</p>
+</p><p><img src="../img/unix_command.png" width="400"></p>
+<p></p>
+<p>Understanding better what a command looks like, let’s try to use the <code>ls</code> command together with the option <code>-l</code>. This option results in <code>ls</code> printing the content of a folder in a long listing format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After running this, we should see our files and folders but in what is called the long format (which gives more detailed information and structures our output a bit better):</p>
-<p align="left">
-<img src="../img/ls2.png" width="500">
-</p>
-<p>If you are unsure what options come with a program its always a good idea to check out the manual. You can do this with:</p>
+<p>After running this, we should see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better:</p>
+<p align="center">
+</p><p><img src="../img/ls2.png" width="400"></p>
+<p></p>
+</section>
+<section id="getting-help" class="level2">
+<h2 class="anchored" data-anchor-id="getting-help">Getting help</h2>
+<p>If you want to know what options are available for a command it is always a good idea to check out the manual. You can do this with:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can exit the manual by pressing <code>q</code>.</p>
-<p>In case you want to check what a program does or what options there are, depending on the program there might be different ways how to do this. These most common ways are:</p>
+<p>In case you want to check what a program does or what options there are, depending on the program there might be different ways to access the manual. These most common ways are:</p>
 <ul>
 <li><code>man ls</code></li>
 <li><code>ls --help</code></li>
 <li><code>ls -h</code></li>
 </ul>
 </section>
-<section id="cd-moving-around-folders" class="level2">
-<h2 class="anchored" data-anchor-id="cd-moving-around-folders"><code>cd</code>: Moving around folders</h2>
-<p>Most of the time you do not want to perform your analyses in the home directory but elsewhere. We can use the <code>cd</code> command to move around the file system.</p>
-<p>The Unix file system is a hierarchical file system to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (/) character. All other files are “descendants” of root. To move from the root, we can go via the descendants to reach the john folder as follows: <code>/users/john</code></p>
+<section id="cd-move-around-folders" class="level2">
+<h2 class="anchored" data-anchor-id="cd-move-around-folders"><code>cd</code>: Move around folders</h2>
+<p>Most of the time you do not want to perform your analyses in the home directory but in a dedicated folder for your project. To get started, we will learn about the <code>cd</code> command that allows us to move around the file system.</p>
+<p>The file system is a hierarchical system used to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (<code>/</code>). All other files are “descendants” of the root. To move from the root into other folders, we can go via the descendants to reach the john folder as follows: <code>/users/john</code>.</p>
 <p align="center">
-<img src="../img/filesystem.png" width="500">
-</p>
-<p>For our analyses, we will move into any of the folders that we see listed after we have used <code>ls -l</code>. In my case I want to move into the source directory:</p>
+</p><p><img src="../img/filesystem.png" width="400"></p>
+<p></p>
+<p>If we specify the location of a folder or file starting from the root directory, we use what is called an absolute path. If we specify the location relative to our current directory, such as our home directory, we use a relative path.</p>
+<p>To start moving around, let’s begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used <code>ls -l</code>. In my case I want to move into the source directory:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> source/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you use <code>pwd</code> afterwards, then you should see that we moved into another directory.</p>
+<p>If you use <code>pwd</code> after moving around directories, you should see that a different location is printed to the screen.</p>
 <p>We can also move back to our original directory using <code>cd ..</code>, which will move the user up one directory (and move us out of the source and back into the home directory).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -370,26 +371,26 @@ Exercise
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Explore your current location with <code>pwd</code> and <code>ls</code> and move around with <code>cd</code> and try to get used to these three commands. If you are more comfortable, try finding your Deskop based on the tips in the section introducing <code>pwd</code></p>
+<p>Explore your current location with <code>pwd</code> and <code>ls</code> and move around with <code>cd</code> and try to get used to these three commands. If you are more comfortable, try finding your Deskop based on the tip in the section about <code>pwd</code>.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="mkdir-making-new-folders" class="level2">
-<h2 class="anchored" data-anchor-id="mkdir-making-new-folders"><code>mkdir</code>: Making new folders</h2>
-<p>Now that we know how to explore our surroundings, let us make a new folder in which we start our data analysios. For this we use the <code>mkdir</code> command.</p>
-<p>To do this, we will first move into our home directory and create a new folder and move into that folder as follows:</p>
+<section id="mkdir-make-new-folders" class="level2">
+<h2 class="anchored" data-anchor-id="mkdir-make-new-folders"><code>mkdir</code>: Make new folders</h2>
+<p>Now that we know how to explore our surroundings, let’s make a new folder in which we start our data analysis. For this we use the <code>mkdir</code> command.</p>
+<p>To do this, we will first move into our home directory and then create and move into a new folder called <code>data_analysis</code> as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#go into the folder from which you want to work (i.e. the home directory)</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#go into the folder from which you want to work (here we go to the home directory)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#make a new folder (in the directory we currently are in, name it new_older)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#make a new folder in the directory we currently are in, name it data_analysis</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data_analysis</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#check if new folder was generated</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#next we move into the newly generated folder</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#move into the newly generated folder</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> data_analysis</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#check if we correctly changed our location</span></span>
@@ -408,21 +409,21 @@ Tip: Command-line completion
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Most command-line interpreters allow to automatically fill in partially typed commands, file paths or file names.</p>
-<p>So instead having to type out <code>data_analysis</code> completely when changing the directory, we can let the interpreter do the work for us.</p>
-<p>To do this, start from the data_analysis folder and type <code>cd data_</code> and press the Tab-key on your keyboard. The cli should have auto-completed the folder name automatically.</p>
+<p>So instead of having to type out <code>data_analysis</code> completely when changing the directory, we can let the interpreter do the work for us.</p>
+<p>To do this, start from the home directory (or wherever you ran the <code>mkdir</code> command) and type <code>cd data_</code> and press the Tab-key on your keyboard. The cli should have auto-completed the folder name automatically.</p>
 <p>If there are multiple options, such as data and data_analysis, the cli can not autocomplete the folder name, however, by pressing Tab twice you will see all options to extend the name.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="wget-downloading-data" class="level2">
-<h2 class="anchored" data-anchor-id="wget-downloading-data"><code>wget</code>: Downloading data</h2>
-<p>Next, let’s download our sequencing data into a new <code>data</code> folder. One way to do this is using the <code>wget</code>. In the command below we add the option <code>-P</code> to specify where to download the data:</p>
+<section id="wget-download-data" class="level2">
+<h2 class="anchored" data-anchor-id="wget-download-data"><code>wget</code>: Download data</h2>
+<p>Next, let’s download our sequencing data into a new <code>data</code> folder. One way to do this is using <code>wget</code>. In the command below we add the option <code>-P</code> to specify into which folder we want to download the data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make a folder for our downloads</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#download a genome from ncbi using wget</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#download some data using wget</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-P</span> data https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
@@ -457,8 +458,8 @@ Click me to see an answer
 </div>
 </div>
 </section>
-<section id="tar-working-with-tar-files" class="level2">
-<h2 class="anchored" data-anchor-id="tar-working-with-tar-files"><code>tar</code>: Working with tar files</h2>
+<section id="tar-work-with-tar-files" class="level2">
+<h2 class="anchored" data-anchor-id="tar-work-with-tar-files"><code>tar</code>: Work with tar files</h2>
 <p>The data we downloaded is provided as a tar file:</p>
 <ul>
 <li>tar is short for Tape Archive, and sometimes referred to as tarball</li>
@@ -494,7 +495,7 @@ Tip: how to generate a tarball
 </div>
 <p>The options we use are:</p>
 <ul>
-<li><code>c</code> create an archive by bundeling files and directories together</li>
+<li><code>c</code> create an archive by bundling files and directories together</li>
 <li><code>z</code> use gzip compression when generating the tar file</li>
 </ul>
 </div>
@@ -513,8 +514,8 @@ Exercise
 <div id="callout-6" class="callout-6-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>After extracting the tarball use <code>ls</code> to explore the content we just downloaded</li>
-<li>Find the path to reach at least one sequence file. Hint, to make your life easier, check the <code>Tip: Command-line completion</code> above.</li>
+<li>After extracting the tarball use <code>ls</code> to explore the content of the folder we just extracted</li>
+<li>Ensure that you also go into any sub-directories in order to reach at least one sequence file that ends on fastq.gz. Hint, to make your life easier, check the <code>Tip: Command-line completion</code> above to not have to type every single word</li>
 </ol>
 <details>
 <summary>
@@ -532,63 +533,50 @@ Click me to see an answer
 </div>
 </div>
 </section>
-<section id="wildcards" class="level2">
-<h2 class="anchored" data-anchor-id="wildcards">Wildcards</h2>
-<p>After exploring our folder, we have seen that <code>data/seq_project</code> contains 4 folders, 2 folders for different users who each generated two replicates.</p>
-<p>However, you might have also noticed that it gets tedious to figure out how many files are in each folder because we would need to run <code>ls</code> on each single folder and view its content individually.</p>
-<p>Luckily, the shell provides special characters to help you rapidly specify groups of filenames. <strong>Wild-cards</strong> are characters can be used as a substitute for any class of characters in a search.</p>
-<p>The <code>*</code> wildcard is the wildcard with the broadest meaning of any of the wildcards, it can represent 0 characters, all single characters or any string of characters. I.e. we can list all files in our folders as follows:</p>
+<section id="rm-remove-files-and-folders" class="level2">
+<h2 class="anchored" data-anchor-id="rm-remove-files-and-folders"><code>rm</code>: Remove files and folders</h2>
+<p>To remove files and folders, we use the <code>rm</code> command. We want to remove the seq_project.tar.gz file since we do not need it anymore once we have extracted the data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list all files in every single folder that is found in seq_project</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#rm a file</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> data/seq_project.tar.gz</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#check if that worked</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Since we see that the sequencing files all end with <code>.fastq.gz</code> we can make this command a bit more specific and at the same time make the output a bit more readable:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list all files in every single folder that is found in seq_project</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now we can easily see for each folder how many files we have.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Tip: More wildcards">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<p>If we want to remove a folder, we need to tell <code>rm</code> that we want to remove folders using an argument. To do this, we use the <code>-r</code> argument (to remove directories and their contents recursively).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip: More wildcards
+Important
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>*</code> is not the only wildcard we can use and a full list can be found <a href="https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm">here</a>.</p>
-<p>Different wildcards can be useful in very different context, not only only listing files but also finding text in files. To make such searches as specific as possible there are different wildcards one can use. Some examples are listed below.</p>
-<p>The [0-9] wildcard = matches any number exactly once and allows us to extract a range of files.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list only a</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/barcode00<span class="pp">[</span><span class="ss">0</span><span class="pp">-</span><span class="ss">9</span><span class="pp">]*</span>/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The [012] wildcard = matches 1 or 2 exactly once and allows us to extract a range of files.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list only a</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/barcode00<span class="pp">[</span><span class="ss">12</span><span class="pp">]*</span>/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>[A-Z] matches any letter in capitals occurring once [a-z]* matches any letter in non-capital letters occurring many times</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list only a</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/barcode001_User1_ITS_1_<span class="pp">[</span><span class="ss">A</span><span class="pp">-</span><span class="ss">Z</span><span class="pp">]</span>001/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
+<p><strong>Unix does not have an undelete command.</strong></p>
+<p>This means that if you delete something with rm, it’s gone. Therefore, use rm with care and check what you write twice before pressing enter!</p>
 </div>
 </div>
 </section>
-<section id="gzip-decompressing-files" class="level2">
-<h2 class="anchored" data-anchor-id="gzip-decompressing-files"><code>gzip</code>: (De)compressing files</h2>
-<p>After downloading and exploring the content of the downloads folder, you see that the file we downloaded ends with <code>gz</code>. This indicates that we work with a gzip-compressed file. Gzip is a tool used to (de)-compress the size of files.</p>
-<p>In order to work with files, we sometimes need to de-compress them first. We can do this as follows (by using the decompress, <code>-d</code> argument):</p>
+<section id="wildcards" class="level2">
+<h2 class="anchored" data-anchor-id="wildcards">Wildcards</h2>
+<p>After we have explored the folder with our sequencing data with <code>ls</code>, we have seen that <code>data/seq_project</code> contains 4 folders, 2 folders for two different users who each generated two replicates.</p>
+<p>You also might have also noticed that it gets tedious to figure out how many files are in each folder because we would need to run <code>ls</code> on each single folder and view its content individually.</p>
+<p>Luckily, the shell provides special characters to rapidly specify groups of filenames or patterns. <strong>Wild-cards</strong> are characters that can be used as a substitute for any class of characters in a search.</p>
+<p>The <code>*</code> wildcard is the wildcard with the broadest meaning of any of the wildcards, it can represent 0 characters, all single characters or any string of characters. It allows us to list all files in the <code>seq_project</code> folder as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#decompress gz data (-d = decompress)</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-d</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>You should have seen before that the sequencing files all end with <code>.fastq.gz</code> we can make this command a bit more specific and at the same time make the output a bit more readable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we wanted to print the absolute and not the relative path, we could do the following (beware that the absolute path will be slightly different depending in you system):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /home/User_name/data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can easily see for each folder how many files we have.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -602,82 +590,89 @@ Exercise
 <div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>After running gzip, check if we now have one uncompressed file by using <code>ls</code></li>
-<li>Use <code>ls</code> with an option to also view the file size and compare the size of our compressed and uncompressed files.</li>
+<li>Use a wildcard to list files for barcode001 only</li>
+<li>Use a wildcard to list files only for user1</li>
 </ol>
 <details>
 <summary>
 Click me to see an answer
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the content of the dowloaded folder</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#compare the size of the different files</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#answer 1:</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/barcode001<span class="pp">*</span>/<span class="pp">*</span>gz</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#answer 2:</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>_User1_<span class="pp">*</span>/<span class="pp">*</span>gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We see that our file has a file size of about ~25M after compression while the compressed files are around ~5M.</p>
-<p>When working with 16S amplicon sequencing files the data is usually much large and its best to keep the files compressed to not clutter your computer.</p>
 </details>
 </div>
 </div>
 </div>
-<p>To keep have our files small its best to work with the compressed files. If we want to compress a file, we can do this as follows:</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: More wildcards">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip: More wildcards
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>*</code> is not the only wildcard we can use and a full list can be found <a href="https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm">here</a>.</p>
+<p>Different wildcards can be useful in different contexts, not only only when listing files but also finding patterns in files. To make such searches as specific as possible there are different wildcards available. A few examples are:</p>
+<p>The [0-9] wildcard = matches any number exactly once and allows us to extract a range of files.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compress</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#check if that worked</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list only a</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/barcode00<span class="pp">[</span><span class="ss">0</span><span class="pp">-</span><span class="ss">9</span><span class="pp">]*</span>/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The [012] wildcard = matches 1 or 2 exactly once and allows us to extract a range of files.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list only a</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/barcode00<span class="pp">[</span><span class="ss">12</span><span class="pp">]*</span>/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>[A-Z] matches any letter in capitals occurring once</p>
+<p>[a-z]* matches any letter in non-capital letters occurring many times</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list only a</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/barcode001_User1_ITS_1_<span class="pp">[</span><span class="ss">A</span><span class="pp">-</span><span class="ss">Z</span><span class="pp">]</span>001/<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="io-redirection-to-new-files" class="level2">
 <h2 class="anchored" data-anchor-id="io-redirection-to-new-files">I/O redirection to new files</h2>
-<p>By using some special notations we can redirect the output of many commands to files, devices, and even to the input of other commands.</p>
-<p>We have seen by now that by default many tools direct their standard output to the display. For example, when we use <code>ls</code> the list of files and folders is printed to the screen. However, we can also redirect the standard output to a file by using the <code>&gt;</code> character.</p>
+<p>We have seen by now that by default our commands direct their standard output to the display. For example, when we use <code>ls</code> the list of files and folders is printed to the screen. However, we can also redirect the standard output to a file by using the <code>&gt;</code> character.</p>
 <p>For example, we might want to generate a list with all fastq files:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#redirect the output from ls to a new file</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span> <span class="op">&gt;</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="cut-extracting-sections-from-tables" class="level2">
-<h2 class="anchored" data-anchor-id="cut-extracting-sections-from-tables"><code>cut</code>: extracting sections from tables</h2>
-<p>This will list the full path, but what if we only wanted to list the file name?</p>
-<p>There are different ways to do this, but <code>cut</code> allows us to separate columns using any delimiter, for example the <code>/</code> we use to separate folders. To ensure that <code>/</code> is seen a separator we use the <code>-d</code> option and with <code>-f4</code> we tell cut to print the fourt element of each separated field.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#view content of the file we work with </span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> fastq_paths.txt</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#only extract the file name (i.e. the fourth field when using a / separator)</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#store this in a new file</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt <span class="op">&gt;</span> fastq_files.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 <section id="exploring-the-content-of-text-files" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-content-of-text-files">Exploring the content of text files</h2>
 <p>Next, let’s view the content of the list we just generated. Viewing the actual files we work with is often important to ensure the integrity of our data.</p>
-<section id="using-head" class="level4">
-<h4 class="anchored" data-anchor-id="using-head">Using <code>head</code></h4>
-<p><code>head</code> can be used to check the first 10 rows of our files;</p>
+<section id="head-view-the-first-rows-of-a-file" class="level4">
+<h4 class="anchored" data-anchor-id="head-view-the-first-rows-of-a-file"><code>head</code>: View the first rows of a file</h4>
+<p><code>head</code> can be used to check the first 10 rows of our files:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="using-tail" class="level3">
-<h3 class="anchored" data-anchor-id="using-tail">Using <code>tail</code></h3>
-<p>If you want to check the last 10 rows use <code>tail</code></p>
+<section id="tail-view-the-last-rows-of-a-file" class="level3">
+<h3 class="anchored" data-anchor-id="tail-view-the-last-rows-of-a-file"><code>tail</code>: View the last rows of a file</h3>
+<p>If you want to check the last 10 rows use <code>tail</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="using-less" class="level3">
-<h3 class="anchored" data-anchor-id="using-less">Using <code>less</code></h3>
-<p><code>less</code> is a program that lets you view a file’s contents one screen at a time. This is useful when dealing with a large text file because it doesn’t load the entire file but accesses it page by page, resulting in fast loading speeds.</p>
+<section id="less-view-the-full-file" class="level3">
+<h3 class="anchored" data-anchor-id="less-view-the-full-file"><code>less</code>: View the full file</h3>
+<p><code>less</code> is a program that lets you view a file’s contents one screen at a time. This is useful when dealing with a large text file (such as a sequence data file) because it doesn’t load the entire file but accesses it page by page, resulting in fast loading speeds.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once opened, less will display the text file one page at a time.</p>
 <ul>
@@ -685,64 +680,25 @@ Click me to see an answer
 <li>To exit less, type <code>q</code></li>
 </ul>
 </section>
-<section id="using-cat" class="level3">
-<h3 class="anchored" data-anchor-id="using-cat">Using <code>cat</code></h3>
-<p><code>cat</code> can do different things:</p>
-<ol type="1">
-<li>Create new files</li>
-<li>Display the content of a file</li>
-<li>Concatenate, i.e.&nbsp;combine, several files</li>
-</ol>
-<p>To view files we can do:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>To combine files we do:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#combine files </span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> fastq_paths.txt fastq_files.txt <span class="op">&gt;</span> combined_files.txt</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#view new file </span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> combined_files.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Using wildcards and cat, combine all R1 files into one file</li>
-<li>Use ls to judge the file size of the individual R1 files and the combined file to assess whether everything worked correctly</li>
-</ol>
-<details>
-<summary>
-Click me to see an answer
-</summary>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#combine files</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R1.fastq.gz <span class="op">&gt;</span> combined.fastq.gz</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#view size individual files</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R1.fastq.gz</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">#view size new file </span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> combined.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</details>
-</div>
-</div>
-</div>
 </section>
+<section id="wc-count-things" class="level2">
+<h2 class="anchored" data-anchor-id="wc-count-things"><code>wc</code>: Count things</h2>
+<p>Another useful tool is the <code>wc</code> (= wordcount) command that allows us to count the number of lines in a file. It is an useful tool for sanity checking and here allows us to count how many files we work with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After running this we see that we work with 8 files.</p>
+<p>We could of course easily count this ourselves, however, if we work with hundreds of files its a quick and easy way to get an overview about how much data we work with.</p>
+<p>One down-side of this approach is that to be able to count the number of files, we first need to generate a file in which we count the number of files. This (i) can create files we do not actually need and (ii) we use two commands while ideally we want to get the information with a single command.</p>
 </section>
-<section id="exploring-the-content-of-compressed-fastq-files" class="level2">
-<h2 class="anchored" data-anchor-id="exploring-the-content-of-compressed-fastq-files">Exploring the content of compressed fastq files</h2>
+<section id="pipes" class="level2">
+<h2 class="anchored" data-anchor-id="pipes">Pipes</h2>
+<p>Pipes are a powerful utility to connect multiple commands together. Pipes allow us to feed the standard output of one command, such as <code>ls</code> as input into another command such as <code>wc -l</code> and as such combine multiple commands together.</p>
+<p>Therefore, lets use <code>ls</code> to first list all fastq files and then pipe the output from <code>ls</code> into the <code>wc</code> command in order to count with how many files we work with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We should see again that we work with 8 files, but now we did not have to generate an intermediate text file and have a more condensed command.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -756,40 +712,62 @@ Exercise
 <div id="callout-10" class="callout-10-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>View the first few rows of one of the fastq.gz files</li>
-<li>Does this look like a normal sequence file to you?</li>
+<li>Use ls and wc to count how many R1 files we have</li>
+<li>Use ls and wc to count how many R2 files we have</li>
+<li>Count how many files were generated for User1?</li>
 </ol>
 <details>
 <summary>
 Click me to see an answer
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#we have 4 R1 files</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R1<span class="pp">*</span>/<span class="pp">*</span>gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#we have 4 R2 files</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R2<span class="pp">*</span>/<span class="pp">*</span>gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#we have 4 files from User1</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>_User1_<span class="pp">*</span>/<span class="pp">*</span>gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After running this command you will see a lot of random letters and numbers but nothing that looks like a sequence, so what is going on?</p>
+<p>Checking whether we have the same number of R1 and R2 files is a good sanity check, to ensure that we have received all the files from the sequencing center.</p>
 </details>
 </div>
 </div>
 </div>
-<section id="zcat-to-compress-and-print-to-screen" class="level4">
-<h4 class="anchored" data-anchor-id="zcat-to-compress-and-print-to-screen"><code>zcat</code> to compress and print to screen</h4>
-<p>To view the content of a compressed file and make sense of the content we need to first uncompress the file. However, sequence files tend to get rather large and we do not want to clutter the files.</p>
-<p>Luckily, there is one useful tool in bash to uncompress the file and print the content to the screen called <code>zcat</code>,</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>When running this we see the content of the whole file printed to the screen. This is a bit better but imagine doing this for a file with millions of sequences. In such a case we would not want to print the whole file to the screen but maybe only the first view rows.</p>
 </section>
-<section id="pipes" class="level4">
-<h4 class="anchored" data-anchor-id="pipes">Pipes</h4>
-<p>Pipes are a powerful utility to connect multiple commands together. They allow us to feed the standard output of one command, such as <code>zcat</code> as input into another command such as <code>head</code> and as such combine multiple commands together:</p>
+<section id="cut-extracting-elements-from-strings" class="level2">
+<h2 class="anchored" data-anchor-id="cut-extracting-elements-from-strings"><code>cut</code>: Extracting elements from strings</h2>
+<p>Remember, how we stored a list of sequencing files and the path leading to these files (relative to our home directory in a text file called <code>fastq_paths.txt</code>?</p>
+<p>Imagine that we only wanted to have a list of files but not the path, how would we do that?</p>
+<p>There are different ways to do this, the simplest one is to use <code>cd</code> and go into the folder with our sequence files and generate a list in there.</p>
+<p>However, another way in which we do not have move around (and learn some other concepts) is to use the <code>cut</code> command. <code>cut</code> allows us to separate lines of text into different elements using any kind of delimiter, for example the <code>/</code> that we use in the file path. To ensure that <code>/</code> is seen a separator we use the <code>-d</code> option and with <code>-f4</code> we tell cut to print the fourth element of each separated field.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#view content of the file we work with </span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> fastq_paths.txt</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#only extract the file name (i.e. the fourth field when using a / separator)</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">#store this in a new file</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt <span class="op">&gt;</span> fastq_files.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After running this, we finally see a sequence and some other information. Notice that for fastq files we always should see 4 rows with information for each sequence:</p>
-<p align="left">
-<img src="../img/fastq_format.png" width="500">
-</p>
+<p>We can also combine this with pipes in order to extract different pieces of information. Let’s assume we start with extracting a folder name, such as <code>barcode002_User1_ITS_9_L001</code>, and from that we want to extract some other information, such as a list with all the barcode IDs. We can easily do this as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">"_"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Nice, we now only have a list with barcodes. However, its not yet ideal since we have duplicated barcodes. If you want to extract this information for some metadata file this is not ideal and we need to get to know two more commands to make this work:</p>
+</section>
+<section id="sort-and-uniq-create-unique-lists" class="level2">
+<h2 class="anchored" data-anchor-id="sort-and-uniq-create-unique-lists"><code>sort</code> and <code>uniq</code>: Create unique lists</h2>
+<ul>
+<li><code>sort</code> sort lines in a file from A-Z and is useful for file organization.</li>
+<li><code>uniq</code>can be used to remove or find duplicates . However, for this to work the file needs to be sorted</li>
+</ul>
+<p>Let’s first ensure that our barcode list is sorted to then extract only the unique information:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">"_"</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -803,131 +781,87 @@ Exercise
 <div id="callout-11" class="callout-11-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>View the content of a file ending on R2 (i.e.&nbsp;one of the reverse reads)</li>
-<li>Do you see a way how you could distinguish forward from reverse reads?</li>
+<li>Use cut to print the folder names that lead to the fastq.gz files</li>
+<li>Print the folder names as in 1 but then also extract the User names</li>
+<li>Ensure that when running the code from 2 that we print a unique list of User names</li>
 </ol>
 <details>
 <summary>
 Click me to see an answer
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#extract the folder names</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#get user names </span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f2</span> <span class="at">-d</span> <span class="st">"_"</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#get unique user names </span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span> fastq_paths.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f2</span> <span class="at">-d</span> <span class="st">"_"</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>R1 and R2 files have a different header, i.e.</p>
-<ul>
-<li>R1: 1:N:0:TGCTCGTAGT</li>
-<li>R2: 2:N:0:TGCTCGTAGT</li>
-</ul>
-<p>However, except this small distinction the headers from the two files should have exactly the same header.</p>
 </details>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="wc-with-how-much-data-do-we-work" class="level2">
-<h2 class="anchored" data-anchor-id="wc-with-how-much-data-do-we-work"><code>wc</code>: With how much data do we work</h2>
-<p>Another useful tool is the <code>wc</code> (= wordcount) command and allow us to count the number of lines in a file. As such it is an easy tool for sanity checking and here allows us to count how many sequences we work with:</p>
+<section id="cat-read-and-combine-files" class="level2">
+<h2 class="anchored" data-anchor-id="cat-read-and-combine-files"><code>cat</code>: Read and combine files</h2>
+<p><code>cat</code> can do different things:</p>
+<ol type="1">
+<li>Create new files</li>
+<li>Display the content of a file</li>
+<li>Concatenate, i.e.&nbsp;combine, several files</li>
+</ol>
+<p>To view files we do:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After running this we see that we work with 179,384 / 4 sequences. We divide by 4 since each sequence is represented by 4 lines of information in our fastq file.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Avanced: better counting">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<p>To combine files we do:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#combine files </span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> fastq_paths.txt fastq_files.txt <span class="op">&gt;</span> combined_files.txt</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#view new file </span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> combined_files.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip: Avanced: better counting
+Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>We have seen that we need to divide the output of <code>wc</code> by four to get the total number of sequences. We can do this with a calculator but actually, some intermediate bash can also be used to do this for us:</p>
+<p>Fastq.gz files can easily be combined using <code>cat</code> and while this is not strictly necessary in our case, you might need to do this with your sequence files in the future. For example if you sequenced a lot of data and for space reasons the sequencing center send you multiple files for a single sample.</p>
+<ol type="1">
+<li>Using wildcards and cat, combine all R1 fastq.gz files into a single file</li>
+<li>Use ls to judge the file size of the individual R1 files and the combined file to assess whether everything worked correctly</li>
+</ol>
+<details>
+<summary>
+Click me to see an answer
+</summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz <span class="kw">|</span> <span class="bu">echo</span> <span class="va">$((</span><span class="kw">`</span><span class="fu">wc</span> <span class="at">-l</span><span class="kw">`</span><span class="op">/</span><span class="dv">4</span><span class="va">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#combine files</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R1.fastq.gz <span class="op">&gt;</span> combined.fastq.gz</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#view size individual files</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R1.fastq.gz</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#view size new file </span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> combined.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the command above we have some new syntax <code>echo $((</code>wc -l<code>/4))</code></p>
-<ul>
-<li>The echo command is used to display messages or print information to the terminal. In our case it will print whatever is going on in this section <code>$((</code>wc -l<code>/4))</code></li>
-<li><code>$((...))</code>: This is an arithmetic expansion in Bash. It allows you to perform arithmetic operations and substitute the result into the command line.</li>
-<li>The backticks (``) around wc -l indicate command substitution. This means that the wc -l command is executed, and its output (the number of lines counted) is used in the overall command. Without command substitution (wc -l alone), you would not capture the output; instead, you would only see the literal text “wc -l”. Command substitution allows you to use the actual result of the command.</li>
-<li><code>/4</code>: This is dividing the result obtained from wc -l by 4. Since each sequence in a FASTQ file is represented by four lines (identifier, sequence, separator, and quality scores), dividing the total number of lines by 4 gives the number of sequences.</li>
-</ul>
+</details>
 </div>
 </div>
 </div>
 </section>
-<section id="for-loops" class="level2">
-<h2 class="anchored" data-anchor-id="for-loops">For-loops</h2>
-<p>Imagine we want to count the lines not only on one but all lines, could we do something like this?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This prints a single number, 869 944, but not the counts for each file, so something did not work right.</p>
-<p>The problem with this command is that it prints the text from all 8 fastq files and only then performs the counting. However, what we want to do is to repeat the same operation over and over again:</p>
-<ul>
-<li>Decompress a first file</li>
-<li>Count the lines in the first file</li>
-<li>Decompress a second file</li>
-<li>Count the lines in the first file</li>
-<li>…</li>
-</ul>
-<p>A <strong>for loop</strong> is a bash programming language statement which allows code to be repeatedly executed. I.e. it allows us to run a command 2, 3, 5 or 100 times.</p>
-<p>Let’s start with a simple example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> 1 2 3<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="st">"Welcome </span><span class="va">${i}</span><span class="st"> times"</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We see that <code>Welcome ...</code> is printed 3 times. To do this we used a new command, <code>echo</code>, which is used to print information to the terminal. Here, you see what this command does step by step:</p>
-<p align="left">
-<img src="../img/loops.png" width="600">
-</p>
-<p>Let’s try to do the same but for our files by storing the individual files found in <code>data/seq_project/*/*.gz</code> in the variable i and print i.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="va">${i}</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>for i in data/seq_project/*/*.gz; do</code>: This part initializes a loop that iterates over all files matching the pattern <code>data/seq_project/*/*.gz</code>. The variable i is assigned each file in succession.</li>
-</ul>
-<p>We can then use these variables, step-by-step, and read them into zcat followed by wc -l:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> <span class="fu">zcat</span> <span class="va">${i}</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>zcat ${i} | wc -l</code>: This is the action performed inside the loop. zcat is used to concatenate and display the content of compressed files (*.gz). The | (pipe) symbol redirects this output to wc -l, which counts the number of lines in the uncompressed content.</li>
-</ul>
-<p>Since this easily can get rather long you could also break down the code into several lines for better readability:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">${i}</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Sometimes it is useful to not store the full path in <code>i</code>, especially when we want to store the output of our loop in a new file. Luckily, we can use the list of files we stored in <code>fastq_files.txt</code> to rewrite this command a bit:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> fastq_files.txt<span class="kw">`;</span> <span class="cf">do</span>  </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="va">${i}</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>for i in `cat fastq_files.txt`; do</code>: This initiates a loop that iterates over each item in the file fastq_files.txt. The backticks ` are used to execute the command within and assign its output to the variable i.</li>
-<li><code>zcat data/seq_project/*/${i} | wc -l</code>: Like before, this line uncompresses (zcat) and counts the number of lines in the specified file. However, in this case, the file is determined by the content of fastq_files.txt, which contains a list of file names.</li>
-</ul>
-<p>We can also easily store the output in a file by redirecting the output and using our variable i to name the files appropriately.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate a new folder to store these files</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> counts </span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> fastq_files.txt<span class="kw">`;</span> <span class="cf">do</span> </span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="va">$i</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> <span class="op">&gt;</span> counts/<span class="va">${i}</span>.txt</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">#check if files were generated </span></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> counts/<span class="pp">*</span>txt </span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">#view content of file </span></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> counts/Sample-DUMMY1_R1.fastq.gz.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="exploring-the-content-of-compressed-fastq-files" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-content-of-compressed-fastq-files">Exploring the content of compressed fastq files</h2>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -941,23 +875,281 @@ Exercise
 <div id="callout-13" class="callout-13-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Use a foor loop to generate two lists lists with the paths to our sequencing data. Generate one file for each user.</li>
+<li>View the first few rows of any one of the fastq.gz sequence files</li>
+<li>Does this look like a normal sequence file to you?</li>
 </ol>
 <details>
 <summary>
 Click me to see an answer
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> User1 User2<span class="kw">;</span> <span class="cf">do</span> </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span> data/seq_project/<span class="pp">*</span><span class="va">$i</span><span class="pp">*</span>/<span class="pp">*</span> <span class="op">&gt;</span> file_<span class="va">${i}</span>.txt</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After running this command you will see a lot of random letters and numbers but nothing that looks like a sequence, so what is going on?</p>
+</details>
+</div>
+</div>
+</div>
+<section id="gzip-decompress-files" class="level3">
+<h3 class="anchored" data-anchor-id="gzip-decompress-files"><code>gzip</code>: (De)compress files</h3>
+<p>After downloading and exploring the content of the downloads folder, you have seen that the file we downloaded ends with <code>gz</code>. This indicates that we work with a gzip-compressed file. Gzip is a tool used to (de)-compress the size of files.</p>
+<p>In order to work with files, we sometimes need to de-compress them first. We can do this as follows (by using the decompress, <code>-d</code> argument):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#decompress a sequence file</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-d</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#view the content of the decompressed file</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After running this, we finally see a sequence and some other information. Notice that for fastq files we always should see 4 rows with information for each sequence:</p>
+<p align="left">
+</p><p><img src="../img/fastq_format.png" width="500"></p>
+<p></p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>After running gzip, list each sequence file with <code>ls</code></li>
+<li>Use <code>ls</code> with an option to also view the file size and compare the size of our compressed and uncompressed files.</li>
+</ol>
+<details>
+<summary>
+Click me to see an answer
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the content of the dowloaded folder</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#compare the size of the different files</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We see that our file has a file size of about ~25M after compression while the compressed files are around ~5M.</p>
+<p>When working with 16S amplicon sequencing files the data is usually much large and its best to keep the files compressed to not clutter your computer.</p>
+</details>
+</div>
+</div>
+</div>
+<p>To keep our files small its best to work with the compressed files. If we want to compress a file, we can do this as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compress</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#check if that worked</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="zcat-compress-and-print-to-screen" class="level4">
+<h4 class="anchored" data-anchor-id="zcat-compress-and-print-to-screen"><code>zcat</code>: Compress and print to screen</h4>
+<p>We have seen that to view the content of a compressed file and make sense of the content we had to first uncompress the file. However, sequence files tend to get rather large and we might not want to decompress our files to not clutter our system.</p>
+<p>Luckily, there is one useful tool in bash to uncompress the file and print the content to the screen called <code>zcat</code>, the original compressed file is kept while doing this. We combine this command with the head command, since do not want to print millions of sequences to the screen but only want to explore the first few rows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="grep-find-patterns-in-data" class="level2">
+<h2 class="anchored" data-anchor-id="grep-find-patterns-in-data"><code>grep</code>: Find patterns in data</h2>
+<p>The grep command is used to search text. It searches the given file for lines containing a match to the given strings or words. Also this command is simple but very useful for sanity checks after file transformations.</p>
+<p>Let’s first search for some things in the text files we generated, for example, we might want to only print information for the R1 files:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#grep a pattern, here R1, in fastq_paths.txt</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"R1"</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We see the list of files that match our pattern. If we simply are interested in the number of files that match our pattern, we could add the option <code>-c</code> for counting.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">"R1"</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can also combine this with wildcards, for example, if we look for all samples from User1 we could do the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"User1_ITS_*_"</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Grep for paths containing ITS_9 in fastq_paths.txt</li>
+<li>Grep for the pattern “AAGACG” in any of the fastq.gz files</li>
+<li>Count how often “AAGACG” occurs in any in any of the fastq.gz files</li>
+</ol>
+<details>
+<summary>
+Click me to see an answer
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"ITS_9"</span> fastq_paths.txt</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#2</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"AAGACG"</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co">#3</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-c</span> <span class="st">"AAGACG"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The last two commands can be very useful to check if if the adapters or primers are still part of your sequence.</p>
+</details>
+</div>
+</div>
+</div>
+</section>
+<section id="wc-with-how-much-data-do-we-work" class="level2">
+<h2 class="anchored" data-anchor-id="wc-with-how-much-data-do-we-work"><code>wc</code>: With how much data do we work</h2>
+<p>Another useful tool is the <code>wc</code> (= wordcount) command that allows us to count the number of lines in a file. It is an easy way to perform sanity checks and in our case allows us to count how many sequences we work with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After running this we see that we work with 179,384 / 4 sequences. We divide by 4 since each sequence is represented by 4 lines of information in our fastq file.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Avanced Tip: better counting">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Avanced Tip: better counting
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have seen that we need to divide the output of <code>wc</code> by four to get the total number of sequences. We can do this with a calculator but actually, some intermediate bash can also be used to do this for us:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz <span class="kw">|</span> <span class="bu">echo</span> <span class="va">$((</span><span class="kw">`</span><span class="fu">wc</span> <span class="at">-l</span><span class="kw">`</span><span class="op">/</span><span class="dv">4</span><span class="va">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the command above we have some new syntax <code>echo $((</code>wc -l<code>/4))</code></p>
+<ul>
+<li>The echo command is used to display messages or print information to the terminal. In our case it will print whatever is going on in this section <code>$(( `wc -l` / 4))</code></li>
+<li><code>$((...))</code>: This is an arithmetic expansion in Bash. It allows you to perform arithmetic operations inside the brackets and substitute the result into the command line.</li>
+<li>The backticks (``) around wc -l indicate command substitution. This means that the wc -l command is executed, and its output (the number of lines counted) is used in the overall command. Without command substitution (wc -l alone), you would not capture the output; instead, you would only see the literal text “wc -l”. Command substitution allows you to use the actual result of the command.</li>
+<li><code>/4</code>: This is dividing the result obtained from wc -l by 4. Since each sequence in a FASTQ file is represented by four lines (identifier, sequence, separator, and quality scores), dividing the total number of lines by 4 gives the number of sequences.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="for-loops" class="level2">
+<h2 class="anchored" data-anchor-id="for-loops">For-loops</h2>
+<p>Imagine we want to count the lines not only from one but all files. Could we do something like the code below?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When running this, we see that the command prints a single number, 869 944, but not the counts for each file, so something did not work right.</p>
+<p>The problem with this command is that it prints the text from all 8 fastq files and only afterwards performs the counting. We basically concatenated all files and then calculated the sum of all 8 files. However, what we want to do is to repeat the same operation over and over again:</p>
+<ul>
+<li>Decompress a first file</li>
+<li>Count the lines in the first file</li>
+<li>Decompress a second file</li>
+<li>Count the lines in the second file</li>
+<li>…</li>
+</ul>
+<p>A <strong>for loop</strong> is a bash programming language statement which allows code to be repeatedly executed. I.e. it allows us to run a command 2, 3, 5 or 100 times.</p>
+<p>Let’s start with a simple example but before that let’s introduce a simple command <code>echo</code>. <code>echo</code> is used to print information, such as <code>Hello</code> to the terminal:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Welcome 1 time!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can use for-loops to print something to the screen not only one, but two, three, four … times as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> 1 2 3<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Welcome </span><span class="va">${i}</span><span class="st"> times"</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>An alternative and more condensed way of writing this that you might encounter in the wild is the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> 1 2 3<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="st">"Welcome </span><span class="va">${i}</span><span class="st"> times"</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, you see what this command does step by step:</p>
+<p align="left">
+</p><p><img src="../img/loops.png" width="600"></p>
+<p></p>
+<p>Let’s try to do the same but for our files by storing the individual files found in <code>data/seq_project/*/*.gz</code> in the variable i and print i to the screen in a for-loop.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"I work with: File </span><span class="va">${i}</span><span class="st">"</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>for i in data/seq_project/*/*.gz; do</code>: This part initializes a loop that iterates over all files matching the pattern <code>data/seq_project/*/*.gz</code>. The variable i is assigned each file in succession.</li>
+</ul>
+<p>We can then use these variables stored in i to perform more useful operations, for example for each file, step-by-step, count the number of lines in each file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">${i}</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>zcat ${i} | wc -l</code>: This is the action performed inside the loop. zcat is used to concatenate and display the content of compressed files (*.gz). The | (pipe) symbol redirects this output to wc -l, which counts the number of lines in the uncompressed content.</li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Use a for loop and count how often grep finds the pattern “TAAGA”</li>
+</ol>
+<details>
+<summary>
+Click me to see an answer
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">${i}</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-c</span> <span class="st">"TAAGA"</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </details>
 </div>
 </div>
 </div>
+<p>Sometimes it is useful to not store the full path in <code>i</code>, especially when we want to store the output of our loop in a new file. Luckily, we can use the list of files we stored in <code>fastq_files.txt</code> to rewrite this command a bit and make use of the fact that we can use <code>cat</code> to print something in a text file to the screen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> fastq_files.txt<span class="kw">`;</span> <span class="cf">do</span>  </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="va">${i}</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>for i in `cat fastq_files.txt`; do</code>: This initiates a loop that iterates over each item in the file fastq_files.txt. The backticks ` are used to execute the <code>cat</code> command within the backticks to read the content of the text file and assign its output to the variable i.</li>
+<li><code>zcat data/seq_project/*/${i} | wc -l</code>: Like before, this line uncompresses (zcat) and counts the number of lines in the specified file. However, in this case, the file is determined by the content of fastq_files.txt, which contains a list of file names.</li>
+</ul>
+<p>After this modification of the code, we can very easily store the output in a file instead of printing the results to the screen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate a new folder to store these files</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> counts </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="kw">`</span><span class="fu">cat</span> fastq_files.txt<span class="kw">`;</span> <span class="cf">do</span> </span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="va">$i</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> <span class="op">&gt;</span> counts/<span class="va">${i}</span>.txt</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co">#check if files were generated </span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> counts/<span class="pp">*</span>txt </span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="co">#view content of file </span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> counts/Sample-DUMMY1_R1.fastq.gz.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Avanced: better counting in for loops">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -966,13 +1158,13 @@ Tip: Avanced: better counting in for loops
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let’s get a bit more advanced to show you some powerful features of bash. For this imagine that you would do this for 100 files. In this case it would be useful to see the file names next to the counts. We can achieve this by using what we have learned in the <code>Better counting tip</code> where we have learned about echo and command substitution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$i</span><span class="st">: </span><span class="va">$(</span><span class="fu">zcat</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$i</span><span class="st">: </span><span class="va">$(</span><span class="fu">zcat</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>The echo command is used to display messages or print information to the terminal. In our case it will print whatever is going on here <code>"$i: $(zcat $i | wc -l)"</code></li>
@@ -981,9 +1173,9 @@ Tip: Avanced: better counting in for loops
 </ul>
 <p>Almost perfect, now we only want to divide this by 4:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$i</span><span class="st">: </span><span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span><span class="dv">4</span> <span class="va">))</span><span class="st">"</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$i</span><span class="st">: </span><span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span><span class="dv">4</span> <span class="va">))</span><span class="st">"</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice, how we use first single brackets and then double brackets?</p>
 <ul>
@@ -1379,7 +1571,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>   
     <div class="nav-footer-center">Copyright 2024, Nina Dombrowski,<br>
-Last modified: January 24, 2024</div>
+Last modified: January 25, 2024</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
