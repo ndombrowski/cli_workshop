@@ -16,13 +16,11 @@ bibliography: references.bib
 
 After installing and starting the terminal, let's orient ourselves by typing our first command, `pwd`, into the terminal and pressing enter.
 
-`pwd` prints the location of the current working directory and basically tells you where exactly you are in the file system.
-
 ```{bash}
 pwd
 ```
 
-When we login we start from what is called our home directory.
+`pwd` prints the location of the current working directory and tells you where exactly you are in the file system. When we login we typically start from what is called our home directory.
 
 ::: {.callout-tip title="Tip: finding the desktop on different user systems" collapse="true"}
 Your home directory will be something like /Users/YourUserName but the path might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces:
@@ -46,13 +44,12 @@ For WSL2 users:
 
 -   The home directory is `/home/YourUserName`
 -   To access the file explorer and get used to where you are you can type `explorer.exe .`
--   You see that the Ubuntu environment is launched separated from your Windows environment
 -   The path to the desktop would be something like this `/mnt/c/Users/YourUserName/OneDrive/Desktop` or `/mnt/c/Users/YourUserName/Desktop`
 :::
 
-## `ls`: List the content of a directory
+## `ls`: List the contents of a directory
 
-Now that we know where we are, let's see how to move around by first seeing what files and folders exist in our home directory. For this we can use the `ls` command, which stands for list directory contents:
+Now that we know where we are, let's find out what files and folders exist in our home directory. For this we can use the `ls` command, which allows us to list directory contents:
 
 ```{bash}
 ls
@@ -66,7 +63,7 @@ In my case this returns something like this:
 
 </p>
 
-This might look a bit different for your system in terms of color for file and folder names but what you see are all files (in bold text) and folders (green-highlighted text) in the directory you currently are in.
+The colors will look different depending on the cli use but in my case I see a list of files (in bold text) and folders (green-highlighted text) in my home directory.
 
 Since this output can easily become over-whelming if we deal with a lot of files and folders, lets look a bit closer into how we can optimize our commands.
 
@@ -80,7 +77,7 @@ Let´s start with looking at the general structure of a command, which generally
 
 </p>
 
-Understanding better what a command looks like, let's try to use the `ls` command together with the option `-l`. This option results in `ls` printing the content of a folder in a long listing format.
+Understanding better what a command looks like, let's use the `ls` command together with the option `-l`. This option results in `ls` printing the content of a folder in a long listing format.
 
 ```{bash}
 ls -l
@@ -132,7 +129,7 @@ cd source/
 
 If you use `pwd` after moving around directories, you should see that a different location is printed to the screen.
 
-We can also move back to our original directory using `cd ..`, which will move the user up one directory (and move us out of the source and back into the home directory).
+We can also move back to our original directory using `cd ..`, which will move us back one directory (and move us out of the source and back into the home directory).
 
 ```{bash}
 cd ..
@@ -144,7 +141,7 @@ We can also move around multiple levels. In the example below, I am going into t
 cd source/../docs
 ```
 
-Another useful way to move around quickly is using the tilde symbol, i.e. `~`, which can be used as a shortcut to move directly into our home directory:
+Another useful way to move around quickly is using the tilde symbol, `~`, which can be used as a shortcut to move directly into our home directory from wherever you are on the file system:
 
 ```{bash}
 cd ~
@@ -161,13 +158,13 @@ Now that we know how to explore our surroundings, let's make a new folder in whi
 To do this, we will first move into our home directory and then create and move into a new folder called `data_analysis` as follows:
 
 ```{bash}
-#go into the folder from which you want to work (here we go to the home directory)
+#go into the home directory
 cd ~
 
-#make a new folder in the directory we currently are in, name it data_analysis
+#in the home directory make a new folder and name it data_analysis
 mkdir data_analysis
 
-#check if new folder was generated
+#check if new folder was generated correctly
 ls
 
 #move into the newly generated folder
@@ -176,6 +173,18 @@ cd data_analysis
 #check if we correctly changed our location
 pwd
 ```
+
+::: {.callout-tip title="Tip: commenting your code" collapse="true"}
+Notice, how in the example below I added the commands to run as well as some explanation about what I did?
+
+Here, I used a specific character `#` in front of a line of text to denote the beginning of a single-line comment. Anything coming after the character is considered a commend and won't be executed by the shell.
+
+In the above example I definitely commented the code too much as my comments basically duplicate the code and that should be avoided, however, it is useful to add comments in code to ensure that the purpose of the code is clear to others.
+
+You could, for example, add a comment above functions to describe what the function does and you can also add comments to "tricky" code where it is not immediately obvious what you are trying to do. Basically, you want to add comments to any section where you think that the future you might get confused a month later.
+
+[Here](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) you find some examples for python and R but the same logic applies when writing code for bash, some examples for that can be found [here](https://linuxize.com/post/bash-comments/).
+:::
 
 ::: {.callout-tip title="Tip: Command-line completion" collapse="true"}
 Most command-line interpreters allow to automatically fill in partially typed commands, file paths or file names.
@@ -189,13 +198,12 @@ If there are multiple options, such as data and data_analysis, the cli can not a
 
 ## `wget`: Download data
 
-Next, let's download our sequencing data into a new `data` folder. One way to do this is using `wget`. In the command below we add the option `-P` to specify into which folder we want to download the data:
+Next, let's download our sequencing data into a new `data` folder. One way to do this is using `wget`. In the command below we add the option `-P` to specify into which folder we want to download the data. You an also see how I documented my code here in order to add some more specifics about where the link came from to help future me in case I, for example, need to look for some e-mails about the data later on.
 
 ```{bash}
-#make a folder for our downloads
 mkdir data
 
-#download some data using wget
+#download data using link provided by the sequencing center on 23.01.2023
 wget -P data https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
 ```
 
@@ -208,10 +216,10 @@ wget -P data https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_proje
 <summary>Click me to see an answer</summary>
 
 ```{bash}
-#check if file was downloaded
+#question 1:
 ls -l data/
 
-#check file size
+#question 2:
 ls -lh data/seq_project.tar.gz
 ```
 
@@ -223,7 +231,7 @@ ls -lh data/seq_project.tar.gz
 The data we downloaded is provided as a tar file:
 
 -   tar is short for Tape Archive, and sometimes referred to as tarball
--   The TAR file format is common in Unix and Unix-like systems when storing data
+-   The TAR file format is commonly used when storing data
 -   TAR files are often compressed after being created and then become TGZ files, using the tgz, tar.gz, or gz extension.
 
 We can decompress the data into our data folder as follows:
@@ -232,7 +240,7 @@ We can decompress the data into our data folder as follows:
 tar -xvf data/seq_project.tar.gz -C data
 ```
 
-The options we use are:
+The options we use with the `tar` command are:
 
 -   `x` tells it to extract files from the archive
 -   `v` display verbose information and provide detailed information while creating the tarball
@@ -253,18 +261,18 @@ The options we use are:
 :::
 
 ::: {.callout-caution collapse="false" title="Exercise"}
-1.  After extracting the tarball use `ls` to explore the content of the folder we just extracted
-2.  Ensure that you also go into any sub-directories in order to reach at least one sequence file that ends on fastq.gz. Hint, to make your life easier, check the `Tip: Command-line completion` above to not have to type every single word
+1.  After extracting the tarball use `ls` to explore the content of the folder we just extracted. Ensure that you explore the content of potential sub-directories.
+2.  Find the path for at least one sequence file that ends on fastq.gz. Hint, to make your life easier, check the `Tip: Command-line completion` above to not have to type every single word.
 
 <details>
 
 <summary>Click me to see an answer</summary>
 
 ```{bash}
-#check the content of the dowloaded folder
+#question 1:
 ls -l data/seq_project
 
-#find a sequence file
+#question 2:
 ls -l data/seq_project/barcode001_User1_ITS_1_L001/
 ```
 
@@ -283,7 +291,7 @@ rm data/seq_project.tar.gz
 ls -l data
 ```
 
-If we want to remove a folder, we need to tell `rm` that we want to remove folders using an argument. To do this, we use the `-r` argument (to remove directories and their contents recursively).
+If we want to remove a folder, we need to tell `rm` that we want to remove folders using an option. To do this, we use `-r` , which allows us to remove directories and their contents recursively.
 
 ::: callout-important
 **Unix does not have an undelete command.**
@@ -328,10 +336,10 @@ Now we can easily see for each folder how many files we have.
 <summary>Click me to see an answer</summary>
 
 ```{bash}
-#answer 1:
+#question 1:
 ls data/seq_project/barcode001*/*gz
 
-#answer 2:
+#question 2:
 ls data/seq_project/*_User1_*/*gz
 ```
 
@@ -346,14 +354,12 @@ Different wildcards can be useful in different contexts, not only only when list
 The \[0-9\] wildcard = matches any number exactly once and allows us to extract a range of files.
 
 ```{bash}
-#list only a
 ls data/seq_project/barcode00[0-9]*/*.gz
 ```
 
 The \[012\] wildcard = matches 1 or 2 exactly once and allows us to extract a range of files.
 
 ```{bash}
-#list only a
 ls data/seq_project/barcode00[12]*/*.gz
 ```
 
@@ -362,19 +368,17 @@ ls data/seq_project/barcode00[12]*/*.gz
 \[a-z\]\* matches any letter in non-capital letters occurring many times
 
 ```{bash}
-#list only a
 ls data/seq_project/barcode001_User1_ITS_1_[A-Z]001/*.gz
 ```
 :::
 
 ## I/O redirection to new files
 
-We have seen by now that by default our commands direct their standard output to the display. For example, when we use `ls` the list of files and folders is printed to the screen. However, we can also redirect the standard output to a file by using the `>` character.
+We have seen by now that by default our commands direct print the standard output to the terminal. For example, when we use `ls` the list of files and folders is printed. However, we can also redirect the standard output to a file by using the `>` character.
 
-For example, we might want to generate a list with all fastq files:
+For example, we might want to generate a list with all fastq files and can do this as follows:
 
 ```{bash}
-#redirect the output from ls to a new file
 ls data/seq_project/*/* > fastq_paths.txt
 ```
 
@@ -400,7 +404,7 @@ tail fastq_paths.txt
 
 ### `less`: View the full file
 
-`less` is a program that lets you view a file's contents one screen at a time. This is useful when dealing with a large text file (such as a sequence data file) because it doesn't load the entire file but accesses it page by page, resulting in fast loading speeds.
+`less` is a program that let's you view a file's contents one screen at a time. This is useful when dealing with a large text file (such as a sequence data file) because it doesn't load the entire file but accesses it page by page, resulting in fast loading speeds.
 
 ```{bash}
 less -S fastq_paths.txt
@@ -410,6 +414,19 @@ Once opened, less will display the text file one page at a time.
 
 -   You can use the arrow Up and Page arrow keys to move through the text file
 -   To exit less, type `q`
+
+::: {.callout-tip title="Tip: Editing text files" collapse="true"}
+You can also edit the content of a text file and there are different programs available to do this on the command line, the most commonly used tool is `nano`, which should come with most command line interpreters. You can open any file as follows:
+
+```{bash}
+nano fastq_paths.txt
+```
+
+Once the document is open you can edit it however you want and then
+
+-   Close the document with `control + X`
+-   Type `y` to save changes and press enter
+:::
 
 ## `wc`: Count things
 
@@ -439,7 +456,7 @@ We should see again that we work with 8 files, but now we did not have to genera
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Use ls and wc to count how many R1 files we have
-2.  Use ls and wc to count how many R2 files we have
+2.  Count how many R2 files we have
 3.  Count how many files were generated for User1?
 
 <details>
@@ -447,22 +464,22 @@ We should see again that we work with 8 files, but now we did not have to genera
 <summary>Click me to see an answer</summary>
 
 ```{bash}
-#we have 4 R1 files
+#question 1: We see 4 files
 ls data/seq_project/*/*R1*/*gz | wc -l 
 
-#we have 4 R2 files
+#question 2: We see 4 files
 ls data/seq_project/*/*R2*/*gz | wc -l 
 
-#we have 4 files from User1
+#question 3: We see 4 files
 ls data/seq_project/*_User1_*/*gz | wc -l 
 ```
 
-Checking whether we have the same number of R1 and R2 files is a good sanity check, to ensure that we have received all the files from the sequencing center.
+Checking whether we have the same number of R1 and R2 files is a good sanity check, to ensure that we have received all the files from the sequencing center whenever we generate paired sequencing data.
 
 </details>
 :::
 
-## `cut`: Extracting elements from strings
+## `cut`: Extract elements from strings
 
 Remember, how we stored a list of sequencing files and the path leading to these files (relative to our home directory in a text file called `fastq_paths.txt`?
 
@@ -473,13 +490,12 @@ There are different ways to do this, the simplest one is to use `cd` and go into
 However, another way in which we do not have move around (and learn some other concepts) is to use the `cut` command. `cut` allows us to separate lines of text into different elements using any kind of delimiter, for example the `/` that we use in the file path. To ensure that `/` is seen a separator we use the `-d` option and with `-f4` we tell cut to print the fourth element of each separated field.
 
 ```{bash}
-#view content of the file we work with 
 head fastq_paths.txt
 
-#only extract the file name (i.e. the fourth field when using a / separator)
+#extract the file name (i.e. the fourth field when using a / separator)
 cut -f4 -d "/" fastq_paths.txt
 
-#store this in a new file
+#do the same as above but this time save the output in a new file
 cut -f4 -d "/" fastq_paths.txt > fastq_files.txt
 ```
 
@@ -493,8 +509,8 @@ Nice, we now only have a list with barcodes. However, its not yet ideal since we
 
 ## `sort` and `uniq`: Create unique lists
 
--   `sort` sort lines in a file from A-Z and is useful for file organization.
--   `uniq`can be used to remove or find duplicates . However, for this to work the file needs to be sorted
+-   `sort`: sort lines in a file from A-Z and is useful for file organization.
+-   `uniq`: remove or find duplicates . For this command to work you need to provide it with a sorted file
 
 Let's first ensure that our barcode list is sorted to then extract only the unique information:
 
@@ -512,13 +528,13 @@ cut -f3 -d "/" fastq_paths.txt | cut -f1 -d "_" | sort | uniq
 <summary>Click me to see an answer</summary>
 
 ```{bash}
-#extract the folder names
+#question 1:
 cut -f3 -d "/" fastq_paths.txt
 
-#get user names 
+#question 2:
 cut -f3 -d "/" fastq_paths.txt | cut -f2 -d "_"
 
-#get unique user names 
+#question 3:
 cut -f3 -d "/" fastq_paths.txt | cut -f2 -d "_" | sort | uniq
 ```
 
@@ -560,15 +576,17 @@ Fastq.gz files can easily be combined using `cat` and while this is not strictly
 <summary>Click me to see an answer</summary>
 
 ```{bash}
-#combine files
+#question 1:
 cat data/seq_project/*/*R1.fastq.gz > combined.fastq.gz
 
-#view size individual files
+#question 2:
 ls -lh data/seq_project/*/*R1.fastq.gz
 
-#view size new file 
+#question 3: 
 ls -lh combined.fastq.gz
 ```
+
+If you compare the numbers from part 2 and 3, you should see that the combined.fastq.gz file is roughly the sum of the individual files.
 
 </details>
 :::
@@ -596,13 +614,11 @@ After running this command you will see a lot of random letters and numbers but 
 
 After downloading and exploring the content of the downloads folder, you have seen that the file we downloaded ends with `gz`. This indicates that we work with a gzip-compressed file. Gzip is a tool used to (de)-compress the size of files.
 
-In order to work with files, we sometimes need to de-compress them first. We can do this as follows (by using the decompress, `-d` argument):
+In order to view the content of such files, we sometimes need to de-compress them first. We can do this using the gzip command together with the decompress `-d` option:
 
 ```{bash}
-#decompress a sequence file
 gzip -d data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
 
-#view the content of the decompressed file
 head data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq
 ```
 
@@ -615,7 +631,7 @@ After running this, we finally see a sequence and some other information. Notice
 </p>
 
 ::: {.callout-caution collapse="false" title="Exercise"}
-1.  After running gzip, list each sequence file with `ls`
+1.  After running the gzip command above, make a list of each sequence file with `ls`
 2.  Use `ls` with an option to also view the file size and compare the size of our compressed and uncompressed files.
 
 <details>
@@ -623,16 +639,16 @@ After running this, we finally see a sequence and some other information. Notice
 <summary>Click me to see an answer</summary>
 
 ```{bash}
-#check the content of the dowloaded folder
+#question 1:
 ls -l data/seq_project/*/*
 
-#compare the size of the different files
+#question 2:
 ls -lh data/seq_project/*/*
 ```
 
 We see that our file has a file size of about \~25M after compression while the compressed files are around \~5M.
 
-When working with 16S amplicon sequencing files the data is usually much large and its best to keep the files compressed to not clutter your computer.
+When working with sequencing files the data is usually much large and its best to keep the files compressed to not clutter your computer.
 
 </details>
 :::
@@ -640,18 +656,16 @@ When working with 16S amplicon sequencing files the data is usually much large a
 To keep our files small its best to work with the compressed files. If we want to compress a file, we can do this as follows:
 
 ```{bash}
-#compress
 gzip data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq
 
-#check if that worked
 ls data/seq_project/*/*
 ```
 
-#### `zcat`: Compress and print to screen
+#### `zcat`: Decompress and print to screen
 
-We have seen that to view the content of a compressed file and make sense of the content we had to first uncompress the file. However, sequence files tend to get rather large and we might not want to decompress our files to not clutter our system.
+We have seen that to view the content of a compressed file and make sense of the content we had to first decompress the file. However, sequence files tend to get rather large and we might not want to decompress our files to not clutter our system.
 
-Luckily, there is one useful tool in bash to uncompress the file and print the content to the screen called `zcat`, the original compressed file is kept while doing this. We combine this command with the head command, since do not want to print millions of sequences to the screen but only want to explore the first few rows:
+Luckily, there is one useful tool in bash to decompress the file and print the content to the screen called `zcat`, the original compressed file is kept while doing this. We combine this command with the head command, since do not want to print millions of sequences to the screen but only want to explore the first few rows:
 
 ```{bash}
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
@@ -681,7 +695,7 @@ grep "User1_ITS_*_" fastq_paths.txt
 ```
 
 ::: {.callout-caution collapse="false" title="Exercise"}
-1.  Grep for paths containing ITS_9 in fastq_paths.txt
+1.  Grep for paths containing the pattern "ITS_9" in fastq_paths.txt
 2.  Grep for the pattern "AAGACG" in any of the fastq.gz files
 3.  Count how often "AAGACG" occurs in any in any of the fastq.gz files
 
@@ -706,7 +720,7 @@ The last two commands can be very useful to check if if the adapters or primers 
 </details>
 :::
 
-## `wc`: With how much data do we work
+## `wc`: Count things
 
 Another useful tool is the `wc` (= wordcount) command that allows us to count the number of lines in a file. It is an easy way to perform sanity checks and in our case allows us to count how many sequences we work with:
 
@@ -714,7 +728,7 @@ Another useful tool is the `wc` (= wordcount) command that allows us to count th
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc -l
 ```
 
-After running this we see that we work with 179,384 / 4 sequences. We divide by 4 since each sequence is represented by 4 lines of information in our fastq file.
+After running this we see that we work with 179,384 / 4 sequences. We need to divide the number we see on the screen by 4 since each sequence is represented by 4 lines of information in our fastq file.
 
 ::: {.callout-tip title="Avanced Tip: better counting" collapse="true"}
 We have seen that we need to divide the output of `wc` by four to get the total number of sequences. We can do this with a calculator but actually, some intermediate bash can also be used to do this for us:
@@ -724,7 +738,7 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | ec
 
 ```
 
-In the command above we have some new syntax `echo $((`wc -l`/4))`
+In the command above we have some new syntax:
 
 -   The echo command is used to display messages or print information to the terminal. In our case it will print whatever is going on in this section `` $(( `wc -l` / 4)) ``
 -   `$((...))`: This is an arithmetic expansion in Bash. It allows you to perform arithmetic operations inside the brackets and substitute the result into the command line.
@@ -790,7 +804,7 @@ done
 
 -   `for i in data/seq_project/*/*.gz; do`: This part initializes a loop that iterates over all files matching the pattern `data/seq_project/*/*.gz`. The variable i is assigned each file in succession.
 
-We can then use these variables stored in i to perform more useful operations, for example for each file, step-by-step, count the number of lines in each file:
+We can then use these variables stored in i to perform more useful operations, for example for each file, step-by-step, count the number of lines in each file by using some of the tools we have seen before:
 
 ```{bash}
 for i in data/seq_project/*/*.gz; do 
@@ -825,22 +839,21 @@ done
 ```
 
 -   `` for i in `cat fastq_files.txt`; do ``: This initiates a loop that iterates over each item in the file fastq_files.txt. The backticks \` are used to execute the `cat` command within the backticks to read the content of the text file and assign its output to the variable i.
--   `zcat data/seq_project/*/${i} | wc -l`: Like before, this line uncompresses (zcat) and counts the number of lines in the specified file. However, in this case, the file is determined by the content of fastq_files.txt, which contains a list of file names.
+-   `zcat data/seq_project/*/${i} | wc -l`: Like before, this line uncompresses (zcat) and counts (wc) the number of lines in the specified file. However, in this case, the file is determined by the content of fastq_files.txt, which contains a list of file names.
 
 After this modification of the code, we can very easily store the output in a file instead of printing the results to the screen.
 
 ```{bash}
-#generate a new folder to store these files
+#Count the number of lines in each sequencing file
+#Store the output in a new folder
 mkdir counts 
 
 for i in `cat fastq_files.txt`; do 
     zcat data/seq_project/*/$i | wc -l > counts/${i}.txt
 done
 
-#check if files were generated 
 ls counts/*txt 
 
-#view content of file 
 head counts/Sample-DUMMY1_R1.fastq.gz.txt
 
 ```
@@ -866,7 +879,7 @@ for i in data/seq_project/*/*.gz; do
 done
 ```
 
-Notice, how we use first single brackets and then double brackets?
+Notice, how we use both single brackets and double brackets?
 
 -   `$((...))` in contrast to `$(...)` is an arithmetic expansion in Bash. It allows you to perform arithmetic operations and substitute the result into the command line.
 :::
