@@ -38,13 +38,15 @@ website:
 
 format:
   html:
+    grid: 
+      body-width: 1800px
     theme:
       light: lumen
       dark: cyborg
     date: last-modified
     toc: true
-    toc-expand: true
-    toc-depth: 4
+    toc-title: Contents
+    toc-expand: 2
     link-external-newwindow: true
 
 

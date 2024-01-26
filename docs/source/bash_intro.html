@@ -186,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../source/hpc_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">hpc_intro.html</span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -203,10 +203,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Contents</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#introduction-to-bash" id="toc-introduction-to-bash" class="nav-link active" data-scroll-target="#introduction-to-bash">Introduction to Bash</a>
   <ul class="collapse">
   <li><a href="#pwd-find-out-where-we-are" id="toc-pwd-find-out-where-we-are" class="nav-link" data-scroll-target="#pwd-find-out-where-we-are"><code>pwd</code>: Find out where we are</a></li>
@@ -220,13 +220,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rm-remove-files-and-folders" id="toc-rm-remove-files-and-folders" class="nav-link" data-scroll-target="#rm-remove-files-and-folders"><code>rm</code>: Remove files and folders</a></li>
   <li><a href="#wildcards" id="toc-wildcards" class="nav-link" data-scroll-target="#wildcards">Wildcards</a></li>
   <li><a href="#io-redirection-to-new-files" id="toc-io-redirection-to-new-files" class="nav-link" data-scroll-target="#io-redirection-to-new-files">I/O redirection to new files</a></li>
-  <li><a href="#exploring-the-content-of-text-files" id="toc-exploring-the-content-of-text-files" class="nav-link" data-scroll-target="#exploring-the-content-of-text-files">Exploring the content of text files</a></li>
+  <li><a href="#exploring-the-content-of-text-files" id="toc-exploring-the-content-of-text-files" class="nav-link" data-scroll-target="#exploring-the-content-of-text-files">Exploring the content of text files</a>
+  <ul class="collapse">
+  <li><a href="#tail-view-the-last-rows-of-a-file" id="toc-tail-view-the-last-rows-of-a-file" class="nav-link" data-scroll-target="#tail-view-the-last-rows-of-a-file"><code>tail</code>: View the last rows of a file</a></li>
+  <li><a href="#less-view-the-full-file" id="toc-less-view-the-full-file" class="nav-link" data-scroll-target="#less-view-the-full-file"><code>less</code>: View the full file</a></li>
+  </ul></li>
   <li><a href="#wc-count-things" id="toc-wc-count-things" class="nav-link" data-scroll-target="#wc-count-things"><code>wc</code>: Count things</a></li>
   <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes">Pipes</a></li>
   <li><a href="#cut-extract-elements-from-strings" id="toc-cut-extract-elements-from-strings" class="nav-link" data-scroll-target="#cut-extract-elements-from-strings"><code>cut</code>: Extract elements from strings</a></li>
   <li><a href="#sort-and-uniq-create-unique-lists" id="toc-sort-and-uniq-create-unique-lists" class="nav-link" data-scroll-target="#sort-and-uniq-create-unique-lists"><code>sort</code> and <code>uniq</code>: Create unique lists</a></li>
   <li><a href="#cat-read-and-combine-files" id="toc-cat-read-and-combine-files" class="nav-link" data-scroll-target="#cat-read-and-combine-files"><code>cat</code>: Read and combine files</a></li>
-  <li><a href="#exploring-the-content-of-compressed-fastq-files" id="toc-exploring-the-content-of-compressed-fastq-files" class="nav-link" data-scroll-target="#exploring-the-content-of-compressed-fastq-files">Exploring the content of compressed fastq files</a></li>
+  <li><a href="#exploring-the-content-of-compressed-fastq-files" id="toc-exploring-the-content-of-compressed-fastq-files" class="nav-link" data-scroll-target="#exploring-the-content-of-compressed-fastq-files">Exploring the content of compressed fastq files</a>
+  <ul class="collapse">
+  <li><a href="#gzip-decompress-files" id="toc-gzip-decompress-files" class="nav-link" data-scroll-target="#gzip-decompress-files"><code>gzip</code>: (De)compress files</a></li>
+  </ul></li>
   <li><a href="#grep-find-patterns-in-data" id="toc-grep-find-patterns-in-data" class="nav-link" data-scroll-target="#grep-find-patterns-in-data"><code>grep</code>: Find patterns in data</a></li>
   <li><a href="#wc-count-things-1" id="toc-wc-count-things-1" class="nav-link" data-scroll-target="#wc-count-things-1"><code>wc</code>: Count things</a></li>
   <li><a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">For-loops</a></li>
@@ -1592,7 +1599,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../source/hpc_intro.html" class="pagination-link">
-        <span class="nav-page-text">hpc_intro.html</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Introduction</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
