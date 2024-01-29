@@ -59,8 +59,8 @@ For both issues: If parts of the tutorial do not work for you due to that, feel 
 
 After you set everything up and opened a terminal you should see something like this and are good to go if you want to follow the tutorial:
 
-<p align="center">
-  <img width="500"  src="../img/terminal.png">
+<p align="left">
+  <img width="700"  src="../img/terminal.png">
 </p>
 
 

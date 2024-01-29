@@ -176,7 +176,7 @@ squeue
 
 After running this, you can see all jobs scheduled on the HPC:
 
-![](../img/squeue.png){width="90%" fig-align="left"}
+![](../img/squeue.png){width="50%" fig-align="left"}
 
 -   JOBID: every job gets a number and you can manipulate jobs via this number
 -   ST: Job state codes that describe the current state of the job. The full list of abbreviations can be found [here](https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html)
@@ -244,7 +244,7 @@ ll results/fastqc /*
 
 Since we work with little data this will run extremely fast, however, if you would be logged into Crunchomics via a second window and run `squeue` you should see that your job is actively running:
 
-![](../img/squeue2.png){width="70%" fig-align="left"}
+![](../img/squeue2.png){width="50%" fig-align="left"}
 
 Additionally, after the run is completed, you should see that several html files were generated in our fastqc folder.
 
@@ -352,7 +352,7 @@ To get started, assume we have created a script named `run_fastqc.sh` with the f
 
 echo "Start fastqc"
 
-srun --cpus-per-task=1 --mem=5G fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1
+fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1
 
 echo "fastqc finished"
 ```
@@ -405,7 +405,7 @@ We have seen that by default sbatch redirects the standard output and error to o
 
 echo "Start fastqc"
 
-srun --cpus-per-task=1 --mem=5G fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1
+fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1
 
 echo "fastqc finished"
 ```
@@ -474,15 +474,107 @@ The job does the following:
 
 If we check what is happening right after submitting the job with `squeue` we should see something like this:
 
-![](../img/arrays.png){width="70%" fig-align="left"}
+![](../img/arrays.png){width="50%" fig-align="left"}
 
 We see that jobs 1-4 are already running and the other jobs are currently waiting for space.
 
 If we check the log files we should see: 
 
-![](../img/arrays2.png){width="70%" fig-align="left"}
+![](../img/arrays2.png){width="50%" fig-align="left"}
 
 We see that we get an individual output and error file for each job. In the output we see what value is stored in the `INDEX`, here 1, and the `CURRENT_SAMPLE`, here  `Sample-DUMMY1_R1.fastq.gz`. 
 
 :::
 
+
+
+## Installing software
+
+There might be cases where the software you are interested in is not installed. 
+
+In the majority of cases, you should be able to install software by using a package management system, such as conda or mamba. These tools allow you to find and install packages in their own environment without administrator privileges. Let'go through a very brief example: 
+
+
+### Install mamba 
+
+A lot of system already come with conda installed, however, if possible we recommend working with mamba instead of conda. mamba is a drop-in replacement and uses the same commands and configuration options as conda, however, it tends to be much faster. A useful thing is that if you find documentation for conda then you can swap almost all commands between conda & mamba.
+
+```{bash}
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+bash Miniforge3-$(uname)-$(uname -m).sh
+```
+
+
+### Setting up an environment
+
+Let's assume we want to install seqkit, a tool that  allows us to calculate some statistics for sequencing data such as the number of sequences or average sequence length.
+
+We can do this as follows:
+
+```{bash}
+#check if the tool is installed (should return command not found if the software is not installed)
+seqkit -h
+
+#create an empty environment and name it seqkit
+mamba create -n seqkit
+
+#install some software, i.e. seqkit, into the seqkit environment
+mamba install -n seqkit -c bioconda seqkit
+
+#to run the tool activate the environment first
+mamba activate seqkit
+
+#check if tool is installed
+seqkit -h
+
+#run the tool via srun
+mkdir results/seqkit
+srun --cpus-per-task 2 --mem=4G seqkit stats -a -To results/seqkit/seqkit_stats.tsv data/seq_project/*/*.gz --threads 2
+less -S results/seqkit/seqkit_stats.tsv 
+
+#leave the environment
+conda deactivate
+```
+
+When installing the seqkit package we specify that we want to look for seqkit in the bioconda channel with the option `-c`. Channels are the locations where packages are stored. They serve as the base for hosting and managing packages. Conda packages are downloaded from remote channels, which are URLs to directories containing conda packages. If you are unable to find a package it might be that you need to specify a channel.
+
+Unsure if a software can be installed with conda? Google conda together with the software name, which should lead you do a conda web page, which also should inform you whether you need to add a specific channel to install the software.
+
+A full set of mamba/conda commands can be found [here](https://docs.conda.io/projects/conda/en/latest/commands/index.html.)
+
+::: {.callout-caution collapse="false" title="Exercise"}
+
+1. Download and view the file `results/seqkit/seqkit_stats.tsv` on your own computer
+2. Run the seqkit again but this time submit the job via a sbatch script instead of using srun
+
+<details>
+<summary>Click me to see an answer</summary>
+
+```{bash}
+#question 1
+scp username@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/results/seqkit/seqkit_stats.tsv .
+
+#question 2 
+sbatch scripts/seqkit.sh
+```
+
+Content of `scripts/seqkit.sh`:
+
+```{bash}
+#!/bin/bash
+#SBATCH --job-name=seqkit_job
+#SBATCH --output=logs/seqkit_%j.out
+#SBATCH --error=logs/seqkit_%j.err
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=5G
+
+echo "Start seqkit"
+
+seqkit stats -a -To results/seqkit/seqkit_stats.tsv data/seq_project/*/*.gz --threads 2
+
+echo "seqkit finished"
+```
+
+
+</details>
+:::

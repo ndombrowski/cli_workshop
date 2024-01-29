@@ -186,7 +186,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, breakable, sharp corners, enhanced, borderline west={3pt}{0pt}{shadecolor}, interior hidden, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, sharp corners, breakable, interior hidden]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -261,7 +261,7 @@ connect like this:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, leftrule=.75mm, colback=white, toptitle=1mm, breakable, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, arc=.35mm, opacitybacktitle=0.6, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, rightrule=.15mm, left=2mm, colframe=quarto-callout-important-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-important-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-important-color!10!white]
 
 If you want to log into Crunchomics from outside of UvA you need to be
 connected to the VPN. If you have not set that up and/or have trouble
@@ -359,7 +359,7 @@ since we are moving a folder, not a file.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, leftrule=.75mm, colback=white, toptitle=1mm, breakable, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, opacitybacktitle=0.6, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC to our own computer}, rightrule=.15mm, left=2mm, colframe=quarto-callout-tip-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC to our own computer}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
 
 We can also move data from the HPC to our own computer. For example,
 let's assume we want to move a single sequencing file. In this case,
@@ -385,7 +385,7 @@ let's assume we want to move a single sequencing file. In this case,
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, leftrule=.75mm, colback=white, toptitle=1mm, breakable, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, opacitybacktitle=0.6, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC using wildcards}, rightrule=.15mm, left=2mm, colframe=quarto-callout-tip-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC using wildcards}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
 
 We can also move several files at once and ignore the whole folder
 structure by using wildcards when using \texttt{scp}.
@@ -499,7 +499,7 @@ is:
 After running this, you can see all jobs scheduled on the HPC:
 
 \begin{center}
-\includegraphics[width=0.9\textwidth,height=\textheight]{../img/squeue.png}
+\includegraphics[width=0.5\textwidth,height=\textheight]{../img/squeue.png}
 \end{center}
 
 \begin{itemize}
@@ -651,13 +651,13 @@ you would be logged into Crunchomics via a second window and run
 \texttt{squeue} you should see that your job is actively running:
 
 \begin{center}
-\includegraphics[width=0.7\textwidth,height=\textheight]{../img/squeue2.png}
+\includegraphics[width=0.5\textwidth,height=\textheight]{../img/squeue2.png}
 \end{center}
 
 Additionally, after the run is completed, you should see that several
 html files were generated in our fastqc folder.
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, leftrule=.75mm, colback=white, toptitle=1mm, breakable, toprule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, bottomtitle=1mm, arc=.35mm, opacitybacktitle=0.6, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, rightrule=.15mm, left=2mm, colframe=quarto-callout-caution-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-caution-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-caution-color!10!white]
 
 Use scp to download the data to your own computer and view one of the
 html files.
@@ -828,7 +828,7 @@ should be executed after each other that is how you could do it.
 
 \BuiltInTok{echo} \StringTok{"Start fastqc"}
 
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G fastqc data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc  }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{fastqc}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc  }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
 \BuiltInTok{echo} \StringTok{"fastqc finished"}
 \end{Highlighting}
@@ -888,7 +888,7 @@ This file is useful as it:
 Feel free to explore the content of the log file, do you see how the
 echo commands are used as well?
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, leftrule=.75mm, colback=white, toptitle=1mm, breakable, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, opacitybacktitle=0.6, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, rightrule=.15mm, left=2mm, colframe=quarto-callout-tip-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
 
 We have seen that by default sbatch redirects the standard output and
 error to our working directory and that it decides itself how to name
@@ -917,7 +917,7 @@ example to:
 
 \BuiltInTok{echo} \StringTok{"Start fastqc"}
 
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G fastqc data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc  }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{fastqc}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc  }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
 \BuiltInTok{echo} \StringTok{"fastqc finished"}
 \end{Highlighting}
@@ -925,7 +925,7 @@ example to:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, leftrule=.75mm, colback=white, toptitle=1mm, breakable, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, opacitybacktitle=0.6, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch and multiple files}, rightrule=.15mm, left=2mm, colframe=quarto-callout-tip-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch and multiple files}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
 
 With fastqc we are very lucky that it can identify all the fastq files
 in the directory we specify with \texttt{-o} and use a wildcard. This is
@@ -1046,7 +1046,7 @@ If we check what is happening right after submitting the job with
 \texttt{squeue} we should see something like this:
 
 \begin{center}
-\includegraphics[width=0.7\textwidth,height=\textheight]{../img/arrays.png}
+\includegraphics[width=0.5\textwidth,height=\textheight]{../img/arrays.png}
 \end{center}
 
 We see that jobs 1-4 are already running and the other jobs are
@@ -1055,13 +1055,136 @@ currently waiting for space.
 If we check the log files we should see:
 
 \begin{center}
-\includegraphics[width=0.7\textwidth,height=\textheight]{../img/arrays2.png}
+\includegraphics[width=0.5\textwidth,height=\textheight]{../img/arrays2.png}
 \end{center}
 
 We see that we get an individual output and error file for each job. In
 the output we see what value is stored in the \texttt{INDEX}, here 1,
 and the \texttt{CURRENT\_SAMPLE}, here
 \texttt{Sample-DUMMY1\_R1.fastq.gz}.
+
+\end{tcolorbox}
+
+\section{Installing software}\label{installing-software}
+
+There might be cases where the software you are interested in is not
+installed.
+
+In the majority of cases, you should be able to install software by
+using a package management system, such as conda or mamba. These tools
+allow you to find and install packages in their own environment without
+administrator privileges. Let'go through a very brief example:
+
+\subsection{Install mamba}\label{install-mamba}
+
+A lot of system already come with conda installed, however, if possible
+we recommend working with mamba instead of conda. mamba is a drop-in
+replacement and uses the same commands and configuration options as
+conda, however, it tends to be much faster. A useful thing is that if
+you find documentation for conda then you can swap almost all commands
+between conda \& mamba.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{curl} \AttributeTok{{-}L} \AttributeTok{{-}O} \StringTok{"https://github.com/conda{-}forge/miniforge/releases/latest/download/Miniforge3{-}}\VariableTok{$(}\FunctionTok{uname}\VariableTok{)}\StringTok{{-}}\VariableTok{$(}\FunctionTok{uname} \AttributeTok{{-}m}\VariableTok{)}\StringTok{.sh"}
+\FunctionTok{bash}\NormalTok{ Miniforge3{-}}\VariableTok{$(}\FunctionTok{uname}\VariableTok{)}\NormalTok{{-}}\VariableTok{$(}\FunctionTok{uname} \AttributeTok{{-}m}\VariableTok{)}\NormalTok{.sh}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Setting up an environment}\label{setting-up-an-environment}
+
+Let's assume we want to install seqkit, a tool that allows us to
+calculate some statistics for sequencing data such as the number of
+sequences or average sequence length.
+
+We can do this as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#check if the tool is installed (should return command not found if the software is not installed)}
+\ExtensionTok{seqkit} \AttributeTok{{-}h}
+
+\CommentTok{\#create an empty environment and name it seqkit}
+\ExtensionTok{mamba}\NormalTok{ create }\AttributeTok{{-}n}\NormalTok{ seqkit}
+
+\CommentTok{\#install some software, i.e. seqkit, into the seqkit environment}
+\ExtensionTok{mamba}\NormalTok{ install }\AttributeTok{{-}n}\NormalTok{ seqkit }\AttributeTok{{-}c}\NormalTok{ bioconda seqkit}
+
+\CommentTok{\#to run the tool activate the environment first}
+\ExtensionTok{mamba}\NormalTok{ activate seqkit}
+
+\CommentTok{\#check if tool is installed}
+\ExtensionTok{seqkit} \AttributeTok{{-}h}
+
+\CommentTok{\#run the tool via srun}
+\FunctionTok{mkdir}\NormalTok{ results/seqkit}
+\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\NormalTok{ 2 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{4G seqkit stats }\AttributeTok{{-}a} \AttributeTok{{-}To}\NormalTok{ results/seqkit/seqkit\_stats.tsv data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 2}
+\FunctionTok{less} \AttributeTok{{-}S}\NormalTok{ results/seqkit/seqkit\_stats.tsv }
+
+\CommentTok{\#leave the environment}
+\ExtensionTok{conda}\NormalTok{ deactivate}
+\end{Highlighting}
+\end{Shaded}
+
+When installing the seqkit package we specify that we want to look for
+seqkit in the bioconda channel with the option \texttt{-c}. Channels are
+the locations where packages are stored. They serve as the base for
+hosting and managing packages. Conda packages are downloaded from remote
+channels, which are URLs to directories containing conda packages. If
+you are unable to find a package it might be that you need to specify a
+channel.
+
+Unsure if a software can be installed with conda? Google conda together
+with the software name, which should lead you do a conda web page, which
+also should inform you whether you need to add a specific channel to
+install the software.
+
+A full set of mamba/conda commands can be found
+\href{https://docs.conda.io/projects/conda/en/latest/commands/index.html.}{here}
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-caution-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-caution-color!10!white]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Download and view the file \texttt{results/seqkit/seqkit\_stats.tsv}
+  on your own computer
+\item
+  Run the seqkit again but this time submit the job via a sbatch script
+  instead of using srun
+\end{enumerate}
+
+Click me to see an answer
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#question 1}
+\FunctionTok{scp}\NormalTok{ username@omics{-}h0.science.uva.nl:/home/ndombro/personal/projectX/results/seqkit/seqkit\_stats.tsv .}
+
+\CommentTok{\#question 2 }
+\ExtensionTok{sbatch}\NormalTok{ scripts/seqkit.sh}
+\end{Highlighting}
+\end{Shaded}
+
+Content of \texttt{scripts/seqkit.sh}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=seqkit\_job}
+\CommentTok{\#SBATCH {-}{-}output=logs/seqkit\_\%j.out}
+\CommentTok{\#SBATCH {-}{-}error=logs/seqkit\_\%j.err}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=2}
+\CommentTok{\#SBATCH {-}{-}mem=5G}
+
+\BuiltInTok{echo} \StringTok{"Start seqkit"}
+
+\ExtensionTok{seqkit}\NormalTok{ stats }\AttributeTok{{-}a} \AttributeTok{{-}To}\NormalTok{ results/seqkit/seqkit\_stats.tsv data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 2}
+
+\BuiltInTok{echo} \StringTok{"seqkit finished"}
+\end{Highlighting}
+\end{Shaded}
 
 \end{tcolorbox}
 

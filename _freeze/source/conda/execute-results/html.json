@@ -1,0 +1,15 @@
+{
+  "hash": "0a9125619bf07e249325d792256a4f61",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ncode-block-bg: true\ncode-block-border-left: \"#31BAE9\"\nexecute:\n  eval: false\nengine: knitr\nbibliography: references.bib\n---\n\n\n# Installing software \n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

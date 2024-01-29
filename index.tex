@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, colback={codebgcolor}, sharp corners, breakable, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, colback={codebgcolor}, boxrule=0pt, enhanced, frame hidden]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -198,6 +198,10 @@ command line interface. This tutorial is divided into two main parts:
   do not have access to an HPC you can follow most parts on your own
   computer as the dataset we provide is a small one.
 \end{enumerate}
+
+For information not covered in this tutorial, check out
+\href{https://scienceparkstudygroup.github.io/software_information/}{IBED's
+bioinformatics guidance page}.
 
 
 

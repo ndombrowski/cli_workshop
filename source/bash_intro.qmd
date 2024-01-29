@@ -625,7 +625,7 @@ After running this, we finally see a sequence and some other information. Notice
 
 <p align="left">
 
-<img src="../img/fastq_format.png" width="500"/>
+<img src="../img/fastq_format.png" width="700"/>
 
 </p>
 
