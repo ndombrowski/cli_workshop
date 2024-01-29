@@ -5,9 +5,13 @@ project:
 execute:
   freeze: auto  # re-render only when source changes
 
+date-modified: last-modified
+
+title-block-style: none
+
 website:
   title: "Introduction to the cli"
-  
+    
   sidebar:
   - id: "Welcome page"
     style: "docked"
@@ -33,8 +37,7 @@ website:
   page-footer:  
     center: | 
       Copyright 2024, Nina Dombrowski,    
-      Last modified: {{< meta date >}} 
-
+      Last modified: {{< meta date-modified >}} 
 
 format:
   html:
@@ -43,10 +46,37 @@ format:
     theme:
       light: lumen
       dark: cyborg
-    date: last-modified
     toc: true
     toc-title: Contents
     toc-expand: 2
     link-external-newwindow: true
 
-
+  pdf:
+    documentclass: scrreprt
+    pdf-engine: pdflatex
+    geometry:
+    #  - top=25mm
+    #  - right=20mm
+    #  - left=10mm
+    #  - bottom=4mm
+    #  - textwidth=4.5in
+      - heightrounded      
+    highlight-style: github
+    pandoc_args: --listings
+    colorlinks: true
+    code-block-bg: D3D3D3  
+    link-external-newwindow: true
+    toc: true
+    keep-tex: true
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+    include-before-body:
+      text: |
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+          showspaces = false,
+          showtabs = false,
+          breaksymbolleft={},
+          breaklines
+        }
