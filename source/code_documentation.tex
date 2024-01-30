@@ -187,7 +187,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, colback={codebgcolor}, frame hidden, breakable, sharp corners, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, sharp corners, colback={codebgcolor}, enhanced, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -232,16 +232,16 @@ purpose, functionality, and usage of your code.
 \href{https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf}{A
 Guide to Reproducible Code in Ecology and Evolution} gives detailed
 information on how to organize project folders and how to write clear
-and reproducible code. The examples are mainly based on R code but most
-are general enough to apply to other computational langauges (and
-scientific disciplines).
+and reproducible code. The examples are mainly based on R but are
+general enough to apply to other computational languages (and scientific
+disciplines).
 
 If you want to see an example for documented code, check out {[}this
 example file{]}\textbf{tba}. The example file is a markdown file (qmd)
 generated with VSCode. Some examples for text editors to use can be
 found below.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colframe=quarto-callout-note-color-frame, colback=white, titlerule=0mm, toprule=.15mm, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, breakable, opacityback=0, arc=.35mm, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, breakable, bottomtitle=1mm, coltitle=black, arc=.35mm, left=2mm, colback=white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, opacityback=0, leftrule=.75mm, toprule=.15mm, bottomrule=.15mm, toptitle=1mm, rightrule=.15mm]
 
 The information in this section is not part of the actual tutorial but
 was added to give you a starting point for how to document your code.
@@ -258,7 +258,7 @@ options after the tutorial.
 
 When documenting code, its best to avoid visual editors, such as word,
 as they are not designed for writing code and easily destroy the
-formating by for example changing ` to ', which when writing code is
+formatting by for example changing ` to ', which when writing code is
 quite a big difference.
 
 Instead you can use a plain text editor, such as TextEdit (Mac) or
@@ -338,7 +338,7 @@ website}.
 Visual Studio Code (VSCode) is a versatile and user-friendly code
 editor. It provides excellent support for various programming languages,
 extensions, and a built-in terminal but might take a bit of work to
-setup to work with different compuational languages.
+setup to work with different computational languages.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

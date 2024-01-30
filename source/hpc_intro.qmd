@@ -12,7 +12,12 @@ Using an HPC works a bit differently than running jobs on your computer, below y
 
 ![](../img/crunchomics1.png){width="70%" fig-align="center"}
 
-Very briefly, the purpose of a login node, sometimes also called head node, is to prepare to run a program (e.g., moving and editing files and compiling, preparing a job script). The compute nodes are used to actually run a program.
+Very briefly, the purpose of a **login node**, sometimes also called head node, is to prepare to run a program (e.g., moving and editing files and compiling, preparing a job script). The **compute nodes** on the other hand are used to actually run a program and we submit jobs from the login to the compute nodes via Slurm. **Slurm** is an open-source workload manager/scheduler that is used on many big HPCs. Slurm has three key functions:
+
+- provide the users access to the resources on the compute nodes for a certain amount of time to perform any computation
+- provide a framework to start, execute, and check the work on the set of allocated compute nodes
+- mange the queue of submitted jobs based on the availability of resources
+
 
 ::: callout-important
 **Crunchomics etiquette**
@@ -30,7 +35,7 @@ You share the HPC with other people, therefore, take care to only ask for the re
 On crunchomics you:
 
 -   are granted a storage of 500 GB. After the duration of your grant, or when your UvAnetID expires, your data will be removed from the HPC. If you need more storage space, contact the Crunchomics team.
--   have a 25G quotum on your home directory which is on a fast NVMe ssd-drive. You can store up to 500GB data in /zfs/omics/personal/\$USER
+-   have a 25 G quotum on your home directory which is on a fast NVMe ssd-drive. You can store up to 500 GB data in /zfs/omics/personal/\$USER
 -   you are in charge of backing up your own data and Crunchomics is NOT an archiving system. To learn about data archiving options at UvA visit the [website of the computational support team](https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html)
 -   find information and documentation about the cluster [here](https://crunchomics-documentation.readthedocs.io/en/latest)
 
@@ -40,13 +45,12 @@ Crunchomics gives you access to:
 -   Each compute node has 512 GB of memory and 64 CPUs
 -   If you need more resources (or access to GPUs), visit the [website of the computational support team](https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html) for more information
 -   Access to two directories:
-    -  The home directory with 25 GB of storage
-    -  your personal directory, with 500 GB of storage
-
+    -   The home directory with 25 GB of storage
+    -   your personal directory, with 500 GB of storage
 
 Some information about storage:
 
-- Snapshots are made daily at 00.00.00 and kept for 2 weeks. This means that deleting files which are in a snapshot will not be available for another 2 weeks. It also means that if you accidentally remove a file it can be restored up to 2 weeks after removal.
-- Data on Crunchomics is stored on multiple disks. Therefore, there is protection against disk failure. The data is not replicated and you are responsible for backing up and/or archiving your data.
+-   Snapshots are made daily at 00.00.00 and kept for 2 weeks. This means that if you accidentally remove a file it can be restored up to 2 weeks after removal.
+-   Data on Crunchomics is stored on multiple disks. Therefore, there is protection against disk failure. However, the data is not replicated and you are responsible for backing up and/or archiving your data.
 
 On the next page you find a tutorial to move the sequencing data that we worked on during the introduction into bash onto the server and run software to assess the quality of our sequencing data. We will learn to use some pre-installed software and also install software ourselves with conda and we will learn different ways to submit jobs to the compute nodes using SLURM.

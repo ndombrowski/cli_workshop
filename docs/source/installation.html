@@ -208,14 +208,14 @@ ul.task-list li input[type="checkbox"] {
 <h1>Setting up a terminal</h1>
 <section id="terminology" class="level2">
 <h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
-<p>The <strong>Linux command-line interface (CLI)</strong> is an alternative to a graphical user interface (GUI) with which you are likely more familiar. Both interfaces allow a user to interact with an operating system. The key difference between the CLI and GUI is that the interaction with CLI is based on issuing commands. In contrast, the interaction with a GUI involves visual elements, such as windows, buttons, etc. CLI is often also referred to as the shell, terminal, console, prompt or various other names</p>
-<p><strong>Bash</strong> is a type of interpreter that processes shell commands. A shell interpreter takes commands in plain text format and calls the operating system to do something, for example changing a directory or modifying the content of some files. Bash itself stands for Bourne Again Shell and it is one of the popular command-line shells used to run other programs, many of which are useful for bioinformatic workflows.</p>
+<p>The <strong>Linux command-line interface (CLI)</strong> is an alternative to a graphical user interface (GUI) with which you are likely more familiar. Both interfaces allow you to interact with an operating system. The key difference between the CLI and GUI is that the interaction with CLI is based on issuing commands. In contrast, the interaction with a GUI involves visual elements, such as windows, buttons, etc. CLI is often also referred to as the shell, terminal, console, prompt or various other names.</p>
+<p><strong>Bash</strong> is a type of interpreter that processes shell commands. A shell interpreter takes commands in plain text format and calls the operating system to do something, for example changing a directory or modifying the content of some files. Bash itself stands for Bourne Again Shell and it is one of the popular command-line shells used to run other programs, many of which are useful for bioinformatic workflows. In this tutorial, we assume that you work with a Bash shell.</p>
 </section>
 <section id="installation-guides" class="level2">
 <h2 class="anchored" data-anchor-id="installation-guides">Installation guides</h2>
 <section id="linux" class="level3">
 <h3 class="anchored" data-anchor-id="linux">Linux</h3>
-<p>The default shell is usually Bash and there is usually no need to install anything to be able to follow this tutorial. On most versions of Linux, th shell accessible by running the Gnome Terminal or KDE Konsole or xterm, which can be found via the applications menu or the search bar. If your machine is set up to use something other than Bash, you can run it by opening a terminal and typing bash.</p>
+<p>The default shell is usually Bash and there is no need to install anything to be able to follow this tutorial. On most versions of Linux, the shell accessible by running the Gnome Terminal or KDE Konsole or xterm, which can be found via the applications menu or the search bar. If your machine is set up to use something other than Bash, you should be able to switch the shell by opening a terminal and typing <code>bash</code>.</p>
 </section>
 <section id="mac" class="level3">
 <h3 class="anchored" data-anchor-id="mac">Mac</h3>
@@ -224,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
 <li>In Finder, select the Go menu, then select Utilities. Locate Terminal in the Utilities folder and open it.</li>
 <li>Use the Mac ‘Spotlight’ computer search function. Search for: Terminal and press Return.</li>
 </ul>
-<p>To ensure that we work with a consistent shell and to check if your machine is set up to use something other than Bash, type <code>echo $SHELL</code> in your terminal window.</p>
+<p>To ensure that you work with a consistent shell and to check if your machine is set up to use something other than Bash, type <code>echo $SHELL</code> in your terminal window. The name of the current shell should be printed to the terminal window.</p>
 <p>If your machine is set up to use something other than Bash, you can try switching to Bash by opening a terminal and typing <code>bash</code>. To check if that worked type <code>echo $SHELL</code> again.</p>
 </section>
 <section id="windows" class="level3">
@@ -244,8 +244,8 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>I am myself mostly familiar with WSL and the following tutorial is tailored towards the location of things when using WSL and Linux and your folder structure might be slightly different when using Git Bash or Mobaxterm.</p>
-<p>Similarly, I am mainly familiar with the bash not the zsh shell. For Mac users that have a newer MAC and have trouble switching to bash this might create some issues when using wildcards.</p>
-<p>For both issues: If parts of the tutorial do not work for you due to that, feel free to contact me and I can adjust the tutorial accordingly.</p>
+<p>Similarly, I am mainly familiar with the bash not the zsh shell. For Mac users that have trouble switching to bash this might create some issues when using wildcards but these users should be able to otherwise follow most parts of this tutorial.</p>
+<p>If parts of the tutorial do not work for you due to issues when working with different operating systems/shells, feel free to contact me and I can adjust the tutorial accordingly.</p>
 </div>
 </div>
 </section>
@@ -254,8 +254,8 @@ Note
 <h2 class="anchored" data-anchor-id="sanity-check">Sanity check</h2>
 <p>After you set everything up and opened a terminal you should see something like this and are good to go if you want to follow the tutorial:</p>
 <p align="left">
-<img width="700" src="../img/terminal.png">
-</p>
+</p><p><img src="../img/terminal.png" width="700"></p>
+<p></p>
 
 
 </section>
@@ -831,7 +831,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-01-29</p>
+Last modified: 2024-01-30</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

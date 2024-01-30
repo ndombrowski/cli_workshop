@@ -186,7 +186,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, sharp corners, breakable, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, interior hidden, boxrule=0pt, breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -223,20 +223,31 @@
 }
 \chapter{Using an HPC}\label{using-an-hpc}
 
-Now, that we are familiar with using the cli, let's upload our
-sequencing data to an HPC an run some software to check the quality of
-our reads.
+Now, that you are familiar more familiar with the cli, let's get used to
+working on an HPC by first login into Crunchomics, uploading our
+sequencing data an run some software to check the quality of our reads.
+
+For people following this tutorial outside of UvA:
+
+\begin{itemize}
+\item
+  If you have access to an HPC using SLURM you can mostly still follow
+  the tutorial
+\item
+  If you do not have access to an HPC but are interested in how to
+  install and run software that can be used to analyse sequencing data,
+  you still might want to check out the steps run below
+\end{itemize}
 
 \section{\texorpdfstring{\texttt{ssh}: Connecting to a
 sever}{ssh: Connecting to a sever}}\label{ssh-connecting-to-a-sever}
 
 \textbf{SSH} (Secure Shell) is a network protocol that enables secure
-remote connections between two systems. The basic command to login looks
-like this:
+remote connections between two systems. The general \texttt{ssh} command
+that you can use to login into any HPC looks as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#connect to a server}
 \FunctionTok{ssh} \AttributeTok{{-}X}\NormalTok{ username@server}
 \end{Highlighting}
 \end{Shaded}
@@ -248,32 +259,33 @@ Options:
 \item
   \texttt{-X} option enables untrusted X11 forwarding in SSH. Untrusted
   means = your local client sends a command to the remote machine and
-  receives the graphical output. We use it since it enables users to run
-  graphical applications on a remote server
+  receives the graphical output. Put simply this option enables us to
+  run graphical applications on a remote server and this for example
+  allows us to view a pdf.
 \end{itemize}
 
-If you have access to and want to connect to crunchomics you would
-connect like this:
+If you have access to and want to connect to Crunchomics you would edit
+the command above to look like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ssh} \AttributeTok{{-}X}\NormalTok{ uvanetid1@omics{-}h0.science.uva.nl}
+\FunctionTok{ssh} \AttributeTok{{-}X}\NormalTok{ uvanetid@omics{-}h0.science.uva.nl}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-important-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, breakable, colback=white, leftrule=.75mm, bottomtitle=1mm, coltitle=black, left=2mm, toprule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colframe=quarto-callout-important-color-frame, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, opacityback=0, opacitybacktitle=0.6]
 
 If you want to log into Crunchomics from outside of UvA you need to be
 connected to the VPN. If you have not set that up and/or have trouble
-doing so, contact ICT.
+doing so, please contact ICT.
 
 \end{tcolorbox}
 
 \section{Crunchomics: Preparing your
 account}\label{crunchomics-preparing-your-account}
 
-If you have not used Crunchomics before, then you want to run a small
-Bash script that:
+If you have not used Crunchomics before, then you want to first run a
+small Bash script that:
 
 \begin{itemize}
 \tightlist
@@ -283,12 +295,12 @@ Bash script that:
   that bash knows that there is an extra folder in which to look for any
   software that is already installed
 \item
-  Sets up a python3 environment and some usefull python packages
+  Sets up a python3 environment and some useful python packages
 \item
   Have a link for your 500 GB personal directory in your home directory
 \end{itemize}
 
-To set this up, run the following in the cli:
+To set this up, run the following command in the cli:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -299,28 +311,29 @@ To set this up, run the following in the cli:
 \section{\texorpdfstring{\texttt{scp}: Transferring data from/to a
 server}{scp: Transferring data from/to a server}}\label{scp-transferring-data-fromto-a-server}
 
-\texttt{scp} stands for Secure Copy Protocol and allows us to securely
+\texttt{scp} stands for Secure Copy Protocol and allows you to securely
 copy files and directories between remote hosts. When transferring data
-the transfer is prepared from the terminal of your local computer and
-not from the HPCs login node.
+the transfer is always prepared from the terminal of your local computer
+and not from the HPCs login node.
 
-The basic syntax is:
+The basic syntax we use looks like this:
 
 \texttt{scp\ {[}options{]}\ SOURCE\ DESTINATION}
 
-To start analysing our data, we want to move our fastq.gz files from our
-local folder, the source, to a folder on Cruncomics, the destination.
-Let's start by:
+To start analysing our data, we want to move the fastq.gz files that we
+have worked with before from our local folder, the source, to a folder
+on Cruncomics, the destination. Let's start setting up a project folder
+from which we want to run our analyses by:
 
 \begin{itemize}
 \tightlist
 \item
   Moving from our home directory into our personal directory. We move
-  there since we have more space in the personal directory. Notice, for
-  bash to find the personal directory, we need to have run the
-  \texttt{omics\_install\_script} script above first
+  there since we have more space in the personal directory. Notice,for
+  the command below to work, we need to have already executed the
+  \texttt{omics\_install\_script} script above
 \item
-  Make a project folder with a descriptive file name
+  Make a project folder with a descriptive file name, i.e.~projectX
 \end{itemize}
 
 \begin{Shaded}
@@ -331,10 +344,10 @@ Let's start by:
 \end{Highlighting}
 \end{Shaded}
 
-Into our project directory, we the want to move the data we have before
-downloaded with our sequencing data. We do this by moving the
-\texttt{data} folder we generated before from our local computer to the
-HPC. Therefore, it is important that:
+Now that we have organized our working directory, we next want to move
+the data folder with the sequencing that you have downloaded before to
+Crunchomics. We do this by moving the whole \texttt{data} folder from
+our local computer to the HPC. Therefore, it is important that:
 
 \begin{itemize}
 \tightlist
@@ -343,31 +356,35 @@ HPC. Therefore, it is important that:
   from the cli while being logged into the HPC!
 \item
   you exchange the two instances of \texttt{username} in the code below
-  with your username
+  with your username/uvanetid
+\item
+  In the example below, I am running the code from inside of the
+  \texttt{data\_analysis} folder that we have generated in the previous
+  tutorial and I use the \texttt{-r} option in order to move the whole
+  data folder and not a single file.
 \end{itemize}
-
-I am running the code from the \texttt{data\_analysis} folder that we
-have generated in the previous tutorial and I use the \texttt{-r} option
-since we are moving a folder, not a file.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\#run command below from local computer, }
+\CommentTok{\#ensure that the data folder is inside the directory from which you run this command}
 \FunctionTok{scp} \AttributeTok{{-}r}\NormalTok{ data username@omics{-}h0.science.uva.nl:/home/username/personal/projectX}
 
-\CommentTok{\#check if that worked }
+\CommentTok{\#run ls on crunchomics to check if you moved the data successfully}
 \ExtensionTok{ll}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{fastq.gz}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC to our own computer}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, breakable, colback=white, leftrule=.75mm, bottomtitle=1mm, coltitle=black, left=2mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC to our own computer}, colframe=quarto-callout-tip-color-frame, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, opacityback=0, opacitybacktitle=0.6]
 
 We can also move data from the HPC to our own computer. For example,
-let's assume we want to move a single sequencing file. In this case,
+let's assume we want to move a single sequencing file from crunchomics
+back to our computer. In this case,
 
 \begin{itemize}
 \tightlist
 \item
-  We do not need \texttt{-r} since we only move a single file.
+  We do not need \texttt{-r} since we only move a single file
 \item
   We again run this command from a terminal on our computer, not while
   being logged in the HPC
@@ -385,32 +402,36 @@ let's assume we want to move a single sequencing file. In this case,
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC using wildcards}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, breakable, colback=white, leftrule=.75mm, bottomtitle=1mm, coltitle=black, left=2mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC using wildcards}, colframe=quarto-callout-tip-color-frame, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, opacityback=0, opacitybacktitle=0.6]
 
 We can also move several files at once and ignore the whole folder
 structure by using wildcards when using \texttt{scp}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#make a random directory to move our data into for testing purposes}
+\CommentTok{\#make a random directory in our Crunchomics working directory to move our data into}
+\CommentTok{\#again, we generate this folder on Crunchomics}
 \FunctionTok{mkdir}\NormalTok{ transfer\_test}
 
+\CommentTok{\#move files from crunchomics to our local computer}
+\CommentTok{\#again, always run scp from your local computer}
 \FunctionTok{scp}\NormalTok{ data/seq\_project/barcode00}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{fastq.gz username@omics{-}h0.science.uva.nl:/home/username/personal/projectX/transfer\_test}
 
 \CommentTok{\#view the data, see how the folder structure is different compared to our first example? }
+\CommentTok{\#since we moved the data TO Crunchomics, we run ls while being logged into Crunchomics}
 \ExtensionTok{ll}\NormalTok{ transfer\_test/}\PreprocessorTok{*}
 \end{Highlighting}
 \end{Shaded}
 
 \textbf{Notice for MAC users}:
 
-For Mac users that work with an zsh shell this might not work and they
-might get an error like ``file not found'', ``no matches found'' or
-something the like. Without going into details zsh has a slightly
-different way of handling wildcards and tries to interpret the wildcard
-literally and tries not to extend the wildcard. If you see the error and
-you are sure the file exists it should work to edit your line of code as
-follows:
+For Mac users that work with an zsh shell the command above might not
+work and they might get an error like ``file not found'', ``no matches
+found'' or something the like. Without going into details zsh has a
+slightly different way of handling wildcards and tries to interpret the
+wildcard literally and thus does not find our files. If you see the
+error and you are sure the file exists it should work to edit your line
+of code as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -423,9 +444,9 @@ environments might need slightly different solutions):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{noglob}\NormalTok{ scp  data/seq\_project/barcode00}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{fastq.gz ndombro@omics{-}h0.science.uva.nl:/home/ndombro/personal/projectX/transfer\_test}
+\ExtensionTok{noglob}\NormalTok{ scp data/seq\_project/barcode00}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{fastq.gz ndombro@omics{-}h0.science.uva.nl:/home/ndombro/personal/projectX/transfer\_test}
 
-\FunctionTok{scp}  \StringTok{\textquotesingle{}data/seq\_project/barcode00*/*fastq.gz\textquotesingle{}}\NormalTok{ ndombro@omics{-}h0.science.uva.nl:/home/ndombro/personal/projectX/transfer\_test}
+\FunctionTok{scp} \StringTok{\textquotesingle{}data/seq\_project/barcode00*/*fastq.gz\textquotesingle{}}\NormalTok{ ndombro@omics{-}h0.science.uva.nl:/home/ndombro/personal/projectX/transfer\_test}
 \end{Highlighting}
 \end{Shaded}
 
@@ -440,8 +461,21 @@ Now, that we have our data prepared we want to run a tool to assess the
 quality of our reads. Before doing that, let's talk about submitting
 jobs to an HPC.
 
-When getting started on a new HPC it is good to know how to get basic
-information about what nodes are avaiable on a cluster by typing the
+As a reminder: We do not run big jobs on the login node but need to
+submit such jobs to the compute nodes via SLURM. Login nodes are for
+preparing your programs to run, while you typically run your actual jobs
+by submitting them to the compute nodes using SLURM.
+
+In the next few sections you will get to know the basics steps to be
+able to do this.
+
+Before doing this it is, however, useful when getting started on a new
+HPC to know how to get basic information about what nodes are available
+on a cluster and how busy the HPC is. This allows us to better know how
+many resources to request in order to have our job run efficiently but
+also get started in a timely manner.
+
+One way to get a list of available compute nodes is by typing the
 following command into the cli:
 
 \begin{Shaded}
@@ -453,17 +487,17 @@ following command into the cli:
 We will see something like this:
 
 \begin{center}
-\includegraphics[width=0.7\textwidth,height=\textheight]{../img/sinfo.png}
+\includegraphics[width=0.6\textwidth,height=\textheight]{../img/sinfo.png}
 \end{center}
 
-Here, you see information about the:
+Here, the different columns you see are:
 
 \begin{itemize}
 \tightlist
 \item
-  partition: the queues that are available
+  partition: w hat queues that are available
 \item
-  state: if a node is busy or not
+  state: tells you if a node is busy or not
 
   \begin{itemize}
   \tightlist
@@ -481,7 +515,7 @@ Here, you see information about the:
 \item
   Nodes: The number of nodes
 \item
-  NodeList: the names of the nodes omics-cn001 to omics-cn005
+  NodeList: the names of the compute nodes omics-cn001 to omics-cn005
 \end{itemize}
 
 \subsection{View info about jobs in the
@@ -496,7 +530,8 @@ is:
 \end{Highlighting}
 \end{Shaded}
 
-After running this, you can see all jobs scheduled on the HPC:
+After running this, you can see all jobs scheduled on the HPC, which
+might look something like this:
 
 \begin{center}
 \includegraphics[width=0.5\textwidth,height=\textheight]{../img/squeue.png}
@@ -513,27 +548,34 @@ After running this, you can see all jobs scheduled on the HPC:
   \href{https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html}{here}
 \end{itemize}
 
-If we would have submitted a job, we also should see it running.
+If we would have submitted a job, we also should see the job listed
+there.
 
 \section{\texorpdfstring{\texttt{srun}: submitting a job
 interactively}{srun: submitting a job interactively}}\label{srun-submitting-a-job-interactively}
 
-\texttt{srun} is used when you want to run tasks interactively or have
-more control over the execution. You directly issue srun commands in the
-terminal, specifying the tasks to be executed and their resource
-requirements.
+\texttt{srun} is used when you want to run tasks interactively or want
+to have more control over the execution of a job. You directly issue
+\texttt{srun} commands in the terminal and you at the same time are able
+to specify the tasks to be executed and their resource requirements. For
+example, you might want to run softwareX and request that this job
+requires 10 cpus and 5 GB of memory.
 
 Use \texttt{srun} when:
 
 \begin{itemize}
 \tightlist
 \item
-  You want to run tasks interactively and need immediate feedback.
+  You want to run tasks interactively and need immediate feedback
+  printed to the screen
 \item
   You are testing or debugging your commands before incorporating them
-  into a script.
+  into a script
 \item
-  You need more control over the execution of tasks.
+  You need more control over the execution of tasks
+\item
+  Typically, you use srun for smaller jobs that do not run for too long,
+  i.e.~a few hours
 \end{itemize}
 
 Let's submit a very simple example for which we would not even need to
@@ -547,9 +589,13 @@ submit a job, but just to get you started.
 
 You should see the output of echo printed to the screen and if you would
 run \texttt{squeue} you won't even see your job since everything ran so
-fast. Now assume you want to run a more complex interactive task with
-srun then it is good to specify the resources your job needs by adding
-flags, i.e.
+fast. But congrats, you communicated the first time with the compute
+node.
+
+Now assume you want to run a more complex interactive task with
+\texttt{srun} that might run longer and benefit from using more CPUs. In
+this case you need to specify the resources your job needs by adding
+flags, i.e.~some of which you see here:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -557,15 +603,14 @@ flags, i.e.
 \end{Highlighting}
 \end{Shaded}
 
-Here, each flag means the following:
+The different flags means the following:
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{-\/-nodes=1}: Specifies the number of nodes. In this case,
   it's set to 1 and tells slurm that we want to use a full node. Only
-  use this if you make use of all resources on that node, otherwise
-  omit.
+  use this if you make use of all resources on that node, otherwise omit
 \item
   \texttt{-\/-ntasks=1}: Defines the number of tasks to run. Here, it's
   set to 1 since we want to use echo once
@@ -593,33 +638,37 @@ make informed choices:
 \tightlist
 \item
   Use default settings: Begin by working with the default settings
-  provided by the HPC cluster. These are often set to provide a balanced
-  resource allocation for a wide range of tasks
+  provided by the HPC cluster or recommended by the tool itself. These
+  are often set to provide a balanced resource allocation for a wide
+  range of tasks
 \item
   Check the software documentation: Consult the documentation of the
   software or tool you are using. Many tools provide recommendations for
   resource allocation based on the nature of the computation.
 \item
-  Testing with Small Datasets: For initial testing and debugging,
-  consider working with a smaller subset of your dataset. This allows
-  for faster job turnaround times, helping you identify and resolve
-  issues more efficiently.
+  Test with small Datasets: For initial testing and debugging especially
+  when working with large datasets, consider working with a smaller
+  subset of your data. This allows for faster job turnaround times,
+  helping you identify and resolve issues more efficiently.
 \item
   Monitor the resources usage:
 
   \begin{itemize}
   \tightlist
   \item
-    Use \texttt{sacct} to check what resources a finished job has used.
-    Look for columns like MaxRSS (maximum resident set size) to check if
-    the amount of memory allocated (--mem) was appropriate. An example
-    command would be
-    \texttt{sacct\ -j\ 419847\ -\/-format=User,JobID,Jobname,state,start,end,elapsed,MaxRss,nnodes,ncpus,nodelist}
+    Use \texttt{sacct} to check what resources a finished job has used
+    and see whether you can optimize a run if you plan to run similar
+    jobs over and over again. An example command would be
+    \texttt{sacct\ -j\ 419847\ -\/-format=User,JobID,Jobname,state,start,end,elapsed,MaxRss,ncpus.}
+    In the report, look for columns like MaxRSS (maximum resident set
+    size) to check if the amount of memory allocated (--mem) was
+    appropriate.
   \item
-    For instance, if you would have used
-    \texttt{-\/-cpus-per-task=4\ -\/-mem=4G}, you would expect to use a
-    total of 16 GB of memory (4 CPUs * 4 GB). Verify this with sacct to
-    ensure your job's resource requirements align with its actual usage.
+    Ensuer that the job used the resources you requested. For instance,
+    if you would have used \texttt{-\/-cpus-per-task=4\ -\/-mem=4G}, you
+    would expect to use a total of 16 GB of memory (4 CPUs * 4 GB). You
+    can verify this with \texttt{sacct} to ensure your job's resource
+    requirements align with its actual usage.
   \end{itemize}
 \item
   Fine-Tuning Resource Requests: If you encounter performance issues or
@@ -633,8 +682,15 @@ make informed choices:
 
 \href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}{FastQC}
 is a quality control tool for high throughput sequence data that is
-already installed on crunchomics. Let's use this to run an actually
-software on our data.
+already installed on Crunchomics. This will be the actual software that
+we now want to run to look more closely at the quality of the sequencing
+data that we just uploaded to Crunchomics.
+
+Let's start by setting up a clean folder structure to keep our files
+organized. I start with making a folder in which I want to store all
+results generated in this analyses and using the \texttt{-p} argument I
+generate a fastqc folder inside the results folder at the same time.
+Then, we can submit our job using \texttt{srun}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -642,13 +698,16 @@ software on our data.
 
 \ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G fastqc data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc  }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
-\ExtensionTok{ll}\NormalTok{ results/fastqc /}\PreprocessorTok{*}
+\ExtensionTok{ll}\NormalTok{ results/fastqc/}\PreprocessorTok{*}
 \end{Highlighting}
 \end{Shaded}
 
-Since we work with little data this will run extremely fast, however, if
-you would be logged into Crunchomics via a second window and run
-\texttt{squeue} you should see that your job is actively running:
+Since we work with little data this will run extremely fast despite only
+using 1 CPU (or thread, in our case this two words can be used
+interchangeably). However, if you would be logged into Crunchomics via a
+second window and run \texttt{squeue} you should see that your job is
+actively running (in the example below, the job we submitted is named
+after the software and got the jobid 746):
 
 \begin{center}
 \includegraphics[width=0.5\textwidth,height=\textheight]{../img/squeue2.png}
@@ -657,10 +716,10 @@ you would be logged into Crunchomics via a second window and run
 Additionally, after the run is completed, you should see that several
 html files were generated in our fastqc folder.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-caution-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-caution-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, breakable, colback=white, leftrule=.75mm, bottomtitle=1mm, coltitle=black, left=2mm, toprule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colframe=quarto-callout-caution-color-frame, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, titlerule=0mm, opacityback=0, opacitybacktitle=0.6]
 
-Use scp to download the data to your own computer and view one of the
-html files.
+Use scp to download the html files generated by fastqc to your own
+computer and view one of the html files.
 
 Click me to see an answer
 
@@ -673,10 +732,10 @@ Click me to see an answer
 You could also open a file on Crunchomics with
 \texttt{firefox\ results/fastqc/Sample-DUMMY1\_R1\_fastqc.html}.
 However, connecting to the internet via a cli on a remote server tends
-to be rather slow and its often better to view files to your own
+to be rather slow and its often better to view files on your own
 computer especially if they are large files.
 
-If you want to know more about how to to interprete the output, you can
+If you want to know more about how to to interpret the output, you can
 visit
 \href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}{the
 fastqc website}, which gives some examples for interpreting good and bad
@@ -689,9 +748,9 @@ via
 srun}{screen: Submitting long running jobs via srun}}\label{screen-submitting-long-running-jobs-via-srun}
 
 One down-side of \texttt{srun} for long running jobs is that your
-terminal gets ``blocked'' as long as the job is running and that your
-job is lost if you loose the ssh connection to the HPC. For long running
-jobs, there are two ways to deal with this:
+terminal gets ``blocked'' as long as the job is running and your job
+will be aborted if you loose the ssh connection to the HPC. For long
+running jobs, there are two ways to deal with this:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -702,7 +761,7 @@ jobs, there are two ways to deal with this:
   use sbatch
 \end{enumerate}
 
-In this section, we will cover how to use Screen. Screen or GNU Screen
+In this section, we will cover how to use screen. Screen or GNU Screen
 is a terminal multiplexer. This means that you can start a screen
 session and then open any number of windows (virtual terminals) inside
 that session.
@@ -722,20 +781,20 @@ We start a screen as follows:
 \end{Shaded}
 
 We detach (go outside of a screen but keep the screen running in the
-background) from a screen with \texttt{control+a+d}.
+background) from a screen by pressing \texttt{control+a+d}.
 
-If you run multiple things, it can be useful to give your screens more
-descriptive names. You can do this as follows:
+If you want to run multiple analyses in multiple screens at the same
+time, then can be useful to give your screens more descriptive names.
+You can give screens a name using the \texttt{-S} option:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#start a screen and give it a name}
 \ExtensionTok{screen} \AttributeTok{{-}S}\NormalTok{ run\_fastqc}
 \end{Highlighting}
 \end{Shaded}
 
-After detaching from a screen you can list all currently running screens
-with:
+After detaching from this screen again with \texttt{control+a+d} you can
+create a list of all currently running screens with:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -743,16 +802,16 @@ with:
 \end{Highlighting}
 \end{Shaded}
 
-You can restart a screen like this:
+You can re-connect to an existing screen like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#restart an existing screen}
 \ExtensionTok{screen} \AttributeTok{{-}r}\NormalTok{ run\_fastqc}
 \end{Highlighting}
 \end{Shaded}
 
-Now inside our screen, we can run fastqc same as we did before:
+Now inside our screen, we can run fastqc same as we did before (but now
+don't risk to loose a long-running job):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -760,11 +819,12 @@ Now inside our screen, we can run fastqc same as we did before:
 \end{Highlighting}
 \end{Shaded}
 
-And for long-running jobs we can jump inside and outside of the job,
-while it is running and at the same time do other things from the cli.
+For long-running jobs we can start multiple screens add once or even if
+we just have one screen open, close it and leave for the day or simply
+work on other things on the cli outside of the screen.
 
 If you want to completely close and remove a screen, type the following
-while being inside of the screen:
+and press enter while being inside of the screen:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -772,18 +832,18 @@ while being inside of the screen:
 \end{Highlighting}
 \end{Shaded}
 
-\section{\texorpdfstring{\texttt{sbatch}: submitting a
-job}{sbatch: submitting a job}}\label{sbatch-submitting-a-job}
+\section{\texorpdfstring{\texttt{sbatch}: submitting a long-running
+job}{sbatch: submitting a long-running job}}\label{sbatch-submitting-a-long-running-job}
 
-\texttt{sbatch} is your go-to command when you have a script (a batch
-script) that needs to be executed without direct user interaction.
+\texttt{sbatch} is your go-to command when you have a script (i.e.~a
+batch script) that needs to be executed without direct user interaction.
 
-Use sbatch when:
+Use \texttt{sbatch} when:
 
 \begin{itemize}
 \tightlist
 \item
-  You have long-running or resource-intensive tasks.
+  You have long-running or resource-intensive tasks
 \item
   You want to submit jobs that can run independently without your
   immediate supervision
@@ -803,8 +863,8 @@ To run a job script, you:
   care of the rest.
 \end{itemize}
 
-Let's start with having some good folder organization to keep our
-project folder organized:
+Let's start with generating some new folders to keep our project folder
+organized:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -813,12 +873,12 @@ project folder organized:
 \end{Highlighting}
 \end{Shaded}
 
-To get started, assume we have created a script named
-\texttt{run\_fastqc.sh} with the following content in which we want to
-run fastqc. Notice, how in this script I added some additional commands.
-Here, I just use this to print some information about the progress which
-could be printed to a log file but if you have several commands that
-should be executed after each other that is how you could do it.
+To get started, assume we have created a script in the scripts folder
+named \texttt{run\_fastqc.sh} with the content that is shown below.
+Notice, how in this script I added some additional \texttt{echo}
+commands? I just use these to print some information about the progress
+which could be printed to a log file but if you have several commands
+that should be executed after each other that is how you could do it.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -834,23 +894,46 @@ should be executed after each other that is how you could do it.
 \end{Highlighting}
 \end{Shaded}
 
-To prepare the script:
+In the job script above:
+
+\begin{itemize}
+\item
+  \texttt{\#!/bin/bash} . This so-called Shebang command tells the shell
+  to interpret and run the Slurm script using the bash shell.~This line
+  should always be added at the very top of your SBATCH/Slurm script.
+\item
+  The lines that follow and start with \texttt{\#} are the lines in
+  which we define the amount of resources required for our job to run.
+  In our case, we request 2 CPUs and 5G of memory.
+\item
+  If your code needs any dependencies, such as loading conda
+  environments, you would add these dependencies here. We do not need
+  this for our example here, but you might need to add something like
+  this \texttt{conda\ activate\ my\_env}. We will touch upon conda
+  environments and installing software a bit later
+\item
+  The lines afterwards are the actually commands that we want to run on
+  the compute nodes, We also call this the job steps.
+\end{itemize}
+
+To prepare the script and run it:
 
 \begin{itemize}
 \tightlist
 \item
-  run \texttt{nano\ scripts/run\_fastqc.sh}.
+  run \texttt{nano\ scripts/run\_fastqc.sh} to generate an empty
+  jobscript file
 \item
-  Copy and paste the content you see above.
+  Copy and paste the code from above into the file we just opened
 \item
   Press \texttt{ctrl+x} to exit nano
 \item
-  Type \texttt{Y} when prompted if the changes should be saved.
+  Type \texttt{Y} when prompted if the changes should be saved
 \item
-  Confirm the name by pressing enter
+  Confirm that the file name is good by pressing enter
 \end{itemize}
 
-The we can submit \texttt{run\_fastqc.sh} with:
+Afterwards, you can submit \texttt{run\_fastqc.sh} as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -868,9 +951,10 @@ something like this printed to the screen
 
 You will also see that a new file is generated that will look something
 like this \texttt{slurm-425707.out}. When you submit a batch job using
-sbatch, Slurm redirects the standard output and standard error streams
-of your job to a file named in the format slurm-JOBID.out, where JOBID
-is the unique identifier assigned to your job.
+sbatch, Slurm redirects the standard output and standard error messages,
+which you have seen printed to the screen when you used \texttt{srun},
+to a file named in the format slurm-JOBID.out, where JOBID is the unique
+identifier assigned to your job.
 
 This file is useful as it:
 
@@ -888,12 +972,12 @@ This file is useful as it:
 Feel free to explore the content of the log file, do you see how the
 echo commands are used as well?
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, breakable, colback=white, leftrule=.75mm, bottomtitle=1mm, coltitle=black, left=2mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, colframe=quarto-callout-tip-color-frame, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, opacityback=0, opacitybacktitle=0.6]
 
-We have seen that by default sbatch redirects the standard output and
-error to our working directory and that it decides itself how to name
-the files. Since file organization is very important, you find below an
-example to:
+We have seen that by default \texttt{sbatch} redirects the standard
+output and error to our working directory and that it decides itself how
+to name the files. Since file organization is very important especially
+if you generated lots of files, you find below an example to:
 
 \begin{itemize}
 \tightlist
@@ -903,7 +987,7 @@ example to:
   Redirect the output into another folder, the logs folder
 \item
   In the code below, the \texttt{\%j} is replaced with the job
-  allocation number
+  allocation number once the log files are generated
 \end{itemize}
 
 \begin{Shaded}
@@ -925,15 +1009,16 @@ example to:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch and multiple files}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, breakable, colback=white, leftrule=.75mm, bottomtitle=1mm, coltitle=black, left=2mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, colframe=quarto-callout-tip-color-frame, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, opacityback=0, opacitybacktitle=0.6]
 
-With fastqc we are very lucky that it can identify all the fastq files
-in the directory we specify with \texttt{-o} and use a wildcard. This is
-extremely useful for us but by far not all programs work this way.
+With fastqc we are very lucky that the tool can identify all the fastq
+files in the directory we specify with \texttt{-o} by making use of the
+wildcard. This is extremely useful for us but by far not all programs
+work this way.
 
 For this section, lets assume that we need to provide each individual
-file we want to analyse, one by one. How would we run such a job
-effectively?
+file we want to analyse, one by one, and can not provide a folder name.
+How would we run such a job effectively?
 
 What we want to do is created what is called a job array that allows us
 to:
@@ -976,7 +1061,7 @@ we store in \texttt{scripts/array.sh}:
 \CommentTok{\#in our case the index will store the values 1 to 8}
 \VariableTok{INDEX}\OperatorTok{=}\VariableTok{$((SLURM\_ARRAY\_TASK\_ID} \VariableTok{))}
 
-\CommentTok{\#build array structure via ale file names}
+\CommentTok{\#build an array structure that stores the fastq.gz file names}
 \VariableTok{CURRENT\_SAMPLE}\OperatorTok{=}\VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples.txt }\KeywordTok{|}  \FunctionTok{sed} \AttributeTok{{-}n} \StringTok{"}\VariableTok{$\{INDEX\}}\StringTok{p"}\VariableTok{)}
 
 \CommentTok{\#print what is actually happening}
@@ -1009,23 +1094,23 @@ The job does the following:
   The \texttt{INDEX} variable is storing the value of the current
   \texttt{SLURM\_ARRAY\_TASK\_ID}. This represents the ID of the current
   job within the array. In our case this will be first 1, then 2,
-  \ldots, and finally 3.
+  \ldots, and finally 8.
 \item
-  Next, we build the array structure:
+  Next, we build the array structure in which the
+  \texttt{CURRENT\_SAMPLE} variable is created by:
 
   \begin{itemize}
   \tightlist
   \item
-    The \texttt{CURRENT\_SAMPLE} variable is created by reading the
-    \texttt{sample\_list.txt} file with \texttt{cat}.
+    Reading the \texttt{sample\_list.txt} file with \texttt{cat}
   \item
-    We then use a pipe to extract the sample at the calculated index
-    using sed.
+    Using a pipe to extract the file name at the calculated index using
+    sed.
     \href{https://scienceparkstudygroup.github.io/software_information/source/cli/cli_file_manipulation.html\#sed-manipulating-the-content-of-files}{Sed}
-    is an extremly powerful way to edit text that we have not yet
-    covered but \texttt{-n\ 1p} is a option that allows us to print one
-    specific line of a file, here the first one when running array 1. So
-    for the first array the actual code run is the following
+    is an extremely powerful way to edit text that we have not covered
+    here but \texttt{-n\ 1p} is a option that allows us to print one
+    specific line of a file, in our case the first one when running
+    array 1. So for the first array the actual code run is the following
     \texttt{cat\ samples.txt\ \textbar{}\ \ sed\ -n\ "1p"}. For the next
     array, we would run
     \texttt{cat\ samples.txt\ \textbar{}\ \ sed\ -n\ "2p"} and so forth.
@@ -1035,8 +1120,8 @@ The job does the following:
     \texttt{Sample-DUMMY1\_R1.fastq.gz}
   \end{itemize}
 \item
-  We use echo to record what was executed when to store it in the
-  standard output
+  We use echo to record what was executed when and store this
+  information in the standard output
 \item
   We run our actual fastqc job on the file name that is currently stored
   in the \texttt{CURRENT\_SAMPLE} variable.
@@ -1049,10 +1134,13 @@ If we check what is happening right after submitting the job with
 \includegraphics[width=0.5\textwidth,height=\textheight]{../img/arrays.png}
 \end{center}
 
-We see that jobs 1-4 are already running and the other jobs are
-currently waiting for space.
+We see that jobs 1-4 are already running and the jobs 5-8 are currently
+waiting for space. That is one of the useful things using a job manager
+such as SLURM. It takes care of finding the appropriate resources on all
+nodes for us as long as we defined the required cpus and memory
+sensibly.
 
-If we check the log files we should see:
+If we check the log files we should see something like this:
 
 \begin{center}
 \includegraphics[width=0.5\textwidth,height=\textheight]{../img/arrays2.png}
@@ -1061,28 +1149,35 @@ If we check the log files we should see:
 We see that we get an individual output and error file for each job. In
 the output we see what value is stored in the \texttt{INDEX}, here 1,
 and the \texttt{CURRENT\_SAMPLE}, here
-\texttt{Sample-DUMMY1\_R1.fastq.gz}.
+\texttt{Sample-DUMMY1\_R1.fastq.gz} and that the analysis finished
+successfully.
 
 \end{tcolorbox}
 
 \section{Installing software}\label{installing-software}
 
 There might be cases where the software you are interested in is not
-installed.
+installed on the HPC you are working with (or own your own computer).
 
 In the majority of cases, you should be able to install software by
-using a package management system, such as conda or mamba. These tools
+using a package management system, such as conda or mamba. These systems
 allow you to find and install packages in their own environment without
-administrator privileges. Let'go through a very brief example:
+administrator privileges. Let's have a look at a very brief example:
 
-\subsection{Install mamba}\label{install-mamba}
+\subsection{Install conda/mamba}\label{install-condamamba}
 
-A lot of system already come with conda installed, however, if possible
-we recommend working with mamba instead of conda. mamba is a drop-in
-replacement and uses the same commands and configuration options as
-conda, however, it tends to be much faster. A useful thing is that if
+A lot of system already come with conda/mamba installed, however, if
+possible we recommend working with mamba instead of conda. mamba is a
+drop-in replacement and uses the same commands and configuration options
+as conda, however, it tends to be much faster. A useful thing is that if
 you find documentation for conda then you can swap almost all commands
 between conda \& mamba.
+
+If you have conda installed and do not want to install anything else,
+that is fine. Just replace all instances of mamba with conda below.
+
+This command should work in most cases to setup conda together with
+mamba:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1095,25 +1190,29 @@ between conda \& mamba.
 
 Let's assume we want to install seqkit, a tool that allows us to
 calculate some statistics for sequencing data such as the number of
-sequences or average sequence length.
+sequences or average sequence length per sample.
 
-We can do this as follows:
+We can install seqkit into a separate environment, which we can give a
+descriptive name, as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#check if the tool is installed (should return command not found if the software is not installed)}
 \ExtensionTok{seqkit} \AttributeTok{{-}h}
 
-\CommentTok{\#create an empty environment and name it seqkit}
-\ExtensionTok{mamba}\NormalTok{ create }\AttributeTok{{-}n}\NormalTok{ seqkit}
+\CommentTok{\#create an empty environment and name it seqkit and we add the version number to the name}
+\CommentTok{\#this basically sets up seqkit separate from our default working environment}
+\CommentTok{\#this is useful whenever software require complicated dependencies allowing us to have a separate install away from software that could conflict with each other}
+\ExtensionTok{mamba}\NormalTok{ create }\AttributeTok{{-}n}\NormalTok{ seqkit\_2.6.1}
 
-\CommentTok{\#install some software, i.e. seqkit, into the seqkit environment}
-\ExtensionTok{mamba}\NormalTok{ install }\AttributeTok{{-}n}\NormalTok{ seqkit }\AttributeTok{{-}c}\NormalTok{ bioconda seqkit}
+\CommentTok{\#install seqkit, into the environment we just created}
+\ExtensionTok{mamba}\NormalTok{ install }\AttributeTok{{-}n}\NormalTok{ seqkit\_2.6.1 }\AttributeTok{{-}c}\NormalTok{ bioconda seqkit=2.6.1}
 
-\CommentTok{\#to run the tool activate the environment first}
-\ExtensionTok{mamba}\NormalTok{ activate seqkit}
+\CommentTok{\#to run seqkit, we need activate the environment first}
+\ExtensionTok{mamba}\NormalTok{ activate seqkit\_2.6.1}
 
-\CommentTok{\#check if tool is installed}
+\CommentTok{\#check if tool is installed, }
+\CommentTok{\#if installed properly this should return some detailed information on how to run seqkit}
 \ExtensionTok{seqkit} \AttributeTok{{-}h}
 
 \CommentTok{\#run the tool via srun}
@@ -1121,28 +1220,40 @@ We can do this as follows:
 \ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\NormalTok{ 2 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{4G seqkit stats }\AttributeTok{{-}a} \AttributeTok{{-}To}\NormalTok{ results/seqkit/seqkit\_stats.tsv data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 2}
 \FunctionTok{less} \AttributeTok{{-}S}\NormalTok{ results/seqkit/seqkit\_stats.tsv }
 
-\CommentTok{\#leave the environment}
+\CommentTok{\#close the environment}
 \ExtensionTok{conda}\NormalTok{ deactivate}
 \end{Highlighting}
 \end{Shaded}
 
-When installing the seqkit package we specify that we want to look for
-seqkit in the bioconda channel with the option \texttt{-c}. Channels are
-the locations where packages are stored. They serve as the base for
-hosting and managing packages. Conda packages are downloaded from remote
-channels, which are URLs to directories containing conda packages. If
-you are unable to find a package it might be that you need to specify a
-channel.
+When installing seqkit, we:
+
+\begin{itemize}
+\item
+  specify the exact version we want to download with \texttt{=2.6.1}. We
+  could also install the newest version that conda/mamba can find by
+  running \texttt{mamba\ install\ -n\ seqkit\ -c\ bioconda\ seqkit}.
+\item
+  specify that we want to look for seqkit in the bioconda channel with
+  the option \texttt{-c}. Channels are the locations where packages are
+  stored. They serve as the base for hosting and managing packages.
+  Conda packages are downloaded from remote channels, which are URLs to
+  directories containing conda packages. If you are unable to find a
+  package it might be that you need to specify a channel.
+\end{itemize}
+
+Forgot what conda environments you installed in the past? You can run
+\texttt{conda\ env\ list} to generate a list of all existing
+environments.
 
 Unsure if a software can be installed with conda? Google conda together
-with the software name, which should lead you do a conda web page, which
-also should inform you whether you need to add a specific channel to
-install the software.
+with the software name, which should lead you do a conda web page. This
+page should inform you whether you need to add a specific channel to
+install the software as well as the version numbers available.
 
 A full set of mamba/conda commands can be found
-\href{https://docs.conda.io/projects/conda/en/latest/commands/index.html.}{here}
+\href{https://docs.conda.io/projects/conda/en/latest/commands/index.html.}{here}.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, left=2mm, colframe=quarto-callout-caution-color-frame, bottomrule=.15mm, opacityback=0, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, arc=.35mm, coltitle=black, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colback=white, rightrule=.15mm, breakable, colbacktitle=quarto-callout-caution-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, breakable, colback=white, leftrule=.75mm, bottomtitle=1mm, coltitle=black, left=2mm, toprule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colframe=quarto-callout-caution-color-frame, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, titlerule=0mm, opacityback=0, opacitybacktitle=0.6]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

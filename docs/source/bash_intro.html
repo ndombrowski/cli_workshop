@@ -279,7 +279,7 @@ Tip: finding the desktop on different user systems
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Your home directory will be something like /Users/YourUserName but the path might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces:</p>
+<p>Your home directory will be something like /Users/YourUserName but the path might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces/operating systems:</p>
 <p>For MAC users:</p>
 <ul>
 <li>The home directory should be <code>/Users/YourUserName</code></li>
@@ -309,7 +309,7 @@ Tip: finding the desktop on different user systems
 </section>
 <section id="ls-list-the-contents-of-a-directory" class="level2">
 <h2 class="anchored" data-anchor-id="ls-list-the-contents-of-a-directory"><code>ls</code>: List the contents of a directory</h2>
-<p>Now that we know where we are, let’s find out what files and folders exist in our home directory. For this we can use the <code>ls</code> command, which allows us to list directory contents:</p>
+<p>Now that we know where we are, let’s find out what files and folders exist in our home directory. For this you can use the <code>ls</code> command, which allows us to list directory contents:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -330,18 +330,18 @@ Tip: finding the desktop on different user systems
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After running this, we should see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better:</p>
+<p>After running this, we should see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better. I.e. we get precise information about who owns the files, how large the files are, when they were last modified and of course the name:</p>
 <p align="center">
 </p><p><img src="../img/ls2.png" width="400"></p>
 <p></p>
 </section>
 <section id="getting-help" class="level2">
 <h2 class="anchored" data-anchor-id="getting-help">Getting help</h2>
-<p>If you want to know what options are available for a command it is always a good idea to check out the manual. You can do this with:</p>
+<p>If you want to know what options are available for a command it is always a good idea to check out the manual. In most of the cases you can do this with:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can exit the manual by pressing <code>q</code>.</p>
+<p>You exit the manual by pressing <code>q</code>.</p>
 <p>In case you want to check what a program does or what options there are, depending on the program there might be different ways to access the manual. These most common ways are:</p>
 <ul>
 <li><code>man ls</code></li>
@@ -352,17 +352,17 @@ Tip: finding the desktop on different user systems
 <section id="cd-move-around-folders" class="level2">
 <h2 class="anchored" data-anchor-id="cd-move-around-folders"><code>cd</code>: Move around folders</h2>
 <p>Most of the time you do not want to perform your analyses in the home directory but in a dedicated folder for your project. To get started, we will learn about the <code>cd</code> command that allows us to move around the file system.</p>
-<p>The file system is a hierarchical system used to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (<code>/</code>). All other files are “descendants” of the root. To move from the root into other folders, we can go via the descendants to reach the john folder as follows: <code>/users/john</code>.</p>
+<p>The file system is a hierarchical system used to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (<code>/</code>). All other files are “descendants” of the root. To move from the root into other folders, we can go via the descendants to for example reach the john folder as follows: <code>/users/john</code>.</p>
 <p align="center">
 </p><p><img src="../img/filesystem.png" width="400"></p>
 <p></p>
-<p>If we specify the location of a folder or file starting from the root directory, we use what is called an absolute path. If we specify the location relative to our current directory, such as our home directory, we use a relative path.</p>
-<p>To start moving around, let’s begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used <code>ls -l</code>. In my case I want to move into the source directory:</p>
+<p>If we specify the location of a folder or file starting from the root directory, we use what is called an <strong>absolute path</strong>. If we specify the location relative to our current directory, such as our home directory, we use what is called a <strong>relative path</strong>.</p>
+<p>To start moving around the filesystem, let’s begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used <code>ls -l</code>. In my case I want to move into the source directory:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> source/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you use <code>pwd</code> after moving around directories, you should see that a different location is printed to the screen.</p>
-<p>We can also move back to our original directory using <code>cd ..</code>, which will move us back one directory (and move us out of the source and back into the home directory).</p>
+<p>We can also move back to our original directory using <code>cd ..</code>. This command will move us back one directory (and move us out of the source and back into the home directory).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1808,7 +1808,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-01-29</p>
+Last modified: 2024-01-30</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

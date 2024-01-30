@@ -22,7 +22,7 @@ pwd
 `pwd` prints the location of the current working directory and tells you where exactly you are in the file system. When we login we typically start from what is called our home directory.
 
 ::: {.callout-tip title="Tip: finding the desktop on different user systems" collapse="true"}
-Your home directory will be something like /Users/YourUserName but the path might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces:
+Your home directory will be something like /Users/YourUserName but the path might be slightly different depending on your operating system. Below you find some help to orient yourself better for different terminal interfaces/operating systems:
 
 For MAC users:
 
@@ -48,7 +48,7 @@ For WSL2 users:
 
 ## `ls`: List the contents of a directory
 
-Now that we know where we are, let's find out what files and folders exist in our home directory. For this we can use the `ls` command, which allows us to list directory contents:
+Now that we know where we are, let's find out what files and folders exist in our home directory. For this you can use the `ls` command, which allows us to list directory contents:
 
 ```{bash}
 ls
@@ -82,7 +82,7 @@ Understanding better what a command looks like, let's use the `ls` command toget
 ls -l
 ```
 
-After running this, we should see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better:
+After running this, we should see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better. I.e. we get precise information about who owns the files, how large the files are, when they were last modified and of course the name:
 
 <p align="center">
 
@@ -92,13 +92,13 @@ After running this, we should see our files and folders again but in a long form
 
 ## Getting help
 
-If you want to know what options are available for a command it is always a good idea to check out the manual. You can do this with:
+If you want to know what options are available for a command it is always a good idea to check out the manual. In most of the cases you can do this with:
 
 ```{bash}
 man ls
 ```
 
-You can exit the manual by pressing `q`.
+You exit the manual by pressing `q`.
 
 In case you want to check what a program does or what options there are, depending on the program there might be different ways to access the manual. These most common ways are:
 
@@ -110,7 +110,7 @@ In case you want to check what a program does or what options there are, dependi
 
 Most of the time you do not want to perform your analyses in the home directory but in a dedicated folder for your project. To get started, we will learn about the `cd` command that allows us to move around the file system.
 
-The file system is a hierarchical system used to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (`/`). All other files are "descendants" of the root. To move from the root into other folders, we can go via the descendants to reach the john folder as follows: `/users/john`.
+The file system is a hierarchical system used to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (`/`). All other files are "descendants" of the root. To move from the root into other folders, we can go via the descendants to for example reach the john folder as follows: `/users/john`.
 
 <p align="center">
 
@@ -118,9 +118,9 @@ The file system is a hierarchical system used to organize files and directories.
 
 </p>
 
-If we specify the location of a folder or file starting from the root directory, we use what is called an absolute path. If we specify the location relative to our current directory, such as our home directory, we use a relative path.
+If we specify the location of a folder or file starting from the root directory, we use what is called an **absolute path**. If we specify the location relative to our current directory, such as our home directory, we use what is called a **relative path**.
 
-To start moving around, let's begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used `ls -l`. In my case I want to move into the source directory:
+To start moving around the filesystem, let's begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used `ls -l`. In my case I want to move into the source directory:
 
 ```{bash}
 cd source/
@@ -128,7 +128,7 @@ cd source/
 
 If you use `pwd` after moving around directories, you should see that a different location is printed to the screen.
 
-We can also move back to our original directory using `cd ..`, which will move us back one directory (and move us out of the source and back into the home directory).
+We can also move back to our original directory using `cd ..`. This command will move us back one directory (and move us out of the source and back into the home directory).
 
 ```{bash}
 cd ..

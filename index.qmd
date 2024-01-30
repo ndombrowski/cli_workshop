@@ -4,13 +4,13 @@ toc-depth: 2
 
 ## Welcome page
 
-On this website you will find a short tutorial that will provide guidance in how to use bash and the command line interface.
+On this website you will find a short tutorial that will explain how use bash and connect and work with an HPC.
 
-The first few pages will introduce you how to set up a terminal and document your code.
+You first will learn how to set up a terminal and document your code. Afterwards, the actual tutorial will begin, in which you will assume the role of a researcher who just received data from a sequencing center and wants to starts analysing this data using the command line interface. This tutorial is divided into two main parts:
 
-Afterwards, the actual tutorial will begin, in which we will assume the role of a researcher who just received amplicon sequencing data from a sequencing center and wants to starts analysing this data using the command line interface. This tutorial is divided into two main parts:
+1. In the first section, you will learn how to organize, view and extract information from your data using bash and the command line interface
+2. Then you will learn how to work with this data on an HPC. You will learn how to connect to an HPC, upload your sequencing data and submit a job in order to assess the quality of your sequencing data 
 
-1. In the first section, we will learn how to organize and how to view and exploring the data on the filesystem. We will start with some basic operations to assess with how much data we work with and extract information from our files.
-2. After becoming familiar with the command line, we will learn how to analyze our data on an HPC (since often analysing large datasets on a personal computer can become quite resource intensive). We will learn how to connect to an HPC, download some software to assess the quality of our sequencing data and submit jobs to computational noted. If you do not have access to an HPC you can follow most parts on your own computer as the dataset we provide is a small one.
+This tutorial was written for researchers at the Institute for Biodiversity and Ecosystem Dynamics (IBED) at the University of Amsterdam who can get access to Crunchomics, the Genomics Compute Environment for SILS and IBED. For researchers that do not have access to Crunchomics or another slurm-based HPC, then you still can follow most sections of this tutorial on your own computer if you are interested in learning about bash.
 
 For information not covered in this tutorial, check out [IBED's bioinformatics guidance page](https://scienceparkstudygroup.github.io/software_information/).
