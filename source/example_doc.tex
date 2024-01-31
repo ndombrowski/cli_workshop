@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, colback={codebgcolor}, sharp corners, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, breakable, boxrule=0pt, colback={codebgcolor}, enhanced, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -183,12 +183,12 @@ The link above leads you to an example for:
   How could I use github to make my code available to others
 \item
   How could a ``code book'' look like? The example you see in the folder
-  is provided a markdown file
+  is provided a Quarto markdown file
   \href{https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd}{here}
-  and for convience the report was also rendered as a
+  and for convenience the report was also rendered as a
   \href{https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html}{html}
-  to send it to collaborators. To view the report, you need to download
-  it first.
+  to make it easier to read for potential collaborators. To view the
+  HTML report, you need to download it first.
 \end{itemize}
 
 The example is based on the data you analyse throughout this tutorial,
@@ -221,15 +221,17 @@ Typically things to add are:
 \item
   From where to start the analyses
 \item
-  Custom paths, to for example databases that need to be downloaded from
-  elsewhere
+  Custom paths, to for example for databases that need to be downloaded
+  from elsewhere
 \item
   Custom variables: In the example above I store the link to the data in
   a variable called \texttt{download\_link}, I then use the variable in
   the code below to download the data. By doing it this way I have one
-  location in the code I need to change things when for example the path
-  to the data changes, the code below stays the same even if I would
-  need to use the \texttt{download\_link} multiple times
+  location in the code another person needs to change the code when for
+  example the path to the data changes. The code below stays the same.
+  When writing code try to think ahead and minimize the number of
+  instances where things need to be changed if for example the location
+  to your data changes.
 \item
   \ldots{}
 \end{itemize}
@@ -253,7 +255,32 @@ for the individual files and the combined file simply to ensure that I
 used my wildcards correctly.
 
 Remember: The computer is only as smart as the person using it and will
-blindly run your commands.
+blindly run your commands. Because of that the computer can do
+unexpected things and you need to account for that.
+
+\subsection{Using markdown to make
+notes}\label{using-markdown-to-make-notes}
+
+\includegraphics[width=5.65625in,height=\textheight]{../img/comments_in_code.png}
+
+In the example above I use markdown to not only document my code but
+also add some comments whenever I might need it. For example here, I
+added some notes about what the results from FastQC actually told me.
+
+This kind of documentation can be useful for:
+
+\begin{itemize}
+\item
+  Justifying decisions further down the line. In this example, I might
+  decide on how to clean the sequencing data. For example, if I would
+  have found a lot of low quality reads or the adapter still being part
+  of the sequence then I would have specifically cleaned my sequences to
+  deal with that
+\item
+  Future you. If you read the report a month, or a year, later you have
+  the key information in your report and don't have to open the HTML
+  reports again.
+\end{itemize}
 
 \subsection{Documenting external
 scripts}\label{documenting-external-scripts}
@@ -281,10 +308,10 @@ You can deal with this in two ways.
   or \href{https://zenodo.org/records/3839790}{zenodo}
 \end{enumerate}
 
-I tend to prefer number 2 because I like to record the code in the
-readme exactly as I ran it but you can do it differently as long as all
-the code you ran is recorded and accessible to others once you publish
-your data.
+I tend to prefer number 2 because I like to record the code in my
+notebooks exactly as I ran them but you can do it differently as long as
+all the code you ran is recorded and accessible to others once you
+publish your data.
 
 
 
