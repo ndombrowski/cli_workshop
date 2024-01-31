@@ -4,6 +4,7 @@ project:
 
 execute:
   freeze: auto  # re-render only when source changes
+  eval: false
 
 date-modified: last-modified
 
@@ -32,6 +33,10 @@ website:
         contents:
           - source/hpc_intro.qmd
           - source/hpc_howto.qmd
+
+      - text: "An example notebook"
+        href: source/example_doc.qmd
+
 
   page-navigation: true
   page-footer:  

@@ -10,8 +10,6 @@ Documenting your code is crucial for both your future self and anyone else who m
 
 [A Guide to Reproducible Code in Ecology and Evolution](https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf) gives detailed information on how to organize project folders and how to write clear and reproducible code. The examples are mainly based on R but are general enough to apply to other computational languages (and scientific disciplines).
 
-If you want to see an example for documented code, check out \[this example file\]**tba**. The example file is a markdown file (qmd) generated with VSCode. Some examples for text editors to use can be found below.
-
 ::: callout-note
 The information in this section is not part of the actual tutorial but was added to give you a starting point for how to document your code.
 

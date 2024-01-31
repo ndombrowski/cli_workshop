@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, sharp corners, breakable, frame hidden, colback={codebgcolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, frame hidden, boxrule=0pt, breakable, colback={codebgcolor}, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -168,40 +168,121 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\section{Welcome page}\label{welcome-page}
+\section{An example notebook}\label{an-example-notebook}
 
-On this website you will find a short tutorial that will explain how use
-bash and connect and work with an HPC.
+If you want to see an example for documented code, check out
+\href{https://github.com/ndombrowski/cli_workshop/example_doc}{an
+example} for how I would might have recorded how I analysed some
+sequence data myself.
 
-You first will learn how to set up a terminal and document your code.
-Afterwards, the actual tutorial will begin, in which you will assume the
-role of a researcher who just received data from a sequencing center and
-wants to starts analysing this data using the command line interface.
-This tutorial is divided into two main parts:
+The link above leads you to an example for:
+
+\begin{itemize}
+\tightlist
+\item
+  How could I use github to make my code available to others
+\item
+  How could a ``code book'' look like? The example you see in the folder
+  is provided a markdown file
+  \href{https://github.com/ndombrowski/cli_workshop/example_doc/example_notebook.qmd}{here}
+  and for convience the report was also rendered as a html to send it to
+  collaborators.
+\end{itemize}
+
+The example is based on the data you analyse throughout this tutorial,
+so the actual code might only make sense after you have finished the
+tutorial. Feel free to revisit this page after you have written some
+code yourself.
+
+Please note that this is just an example to get you started and such a
+report might look different depending on your needs.
+
+Below you find some general hints for what to put into different
+sections that you can see in the qmd file.
+
+\subsection{YAML headers}\label{yaml-headers}
+
+\includegraphics[width=7.84375in,height=\textheight]{../img/yaml_header.png}
+
+\subsection{Setting up your working
+directory}\label{setting-up-your-working-directory}
+
+\includegraphics[width=5.71875in,height=\textheight]{../img/general_setup.png}
+
+In this first section I add everything that a user that wants to use my
+workflow has to change and I try to standardize the code below, so that
+another user could just run this as is without having to edit anything.
+Typically things to add are:
+
+\begin{itemize}
+\tightlist
+\item
+  From where to start the analyses
+\item
+  Custom paths, to for example databases that need to be downloaded from
+  elsewhere
+\item
+  Custom variables: In the example above I store the link to the data in
+  a variable called \texttt{download\_link}, I then use the variable in
+  the code below to download the data. By doing it this way I have one
+  location in the code I need to change things when for example the path
+  to the data changes, the code below stays the same even if I would
+  need to use the \texttt{download\_link} multiple times
+\item
+  \ldots{}
+\end{itemize}
+
+I tend to NOT add the information how I use \texttt{scp} to log into an
+HPC to keep my user name and login information private.
+
+\subsection{Sanity checks}\label{sanity-checks}
+
+\includegraphics[width=5.84375in,height=\textheight]{../img/sanity_check.png}
+
+When I first start working with new data, I try to add as many sanity
+checks as possible to ensure that my data looks good. That way I avoid
+that I don't notice an issue and run into trouble further down the line.
+I at the same time understand my data more and learn with how many
+samples and how much data I am working with.
+
+I also add such sanity checks whenever I modify my data. For example,
+when I merge individual files into a large file I might count the lines
+for the individual files and the combined file simply to ensure that I
+used my wildcards correctly.
+
+Remember: The computer is only as smart as the person using it and will
+blindly run your commands.
+
+\subsection{Documenting external
+scripts}\label{documenting-external-scripts}
+
+\includegraphics[width=5.82292in,height=\textheight]{../img/external_scripts.png}
+
+This part might make more sense after you have worked through the part
+of the tutorial about using an HPC. But what you see here is how I have
+written down code that simply says that I submitted a script to a HPC
+but it does not actually say how I ran the FastQC software. The actual
+code is ``hidden'' inside of the run\_fastqc.sh script. This also means
+that a person reading your workflow does not have the code right away.
+You can deal with this in two ways.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  In the first section, you will learn how to organize, view and extract
-  information from your data using bash and the command line interface
+  Instead of the sbatch command, you can add the actual line of code
+  that was run on the compute node.
 \item
-  Then you will learn how to work with this data on an HPC. You will
-  learn how to connect to an HPC, upload your sequencing data and submit
-  a job in order to assess the quality of your sequencing data
+  When publishing your code with your manuscript, add the whole scripts
+  folder to where you publish the main code, i.e.~on
+  \href{https://github.com/ndombrowski/cli_workshop/example_doc}{github}
+  or \href{https://zenodo.org/records/3839790}{zenodo}
 \end{enumerate}
 
-This tutorial was written for researchers at the Institute for
-Biodiversity and Ecosystem Dynamics (IBED) at the University of
-Amsterdam who can get access to Crunchomics, the Genomics Compute
-Environment for SILS and IBED. For researchers that do not have access
-to Crunchomics or another slurm-based HPC, then you still can follow
-most sections of this tutorial on your own computer if you are
-interested in learning about bash.
-
-For information not covered in this tutorial, check out
-\href{https://scienceparkstudygroup.github.io/software_information/}{IBED's
-bioinformatics guidance page}.
+I tend to prefer number 2 because I like to record the code in the
+readme exactly as I ran it but you can do it differently as long as all
+the code you ran is recorded and accessible to others once you publish
+your data.
 
 
 

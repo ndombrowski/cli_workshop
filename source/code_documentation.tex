@@ -187,7 +187,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, sharp corners, colback={codebgcolor}, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, breakable, boxrule=0pt, colback={codebgcolor}, enhanced]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -236,12 +236,7 @@ and reproducible code. The examples are mainly based on R but are
 general enough to apply to other computational languages (and scientific
 disciplines).
 
-If you want to see an example for documented code, check out {[}this
-example file{]}\textbf{tba}. The example file is a markdown file (qmd)
-generated with VSCode. Some examples for text editors to use can be
-found below.
-
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, breakable, bottomtitle=1mm, coltitle=black, arc=.35mm, left=2mm, colback=white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, opacityback=0, leftrule=.75mm, toprule=.15mm, bottomrule=.15mm, toptitle=1mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, breakable, coltitle=black, leftrule=.75mm, colback=white, bottomtitle=1mm, opacitybacktitle=0.6, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, left=2mm]
 
 The information in this section is not part of the actual tutorial but
 was added to give you a starting point for how to document your code.

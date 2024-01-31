@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../source/hpc_howto.html" rel="next">
-<link href="../source/bash_intro.html" rel="prev">
+<link href="../source/hpc_howto.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../source/hpc_intro.html">Using an HPC</a></li><li class="breadcrumb-item"><a href="../source/hpc_intro.html">HPC introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../source/example_doc.html">An example notebook</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -157,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../source/hpc_intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../source/hpc_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">HPC introduction</span></a>
   </div>
 </li>
@@ -171,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../source/example_doc.html" class="sidebar-item-text sidebar-link">
+  <a href="../source/example_doc.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">An example notebook</span></a>
   </div>
 </li>
@@ -185,9 +184,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul class="collapse">
-  <li><a href="#hpc-introduction" id="toc-hpc-introduction" class="nav-link active" data-scroll-target="#hpc-introduction">HPC introduction</a></li>
+  <li><a href="#an-example-notebook" id="toc-an-example-notebook" class="nav-link active" data-scroll-target="#an-example-notebook">An example notebook</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hpc_intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="example_doc.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -200,71 +199,52 @@ ul.task-list li input[type="checkbox"] {
 
 <div style="text-align: justify">
 
-<section id="hpc-introduction" class="level2">
-<h2 class="anchored" data-anchor-id="hpc-introduction">HPC introduction</h2>
-<p>If you work at IBED you can get access to the Crunchomics HPC, the Genomics Compute Environment for SILS and IBED. If you need access to Crunchomics, send an email to Wim de Leeuw <a href="mailto:w.c.deleeuw@uva.nl" class="email">w.c.deleeuw@uva.nl</a> to get an account set up by giving him your UvA netID.</p>
-<p>Using an HPC works a bit differently than running jobs on your computer, below you find a simplified schematic:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img/crunchomics1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
-</figure>
-</div>
-<p>Very briefly, the purpose of a <strong>login node</strong>, sometimes also called head node, is to prepare to run a program (e.g., moving and editing files and compiling, preparing a job script). The <strong>compute nodes</strong> on the other hand are used to actually run a program and we submit jobs from the login to the compute nodes via Slurm. <strong>Slurm</strong> is an open-source workload manager/scheduler that is used on many big HPCs. Slurm has three key functions:</p>
+<section id="an-example-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="an-example-notebook">An example notebook</h2>
+<p>If you want to see an example for documented code, check out <a href="https://github.com/ndombrowski/cli_workshop/example_doc">an example</a> for how I would might have recorded how I analysed some sequence data myself.</p>
+<p>The link above leads you to an example for:</p>
 <ul>
-<li>provide the users access to the resources on the compute nodes for a certain amount of time to perform any computation</li>
-<li>provide a framework to start, execute, and check the work on the set of allocated compute nodes</li>
-<li>mange the queue of submitted jobs based on the availability of resources</li>
+<li>How could I use github to make my code available to others</li>
+<li>How could a “code book” look like? The example you see in the folder is provided a markdown file <a href="https://github.com/ndombrowski/cli_workshop/example_doc/example_notebook.qmd">here</a> and for convience the report was also rendered as a html to send it to collaborators.</li>
 </ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Crunchomics etiquette</strong></p>
-<p>You share the HPC with other people, therefore, take care to only ask for the resources you actually use. Some general rules:</p>
+<p>The example is based on the data you analyse throughout this tutorial, so the actual code might only make sense after you have finished the tutorial. Feel free to revisit this page after you have written some code yourself.</p>
+<p>Please note that this is just an example to get you started and such a report might look different depending on your needs.</p>
+<p>Below you find some general hints for what to put into different sections that you can see in the qmd file.</p>
+<section id="yaml-headers" class="level3">
+<h3 class="anchored" data-anchor-id="yaml-headers">YAML headers</h3>
+<p><img src="..\img/yaml_header.png" class="img-fluid" width="753"></p>
+</section>
+<section id="setting-up-your-working-directory" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-your-working-directory">Setting up your working directory</h3>
+<p><img src="..\img/general_setup.png" class="img-fluid" width="549"></p>
+<p>In this first section I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, so that another user could just run this as is without having to edit anything. Typically things to add are:</p>
 <ul>
-<li>There are no hard limits on resource usage, instead we expect you to keep in mind you are sharing the system with other users. Some rules of thumb:
-<ul>
-<li>Don’t run jobs that request many cpus and lots of memory on the head-node (omics-h0), use the compute nodes (omics-cn001 - omics-cn005) for this</li>
-<li>Don’t allocate more than 20% (cpu or memory) of the cluster for more than a day</li>
-<li>Do not leave allocations unused and set reasonable time limits on you jobs</li>
-</ul></li>
-<li>For large compute jobs a job queuing system (SLURM) is available. Interactive usage is possible but is discouraged for larger jobs. We will learn how to use the queue during this tutorial</li>
-<li>Close applications when not in use, i.e.&nbsp;when running R interactively</li>
+<li>From where to start the analyses</li>
+<li>Custom paths, to for example databases that need to be downloaded from elsewhere</li>
+<li>Custom variables: In the example above I store the link to the data in a variable called <code>download_link</code>, I then use the variable in the code below to download the data. By doing it this way I have one location in the code I need to change things when for example the path to the data changes, the code below stays the same even if I would need to use the <code>download_link</code> multiple times</li>
+<li>…</li>
 </ul>
-</div>
-</div>
-<p>On crunchomics you:</p>
-<ul>
-<li>are granted a storage of 500 GB. After the duration of your grant, or when your UvAnetID expires, your data will be removed from the HPC. If you need more storage space, contact the Crunchomics team.</li>
-<li>have a 25 G quotum on your home directory which is on a fast NVMe ssd-drive. You can store up to 500 GB data in /zfs/omics/personal/$USER</li>
-<li>you are in charge of backing up your own data and Crunchomics is NOT an archiving system. To learn about data archiving options at UvA visit the <a href="https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html">website of the computational support team</a></li>
-<li>find information and documentation about the cluster <a href="https://crunchomics-documentation.readthedocs.io/en/latest">here</a></li>
-</ul>
-<p>Crunchomics gives you access to:</p>
-<ul>
-<li>5 compute nodes</li>
-<li>Each compute node has 512 GB of memory and 64 CPUs</li>
-<li>If you need more resources (or access to GPUs), visit the <a href="https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html">website of the computational support team</a> for more information</li>
-<li>Access to two directories:
-<ul>
-<li>The home directory with 25 GB of storage</li>
-<li>your personal directory, with 500 GB of storage</li>
-</ul></li>
-</ul>
-<p>Some information about storage:</p>
-<ul>
-<li>Snapshots are made daily at 00.00.00 and kept for 2 weeks. This means that if you accidentally remove a file it can be restored up to 2 weeks after removal.</li>
-<li>Data on Crunchomics is stored on multiple disks. Therefore, there is protection against disk failure. However, the data is not replicated and you are responsible for backing up and/or archiving your data.</li>
-</ul>
-<p>On the next page you find a tutorial to move the sequencing data that we worked on during the introduction into bash onto the server and run software to assess the quality of our sequencing data. We will learn to use some pre-installed software and also install software ourselves with conda and we will learn different ways to submit jobs to the compute nodes using SLURM.</p>
+<p>I tend to NOT add the information how I use <code>scp</code> to log into an HPC to keep my user name and login information private.</p>
+</section>
+<section id="sanity-checks" class="level3">
+<h3 class="anchored" data-anchor-id="sanity-checks">Sanity checks</h3>
+<p><img src="..\img/sanity_check.png" class="img-fluid" width="561"></p>
+<p>When I first start working with new data, I try to add as many sanity checks as possible to ensure that my data looks good. That way I avoid that I don’t notice an issue and run into trouble further down the line. I at the same time understand my data more and learn with how many samples and how much data I am working with.</p>
+<p>I also add such sanity checks whenever I modify my data. For example, when I merge individual files into a large file I might count the lines for the individual files and the combined file simply to ensure that I used my wildcards correctly.</p>
+<p>Remember: The computer is only as smart as the person using it and will blindly run your commands.</p>
+</section>
+<section id="documenting-external-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="documenting-external-scripts">Documenting external scripts</h3>
+<p><img src="..\img/external_scripts.png" class="img-fluid" width="559"></p>
+<p>This part might make more sense after you have worked through the part of the tutorial about using an HPC. But what you see here is how I have written down code that simply says that I submitted a script to a HPC but it does not actually say how I ran the FastQC software. The actual code is “hidden” inside of the run_fastqc.sh script. This also means that a person reading your workflow does not have the code right away. You can deal with this in two ways.</p>
+<ol type="1">
+<li>Instead of the sbatch command, you can add the actual line of code that was run on the compute node.</li>
+<li>When publishing your code with your manuscript, add the whole scripts folder to where you publish the main code, i.e.&nbsp;on <a href="https://github.com/ndombrowski/cli_workshop/example_doc">github</a> or <a href="https://zenodo.org/records/3839790">zenodo</a></li>
+</ol>
+<p>I tend to prefer number 2 because I like to record the code in the readme exactly as I ran it but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.</p>
 
 
+</section>
 </section>
 
 </div></main> <!-- /main -->
@@ -819,14 +799,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../source/bash_intro.html" class="pagination-link  aria-label=" introduction="" to="" bash"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to Bash</span>
+      <a href="../source/hpc_howto.html" class="pagination-link  aria-label=" using="" an="" hpc"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Using an HPC</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../source/hpc_howto.html" class="pagination-link" aria-label="Using an HPC">
-        <span class="nav-page-text">Using an HPC</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -837,7 +814,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-01-30</p>
+Last modified: 2024-01-31</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

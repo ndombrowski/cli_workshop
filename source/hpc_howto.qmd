@@ -555,7 +555,7 @@ A full set of mamba/conda commands can be found [here](https://docs.conda.io/pro
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Download and view the file `results/seqkit/seqkit_stats.tsv` on your own computer
-2.  Run the seqkit again but this time submit the job via a sbatch script instead of using srun
+2.  Run the seqkit again but this time submit the job via a sbatch script instead of using srun. Notice, that you need to tell SLURM how it can activate the conda environment that has seqkit installed. You might need to google how to do that, since this requires some extra line of code that we have not covered yet but see this as a good exercise for how to handle error messages that you see in the log files for your own analyses
 
 <details>
 
@@ -579,6 +579,11 @@ Content of `scripts/seqkit.sh`:
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=5G
 
+#activate dependencies
+source ~/.bashrc
+mamba activate seqkit_2.6.1
+
+#run seqkit
 echo "Start seqkit"
 
 seqkit stats -a -To results/seqkit/seqkit_stats.tsv data/seq_project/*/*.gz --threads 2
@@ -586,5 +591,22 @@ seqkit stats -a -To results/seqkit/seqkit_stats.tsv data/seq_project/*/*.gz --th
 echo "seqkit finished"
 ```
 
+In the script above, we see that we need to add two lines of code to activate the seqkit conda environment:
+
+```
+source ~/.bashrc
+mamba activate seqkit_2.6.1
+```
+
+When you run a script or a command, it operates in its own environment. The source command is like telling the script to look into another file, in this case, `~/.bashrc`, and execute the commands in that file as if they were written directly into the script.
+
+Here, source `~/.bashrc` is telling the script to execute the commands in the `~/.bashrc` file. This is typically done to set up environment variables, paths, and activate any software or tools that are required for the script to run successfully. In our case this tells Slurm where we have installed conda and thus enables Slurm to use conda itself.
+
+This allows slurm to, after executing `source ~/.bashrc`, activates a Conda environment using `mamba activate seqkit_2.6.1`. This ensures that the SeqKit tool and its dependencies are available and properly configured for use in the subsequent part of the script.
+
+
 </details>
 :::
+
+
+

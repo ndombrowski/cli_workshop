@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../source/example_doc.html" rel="next">
 <link href="../source/hpc_intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -202,6 +203,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../source/example_doc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">An example notebook</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -814,7 +821,7 @@ Exercise
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Download and view the file <code>results/seqkit/seqkit_stats.tsv</code> on your own computer</li>
-<li>Run the seqkit again but this time submit the job via a sbatch script instead of using srun</li>
+<li>Run the seqkit again but this time submit the job via a sbatch script instead of using srun. Notice, that you need to tell SLURM how it can activate the conda environment that has seqkit installed. You might need to google how to do that, since this requires some extra line of code that we have not covered yet but see this as a good exercise for how to handle error messages that you see in the log files for your own analyses</li>
 </ol>
 <details>
 <summary>
@@ -836,12 +843,23 @@ Click me to see an answer
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start seqkit"</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="at">-To</span> results/seqkit/seqkit_stats.tsv data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="at">--threads</span> 2</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#activate dependencies</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> activate seqkit_2.6.1</span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit finished"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co">#run seqkit</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start seqkit"</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="at">-To</span> results/seqkit/seqkit_stats.tsv data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="at">--threads</span> 2</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit finished"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>In the script above, we see that we need to add two lines of code to activate the seqkit conda environment:</p>
+<pre><code>source ~/.bashrc
+mamba activate seqkit_2.6.1</code></pre>
+<p>When you run a script or a command, it operates in its own environment. The source command is like telling the script to look into another file, in this case, <code>~/.bashrc</code>, and execute the commands in that file as if they were written directly into the script.</p>
+<p>Here, source <code>~/.bashrc</code> is telling the script to execute the commands in the <code>~/.bashrc</code> file. This is typically done to set up environment variables, paths, and activate any software or tools that are required for the script to run successfully. In our case this tells Slurm where we have installed conda and thus enables Slurm to use conda itself.</p>
+<p>This allows slurm to, after executing <code>source ~/.bashrc</code>, activates a Conda environment using <code>mamba activate seqkit_2.6.1</code>. This ensures that the SeqKit tool and its dependencies are available and properly configured for use in the subsequent part of the script.</p>
 </details>
 </div>
 </div>
@@ -1409,6 +1427,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../source/example_doc.html" class="pagination-link" aria-label="An example notebook">
+        <span class="nav-page-text">An example notebook</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -1419,7 +1440,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-01-30</p>
+Last modified: 2024-01-31</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
