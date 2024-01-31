@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, frame hidden, boxrule=0pt, breakable, colback={codebgcolor}, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, colback={codebgcolor}, sharp corners, frame hidden, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -171,7 +171,7 @@
 \section{An example notebook}\label{an-example-notebook}
 
 If you want to see an example for documented code, check out
-\href{https://github.com/ndombrowski/cli_workshop/example_doc}{an
+\href{https://github.com/ndombrowski/cli_workshop/tree/main/example_doc}{an
 example} for how I would might have recorded how I analysed some
 sequence data myself.
 
@@ -184,9 +184,11 @@ The link above leads you to an example for:
 \item
   How could a ``code book'' look like? The example you see in the folder
   is provided a markdown file
-  \href{https://github.com/ndombrowski/cli_workshop/example_doc/example_notebook.qmd}{here}
-  and for convience the report was also rendered as a html to send it to
-  collaborators.
+  \href{https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd}{here}
+  and for convience the report was also rendered as a
+  \href{https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html}{html}
+  to send it to collaborators. To view the report, you need to download
+  it first.
 \end{itemize}
 
 The example is based on the data you analyse throughout this tutorial,
@@ -275,7 +277,7 @@ You can deal with this in two ways.
 \item
   When publishing your code with your manuscript, add the whole scripts
   folder to where you publish the main code, i.e.~on
-  \href{https://github.com/ndombrowski/cli_workshop/example_doc}{github}
+  \href{https://github.com/ndombrowski/cli_workshop/tree/main/example_doc}{github}
   or \href{https://zenodo.org/records/3839790}{zenodo}
 \end{enumerate}
 
