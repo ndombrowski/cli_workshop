@@ -148,7 +148,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, interior hidden, frame hidden, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, sharp corners, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, interior hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -190,11 +190,10 @@
 The \textbf{Linux command-line interface (CLI)} is an alternative to a
 graphical user interface (GUI) with which you are likely more familiar.
 Both interfaces allow you to interact with an operating system. The key
-difference between the CLI and GUI is that the interaction with CLI is
-based on issuing commands. In contrast, the interaction with a GUI
-involves visual elements, such as windows, buttons, etc. CLI is often
-also referred to as the shell, terminal, console, prompt or various
-other names.
+difference between the CLI and GUI is that the interaction with the CLI
+is based on issuing commands. In contrast, the interaction with a GUI
+involves visual elements, such as windows, buttons, etc. The CLI is also
+referred to as the shell, terminal, console or prompt.
 
 \textbf{Bash} is a type of interpreter that processes shell commands. A
 shell interpreter takes commands in plain text format and calls the
@@ -240,42 +239,46 @@ shell should be printed to the terminal window.
 
 If your machine is set up to use something other than Bash, you can try
 switching to Bash by opening a terminal and typing \texttt{bash}. To
-check if that worked type \texttt{echo\ \$SHELL} again.
+check if that worked type \texttt{echo\ \$SHELL} again. If you have
+trouble switching from zsh to bash, do not worry, most steps in the
+tutorial work with either shell.
 
 \subsection{Windows}\label{windows}
 
 Operating systems like macOS and Linux come with a native command-line
-terminal, making it straightforward to run bash commands. However, for
-Windows users you need to install some software first to be able to use
-bash, below you find three options:
+terminal, making it straightforward to run bash commands. However,
+Windows users need to install some software first to be able to use
+bash. Below you find three options:
 
-One option to access the bash shell commands is using \textbf{Git Bash},
-for detailed installation instructions please have a look at the
-\href{https://carpentries.github.io/workshop-template/install_instructions/\#shell-windows}{carpenties
-website}.
-
-A second option is \textbf{Mobaxterm}, which enables Windows users to
+A first option is \textbf{Mobaxterm}, which enables Windows users to
 execute basic Linux/Unix commands on their local machine, connect to an
 HPC with SSH and to transfer files with SCP/SFTP (more on that later).
 Installation instructions can be found
-\href{https://hpc.ncsu.edu/Documents/mobaxterm.php}{here}.
+\href{https://hpc.ncsu.edu/Documents/mobaxterm.php}{here}. This option
+should be the easiest to setup if you have little experience with the
+shell.
+
+A second option to access the bash shell commands is using \textbf{Git
+Bash}, for detailed installation instructions please have a look at the
+\href{https://carpentries.github.io/workshop-template/install_instructions/\#shell-windows}{carpenties
+website}.
 
 A final option is to use Windows and Linux at the same time on a Windows
 machine. The \textbf{Windows Subsystem for Linux (WSL2)} lets users
 install a Linux distribution (such as Ubuntu, which is the default Linux
 distribution, which we recommend to use) and use Linux applications,
 utilities, and Bash command-line tools directly on Windows. This option
-allows you to use all the tools available but since you more or less are
-installing a separating system on your PC needs to have enough memory to
-run this. Installation instructions can be found
+is the most flexible as you have a full Linux system at your command but
+since you basically install a separate system on your PC you need to
+have enough memory to run this. Installation instructions can be found
 \href{https://learn.microsoft.com/en-us/windows/wsl/install}{here}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, toprule=.15mm, bottomrule=.15mm, breakable, left=2mm, leftrule=.75mm, titlerule=0mm, colback=white, opacitybacktitle=0.6, coltitle=black, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, breakable, titlerule=0mm, leftrule=.75mm, coltitle=black, bottomtitle=1mm, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, colback=white, left=2mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, rightrule=.15mm, arc=.35mm, opacityback=0, bottomrule=.15mm, opacitybacktitle=0.6]
 
-I am myself mostly familiar with WSL and the following tutorial is
-tailored towards the location of things when using WSL and Linux and
-your folder structure might be slightly different when using Git Bash or
-Mobaxterm.
+I am myself familiar with Linux, Mac and WSL and the following tutorial
+is tailored towards the location of things when using WSL. If you use
+another system that is no problem, however, your folder structure might
+be slightly different when using Git Bash or Mobaxterm.
 
 Similarly, I am mainly familiar with the bash not the zsh shell. For Mac
 users that have trouble switching to bash this might create some issues

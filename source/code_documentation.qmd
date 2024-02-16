@@ -6,21 +6,21 @@ toc-depth: 2
 
 ## Documenting code
 
-Documenting your code is crucial for both your future self and anyone else who might work with your code. Documentation serves as a roadmap for your code. It helps others (and your future self) understand the purpose, functionality, and usage of your code.
+Documenting your code is crucial for both your future self and anyone else who might want to work with your code. You want to document your code with as much detail as you would fill out a lab book as your documentation will help others (and your future self) understand the purpose, functionality, and usage of your code.
 
 [A Guide to Reproducible Code in Ecology and Evolution](https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf) gives detailed information on how to organize project folders and how to write clear and reproducible code. The examples are mainly based on R but are general enough to apply to other computational languages (and scientific disciplines).
 
 ::: callout-note
 The information in this section is not part of the actual tutorial but was added to give you a starting point for how to document your code.
 
-If you follow the in-person tutorial it is best to record your notes using a plain text editor but feel free to explore the more advanced options after the tutorial.
+If you follow the in-person tutorial you might want to start by recording your notes using a plain text editor but feel free to explore the more advanced options after the tutorial.
 :::
 
 ## Choose Your Editor
 
 ### Plain text editor
 
-When documenting code, its best to avoid visual editors, such as word, as they are not designed for writing code and easily destroy the formatting by for example changing \` to ', which when writing code is quite a big difference.
+When documenting code, its best to avoid visual editors, such as Word, as these editors are not designed for writing code and easily destroy the formatting by for example changing \` to ', which when writing code is quite a big difference.
 
 Instead you can use a plain text editor, such as TextEdit (Mac) or Notepad (Windows). This is the easiest to get started but you will loose some functionality, such as adding headers or writing text in bold.
 
@@ -28,24 +28,24 @@ Alternatives, that offer more functionality, are for example RStudio or VScode.
 
 ### Rmarkdown in RStudio
 
-RMarkdown is an extension of Markdown that allows you to integrate R code directly into your documentation.
+RMarkdown is an extension of Markdown (more on Markdown in a second) that allows you to integrate R code directly into your documentation.
 
-If you have not install R and Rstudio, follow [these instructions](https://rstudio-education.github.io/hopr/starting.html).
+If you have not installed R and Rstudio, follow [these instructions](https://rstudio-education.github.io/hopr/starting.html).
 
 In RStudio you can create an R Markdown File by:
 
 -   In RStudio, go to File -\> New File -\> R Markdown
 -   Choose a title, author, and output format
--   Knit the Document:
+-   After you are done writing your documentation you can knit the document into an HTML, PDF or word document:
     -   Click the "Knit" button to render your R Markdown document into the chosen output format.
 
 For more information visit [the RMarkdown tutorial](https://rmarkdown.rstudio.com/lesson-1.html).
 
 ### Quarto in Rstudio
 
-Quarto is an alternative to RMarkdown for creating dynamic documents in RStudio but can be read by other editors, such as VScode. Compared to RMarkdown it provides enhanced features for document creation and includes many more built in output formats (and many more options for customizing each format).
+Quarto is an alternative to RMarkdown for creating dynamic documents in RStudio that can be read by other editors, such as VScode. Compared to RMarkdown it provides enhanced features for document creation and includes many more built in output formats (and many more options for customizing each format).
 
-It is installed by default on newer R installations.
+It is installed by default on newer R installations. If you do not have R and Rstudio installed, follow [these instructions](https://rstudio-education.github.io/hopr/starting.html).
 
 -   In RStudio, go to File -\> New File -\> Quarto document
 -   Choose a title, author, and output format
@@ -65,7 +65,7 @@ Visual Studio Code (VSCode) is a versatile and user-friendly code editor. It pro
 
 ## Markdown for Documentation
 
-Markdown is a lightweight markup language that's easy to read and write. It allows you to add formatting elements to plain text documents.
+Markdown is a lightweight markup language that is easy to read and write. It allows you to add formatting elements, such as headers, to plain text documents.
 
 **Headers:**
 
@@ -80,7 +80,7 @@ Use `#` for headers. The more `#` symbols, the smaller the header. When writing 
 
 Use `-` or `*` for unordered lists and numbers for ordered lists.
 
-Ordered lists are created by using numbers followed by periods. The numbers don’t have to be in numerical order, but the list should start with the number one.
+Ordered lists are created by using numbers followed by periods. The numbers do not have to be in numerical order, but the list should start with the number one.
 
 ``` markdown
 1. First item
@@ -129,7 +129,7 @@ You can also combine ordered with unordered lists:
 
 **Code Blocks:**
 
-Enclose code snippets in triple backticks.
+Enclose code snippets in triple backticks followed by the computational language, i.e. bash or python, used.
 
 ```` markdown
 ```bash

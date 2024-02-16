@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#choose-your-editor" id="toc-choose-your-editor" class="nav-link" data-scroll-target="#choose-your-editor">Choose Your Editor</a></li>
   <li><a href="#markdown-for-documentation" id="toc-markdown-for-documentation" class="nav-link" data-scroll-target="#markdown-for-documentation">Markdown for Documentation</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="code_documentation.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/code_documentation.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="code_documentation.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -238,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="documenting-code" class="level2">
 <h2 class="anchored" data-anchor-id="documenting-code">Documenting code</h2>
-<p>Documenting your code is crucial for both your future self and anyone else who might work with your code. Documentation serves as a roadmap for your code. It helps others (and your future self) understand the purpose, functionality, and usage of your code.</p>
+<p>Documenting your code is crucial for both your future self and anyone else who might want to work with your code. You want to document your code with as much detail as you would fill out a lab book as your documentation will help others (and your future self) understand the purpose, functionality, and usage of your code.</p>
 <p><a href="https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf">A Guide to Reproducible Code in Ecology and Evolution</a> gives detailed information on how to organize project folders and how to write clear and reproducible code. The examples are mainly based on R but are general enough to apply to other computational languages (and scientific disciplines).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -251,7 +251,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>The information in this section is not part of the actual tutorial but was added to give you a starting point for how to document your code.</p>
-<p>If you follow the in-person tutorial it is best to record your notes using a plain text editor but feel free to explore the more advanced options after the tutorial.</p>
+<p>If you follow the in-person tutorial you might want to start by recording your notes using a plain text editor but feel free to explore the more advanced options after the tutorial.</p>
 </div>
 </div>
 </section>
@@ -259,19 +259,19 @@ Note
 <h2 class="anchored" data-anchor-id="choose-your-editor">Choose Your Editor</h2>
 <section id="plain-text-editor" class="level3">
 <h3 class="anchored" data-anchor-id="plain-text-editor">Plain text editor</h3>
-<p>When documenting code, its best to avoid visual editors, such as word, as they are not designed for writing code and easily destroy the formatting by for example changing ` to ’, which when writing code is quite a big difference.</p>
+<p>When documenting code, its best to avoid visual editors, such as Word, as these editors are not designed for writing code and easily destroy the formatting by for example changing ` to ’, which when writing code is quite a big difference.</p>
 <p>Instead you can use a plain text editor, such as TextEdit (Mac) or Notepad (Windows). This is the easiest to get started but you will loose some functionality, such as adding headers or writing text in bold.</p>
 <p>Alternatives, that offer more functionality, are for example RStudio or VScode.</p>
 </section>
 <section id="rmarkdown-in-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="rmarkdown-in-rstudio">Rmarkdown in RStudio</h3>
-<p>RMarkdown is an extension of Markdown that allows you to integrate R code directly into your documentation.</p>
-<p>If you have not install R and Rstudio, follow <a href="https://rstudio-education.github.io/hopr/starting.html">these instructions</a>.</p>
+<p>RMarkdown is an extension of Markdown (more on Markdown in a second) that allows you to integrate R code directly into your documentation.</p>
+<p>If you have not installed R and Rstudio, follow <a href="https://rstudio-education.github.io/hopr/starting.html">these instructions</a>.</p>
 <p>In RStudio you can create an R Markdown File by:</p>
 <ul>
 <li>In RStudio, go to File -&gt; New File -&gt; R Markdown</li>
 <li>Choose a title, author, and output format</li>
-<li>Knit the Document:
+<li>After you are done writing your documentation you can knit the document into an HTML, PDF or word document:
 <ul>
 <li>Click the “Knit” button to render your R Markdown document into the chosen output format.</li>
 </ul></li>
@@ -280,8 +280,8 @@ Note
 </section>
 <section id="quarto-in-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="quarto-in-rstudio">Quarto in Rstudio</h3>
-<p>Quarto is an alternative to RMarkdown for creating dynamic documents in RStudio but can be read by other editors, such as VScode. Compared to RMarkdown it provides enhanced features for document creation and includes many more built in output formats (and many more options for customizing each format).</p>
-<p>It is installed by default on newer R installations.</p>
+<p>Quarto is an alternative to RMarkdown for creating dynamic documents in RStudio that can be read by other editors, such as VScode. Compared to RMarkdown it provides enhanced features for document creation and includes many more built in output formats (and many more options for customizing each format).</p>
+<p>It is installed by default on newer R installations. If you do not have R and Rstudio installed, follow <a href="https://rstudio-education.github.io/hopr/starting.html">these instructions</a>.</p>
 <ul>
 <li>In RStudio, go to File -&gt; New File -&gt; Quarto document</li>
 <li>Choose a title, author, and output format</li>
@@ -309,14 +309,14 @@ Note
 </section>
 <section id="markdown-for-documentation" class="level2">
 <h2 class="anchored" data-anchor-id="markdown-for-documentation">Markdown for Documentation</h2>
-<p>Markdown is a lightweight markup language that’s easy to read and write. It allows you to add formatting elements to plain text documents.</p>
+<p>Markdown is a lightweight markup language that is easy to read and write. It allows you to add formatting elements, such as headers, to plain text documents.</p>
 <p><strong>Headers:</strong></p>
 <p>Use <code>#</code> for headers. The more <code>#</code> symbols, the smaller the header. When writing a header make sure to always put a space between the <code>#</code> and the header name.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Main Header</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subheader</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Lists:</strong></p>
 <p>Use <code>-</code> or <code>*</code> for unordered lists and numbers for ordered lists.</p>
-<p>Ordered lists are created by using numbers followed by periods. The numbers don’t have to be in numerical order, but the list should start with the number one.</p>
+<p>Ordered lists are created by using numbers followed by periods. The numbers do not have to be in numerical order, but the list should start with the number one.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>First item</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Second item</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Third item</span>
@@ -346,7 +346,7 @@ Note
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Indented item</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Fourth item</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Code Blocks:</strong></p>
-<p>Enclose code snippets in triple backticks.</p>
+<p>Enclose code snippets in triple backticks followed by the computational language, i.e.&nbsp;bash or python, used.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"control"</span> downloads/Experiment1.txt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -597,7 +597,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/ndombrowski\.github\.io\/cli_workshop\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -941,8 +941,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-01-31</p>
-</div>
+Last modified: 2024-02-12</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/code_documentation.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

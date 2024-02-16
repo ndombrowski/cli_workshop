@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, breakable, boxrule=0pt, colback={codebgcolor}, enhanced, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, enhanced, breakable, colback={codebgcolor}, boxrule=0pt, frame hidden]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -172,8 +172,8 @@
 
 If you want to see an example for documented code, check out
 \href{https://github.com/ndombrowski/cli_workshop/tree/main/example_doc}{an
-example} for how I would might have recorded how I analysed some
-sequence data myself.
+example} for how I might have recorded how I analysed some sequence data
+myself.
 
 The link above leads you to an example for:
 

@@ -186,7 +186,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, borderline west={3pt}{0pt}{shadecolor}, frame hidden, enhanced, breakable, boxrule=0pt, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, breakable, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -231,12 +231,12 @@ For people following this tutorial outside of UvA:
 
 \begin{itemize}
 \item
-  If you have access to an HPC using SLURM you can mostly still follow
-  the tutorial
+  If you have access to an HPC using SLURM you still follow the tutorial
 \item
   If you do not have access to an HPC but are interested in how to
   install and run software that can be used to analyse sequencing data,
-  you still might want to check out the steps run below
+  you still might want to check out the steps run below. The dataset is
+  very small and all analyses can be run on a desktop computer
 \end{itemize}
 
 \section{\texorpdfstring{\texttt{ssh}: Connecting to a
@@ -273,7 +273,7 @@ the command above to look like this:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-important-color-frame, opacityback=0, bottomtitle=1mm, toprule=.15mm, coltitle=black, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, breakable, rightrule=.15mm, bottomrule=.15mm, colback=white, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, breakable, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, rightrule=.15mm, coltitle=black, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, left=2mm, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white]
 
 If you want to log into Crunchomics from outside of UvA you need to be
 connected to the VPN. If you have not set that up and/or have trouble
@@ -293,7 +293,7 @@ small Bash script that:
   Allows you to use system-wide installed software, by adding
   \texttt{/zfs/omics/software/bin} to your path. This basically means
   that bash knows that there is an extra folder in which to look for any
-  software that is already installed
+  software that is pre-installed on the HPC
 \item
   Sets up a python3 environment and some useful python packages
 \item
@@ -328,10 +328,10 @@ from which we want to run our analyses by:
 \begin{itemize}
 \tightlist
 \item
-  Moving from our home directory into our personal directory. We move
-  there since we have more space in the personal directory. Notice,for
-  the command below to work, we need to have already executed the
-  \texttt{omics\_install\_script} script above
+  Moving from our Crunchomics home directory into our personal
+  directory. We move there since we have more space in the personal
+  directory. Notice,for the command below to work, we need to have
+  already executed the \texttt{omics\_install\_script} script above
 \item
   Make a project folder with a descriptive file name, i.e.~projectX
 \end{itemize}
@@ -347,7 +347,8 @@ from which we want to run our analyses by:
 Now that we have organized our working directory, we next want to move
 the data folder with the sequencing that you have downloaded before to
 Crunchomics. We do this by moving the whole \texttt{data} folder from
-our local computer to the HPC. Therefore, it is important that:
+our local computer to the new project folder on the HPC. Therefore, it
+is important that:
 
 \begin{itemize}
 \tightlist
@@ -375,7 +376,7 @@ our local computer to the HPC. Therefore, it is important that:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-tip-color-frame, opacityback=0, bottomtitle=1mm, toprule=.15mm, coltitle=black, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC to our own computer}, breakable, rightrule=.15mm, bottomrule=.15mm, colback=white, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, breakable, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, rightrule=.15mm, coltitle=black, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC to our own computer}, left=2mm, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white]
 
 We can also move data from the HPC to our own computer. For example,
 let's assume we want to move a single sequencing file from crunchomics
@@ -402,7 +403,7 @@ back to our computer. In this case,
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-tip-color-frame, opacityback=0, bottomtitle=1mm, toprule=.15mm, coltitle=black, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC using wildcards}, breakable, rightrule=.15mm, bottomrule=.15mm, colback=white, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, breakable, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, rightrule=.15mm, coltitle=black, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: moving data from the HPC using wildcards}, left=2mm, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white]
 
 We can also move several files at once and ignore the whole folder
 structure by using wildcards when using \texttt{scp}.
@@ -495,9 +496,14 @@ Here, the different columns you see are:
 \begin{itemize}
 \tightlist
 \item
-  partition: w hat queues that are available
+  partition: tells us what queues that are available. There are few
+  partitions on Crunchomics and you do not need to define them in our
+  case. However, other systems use partitions to group a subset of nodes
+  with different type of hardwares or a specific maximum wall time. For
+  example, you might have specific partitions for memory-heavy versus
+  time-intensive jobs.
 \item
-  state: tells you if a node is busy or not
+  state: tells you if a node is busy or not. Here:
 
   \begin{itemize}
   \tightlist
@@ -513,9 +519,10 @@ Here, the different columns you see are:
     down : unavailable for use.
   \end{itemize}
 \item
-  Nodes: The number of nodes
+  Nodes: The number of nodes available for each partition
 \item
-  NodeList: the names of the compute nodes omics-cn001 to omics-cn005
+  NodeList: the names of the compute nodes (i.e.~omics-cn001 to
+  omics-cn005)
 \end{itemize}
 
 \subsection{View info about jobs in the
@@ -559,7 +566,7 @@ to have more control over the execution of a job. You directly issue
 \texttt{srun} commands in the terminal and you at the same time are able
 to specify the tasks to be executed and their resource requirements. For
 example, you might want to run softwareX and request that this job
-requires 10 cpus and 5 GB of memory.
+requires 10 CPUs and 5 GB of memory.
 
 Use \texttt{srun} when:
 
@@ -603,14 +610,16 @@ flags, i.e.~some of which you see here:
 \end{Highlighting}
 \end{Shaded}
 
-The different flags means the following:
+The different flags mean the following:
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{-\/-nodes=1}: Specifies the number of nodes. In this case,
   it's set to 1 and tells slurm that we want to use a full node. Only
-  use this if you make use of all resources on that node, otherwise omit
+  use this if you make use of all resources on that node, otherwise
+  omit. In our case this definitely is over-kill to request a full node
+  with 64 CPUs to print a single line of text to the screen.
 \item
   \texttt{-\/-ntasks=1}: Defines the number of tasks to run. Here, it's
   set to 1 since we want to use echo once
@@ -686,6 +695,9 @@ already installed on Crunchomics. This will be the actual software that
 we now want to run to look more closely at the quality of the sequencing
 data that we just uploaded to Crunchomics.
 
+By the way: Whenever running a software for a first time, it is useful
+to check the manual, for example with \texttt{fastqc\ -h.}
+
 Let's start by setting up a clean folder structure to keep our files
 organized. I start with making a folder in which I want to store all
 results generated in this analyses and using the \texttt{-p} argument I
@@ -703,7 +715,7 @@ Then, we can submit our job using \texttt{srun}.
 \end{Shaded}
 
 Since we work with little data this will run extremely fast despite only
-using 1 CPU (or thread, in our case this two words can be used
+using 1 CPU (or thread, in our case these two words can be used
 interchangeably). However, if you would be logged into Crunchomics via a
 second window and run \texttt{squeue} you should see that your job is
 actively running (in the example below, the job we submitted is named
@@ -714,12 +726,12 @@ after the software and got the jobid 746):
 \end{center}
 
 Additionally, after the run is completed, you should see that several
-html files were generated in our fastqc folder.
+HTML files were generated in our fastqc folder.
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, titlerule=0mm, colbacktitle=quarto-callout-caution-color!10!white, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-caution-color-frame, opacityback=0, bottomtitle=1mm, toprule=.15mm, coltitle=black, toptitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, breakable, rightrule=.15mm, bottomrule=.15mm, colback=white, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-caution-color-frame, opacitybacktitle=0.6, breakable, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, rightrule=.15mm, coltitle=black, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, left=2mm, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-caution-color!10!white]
 
-Use scp to download the html files generated by fastqc to your own
-computer and view one of the html files.
+Use scp to download the HTML files generated by fastqc to your own
+computer and view one of the HTML files.
 
 Click me to see an answer
 
@@ -819,7 +831,7 @@ don't risk to loose a long-running job):
 \end{Highlighting}
 \end{Shaded}
 
-For long-running jobs we can start multiple screens add once or even if
+For long-running jobs we can start multiple screens at once or even if
 we just have one screen open, close it and leave for the day or simply
 work on other things on the cli outside of the screen.
 
@@ -898,8 +910,8 @@ In the job script above:
 
 \begin{itemize}
 \item
-  \texttt{\#!/bin/bash} . This so-called Shebang command tells the shell
-  to interpret and run the Slurm script using the bash shell.~This line
+  \texttt{\#!/bin/bash} . This so-called Shebang line tells the shell to
+  interpret and run the Slurm script using the bash shell.~This line
   should always be added at the very top of your SBATCH/Slurm script.
 \item
   The lines that follow and start with \texttt{\#} are the lines in
@@ -909,8 +921,9 @@ In the job script above:
   If your code needs any dependencies, such as loading conda
   environments, you would add these dependencies here. We do not need
   this for our example here, but you might need to add something like
-  this \texttt{conda\ activate\ my\_env}. We will touch upon conda
-  environments and installing software a bit later
+  this \texttt{conda\ activate\ my\_env} if you have installed your own
+  software. We will touch upon conda environments and installing
+  software a bit later.
 \item
   The lines afterwards are the actually commands that we want to run on
   the compute nodes, We also call this the job steps.
@@ -921,10 +934,10 @@ To prepare the script and run it:
 \begin{itemize}
 \tightlist
 \item
-  run \texttt{nano\ scripts/run\_fastqc.sh} to generate an empty
+  Run \texttt{nano\ scripts/run\_fastqc.sh} to generate an empty
   jobscript file
 \item
-  Copy and paste the code from above into the file we just opened
+  Add the code from above into the file we just opened
 \item
   Press \texttt{ctrl+x} to exit nano
 \item
@@ -947,14 +960,15 @@ Afterwards, you can submit \texttt{run\_fastqc.sh} as follows:
 
 After running this, you should see that the job was submitted and
 something like this printed to the screen
-\texttt{Submitted\ batch\ job\ 754}.
+\texttt{Submitted\ batch\ job\ 754}. You will also see that a new file
+is generated that will look something like this
+\texttt{slurm-425707.out}.
 
-You will also see that a new file is generated that will look something
-like this \texttt{slurm-425707.out}. When you submit a batch job using
-sbatch, Slurm redirects the standard output and standard error messages,
-which you have seen printed to the screen when you used \texttt{srun},
-to a file named in the format slurm-JOBID.out, where JOBID is the unique
-identifier assigned to your job.
+When you submit a batch job using sbatch, Slurm redirects the standard
+output and standard error messages, which you have seen printed to the
+screen when you used \texttt{srun}, to a file named in the format
+slurm-JOBID.out, where JOBID is the unique identifier assigned to your
+job.
 
 This file is useful as it:
 
@@ -966,18 +980,18 @@ This file is useful as it:
   Can be used for debugging, since if something goes wrong with your
   job, examining the contents of this file can provide valuable insights
   into the issue. Error messages, warnings, or unexpected outputs are
-  often recorded here.
+  often recorded here
 \end{itemize}
 
 Feel free to explore the content of the log file, do you see how the
 echo commands are used as well?
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-tip-color-frame, opacityback=0, bottomtitle=1mm, toprule=.15mm, coltitle=black, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, breakable, rightrule=.15mm, bottomrule=.15mm, colback=white, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, breakable, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, rightrule=.15mm, coltitle=black, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, left=2mm, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white]
 
 We have seen that by default \texttt{sbatch} redirects the standard
 output and error to our working directory and that it decides itself how
 to name the files. Since file organization is very important especially
-if you generated lots of files, you find below an example to:
+if you generate lots of files, you find below an example to:
 
 \begin{itemize}
 \tightlist
@@ -1009,7 +1023,7 @@ if you generated lots of files, you find below an example to:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-tip-color-frame, opacityback=0, bottomtitle=1mm, toprule=.15mm, coltitle=black, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, breakable, rightrule=.15mm, bottomrule=.15mm, colback=white, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, breakable, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, rightrule=.15mm, coltitle=black, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, left=2mm, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white]
 
 With fastqc we are very lucky that the tool can identify all the fastq
 files in the directory we specify with \texttt{-o} by making use of the
@@ -1058,7 +1072,7 @@ we store in \texttt{scripts/array.sh}:
 \CommentTok{\#SBATCH {-}{-}mem{-}per{-}cpu=5G}
 
 \CommentTok{\#calculate the index of the current job within the batch}
-\CommentTok{\#in our case the index will store the values 1 to 8}
+\CommentTok{\#in our case the index will store the values 1 to 8 for our 8 files}
 \VariableTok{INDEX}\OperatorTok{=}\VariableTok{$((SLURM\_ARRAY\_TASK\_ID} \VariableTok{))}
 
 \CommentTok{\#build an array structure that stores the fastq.gz file names}
@@ -1157,7 +1171,7 @@ successfully.
 \section{Installing software}\label{installing-software}
 
 There might be cases where the software you are interested in is not
-installed on the HPC you are working with (or own your own computer).
+installed on the HPC you are working with (or on your own computer).
 
 In the majority of cases, you should be able to install software by
 using a package management system, such as conda or mamba. These systems
@@ -1166,10 +1180,10 @@ administrator privileges. Let's have a look at a very brief example:
 
 \subsection{Install conda/mamba}\label{install-condamamba}
 
-A lot of system already come with conda/mamba installed, however, if
+A lot of systems already come with conda/mamba installed, however, if
 possible we recommend working with mamba instead of conda. mamba is a
-drop-in replacement and uses the same commands and configuration options
-as conda, however, it tends to be much faster. A useful thing is that if
+replacement and uses the same commands and configuration options as
+conda, however, it tends to be much faster. A useful thing is that if
 you find documentation for conda then you can swap almost all commands
 between conda \& mamba.
 
@@ -1197,7 +1211,7 @@ descriptive name, as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#check if the tool is installed (should return command not found if the software is not installed)}
+\CommentTok{\#check if the tool is installed (should return "command not" found if the software is not installed)}
 \ExtensionTok{seqkit} \AttributeTok{{-}h}
 
 \CommentTok{\#create an empty environment and name it seqkit and we add the version number to the name}
@@ -1253,7 +1267,7 @@ install the software as well as the version numbers available.
 A full set of mamba/conda commands can be found
 \href{https://docs.conda.io/projects/conda/en/latest/commands/index.html.}{here}.
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, titlerule=0mm, colbacktitle=quarto-callout-caution-color!10!white, arc=.35mm, leftrule=.75mm, colframe=quarto-callout-caution-color-frame, opacityback=0, bottomtitle=1mm, toprule=.15mm, coltitle=black, toptitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, breakable, rightrule=.15mm, bottomrule=.15mm, colback=white, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-caution-color-frame, opacitybacktitle=0.6, breakable, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, rightrule=.15mm, coltitle=black, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, left=2mm, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-caution-color!10!white]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1320,8 +1334,8 @@ The source command is like telling the script to look into another file,
 in this case, \texttt{\textasciitilde{}/.bashrc}, and execute the
 commands in that file as if they were written directly into the script.
 
-Here, source \texttt{\textasciitilde{}/.bashrc} is telling the script to
-execute the commands in the \texttt{\textasciitilde{}/.bashrc} file.
+Here, \texttt{source\ \textasciitilde{}/.bashrc} is telling the script
+to execute the commands in the \texttt{\textasciitilde{}/.bashrc} file.
 This is typically done to set up environment variables, paths, and
 activate any software or tools that are required for the script to run
 successfully. In our case this tells Slurm where we have installed conda

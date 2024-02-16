@@ -84,9 +84,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#title" id="toc-title" class="nav-link active" data-scroll-target="#title">Title</a></li>
+  <li><a href="#welcome-page" id="toc-welcome-page" class="nav-link active" data-scroll-target="#welcome-page">Welcome page</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="readme.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/readme.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="readme.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -97,9 +97,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="title" class="level2">
-<h2 class="anchored" data-anchor-id="title">Title</h2>
-<p>tba</p>
+<section id="welcome-page" class="level2">
+<h2 class="anchored" data-anchor-id="welcome-page">Welcome page</h2>
+<p>On this website you will find a short tutorial that will explain how use bash and connect and work with an HPC. To follow this tutorial please visit <a href="https://ndombrowski.github.io/cli_workshop/">this website</a>.</p>
+<p>You first will learn how to set up a terminal and document your code. Afterwards, the actual tutorial will begin, in which you will assume the role of a researcher who just received data from a sequencing center and wants to starts analysing this data using the command line interface. This tutorial is divided into two main parts:</p>
+<ol type="1">
+<li>In the first section, you will learn how to organize, view and extract information from your data using bash and the command line interface</li>
+<li>Then you will learn how to work with this data on an HPC. You will learn how to connect to an HPC, upload your sequencing data and submit a job in order to assess the quality of your sequencing data</li>
+</ol>
+<p>This tutorial was written for researchers at the Institute for Biodiversity and Ecosystem Dynamics (IBED) at the University of Amsterdam who can get access to Crunchomics, the Genomics Compute Environment for SILS and IBED. For researchers that do not have access to Crunchomics or another slurm-based HPC, then you still can follow most sections of this tutorial on your own computer if you are interested in learning about bash.</p>
 
 
 </section>
@@ -330,7 +336,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/ndombrowski\.github\.io\/cli_workshop\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -662,8 +668,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-01-23</p>
-</div>
+Last modified: 2024-01-31</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/readme.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

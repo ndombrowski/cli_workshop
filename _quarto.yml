@@ -12,6 +12,9 @@ title-block-style: none
 
 website:
   title: "Introduction to the cli"
+  site-url: https://ndombrowski.github.io/cli_workshop/
+  repo-url: https://github.com/ndombrowski/cli_workshop/
+  repo-actions: [source, issue]
     
   sidebar:
   - id: "Welcome page"

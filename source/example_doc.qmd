@@ -6,7 +6,7 @@ toc-depth: 2
 
 ## An example notebook
 
-If you want to see an example for documented code, check out [an example](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) for how I would might have recorded how I analysed some sequence data myself.
+If you want to see an example for documented code, check out [an example](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) for how I might have recorded how I analysed some sequence data myself.
 
 The link above leads you to an example for:
 
@@ -46,7 +46,7 @@ I also add such sanity checks whenever I modify my data. For example, when I mer
 
 Remember: The computer is only as smart as the person using it and will blindly run your commands. Because of that the computer can do unexpected things and you need to account for that.
 
-### Using markdown to make notes 
+### Using markdown to make notes
 
 ![](/img/comments_in_code.png){width="543"}
 
