@@ -428,7 +428,7 @@ Once the document is open you can edit it however you want and then
 
 ## `wc`: Count things
 
-Another useful tool is the `wc` (= wordcount) command that allows us to count the number of lines in a file. It is an useful tool for sanity checking and here allows us to count how many files we work with:
+Another useful tool is the `wc` (= wordcount) command that allows us to count the number of lines via `-l` in a file. It is an useful tool for sanity checking and here allows us to count how many files we work with:
 
 ```{bash}
 wc -l fastq_paths.txt
@@ -477,6 +477,7 @@ Checking whether we have the same number of R1 and R2 files is a good sanity che
 </details>
 :::
 
+
 ## `cut`: Extract elements from strings
 
 Remember, how we stored a list of sequencing files and the path leading to these files (relative to our home directory in a text file called `fastq_paths.txt`?
@@ -517,7 +518,7 @@ cut -f3 -d "/" fastq_paths.txt | cut -f1 -d "_" | sort | uniq
 ```
 
 ::: {.callout-caution collapse="false" title="Exercise"}
-1.  Use cut on fastq_paths.txt to print the folder names in which the fastq.gz files reside
+1.  Use cut on fastq_paths.txt to print the folder names in which the fastq.gz files reside (i.e. barcode001_User1_ITS_1_L001)
 2.  Print the folder names as in 1 and then extract the user names from this list
 3.  Ensure that when running the code from 2 that we print a unique list of user names
 
@@ -878,4 +879,57 @@ done
 Notice, how we use both single brackets and double brackets?
 
 -   `$((...))` in contrast to `$(...)` is an arithmetic expansion in Bash. It allows you to perform arithmetic operations and substitute the result into the command line.
+:::
+
+
+::: {.callout-tip title="Avanced Tip: Using bash to make sample mapping files" collapse="true"}
+
+For a lot of mapping files for amplicon analyses, you need to prepare a table that lists your files, often with the R1 and R2 files in separate columns. How could we do this using bash?
+
+This code is more advanced and uses a few concepts we have not talked about but should give you an idea about the different data transformations you can do with bash.
+
+```{bash}
+for file in data/seq_project/*/*.gz; do
+    if [[ $file == *_R1.fastq.gz ]]; then
+        r1_file=$file
+        r2_file=$(echo $file | sed 's/_R1/_R2/')
+        echo "$r1_file,$r2_file"
+    fi
+done
+```
+
+1. `for file in data/seq_project/*/*.gz`: We loop through all fastq.gz files 
+2. `if [[ $file == *_R1.fastq.gz ]]; then`: This line checks if the current file's name matches the pattern *_R1.fastq.gz. The `[[ ... ]]` is a conditional construct in bash, and the == is used for string comparison. If the condition is true (i.e., the file is an R1 file), then the code inside the if block will be executed. The block starts with `if`and finishes at the `fi`.
+3. `r1_file=$file`: This line involves creating a variable named r1_file and assigning it the value of the current file `($file)`. A variable is a symbolic name or identifier associated with a value or data. It allows you to store and retrieve information for later use. Here, r1_file is used to store the name of the current R1 file.
+4. `r2_file=$(echo $file | sed 's/_R1/_R2/')`: This line sets the variable r2_file by replacing _R1 with _R2 in the current file name. This is done using the sed command, which is a stream editor for filtering and transforming text.
+5. `echo "$r1_file,$r2_file"`: This line prints the R1 and R2 file names separated by a comma. This will be part of the output in the format R1,R2.
+
+We can do even more and add a column with the sample name:
+
+```{bash}
+for file in data/seq_project/*/*.gz; do
+    if [[ $file == *_R1.fastq.gz ]]; then
+        sample_name=$(basename "$(dirname "$file")")
+        r1_file=$file
+        r2_file=$(echo $file | sed 's/_R1/_R2/')
+        echo "$sample_name,$r1_file,$r2_file"
+    fi
+done
+```
+
+1. `sample_name=$(basename "$(dirname "$file")")`: Extracts the sample name from the directory name where the file is located. dirname gets the directory path, basename extracts the base name (last part) of that path, and the result is stored in the variable sample_name.
+
+You can easily combine this with some of the things we learned, such as using `cut` to extract specific parts of the sample_name as well. I.e. lets assume you only want to list the index:
+
+```{bash}
+for file in data/seq_project/*/*.gz; do
+    if [[ $file == *_R1.fastq.gz ]]; then
+        sample_name=$(basename "$(dirname "$file")" |cut -f1 -d "_" ) 
+        r1_file=$file
+        r2_file=$(echo $file | sed 's/_R1/_R2/')
+        echo "$sample_name,$r1_file,$r2_file"
+    fi
+done
+```
+
 :::

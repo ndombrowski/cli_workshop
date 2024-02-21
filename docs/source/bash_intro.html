@@ -743,7 +743,7 @@ Tip: Editing text files
 </section>
 <section id="wc-count-things" class="level2">
 <h2 class="anchored" data-anchor-id="wc-count-things"><code>wc</code>: Count things</h2>
-<p>Another useful tool is the <code>wc</code> (= wordcount) command that allows us to count the number of lines in a file. It is an useful tool for sanity checking and here allows us to count how many files we work with:</p>
+<p>Another useful tool is the <code>wc</code> (= wordcount) command that allows us to count the number of lines via <code>-l</code> in a file. It is an useful tool for sanity checking and here allows us to count how many files we work with:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> fastq_paths.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -840,7 +840,7 @@ Exercise
 <div id="callout-13" class="callout-13-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Use cut on fastq_paths.txt to print the folder names in which the fastq.gz files reside</li>
+<li>Use cut on fastq_paths.txt to print the folder names in which the fastq.gz files reside (i.e.&nbsp;barcode001_User1_ITS_1_L001)</li>
 <li>Print the folder names as in 1 and then extract the user names from this list</li>
 <li>Ensure that when running the code from 2 that we print a unique list of user names</li>
 </ol>
@@ -1234,6 +1234,64 @@ Tip: Avanced: better counting in for loops
 <ul>
 <li><code>$((...))</code> in contrast to <code>$(...)</code> is an arithmetic expansion in Bash. It allows you to perform arithmetic operations and substitute the result into the command line.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Avanced Tip: Using bash to make sample mapping files">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Avanced Tip: Using bash to make sample mapping files
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a lot of mapping files for amplicon analyses, you need to prepare a table that lists your files, often with the R1 and R2 files in separate columns. How could we do this using bash?</p>
+<p>This code is more advanced and uses a few concepts we have not talked about but should give you an idea about the different data transformations you can do with bash.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><code>for file in data/seq_project/*/*.gz</code>: We loop through all fastq.gz files</li>
+<li><code>if [[ $file == *_R1.fastq.gz ]]; then</code>: This line checks if the current file’s name matches the pattern *_R1.fastq.gz. The <code>[[ ... ]]</code> is a conditional construct in bash, and the == is used for string comparison. If the condition is true (i.e., the file is an R1 file), then the code inside the if block will be executed. The block starts with <code>if</code>and finishes at the <code>fi</code>.</li>
+<li><code>r1_file=$file</code>: This line involves creating a variable named r1_file and assigning it the value of the current file <code>($file)</code>. A variable is a symbolic name or identifier associated with a value or data. It allows you to store and retrieve information for later use. Here, r1_file is used to store the name of the current R1 file.</li>
+<li><code>r2_file=$(echo $file | sed 's/_R1/_R2/')</code>: This line sets the variable r2_file by replacing _R1 with _R2 in the current file name. This is done using the sed command, which is a stream editor for filtering and transforming text.</li>
+<li><code>echo "$r1_file,$r2_file"</code>: This line prints the R1 and R2 file names separated by a comma. This will be part of the output in the format R1,R2.</li>
+</ol>
+<p>We can do even more and add a column with the sample name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">sample_name</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span><span class="va">)</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$sample_name</span><span class="st">,</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><code>sample_name=$(basename "$(dirname "$file")")</code>: Extracts the sample name from the directory name where the file is located. dirname gets the directory path, basename extracts the base name (last part) of that path, and the result is stored in the variable sample_name.</li>
+</ol>
+<p>You can easily combine this with some of the things we learned, such as using <code>cut</code> to extract specific parts of the sample_name as well. I.e. lets assume you only want to list the index:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">sample_name</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span><span class="va">)</span><span class="st">"</span> <span class="kw">|</span><span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">"_"</span> <span class="va">)</span> </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$sample_name</span><span class="st">,</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1812,7 +1870,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-02-16</p>
+Last modified: 2024-02-21</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/bash_intro.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
