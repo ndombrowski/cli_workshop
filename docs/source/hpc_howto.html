@@ -598,7 +598,7 @@ Click me to see an answer
 <p>To get started, assume we have created a script in the scripts folder named <code>run_fastqc.sh</code> with the content that is shown below. Notice, how in this script I added some additional <code>echo</code> commands? I just use these to print some information about the progress which could be printed to a log file but if you have several commands that should be executed after each other that is how you could do it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start fastqc"</span></span>
@@ -610,7 +610,7 @@ Click me to see an answer
 <p>In the job script above:</p>
 <ul>
 <li><p><code>#!/bin/bash</code> . This so-called Shebang line tells the shell to interpret and run the Slurm script using the bash shell.&nbsp;This line should always be added at the very top of your SBATCH/Slurm script.</p></li>
-<li><p>The lines that follow and start with <code>#</code> are the lines in which we define the amount of resources required for our job to run. In our case, we request 2 CPUs and 5G of memory.</p></li>
+<li><p>The lines that follow and start with <code>#</code> are the lines in which we define the amount of resources required for our job to run. In our case, we request 1 CPU and 5G of memory.</p></li>
 <li><p>If your code needs any dependencies, such as loading conda environments, you would add these dependencies here. We do not need this for our example here, but you might need to add something like this <code>conda activate my_env</code> if you have installed your own software. We will touch upon conda environments and installing software a bit later.</p></li>
 <li><p>The lines afterwards are the actually commands that we want to run on the compute nodes, We also call this the job steps.</p></li>
 </ul>
@@ -661,7 +661,7 @@ Tip: sbatch and better log files
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=our_fastqc_job</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastqc_%j.out</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastqc_%j.err</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start fastqc"</span></span>
@@ -1441,7 +1441,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-02-21</p>
+Last modified: 2024-02-22</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_howto.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

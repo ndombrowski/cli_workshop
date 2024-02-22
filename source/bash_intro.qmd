@@ -855,7 +855,7 @@ head counts/Sample-DUMMY1_R1.fastq.gz.txt
 
 ```
 
-::: {.callout-tip title="Tip: Avanced: better counting in for loops" collapse="true"}
+::: {.callout-tip title="Avanced Tip: better counting in for loops" collapse="true"}
 Let's get a bit more advanced to show you some powerful features of bash. For this imagine that you would do this for 100 files. In this case it would be useful to see the file names next to the counts. We can achieve this by using what we have learned in the `Better counting tip` where we have learned about echo and command substitution.
 
 ```{bash}

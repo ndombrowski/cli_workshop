@@ -148,7 +148,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, enhanced, sharp corners, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, interior hidden, frame hidden, boxrule=0pt, enhanced, sharp corners, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -273,7 +273,7 @@ since you basically install a separate system on your PC you need to
 have enough memory to run this. Installation instructions can be found
 \href{https://learn.microsoft.com/en-us/windows/wsl/install}{here}.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, opacitybacktitle=0.6, bottomtitle=1mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, arc=.35mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, breakable, titlerule=0mm, coltitle=black, opacitybacktitle=0.6, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colback=white, toprule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, left=2mm]
 
 I am myself familiar with Linux, Mac and WSL and the following tutorial
 is tailored towards the location of things when using WSL. If you use

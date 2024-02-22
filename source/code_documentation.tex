@@ -187,7 +187,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, breakable, frame hidden, colback={codebgcolor}, enhanced, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, colback={codebgcolor}, boxrule=0pt, frame hidden, enhanced, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -237,7 +237,7 @@ and reproducible code. The examples are mainly based on R but are
 general enough to apply to other computational languages (and scientific
 disciplines).
 
-\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, opacityback=0, colback=white, colbacktitle=quarto-callout-note-color!10!white, breakable, toptitle=1mm, left=2mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toprule=.15mm, coltitle=black, opacitybacktitle=0.6, bottomtitle=1mm, titlerule=0mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, toprule=.15mm, bottomtitle=1mm, breakable, opacitybacktitle=0.6, toptitle=1mm, coltitle=black, arc=.35mm, rightrule=.15mm, leftrule=.75mm, left=2mm, colback=white, titlerule=0mm]
 
 The information in this section is not part of the actual tutorial but
 was added to give you a starting point for how to document your code.
