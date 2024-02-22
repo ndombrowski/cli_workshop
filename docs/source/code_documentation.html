@@ -260,7 +260,7 @@ Note
 <section id="plain-text-editor" class="level3">
 <h3 class="anchored" data-anchor-id="plain-text-editor">Plain text editor</h3>
 <p>When documenting code, its best to avoid visual editors, such as Word, as these editors are not designed for writing code and easily destroy the formatting by for example changing ` to ’, which when writing code is quite a big difference.</p>
-<p>Instead you can use a plain text editor, such as TextEdit (Mac) or Notepad (Windows). This is the easiest to get started but you will loose some functionality, such as adding headers or writing text in bold.</p>
+<p>Instead you can use a plain text editor, such as TextEdit (Mac) or Notepad (Windows). This is the easiest to get started but you will loose some functionality, such as separating the code from comments, adding headers or writing text in bold.</p>
 <p>Alternatives, that offer more functionality, are for example RStudio or VScode.</p>
 </section>
 <section id="rmarkdown-in-rstudio" class="level3">
@@ -294,7 +294,7 @@ Note
 </section>
 <section id="vscode" class="level3">
 <h3 class="anchored" data-anchor-id="vscode">VSCode</h3>
-<p>Visual Studio Code (VSCode) is a versatile and user-friendly code editor. It provides excellent support for various programming languages, extensions, and a built-in terminal but might take a bit of work to setup to work with different computational languages.</p>
+<p>Visual Studio Code (VSCode) is a versatile and user-friendly code editor. It provides excellent support for various programming languages, extensions, and a built-in terminal but might take a bit of work to setup to work with different computational languages. VSCode might take a bit longer to setup than RStudio but offers more flexibility due to various extensions that users can install.</p>
 <ol type="1">
 <li>Installation:
 <ul>
@@ -311,7 +311,7 @@ Note
 <h2 class="anchored" data-anchor-id="markdown-for-documentation">Markdown for Documentation</h2>
 <p>Markdown is a lightweight markup language that is easy to read and write. It allows you to add formatting elements, such as headers, to plain text documents.</p>
 <p><strong>Headers:</strong></p>
-<p>Use <code>#</code> for headers. The more <code>#</code> symbols, the smaller the header. When writing a header make sure to always put a space between the <code>#</code> and the header name.</p>
+<p>Use <code>#</code> to add a header and separate different sections of your documentation. The more <code>#</code> symbols you use after each other, the smaller the header will be. When writing a header make sure to always put a space between the <code>#</code> and the header name.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Main Header</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subheader</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Lists:</strong></p>
@@ -351,16 +351,16 @@ Note
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"control"</span> downloads/Experiment1.txt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Links:</strong></p>
-<p>Create links to external resources or within your documentation.</p>
+<p>You can easily add links to external resources or within your documentation as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Link Text</span><span class="co">](https://www.example.com)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Emphasis:</strong></p>
-<p>Use <code>*</code> or <code>_</code> for italic and <code>**</code> or <code>__</code> for bold.</p>
+<p>You can use <code>*</code> or <code>_</code> to write italic and <code>**</code> or <code>__</code> for bold text.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>*italic*</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>**bold**</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Pictures</strong></p>
-<p>You can easily add images to your documentation as well:</p>
+<p>You can also add images to your documentation as follows:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Alt Text](path/to/your/image.jpg)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here, replace <code>Alt Text</code> with a descriptive alternative text for your image, and <code>path/to/your/ifrom spamage.jpg</code> with the actual path or URL of your image.</p>
+<p>Here, replace <code>Alt Text</code> with a descriptive alternative text for your image, and <code>path/to/your/image.jpg</code> with the actual path or URL of your image.</p>
 <p><strong>Tables</strong></p>
 <p>Tables can be useful for organizing information. Here’s a simple table:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>| Header 1 | Header 2 |</span>
@@ -941,7 +941,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-02-12</p>
+Last modified: 2024-02-22</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/code_documentation.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

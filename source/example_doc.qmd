@@ -6,12 +6,12 @@ toc-depth: 2
 
 ## An example notebook
 
-If you want to see an example for documented code, check out [an example](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) for how I might have recorded how I analysed some sequence data myself.
+If you want to see an example for documented code, check out [a notebook](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) I wrote based on what we are doing in this tutorial.
 
 The link above leads you to an example for:
 
 -   How could I use github to make my code available to others
--   How could a "code book" look like? The example you see in the folder is provided a Quarto markdown file [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd) and for convenience the report was also rendered as a [html](https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html) to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.
+-   How a "code book" could lool like. The example you see in the folder is provided as a Quarto markdown file [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd) and for convenience the report was also rendered as a [html](https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html) to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.
 
 The example is based on the data you analyse throughout this tutorial, so the actual code might only make sense after you have finished the tutorial. Feel free to revisit this page after you have written some code yourself.
 
@@ -27,14 +27,13 @@ Below you find some general hints for what to put into different sections that y
 
 ![](/img/general_setup.png){width="549"}
 
-In this first section I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, so that another user could just run this as is without having to edit anything. Typically things to add are:
+In one of the first sections of my notebools I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, i.e. I try to write it in a way so that it does not need to be changed. This ensures that another user could just run my code as is without having to edit anything other than this first section. Typically things to add are:
 
--   From where to start the analyses
--   Custom paths, to for example for databases that need to be downloaded from elsewhere
--   Custom variables: In the example above I store the link to the data in a variable called `download_link`, I then use the variable in the code below to download the data. By doing it this way I have one location in the code another person needs to change the code when for example the path to the data changes. The code below stays the same. When writing code try to think ahead and minimize the number of instances where things need to be changed if for example the location to your data changes.
--   ...
+-   From where to start the analyses, i.e. the location of the working directory or project folder
+-   Custom paths, to for example for databases that need to be downloaded from the web or repositories
+-   Custom variables: In the example above I store the link to the data in a variable called `download_link`, I then use the variable in the code below to download the data. By doing it this way I have one location in the code another person needs to change the code when for example the path to the data changes. The code below stays the same since I use the `download_link` variable and not the actual path any more. When writing code try to think ahead and minimize the number of instances where things need to be changed if for example the location to your data changes. 
 
-I tend to NOT add the information how I use `scp` to log into an HPC to keep my user name and login information private.
+I tend to NOT add the information on how I use `scp` to log into an HPC to keep my user name and login information private.
 
 ### Sanity checks
 
@@ -50,13 +49,12 @@ Remember: The computer is only as smart as the person using it and will blindly 
 
 ![](/img/comments_in_code.png){width="543"}
 
-In the example above I use markdown to not only document my code but also add some comments whenever I might need it. For example here, I added some notes about what the results from FastQC actually told me.
+In the example above I use markdown to not only document my code but also add some comments whenever I might need it. In the example above, I added some notes about what the results from FastQC actually told me.
 
 This kind of documentation can be useful for:
 
 -   Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, if I would have found a lot of low quality reads or the adapter still being part of the sequence then I would have specifically cleaned my sequences to deal with that
-
--   Future you. If you read the report a month, or a year, later you have the key information in your report and don't have to open the HTML reports again.
+-   Future you. If you read the report a month, or a year, later you have the key information in your report and don't have to open any files or tables that are located elsewhere
 
 ### Documenting external scripts
 
@@ -67,4 +65,4 @@ This part might make more sense after you have worked through the part of the tu
 1.  Instead of the sbatch command, you can add the actual line of code that was run on the compute node.
 2.  When publishing your code with your manuscript, add the whole scripts folder to where you publish the main code, i.e. on [github](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) or [zenodo](https://zenodo.org/records/3839790)
 
-I tend to prefer number 2 because I like to record the code in my notebooks exactly as I ran them but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.
+I tend to prefer number 2 because I like to record the code in my notebooks exactly as I ran it but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.

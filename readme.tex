@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, breakable, colback={codebgcolor}, sharp corners, frame hidden, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, enhanced, frame hidden, boxrule=0pt, breakable, colback={codebgcolor}]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures

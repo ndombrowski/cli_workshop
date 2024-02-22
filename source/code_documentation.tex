@@ -187,7 +187,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, colback={codebgcolor}, boxrule=0pt, frame hidden, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, colback={codebgcolor}, breakable, boxrule=0pt, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -237,7 +237,7 @@ and reproducible code. The examples are mainly based on R but are
 general enough to apply to other computational languages (and scientific
 disciplines).
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, toprule=.15mm, bottomtitle=1mm, breakable, opacitybacktitle=0.6, toptitle=1mm, coltitle=black, arc=.35mm, rightrule=.15mm, leftrule=.75mm, left=2mm, colback=white, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, breakable, opacitybacktitle=0.6, bottomrule=.15mm, colback=white, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, titlerule=0mm, toptitle=1mm, coltitle=black, bottomtitle=1mm]
 
 The information in this section is not part of the actual tutorial but
 was added to give you a starting point for how to document your code.
@@ -259,7 +259,8 @@ is quite a big difference.
 
 Instead you can use a plain text editor, such as TextEdit (Mac) or
 Notepad (Windows). This is the easiest to get started but you will loose
-some functionality, such as adding headers or writing text in bold.
+some functionality, such as separating the code from comments, adding
+headers or writing text in bold.
 
 Alternatives, that offer more functionality, are for example RStudio or
 VScode.
@@ -338,7 +339,9 @@ website}.
 Visual Studio Code (VSCode) is a versatile and user-friendly code
 editor. It provides excellent support for various programming languages,
 extensions, and a built-in terminal but might take a bit of work to
-setup to work with different computational languages.
+setup to work with different computational languages. VSCode might take
+a bit longer to setup than RStudio but offers more flexibility due to
+various extensions that users can install.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -372,9 +375,10 @@ plain text documents.
 
 \textbf{Headers:}
 
-Use \texttt{\#} for headers. The more \texttt{\#} symbols, the smaller
-the header. When writing a header make sure to always put a space
-between the \texttt{\#} and the header name.
+Use \texttt{\#} to add a header and separate different sections of your
+documentation. The more \texttt{\#} symbols you use after each other,
+the smaller the header will be. When writing a header make sure to
+always put a space between the \texttt{\#} and the header name.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -464,7 +468,8 @@ language, i.e.~bash or python, used.
 
 \textbf{Links:}
 
-Create links to external resources or within your documentation.
+You can easily add links to external resources or within your
+documentation as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -474,8 +479,8 @@ Create links to external resources or within your documentation.
 
 \textbf{Emphasis:}
 
-Use \texttt{*} or \texttt{\_} for italic and \texttt{**} or
-\texttt{\_\_} for bold.
+You can use \texttt{*} or \texttt{\_} to write italic and \texttt{**} or
+\texttt{\_\_} for bold text.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -486,7 +491,7 @@ Use \texttt{*} or \texttt{\_} for italic and \texttt{**} or
 
 \textbf{Pictures}
 
-You can easily add images to your documentation as well:
+You can also add images to your documentation as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -495,8 +500,8 @@ You can easily add images to your documentation as well:
 \end{Shaded}
 
 Here, replace \texttt{Alt\ Text} with a descriptive alternative text for
-your image, and \texttt{path/to/your/ifrom\ spamage.jpg} with the actual
-path or URL of your image.
+your image, and \texttt{path/to/your/image.jpg} with the actual path or
+URL of your image.
 
 \textbf{Tables}
 

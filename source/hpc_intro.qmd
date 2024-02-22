@@ -24,8 +24,8 @@ Very briefly, you can log into an HPC onto a login node. The purpose of a **logi
 You share the HPC with other people, therefore, take care to only ask for the resources you actually use. Some general rules:
 
 -   There are no hard limits on resource usage, instead we expect you to keep in mind that you are sharing the system with other users. Some rules of thumb:
-    -   To NOT run jobs that request many CPUs and lots of memory on the head-node (omics-h0), use the compute nodes (omics-cn001 - omics-cn005) for this
-    -   Do NOT allocate more than 20% (CPU or memory) of the cluster for more than a day. If you have large jobs, contact Wim
+    -   Do NOT run jobs that request many CPUs and lots of memory on the head-node (omics-h0), use the compute nodes (omics-cn001 - omics-cn005) for this
+    -   Do NOT allocate more than 20% (CPU or memory) of the cluster for more than a day. If you have large jobs, contact Wim de Leeuw
     -   Do not leave allocations unused and set reasonable time limits on you jobs
 -   For large compute jobs a job queuing system (SLURM) is available. Interactive usage is possible but is discouraged for larger jobs. We will learn how to use the queue during this tutorial
 -   Close applications when not in use, i.e. when running R interactively

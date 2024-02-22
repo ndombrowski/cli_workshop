@@ -22,7 +22,7 @@ If you follow the in-person tutorial you might want to start by recording your n
 
 When documenting code, its best to avoid visual editors, such as Word, as these editors are not designed for writing code and easily destroy the formatting by for example changing \` to ', which when writing code is quite a big difference.
 
-Instead you can use a plain text editor, such as TextEdit (Mac) or Notepad (Windows). This is the easiest to get started but you will loose some functionality, such as adding headers or writing text in bold.
+Instead you can use a plain text editor, such as TextEdit (Mac) or Notepad (Windows). This is the easiest to get started but you will loose some functionality, such as separating the code from comments, adding headers or writing text in bold.
 
 Alternatives, that offer more functionality, are for example RStudio or VScode.
 
@@ -56,7 +56,7 @@ For more information (and more functionality) visit [the Quarto website](https:/
 
 ### VSCode
 
-Visual Studio Code (VSCode) is a versatile and user-friendly code editor. It provides excellent support for various programming languages, extensions, and a built-in terminal but might take a bit of work to setup to work with different computational languages.
+Visual Studio Code (VSCode) is a versatile and user-friendly code editor. It provides excellent support for various programming languages, extensions, and a built-in terminal but might take a bit of work to setup to work with different computational languages. VSCode might take a bit longer to setup than RStudio but offers more flexibility due to various extensions that users can install.
 
 1.  Installation:
     -   Download and install VSCode from [here](https://code.visualstudio.com/).
@@ -69,7 +69,7 @@ Markdown is a lightweight markup language that is easy to read and write. It all
 
 **Headers:**
 
-Use `#` for headers. The more `#` symbols, the smaller the header. When writing a header make sure to always put a space between the `#` and the header name.
+Use `#` to add a header and separate different sections of your documentation. The more `#` symbols you use after each other, the smaller the header will be. When writing a header make sure to always put a space between the `#` and the header name.
 
 ``` markdown
 # Main Header
@@ -139,7 +139,7 @@ grep "control" downloads/Experiment1.txt
 
 **Links:**
 
-Create links to external resources or within your documentation.
+You can easily add links to external resources or within your documentation as follows:
 
 ``` markdown
 [Link Text](https://www.example.com)
@@ -147,7 +147,7 @@ Create links to external resources or within your documentation.
 
 **Emphasis:**
 
-Use `*` or `_` for italic and `**` or `__` for bold.
+You can use `*` or `_` to write italic and `**` or `__` for bold text.
 
 ``` markdown
 *italic*
@@ -156,13 +156,13 @@ Use `*` or `_` for italic and `**` or `__` for bold.
 
 **Pictures**
 
-You can easily add images to your documentation as well:
+You can also add images to your documentation as follows:
 
 ``` markdown
 ![Alt Text](path/to/your/image.jpg)
 ```
 
-Here, replace `Alt Text` with a descriptive alternative text for your image, and `path/to/your/ifrom spamage.jpg` with the actual path or URL of your image.
+Here, replace `Alt Text` with a descriptive alternative text for your image, and `path/to/your/image.jpg` with the actual path or URL of your image.
 
 **Tables**
 

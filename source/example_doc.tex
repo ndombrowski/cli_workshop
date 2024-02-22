@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={codebgcolor}, sharp corners, breakable, boxrule=0pt, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, sharp corners, enhanced, frame hidden, colback={codebgcolor}, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -171,9 +171,8 @@
 \section{An example notebook}\label{an-example-notebook}
 
 If you want to see an example for documented code, check out
-\href{https://github.com/ndombrowski/cli_workshop/tree/main/example_doc}{an
-example} for how I might have recorded how I analysed some sequence data
-myself.
+\href{https://github.com/ndombrowski/cli_workshop/tree/main/example_doc}{a
+notebook} I wrote based on what we are doing in this tutorial.
 
 The link above leads you to an example for:
 
@@ -182,8 +181,8 @@ The link above leads you to an example for:
 \item
   How could I use github to make my code available to others
 \item
-  How could a ``code book'' look like? The example you see in the folder
-  is provided a Quarto markdown file
+  How a ``code book'' could lool like. The example you see in the folder
+  is provided as a Quarto markdown file
   \href{https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd}{here}
   and for convenience the report was also rendered as a
   \href{https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html}{html}
@@ -211,33 +210,35 @@ directory}\label{setting-up-your-working-directory}
 
 \includegraphics[width=5.71875in,height=\textheight]{../img/general_setup.png}
 
-In this first section I add everything that a user that wants to use my
-workflow has to change and I try to standardize the code below, so that
-another user could just run this as is without having to edit anything.
-Typically things to add are:
+In one of the first sections of my notebools I add everything that a
+user that wants to use my workflow has to change and I try to
+standardize the code below, i.e.~I try to write it in a way so that it
+does not need to be changed. This ensures that another user could just
+run my code as is without having to edit anything other than this first
+section. Typically things to add are:
 
 \begin{itemize}
 \tightlist
 \item
-  From where to start the analyses
+  From where to start the analyses, i.e.~the location of the working
+  directory or project folder
 \item
   Custom paths, to for example for databases that need to be downloaded
-  from elsewhere
+  from the web or repositories
 \item
   Custom variables: In the example above I store the link to the data in
   a variable called \texttt{download\_link}, I then use the variable in
   the code below to download the data. By doing it this way I have one
   location in the code another person needs to change the code when for
-  example the path to the data changes. The code below stays the same.
-  When writing code try to think ahead and minimize the number of
-  instances where things need to be changed if for example the location
-  to your data changes.
-\item
-  \ldots{}
+  example the path to the data changes. The code below stays the same
+  since I use the \texttt{download\_link} variable and not the actual
+  path any more. When writing code try to think ahead and minimize the
+  number of instances where things need to be changed if for example the
+  location to your data changes.
 \end{itemize}
 
-I tend to NOT add the information how I use \texttt{scp} to log into an
-HPC to keep my user name and login information private.
+I tend to NOT add the information on how I use \texttt{scp} to log into
+an HPC to keep my user name and login information private.
 
 \subsection{Sanity checks}\label{sanity-checks}
 
@@ -264,12 +265,13 @@ notes}\label{using-markdown-to-make-notes}
 \includegraphics[width=5.65625in,height=\textheight]{../img/comments_in_code.png}
 
 In the example above I use markdown to not only document my code but
-also add some comments whenever I might need it. For example here, I
+also add some comments whenever I might need it. In the example above, I
 added some notes about what the results from FastQC actually told me.
 
 This kind of documentation can be useful for:
 
 \begin{itemize}
+\tightlist
 \item
   Justifying decisions further down the line. In this example, I might
   decide on how to clean the sequencing data. For example, if I would
@@ -278,8 +280,8 @@ This kind of documentation can be useful for:
   deal with that
 \item
   Future you. If you read the report a month, or a year, later you have
-  the key information in your report and don't have to open the HTML
-  reports again.
+  the key information in your report and don't have to open any files or
+  tables that are located elsewhere
 \end{itemize}
 
 \subsection{Documenting external
@@ -309,7 +311,7 @@ You can deal with this in two ways.
 \end{enumerate}
 
 I tend to prefer number 2 because I like to record the code in my
-notebooks exactly as I ran them but you can do it differently as long as
+notebooks exactly as I ran it but you can do it differently as long as
 all the code you ran is recorded and accessible to others once you
 publish your data.
 

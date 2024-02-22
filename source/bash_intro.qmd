@@ -62,7 +62,7 @@ In my case this returns something like this (and this will look different for yo
 
 </p>
 
-The colors will look different depending on the CLI you use but in the example above you see a list of files (in bold text) and folders (green-highlighted text) that can be found in the current directory directory.
+The colors will look different depending on the CLI you use but in the example above you see a list of files (in bold text) and folders (green-highlighted text) that can be found in my current directory.
 
 Since this output can easily become over-whelming if we deal with a lot of files and folders, lets look a bit closer into how we can optimize our commands by looking at the general structure of a command.
 
@@ -76,13 +76,13 @@ A command generally consists of three elements, the command itself and some opti
 
 </p>
 
-Understanding better what a command looks like, let's use the `ls` command together with the option `-l`. This option results in `ls` printing the content of a folder in a long listing format.
+Understanding better what a command looks like, let's use the `ls` command together with the option `-l`. This option results in `ls` printing the content of a folder in what is called a long listing format.
 
 ```{bash}
 ls -l
 ```
 
-After running this, we should see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better. In the example below we can see that we now print additional information about who owns the files (i.e. access modes), how large the files are, when they were last modified and of course the name:
+After running this, we see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better. In the example below we can see that we now print additional information about who owns the files (i.e. access modes), how large the files are, when they were last modified and of course the name:
 
 <p align="center">
 
@@ -120,7 +120,7 @@ The file system is a hierarchical system used to organize files and directories.
 
 If we specify the location of a folder or file starting from the root directory, we use what is called an **absolute path**. If we specify the location relative to our current directory, such as our home directory, we use what is called a **relative path**.
 
-To start moving around the file system, let's begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used `ls -l`. In my case I want to move into the source directory:
+To start moving around the file system, let's begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used `ls -l`. In my case I want to move into the source directory. If you run this, choose any folder you see after running the `ls` command:
 
 ```{bash}
 cd source/
@@ -173,7 +173,7 @@ cd data_analysis
 pwd
 ```
 
-::: {.callout-tip title="Tip: commenting your code" collapse="true"}
+::: {.callout-tip title="Tip: Commenting your code" collapse="true"}
 Notice, how in the example below I added the commands to run as well as some explanation about what I did?
 
 Here, I used a specific character `#` in front of a line of text to denote the beginning of a single-line comment. Anything coming after the character is considered a comment and won't be executed by the shell.
@@ -193,11 +193,14 @@ So instead of having to type out `data_analysis` completely when changing the di
 To do this, start from the home directory (or wherever you ran the `mkdir` command) and type `cd data_` and press the Tab-key on your keyboard. The cli should have auto-completed the folder name automatically.
 
 If there are multiple options, such as data and data_analysis, the cli can not autocomplete the folder name, however, by pressing Tab twice you will see all options to extend the name.
+
+While we talk about being lazy:
+If you press the arrow-up key on your keyboard you can cycle through commands you already ran and this often times can be useful to recycle code snippets (i.e. if you are trying certain settings and want to quickly change a small section of your code).
 :::
 
 ## `wget`: Download data
 
-Next, let's download our sequencing data, called seq_project.tar.gz, by using `wget`. In the command below we add the option `-P` to specify into which folder we want to download the data. You an also see how I documented my code here in order to add some more specifics about where the link came from to help future me in case I, for example, need to look for some e-mails about the data later on.
+Next, let's download our sequencing data, called seq_project.tar.gz using `wget`. In the command below we add the option `-P` to specify into which folder we want to download the data. 
 
 ```{bash}
 #make a new folder into which we want to download our sequencing data
@@ -206,6 +209,10 @@ mkdir data
 #download data using link provided by the sequencing center on 23.01.2023
 wget -P data https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
 ```
+
+In this example, you can also see how I documented my code here in order to add some more specifics about where the link came from to help future me in case I, for example, need to look for some e-mails about the data later on.
+
+Also note how I generate a special data folder in my project folder to better organize my data instead of downloading the data directly into my project folder. Generating a good folder structure is especially useful if you generate a lot of files and want to have a better overview over each file.
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Check with `ls` if the file was downloaded correctly
@@ -301,9 +308,9 @@ This means that if you delete something with rm, it's gone. Therefore, use `rm` 
 
 ## Wildcards
 
-After we have explored the folder with our sequencing data with `ls`, we have seen that `data/seq_project` contains 4 folders, 2 folders for two different users who each generated two replicates.
+After we have explored the folder with our sequencing data with `ls`, we have seen that `data/seq_project` contains 4 folders, 2 folders for two different users who each generated two samples.
 
-You also might have also noticed that it gets tedious to figure out how many files are in each folder because we would need to run `ls` on each single folder and view its content individually.
+You also might have also noticed that it gets tedious to figure out how many files are in each folder because we would need to run `ls` on each single folder and view its contents individually.
 
 Luckily, the shell provides special characters to rapidly specify groups of filenames or patterns. **Wild-cards** are characters that can be used as a substitute for any class of characters in a search.
 
@@ -480,7 +487,7 @@ Checking whether we have the same number of R1 and R2 files is a good sanity che
 
 ## `cut`: Extract elements from strings
 
-Remember, how we stored a list of sequencing files and the path leading to these files (relative to our home directory in a text file called `fastq_paths.txt`?
+Remember, how we stored a list of sequencing files and the path leading to these files (relative to our home directory in a text file called `fastq_paths.txt`)?
 
 Imagine that we only wanted to have a list of files but not the path, how would we do that?
 
@@ -498,7 +505,7 @@ cut -f4 -d "/" fastq_paths.txt
 cut -f4 -d "/" fastq_paths.txt > fastq_files.txt
 ```
 
-We can also combine this with pipes in order to extract different pieces of information. Let's assume we start with extracting a folder name, such as `barcode002_User1_ITS_9_L001`, and from that we want to extract some other information, such as a list with all the barcode IDs. We can easily do this as follows:
+We can also combine this with pipes in order to extract different pieces of information. Let's assume we start with extracting a folder name, such as `barcode002_User1_ITS_9_L001`, and from that we want to extract some other information, such as the barcode IDs. We can easily do this as follows:
 
 ```{bash}
 cut -f3 -d "/" fastq_paths.txt | cut -f1 -d "_"
@@ -645,7 +652,7 @@ ls -lh data/seq_project/*/*
 
 We see that our file has a file size of about \~25M after compression while the compressed files are around \~5M.
 
-When working with sequencing files the data is usually much large and its best to keep the files compressed to not clutter your computer.
+When working with sequencing files the data is usually much larger and its best to keep the files compressed to not clutter your computer.
 
 </details>
 :::
@@ -662,7 +669,7 @@ ls data/seq_project/*/*
 
 We have seen that to view the content of a compressed file and make sense of the content we had to first decompress the file. However, sequence files tend to get rather large and we might not want to decompress our files to not clutter our system.
 
-Luckily, there is one useful tool in bash to decompress the file and print the content to the screen called `zcat`. When running `zcat` on a file then the original compressed file is kept as is. We combine the `zcat` command with the `head` command, since do not want to print millions of sequences to the screen but only want to explore the first few rows:
+Luckily, there is one useful tool in bash to decompress the file and print the content to the screen called `zcat`. When running `zcat` on a file then the original compressed file is kept as is. We combine the `zcat` command with the `head` command, since we do not want to print millions of sequences to the screen but only want to explore the first few rows:
 
 ```{bash}
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
@@ -688,7 +695,7 @@ grep -c "R1" fastq_paths.txt
 We can also use grep with wildcards, for example, if we want to look only at samples from User1 we could do the following:
 
 ```{bash}
-grep "User1_ITS_*_" fastq_paths.txt
+grep "User1_*" fastq_paths.txt
 ```
 
 ::: {.callout-caution collapse="false" title="Exercise"}
@@ -727,12 +734,11 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc
 
 After running this we see that we work with 179,384 / 4 sequences. We need to divide the number we see on the screen by 4 since each sequence is represented by 4 lines of information in our fastq file.
 
-::: {.callout-tip title="Avanced Tip: better counting" collapse="true"}
+::: {.callout-tip title="Avanced Tip: Better counting" collapse="true"}
 We have seen that we need to divide the output of `wc` by four to get the total number of sequences. We can do this with a calculator but actually, some intermediate bash can also be used to do this for us:
 
 ```{bash}
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | echo $(( $(wc -l) /4))
-
 ```
 
 In the command above we have some new syntax:
@@ -773,14 +779,14 @@ We can use for-loops to print something to the screen not only one, but two, thr
 
 ```{bash}
 for i in 1 2 3; do 
-    echo "Welcome ${i} times"
+    echo "Welcome $i times"
 done
 ```
 
 An alternative and more condensed way of writing this that you might encounter in the wild is the following:
 
 ```{bash}
-for i in 1 2 3; do echo "Welcome ${i} times"; done
+for i in 1 2 3; do echo "Welcome $i times"; done
 ```
 
 Here, you see what this command does step by step:
@@ -795,21 +801,21 @@ Let's try to do the same but now for our sequencing files by storing the individ
 
 ```{bash}
 for i in data/seq_project/*/*.gz; do 
-    echo "I work with: File ${i}"
+    echo "I work with: File $i"
 done
 ```
 
--   `for i in data/seq_project/*/*.gz; do`: This part initializes a loop that iterates over all files matching the pattern `data/seq_project/*/*.gz`. The variable i is assigned each file in succession.
+-   `for i in data/seq_project/*/*.gz; do`: This part initializes a loop that iterates over all files matching the pattern `data/seq_project/*/*.gz`. The variable i is assigned to each file in succession.
 
 We can then use these variables stored in i to perform more useful operations, for example for each file, step-by-step, count the number of lines in each file by using some of the tools we have seen before:
 
 ```{bash}
 for i in data/seq_project/*/*.gz; do 
-    zcat ${i} | wc -l
+    zcat $i | wc -l
 done
 ```
 
--   `zcat ${i} | wc -l`: This is the action performed inside the loop. zcat is used to concatenate and display the content of compressed files (\*.gz). The \| (pipe) symbol redirects this output to wc -l, which counts the number of lines in the uncompressed content.
+-   `zcat $i | wc -l`: This is the action performed inside the loop. zcat is used to concatenate and display the content of compressed files (\*.gz). The \| (pipe) symbol redirects this output to wc -l, which counts the number of lines in the uncompressed content.
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Use a for loop and count how often grep finds the pattern "TAAGA" in each individual fastq.gz file
@@ -820,7 +826,7 @@ done
 
 ```{bash}
 for i in data/seq_project/*/*.gz; do 
-    zcat ${i} | grep -c "TAAGA"
+    zcat $i | grep -c "TAAGA"
 done
 ```
 
@@ -831,12 +837,12 @@ Sometimes it is useful to not store the full path in `i`, especially when we wan
 
 ```{bash}
 for i in `cat fastq_files.txt`; do  
-    zcat data/seq_project/*/${i} | wc -l
+    zcat data/seq_project/*/$i | wc -l
 done
 ```
 
 -   `` for i in `cat fastq_files.txt`; do ``: This initiates a loop that iterates over each item in the file fastq_files.txt. The backticks \` are used to execute the `cat` command within the backticks to read the content of the text file and assign its output to the variable i.
--   `zcat data/seq_project/*/${i} | wc -l`: Like before, this line uncompresses (zcat) and counts (wc) the number of lines in the specified file. However, in this case, the file is determined by the content of fastq_files.txt, which contains a list of file names.
+-   `zcat data/seq_project/*/$i | wc -l`: Like before, this line uncompresses (zcat) and counts (wc) the number of lines in the specified file. However, in this case, the file is determined by the content of fastq_files.txt, which contains a list of file names.
 
 After this modification of the code, we can very easily store the output in a file instead of printing the results to the screen.
 
@@ -846,16 +852,15 @@ After this modification of the code, we can very easily store the output in a fi
 mkdir counts 
 
 for i in `cat fastq_files.txt`; do 
-    zcat data/seq_project/*/$i | wc -l > counts/${i}.txt
+    zcat data/seq_project/*/$i | wc -l > counts/$i.txt
 done
 
-ls counts/*txt 
+ls -l counts/*txt 
 
 head counts/Sample-DUMMY1_R1.fastq.gz.txt
-
 ```
 
-::: {.callout-tip title="Avanced Tip: better counting in for loops" collapse="true"}
+::: {.callout-tip title="Avanced Tip: Better counting in for loops" collapse="true"}
 Let's get a bit more advanced to show you some powerful features of bash. For this imagine that you would do this for 100 files. In this case it would be useful to see the file names next to the counts. We can achieve this by using what we have learned in the `Better counting tip` where we have learned about echo and command substitution.
 
 ```{bash}

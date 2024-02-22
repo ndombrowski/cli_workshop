@@ -201,11 +201,11 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="an-example-notebook" class="level2">
 <h2 class="anchored" data-anchor-id="an-example-notebook">An example notebook</h2>
-<p>If you want to see an example for documented code, check out <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">an example</a> for how I might have recorded how I analysed some sequence data myself.</p>
+<p>If you want to see an example for documented code, check out <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">a notebook</a> I wrote based on what we are doing in this tutorial.</p>
 <p>The link above leads you to an example for:</p>
 <ul>
 <li>How could I use github to make my code available to others</li>
-<li>How could a “code book” look like? The example you see in the folder is provided a Quarto markdown file <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd">here</a> and for convenience the report was also rendered as a <a href="https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html">html</a> to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.</li>
+<li>How a “code book” could lool like. The example you see in the folder is provided as a Quarto markdown file <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd">here</a> and for convenience the report was also rendered as a <a href="https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html">html</a> to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.</li>
 </ul>
 <p>The example is based on the data you analyse throughout this tutorial, so the actual code might only make sense after you have finished the tutorial. Feel free to revisit this page after you have written some code yourself.</p>
 <p>Please note that this is just an example to get you started and such a report might look different depending on your needs.</p>
@@ -217,14 +217,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="setting-up-your-working-directory" class="level3">
 <h3 class="anchored" data-anchor-id="setting-up-your-working-directory">Setting up your working directory</h3>
 <p><img src="..\img/general_setup.png" class="img-fluid" width="549"></p>
-<p>In this first section I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, so that another user could just run this as is without having to edit anything. Typically things to add are:</p>
+<p>In one of the first sections of my notebools I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, i.e.&nbsp;I try to write it in a way so that it does not need to be changed. This ensures that another user could just run my code as is without having to edit anything other than this first section. Typically things to add are:</p>
 <ul>
-<li>From where to start the analyses</li>
-<li>Custom paths, to for example for databases that need to be downloaded from elsewhere</li>
-<li>Custom variables: In the example above I store the link to the data in a variable called <code>download_link</code>, I then use the variable in the code below to download the data. By doing it this way I have one location in the code another person needs to change the code when for example the path to the data changes. The code below stays the same. When writing code try to think ahead and minimize the number of instances where things need to be changed if for example the location to your data changes.</li>
-<li>…</li>
+<li>From where to start the analyses, i.e.&nbsp;the location of the working directory or project folder</li>
+<li>Custom paths, to for example for databases that need to be downloaded from the web or repositories</li>
+<li>Custom variables: In the example above I store the link to the data in a variable called <code>download_link</code>, I then use the variable in the code below to download the data. By doing it this way I have one location in the code another person needs to change the code when for example the path to the data changes. The code below stays the same since I use the <code>download_link</code> variable and not the actual path any more. When writing code try to think ahead and minimize the number of instances where things need to be changed if for example the location to your data changes.</li>
 </ul>
-<p>I tend to NOT add the information how I use <code>scp</code> to log into an HPC to keep my user name and login information private.</p>
+<p>I tend to NOT add the information on how I use <code>scp</code> to log into an HPC to keep my user name and login information private.</p>
 </section>
 <section id="sanity-checks" class="level3">
 <h3 class="anchored" data-anchor-id="sanity-checks">Sanity checks</h3>
@@ -236,11 +235,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="using-markdown-to-make-notes" class="level3">
 <h3 class="anchored" data-anchor-id="using-markdown-to-make-notes">Using markdown to make notes</h3>
 <p><img src="..\img/comments_in_code.png" class="img-fluid" width="543"></p>
-<p>In the example above I use markdown to not only document my code but also add some comments whenever I might need it. For example here, I added some notes about what the results from FastQC actually told me.</p>
+<p>In the example above I use markdown to not only document my code but also add some comments whenever I might need it. In the example above, I added some notes about what the results from FastQC actually told me.</p>
 <p>This kind of documentation can be useful for:</p>
 <ul>
-<li><p>Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, if I would have found a lot of low quality reads or the adapter still being part of the sequence then I would have specifically cleaned my sequences to deal with that</p></li>
-<li><p>Future you. If you read the report a month, or a year, later you have the key information in your report and don’t have to open the HTML reports again.</p></li>
+<li>Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, if I would have found a lot of low quality reads or the adapter still being part of the sequence then I would have specifically cleaned my sequences to deal with that</li>
+<li>Future you. If you read the report a month, or a year, later you have the key information in your report and don’t have to open any files or tables that are located elsewhere</li>
 </ul>
 </section>
 <section id="documenting-external-scripts" class="level3">
@@ -251,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Instead of the sbatch command, you can add the actual line of code that was run on the compute node.</li>
 <li>When publishing your code with your manuscript, add the whole scripts folder to where you publish the main code, i.e.&nbsp;on <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">github</a> or <a href="https://zenodo.org/records/3839790">zenodo</a></li>
 </ol>
-<p>I tend to prefer number 2 because I like to record the code in my notebooks exactly as I ran them but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.</p>
+<p>I tend to prefer number 2 because I like to record the code in my notebooks exactly as I ran it but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.</p>
 
 
 </section>
@@ -824,7 +823,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-01-31</p>
+Last modified: 2024-02-22</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

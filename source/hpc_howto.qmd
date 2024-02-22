@@ -16,7 +16,6 @@ Now, that you are familiar more familiar with the cli, let's get used to working
 For people following this tutorial outside of UvA:
 
 -   If you have access to an HPC using SLURM you still follow the tutorial
-
 -   If you do not have access to an HPC but are interested in how to install and run software that can be used to analyse sequencing data, you still might want to check out the steps run below. The dataset is very small and all analyses can be run on a desktop computer
 
 ## `ssh`: Connecting to a sever
@@ -43,7 +42,7 @@ If you want to log into Crunchomics from outside of UvA you need to be connected
 
 ## Crunchomics: Preparing your account
 
-If you have not used Crunchomics before, then you want to first run a small Bash script that:
+Ignore this section if you already did this but if this is your first time on Crunchomics, then you want to first run a small Bash script that:
 
 -   Allows you to use system-wide installed software, by adding `/zfs/omics/software/bin` to your path. This basically means that bash knows that there is an extra folder in which to look for any software that is pre-installed on the HPC
 -   Sets up a python3 environment and some useful python packages
@@ -55,6 +54,8 @@ To set this up, run the following command in the cli:
 /zfs/omics/software/script/omics_install_script
 ```
 
+
+
 ## `scp`: Transferring data from/to a server
 
 `scp` stands for Secure Copy Protocol and allows you to securely copy files and directories between remote hosts. When transferring data the transfer is always prepared from the terminal of your local computer and not from the HPCs login node.
@@ -65,7 +66,7 @@ The basic syntax we use looks like this:
 
 To start analysing our data, we want to move the fastq.gz files that we have worked with before from our local folder, the source, to a folder on Cruncomics, the destination. Let's start setting up a project folder from which we want to run our analyses by:
 
--   Moving from our Crunchomics home directory into our personal directory. We move there since we have more space in the personal directory. Notice,for the command below to work, we need to have already executed the `omics_install_script` script above
+-   Moving from our Crunchomics home directory into our personal directory. We move there since we have more space in the personal directory. Notice, for the command below to work, we need to have already executed the `omics_install_script` script above
 -   Make a project folder with a descriptive file name, i.e. projectX
 
 ```{bash}
@@ -81,7 +82,7 @@ Now that we have organized our working directory, we next want to move the data 
 -   In the example below, I am running the code from inside of the `data_analysis` folder that we have generated in the previous tutorial and I use the `-r` option in order to move the whole data folder and not a single file.
 
 ```{bash}
-#run command below from local computer, 
+#run the command below from your local computer, 
 #ensure that the data folder is inside the directory from which you run this command
 scp -r data username@omics-h0.science.uva.nl:/home/username/personal/projectX
 
@@ -89,7 +90,7 @@ scp -r data username@omics-h0.science.uva.nl:/home/username/personal/projectX
 ll data/seq_project/*/*fastq.gz
 ```
 
-::: {.callout-tip title="Tip: moving data from the HPC to our own computer" collapse="true"}
+::: {.callout-tip title="Tip: Moving data from the HPC to our own computer" collapse="true"}
 We can also move data from the HPC to our own computer. For example, let's assume we want to move a single sequencing file from crunchomics back to our computer. In this case,
 
 -   We do not need `-r` since we only move a single file
@@ -101,7 +102,7 @@ scp username@omics-h0.science.uva.nl:/home/username/personal/projectX/data/seq_p
 ```
 :::
 
-::: {.callout-tip title="Tip: moving data from the HPC using wildcards" collapse="true"}
+::: {.callout-tip title="Tip: Moving data from the HPC using wildcards" collapse="true"}
 We can also move several files at once and ignore the whole folder structure by using wildcards when using `scp`.
 
 ```{bash}
@@ -120,7 +121,7 @@ ll transfer_test/*
 
 **Notice for MAC users**:
 
-For Mac users that work with an zsh shell the command above might not work and they might get an error like "file not found", "no matches found" or something the like. Without going into details zsh has a slightly different way of handling wildcards and tries to interpret the wildcard literally and thus does not find our files. If you see the error and you are sure the file exists it should work to edit your line of code as follows:
+For Mac users that work with an zsh shell the command above might not work and you might get an error like "file not found", "no matches found" or something the like. Without going into details zsh has a slightly different way of handling wildcards and tries to interpret the wildcard literally and thus does not find our files. If you see the error and you are sure the file exists it should work to edit your line of code as follows:
 
 ```{bash}
 \scp  data/seq_project/barcode00*/*fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/projectX/transfer_test
@@ -141,11 +142,11 @@ scp 'data/seq_project/barcode00*/*fastq.gz' ndombro@omics-h0.science.uva.nl:/hom
 
 Now, that we have our data prepared we want to run a tool to assess the quality of our reads. Before doing that, let's talk about submitting jobs to an HPC.
 
-As a reminder: We do not run big jobs on the login node but need to submit such jobs to the compute nodes via SLURM. Login nodes are for preparing your programs to run, while you typically run your actual jobs by submitting them to the compute nodes using SLURM.
+As a reminder: We do not run big jobs on the login node but need to submit such jobs to the compute nodes via SLURM. Login nodes are for preparing your programs to run and you run your actual jobs by submitting them to the compute nodes using SLURM.
 
 In the next few sections you will get to know the basics steps to be able to do this.
 
-Before doing this it is, however, useful when getting started on a new HPC to know how to get basic information about what nodes are available on a cluster and how busy the HPC is. This allows us to better know how many resources to request in order to have our job run efficiently but also get started in a timely manner.
+Before doing this it is, however, useful when getting started on a new HPC to know how to get basic information about what nodes are available on a cluster and how busy an HPC is. This allows us to better know how many resources to request in order to have our job run efficiently but also get started in a timely manner.
 
 One way to get a list of available compute nodes is by typing the following command into the cli:
 
@@ -186,7 +187,7 @@ After running this, you can see all jobs scheduled on the HPC, which might look 
 
 If we would have submitted a job, we also should see the job listed there.
 
-## `srun`: submitting a job interactively
+## `srun`:Submitting a job interactively
 
 `srun` is used when you want to run tasks interactively or want to have more control over the execution of a job. You directly issue `srun` commands in the terminal and you at the same time are able to specify the tasks to be executed and their resource requirements. For example, you might want to run softwareX and request that this job requires 10 CPUs and 5 GB of memory.
 
@@ -225,7 +226,7 @@ When you're just starting, deciding on the right resources to request for your c
 
 -   Use default settings: Begin by working with the default settings provided by the HPC cluster or recommended by the tool itself. These are often set to provide a balanced resource allocation for a wide range of tasks
 -   Check the software documentation: Consult the documentation of the software or tool you are using. Many tools provide recommendations for resource allocation based on the nature of the computation.
--   Test with small Datasets: For initial testing and debugging especially when working with large datasets, consider working with a smaller subset of your data. This allows for faster job turnaround times, helping you identify and resolve issues more efficiently.
+-   Test with small datasets: For initial testing and debugging especially when working with large datasets, consider working with a smaller subset of your data. This allows for faster job turnaround times, helping you identify and resolve issues more efficiently.
 -   Monitor the resources usage:
     -   Use `sacct` to check what resources a finished job has used and see whether you can optimize a run if you plan to run similar jobs over and over again. An example command would be `sacct -j 419847 --format=User,JobID,Jobname,state,start,end,elapsed,MaxRss,ncpus.` In the report, look for columns like MaxRSS (maximum resident set size) to check if the amount of memory allocated (--mem) was appropriate.
     -   Ensuer that the job used the resources you requested. For instance, if you would have used `--cpus-per-task=4 --mem=4G`, you would expect to use a total of 16 GB of memory (4 CPUs \* 4 GB). You can verify this with `sacct` to ensure your job's resource requirements align with its actual usage.
@@ -237,7 +238,7 @@ When you're just starting, deciding on the right resources to request for your c
 
 By the way: Whenever running a software for a first time, it is useful to check the manual, for example with `fastqc -h.`
 
-Let's start by setting up a clean folder structure to keep our files organized. I start with making a folder in which I want to store all results generated in this analyses and using the `-p` argument I generate a fastqc folder inside the results folder at the same time. Then, we can submit our job using `srun`.
+Let's start by setting up a clean folder structure to keep our files organized. I start with making a folder in which I want to store all results generated in this analysis and by using the `-p` argument I generate a fastqc folder inside the results folder at the same time. Then, we can submit our job using `srun`.
 
 ```{bash}
 mkdir -p results/fastqc 
@@ -344,7 +345,7 @@ mkdir scripts
 mkdir logs
 ```
 
-To get started, assume we have created a script in the scripts folder named `run_fastqc.sh` with the content that is shown below. Notice, how in this script I added some additional `echo` commands? I just use these to print some information about the progress which could be printed to a log file but if you have several commands that should be executed after each other that is how you could do it.
+To get started, assume we have created a script in the scripts folder named `run_fastqc.sh` with the content that is shown below. Notice, how in this script I added some additional `echo` commands? I just use these to print some information about the progress which could be printed to a log file but if you have several commands that should be executed after each other that is how you would do it.
 
 ```{bash}
 #!/bin/bash
@@ -361,9 +362,8 @@ echo "fastqc finished"
 In the job script above:
 
 -   `#!/bin/bash` . This so-called Shebang line tells the shell to interpret and run the Slurm script using the bash shell. This line should always be added at the very top of your SBATCH/Slurm script.
-
 -   The lines that follow and start with `#` are the lines in which we define the amount of resources required for our job to run. In our case, we request 1 CPU and 5G of memory.
--   If your code needs any dependencies, such as loading conda environments, you would add these dependencies here. We do not need this for our example here, but you might need to add something like this `conda activate my_env` if you have installed your own software. We will touch upon conda environments and installing software a bit later.
+-   If your code needs any dependencies, such as conda environments, you would add these dependencies here. We do not need this for our example here, but you might need to add something like this `conda activate my_env` if you have installed your own software. We will touch upon conda environments and installing software a bit later.
 -   The lines afterwards are the actually commands that we want to run on the compute nodes, We also call this the job steps.
 
 To prepare the script and run it:
@@ -378,13 +378,13 @@ Afterwards, you can submit `run_fastqc.sh` as follows:
 
 ```{bash}
 #submit job: 754
-sbatch sbatch scripts/run_fastqc.sh
+sbatch scripts/run_fastqc.sh
 
 #check if job is running correctly
 squeue
 ```
 
-After running this, you should see that the job was submitted and something like this printed to the screen `Submitted batch job 754`. You will also see that a new file is generated that will look something like this `slurm-425707.out`.
+After running this, you should see that the job was submitted and something like this printed to the screen `Submitted batch job 754`. You will also see that a new file is generated that will look something like this `slurm-754.out`.
 
 When you submit a batch job using sbatch, Slurm redirects the standard output and standard error messages, which you have seen printed to the screen when you used `srun`, to a file named in the format slurm-JOBID.out, where JOBID is the unique identifier assigned to your job.
 
@@ -544,7 +544,6 @@ conda deactivate
 When installing seqkit, we:
 
 -   specify the exact version we want to download with `=2.6.1`. We could also install the newest version that conda/mamba can find by running `mamba install -n seqkit -c bioconda seqkit`.
-
 -   specify that we want to look for seqkit in the bioconda channel with the option `-c`. Channels are the locations where packages are stored. They serve as the base for hosting and managing packages. Conda packages are downloaded from remote channels, which are URLs to directories containing conda packages. If you are unable to find a package it might be that you need to specify a channel.
 
 Forgot what conda environments you installed in the past? You can run `conda env list` to generate a list of all existing environments.

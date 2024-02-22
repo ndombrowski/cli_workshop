@@ -133,7 +133,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, frame hidden, sharp corners, colback={codebgcolor}, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={codebgcolor}, sharp corners, enhanced, frame hidden, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -170,15 +170,15 @@
 }
 \section{Welcome page}\label{welcome-page}
 
-On this website you will find a short tutorial that will explain how use
-bash and connect and work with an HPC.
+On this website you will find a short tutorial that will explain how to
+use bash and connect and work with an HPC.
 
 On the first pages you will get some introduction into setting up a
 terminal and documenting your code. Afterwards, the actual tutorial will
-begin, in which you will assume the role of a researcher who just
-received data from a sequencing center and wants to starts analysing
-this data using the command line interface. This tutorial is divided
-into two main parts:
+begin, in which you will assume the role of a researcher who received
+data from a sequencing center and wants to start analysing this data
+using the command line interface. This tutorial is divided into two main
+parts:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -197,7 +197,7 @@ This tutorial was written for researchers at the Institute for
 Biodiversity and Ecosystem Dynamics (IBED) at the University of
 Amsterdam who can get access to Crunchomics, the Genomics Compute
 Environment for SILS and IBED. For researchers that do not have access
-to Crunchomics or another slurm-based HPC, then you still can follow
+to Crunchomics, or another slurm-based HPC, then you still can follow
 most sections of this tutorial on your own computer if you are
 interested in learning about bash.
 
