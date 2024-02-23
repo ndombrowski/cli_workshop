@@ -214,6 +214,18 @@ In this example, you can also see how I documented my code here in order to add 
 
 Also note how I generate a special data folder in my project folder to better organize my data instead of downloading the data directly into my project folder. Generating a good folder structure is especially useful if you generate a lot of files and want to have a better overview over each file.
 
+::: {.callout-important title="Wget for Mac users" collapse="false"}
+
+For Mac users wget is not installed by default. If you do not want to install it, run the following:
+
+```{bash}
+curl -LO https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
+mv seq_project.tar.gz data
+```
+
+:::
+
+
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Check with `ls` if the file was downloaded correctly
 2.  Check the manual if there are extra options that we can use for `ls` to check the file size (advanced)
@@ -675,6 +687,17 @@ Luckily, there is one useful tool in bash to decompress the file and print the c
 ```{bash}
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
 ```
+
+
+::: {.callout-important title="Zcat for Mac users" collapse="false"}
+
+For Mac users  using the zsh shell, zcat might not work as expected. Try using gzcat instead: 
+
+```{bash}
+gzcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
+```
+
+:::
 
 ## `grep`: Find patterns in data
 
