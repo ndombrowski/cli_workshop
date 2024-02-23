@@ -470,10 +470,11 @@ We should see again that we work with 8 files, but now we did not have to genera
 
 ```{bash}
 #question 1: We see 4 files
-ls data/seq_project/*/*R1*/*gz | wc -l 
+ls data/seq_project/*/*R1*gz | wc -l 
+ls data/seq_project/*/*R1*gz | wc -l 
 
 #question 2: We see 4 files
-ls data/seq_project/*/*R2*/*gz | wc -l 
+ls data/seq_project/*/*R2*gz | wc -l 
 
 #question 3: We see 4 files
 ls data/seq_project/*_User1_*/*gz | wc -l 
