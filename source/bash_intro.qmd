@@ -909,12 +909,12 @@ done
 4. `r2_file=$(echo $file | sed 's/_R1/_R2/')`: This line sets the variable r2_file by replacing _R1 with _R2 in the current file name. This is done using the sed command, which is a stream editor for filtering and transforming text.
 5. `echo "$r1_file,$r2_file"`: This line prints the R1 and R2 file names separated by a comma. This will be part of the output in the format R1,R2.
 
-We can do even more and add a column with the sample name:
+We can do even more and add a column with the sample name with what we have learned before:
 
 ```{bash}
 for file in data/seq_project/*/*.gz; do
     if [[ $file == *_R1.fastq.gz ]]; then
-        sample_name=$(basename "$(dirname "$file")")
+        sample_name=$(echo $file | cut -f3 -d "/" )
         r1_file=$file
         r2_file=$(echo $file | sed 's/_R1/_R2/')
         echo "$sample_name,$r1_file,$r2_file"
@@ -922,14 +922,12 @@ for file in data/seq_project/*/*.gz; do
 done
 ```
 
-1. `sample_name=$(basename "$(dirname "$file")")`: Extracts the sample name from the directory name where the file is located. dirname gets the directory path, basename extracts the base name (last part) of that path, and the result is stored in the variable sample_name.
-
 You can easily combine this with some of the things we learned, such as using `cut` to extract specific parts of the sample_name as well. I.e. lets assume you only want to list the index:
 
 ```{bash}
 for file in data/seq_project/*/*.gz; do
     if [[ $file == *_R1.fastq.gz ]]; then
-        sample_name=$(basename "$(dirname "$file")" |cut -f1 -d "_" ) 
+        sample_name=$(echo $file | cut -f3 -d "/"  |cut -f1 -d "_" ) 
         r1_file=$file
         r2_file=$(echo $file | sed 's/_R1/_R2/')
         echo "$sample_name,$r1_file,$r2_file"
