@@ -288,6 +288,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>If you want to log into Crunchomics while working from UvA use the eduroam network, not the open Amsterdam Science Park network.</p>
 <p>If you want to log into Crunchomics from outside of UvA you need to be connected to the VPN. If you have not set that up and/or have trouble doing so, please contact ICT.</p>
 </div>
 </div>
@@ -307,12 +308,12 @@ Important
 </section>
 <section id="scp-transferring-data-fromto-a-server" class="level2">
 <h2 class="anchored" data-anchor-id="scp-transferring-data-fromto-a-server"><code>scp</code>: Transferring data from/to a server</h2>
-<p><code>scp</code> stands for Secure Copy Protocol and allows you to securely copy files and directories between remote hosts. When transferring data the transfer is always prepared from the terminal of your local computer and not from the HPCs login node.</p>
+<p><code>scp</code> stands for Secure Copy Protocol and allows you to securely copy files and directories between remote hosts. When transferring data the transfer is always prepared from the terminal of your personal computer and not from the HPCs login node.</p>
 <p>The basic syntax we use looks like this:</p>
 <p><code>scp [options] SOURCE DESTINATION</code></p>
-<p>To start analysing our data, we want to move the fastq.gz files that we have worked with before from our local folder, the source, to a folder on Cruncomics, the destination. Let’s start setting up a project folder from which we want to run our analyses by:</p>
+<p>To start analysing our data, we want to move the fastq.gz files that we have worked with before from our personal folder, the source, to a folder on Cruncomics, the destination. Let’s start setting up a project folder from which we want to run our analyses by:</p>
 <ul>
-<li>Moving from our Crunchomics home directory into our personal directory. We move there since we have more space in the personal directory. Notice, for the command below to work, we need to have already executed the <code>omics_install_script</code> script above</li>
+<li>Moving from our home directory into our personal directory on the Crunchomics HPC. We move there since we have more space in the personal directory. Notice, for the command below to work, we need to have already executed the <code>omics_install_script</code> script above</li>
 <li>Make a project folder with a descriptive file name, i.e.&nbsp;projectX</li>
 </ul>
 <div class="cell">
@@ -320,11 +321,11 @@ Important
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> projectX</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> projectX</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now that we have organized our working directory, we next want to move the data folder with the sequencing that you have downloaded before to Crunchomics. We do this by moving the whole <code>data</code> folder from our local computer to the new project folder on the HPC. Therefore, it is important that:</p>
+<p>Now that we have organized our working directory on the HPC, we next want to move the data folder (which right now is only on your own, personal computer) with the sequencing that you have downloaded before to Crunchomics. We do this by moving the whole <code>data</code> folder from our own computer to the new project folder on the HPC. Therefore, it is important that:</p>
 <ul>
 <li>we run the following command from the cli on our own computer and not from the cli while being logged into the HPC!</li>
 <li>you exchange the two instances of <code>username</code> in the code below with your username/uvanetid</li>
-<li>In the example below, I am running the code from inside of the <code>data_analysis</code> folder that we have generated in the previous tutorial and I use the <code>-r</code> option in order to move the whole data folder and not a single file.</li>
+<li>In the example below, I am running the code from inside of the <code>data_analysis</code> folder that we have generated in the previous tutorial since that is where I have the data folder that I want to move. I use the <code>-r</code> option in order to move the whole data folder and not a single file.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#run the command below from your local computer, </span></span>
@@ -395,6 +396,38 @@ Tip: Moving data from the HPC using wildcards
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="st">'data/seq_project/barcode00*/*fastq.gz'</span> ndombro@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/transfer_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Moving files using the FileZilla GUI">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip: Moving files using the FileZilla GUI
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>scp</code> takes some getting used to and there are several graphical user interface programs that are available which provide the same functionality. Here, we will look at FileZilla, as it is compatible with Windows, Mac, and Linux.</p>
+<p>To use FileZilla, do the following:</p>
+<ol type="1">
+<li>Download the FileZilla Client <a href="https://filezilla-project.org/">here</a>. The free version is all we need.</li>
+<li>Follow the download instructions</li>
+<li>Click the FileZilla app to start it</li>
+<li>Add Uva user credentials
+<ul>
+<li>Enter <code>omics-h0.science.uva.nl</code> in host</li>
+<li>Enter <code>user_name</code> in user</li>
+<li>Enter psswd chosen when making surf account</li>
+<li>Port should be 22 to open a sftp connection</li>
+</ul></li>
+<li>Trust the host</li>
+<li>You land in your home directory (on the right hand side)</li>
+<li>You can copy-paste data by drag and dropping</li>
+</ol>
 </div>
 </div>
 </div>
@@ -513,7 +546,7 @@ Tip: Moving data from the HPC using wildcards
 </div>
 <p>Additionally, after the run is completed, you should see that several HTML files were generated in our fastqc folder.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -522,7 +555,7 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Use scp to download the HTML files generated by fastqc to your own computer and view one of the HTML files.</p>
 <details>
@@ -639,7 +672,7 @@ Click me to see an answer
 </ul>
 <p>Feel free to explore the content of the log file, do you see how the echo commands are used as well?</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: sbatch and better log files">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -648,7 +681,7 @@ Tip: sbatch and better log files
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We have seen that by default <code>sbatch</code> redirects the standard output and error to our working directory and that it decides itself how to name the files. Since file organization is very important especially if you generate lots of files, you find below an example to:</p>
 <ul>
@@ -674,7 +707,7 @@ Tip: sbatch and better log files
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Advanced tip: sbatch arrays to run multiple files in parallel">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -683,7 +716,7 @@ Advanced tip: sbatch arrays to run multiple files in parallel
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>With fastqc we are very lucky that the tool can identify all the fastq files in the directory we specify with <code>-o</code> by making use of the wildcard. This is extremely useful for us but by far not all programs work this way.</p>
 <p>For this section, lets assume that we need to provide each individual file we want to analyse, one by one, and can not provide a folder name. How would we run such a job effectively?</p>
@@ -809,7 +842,7 @@ Advanced tip: sbatch arrays to run multiple files in parallel
 <p>Unsure if a software can be installed with conda? Google conda together with the software name, which should lead you do a conda web page. This page should inform you whether you need to add a specific channel to install the software as well as the version numbers available.</p>
 <p>A full set of mamba/conda commands can be found <a href="https://docs.conda.io/projects/conda/en/latest/commands/index.html.">here</a>.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -818,7 +851,7 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Download and view the file <code>results/seqkit/seqkit_stats.tsv</code> on your own computer</li>
@@ -1441,7 +1474,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-02-22</p>
+Last modified: 2024-02-26</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_howto.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

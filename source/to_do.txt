@@ -1,0 +1,77 @@
+# Notebook
+
+To do:
+
+- Add screenshot for output of ls -l and explain different fields
+- Make figure for cut
+- - add note to not be on open network but eduram
+- add example to use filezilla
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Issues with keys after Crunchomics reboot: 
+
+```{bash}
+ssh-keygen -f /home/mobaxterm/.ssh/known_hosts -R "omics-h0.science.uva.nl"
+```
+
+
+Interactive bash
+
+
+```{bash}
+srun --cpus-per-task 1 --mem=5G --time=01:00:00 --pty bash -i
+```
+
+
+Wget alternative
+
+
+```{bash}
+curl -LO https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
+
+mv seq_project.tar.gz data
+
+```

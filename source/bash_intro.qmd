@@ -44,6 +44,10 @@ For WSL2 users:
 -   The home directory is `/home/YourUserName`
 -   To access the current directory in the file explorer you can type `explorer.exe .`
 -   The path to the desktop would be something like this `/mnt/c/Users/YourUserName/OneDrive/Desktop` or `/mnt/c/Users/YourUserName/Desktop`
+
+Accessing the Uva OneDrive folder:
+
+To access the OneDrive Uva folder, you need to add quotes between the absolute file path since bash does otherwise not know what to do with the space in the file name, i.e. `cd "/mnt/c/Users/UserName/OneDrive - Uva"`. This is also a good example for why you normally do NOT want to add spaces in your filepath.
 :::
 
 ## `ls`: List the contents of a directory
@@ -194,37 +198,27 @@ To do this, start from the home directory (or wherever you ran the `mkdir` comma
 
 If there are multiple options, such as data and data_analysis, the cli can not autocomplete the folder name, however, by pressing Tab twice you will see all options to extend the name.
 
-While we talk about being lazy:
-If you press the arrow-up key on your keyboard you can cycle through commands you already ran and this often times can be useful to recycle code snippets (i.e. if you are trying certain settings and want to quickly change a small section of your code).
+While we talk about being lazy: If you press the arrow-up key on your keyboard you can cycle through commands you already ran and this often times can be useful to recycle code snippets (i.e. if you are trying certain settings and want to quickly change a small section of your code).
 :::
 
 ## `wget`: Download data
 
-Next, let's download our sequencing data, called seq_project.tar.gz using `wget`. In the command below we add the option `-P` to specify into which folder we want to download the data. 
+Next, let's download our sequencing data, called seq_project.tar.gz using `wget`. In the command below we add the option `-P` to specify into which folder we want to download the data.
 
 ```{bash}
-#make a new folder into which we want to download our sequencing data
-mkdir data
-
 #download data using link provided by the sequencing center on 23.01.2023
-wget -P data https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
+wget https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
 ```
 
 In this example, you can also see how I documented my code here in order to add some more specifics about where the link came from to help future me in case I, for example, need to look for some e-mails about the data later on.
 
-Also note how I generate a special data folder in my project folder to better organize my data instead of downloading the data directly into my project folder. Generating a good folder structure is especially useful if you generate a lot of files and want to have a better overview over each file.
-
 ::: {.callout-important title="Wget for Mac users" collapse="false"}
-
 For Mac users wget is not installed by default. If you do not want to install it, run the following:
 
 ```{bash}
 curl -LO https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
-mv seq_project.tar.gz data
 ```
-
 :::
-
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Check with `ls` if the file was downloaded correctly
@@ -236,14 +230,47 @@ mv seq_project.tar.gz data
 
 ```{bash}
 #question 1:
-ls -l data/
+ls -l
 
 #question 2:
-ls -lh data
+ls -lh
 ```
 
 </details>
 :::
+
+## `cp`: Copying data
+
+When working with many files a good folder structure is essential to keep track of our files. To keep our project folder organized, we will copy the `seq_project.tar.gz` file we just downloaded into a special folder that we will call `data`.
+
+```{bash}
+#make a folder for our raw data
+mkdir data
+
+#move the tar.gz file into the data fodler 
+cp seq_project.tar.gz data/
+
+#check what happened
+ls -l
+ls -l data
+```
+
+When running the two `ls` commands, we see that we now have two copies of `seq_project.tar.gz`, one file is in our working directory and the other one is in our data folder. Copying large amounts of data is not ideal since we will use unneccassary space. However, we can use another command to move the tar folder into our data folder.
+
+## `mv`: Moving data
+
+`mv` is the command we can use to move data across locations without generating a copy. We run it as follows:
+
+```{bash}
+#move the tar.gz file into the data fodler 
+mv seq_project.tar.gz data/
+
+#check what happened
+ls -l
+ls -l data
+```
+
+Notice that `mv` will move the tar file and, without asking, overwrite the existing tar file we had in the data folder when we ran `cp`. This means for you that if you run move its best to make sure that you do not overwrite files by mistake.
 
 ## `tar`: Work with tar files
 
@@ -332,11 +359,15 @@ The `*` wildcard is the wildcard with the broadest meaning of any of the wildcar
 ls data/seq_project/*
 ```
 
+![](/img/wildcards_0.png){width="315"}
+
 You should have seen before that the sequencing files all end with `.fastq.gz` we can make this command a bit more specific and at the same time make the output a bit more readable:
 
 ```{bash}
 ls data/seq_project/*/*.gz
 ```
+
+![](/img/wildcards_1.png){width="558"}
 
 If we wanted to print the absolute and not the relative path, we could do the following (beware that the absolute path will be slightly different depending in you system):
 
@@ -348,7 +379,9 @@ Now we can easily see for each folder how many files we have.
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Use a wildcard to list files for barcode001 only
-2.  Use a wildcard to list files only for User1
+2.  Use a wildcard to only list R1 (i.e. forward) files
+3.  Use a wildcard to copy all R1 files into a new folder, call this new folder `R1_files`. Use `ls` to confirm if you copied the right files
+4.  To avoid duplicates, remove the R1_files folder from question 3 after you have ensured the command you used worked
 
 <details>
 
@@ -359,8 +392,23 @@ Now we can easily see for each folder how many files we have.
 ls data/seq_project/barcode001*/*gz
 
 #question 2:
-ls data/seq_project/*_User1_*/*gz
+ls data/seq_project/*/*R1*
+
+#question 3:
+mkdir R1_files
+cp data/seq_project/*/*R1* R1_files
+ls data/seq_project/*/*.gz
+ls -l R1_files
+
+#question 4:
+rm -r R1_files
 ```
+
+After solving question 2 you should see:
+
+![](/img/wildcards_3.png){width="489"}
+
+After solving question 3, we should see that all files still exist in its original location but are now also inside of the `R1_files` folder. Notice, how we can use wildcards together with other commands to easily reorganize our data?
 
 </details>
 :::
@@ -483,7 +531,6 @@ We should see again that we work with 8 files, but now we did not have to genera
 ```{bash}
 #question 1: We see 4 files
 ls data/seq_project/*/*R1*gz | wc -l 
-ls data/seq_project/*/*R1*gz | wc -l 
 
 #question 2: We see 4 files
 ls data/seq_project/*/*R2*gz | wc -l 
@@ -496,7 +543,6 @@ Checking whether we have the same number of R1 and R2 files is a good sanity che
 
 </details>
 :::
-
 
 ## `cut`: Extract elements from strings
 
@@ -518,11 +564,15 @@ cut -f4 -d "/" fastq_paths.txt
 cut -f4 -d "/" fastq_paths.txt > fastq_files.txt
 ```
 
+![](/img/cut_1.pnd.png){width="461"}
+
 We can also combine this with pipes in order to extract different pieces of information. Let's assume we start with extracting a folder name, such as `barcode002_User1_ITS_9_L001`, and from that we want to extract some other information, such as the barcode IDs. We can easily do this as follows:
 
 ```{bash}
 cut -f3 -d "/" fastq_paths.txt | cut -f1 -d "_"
 ```
+
+![](/img/cut_2.png){width="388"}
 
 Nice, we now only have a list with barcodes. However, its not yet ideal since we have duplicated barcodes. If you want to extract this information for some metadata file this is not ideal and we need to get to know two more commands to make this work:
 
@@ -688,15 +738,12 @@ Luckily, there is one useful tool in bash to decompress the file and print the c
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
 ```
 
-
 ::: {.callout-important title="Zcat for Mac users" collapse="false"}
-
-For Mac users  using the zsh shell, zcat might not work as expected. Try using gzcat instead: 
+For Mac users using the zsh shell, zcat might not work as expected. Try using gzcat instead:
 
 ```{bash}
 gzcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
 ```
-
 :::
 
 ## `grep`: Find patterns in data
@@ -767,8 +814,8 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | ec
 
 In the command above we have some new syntax:
 
--   The `echo` command is used to display messages or print information to the terminal. In our case it will print whatever is going on in this section `` $(( $(wc -l) /4)) ``
-- ` $(...)`  indicates a command substitution. It allows the output of the enclosed command (wc -l) to be used as part of another command. Without command substitution (wc -l alone), you would not capture the output; instead, you would only see the literal text "wc -l".
+-   The `echo` command is used to display messages or print information to the terminal. In our case it will print whatever is going on in this section `$(( $(wc -l) /4))`
+-   `$(...)` indicates a command substitution. It allows the output of the enclosed command (wc -l) to be used as part of another command. Without command substitution (wc -l alone), you would not capture the output; instead, you would only see the literal text "wc -l".
 -   `$((...))`: This is an arithmetic expansion in Bash. It allows you to perform arithmetic operations inside the brackets and substitute the result into the command line. In this case, it calculates the result of dividing the number of lines in the fastq file by 4.
 -   `/4`: This is dividing the result obtained from wc -l by 4. Since each sequence in a FASTQ file is represented by four lines (identifier, sequence, separator, and quality scores), dividing the total number of lines by 4 gives the number of sequences.
 :::
@@ -910,9 +957,7 @@ Notice, how we use both single brackets and double brackets?
 -   `$((...))` in contrast to `$(...)` is an arithmetic expansion in Bash. It allows you to perform arithmetic operations and substitute the result into the command line.
 :::
 
-
 ::: {.callout-tip title="Avanced Tip: Using bash to make sample mapping files" collapse="true"}
-
 For a lot of mapping files for amplicon analyses, you need to prepare a table that lists your files, often with the R1 and R2 files in separate columns. How could we do this using bash?
 
 This code is more advanced and uses a few concepts we have not talked about but should give you an idea about the different data transformations you can do with bash.
@@ -927,11 +972,11 @@ for file in data/seq_project/*/*.gz; do
 done
 ```
 
-1. `for file in data/seq_project/*/*.gz`: We loop through all fastq.gz files 
-2. `if [[ $file == *_R1.fastq.gz ]]; then`: This line checks if the current file's name matches the pattern *_R1.fastq.gz. The `[[ ... ]]` is a conditional construct in bash, and the == is used for string comparison. If the condition is true (i.e., the file is an R1 file), then the code inside the if block will be executed. The block starts with `if`and finishes at the `fi`.
-3. `r1_file=$file`: This line involves creating a variable named r1_file and assigning it the value of the current file `($file)`. A variable is a symbolic name or identifier associated with a value or data. It allows you to store and retrieve information for later use. Here, r1_file is used to store the name of the current R1 file.
-4. `r2_file=$(echo $file | sed 's/_R1/_R2/')`: This line sets the variable r2_file by replacing _R1 with _R2 in the current file name. This is done using the sed command, which is a stream editor for filtering and transforming text.
-5. `echo "$r1_file,$r2_file"`: This line prints the R1 and R2 file names separated by a comma. This will be part of the output in the format R1,R2.
+1.  `for file in data/seq_project/*/*.gz`: We loop through all fastq.gz files
+2.  `if [[ $file == *_R1.fastq.gz ]]; then`: This line checks if the current file's name matches the pattern \*\_R1.fastq.gz. The `[[ ... ]]` is a conditional construct in bash, and the == is used for string comparison. If the condition is true (i.e., the file is an R1 file), then the code inside the if block will be executed. The block starts with `if`and finishes at the `fi`.
+3.  `r1_file=$file`: This line involves creating a variable named r1_file and assigning it the value of the current file `($file)`. A variable is a symbolic name or identifier associated with a value or data. It allows you to store and retrieve information for later use. Here, r1_file is used to store the name of the current R1 file.
+4.  `r2_file=$(echo $file | sed 's/_R1/_R2/')`: This line sets the variable r2_file by replacing \_R1 with \_R2 in the current file name. This is done using the sed command, which is a stream editor for filtering and transforming text.
+5.  `echo "$r1_file,$r2_file"`: This line prints the R1 and R2 file names separated by a comma. This will be part of the output in the format R1,R2.
 
 We can do even more and add a column with the sample name with what we have learned before:
 
@@ -958,5 +1003,4 @@ for file in data/seq_project/*/*.gz; do
     fi
 done
 ```
-
 :::

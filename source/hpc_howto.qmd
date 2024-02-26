@@ -37,6 +37,9 @@ ssh -X uvanetid@omics-h0.science.uva.nl
 ```
 
 ::: callout-important
+
+If you want to log into Crunchomics while working from UvA use the eduroam network, not the open Amsterdam Science Park network.  
+
 If you want to log into Crunchomics from outside of UvA you need to be connected to the VPN. If you have not set that up and/or have trouble doing so, please contact ICT.
 :::
 
@@ -54,19 +57,17 @@ To set this up, run the following command in the cli:
 /zfs/omics/software/script/omics_install_script
 ```
 
-
-
 ## `scp`: Transferring data from/to a server
 
-`scp` stands for Secure Copy Protocol and allows you to securely copy files and directories between remote hosts. When transferring data the transfer is always prepared from the terminal of your local computer and not from the HPCs login node.
+`scp` stands for Secure Copy Protocol and allows you to securely copy files and directories between remote hosts. When transferring data the transfer is always prepared from the terminal of your personal computer and not from the HPCs login node.
 
 The basic syntax we use looks like this:
 
 `scp [options] SOURCE DESTINATION`
 
-To start analysing our data, we want to move the fastq.gz files that we have worked with before from our local folder, the source, to a folder on Cruncomics, the destination. Let's start setting up a project folder from which we want to run our analyses by:
+To start analysing our data, we want to move the fastq.gz files that we have worked with before from our personal folder, the source, to a folder on Cruncomics, the destination. Let's start setting up a project folder from which we want to run our analyses by:
 
--   Moving from our Crunchomics home directory into our personal directory. We move there since we have more space in the personal directory. Notice, for the command below to work, we need to have already executed the `omics_install_script` script above
+-   Moving from our home directory into our personal directory on the Crunchomics HPC. We move there since we have more space in the personal directory. Notice, for the command below to work, we need to have already executed the `omics_install_script` script above
 -   Make a project folder with a descriptive file name, i.e. projectX
 
 ```{bash}
@@ -75,11 +76,11 @@ mkdir projectX
 cd projectX
 ```
 
-Now that we have organized our working directory, we next want to move the data folder with the sequencing that you have downloaded before to Crunchomics. We do this by moving the whole `data` folder from our local computer to the new project folder on the HPC. Therefore, it is important that:
+Now that we have organized our working directory on the HPC, we next want to move the data folder (which right now is only on your own, personal computer) with the sequencing that you have downloaded before to Crunchomics. We do this by moving the whole `data` folder from our own computer to the new project folder on the HPC. Therefore, it is important that:
 
 -   we run the following command from the cli on our own computer and not from the cli while being logged into the HPC!
 -   you exchange the two instances of `username` in the code below with your username/uvanetid
--   In the example below, I am running the code from inside of the `data_analysis` folder that we have generated in the previous tutorial and I use the `-r` option in order to move the whole data folder and not a single file.
+-   In the example below, I am running the code from inside of the `data_analysis` folder that we have generated in the previous tutorial since that is where I have the data folder that I want to move. I use the `-r` option in order to move the whole data folder and not a single file.
 
 ```{bash}
 #run the command below from your local computer, 
@@ -134,7 +135,28 @@ noglob scp data/seq_project/barcode00*/*fastq.gz ndombro@omics-h0.science.uva.nl
 
 scp 'data/seq_project/barcode00*/*fastq.gz' ndombro@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/transfer_test
 ```
+
 :::
+
+::: {.callout-tip title="Tip: Moving files using the FileZilla GUI" collapse="true"}
+`scp` takes some getting used to and there are several graphical user interface programs that are available which provide the same functionality. Here, we will look at FileZilla, as it is compatible with Windows, Mac, and Linux.
+
+To use FileZilla, do the following:
+
+1.  Download the FileZilla Client [here](https://filezilla-project.org/). The free version is all we need.
+2.  Follow the download instructions
+3.  Click the FileZilla app to start it
+4.  Add Uva user credentials
+    -   Enter `omics-h0.science.uva.nl` in host
+    -   Enter `user_name` in user
+    -   Enter psswd chosen when making surf account
+    -   Port should be 22 to open a sftp connection
+5.  Trust the host
+6.  You land in your home directory (on the right hand side)
+7.  You can copy-paste data by drag and dropping
+:::
+
+
 
 ## Slurm basics
 
