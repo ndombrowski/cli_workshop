@@ -757,6 +757,7 @@ Advanced tip: sbatch arrays to run multiple files in parallel
 <ul>
 <li><code>#SBATCH --array=1-8</code>: Sets up a job array, specifying the range (1-8). We choose 1-8 because we have exactly 8 fastq.gz files we want to analyse</li>
 <li><code>#SBATCH --output=logs/array_%A_%a.out</code>: Store the standard output and error. <code>%A</code> represents the job ID assigned by Slurm, and <code>%a</code> represents the array task ID</li>
+<li><strong>Important</strong>: Are your individual arrays large jobs that use a lot of CPUs/memory? Then you might not want to submit all at the same time but submit them in a step-wise manner. With <code>#SBATCH --array=1-8%2</code> you would only submit the first two jobs and only after these have finished the next jobs. Remember, try to use not more than ~20% of the crunchomics cluster at the same time.</li>
 </ul>
 <p>The job does the following:</p>
 <ul>
@@ -1474,7 +1475,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-02-26</p>
+Last modified: 2024-03-27</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_howto.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

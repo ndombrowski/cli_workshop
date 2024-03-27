@@ -247,7 +247,7 @@ When working with many files a good folder structure is essential to keep track 
 #make a folder for our raw data
 mkdir data
 
-#move the tar.gz file into the data fodler 
+#move the tar.gz file into the data folder 
 cp seq_project.tar.gz data/
 
 #check what happened
@@ -359,7 +359,7 @@ The `*` wildcard is the wildcard with the broadest meaning of any of the wildcar
 ls data/seq_project/*
 ```
 
-![](/img/wildcards_0.png){width="315"}
+![](/img/wildcards_0.png){width="242"}
 
 You should have seen before that the sequencing files all end with `.fastq.gz` we can make this command a bit more specific and at the same time make the output a bit more readable:
 

@@ -486,6 +486,7 @@ In the script we use some new SLURM arguments:
 
 -   `#SBATCH --array=1-8`: Sets up a job array, specifying the range (1-8). We choose 1-8 because we have exactly 8 fastq.gz files we want to analyse
 -   `#SBATCH --output=logs/array_%A_%a.out`: Store the standard output and error. `%A` represents the job ID assigned by Slurm, and `%a` represents the array task ID
+-   **Important**: Are your individual arrays large jobs that use a lot of CPUs/memory? Then you might not want to submit all at the same time but submit them in a step-wise manner. With `#SBATCH --array=1-8%2` you would only submit the first two jobs and only after these have finished the next jobs. Remember, try to use not more than ~20% of the crunchomics cluster at the same time.
 
 The job does the following:
 
