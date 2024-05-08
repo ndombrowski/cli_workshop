@@ -802,6 +802,14 @@ Advanced tip: sbatch arrays to run multiple files in parallel
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-O</span> <span class="st">"https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="va">$(</span><span class="fu">uname</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">.sh"</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniforge3-<span class="va">$(</span><span class="fu">uname</span><span class="va">)</span>-<span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span>.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>When running the bash command, you get asked a few questions:</p>
+<ol type="1">
+<li>Read the license and use arrow down to scroll down. Don’t scroll too fast, so that you see the next question</li>
+<li>Decide where conda gets installed. You can say yes to the default location in your home. But don’t forget that for Crunchomics your home only has 25G of space. You could also install the miniforge/mambaforge folder in your personal folder instead.</li>
+<li>Say yes, when you get asked whether conda should be initialized during start up</li>
+<li>Restart the shell (exit the terminal and use ssh to log back in) for the changes to take effect</li>
+<li>Check if conda is accessible by running <code>conda -h</code></li>
+</ol>
 </section>
 <section id="setting-up-an-environment" class="level3">
 <h3 class="anchored" data-anchor-id="setting-up-an-environment">Setting up an environment</h3>
@@ -1475,7 +1483,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-03-27</p>
+Last modified: 2024-05-08</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_howto.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

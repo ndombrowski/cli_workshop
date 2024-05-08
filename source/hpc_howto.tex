@@ -186,7 +186,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, boxrule=0pt, frame hidden, enhanced, sharp corners, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -274,7 +274,7 @@ the command above to look like this:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 If you want to log into Crunchomics while working from UvA use the
 eduroam network, not the open Amsterdam Science Park network.
@@ -383,7 +383,7 @@ important that:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to our own computer}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to our own computer}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 We can also move data from the HPC to our own computer. For example,
 let's assume we want to move a single sequencing file from crunchomics
@@ -410,7 +410,7 @@ back to our computer. In this case,
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC using wildcards}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC using wildcards}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 We can also move several files at once and ignore the whole folder
 structure by using wildcards when using \texttt{scp}.
@@ -460,7 +460,7 @@ environments might need slightly different solutions):
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files using the FileZilla GUI}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files using the FileZilla GUI}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 \texttt{scp} takes some getting used to and there are several graphical
 user interface programs that are available which provide the same
@@ -779,7 +779,7 @@ after the software and got the jobid 746):
 Additionally, after the run is completed, you should see that several
 HTML files were generated in our fastqc folder.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-caution-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-caution-color!10!white, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, bottomtitle=1mm, colframe=quarto-callout-caution-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 Use scp to download the HTML files generated by fastqc to your own
 computer and view one of the HTML files.
@@ -1037,7 +1037,7 @@ This file is useful as it:
 Feel free to explore the content of the log file, do you see how the
 echo commands are used as well?
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 We have seen that by default \texttt{sbatch} redirects the standard
 output and error to our working directory and that it decides itself how
@@ -1074,7 +1074,7 @@ if you generate lots of files, you find below an example to:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 With fastqc we are very lucky that the tool can identify all the fastq
 files in the directory we specify with \texttt{-o} by making use of the
@@ -1259,6 +1259,29 @@ mamba:
 \end{Highlighting}
 \end{Shaded}
 
+When running the bash command, you get asked a few questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Read the license and use arrow down to scroll down. Don't scroll too
+  fast, so that you see the next question
+\item
+  Decide where conda gets installed. You can say yes to the default
+  location in your home. But don't forget that for Crunchomics your home
+  only has 25G of space. You could also install the miniforge/mambaforge
+  folder in your personal folder instead.
+\item
+  Say yes, when you get asked whether conda should be initialized during
+  start up
+\item
+  Restart the shell (exit the terminal and use ssh to log back in) for
+  the changes to take effect
+\item
+  Check if conda is accessible by running \texttt{conda\ -h}
+\end{enumerate}
+
 \subsection{Setting up an environment}\label{setting-up-an-environment}
 
 Let's assume we want to install seqkit, a tool that allows us to
@@ -1327,7 +1350,7 @@ install the software as well as the version numbers available.
 A full set of mamba/conda commands can be found
 \href{https://docs.conda.io/projects/conda/en/latest/commands/index.html.}{here}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-caution-color-frame, breakable, opacityback=0, toptitle=1mm, left=2mm, coltitle=black, colbacktitle=quarto-callout-caution-color!10!white, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, colback=white, arc=.35mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, colback=white, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, bottomtitle=1mm, colframe=quarto-callout-caution-color-frame, coltitle=black, titlerule=0mm, toprule=.15mm, opacityback=0, arc=.35mm, left=2mm, breakable]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
