@@ -372,7 +372,8 @@ To get started, assume we have created a script in the scripts folder named `run
 ```{bash}
 #!/bin/bash
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=5G
+#SBATCH --mem=5G      
+#SBATCH --time=1:00:00
 
 echo "Start fastqc"
 
@@ -384,7 +385,7 @@ echo "fastqc finished"
 In the job script above:
 
 -   `#!/bin/bash` . This so-called Shebang line tells the shell to interpret and run the Slurm script using the bash shell. This line should always be added at the very top of your SBATCH/Slurm script.
--   The lines that follow and start with `#` are the lines in which we define the amount of resources required for our job to run. In our case, we request 1 CPU and 5G of memory.
+-   The lines that follow and start with `#` are the lines in which we define the amount of resources required for our job to run. In our case, we request 1 CPU, 5G of memory and 1 hour time limit.
 -   If your code needs any dependencies, such as conda environments, you would add these dependencies here. We do not need this for our example here, but you might need to add something like this `conda activate my_env` if you have installed your own software. We will touch upon conda environments and installing software a bit later.
 -   The lines afterwards are the actually commands that we want to run on the compute nodes, We also call this the job steps.
 
@@ -431,6 +432,7 @@ We have seen that by default `sbatch` redirects the standard output and error to
 #SBATCH --error=logs/fastqc_%j.err
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=5G
+#SBATCH --time=1:00:00
 
 echo "Start fastqc"
 
