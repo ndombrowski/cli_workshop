@@ -499,15 +499,19 @@ Tip: Moving files using the FileZilla GUI
 <p>You should see the output of echo printed to the screen and if you would run <code>squeue</code> you won’t even see your job since everything ran so fast. But congrats, you communicated the first time with the compute node.</p>
 <p>Now assume you want to run a more complex interactive task with <code>srun</code> that might run longer and benefit from using more CPUs. In this case you need to specify the resources your job needs by adding flags, i.e.&nbsp;some of which you see here:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks</span><span class="op">=</span>1 <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>1G echo <span class="st">"Hello interactively"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>1G <span class="at">--time</span><span class="op">=</span>00:10:00 echo <span class="st">"Hello interactively"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The different flags mean the following:</p>
 <ul>
-<li><code>--nodes=1</code>: Specifies the number of nodes. In this case, it’s set to 1 and tells slurm that we want to use a full node. Only use this if you make use of all resources on that node, otherwise omit. In our case this definitely is over-kill to request a full node with 64 CPUs to print a single line of text to the screen.</li>
-<li><code>--ntasks=1</code>: Defines the number of tasks to run. Here, it’s set to 1 since we want to use echo once</li>
 <li><code>--cpus-per-task=1</code>: Specifies the number of CPUs per task. Adjust this based on the computational requirements of your task</li>
 <li><code>--mem=1G</code>: Sets the memory requirement for the task. Modify this based on your task’s memory needs</li>
+<li><code>--time=00:10:00</code> Sets the time limit to 10 minutes</li>
 <li><code>echo "Hello interactively</code>: The actual command you want to run interactively</li>
+</ul>
+<p>Other flags:</p>
+<ul>
+<li><code>--nodes=1</code>: Specifies the number of nodes. In this case, it’s set to 1 and tells slurm that we want to use a full node. Only use this if you make use of all resources on that node, otherwise omit. In our case this definitely is over-kill to request a full node with 64 CPUs to print a single line of text to the screen.</li>
+<li><code>--ntasks=1</code>: Defines the number of tasks to run. Here, we would set it to 1 since we want to use echo once</li>
 </ul>
 <section id="choosing-the-right-amount-of-resources" class="level3">
 <h3 class="anchored" data-anchor-id="choosing-the-right-amount-of-resources">Choosing the right amount of resources</h3>

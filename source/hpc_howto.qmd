@@ -231,16 +231,21 @@ You should see the output of echo printed to the screen and if you would run `sq
 Now assume you want to run a more complex interactive task with `srun` that might run longer and benefit from using more CPUs. In this case you need to specify the resources your job needs by adding flags, i.e. some of which you see here:
 
 ```{bash}
-srun --nodes=1 --ntasks=1 --cpus-per-task=1 --mem=1G echo "Hello interactively"
+srun --cpus-per-task=1 --mem=1G --time=00:10:00 echo "Hello interactively"
 ```
 
 The different flags mean the following:
 
--   `--nodes=1`: Specifies the number of nodes. In this case, it's set to 1 and tells slurm that we want to use a full node. Only use this if you make use of all resources on that node, otherwise omit. In our case this definitely is over-kill to request a full node with 64 CPUs to print a single line of text to the screen.
--   `--ntasks=1`: Defines the number of tasks to run. Here, it's set to 1 since we want to use echo once
 -   `--cpus-per-task=1`: Specifies the number of CPUs per task. Adjust this based on the computational requirements of your task
 -   `--mem=1G`: Sets the memory requirement for the task. Modify this based on your task's memory needs
+-   `--time=00:10:00` Sets the time limit to 10 minutes
 -   `echo "Hello interactively`: The actual command you want to run interactively
+
+Other flags:
+
+-   `--nodes=1`: Specifies the number of nodes. In this case, it's set to 1 and tells slurm that we want to use a full node. Only use this if you make use of all resources on that node, otherwise omit. In our case this definitely is over-kill to request a full node with 64 CPUs to print a single line of text to the screen.
+-   `--ntasks=1`: Defines the number of tasks to run. Here, we would set it to 1 since we want to use echo once
+
 
 ### Choosing the right amount of resources
 
