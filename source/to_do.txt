@@ -1,77 +1,127 @@
-# Notebook
+# To do: workshop revision (started 2026-10)
 
-To do:
-
-- Add screenshot for output of ls -l and explain different fields
-- Make figure for cut
-- - add note to not be on open network but eduram
-- add example to use filezilla
+Schedule and core/optional split: _course_schedule.md
+Project notes for Claude: CLAUDE.md (local only)
 
 
+## Deadlines
+
+- Before 2026-10-24: send a short abstract + instructions on what participants need to
+  download/install before the workshop. The instructions should match the new pre-workshop
+  checklist (see "Before the workshop" below).
 
 
+## General structure
+
+- Mark a core path and an optional path. Optional = "(optional)" in the heading + collapsed box.
+  Candidates for day 1: cut, sort/uniq, cat (combining files), gzip, the second wc section, nano, advanced tips.
+- Day 1 covers a lot: move the harder loop parts (basename, output-name variables) to day 2,
+  where the fastp loop gives a real reason for them.
+- If cut becomes optional, check that day 2 does not depend on it (samples.txt in the array tip).
 
 
+## Before the workshop (installation.qmd)
+
+- Terminal setup moves to before the workshop (in-class setup took too long last time).
+- Rebuild installation.qmd from the MicEco2025 terminal page: terminal/shell/prompt terms,
+  MobaXterm or WSL2, Mac, Linux.
+- Checklist with "check that this works" steps: echo $SHELL, ssh login to Crunchomics, exit,
+  choose a text editor for the notes file.
+- Add a deadline to report problems before the workshop.
+- In the ssh check: mention eduroam (not the open network) and VPN when working from home.
 
 
+## Day 1: CLI basics (bash_intro.qmd)
+
+- Missing core skills, move into the main text (now only in a collapsed tip): Tab completion,
+  arrow up key. Add: Ctrl+C, reading error messages (first deliberate error: "No such file or directory").
+- Introduce variables before loops.
+- Loops stay simple: echo, then zcat | wc -l per file.
+- Introduce script files (.sh, run with bash) as preparation for sbatch on day 2.
+- Make figure for cut.
+- check: curl alternative to wget already exists (Mac box). Keep as is?
 
 
+## Day 2: HPC (hpc_intro.qmd, hpc_howto.qmd)
+
+- Replace seqkit with fastp everywhere: hpc_howto.qmd, conda section, exercises,
+  example_doc/scripts/seqkit.sh, example_notebook.qmd.
+- Order: FastQC with srun (simple, wildcard) → fastp on one sample with srun (look at what it
+  produces) → the loop built step by step with echo → the same loop in an sbatch script →
+  count and check outputs → optional: arrays, and FastQC again on the trimmed reads.
+- Use the for-loops tutorial as a base for building the loop:
+  https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html
+- fastp is a nice example of reading the help and thinking about outputs: it writes fastp.html and
+  fastp.json by default, so in a loop it overwrites the reports of earlier samples.
+- Conda motivation: Crunchomics has fastp 1.0.1, the current version is 1.3.7 (checked 2026-10-06).
+  Show fastp --version, explain why you may want a newer version, then install an own pinned
+  version with mamba. The Crunchomics fastp is the backup if an install fails.
+- omics_install_script: run in class, explain what it does (PATH, python, ~/personal link).
+- Miniforge: in class, after a short "what is conda/mamba" + instructor demo. Install into
+  ~/personal (500 GB), not home (25 GB). Make this very visible.
+- Add interactive session with srun --pty bash (snippet below).
+- Add tip for "host key changed" after a Crunchomics reboot (snippet below). Path differs per
+  system (MobaXterm vs WSL/Mac).
+- Move sacct (and "choosing resources") after the first batch job.
+- Make screen optional (sbatch covers long jobs).
+- Arrays as optional next step after the sbatch loop, link to the IBED SLURM page.
+- check: eduroam/VPN note already exists as a box in hpc_howto.qmd (line ~39). Still needed?
 
 
+## Documenting code (code_documentation.qmd, example_doc.qmd)
+
+- Make documentation a thread through both days. From minute one, participants keep a notes
+  file and paste in each command with a comment.
+- Use example_doc.qmd as a wrap-up at the end of day 2. By then participants have written the
+  code themselves, so the example makes sense.
+- Both pages may be reworked (this is where participants struggle most).
 
 
+## LLM page (later)
+
+- Place: end of day 2 pointer + separate follow-up page.
+- Natural bridge: the conda sbatch exercise tells participants to "google how to activate conda".
+  Many will use an LLM for this anyway. Could become the first worked example on the LLM page.
+- Seed material: "On GenAI usage" section of the IBED for-loops page.
 
 
+## Site-wide
+
+- index.qmd + readme.md: add the 2-day overview, a time estimate for self-study users
+  (_course_schedule.md is only visible on GitHub), and the pre-workshop checklist link.
+- Dead links: scienceparkstudygroup.github.io/software_information/ returns 404 (checked
+  2026-10-06). Used in index.qmd and hpc_howto.qmd (sed link). New site:
+  scienceparkstudygroup.github.io/ibed-bioinformatics-page/. Check all external links.
+- Other repo: IBED slurm_basics page has the same --nodes and --mem errors as fixed here.
 
 
+## Decisions (details in _course_schedule.md)
+
+- Optional sections: "(optional)" in the heading + collapsed box.
+- Miniforge: in class on day 2, into ~/personal.
+- omics_install_script: in class on day 2, before the conda install.
+- fastp loop: leaning towards a wildcard in the path, with a word on checking what a wildcard
+  matches. Not final.
 
 
+## Snippets
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Issues with keys after Crunchomics reboot: 
+Issues with keys after Crunchomics reboot:
 
 ```{bash}
 ssh-keygen -f /home/mobaxterm/.ssh/known_hosts -R "omics-h0.science.uva.nl"
 ```
 
-
-Interactive bash
-
+Interactive bash:
 
 ```{bash}
 srun --cpus-per-task 1 --mem=5G --time=01:00:00 --pty bash -i
 ```
 
-
-Wget alternative
-
+Wget alternative:
 
 ```{bash}
 curl -LO https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
 
 mv seq_project.tar.gz data
-
 ```

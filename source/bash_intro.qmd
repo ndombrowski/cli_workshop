@@ -289,7 +289,7 @@ tar -xvf data/seq_project.tar.gz -C data
 The options we use with the `tar` command are:
 
 -   `x` tells tar to extract files from the archive
--   `v` displays verbose information while creating the tarball
+-   `v` (verbose) prints the name of each file while it is being extracted, so you can see what happens
 -   `f` specifies the file name
 -   `C` tells tar to change directory (so the package content will be unpacked there)
 
@@ -763,11 +763,21 @@ We see the list of files that match our pattern. If we simply are interested in 
 grep -c "R1" fastq_paths.txt
 ```
 
-We can also use grep with wildcards, for example, if we want to look only at samples from User1 we could do the following:
+If we want to look only at samples from User1, we can search for that part of the file name:
 
 ```{bash}
-grep "User1_*" fastq_paths.txt
+grep "User1" fastq_paths.txt
 ```
+
+::: callout-important
+**grep patterns are not wildcards**
+
+In `grep`, characters such as `*` and `.` mean something different than the wildcards we used with `ls`. grep uses so-called **regular expressions**, a small language to describe text patterns. In a regular expression, `*` means "the character before me, repeated zero or more times" and `.` means "any single character".
+
+For example, `grep "User1_*"` does not mean "User1 followed by anything". It means "User1 followed by zero or more underscores". It would give the same result as `grep "User1"` here, but only by luck.
+
+When you start out, search for plain text and always put your pattern in quotes, so that the shell does not try to treat it as a wildcard first.
+:::
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1.  Grep for paths containing the pattern "ITS_9" in fastq_paths.txt

@@ -243,7 +243,7 @@ The different flags mean the following:
 
 Other flags:
 
--   `--nodes=1`: Specifies the number of nodes. In this case, it's set to 1 and tells slurm that we want to use a full node. Only use this if you make use of all resources on that node, otherwise omit. In our case this definitely is over-kill to request a full node with 64 CPUs to print a single line of text to the screen.
+-   `--nodes=1`: Specifies the number of nodes (i.e. separate computers) your job runs on. This does not reserve the whole node for you, jobs of other people can still run on the same node. The CPUs you request with `--cpus-per-task` always come from a single node, so for the jobs in this tutorial you can leave this option out. If you ever really need a whole node for yourself, the option for that is `--exclusive`, but on a shared system like Crunchomics you rarely want this.
 -   `--ntasks=1`: Defines the number of tasks to run. Here, we would set it to 1 since we want to use echo once
 
 
@@ -256,7 +256,7 @@ When you're just starting, deciding on the right resources to request for your c
 -   Test with small datasets: For initial testing and debugging especially when working with large datasets, consider working with a smaller subset of your data. This allows for faster job turnaround times, helping you identify and resolve issues more efficiently.
 -   Monitor the resources usage:
     -   Use `sacct` to check what resources a finished job has used and see whether you can optimize a run if you plan to run similar jobs over and over again. An example command would be `sacct -j 419847 --format=User,JobID,Jobname,state,start,end,elapsed,MaxRss,ncpus.` In the report, look for columns like MaxRSS (maximum resident set size) to check if the amount of memory allocated (--mem) was appropriate.
-    -   Ensuer that the job used the resources you requested. For instance, if you would have used `--cpus-per-task=4 --mem=4G`, you would expect to use a total of 16 GB of memory (4 CPUs \* 4 GB). You can verify this with `sacct` to ensure your job's resource requirements align with its actual usage.
+    -   Ensure that the job used the resources you requested. Be careful with how memory is counted: `--mem=4G` asks for 4 GB in total for your job, no matter how many CPUs you request. `--mem-per-cpu=4G` instead asks for 4 GB for each CPU, so `--cpus-per-task=4 --mem-per-cpu=4G` gives you a total of 16 GB of memory (4 CPUs \* 4 GB). You can verify this with `sacct` to ensure your job's resource requirements align with its actual usage.
 -   Fine-Tuning Resource Requests: If you encounter performance issues or your jobs are not completing successfully, consider iteratively adjusting resource requests. This might involve increasing or decreasing the number of CPUs, memory allocation, or other relevant parameters.
 
 ### Run FastQC with srun
