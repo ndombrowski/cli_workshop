@@ -387,21 +387,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#using-an-hpc" id="toc-using-an-hpc" class="nav-link active" data-scroll-target="#using-an-hpc">Using an HPC</a>
   <ul class="collapse">
-  <li><a href="#ssh-connecting-to-a-sever" id="toc-ssh-connecting-to-a-sever" class="nav-link" data-scroll-target="#ssh-connecting-to-a-sever"><code>ssh</code>: Connecting to a sever</a></li>
+  <li><a href="#connecting-to-the-hpc" id="toc-connecting-to-the-hpc" class="nav-link" data-scroll-target="#connecting-to-the-hpc">Connecting to the HPC</a>
+  <ul class="collapse">
+  <li><a href="#ssh-connecting-to-a-server" id="toc-ssh-connecting-to-a-server" class="nav-link" data-scroll-target="#ssh-connecting-to-a-server"><code>ssh</code>: Connecting to a server</a></li>
   <li><a href="#crunchomics-preparing-your-account" id="toc-crunchomics-preparing-your-account" class="nav-link" data-scroll-target="#crunchomics-preparing-your-account">Crunchomics: Preparing your account</a></li>
-  <li><a href="#scp-transferring-data-fromto-a-server" id="toc-scp-transferring-data-fromto-a-server" class="nav-link" data-scroll-target="#scp-transferring-data-fromto-a-server"><code>scp</code>: Transferring data from/to a server</a></li>
-  <li><a href="#slurm-basics" id="toc-slurm-basics" class="nav-link" data-scroll-target="#slurm-basics">Slurm basics</a>
-  <ul class="collapse">
-  <li><a href="#get-information-about-the-cluster" id="toc-get-information-about-the-cluster" class="nav-link" data-scroll-target="#get-information-about-the-cluster">Get information about the cluster</a></li>
-  <li><a href="#view-info-about-jobs-in-the-queue" id="toc-view-info-about-jobs-in-the-queue" class="nav-link" data-scroll-target="#view-info-about-jobs-in-the-queue">View info about jobs in the queue</a></li>
+  <li><a href="#preparing-your-working-directory" id="toc-preparing-your-working-directory" class="nav-link" data-scroll-target="#preparing-your-working-directory">Preparing your working directory</a></li>
+  <li><a href="#scp-transferring-data-to-and-from-a-server" id="toc-scp-transferring-data-to-and-from-a-server" class="nav-link" data-scroll-target="#scp-transferring-data-to-and-from-a-server"><code>scp</code>: Transferring data to and from a server</a></li>
   </ul></li>
-  <li><a href="#srunsubmitting-a-job-interactively" id="toc-srunsubmitting-a-job-interactively" class="nav-link" data-scroll-target="#srunsubmitting-a-job-interactively"><code>srun</code>:Submitting a job interactively</a>
+  <li><a href="#submitting-jobs-with-slurm" id="toc-submitting-jobs-with-slurm" class="nav-link" data-scroll-target="#submitting-jobs-with-slurm">Submitting jobs with SLURM</a>
   <ul class="collapse">
+  <li><a href="#login-node-and-compute-nodes" id="toc-login-node-and-compute-nodes" class="nav-link" data-scroll-target="#login-node-and-compute-nodes">Login node and compute nodes</a></li>
+  <li><a href="#sinfo-get-information-about-the-cluster" id="toc-sinfo-get-information-about-the-cluster" class="nav-link" data-scroll-target="#sinfo-get-information-about-the-cluster"><code>sinfo</code>: Get information about the cluster</a></li>
+  <li><a href="#squeue-view-the-jobs-in-the-queue" id="toc-squeue-view-the-jobs-in-the-queue" class="nav-link" data-scroll-target="#squeue-view-the-jobs-in-the-queue"><code>squeue</code>: View the jobs in the queue</a></li>
+  <li><a href="#srun-submitting-a-job-interactively" id="toc-srun-submitting-a-job-interactively" class="nav-link" data-scroll-target="#srun-submitting-a-job-interactively"><code>srun</code>: Submitting a job interactively</a></li>
+  <li><a href="#run-fastqc-with-srun" id="toc-run-fastqc-with-srun" class="nav-link" data-scroll-target="#run-fastqc-with-srun">Run FastQC with <code>srun</code></a></li>
+  <li><a href="#srun---pty-bash-working-interactively-on-a-compute-node" id="toc-srun---pty-bash-working-interactively-on-a-compute-node" class="nav-link" data-scroll-target="#srun---pty-bash-working-interactively-on-a-compute-node"><code>srun --pty bash</code>: Working interactively on a compute node</a></li>
+  <li><a href="#sbatch-submitting-a-long-running-job" id="toc-sbatch-submitting-a-long-running-job" class="nav-link" data-scroll-target="#sbatch-submitting-a-long-running-job"><code>sbatch</code>: Submitting a long-running job</a></li>
+  <li><a href="#sacct-checking-the-resources-a-job-used" id="toc-sacct-checking-the-resources-a-job-used" class="nav-link" data-scroll-target="#sacct-checking-the-resources-a-job-used"><code>sacct</code>: Checking the resources a job used</a></li>
   <li><a href="#choosing-the-right-amount-of-resources" id="toc-choosing-the-right-amount-of-resources" class="nav-link" data-scroll-target="#choosing-the-right-amount-of-resources">Choosing the right amount of resources</a></li>
-  <li><a href="#run-fastqc-with-srun" id="toc-run-fastqc-with-srun" class="nav-link" data-scroll-target="#run-fastqc-with-srun">Run FastQC with srun</a></li>
   </ul></li>
-  <li><a href="#screen-submitting-long-running-jobs-via-srun" id="toc-screen-submitting-long-running-jobs-via-srun" class="nav-link" data-scroll-target="#screen-submitting-long-running-jobs-via-srun"><code>screen</code>: Submitting long running jobs via srun</a></li>
-  <li><a href="#sbatch-submitting-a-long-running-job" id="toc-sbatch-submitting-a-long-running-job" class="nav-link" data-scroll-target="#sbatch-submitting-a-long-running-job"><code>sbatch</code>: submitting a long-running job</a></li>
+  <li><a href="#screen-keeping-srun-jobs-running-optional" id="toc-screen-keeping-srun-jobs-running-optional" class="nav-link" data-scroll-target="#screen-keeping-srun-jobs-running-optional"><code>screen</code>: Keeping srun jobs running (optional)</a></li>
+  <li><a href="#job-arrays-running-many-files-in-parallel-optional" id="toc-job-arrays-running-many-files-in-parallel-optional" class="nav-link" data-scroll-target="#job-arrays-running-many-files-in-parallel-optional">Job arrays: Running many files in parallel (optional)</a></li>
   <li><a href="#installing-software" id="toc-installing-software" class="nav-link" data-scroll-target="#installing-software">Installing software</a>
   <ul class="collapse">
   <li><a href="#install-condamamba" id="toc-install-condamamba" class="nav-link" data-scroll-target="#install-condamamba">Install conda/mamba</a></li>
@@ -423,26 +429,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="using-an-hpc" class="level1" style="text-align: justify">
 <h1>Using an HPC</h1>
-<p>Now, that you are familiar more familiar with the cli, let’s get used to working on an HPC by first login into Crunchomics, uploading our sequencing data an run some software to check the quality of our reads.</p>
+<p>Now that you are more familiar with the command line, we will learn how to work on the UvA Crunchomics HPC. On this page, you will:</p>
+<ul>
+<li>Connect to Crunchomics and prepare your account</li>
+<li>Transfer the sequencing data from your own computer to Crunchomics</li>
+<li>Run your first analyses on the compute nodes with SLURM:
+<ul>
+<li><code>srun</code> for short, interactive analyses</li>
+<li><code>sbatch</code> for longer running, more resource intensive analyses</li>
+</ul></li>
+<li>Install your own software with conda</li>
+</ul>
 <p>For people following this tutorial outside of UvA:</p>
 <ul>
-<li>If you have access to an HPC using SLURM you still follow the tutorial</li>
-<li>If you do not have access to an HPC but are interested in how to install and run software that can be used to analyse sequencing data, you still might want to check out the steps run below. The dataset is very small and all analyses can be run on a desktop computer</li>
+<li>If you have access to an HPC that uses SLURM, you can still follow the tutorial</li>
+<li>If you do not have access to an HPC but are interested in how to install and run software that can be used to analyse sequencing data, you still might want to check out the steps below. The dataset is very small and all analyses can be run on a desktop computer</li>
 </ul>
-<section id="ssh-connecting-to-a-sever" class="level2">
-<h2 class="anchored" data-anchor-id="ssh-connecting-to-a-sever"><code>ssh</code>: Connecting to a sever</h2>
-<p><strong>SSH</strong> (Secure Shell) is a network protocol that enables secure remote connections between two systems. The general <code>ssh</code> command that you can use to login into any HPC looks as follows:</p>
+<section id="connecting-to-the-hpc" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-to-the-hpc">Connecting to the HPC</h2>
+<section id="ssh-connecting-to-a-server" class="level3">
+<h3 class="anchored" data-anchor-id="ssh-connecting-to-a-server"><code>ssh</code>: Connecting to a server</h3>
+<p><strong>SSH</strong> (Secure Shell) is a network protocol that allows you to securely connect to a remote computer, such as the Crunchomics HPC. The general command looks like this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-X</span> username@server</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@server</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Options:</p>
+<p>Here:</p>
 <ul>
-<li><code>-X</code> option enables untrusted X11 forwarding in SSH. Untrusted means = your local client sends a command to the remote machine and receives the graphical output. Put simply this option enables us to run graphical applications on a remote server and this for example allows us to view a pdf.</li>
+<li><code>username</code> is your account name on the HPC. For Crunchomics, this is your UvAnetID</li>
+<li><code>server</code> is the address of the HPC you want to connect to. For Crunchomics, this is <code>omics-h0.science.uva.nl</code></li>
 </ul>
-<p>If you have access to and want to connect to Crunchomics you would edit the command above to look like this:</p>
+<p>To log in to Crunchomics, use the following command and enter your UvA password when you are asked for it. Remember that nothing appears on the screen while you type your password:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-X</span> uvanetid@omics-h0.science.uva.nl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log in to Crunchomics (replace uvanetid with your own UvAnetID)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> uvanetid@omics-h0.science.uva.nl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>You did the same during the <a href="../source/installation.html">Before you start</a> checks. After logging in, the prompt changes: it now shows your UvAnetID and <code>omics-h0</code>. Every command you type now runs on Crunchomics, not on your own computer.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -453,119 +474,192 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you want to log into Crunchomics while working from UvA use the eduroam network, not the open Amsterdam Science Park network.</p>
-<p>If you want to log into Crunchomics from outside of UvA you need to be connected to the VPN. If you have not set that up and/or have trouble doing so, please contact ICT.</p>
-</div>
-</div>
-</section>
-<section id="crunchomics-preparing-your-account" class="level2">
-<h2 class="anchored" data-anchor-id="crunchomics-preparing-your-account">Crunchomics: Preparing your account</h2>
-<p>Ignore this section if you already did this but if this is your first time on Crunchomics, then you want to first run a small Bash script that:</p>
+<p><strong>Important tips for connecting:</strong></p>
 <ul>
-<li>Allows you to use system-wide installed software, by adding <code>/zfs/omics/software/bin</code> to your path. This basically means that bash knows that there is an extra folder in which to look for any software that is pre-installed on the HPC</li>
-<li>Sets up a python3 environment and some useful python packages</li>
-<li>Have a link for your 500 GB personal directory in your home directory</li>
+<li>If you want to log in to Crunchomics while working from UvA, use the eduroam network, not the open Amsterdam Science Park network</li>
+<li>If you are connecting from outside UvA, you must be connected to the VPN. Contact ICT if you have not set it up or encounter issues</li>
+<li>Always double-check your username and the server address to avoid login errors</li>
 </ul>
-<p>To set this up, run the following command in the cli:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/zfs/omics/software/script/omics_install_script</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="scp-transferring-data-fromto-a-server" class="level2">
-<h2 class="anchored" data-anchor-id="scp-transferring-data-fromto-a-server"><code>scp</code>: Transferring data from/to a server</h2>
-<p><code>scp</code> stands for Secure Copy Protocol and allows you to securely copy files and directories between remote hosts. When transferring data the transfer is always prepared from the terminal of your personal computer and not from the HPCs login node.</p>
-<p>The basic syntax we use looks like this:</p>
-<p><code>scp [options] SOURCE DESTINATION</code></p>
-<p>To start analysing our data, we want to move the fastq.gz files that we have worked with before from our personal folder, the source, to a folder on Cruncomics, the destination. Let’s start setting up a project folder from which we want to run our analyses by:</p>
-<ul>
-<li>Moving from our home directory into our personal directory on the Crunchomics HPC. We move there since we have more space in the personal directory. Notice, for the command below to work, we need to have already executed the <code>omics_install_script</code> script above</li>
-<li>Make a project folder with a descriptive file name, i.e.&nbsp;projectX</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> projectX</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> projectX</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Now that we have organized our working directory on the HPC, we next want to move the data folder (which right now is only on your own, personal computer) with the sequencing that you have downloaded before to Crunchomics. We do this by moving the whole <code>data</code> folder from our own computer to the new project folder on the HPC. Therefore, it is important that:</p>
-<ul>
-<li>we run the following command from the cli on our own computer and not from the cli while being logged into the HPC!</li>
-<li>you exchange the two instances of <code>username</code> in the code below with your username/uvanetid</li>
-<li>In the example below, I am running the code from inside of the <code>data_analysis</code> folder that we have generated in the previous tutorial since that is where I have the data folder that I want to move. I use the <code>-r</code> option in order to move the whole data folder and not a single file.</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#run the command below from your local computer, </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ensure that the data folder is inside the directory from which you run this command</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> data username@omics-h0.science.uva.nl:/home/username/personal/projectX</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#run ls on crunchomics to check if you moved the data successfully</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Moving data from the HPC to our own computer">
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Viewing graphical output with ssh -X">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Tip: Moving data from the HPC to our own computer
+<span class="screen-reader-only">Tip</span>Tip: Viewing graphical output with ssh -X
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We can also move data from the HPC to our own computer. For example, let’s assume we want to move a single sequencing file from crunchomics back to our computer. In this case,</p>
-<ul>
-<li>We do not need <code>-r</code> since we only move a single file</li>
-<li>We again run this command from a terminal on our computer, not while being logged in the HPC</li>
-<li>We use <code>.</code> to indicate that we want to move the file into the directory we are currently in. If we want to move the file elsewhere we can use any absolute or relative path as needed</li>
-</ul>
+<p>Some programs on the HPC can open a window, for example to show a plot or a PDF. To see such windows on your own computer, log in with the <code>-X</code> option:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@omics-h0.science.uva.nl:/home/username/personal/projectX/data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-X</span> uvanetid@omics-h0.science.uva.nl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>-X</code> enables what is called <strong>X11 forwarding</strong>: the HPC sends the graphical output to your computer. In this tutorial we don’t need this, because we copy the results to our own computer instead.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Moving data from the HPC using wildcards">
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Warning about a changed host key">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Tip: Moving data from the HPC using wildcards
+<span class="screen-reader-only">Tip</span>Tip: Warning about a changed host key
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We can also move several files at once and ignore the whole folder structure by using wildcards when using <code>scp</code>.</p>
+<p>The first time you connect, your computer stores a “fingerprint” of Crunchomics, the so-called host key. After maintenance of Crunchomics, this key can change. Then <code>ssh</code> refuses to connect and shows a warning like <code>REMOTE HOST IDENTIFICATION HAS CHANGED!</code>.</p>
+<p>If you know that Crunchomics had maintenance, you can remove the old key from your computer with the command below. Run it on your own computer, not on the HPC. Then log in again and type <code>yes</code> when you are asked whether you want to continue connecting.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make a random directory in our Crunchomics working directory to move our data into</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#again, we generate this folder on Crunchomics</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> transfer_test</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#move files from crunchomics to our local computer</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#again, always run scp from your local computer</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> data/seq_project/barcode00<span class="pp">*</span>/<span class="pp">*</span>fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/projectX/transfer_test</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#view the data, see how the folder structure is different compared to our first example? </span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#since we moved the data TO Crunchomics, we run ls while being logged into Crunchomics</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> transfer_test/<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the stored host key for Crunchomics from your own computer</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-R</span> <span class="st">"omics-h0.science.uva.nl"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Notice for MAC users</strong>:</p>
-<p>For Mac users that work with an zsh shell the command above might not work and you might get an error like “file not found”, “no matches found” or something the like. Without going into details zsh has a slightly different way of handling wildcards and tries to interpret the wildcard literally and thus does not find our files. If you see the error and you are sure the file exists it should work to edit your line of code as follows:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">\scp</span>  data/seq_project/barcode00<span class="pp">*</span>/<span class="pp">*</span>fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/projectX/transfer_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you are unsure why the key changed, ask before you remove it.</p>
 </div>
-<p>If that does not work, these are some other things to try (different zsh environments might need slightly different solutions):</p>
+</div>
+</div>
+</section>
+<section id="crunchomics-preparing-your-account" class="level3">
+<h3 class="anchored" data-anchor-id="crunchomics-preparing-your-account">Crunchomics: Preparing your account</h3>
+<p>If this is your <strong>first time using Crunchomics</strong>, you need to run a small bash script to set up your account. Ignore this section if you have done this before. The script:</p>
+<ul>
+<li>Adds <code>/zfs/omics/software/bin</code> to your PATH. The <strong>PATH</strong> is the list of folders in which bash looks for programs. With this change, bash can find the software that is already installed on Crunchomics</li>
+<li>Sets up a Python 3 environment with some useful Python packages</li>
+<li>Creates a link called <code>personal</code> in your home directory. This link leads to your personal directory, which has 500 GB of space. Your home directory itself only has 25 GB</li>
+</ul>
+<p>To set up your account, run the following commands:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">noglob</span> scp data/seq_project/barcode00<span class="pp">*</span>/<span class="pp">*</span>fastq.gz ndombro@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/transfer_test</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="st">'data/seq_project/barcode00*/*fastq.gz'</span> ndombro@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/transfer_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, orient yourself</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Crunchomics installation script</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">/zfs/omics/software/script/omics_install_script</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what changed</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># You should now see the personal folder inside your home directory</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="preparing-your-working-directory" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-your-working-directory">Preparing your working directory</h3>
+<p>Next, let’s make a project folder for our analyses. Always make project folders inside your personal directory, since it has much more space than your home directory. We give the folder the same name as on our own computer, <code>data_analysis</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Go into the personal folder</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a new project folder and go into it</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data_analysis</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> data_analysis</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that you are in the right folder</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You now have a clean workspace for all the analyses that you will run on Crunchomics. As on your own computer, it is good practice to keep your raw data, results and scripts in separate folders.</p>
+</section>
+<section id="scp-transferring-data-to-and-from-a-server" class="level3">
+<h3 class="anchored" data-anchor-id="scp-transferring-data-to-and-from-a-server"><code>scp</code>: Transferring data to and from a server</h3>
+<p>Next, we want to transfer the <code>data</code> folder with our sequencing data from our own computer to the new project folder on Crunchomics. We do this with <code>scp</code> (Secure Copy Protocol), which securely copies files and folders between your computer and a remote server.</p>
+<p>The basic syntax is:</p>
+<ul>
+<li><code>scp [options] SOURCE DESTINATION</code></li>
+<li>A location on a server is written as <code>username@server:path_on_the_server</code></li>
+</ul>
+<p>When transferring data, you must <strong>run <code>scp</code> in a terminal on your own computer</strong>, not in a terminal that is logged in to the HPC. To keep yourself organized, it is useful to have two terminals open: one on your own computer and one on Crunchomics. In MobaXterm, you can open a second terminal in a new tab:</p>
+<p align="left">
+</p><p><img src="../img/using_mobaxterm_tabs.png" width="700"></p>
+<p></p>
+<p>To copy the entire <code>data</code> folder into your Crunchomics project folder, use:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this in the terminal on your OWN computer (not on the HPC),</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from inside your local data_analysis folder (where the data folder is)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace both instances of 'username' with your UvAnetID</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> data username@omics-h0.science.uva.nl:/home/username/personal/data_analysis</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here:</p>
+<ul>
+<li><code>-r</code> copies a folder together with everything inside it (<strong>recursive</strong>). Without <code>-r</code>, <code>scp</code> only copies single files</li>
+<li><code>data</code> is the source: the folder on your own computer</li>
+<li><code>username@omics-h0.science.uva.nl:/home/username/personal/data_analysis</code> is the destination: your project folder on Crunchomics</li>
+</ul>
+<p>Now switch to the terminal that is logged in to Crunchomics and check that the files arrived:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this on Crunchomics, inside the data_analysis folder</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>fastq.gz</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 8 files (4 samples, R1 and R2 each)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Moving data from the HPC to your own computer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Moving data from the HPC to your own computer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can also copy results from the HPC to your own computer. For this, you switch source and destination. For example, to copy a single sequencing file from Crunchomics:</p>
+<ul>
+<li>We do not need <code>-r</code>, since we only copy a single file</li>
+<li>We again run this command in a terminal on our own computer, not on the HPC</li>
+<li>The <code>.</code> at the end means “copy into the folder I am in right now” on your own computer. If you want to copy the file elsewhere, replace <code>.</code> with a path</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Moving files with wildcards">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Moving files with wildcards
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can also copy several files at once with a wildcard. Then <code>scp</code> copies only the files, not the folders they are in.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On Crunchomics: make a folder to copy the data into</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> transfer_test</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># On your own computer: copy all fastq.gz files to the new folder on Crunchomics</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> data/seq_project/barcode00<span class="pp">*</span>/<span class="pp">*</span>fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># On Crunchomics: view the data</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># See how the folder structure is different compared to our first example?</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> transfer_test/<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Notice for Mac users</strong>:</p>
+<p>For Mac users who work with the zsh shell, the command above might not work, and you might get an error like “file not found”, “no matches found” or something similar. zsh handles wildcards slightly differently than bash. If you see this error and you are sure that the files exist, try this version of the command:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">\scp</span> data/seq_project/barcode00<span class="pp">*</span>/<span class="pp">*</span>fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If that does not work, these are some other things to try (different zsh setups might need slightly different solutions):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">noglob</span> scp data/seq_project/barcode00<span class="pp">*</span>/<span class="pp">*</span>fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="st">'data/seq_project/barcode00*/*fastq.gz'</span> username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Moving files using the FileZilla GUI">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -574,40 +668,47 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>scp</code> takes some getting used to and there are several graphical user interface programs that are available which provide the same functionality. Here, we will look at FileZilla, as it is compatible with Windows, Mac, and Linux.</p>
+<p><code>scp</code> takes some getting used to, and there are several programs with a graphical user interface that do the same thing. Here, we look at FileZilla, which works on Windows, Mac and Linux.</p>
 <p>To use FileZilla, do the following:</p>
 <ol type="1">
 <li>Download the FileZilla Client <a href="https://filezilla-project.org/">here</a>. The free version is all we need.</li>
-<li>Follow the download instructions</li>
+<li>Follow the installation instructions</li>
 <li>Click the FileZilla app to start it</li>
-<li>Add Uva user credentials
+<li>Add your UvA user credentials:
 <ul>
 <li>Enter <code>omics-h0.science.uva.nl</code> in host</li>
-<li>Enter <code>user_name</code> in user</li>
-<li>Enter psswd chosen when making surf account</li>
-<li>Port should be 22 to open a sftp connection</li>
+<li>Enter your UvAnetID in user</li>
+<li>Enter your UvA password</li>
+<li>Port should be 22 to open an SFTP connection</li>
 </ul></li>
 <li>Trust the host</li>
 <li>You land in your home directory (on the right hand side)</li>
-<li>You can copy-paste data by drag and dropping</li>
+<li>You can copy data by dragging and dropping</li>
 </ol>
 </div>
 </div>
 </div>
 </section>
-<section id="slurm-basics" class="level2">
-<h2 class="anchored" data-anchor-id="slurm-basics">Slurm basics</h2>
-<section id="get-information-about-the-cluster" class="level3">
-<h3 class="anchored" data-anchor-id="get-information-about-the-cluster">Get information about the cluster</h3>
-<p>Now, that we have our data prepared we want to run a tool to assess the quality of our reads. Before doing that, let’s talk about submitting jobs to an HPC.</p>
-<p>As a reminder: We do not run big jobs on the login node but need to submit such jobs to the compute nodes via SLURM. Login nodes are for preparing your programs to run and you run your actual jobs by submitting them to the compute nodes using SLURM.</p>
-<p>In the next few sections you will get to know the basics steps to be able to do this.</p>
-<p>Before doing this it is, however, useful when getting started on a new HPC to know how to get basic information about what nodes are available on a cluster and how busy an HPC is. This allows us to better know how many resources to request in order to have our job run efficiently but also get started in a timely manner.</p>
-<p>One way to get a list of available compute nodes is by typing the following command into the cli:</p>
+</section>
+<section id="submitting-jobs-with-slurm" class="level2">
+<h2 class="anchored" data-anchor-id="submitting-jobs-with-slurm">Submitting jobs with SLURM</h2>
+<section id="login-node-and-compute-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="login-node-and-compute-nodes">Login node and compute nodes</h3>
+<p>In the HPC introduction, you learned that an HPC has two main parts:</p>
+<ul>
+<li>The <strong>login node</strong>: where you log in and do light work, such as moving files, editing scripts or preparing jobs</li>
+<li>The <strong>compute nodes</strong>: where the actual analyses run. These nodes have more CPUs and memory</li>
+</ul>
+<p>We do not run big analyses on the login node. Instead, we send them to the compute nodes as <strong>jobs</strong>. A job is a task that you ask the HPC to run, together with the resources it needs. The jobs are managed by <strong>SLURM</strong>, a workload manager that decides <em>when</em>, <em>where</em> and <em>how</em> your jobs run based on the available resources.</p>
+</section>
+<section id="sinfo-get-information-about-the-cluster" class="level3">
+<h3 class="anchored" data-anchor-id="sinfo-get-information-about-the-cluster"><code>sinfo</code>: Get information about the cluster</h3>
+<p>When you start on a new HPC, it is useful to know which compute nodes exist and how busy they are. This helps you to choose how many resources to request, so that your job runs efficiently but also starts in time.</p>
+<p>To get a list of the compute nodes, type:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sinfo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sinfo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We will see something like this:</p>
 <div class="quarto-figure quarto-figure-left">
@@ -615,422 +716,127 @@ Important
 <p><img src="../img/sinfo.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:60.0%"></p>
 </figure>
 </div>
-<p>Here, the different columns you see are:</p>
+<p>Here, the different columns are:</p>
 <ul>
-<li>partition: tells us what queues that are available. There are few partitions on Crunchomics and you do not need to define them in our case. However, other systems use partitions to group a subset of nodes with different type of hardwares or a specific maximum wall time. For example, you might have specific partitions for memory-heavy versus time-intensive jobs.</li>
-<li>state: tells you if a node is busy or not. Here:
+<li>PARTITION: the queues that are available. Crunchomics has only a few partitions, and you do not need to choose one. Other systems use partitions to group nodes with different hardware or a different maximum run time</li>
+<li>STATE: tells you whether a node is busy or not:
 <ul>
-<li>mix : consumable resources partially allocated</li>
-<li>idle : available to requests consumable resources</li>
-<li>drain : unavailable for use per system administrator request</li>
-<li>alloc : consumable resources fully allocated</li>
-<li>down : unavailable for use.</li>
+<li>mix: some of the resources are in use</li>
+<li>idle: the node is free</li>
+<li>drain: unavailable, because the system administrator asked for it</li>
+<li>alloc: all resources are in use</li>
+<li>down: unavailable</li>
 </ul></li>
-<li>Nodes: The number of nodes available for each partition</li>
-<li>NodeList: the names of the compute nodes (i.e.&nbsp;omics-cn001 to omics-cn005)</li>
+<li>NODES: the number of nodes in each state</li>
+<li>NODELIST: the names of the compute nodes</li>
 </ul>
 </section>
-<section id="view-info-about-jobs-in-the-queue" class="level3">
-<h3 class="anchored" data-anchor-id="view-info-about-jobs-in-the-queue">View info about jobs in the queue</h3>
-<p>The following command gives us some information about how busy the HPC is:</p>
+<section id="squeue-view-the-jobs-in-the-queue" class="level3">
+<h3 class="anchored" data-anchor-id="squeue-view-the-jobs-in-the-queue"><code>squeue</code>: View the jobs in the queue</h3>
+<p>The command below shows you which jobs are currently running or waiting in the queue:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>After running this, you can see all jobs scheduled on the HPC, which might look something like this:</p>
+<p>This shows all jobs on the system and might look something like this:</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="../img/squeue.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
 </figure>
 </div>
+<p>Some useful columns to know:</p>
 <ul>
-<li>JOBID: every job gets a number and you can manipulate jobs via this number</li>
-<li>ST: Job state codes that describe the current state of the job. The full list of abbreviations can be found <a href="https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html">here</a></li>
+<li>JOBID: a unique number for each job. You can use it to check on or cancel a job later</li>
+<li>ST: the current state of the job, e.g.&nbsp;R = running, PD = pending (waiting). A full list of SLURM job state codes can be found <a href="https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html">here</a></li>
 </ul>
-<p>If we would have submitted a job, we also should see the job listed there.</p>
-</section>
-</section>
-<section id="srunsubmitting-a-job-interactively" class="level2">
-<h2 class="anchored" data-anchor-id="srunsubmitting-a-job-interactively"><code>srun</code>:Submitting a job interactively</h2>
-<p><code>srun</code> is used when you want to run tasks interactively or want to have more control over the execution of a job. You directly issue <code>srun</code> commands in the terminal and you at the same time are able to specify the tasks to be executed and their resource requirements. For example, you might want to run softwareX and request that this job requires 10 CPUs and 5 GB of memory.</p>
-<p>Use <code>srun</code> when:</p>
-<ul>
-<li>You want to run tasks interactively and need immediate feedback printed to the screen</li>
-<li>You are testing or debugging your commands before incorporating them into a script</li>
-<li>You need more control over the execution of tasks</li>
-<li>Typically, you use srun for smaller jobs that do not run for too long, i.e.&nbsp;a few hours</li>
-</ul>
-<p>Let’s submit a very simple example for which we would not even need to submit a job, but just to get you started.</p>
+<p>Once you have submitted a job, it appears in this list as well. To see only your own jobs, add the <code>-u</code> option followed by your user name. <code>$USER</code> is a shortcut that bash replaces with your own user name:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> echo <span class="st">"Hello interactively"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>You should see the output of echo printed to the screen and if you would run <code>squeue</code> you won’t even see your job since everything ran so fast. But congrats, you communicated the first time with the compute node.</p>
-<p>Now assume you want to run a more complex interactive task with <code>srun</code> that might run longer and benefit from using more CPUs. In this case you need to specify the resources your job needs by adding flags, i.e.&nbsp;some of which you see here:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>1G <span class="at">--time</span><span class="op">=</span>00:10:00 echo <span class="st">"Hello interactively"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The different flags mean the following:</p>
-<ul>
-<li><code>--cpus-per-task=1</code>: Specifies the number of CPUs per task. Adjust this based on the computational requirements of your task</li>
-<li><code>--mem=1G</code>: Sets the memory requirement for the task. Modify this based on your task’s memory needs</li>
-<li><code>--time=00:10:00</code> Sets the time limit to 10 minutes</li>
-<li><code>echo "Hello interactively</code>: The actual command you want to run interactively</li>
-</ul>
-<p>Other flags:</p>
-<ul>
-<li><code>--nodes=1</code>: Specifies the number of nodes (i.e.&nbsp;separate computers) your job runs on. This does not reserve the whole node for you, jobs of other people can still run on the same node. The CPUs you request with <code>--cpus-per-task</code> always come from a single node, so for the jobs in this tutorial you can leave this option out. If you ever really need a whole node for yourself, the option for that is <code>--exclusive</code>, but on a shared system like Crunchomics you rarely want this.</li>
-<li><code>--ntasks=1</code>: Defines the number of tasks to run. Here, we would set it to 1 since we want to use echo once</li>
-</ul>
-<section id="choosing-the-right-amount-of-resources" class="level3">
-<h3 class="anchored" data-anchor-id="choosing-the-right-amount-of-resources">Choosing the right amount of resources</h3>
-<p>When you’re just starting, deciding on the right resources to request for your computational job can be a bit challenging. The resource requirements can vary significantly based on the specific tool or workflow you are using. Here are some general guidelines to help you make informed choices:</p>
-<ul>
-<li>Use default settings: Begin by working with the default settings provided by the HPC cluster or recommended by the tool itself. These are often set to provide a balanced resource allocation for a wide range of tasks</li>
-<li>Check the software documentation: Consult the documentation of the software or tool you are using. Many tools provide recommendations for resource allocation based on the nature of the computation.</li>
-<li>Test with small datasets: For initial testing and debugging especially when working with large datasets, consider working with a smaller subset of your data. This allows for faster job turnaround times, helping you identify and resolve issues more efficiently.</li>
-<li>Monitor the resources usage:
-<ul>
-<li>Use <code>sacct</code> to check what resources a finished job has used and see whether you can optimize a run if you plan to run similar jobs over and over again. An example command would be <code>sacct -j 419847 --format=User,JobID,Jobname,state,start,end,elapsed,MaxRss,ncpus.</code> In the report, look for columns like MaxRSS (maximum resident set size) to check if the amount of memory allocated (–mem) was appropriate.</li>
-<li>Ensure that the job used the resources you requested. Be careful with how memory is counted: <code>--mem=4G</code> asks for 4 GB in total for your job, no matter how many CPUs you request. <code>--mem-per-cpu=4G</code> instead asks for 4 GB for each CPU, so <code>--cpus-per-task=4 --mem-per-cpu=4G</code> gives you a total of 16 GB of memory (4 CPUs * 4 GB). You can verify this with <code>sacct</code> to ensure your job’s resource requirements align with its actual usage.</li>
-</ul></li>
-<li>Fine-Tuning Resource Requests: If you encounter performance issues or your jobs are not completing successfully, consider iteratively adjusting resource requests. This might involve increasing or decreasing the number of CPUs, memory allocation, or other relevant parameters.</li>
-</ul>
 </section>
-<section id="run-fastqc-with-srun" class="level3">
-<h3 class="anchored" data-anchor-id="run-fastqc-with-srun">Run FastQC with srun</h3>
-<p><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> is a quality control tool for high throughput sequence data that is already installed on Crunchomics. This will be the actual software that we now want to run to look more closely at the quality of the sequencing data that we just uploaded to Crunchomics.</p>
-<p>By the way: Whenever running a software for a first time, it is useful to check the manual, for example with <code>fastqc -h.</code></p>
-<p>Let’s start by setting up a clean folder structure to keep our files organized. I start with making a folder in which I want to store all results generated in this analysis and by using the <code>-p</code> argument I generate a fastqc folder inside the results folder at the same time. Then, we can submit our job using <code>srun</code>.</p>
+<section id="srun-submitting-a-job-interactively" class="level3">
+<h3 class="anchored" data-anchor-id="srun-submitting-a-job-interactively"><code>srun</code>: Submitting a job interactively</h3>
+<p>Now let’s run our first job on a compute node. There are two main ways to submit jobs: <code>srun</code> and <code>sbatch</code>. We start with <code>srun</code>, which you typically use when:</p>
+<ul>
+<li>You want to run tasks <strong>interactively</strong> and see the output directly on your screen</li>
+<li>You are <strong>testing or debugging</strong> your commands before writing a job script</li>
+<li>You have <strong>short jobs</strong> (usually less than a few hours)</li>
+</ul>
+<p>Let’s start with a very simple example to see how <code>srun</code> works:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastqc </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G fastqc data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">-o</span> results/fastqc  <span class="at">--threads</span> 1</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> results/fastqc/<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>1G <span class="at">--time</span><span class="op">=</span>00:10:00 echo <span class="st">"Hello world"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Since we work with little data this will run extremely fast despite only using 1 CPU (or thread, in our case these two words can be used interchangeably). However, if you would be logged into Crunchomics via a second window and run <code>squeue</code> you should see that your job is actively running (in the example below, the job we submitted is named after the software and got the jobid 746):</p>
-<div class="quarto-figure quarto-figure-left">
-<figure class="figure">
-<p><img src="../img/squeue2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
-</figure>
-</div>
-<p>Additionally, after the run is completed, you should see that several HTML files were generated in our fastqc folder.</p>
-<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<p>Here’s what each part means:</p>
+<ul>
+<li><code>srun</code>: tells SLURM that you want to run something on a compute node, with the resources that follow</li>
+<li><code>--cpus-per-task=1</code>: request 1 CPU</li>
+<li><code>--mem=1G</code>: request 1 GB of memory</li>
+<li><code>--time=00:10:00</code>: set a maximum run time of 10 minutes (hours:minutes:seconds). If the job takes longer, SLURM stops it</li>
+<li><code>echo "Hello world"</code>: the actual command to run</li>
+</ul>
+<p>So everything between <code>srun</code> and the actual command tells SLURM which resources your job needs on the compute node. The job runs so fast that you won’t see it in <code>squeue</code>. But congratulations, you just communicated with a compute node for the first time.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Question</span>Exercise
+Important
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Use scp to download the HTML files generated by fastqc to your own computer and view one of the HTML files.</p>
-<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Answer</span>Click me to see an answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@omics-h0.science.uva.nl:/home/username/personal/projectX/results/fastqc/<span class="pp">*</span>html results/fastqc/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>You could also open a file on Crunchomics with <code>firefox results/fastqc/Sample-DUMMY1_R1_fastqc.html</code>. However, connecting to the internet via a cli on a remote server tends to be rather slow and its often better to view files on your own computer especially if they are large files.</p>
-<p>If you want to know more about how to to interpret the output, you can visit <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">the fastqc website</a>, which gives some examples for interpreting good and bad reports.</p>
+<p>Jobs started with <code>srun</code> stop if you lose the connection to the HPC, for example when you close your laptop. For longer jobs, use <code>sbatch</code> (see below).</p>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="screen-submitting-long-running-jobs-via-srun" class="level2">
-<h2 class="anchored" data-anchor-id="screen-submitting-long-running-jobs-via-srun"><code>screen</code>: Submitting long running jobs via srun</h2>
-<p>One down-side of <code>srun</code> for long running jobs is that your terminal gets “blocked” as long as the job is running and your job will be aborted if you loose the ssh connection to the HPC. For long running jobs, there are two ways to deal with this:</p>
-<ol type="1">
-<li>submit a srun job in a screen</li>
-<li>use sbatch</li>
-</ol>
-<p>In this section, we will cover how to use screen. Screen or GNU Screen is a terminal multiplexer. This means that you can start a screen session and then open any number of windows (virtual terminals) inside that session.</p>
-<p>Processes running in Screen will continue to run when their window is not visible even if you get disconnected. This is perfect, if we start longer running processes on the server and want to shut down our computer when leaving for the day. As long as the server is still connected to the internet, your process will continue running.</p>
-<p>We start a screen as follows:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>We detach (go outside of a screen but keep the screen running in the background) from a screen by pressing <code>control+a+d</code>.</p>
-<p>If you want to run multiple analyses in multiple screens at the same time, then can be useful to give your screens more descriptive names. You can give screens a name using the <code>-S</code> option:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> run_fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>After detaching from this screen again with <code>control+a+d</code> you can create a list of all currently running screens with:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>You can re-connect to an existing screen like this:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> run_fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Now inside our screen, we can run fastqc same as we did before (but now don’t risk to loose a long-running job):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G fastqc data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">-o</span> results/fastqc  <span class="at">--threads</span> 1 </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>For long-running jobs we can start multiple screens at once or even if we just have one screen open, close it and leave for the day or simply work on other things on the cli outside of the screen.</p>
-<p>If you want to completely close and remove a screen, type the following and press enter while being inside of the screen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="sbatch-submitting-a-long-running-job" class="level2">
-<h2 class="anchored" data-anchor-id="sbatch-submitting-a-long-running-job"><code>sbatch</code>: submitting a long-running job</h2>
-<p><code>sbatch</code> is your go-to command when you have a script (i.e.&nbsp;a batch script) that needs to be executed without direct user interaction.</p>
-<p>Use <code>sbatch</code> when:</p>
-<ul>
-<li>You have long-running or resource-intensive tasks</li>
-<li>You want to submit jobs that can run independently without your immediate supervision</li>
-<li>You want to submit multiple jobs at once</li>
-</ul>
-<p>To run a job script, you:</p>
-<ul>
-<li>create a script that contains all the commands and configurations needed for your job</li>
-<li>use sbatch to submit this script to the Slurm scheduler, and it takes care of the rest.</li>
-</ul>
-<p>Let’s start with generating some new folders to keep our project folder organized:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> scripts </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> logs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>To get started, assume we have created a script in the scripts folder named <code>run_fastqc.sh</code> with the content that is shown below. Notice, how in this script I added some additional <code>echo</code> commands? I just use these to print some information about the progress which could be printed to a log file but if you have several commands that should be executed after each other that is how you would do it.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G      </span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=1:00:00</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start fastqc"</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">-o</span> results/fastqc  <span class="at">--threads</span> 1</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"fastqc finished"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>In the job script above:</p>
-<ul>
-<li><code>#!/bin/bash</code> . This so-called Shebang line tells the shell to interpret and run the Slurm script using the bash shell.&nbsp;This line should always be added at the very top of your SBATCH/Slurm script.</li>
-<li>The lines that follow and start with <code>#</code> are the lines in which we define the amount of resources required for our job to run. In our case, we request 1 CPU, 5G of memory and 1 hour time limit.</li>
-<li>If your code needs any dependencies, such as conda environments, you would add these dependencies here. We do not need this for our example here, but you might need to add something like this <code>conda activate my_env</code> if you have installed your own software. We will touch upon conda environments and installing software a bit later.</li>
-<li>The lines afterwards are the actually commands that we want to run on the compute nodes, We also call this the job steps.</li>
-</ul>
-<p>To prepare the script and run it:</p>
-<ul>
-<li>Run <code>nano scripts/run_fastqc.sh</code> to generate an empty jobscript file</li>
-<li>Add the code from above into the file we just opened</li>
-<li>Press <code>ctrl+x</code> to exit nano</li>
-<li>Type <code>Y</code> when prompted if the changes should be saved</li>
-<li>Confirm that the file name is good by pressing enter</li>
-</ul>
-<p>Afterwards, you can submit <code>run_fastqc.sh</code> as follows:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#submit job: 754</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/run_fastqc.sh</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#check if job is running correctly</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>After running this, you should see that the job was submitted and something like this printed to the screen <code>Submitted batch job 754</code>. You will also see that a new file is generated that will look something like this <code>slurm-754.out</code>.</p>
-<p>When you submit a batch job using sbatch, Slurm redirects the standard output and standard error messages, which you have seen printed to the screen when you used <code>srun</code>, to a file named in the format slurm-JOBID.out, where JOBID is the unique identifier assigned to your job.</p>
-<p>This file is useful as it:</p>
-<ul>
-<li>Captures the output of our batch scripts and stores them in a file</li>
-<li>Can be used for debugging, since if something goes wrong with your job, examining the contents of this file can provide valuable insights into the issue. Error messages, warnings, or unexpected outputs are often recorded here</li>
-</ul>
-<p>Feel free to explore the content of the log file, do you see how the echo commands are used as well?</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Tip: sbatch and better log files">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Tip: sbatch and better log files
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We have seen that by default <code>sbatch</code> redirects the standard output and error to our working directory and that it decides itself how to name the files. Since file organization is very important especially if you generate lots of files, you find below an example to:</p>
-<ul>
-<li>Store the standard output and error in two separate files</li>
-<li>Redirect the output into another folder, the logs folder</li>
-<li>In the code below, the <code>%j</code> is replaced with the job allocation number once the log files are generated</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=our_fastqc_job</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastqc_%j.out</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastqc_%j.err</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=1:00:00</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start fastqc"</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">-o</span> results/fastqc  <span class="at">--threads</span> 1</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"fastqc finished"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Advanced tip: sbatch arrays to run multiple files in parallel">
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Other srun options you might see">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Advanced tip: sbatch arrays to run multiple files in parallel
+<span class="screen-reader-only">Tip</span>Tip: Other srun options you might see
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>With fastqc we are very lucky that the tool can identify all the fastq files in the directory we specify with <code>-o</code> by making use of the wildcard. This is extremely useful for us but by far not all programs work this way.</p>
-<p>For this section, lets assume that we need to provide each individual file we want to analyse, one by one, and can not provide a folder name. How would we run such a job effectively?</p>
-<p>What we want to do is created what is called a job array that allows us to:</p>
+<p>In examples online, you will often see two more options:</p>
 <ul>
-<li>Run multiple jobs that have the same job definition, i.e.&nbsp;cpus, memory and software used</li>
-<li>Run these job in the most optimal way. I.e. we do not want to run one job after each other but we also want to run jobs in parallel at the same time to optimize resource usage.</li>
+<li><code>--nodes=1</code>: the number of nodes (i.e.&nbsp;separate computers) your job runs on. This does not reserve the whole node for you, jobs of other people can still run on the same node. The CPUs you request with <code>--cpus-per-task</code> always come from a single node, so for the jobs in this tutorial you can leave this option out. If you ever really need a whole node for yourself, the option for that is <code>--exclusive</code>, but on a shared system like Crunchomics you rarely want this.</li>
+<li><code>--ntasks=1</code>: the number of tasks to run. The default is 1, which is what we need in this tutorial</li>
 </ul>
-<p>Let’s start with making a list with files we want to work with based on what we have already learned:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">"/"</span> <span class="op">&gt;</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Next, we can use this text file in our job array, the content of which we store in <code>scripts/array.sh</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=my_array</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/array_%A_%a.out</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/array_%A_%a.err</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-8</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem-per-cpu=5G</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the index of the current job within the batch</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">#in our case the index will store the values 1 to 8 for our 8 files</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="va">INDEX</span><span class="op">=</span><span class="va">$((SLURM_ARRAY_TASK_ID</span> <span class="va">))</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#build an array structure that stores the fastq.gz file names</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="va">CURRENT_SAMPLE</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> samples.txt <span class="kw">|</span>  <span class="fu">sed</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${INDEX}</span><span class="st">p"</span><span class="va">)</span></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="co">#print what is actually happening</span></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Now Job</span><span class="va">${INDEX}</span><span class="st"> runs on </span><span class="va">${CURRENT_SAMPLE}</span><span class="st">"</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="co">#run the actual job</span></span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> data/seq_project/<span class="pp">*</span>/<span class="va">${CURRENT_SAMPLE}</span> <span class="at">-o</span> results/fastqc  <span class="at">--threads</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>In the script we use some new SLURM arguments:</p>
+</div>
+</section>
+<section id="run-fastqc-with-srun" class="level3">
+<h3 class="anchored" data-anchor-id="run-fastqc-with-srun">Run FastQC with <code>srun</code></h3>
+<p>Next, let’s use <code>srun</code> for something more useful. <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> is a quality control tool for sequencing data that is already installed on Crunchomics. We use it to look more closely at the quality of the sequencing data that we just copied to Crunchomics.</p>
+<p>Whenever you use a tool for the first time, check its help page (e.g.&nbsp;<code>fastqc -h</code>) to see all available options, or look online for a manual.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a results folder with a fastqc folder inside</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastqc</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run FastQC on all fastq.gz files with srun</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G <span class="at">--time</span><span class="op">=</span>00:30:00 fastqc data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">-o</span> results/fastqc <span class="at">--threads</span> 1</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the output: we expect one HTML report (and one zip file) per fastq.gz file</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here:</p>
 <ul>
-<li><code>#SBATCH --array=1-8</code>: Sets up a job array, specifying the range (1-8). We choose 1-8 because we have exactly 8 fastq.gz files we want to analyse</li>
-<li><code>#SBATCH --output=logs/array_%A_%a.out</code>: Store the standard output and error. <code>%A</code> represents the job ID assigned by Slurm, and <code>%a</code> represents the array task ID</li>
-<li><strong>Important</strong>: Are your individual arrays large jobs that use a lot of CPUs/memory? Then you might not want to submit all at the same time but submit them in a step-wise manner. With <code>#SBATCH --array=1-8%2</code> you would only submit the first two jobs and only after these have finished the next jobs. Remember, try to use not more than ~20% of the crunchomics cluster at the same time.</li>
-</ul>
-<p>The job does the following:</p>
+<li><code>fastqc data/seq_project/*/*gz</code>: run FastQC on all files in the <code>seq_project</code> folders that end with <code>gz</code></li>
+<li><code>-o results/fastqc</code>: write the output into the <code>results/fastqc</code> folder</li>
+<li><code>--threads 1</code>: let FastQC use 1 CPU (in our case, thread and CPU mean the same)
 <ul>
-<li>The <code>INDEX</code> variable is storing the value of the current <code>SLURM_ARRAY_TASK_ID</code>. This represents the ID of the current job within the array. In our case this will be first 1, then 2, …, and finally 8.</li>
-<li>Next, we build the array structure in which the <code>CURRENT_SAMPLE</code> variable is created by:
-<ul>
-<li>Reading the <code>sample_list.txt</code> file with <code>cat</code></li>
-<li>Using a pipe to extract the file name at the calculated index using sed. <a href="https://scienceparkstudygroup.github.io/software_information/source/cli/cli_file_manipulation.html#sed-manipulating-the-content-of-files">Sed</a> is an extremely powerful way to edit text that we have not covered here but <code>-n 1p</code> is a option that allows us to print one specific line of a file, in our case the first one when running array 1. So for the first array the actual code run is the following <code>cat samples.txt |  sed -n "1p"</code>. For the next array, we would run <code>cat samples.txt |  sed -n "2p"</code> and so forth.</li>
-<li>The output of the pipe is stored in a variable, called <code>CURRENT_SAMPLE</code>. For our first sample this will be <code>Sample-DUMMY1_R1.fastq.gz</code></li>
+<li><strong>Important</strong>: always make sure that the number of CPUs you request from SLURM matches the number of CPUs (threads) the software uses. If the tool uses more than you requested, it competes with itself for CPUs. If you request more than the tool uses, the extra CPUs sit idle while others could use them</li>
 </ul></li>
-<li>We use echo to record what was executed when and store this information in the standard output</li>
-<li>We run our actual fastqc job on the file name that is currently stored in the <code>CURRENT_SAMPLE</code> variable.</li>
 </ul>
-<p>If we check what is happening right after submitting the job with <code>squeue</code> we should see something like this:</p>
+<p>Since we work with little data, this runs fast despite only using 1 CPU. If you are logged in to Crunchomics in a second terminal and run <code>squeue</code> while FastQC is running, you should see your job (in the example below, the job is named after the software and got the job ID 746):</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="../img/arrays.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
+<p><img src="../img/squeue2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
 </figure>
 </div>
-<p>We see that jobs 1-4 are already running and the jobs 5-8 are currently waiting for space. That is one of the useful things using a job manager such as SLURM. It takes care of finding the appropriate resources on all nodes for us as long as we defined the required cpus and memory sensibly.</p>
-<p>If we check the log files we should see something like this:</p>
-<div class="quarto-figure quarto-figure-left">
-<figure class="figure">
-<p><img src="../img/arrays2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
-</figure>
-</div>
-<p>We see that we get an individual output and error file for each job. In the output we see what value is stored in the <code>INDEX</code>, here 1, and the <code>CURRENT_SAMPLE</code>, here <code>Sample-DUMMY1_R1.fastq.gz</code> and that the analysis finished successfully.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="installing-software" class="level2">
-<h2 class="anchored" data-anchor-id="installing-software">Installing software</h2>
-<p>There might be cases where the software you are interested in is not installed on the HPC you are working with (or on your own computer).</p>
-<p>In the majority of cases, you should be able to install software by using a package management system, such as conda or mamba. These systems allow you to find and install packages in their own environment without administrator privileges. Let’s have a look at a very brief example:</p>
-<section id="install-condamamba" class="level3">
-<h3 class="anchored" data-anchor-id="install-condamamba">Install conda/mamba</h3>
-<p>A lot of systems already come with conda/mamba installed, however, if possible we recommend working with mamba instead of conda. mamba is a replacement and uses the same commands and configuration options as conda, however, it tends to be much faster. A useful thing is that if you find documentation for conda then you can swap almost all commands between conda &amp; mamba.</p>
-<p>If you have conda installed and do not want to install anything else, that is fine. Just replace all instances of mamba with conda below.</p>
-<p>This command should work in most cases to setup conda together with mamba:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-O</span> <span class="st">"https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="va">$(</span><span class="fu">uname</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">.sh"</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniforge3-<span class="va">$(</span><span class="fu">uname</span><span class="va">)</span>-<span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span>.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>When running the bash command, you get asked a few questions:</p>
-<ol type="1">
-<li>Read the license and use arrow down to scroll down. Don’t scroll too fast, so that you see the next question</li>
-<li>Decide where conda gets installed. You can say yes to the default location in your home. But don’t forget that for Crunchomics your home only has 25G of space. You could also install the miniforge/mambaforge folder in your personal folder instead.</li>
-<li>Say yes, when you get asked whether conda should be initialized during start up</li>
-<li>Restart the shell (exit the terminal and use ssh to log back in) for the changes to take effect</li>
-<li>Check if conda is accessible by running <code>conda -h</code></li>
-</ol>
-</section>
-<section id="setting-up-an-environment" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up-an-environment">Setting up an environment</h3>
-<p>Let’s assume we want to install seqkit, a tool that allows us to calculate some statistics for sequencing data such as the number of sequences or average sequence length per sample.</p>
-<p>We can install seqkit into a separate environment, which we can give a descriptive name, as follows:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check if the tool is installed (should return "command not" found if the software is not installed)</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> <span class="at">-h</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#create an empty environment and name it seqkit and we add the version number to the name</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#this basically sets up seqkit separate from our default working environment</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#this is useful whenever software require complicated dependencies allowing us to have a separate install away from software that could conflict with each other</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> seqkit_2.6.1</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#install seqkit, into the environment we just created</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-n</span> seqkit_2.6.1 <span class="at">-c</span> bioconda seqkit=2.6.1</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#to run seqkit, we need activate the environment first</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> activate seqkit_2.6.1</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#check if tool is installed, </span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">#if installed properly this should return some detailed information on how to run seqkit</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> <span class="at">-h</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">#run the tool via srun</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results/seqkit</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span> 2 <span class="at">--mem</span><span class="op">=</span>4G seqkit stats <span class="at">-a</span> <span class="at">-To</span> results/seqkit/seqkit_stats.tsv data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="at">--threads</span> 2</span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> results/seqkit/seqkit_stats.tsv </span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a><span class="co">#close the environment</span></span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>When installing seqkit, we:</p>
-<ul>
-<li>specify the exact version we want to download with <code>=2.6.1</code>. We could also install the newest version that conda/mamba can find by running <code>mamba install -n seqkit -c bioconda seqkit</code>.</li>
-<li>specify that we want to look for seqkit in the bioconda channel with the option <code>-c</code>. Channels are the locations where packages are stored. They serve as the base for hosting and managing packages. Conda packages are downloaded from remote channels, which are URLs to directories containing conda packages. If you are unable to find a package it might be that you need to specify a channel.</li>
-</ul>
-<p>Forgot what conda environments you installed in the past? You can run <code>conda env list</code> to generate a list of all existing environments.</p>
-<p>Unsure if a software can be installed with conda? Google conda together with the software name, which should lead you do a conda web page. This page should inform you whether you need to add a specific channel to install the software as well as the version numbers available.</p>
-<p>A full set of mamba/conda commands can be found <a href="https://docs.conda.io/projects/conda/en/latest/commands/index.html.">here</a>.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1043,9 +849,10 @@ Important
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
+<p>The FastQC reports are HTML files, which are easiest to view in the internet browser of your own computer.</p>
 <ol type="1">
-<li>Download and view the file <code>results/seqkit/seqkit_stats.tsv</code> on your own computer</li>
-<li>Run the seqkit again but this time submit the job via a sbatch script instead of using srun. Notice, that you need to tell SLURM how it can activate the conda environment that has seqkit installed. You might need to google how to do that, since this requires some extra line of code that we have not covered yet but see this as a good exercise for how to handle error messages that you see in the log files for your own analyses</li>
+<li>Use <code>scp</code> to copy the HTML files generated by FastQC from Crunchomics into the <code>results/fastqc</code> folder of the <code>data_analysis</code> folder on your own computer</li>
+<li>Open the folder in your file browser and open one of the HTML files</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -1060,31 +867,490 @@ Important
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/results/seqkit/seqkit_stats.tsv .</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2 </span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/seqkit.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run all of this in the terminal on your OWN computer,</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from inside your local data_analysis folder</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the folder for the reports</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastqc</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy all HTML reports</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The quotes make sure that the wildcard is used on Crunchomics, not on your own computer</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="st">'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/fastqc/*html'</span> results/fastqc/</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that the 8 reports arrived</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/fastqc</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2:</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the folder in your file browser</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/fastqc</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="ex">explorer.exe</span> .     <span class="co"># Windows (MobaXterm or WSL2)</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> .             <span class="co"># Mac</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Double-click on one of the HTML files to open it in your browser. If you want to know more about how to interpret the output, visit <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">the FastQC website</a>, which gives examples of good and bad reports.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="srun---pty-bash-working-interactively-on-a-compute-node" class="level3">
+<h3 class="anchored" data-anchor-id="srun---pty-bash-working-interactively-on-a-compute-node"><code>srun --pty bash</code>: Working interactively on a compute node</h3>
+<p>Sometimes you want to try out several commands after each other on a compute node, for example to test a new tool. Instead of putting <code>srun</code> in front of every command, you can open an <strong>interactive session</strong>: a shell that runs on a compute node.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open an interactive bash shell on a compute node for at most 1 hour</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G <span class="at">--time</span><span class="op">=</span>01:00:00 <span class="at">--pty</span> bash <span class="at">-i</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here:</p>
+<ul>
+<li><code>--pty bash -i</code> starts an interactive bash shell on the compute node, instead of running a single command</li>
+</ul>
+<p>Your prompt changes: it now shows the name of the compute node instead of <code>omics-h0</code>. You can check where you are with the command <code>hostname</code>, which prints the name of the computer you are working on. Every command you type now runs on the compute node, with the resources you requested.</p>
+<p>When you are done, leave the compute node and go back to the login node:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Always <code>exit</code> an interactive session when you are done. As long as the session is open, the CPUs and memory you requested stay reserved for you, even if you don’t use them, and other people have to wait for them.</p>
+</div>
+</div>
+</section>
+<section id="sbatch-submitting-a-long-running-job" class="level3">
+<h3 class="anchored" data-anchor-id="sbatch-submitting-a-long-running-job"><code>sbatch</code>: Submitting a long-running job</h3>
+<p>While <code>srun</code> is great for quick, interactive runs, most analyses on an HPC are submitted with <strong><code>sbatch</code></strong>. With <code>sbatch</code>, you write your commands into a <strong>job script</strong>, a text file with all the commands and the resources your job needs. SLURM then runs the script in the background, even after you log out.</p>
+<p>Use <code>sbatch</code> when:</p>
+<ul>
+<li>You have <strong>long or resource-intensive</strong> analyses</li>
+<li>You want jobs to run <strong>unattended</strong>, without your direct supervision</li>
+<li>You want to <strong>run several jobs</strong> after each other or at the same time</li>
+</ul>
+<section id="step-1-create-folders-for-scripts-and-logs" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-create-folders-for-scripts-and-logs">Step 1: Create folders for scripts and logs</h4>
+<p>We keep our project tidy by making separate folders for our job scripts and for the log files that SLURM writes:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts logs</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that the folders are there</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-2-write-a-job-script" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-write-a-job-script">Step 2: Write a job script</h4>
+<p>We run FastQC again, but this time with <code>sbatch</code> instead of <code>srun</code>, so that you can directly compare the two.</p>
+<p>Use <code>nano</code> to create a script file:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> scripts/run_fastqc.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then add the following content:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastqc</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastqc_%j.out</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastqc_%j.err</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"FastQC job started on:"</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">-o</span> results/fastqc <span class="at">--threads</span> 1</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"FastQC job finished on:"</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Save and exit:</p>
+<ul>
+<li>Press <code>Ctrl+X</code> to exit, then <code>Y</code> to confirm that you want to save the file, then Enter to keep the file name</li>
+</ul>
+<p>Notice how the <code>fastqc</code> command looks exactly the same as when we used <code>srun</code>? The main difference between <code>srun</code> and <code>sbatch</code> is how we package the instructions for the compute node.</p>
+</section>
+<section id="step-3-understanding-your-job-script" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-understanding-your-job-script">Step 3: Understanding your job script</h4>
+<p>In the job script above:</p>
+<ul>
+<li><code>#!/bin/bash</code>: this so-called <strong>shebang</strong> line tells the system to run the script with bash. Add it at the very top of every job script</li>
+<li><code>#SBATCH --...</code>: these lines tell SLURM which resources the job needs and how to name things. They are the same options that you used with <code>srun</code>, plus three new ones:
+<ul>
+<li><code>--job-name</code>: a name for your job, which you see in <code>squeue</code></li>
+<li><code>--output</code>: the file in which SLURM stores everything the job prints to the screen (the <strong>standard output</strong>)</li>
+<li><code>--error</code>: the file in which SLURM stores error messages (the <strong>standard error</strong>)</li>
+<li><code>%j</code> in the file names is replaced by the job ID. This way, every job gets its own log files and nothing is overwritten</li>
+</ul></li>
+<li><code>echo</code> and <code>date</code>: print messages with the time, so that you can follow the progress of the job in the log file</li>
+<li><code>fastqc ...</code>: the actual analysis that runs on the compute node</li>
+</ul>
+<p>Notice that the <code>#SBATCH</code> lines start with <code>#</code>? For bash, these lines are comments. Only SLURM reads them.</p>
+</section>
+<section id="step-4-submit-and-monitor-your-job" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-submit-and-monitor-your-job">Step 4: Submit and monitor your job</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Submit the job script to SLURM</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/run_fastqc.sh</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the job status (the job may run too fast to appear)</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Once the job is finished and no longer in the list, check the outputs</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> logs</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>When the job is submitted, you see something like <code>Submitted batch job 754</code>, and two new log files appear in your <code>logs</code> folder:</p>
+<ul>
+<li><code>fastqc_&lt;jobID&gt;.out</code>: the standard output, e.g.&nbsp;the messages from <code>echo</code> and <code>date</code></li>
+<li><code>fastqc_&lt;jobID&gt;.err</code>: the error log. Check this file if your job fails</li>
+</ul>
+<p>Have a look at both log files, for example with <code>cat logs/fastqc_*.out</code>. Do you see the messages from <code>echo</code> and <code>date</code>? Some programs also write normal progress messages into the error log, so a <code>.err</code> file with content does not always mean that something went wrong.</p>
+<p>Since we gave FastQC the same output folder, the reports from the <code>srun</code> run were replaced by the new ones. Here that is fine, because the input is the same.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Debugging your first sbatch jobs">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Debugging your first sbatch jobs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>If your job fails:</p>
+<ul>
+<li>Check the <code>.err</code> and <code>.out</code> files in the <code>logs</code> folder. These files usually tell you what went wrong</li>
+<li>Check that your input files and paths exist, e.g.&nbsp;with <code>ls</code>. The job runs from the folder in which you typed <code>sbatch</code>, so relative paths start from there</li>
+<li>Try to run the main command interactively with <code>srun</code> first. If it works there, it should also work in a script</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-scancel-cancelling-a-job" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-scancel-cancelling-a-job">Step 5: <code>scancel</code>: Cancelling a job</h4>
+<p>Sometimes you realize that a job is stuck, misconfigured or uses the wrong resources. You can cancel it with <code>scancel</code> and the job ID:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> <span class="op">&lt;</span>jobID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For example, if your job ID was 754:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 754</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Good HPC etiquette">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Good HPC etiquette
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Always cancel jobs that run incorrectly or that you no longer need. This frees resources for others and avoids unnecessary load on the cluster.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sacct-checking-the-resources-a-job-used" class="level3">
+<h3 class="anchored" data-anchor-id="sacct-checking-the-resources-a-job-used"><code>sacct</code>: Checking the resources a job used</h3>
+<p>After a job has finished, you can check which resources it actually used with <code>sacct</code>. Replace <code>754</code> with the job ID of your FastQC job:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sacct</span> <span class="at">-j</span> 754 <span class="at">--format</span><span class="op">=</span>User,JobID,JobName,State,Start,End,Elapsed,MaxRSS,NCPUS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here:</p>
+<ul>
+<li><code>-j 754</code>: show the information for job 754</li>
+<li><code>--format=...</code>: choose which columns to show. The most useful ones are:
+<ul>
+<li><code>State</code>: whether the job finished successfully (COMPLETED) or not (e.g.&nbsp;FAILED, CANCELLED, TIMEOUT)</li>
+<li><code>Elapsed</code>: how long the job ran</li>
+<li><code>MaxRSS</code>: the maximum amount of memory the job used. Compare this with the memory you requested with <code>--mem</code></li>
+<li><code>NCPUS</code>: the number of CPUs the job had</li>
+</ul></li>
+</ul>
+</section>
+<section id="choosing-the-right-amount-of-resources" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-right-amount-of-resources">Choosing the right amount of resources</h3>
+<p>When you are just starting, choosing the right amount of CPUs, memory and run time can be tricky. The resources a job needs vary a lot between tools and datasets. Here are a few rules of thumb:</p>
+<ul>
+<li><strong>Start small</strong>: a lot of tools don’t need huge resources, especially for small test runs</li>
+<li><strong>Check the tool’s documentation</strong>: some tools recommend resource settings</li>
+<li><strong>Test with a small dataset first</strong>: a subset of your data runs faster and helps you find and fix problems</li>
+<li><strong>Check what your job used</strong>: use <code>sacct</code> (see above) to compare what your job used with what you requested. If you plan to run similar jobs over and over again, adjust your requests</li>
+<li><strong>Be careful with how memory is counted</strong>: <code>--mem=4G</code> asks for 4 GB in total for your job, no matter how many CPUs you request. <code>--mem-per-cpu=4G</code> instead asks for 4 GB for each CPU, so <code>--cpus-per-task=4 --mem-per-cpu=4G</code> gives you a total of 16 GB of memory (4 CPUs * 4 GB)</li>
+<li><strong>Adjust step by step</strong>: if your job fails or runs out of memory or time, increase the resources gradually</li>
+</ul>
+<p>Remember: requesting more resources than you need makes your jobs wait longer in the queue and can block others from running.</p>
+</section>
+</section>
+<section id="screen-keeping-srun-jobs-running-optional" class="level2">
+<h2 class="anchored" data-anchor-id="screen-keeping-srun-jobs-running-optional"><code>screen</code>: Keeping srun jobs running (optional)</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using screen for long srun jobs">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using screen for long srun jobs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>One downside of <code>srun</code> for long running jobs is that your terminal is “blocked” as long as the job runs, and your job is aborted if you lose the ssh connection to the HPC. For long running jobs, there are two ways to deal with this:</p>
+<ol type="1">
+<li>use <code>sbatch</code> (see above)</li>
+<li>run the <code>srun</code> job inside a screen</li>
+</ol>
+<p><strong>Screen</strong> (or GNU Screen) is a terminal multiplexer. This means that you can start a screen session and open any number of windows (virtual terminals) inside that session. Processes running in a screen continue to run when their window is not visible, even if you get disconnected. As long as the server is running, your process continues.</p>
+<p>We start a screen as follows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We <strong>detach</strong> from a screen (go outside of it but keep it running in the background) by pressing <code>Ctrl+a</code> and then <code>d</code>.</p>
+<p>If you want to run several analyses in several screens at the same time, it is useful to give your screens descriptive names with the <code>-S</code> option:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> run_fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>After detaching from this screen again with <code>Ctrl+a</code> and then <code>d</code>, you can list all running screens with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You can reconnect to an existing screen like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> run_fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Inside the screen, we can run FastQC the same way as before, but now we don’t risk losing a long-running job:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G <span class="at">--time</span><span class="op">=</span>00:30:00 fastqc data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">-o</span> results/fastqc <span class="at">--threads</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If you want to completely close and remove a screen, type the following and press enter while you are inside the screen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="job-arrays-running-many-files-in-parallel-optional" class="level2">
+<h2 class="anchored" data-anchor-id="job-arrays-running-many-files-in-parallel-optional">Job arrays: Running many files in parallel (optional)</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Advanced tip: sbatch arrays to run multiple files in parallel">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Advanced tip: sbatch arrays to run multiple files in parallel
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>With FastQC, we are lucky that we can give the tool all fastq files at once with a wildcard. Not all programs work this way.</p>
+<p>For this section, let’s assume that we need to give the tool each file one by one. How would we run such a job efficiently?</p>
+<p>We can use a <strong>job array</strong>, which allows us to:</p>
+<ul>
+<li>Run several jobs that have the same job definition, i.e.&nbsp;CPUs, memory and software</li>
+<li>Run these jobs in parallel (at the same time), instead of one after the other</li>
+</ul>
+<p>Let’s start with making a list of the files we want to work with, using what we learned on day 1:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">"/"</span> <span class="op">&gt;</span> samples.txt</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the list: we expect 8 file names</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Next, we use this text file in our job array. Store the following in <code>scripts/array.sh</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=my_array</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/array_%A_%a.out</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/array_%A_%a.err</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-8</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The number of the current job in the array (1 to 8 for our 8 files)</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="va">INDEX</span><span class="op">=</span><span class="va">$SLURM_ARRAY_TASK_ID</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file name on line number INDEX of samples.txt</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="va">CURRENT_SAMPLE</span><span class="op">=</span><span class="va">$(</span><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${INDEX}</span><span class="st">p"</span> samples.txt<span class="va">)</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Print what is happening</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Now Job</span><span class="va">${INDEX}</span><span class="st"> runs on </span><span class="va">${CURRENT_SAMPLE}</span><span class="st">"</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the actual job</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> data/seq_project/<span class="pp">*</span>/<span class="va">${CURRENT_SAMPLE}</span> <span class="at">-o</span> results/fastqc <span class="at">--threads</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In the script, we use some new SLURM options:</p>
+<ul>
+<li><code>#SBATCH --array=1-8</code>: sets up a job array with 8 jobs, numbered 1 to 8. We choose 1-8 because we have exactly 8 fastq.gz files</li>
+<li><code>#SBATCH --output=logs/array_%A_%a.out</code>: <code>%A</code> is replaced by the job ID that SLURM assigns, and <code>%a</code> by the number of the job in the array</li>
+<li><strong>Important</strong>: do the individual jobs in your array use a lot of CPUs or memory? Then you might not want to run all of them at the same time. With <code>#SBATCH --array=1-8%2</code>, SLURM runs at most 2 jobs at the same time, and starts the next ones when these have finished. Try to use no more than ~20% of the Crunchomics cluster at the same time.</li>
+</ul>
+<p>The script does the following:</p>
+<ul>
+<li><code>INDEX</code> stores the value of <code>SLURM_ARRAY_TASK_ID</code>, the number of the current job within the array. This is 1 for the first job, 2 for the second, …, and 8 for the last one</li>
+<li><code>sed -n "${INDEX}p" samples.txt</code> prints one line of <code>samples.txt</code>: line 1 for job 1, line 2 for job 2, and so on. We store this file name in the variable <code>CURRENT_SAMPLE</code>. For the first job, this is <code>Sample-DUMMY1_R1.fastq.gz</code></li>
+<li><code>echo</code> records which job works on which file</li>
+<li>Finally, we run FastQC on the file stored in <code>CURRENT_SAMPLE</code></li>
+</ul>
+<p>Submit the script with <code>sbatch scripts/array.sh</code>. If we check what is happening right after submitting the job with <code>squeue</code>, we should see something like this:</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="../img/arrays.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>We see that jobs 1-4 are already running, and jobs 5-8 are waiting for space. That is one of the useful things about a job manager such as SLURM: it finds the resources on all nodes for us, as long as we requested sensible amounts of CPUs and memory.</p>
+<p>If we check the log files, we should see something like this:</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="../img/arrays2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>We get an output and an error file for each job. In the output, we see the value stored in <code>INDEX</code>, here 1, and in <code>CURRENT_SAMPLE</code>, here <code>Sample-DUMMY1_R1.fastq.gz</code>, and that the analysis finished successfully.</p>
+<p>More about arrays and other SLURM options can be found on the <a href="https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/cli/slurm_basics.html">IBED SLURM basics page</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="installing-software" class="level2">
+<h2 class="anchored" data-anchor-id="installing-software">Installing software</h2>
+<p>There might be cases where the software you are interested in is not installed on the HPC you are working with (or on your own computer).</p>
+<p>In the majority of cases, you should be able to install software by using a package management system, such as conda or mamba. These systems allow you to find and install packages in their own environment without administrator privileges. Let’s have a look at a very brief example:</p>
+<section id="install-condamamba" class="level3">
+<h3 class="anchored" data-anchor-id="install-condamamba">Install conda/mamba</h3>
+<p>A lot of systems already come with conda/mamba installed, however, if possible we recommend working with mamba instead of conda. mamba is a replacement and uses the same commands and configuration options as conda, however, it tends to be much faster. A useful thing is that if you find documentation for conda then you can swap almost all commands between conda &amp; mamba.</p>
+<p>You can check if you have either with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> conda</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> mamba</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If you have conda installed and do not want to install anything else, that is fine. Just replace all instances of mamba with conda below.</p>
+<p>If you don’t have access to either conda or mamba then you can install Miniforge (which includes conda and mamba by default) by running the following two commands:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-O</span> <span class="st">"https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="va">$(</span><span class="fu">uname</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">.sh"</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniforge3-<span class="va">$(</span><span class="fu">uname</span><span class="va">)</span>-<span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span>.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>During installation:</p>
+<ol type="1">
+<li>Read the license (scroll by pressing enter) and say “Yes” when asking for confirmation</li>
+<li>Choose the installation location Important: On Crunchomics, your home directory has only 25 GB of space. Therefore install everything into the personal folder that comes with 500 GB: <code>/zfs/omics/personal/uvanetID/miniforge3</code></li>
+<li>Say “yes” when asked if conda should be initialized</li>
+<li>Restart your shell by typing <code>source ~/.bashrc</code>. You now should see a (base) in front of your prompt indicating that you are now inside conda’s base environment</li>
+<li>Verify the installation:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">-h</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> <span class="at">-h</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="setting-up-an-environment" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-an-environment">Setting up an environment</h3>
+<p>Let’s assume we want to install seqkit, a tool that allows us to calculate some statistics for sequencing data such as the number of sequences or average sequence length per sample.</p>
+<p>We can install seqkit into a separate environment, which we can give a descriptive name, as follows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check if the tool is installed (should return "command not" found if the software is not installed)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> <span class="at">-h</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#create an empty environment and name it seqkit and we add the version number to the name</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#this basically sets up seqkit separate from our default working environment</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#this is useful whenever software require complicated dependencies allowing us to have a separate install away from software that could conflict with each other</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> seqkit_2.6.1</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co">#install seqkit, into the environment we just created</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-n</span> seqkit_2.6.1 <span class="at">-c</span> bioconda seqkit=2.6.1</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co">#to run seqkit, we need activate the environment first</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> activate seqkit_2.6.1</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co">#check if tool is installed, </span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="co">#if installed properly this should return some detailed information on how to run seqkit</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> <span class="at">-h</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="co">#run the tool via srun</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results/seqkit</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span> 2 <span class="at">--mem</span><span class="op">=</span>4G seqkit stats <span class="at">-a</span> <span class="at">-To</span> results/seqkit/seqkit_stats.tsv data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="at">--threads</span> 2</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> results/seqkit/seqkit_stats.tsv </span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="co">#close the environment</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>General recommendations</strong>:</p>
+<ul>
+<li>Whenever possible, use mamba instead of conda, it resolves dependencies faster</li>
+<li>Keep your base environment clean (the base environment is the conda environment you start with when you log into the HPC). Always create new environments for each tool (conda create -n toolname …) instead of installing everything in base</li>
+<li>Check the tool’s documentation for specific installation notes or version requirements</li>
+<li>You can install specific versions when needed with <code>mamba create -n seqkit_v2.6.1 -c bioconda seqkit=2.6.1</code></li>
+<li>You can remove environments you no longer need with <code>conda env remove -n seqkit_v2.6.1</code></li>
+<li>You can list all existing environments with <code>conda env list</code></li>
+</ul>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Download and view the file <code>results/seqkit/seqkit_stats.tsv</code> on your own computer</li>
+<li>Run the seqkit again but this time submit the job via a sbatch script instead of using srun. Notice, that you need to tell SLURM how it can activate the conda environment that has seqkit installed. You might need to google how to do that, since this requires some extra line of code that we have not covered yet but see this as a good exercise for how to handle error messages that you see in the log files for your own analyses</li>
+</ol>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/seqkit/seqkit_stats.tsv .</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2 </span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/seqkit.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Content of <code>scripts/seqkit.sh</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=seqkit_job</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/seqkit_%j.out</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/seqkit_%j.err</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#activate dependencies</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> activate seqkit_2.6.1</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co">#run seqkit</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start seqkit"</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="at">-To</span> results/seqkit/seqkit_stats.tsv data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="at">--threads</span> 2</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit finished"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=seqkit_job</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/seqkit_%j.out</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/seqkit_%j.err</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co">#activate dependencies</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> activate seqkit_2.6.1</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="co">#run seqkit</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start seqkit"</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="at">-To</span> results/seqkit/seqkit_stats.tsv data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="at">--threads</span> 2</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit finished"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In the script above, we see that we need to add two lines of code to activate the seqkit conda environment:</p>
 <pre><code>source ~/.bashrc

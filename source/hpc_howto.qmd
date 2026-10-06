@@ -11,300 +11,536 @@ bibliography: references.bib
 
 # Using an HPC
 
-Now, that you are familiar more familiar with the cli, let's get used to working on an HPC by first login into Crunchomics, uploading our sequencing data an run some software to check the quality of our reads.
+Now that you are more familiar with the command line, we will learn how to work on the UvA Crunchomics HPC. On this page, you will:
+
+-   Connect to Crunchomics and prepare your account
+-   Transfer the sequencing data from your own computer to Crunchomics
+-   Run your first analyses on the compute nodes with SLURM:
+    -   `srun` for short, interactive analyses
+    -   `sbatch` for longer running, more resource intensive analyses
+-   Install your own software with conda
 
 For people following this tutorial outside of UvA:
 
--   If you have access to an HPC using SLURM you still follow the tutorial
--   If you do not have access to an HPC but are interested in how to install and run software that can be used to analyse sequencing data, you still might want to check out the steps run below. The dataset is very small and all analyses can be run on a desktop computer
+-   If you have access to an HPC that uses SLURM, you can still follow the tutorial
+-   If you do not have access to an HPC but are interested in how to install and run software that can be used to analyse sequencing data, you still might want to check out the steps below. The dataset is very small and all analyses can be run on a desktop computer
 
-## `ssh`: Connecting to a sever
+## Connecting to the HPC
 
-**SSH** (Secure Shell) is a network protocol that enables secure remote connections between two systems. The general `ssh` command that you can use to login into any HPC looks as follows:
+### `ssh`: Connecting to a server
+
+**SSH** (Secure Shell) is a network protocol that allows you to securely connect to a remote computer, such as the Crunchomics HPC. The general command looks like this:
 
 ```{bash}
-ssh -X username@server
+ssh username@server
 ```
 
-Options:
+Here:
 
--   `-X` option enables untrusted X11 forwarding in SSH. Untrusted means = your local client sends a command to the remote machine and receives the graphical output. Put simply this option enables us to run graphical applications on a remote server and this for example allows us to view a pdf.
+-   `username` is your account name on the HPC. For Crunchomics, this is your UvAnetID
+-   `server` is the address of the HPC you want to connect to. For Crunchomics, this is `omics-h0.science.uva.nl`
 
-If you have access to and want to connect to Crunchomics you would edit the command above to look like this:
+To log in to Crunchomics, use the following command and enter your UvA password when you are asked for it. Remember that nothing appears on the screen while you type your password:
+
+```{bash}
+# Log in to Crunchomics (replace uvanetid with your own UvAnetID)
+ssh uvanetid@omics-h0.science.uva.nl
+```
+
+You did the same during the [Before you start](installation.qmd) checks. After logging in, the prompt changes: it now shows your UvAnetID and `omics-h0`. Every command you type now runs on Crunchomics, not on your own computer.
+
+::: callout-important
+**Important tips for connecting:**
+
+-   If you want to log in to Crunchomics while working from UvA, use the eduroam network, not the open Amsterdam Science Park network
+-   If you are connecting from outside UvA, you must be connected to the VPN. Contact ICT if you have not set it up or encounter issues
+-   Always double-check your username and the server address to avoid login errors
+:::
+
+::: {.callout-tip title="Tip: Viewing graphical output with ssh -X" collapse="true"}
+Some programs on the HPC can open a window, for example to show a plot or a PDF. To see such windows on your own computer, log in with the `-X` option:
 
 ```{bash}
 ssh -X uvanetid@omics-h0.science.uva.nl
 ```
 
-::: callout-important
-
-If you want to log into Crunchomics while working from UvA use the eduroam network, not the open Amsterdam Science Park network.  
-
-If you want to log into Crunchomics from outside of UvA you need to be connected to the VPN. If you have not set that up and/or have trouble doing so, please contact ICT.
+`-X` enables what is called **X11 forwarding**: the HPC sends the graphical output to your computer. In this tutorial we don't need this, because we copy the results to our own computer instead.
 :::
 
-## Crunchomics: Preparing your account
+::: {.callout-tip title="Tip: Warning about a changed host key" collapse="true"}
+The first time you connect, your computer stores a "fingerprint" of Crunchomics, the so-called host key. After maintenance of Crunchomics, this key can change. Then `ssh` refuses to connect and shows a warning like `REMOTE HOST IDENTIFICATION HAS CHANGED!`.
 
-Ignore this section if you already did this but if this is your first time on Crunchomics, then you want to first run a small Bash script that:
-
--   Allows you to use system-wide installed software, by adding `/zfs/omics/software/bin` to your path. This basically means that bash knows that there is an extra folder in which to look for any software that is pre-installed on the HPC
--   Sets up a python3 environment and some useful python packages
--   Have a link for your 500 GB personal directory in your home directory
-
-To set this up, run the following command in the cli:
+If you know that Crunchomics had maintenance, you can remove the old key from your computer with the command below. Run it on your own computer, not on the HPC. Then log in again and type `yes` when you are asked whether you want to continue connecting.
 
 ```{bash}
+# Remove the stored host key for Crunchomics from your own computer
+ssh-keygen -R "omics-h0.science.uva.nl"
+```
+
+If you are unsure why the key changed, ask before you remove it.
+:::
+
+### Crunchomics: Preparing your account
+
+If this is your **first time using Crunchomics**, you need to run a small bash script to set up your account. Ignore this section if you have done this before. The script:
+
+-   Adds `/zfs/omics/software/bin` to your PATH. The **PATH** is the list of folders in which bash looks for programs. With this change, bash can find the software that is already installed on Crunchomics
+-   Sets up a Python 3 environment with some useful Python packages
+-   Creates a link called `personal` in your home directory. This link leads to your personal directory, which has 500 GB of space. Your home directory itself only has 25 GB
+
+To set up your account, run the following commands:
+
+```{bash}
+# First, orient yourself
+pwd
+ls -lh
+
+# Run the Crunchomics installation script
 /zfs/omics/software/script/omics_install_script
+
+# Check what changed
+# You should now see the personal folder inside your home directory
+ls -lh
 ```
 
-## `scp`: Transferring data from/to a server
+### Preparing your working directory
 
-`scp` stands for Secure Copy Protocol and allows you to securely copy files and directories between remote hosts. When transferring data the transfer is always prepared from the terminal of your personal computer and not from the HPCs login node.
-
-The basic syntax we use looks like this:
-
-`scp [options] SOURCE DESTINATION`
-
-To start analysing our data, we want to move the fastq.gz files that we have worked with before from our personal folder, the source, to a folder on Cruncomics, the destination. Let's start setting up a project folder from which we want to run our analyses by:
-
--   Moving from our home directory into our personal directory on the Crunchomics HPC. We move there since we have more space in the personal directory. Notice, for the command below to work, we need to have already executed the `omics_install_script` script above
--   Make a project folder with a descriptive file name, i.e. projectX
+Next, let's make a project folder for our analyses. Always make project folders inside your personal directory, since it has much more space than your home directory. We give the folder the same name as on our own computer, `data_analysis`:
 
 ```{bash}
-cd personal/
-mkdir projectX
-cd projectX
+# Go into the personal folder
+cd personal
+
+# Make a new project folder and go into it
+mkdir data_analysis
+cd data_analysis
+
+# Check that you are in the right folder
+pwd
 ```
 
-Now that we have organized our working directory on the HPC, we next want to move the data folder (which right now is only on your own, personal computer) with the sequencing that you have downloaded before to Crunchomics. We do this by moving the whole `data` folder from our own computer to the new project folder on the HPC. Therefore, it is important that:
+You now have a clean workspace for all the analyses that you will run on Crunchomics. As on your own computer, it is good practice to keep your raw data, results and scripts in separate folders.
 
--   we run the following command from the cli on our own computer and not from the cli while being logged into the HPC!
--   you exchange the two instances of `username` in the code below with your username/uvanetid
--   In the example below, I am running the code from inside of the `data_analysis` folder that we have generated in the previous tutorial since that is where I have the data folder that I want to move. I use the `-r` option in order to move the whole data folder and not a single file.
+### `scp`: Transferring data to and from a server
+
+Next, we want to transfer the `data` folder with our sequencing data from our own computer to the new project folder on Crunchomics. We do this with `scp` (Secure Copy Protocol), which securely copies files and folders between your computer and a remote server.
+
+The basic syntax is:
+
+-   `scp [options] SOURCE DESTINATION`
+-   A location on a server is written as `username@server:path_on_the_server`
+
+When transferring data, you must **run `scp` in a terminal on your own computer**, not in a terminal that is logged in to the HPC. To keep yourself organized, it is useful to have two terminals open: one on your own computer and one on Crunchomics. In MobaXterm, you can open a second terminal in a new tab:
+
+<p align="left">
+
+<img src="../img/terminal_tabs.png" width="700"/>
+
+</p>
+
+To copy the entire `data` folder into your Crunchomics project folder, use:
 
 ```{bash}
-#run the command below from your local computer, 
-#ensure that the data folder is inside the directory from which you run this command
-scp -r data username@omics-h0.science.uva.nl:/home/username/personal/projectX
-
-#run ls on crunchomics to check if you moved the data successfully
-ll data/seq_project/*/*fastq.gz
+# Run this in the terminal on your OWN computer (not on the HPC),
+# from inside your local data_analysis folder (where the data folder is)
+# Replace both instances of 'username' with your UvAnetID
+scp -r data username@omics-h0.science.uva.nl:/home/username/personal/data_analysis
 ```
 
-::: {.callout-tip title="Tip: Moving data from the HPC to our own computer" collapse="true"}
-We can also move data from the HPC to our own computer. For example, let's assume we want to move a single sequencing file from crunchomics back to our computer. In this case,
+Here:
 
--   We do not need `-r` since we only move a single file
--   We again run this command from a terminal on our computer, not while being logged in the HPC
--   We use `.` to indicate that we want to move the file into the directory we are currently in. If we want to move the file elsewhere we can use any absolute or relative path as needed
+-   `-r` copies a folder together with everything inside it (**recursive**). Without `-r`, `scp` only copies single files
+-   `data` is the source: the folder on your own computer
+-   `username@omics-h0.science.uva.nl:/home/username/personal/data_analysis` is the destination: your project folder on Crunchomics
+
+Now switch to the terminal that is logged in to Crunchomics and check that the files arrived:
 
 ```{bash}
-scp username@omics-h0.science.uva.nl:/home/username/personal/projectX/data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz .
+# Run this on Crunchomics, inside the data_analysis folder
+ls -l data/seq_project/*/*fastq.gz
+
+# We expect 8 files (4 samples, R1 and R2 each)
+ls data/seq_project/*/*fastq.gz | wc -l
+```
+
+::: {.callout-tip title="Tip: Moving data from the HPC to your own computer" collapse="true"}
+You can also copy results from the HPC to your own computer. For this, you switch source and destination. For example, to copy a single sequencing file from Crunchomics:
+
+-   We do not need `-r`, since we only copy a single file
+-   We again run this command in a terminal on our own computer, not on the HPC
+-   The `.` at the end means "copy into the folder I am in right now" on your own computer. If you want to copy the file elsewhere, replace `.` with a path
+
+```{bash}
+scp username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz .
 ```
 :::
 
-::: {.callout-tip title="Tip: Moving data from the HPC using wildcards" collapse="true"}
-We can also move several files at once and ignore the whole folder structure by using wildcards when using `scp`.
+::: {.callout-tip title="Tip: Moving files with wildcards" collapse="true"}
+We can also copy several files at once with a wildcard. Then `scp` copies only the files, not the folders they are in.
 
 ```{bash}
-#make a random directory in our Crunchomics working directory to move our data into
-#again, we generate this folder on Crunchomics
+# On Crunchomics: make a folder to copy the data into
 mkdir transfer_test
 
-#move files from crunchomics to our local computer
-#again, always run scp from your local computer
-scp data/seq_project/barcode00*/*fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/projectX/transfer_test
+# On your own computer: copy all fastq.gz files to the new folder on Crunchomics
+scp data/seq_project/barcode00*/*fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test
 
-#view the data, see how the folder structure is different compared to our first example? 
-#since we moved the data TO Crunchomics, we run ls while being logged into Crunchomics
-ll transfer_test/*
+# On Crunchomics: view the data
+# See how the folder structure is different compared to our first example?
+ls -l transfer_test/*
 ```
 
-**Notice for MAC users**:
+**Notice for Mac users**:
 
-For Mac users that work with an zsh shell the command above might not work and you might get an error like "file not found", "no matches found" or something the like. Without going into details zsh has a slightly different way of handling wildcards and tries to interpret the wildcard literally and thus does not find our files. If you see the error and you are sure the file exists it should work to edit your line of code as follows:
+For Mac users who work with the zsh shell, the command above might not work, and you might get an error like "file not found", "no matches found" or something similar. zsh handles wildcards slightly differently than bash. If you see this error and you are sure that the files exist, try this version of the command:
 
 ```{bash}
-\scp  data/seq_project/barcode00*/*fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/projectX/transfer_test
+\scp data/seq_project/barcode00*/*fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test
 ```
 
-If that does not work, these are some other things to try (different zsh environments might need slightly different solutions):
+If that does not work, these are some other things to try (different zsh setups might need slightly different solutions):
 
 ```{bash}
-noglob scp data/seq_project/barcode00*/*fastq.gz ndombro@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/transfer_test
+noglob scp data/seq_project/barcode00*/*fastq.gz username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test
 
-scp 'data/seq_project/barcode00*/*fastq.gz' ndombro@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/transfer_test
+scp 'data/seq_project/barcode00*/*fastq.gz' username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test
 ```
-
 :::
 
 ::: {.callout-tip title="Tip: Moving files using the FileZilla GUI" collapse="true"}
-`scp` takes some getting used to and there are several graphical user interface programs that are available which provide the same functionality. Here, we will look at FileZilla, as it is compatible with Windows, Mac, and Linux.
+`scp` takes some getting used to, and there are several programs with a graphical user interface that do the same thing. Here, we look at FileZilla, which works on Windows, Mac and Linux.
 
 To use FileZilla, do the following:
 
 1.  Download the FileZilla Client [here](https://filezilla-project.org/). The free version is all we need.
-2.  Follow the download instructions
+2.  Follow the installation instructions
 3.  Click the FileZilla app to start it
-4.  Add Uva user credentials
+4.  Add your UvA user credentials:
     -   Enter `omics-h0.science.uva.nl` in host
-    -   Enter `user_name` in user
-    -   Enter psswd chosen when making surf account
-    -   Port should be 22 to open a sftp connection
+    -   Enter your UvAnetID in user
+    -   Enter your UvA password
+    -   Port should be 22 to open an SFTP connection
 5.  Trust the host
 6.  You land in your home directory (on the right hand side)
-7.  You can copy-paste data by drag and dropping
+7.  You can copy data by dragging and dropping
 :::
 
+## Submitting jobs with SLURM
+
+### Login node and compute nodes
+
+In the HPC introduction, you learned that an HPC has two main parts:
+
+-   The **login node**: where you log in and do light work, such as moving files, editing scripts or preparing jobs
+-   The **compute nodes**: where the actual analyses run. These nodes have more CPUs and memory
+
+We do not run big analyses on the login node. Instead, we send them to the compute nodes as **jobs**. A job is a task that you ask the HPC to run, together with the resources it needs. The jobs are managed by **SLURM**, a workload manager that decides *when*, *where* and *how* your jobs run based on the available resources.
 
 
-## Slurm basics
+### `squeue`: View the jobs in the queue
 
-### Get information about the cluster
-
-Now, that we have our data prepared we want to run a tool to assess the quality of our reads. Before doing that, let's talk about submitting jobs to an HPC.
-
-As a reminder: We do not run big jobs on the login node but need to submit such jobs to the compute nodes via SLURM. Login nodes are for preparing your programs to run and you run your actual jobs by submitting them to the compute nodes using SLURM.
-
-In the next few sections you will get to know the basics steps to be able to do this.
-
-Before doing this it is, however, useful when getting started on a new HPC to know how to get basic information about what nodes are available on a cluster and how busy an HPC is. This allows us to better know how many resources to request in order to have our job run efficiently but also get started in a timely manner.
-
-One way to get a list of available compute nodes is by typing the following command into the cli:
-
-```{bash}
-sinfo
-```
-
-We will see something like this:
-
-![](../img/sinfo.png){fig-align="left" width="60%"}
-
-Here, the different columns you see are:
-
--   partition: tells us what queues that are available. There are few partitions on Crunchomics and you do not need to define them in our case. However, other systems use partitions to group a subset of nodes with different type of hardwares or a specific maximum wall time. For example, you might have specific partitions for memory-heavy versus time-intensive jobs.
--   state: tells you if a node is busy or not. Here:
-    -   mix : consumable resources partially allocated
-    -   idle : available to requests consumable resources
-    -   drain : unavailable for use per system administrator request
-    -   alloc : consumable resources fully allocated
-    -   down : unavailable for use.
--   Nodes: The number of nodes available for each partition
--   NodeList: the names of the compute nodes (i.e. omics-cn001 to omics-cn005)
-
-### View info about jobs in the queue
-
-The following command gives us some information about how busy the HPC is:
+The command below shows you which jobs are currently running or waiting in the queue:
 
 ```{bash}
 squeue
 ```
 
-After running this, you can see all jobs scheduled on the HPC, which might look something like this:
+This shows all jobs on the system and might look something like this:
 
 ![](../img/squeue.png){width="50%" fig-align="left"}
 
--   JOBID: every job gets a number and you can manipulate jobs via this number
--   ST: Job state codes that describe the current state of the job. The full list of abbreviations can be found [here](https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html)
+Some useful columns to know:
 
-If we would have submitted a job, we also should see the job listed there.
+-   JOBID: a unique number for each job. You can use it to check on or cancel a job later
+-   ST: the current state of the job, e.g. R = running, PD = pending (waiting). A full list of SLURM job state codes can be found [here](https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html)
 
-## `srun`:Submitting a job interactively
-
-`srun` is used when you want to run tasks interactively or want to have more control over the execution of a job. You directly issue `srun` commands in the terminal and you at the same time are able to specify the tasks to be executed and their resource requirements. For example, you might want to run softwareX and request that this job requires 10 CPUs and 5 GB of memory.
-
-Use `srun` when:
-
--   You want to run tasks interactively and need immediate feedback printed to the screen
--   You are testing or debugging your commands before incorporating them into a script
--   You need more control over the execution of tasks
--   Typically, you use srun for smaller jobs that do not run for too long, i.e. a few hours
-
-Let's submit a very simple example for which we would not even need to submit a job, but just to get you started.
+Once you have submitted a job, it appears in this list as well. To see only your own jobs, add the `-u` option followed by your user name. `$USER` is a shortcut that bash replaces with your own user name:
 
 ```{bash}
-srun echo "Hello interactively"
+squeue -u $USER
 ```
 
-You should see the output of echo printed to the screen and if you would run `squeue` you won't even see your job since everything ran so fast. But congrats, you communicated the first time with the compute node.
+### `srun`: Submitting a job interactively
 
-Now assume you want to run a more complex interactive task with `srun` that might run longer and benefit from using more CPUs. In this case you need to specify the resources your job needs by adding flags, i.e. some of which you see here:
+Now let's run our first job on a compute node. There are two main ways to submit jobs: `srun` and `sbatch`. We start with `srun`, which you typically use when:
+
+-   You want to run tasks **interactively** and see the output directly on your screen
+-   You are **testing or debugging** your commands before writing a job script
+-   You have **short jobs** (usually less than a few hours)
+
+Let's start with a very simple example to see how `srun` works:
 
 ```{bash}
-srun --cpus-per-task=1 --mem=1G --time=00:10:00 echo "Hello interactively"
+srun --cpus-per-task=1 --mem=1G --time=00:10:00 echo "Hello world"
 ```
 
-The different flags mean the following:
+Here's what each part means:
 
--   `--cpus-per-task=1`: Specifies the number of CPUs per task. Adjust this based on the computational requirements of your task
--   `--mem=1G`: Sets the memory requirement for the task. Modify this based on your task's memory needs
--   `--time=00:10:00` Sets the time limit to 10 minutes
--   `echo "Hello interactively`: The actual command you want to run interactively
+-   `srun`: tells SLURM that you want to run something on a compute node, with the resources that follow
+-   `--cpus-per-task=1`: request 1 CPU
+-   `--mem=1G`: request 1 GB of memory
+-   `--time=00:10:00`: set a maximum run time of 10 minutes (hours:minutes:seconds). If the job takes longer, SLURM stops it
+-   `echo "Hello world"`: the actual command to run
 
-Other flags:
+So everything between `srun` and the actual command tells SLURM which resources your job needs on the compute node. The job runs so fast that you won't see it in `squeue`. But congratulations, you just communicated with a compute node for the first time.
 
--   `--nodes=1`: Specifies the number of nodes (i.e. separate computers) your job runs on. This does not reserve the whole node for you, jobs of other people can still run on the same node. The CPUs you request with `--cpus-per-task` always come from a single node, so for the jobs in this tutorial you can leave this option out. If you ever really need a whole node for yourself, the option for that is `--exclusive`, but on a shared system like Crunchomics you rarely want this.
--   `--ntasks=1`: Defines the number of tasks to run. Here, we would set it to 1 since we want to use echo once
+::: callout-important
+Jobs started with `srun` stop if you lose the connection to the HPC, for example when you close your laptop. For longer jobs, use `sbatch` (see below).
+:::
 
+::: {.callout-tip title="Tip: Other srun options you might see" collapse="true"}
+In examples online, you will often see two more options:
 
-### Choosing the right amount of resources
+-   `--nodes=1`: the number of nodes (i.e. separate computers) your job runs on. This does not reserve the whole node for you, jobs of other people can still run on the same node. The CPUs you request with `--cpus-per-task` always come from a single node, so for the jobs in this tutorial you can leave this option out. If you ever really need a whole node for yourself, the option for that is `--exclusive`, but on a shared system like Crunchomics you rarely want this.
+-   `--ntasks=1`: the number of tasks to run. The default is 1, which is what we need in this tutorial
+:::
 
-When you're just starting, deciding on the right resources to request for your computational job can be a bit challenging. The resource requirements can vary significantly based on the specific tool or workflow you are using. Here are some general guidelines to help you make informed choices:
+### Run FastQC with `srun`
 
--   Use default settings: Begin by working with the default settings provided by the HPC cluster or recommended by the tool itself. These are often set to provide a balanced resource allocation for a wide range of tasks
--   Check the software documentation: Consult the documentation of the software or tool you are using. Many tools provide recommendations for resource allocation based on the nature of the computation.
--   Test with small datasets: For initial testing and debugging especially when working with large datasets, consider working with a smaller subset of your data. This allows for faster job turnaround times, helping you identify and resolve issues more efficiently.
--   Monitor the resources usage:
-    -   Use `sacct` to check what resources a finished job has used and see whether you can optimize a run if you plan to run similar jobs over and over again. An example command would be `sacct -j 419847 --format=User,JobID,Jobname,state,start,end,elapsed,MaxRss,ncpus.` In the report, look for columns like MaxRSS (maximum resident set size) to check if the amount of memory allocated (--mem) was appropriate.
-    -   Ensure that the job used the resources you requested. Be careful with how memory is counted: `--mem=4G` asks for 4 GB in total for your job, no matter how many CPUs you request. `--mem-per-cpu=4G` instead asks for 4 GB for each CPU, so `--cpus-per-task=4 --mem-per-cpu=4G` gives you a total of 16 GB of memory (4 CPUs \* 4 GB). You can verify this with `sacct` to ensure your job's resource requirements align with its actual usage.
--   Fine-Tuning Resource Requests: If you encounter performance issues or your jobs are not completing successfully, consider iteratively adjusting resource requests. This might involve increasing or decreasing the number of CPUs, memory allocation, or other relevant parameters.
+Next, let's use `srun` for something more useful. [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a quality control tool for sequencing data that is already installed on Crunchomics. We use it to look more closely at the quality of the sequencing data that we just copied to Crunchomics.
 
-### Run FastQC with srun
-
-[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a quality control tool for high throughput sequence data that is already installed on Crunchomics. This will be the actual software that we now want to run to look more closely at the quality of the sequencing data that we just uploaded to Crunchomics.
-
-By the way: Whenever running a software for a first time, it is useful to check the manual, for example with `fastqc -h.`
-
-Let's start by setting up a clean folder structure to keep our files organized. I start with making a folder in which I want to store all results generated in this analysis and by using the `-p` argument I generate a fastqc folder inside the results folder at the same time. Then, we can submit our job using `srun`.
+Whenever you use a tool for the first time, check its help page (e.g. `fastqc -h`) to see all available options, or look online for a manual.
 
 ```{bash}
-mkdir -p results/fastqc 
+# Make a results folder with a fastqc folder inside
+mkdir -p results/fastqc
 
-srun --cpus-per-task=1 --mem=5G fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1
+# Run FastQC on all fastq.gz files with srun
+srun --cpus-per-task=1 --mem=5G --time=00:30:00 fastqc data/seq_project/*/*gz -o results/fastqc --threads 1
 
-ll results/fastqc/*
+# Check the output: we expect one HTML report (and one zip file) per fastq.gz file
+ls -l results/fastqc
 ```
 
-Since we work with little data this will run extremely fast despite only using 1 CPU (or thread, in our case these two words can be used interchangeably). However, if you would be logged into Crunchomics via a second window and run `squeue` you should see that your job is actively running (in the example below, the job we submitted is named after the software and got the jobid 746):
+Here:
+
+-   `fastqc data/seq_project/*/*gz`: run FastQC on all files in the `seq_project` folders that end with `gz`
+-   `-o results/fastqc`: write the output into the `results/fastqc` folder
+-   `--threads 1`: let FastQC use 1 CPU (in our case, thread and CPU mean the same)
+    -   **Important**: always make sure that the number of CPUs you request from SLURM matches the number of CPUs (threads) the software uses. If the tool uses more than you requested, it competes with itself for CPUs. If you request more than the tool uses, the extra CPUs sit idle while others could use them
+
+Since we work with little data, this runs fast despite only using 1 CPU. If you are logged in to Crunchomics in a second terminal and run `squeue` while FastQC is running, you should see your job (in the example below, the job is named after the software and got the job ID 746):
 
 ![](../img/squeue2.png){width="50%" fig-align="left"}
 
-Additionally, after the run is completed, you should see that several HTML files were generated in our fastqc folder.
-
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-Use scp to download the HTML files generated by fastqc to your own computer and view one of the HTML files.
+The FastQC reports are HTML files, which are easiest to view in the internet browser of your own computer.
+
+1.  Use `scp` to copy the HTML files generated by FastQC from Crunchomics into the `results/fastqc` folder of the `data_analysis` folder on your own computer
+2.  Open the folder in your file browser and open one of the HTML files
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-scp username@omics-h0.science.uva.nl:/home/username/personal/projectX/results/fastqc/*html results/fastqc/
+# Run all of this in the terminal on your OWN computer,
+# from inside your local data_analysis folder
+
+# Question 1:
+# Make the folder for the reports
+mkdir -p results/fastqc
+
+# Copy all HTML reports
+# The quotes make sure that the wildcard is used on Crunchomics, not on your own computer
+scp 'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/fastqc/*html' results/fastqc/
+
+# Check that the 8 reports arrived
+ls -l results/fastqc
+
+# Question 2:
+# Open the folder in your file browser
+cd results/fastqc
+explorer.exe .     # Windows (MobaXterm or WSL2)
+open .             # Mac
 ```
 
-You could also open a file on Crunchomics with `firefox results/fastqc/Sample-DUMMY1_R1_fastqc.html`. However, connecting to the internet via a cli on a remote server tends to be rather slow and its often better to view files on your own computer especially if they are large files.
-
-If you want to know more about how to to interpret the output, you can visit [the fastqc website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which gives some examples for interpreting good and bad reports.
+Double-click on one of the HTML files to open it in your browser. If you want to know more about how to interpret the output, visit [the FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which gives examples of good and bad reports.
 :::
 :::
 
-## `screen`: Submitting long running jobs via srun
+### `srun --pty bash`: Working interactively on a compute node
 
-One down-side of `srun` for long running jobs is that your terminal gets "blocked" as long as the job is running and your job will be aborted if you loose the ssh connection to the HPC. For long running jobs, there are two ways to deal with this:
+Sometimes you want to try out several commands after each other on a compute node, for example to test a new tool. Instead of putting `srun` in front of every command, you can open an **interactive session**: a shell that runs on a compute node.
 
-1.  submit a srun job in a screen
-2.  use sbatch
+```{bash}
+# Open an interactive bash shell on a compute node for at most 1 hour
+srun --cpus-per-task=1 --mem=5G --time=01:00:00 --pty bash -i
+```
 
-In this section, we will cover how to use screen. Screen or GNU Screen is a terminal multiplexer. This means that you can start a screen session and then open any number of windows (virtual terminals) inside that session.
+Here:
 
-Processes running in Screen will continue to run when their window is not visible even if you get disconnected. This is perfect, if we start longer running processes on the server and want to shut down our computer when leaving for the day. As long as the server is still connected to the internet, your process will continue running.
+-   `--pty bash -i` starts an interactive bash shell on the compute node, instead of running a single command
+
+Your prompt changes: it now shows the name of the compute node instead of `omics-h0`. You can check where you are with the command `hostname`, which prints the name of the computer you are working on. Every command you type now runs on the compute node, with the resources you requested.
+
+When you are done, leave the compute node and go back to the login node:
+
+```{bash}
+exit
+```
+
+::: callout-important
+Always `exit` an interactive session when you are done. As long as the session is open, the CPUs and memory you requested stay reserved for you, even if you don't use them, and other people have to wait for them.
+:::
+
+### `sbatch`: Submitting a long-running job
+
+While `srun` is great for quick, interactive runs, most analyses on an HPC are submitted with **`sbatch`**. With `sbatch`, you write your commands into a **job script**, a text file with all the commands and the resources your job needs. SLURM then runs the script in the background, even after you log out.
+
+Use `sbatch` when:
+
+-   You have **long or resource-intensive** analyses
+-   You want jobs to run **unattended**, without your direct supervision
+-   You want to **run several jobs** after each other or at the same time
+
+#### Step 1: Create folders for scripts and logs
+
+We keep our project tidy by making separate folders for our job scripts and for the log files that SLURM writes:
+
+```{bash}
+mkdir -p scripts logs
+
+# Check that the folders are there
+ls -l
+```
+
+#### Step 2: Write a job script
+
+We run FastQC again, but this time with `sbatch` instead of `srun`, so that you can directly compare the two.
+
+Use `nano` to create a script file:
+
+```{bash}
+nano scripts/run_fastqc.sh
+```
+
+Then add the following content:
+
+```{bash}
+#!/bin/bash
+#SBATCH --job-name=fastqc
+#SBATCH --output=logs/fastqc_%j.out
+#SBATCH --error=logs/fastqc_%j.err
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=5G
+#SBATCH --time=01:00:00
+
+echo "FastQC job started on:"
+date
+
+fastqc data/seq_project/*/*gz -o results/fastqc --threads 1
+
+echo "FastQC job finished on:"
+date
+```
+
+Save and exit:
+
+-   Press `Ctrl+X` to exit, then `Y` to confirm that you want to save the file, then Enter to keep the file name
+
+Notice how the `fastqc` command looks exactly the same as when we used `srun`? The main difference between `srun` and `sbatch` is how we package the instructions for the compute node.
+
+#### Step 3: Understanding your job script
+
+In the job script above:
+
+-   `#!/bin/bash`: this so-called **shebang** line tells the system to run the script with bash. Add it at the very top of every job script
+-   `#SBATCH --...`: these lines tell SLURM which resources the job needs and how to name things. They are the same options that you used with `srun`, plus three new ones:
+    -   `--job-name`: a name for your job, which you see in `squeue`
+    -   `--output`: the file in which SLURM stores everything the job prints to the screen (the **standard output**)
+    -   `--error`: the file in which SLURM stores error messages (the **standard error**)
+    -   `%j` in the file names is replaced by the job ID. This way, every job gets its own log files and nothing is overwritten
+-   `echo` and `date`: print messages with the time, so that you can follow the progress of the job in the log file
+-   `fastqc ...`: the actual analysis that runs on the compute node
+
+Notice that the `#SBATCH` lines start with `#`? For bash, these lines are comments. Only SLURM reads them.
+
+#### Step 4: Submit and monitor your job
+
+```{bash}
+# Submit the job script to SLURM
+sbatch scripts/run_fastqc.sh
+
+# Check the job status (the job may run too fast to appear)
+squeue -u $USER
+
+# Once the job is finished and no longer in the list, check the outputs
+ls -l logs
+ls -l results/fastqc
+```
+
+When the job is submitted, you see something like `Submitted batch job 754`, and two new log files appear in your `logs` folder:
+
+-   `fastqc_<jobID>.out`: the standard output, e.g. the messages from `echo` and `date`
+-   `fastqc_<jobID>.err`: the error log. Check this file if your job fails
+
+Have a look at both log files, for example with `cat logs/fastqc_*.out`. Do you see the messages from `echo` and `date`? Some programs also write normal progress messages into the error log, so a `.err` file with content does not always mean that something went wrong.
+
+Since we gave FastQC the same output folder, the reports from the `srun` run were replaced by the new ones. Here that is fine, because the input is the same.
+
+::: {.callout-tip title="Tip: Debugging your first sbatch jobs" collapse="false"}
+If your job fails:
+
+-   Check the `.err` and `.out` files in the `logs` folder. These files usually tell you what went wrong
+-   Check that your input files and paths exist, e.g. with `ls`. The job runs from the folder in which you typed `sbatch`, so relative paths start from there
+-   Try to run the main command interactively with `srun` first. If it works there, it should also work in a script
+:::
+
+#### Step 5: `scancel`: Cancelling a job
+
+Sometimes you realize that a job is stuck, misconfigured or uses the wrong resources. You can cancel it with `scancel` and the job ID:
+
+```{bash}
+scancel <jobID>
+```
+
+For example, if your job ID was 754:
+
+```{bash}
+scancel 754
+```
+
+::: {.callout-tip title="Tip: Good HPC etiquette" collapse="false"}
+Always cancel jobs that run incorrectly or that you no longer need. This frees resources for others and avoids unnecessary load on the cluster.
+:::
+
+### `sacct`: Checking the resources a job used
+
+After a job has finished, you can check which resources it actually used with `sacct`. Replace `754` with the job ID of your FastQC job:
+
+```{bash}
+sacct -j 754 --format=User,JobID,JobName,State,Start,End,Elapsed,MaxRSS,NCPUS
+```
+
+Here:
+
+-   `-j 754`: show the information for job 754
+-   `--format=...`: choose which columns to show. The most useful ones are:
+    -   `State`: whether the job finished successfully (COMPLETED) or not (e.g. FAILED, CANCELLED, TIMEOUT)
+    -   `Elapsed`: how long the job ran
+    -   `MaxRSS`: the maximum amount of memory the job used. Compare this with the memory you requested with `--mem`
+    -   `NCPUS`: the number of CPUs the job had
+
+### Choosing the right amount of resources
+
+When you are just starting, choosing the right amount of CPUs, memory and run time can be tricky. The resources a job needs vary a lot between tools and datasets. Here are a few rules of thumb:
+
+-   **Start small**: a lot of tools don't need huge resources, especially for small test runs
+-   **Check the tool's documentation**: some tools recommend resource settings
+-   **Test with a small dataset first**: a subset of your data runs faster and helps you find and fix problems
+-   **Check what your job used**: use `sacct` (see above) to compare what your job used with what you requested. If you plan to run similar jobs over and over again, adjust your requests
+-   **Be careful with how memory is counted**: `--mem=4G` asks for 4 GB in total for your job, no matter how many CPUs you request. `--mem-per-cpu=4G` instead asks for 4 GB for each CPU, so `--cpus-per-task=4 --mem-per-cpu=4G` gives you a total of 16 GB of memory (4 CPUs \* 4 GB)
+-   **Adjust step by step**: if your job fails or runs out of memory or time, increase the resources gradually
+
+Remember: requesting more resources than you need makes your jobs wait longer in the queue and can block others from running.
+
+## `screen`: Keeping srun jobs running (optional)
+
+::: {.callout-tip title="Using screen for long srun jobs" collapse="true"}
+One downside of `srun` for long running jobs is that your terminal is "blocked" as long as the job runs, and your job is aborted if you lose the ssh connection to the HPC. For long running jobs, there are two ways to deal with this:
+
+1.  use `sbatch` (see above)
+2.  run the `srun` job inside a screen
+
+**Screen** (or GNU Screen) is a terminal multiplexer. This means that you can start a screen session and open any number of windows (virtual terminals) inside that session. Processes running in a screen continue to run when their window is not visible, even if you get disconnected. As long as the server is running, your process continues.
 
 We start a screen as follows:
 
@@ -312,206 +548,111 @@ We start a screen as follows:
 screen
 ```
 
-We detach (go outside of a screen but keep the screen running in the background) from a screen by pressing `control+a+d`.
+We **detach** from a screen (go outside of it but keep it running in the background) by pressing `Ctrl+a` and then `d`.
 
-If you want to run multiple analyses in multiple screens at the same time, then can be useful to give your screens more descriptive names. You can give screens a name using the `-S` option:
+If you want to run several analyses in several screens at the same time, it is useful to give your screens descriptive names with the `-S` option:
 
 ```{bash}
 screen -S run_fastqc
 ```
 
-After detaching from this screen again with `control+a+d` you can create a list of all currently running screens with:
+After detaching from this screen again with `Ctrl+a` and then `d`, you can list all running screens with:
 
 ```{bash}
 screen -ls
 ```
 
-You can re-connect to an existing screen like this:
+You can reconnect to an existing screen like this:
 
 ```{bash}
 screen -r run_fastqc
 ```
 
-Now inside our screen, we can run fastqc same as we did before (but now don't risk to loose a long-running job):
+Inside the screen, we can run FastQC the same way as before, but now we don't risk losing a long-running job:
 
 ```{bash}
-srun --cpus-per-task=1 --mem=5G fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1 
+srun --cpus-per-task=1 --mem=5G --time=00:30:00 fastqc data/seq_project/*/*gz -o results/fastqc --threads 1
 ```
 
-For long-running jobs we can start multiple screens at once or even if we just have one screen open, close it and leave for the day or simply work on other things on the cli outside of the screen.
-
-If you want to completely close and remove a screen, type the following and press enter while being inside of the screen:
+If you want to completely close and remove a screen, type the following and press enter while you are inside the screen:
 
 ```{bash}
 exit
 ```
-
-## `sbatch`: submitting a long-running job
-
-`sbatch` is your go-to command when you have a script (i.e. a batch script) that needs to be executed without direct user interaction.
-
-Use `sbatch` when:
-
--   You have long-running or resource-intensive tasks
--   You want to submit jobs that can run independently without your immediate supervision
--   You want to submit multiple jobs at once
-
-To run a job script, you:
-
--   create a script that contains all the commands and configurations needed for your job
--   use sbatch to submit this script to the Slurm scheduler, and it takes care of the rest.
-
-Let's start with generating some new folders to keep our project folder organized:
-
-```{bash}
-mkdir scripts 
-mkdir logs
-```
-
-To get started, assume we have created a script in the scripts folder named `run_fastqc.sh` with the content that is shown below. Notice, how in this script I added some additional `echo` commands? I just use these to print some information about the progress which could be printed to a log file but if you have several commands that should be executed after each other that is how you would do it.
-
-```{bash}
-#!/bin/bash
-#SBATCH --cpus-per-task=1
-#SBATCH --mem=5G      
-#SBATCH --time=1:00:00
-
-echo "Start fastqc"
-
-fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1
-
-echo "fastqc finished"
-```
-
-In the job script above:
-
--   `#!/bin/bash` . This so-called Shebang line tells the shell to interpret and run the Slurm script using the bash shell. This line should always be added at the very top of your SBATCH/Slurm script.
--   The lines that follow and start with `#` are the lines in which we define the amount of resources required for our job to run. In our case, we request 1 CPU, 5G of memory and 1 hour time limit.
--   If your code needs any dependencies, such as conda environments, you would add these dependencies here. We do not need this for our example here, but you might need to add something like this `conda activate my_env` if you have installed your own software. We will touch upon conda environments and installing software a bit later.
--   The lines afterwards are the actually commands that we want to run on the compute nodes, We also call this the job steps.
-
-To prepare the script and run it:
-
--   Run `nano scripts/run_fastqc.sh` to generate an empty jobscript file
--   Add the code from above into the file we just opened
--   Press `ctrl+x` to exit nano
--   Type `Y` when prompted if the changes should be saved
--   Confirm that the file name is good by pressing enter
-
-Afterwards, you can submit `run_fastqc.sh` as follows:
-
-```{bash}
-#submit job: 754
-sbatch scripts/run_fastqc.sh
-
-#check if job is running correctly
-squeue
-```
-
-After running this, you should see that the job was submitted and something like this printed to the screen `Submitted batch job 754`. You will also see that a new file is generated that will look something like this `slurm-754.out`.
-
-When you submit a batch job using sbatch, Slurm redirects the standard output and standard error messages, which you have seen printed to the screen when you used `srun`, to a file named in the format slurm-JOBID.out, where JOBID is the unique identifier assigned to your job.
-
-This file is useful as it:
-
--   Captures the output of our batch scripts and stores them in a file
--   Can be used for debugging, since if something goes wrong with your job, examining the contents of this file can provide valuable insights into the issue. Error messages, warnings, or unexpected outputs are often recorded here
-
-Feel free to explore the content of the log file, do you see how the echo commands are used as well?
-
-::: {.callout-tip title="Tip: sbatch and better log files" collapse="true"}
-We have seen that by default `sbatch` redirects the standard output and error to our working directory and that it decides itself how to name the files. Since file organization is very important especially if you generate lots of files, you find below an example to:
-
--   Store the standard output and error in two separate files
--   Redirect the output into another folder, the logs folder
--   In the code below, the `%j` is replaced with the job allocation number once the log files are generated
-
-```{bash}
-#!/bin/bash
-#SBATCH --job-name=our_fastqc_job
-#SBATCH --output=logs/fastqc_%j.out
-#SBATCH --error=logs/fastqc_%j.err
-#SBATCH --cpus-per-task=1
-#SBATCH --mem=5G
-#SBATCH --time=1:00:00
-
-echo "Start fastqc"
-
-fastqc data/seq_project/*/*gz -o results/fastqc  --threads 1
-
-echo "fastqc finished"
-```
 :::
 
+## Job arrays: Running many files in parallel (optional)
+
 ::: {.callout-tip title="Advanced tip: sbatch arrays to run multiple files in parallel" collapse="true"}
-With fastqc we are very lucky that the tool can identify all the fastq files in the directory we specify with `-o` by making use of the wildcard. This is extremely useful for us but by far not all programs work this way.
+With FastQC, we are lucky that we can give the tool all fastq files at once with a wildcard. Not all programs work this way.
 
-For this section, lets assume that we need to provide each individual file we want to analyse, one by one, and can not provide a folder name. How would we run such a job effectively?
+For this section, let's assume that we need to give the tool each file one by one. How would we run such a job efficiently?
 
-What we want to do is created what is called a job array that allows us to:
+We can use a **job array**, which allows us to:
 
--   Run multiple jobs that have the same job definition, i.e. cpus, memory and software used
--   Run these job in the most optimal way. I.e. we do not want to run one job after each other but we also want to run jobs in parallel at the same time to optimize resource usage.
+-   Run several jobs that have the same job definition, i.e. CPUs, memory and software
+-   Run these jobs in parallel (at the same time), instead of one after the other
 
-Let's start with making a list with files we want to work with based on what we have already learned:
+Let's start with making a list of the files we want to work with, using what we learned on day 1:
 
 ```{bash}
 ls data/seq_project/*/*.gz | cut -f4 -d "/" > samples.txt
+
+# Check the list: we expect 8 file names
+cat samples.txt
+wc -l samples.txt
 ```
 
-Next, we can use this text file in our job array, the content of which we store in `scripts/array.sh`:
+Next, we use this text file in our job array. Store the following in `scripts/array.sh`:
 
 ```{bash}
 #!/bin/bash
-
 #SBATCH --job-name=my_array
 #SBATCH --output=logs/array_%A_%a.out
 #SBATCH --error=logs/array_%A_%a.err
 #SBATCH --array=1-8
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=5G
+#SBATCH --mem=5G
 
-#calculate the index of the current job within the batch
-#in our case the index will store the values 1 to 8 for our 8 files
-INDEX=$((SLURM_ARRAY_TASK_ID ))
+# The number of the current job in the array (1 to 8 for our 8 files)
+INDEX=$SLURM_ARRAY_TASK_ID
 
-#build an array structure that stores the fastq.gz file names
-CURRENT_SAMPLE=$(cat samples.txt |  sed -n "${INDEX}p")
+# Read the file name on line number INDEX of samples.txt
+CURRENT_SAMPLE=$(sed -n "${INDEX}p" samples.txt)
 
-#print what is actually happening
+# Print what is happening
 echo "Now Job${INDEX} runs on ${CURRENT_SAMPLE}"
 
-#run the actual job
-fastqc data/seq_project/*/${CURRENT_SAMPLE} -o results/fastqc  --threads 1
+# Run the actual job
+fastqc data/seq_project/*/${CURRENT_SAMPLE} -o results/fastqc --threads 1
 ```
 
-In the script we use some new SLURM arguments:
+In the script, we use some new SLURM options:
 
--   `#SBATCH --array=1-8`: Sets up a job array, specifying the range (1-8). We choose 1-8 because we have exactly 8 fastq.gz files we want to analyse
--   `#SBATCH --output=logs/array_%A_%a.out`: Store the standard output and error. `%A` represents the job ID assigned by Slurm, and `%a` represents the array task ID
--   **Important**: Are your individual arrays large jobs that use a lot of CPUs/memory? Then you might not want to submit all at the same time but submit them in a step-wise manner. With `#SBATCH --array=1-8%2` you would only submit the first two jobs and only after these have finished the next jobs. Remember, try to use not more than ~20% of the crunchomics cluster at the same time.
+-   `#SBATCH --array=1-8`: sets up a job array with 8 jobs, numbered 1 to 8. We choose 1-8 because we have exactly 8 fastq.gz files
+-   `#SBATCH --output=logs/array_%A_%a.out`: `%A` is replaced by the job ID that SLURM assigns, and `%a` by the number of the job in the array
+-   **Important**: do the individual jobs in your array use a lot of CPUs or memory? Then you might not want to run all of them at the same time. With `#SBATCH --array=1-8%2`, SLURM runs at most 2 jobs at the same time, and starts the next ones when these have finished. Try to use no more than ~20% of the Crunchomics cluster at the same time.
 
-The job does the following:
+The script does the following:
 
--   The `INDEX` variable is storing the value of the current `SLURM_ARRAY_TASK_ID`. This represents the ID of the current job within the array. In our case this will be first 1, then 2, ..., and finally 8.
--   Next, we build the array structure in which the `CURRENT_SAMPLE` variable is created by:
-    -   Reading the `sample_list.txt` file with `cat`
-    -   Using a pipe to extract the file name at the calculated index using sed. [Sed](https://scienceparkstudygroup.github.io/software_information/source/cli/cli_file_manipulation.html#sed-manipulating-the-content-of-files) is an extremely powerful way to edit text that we have not covered here but `-n 1p` is a option that allows us to print one specific line of a file, in our case the first one when running array 1. So for the first array the actual code run is the following `cat samples.txt |  sed -n "1p"`. For the next array, we would run `cat samples.txt |  sed -n "2p"` and so forth.
-    -   The output of the pipe is stored in a variable, called `CURRENT_SAMPLE`. For our first sample this will be `Sample-DUMMY1_R1.fastq.gz`
--   We use echo to record what was executed when and store this information in the standard output
--   We run our actual fastqc job on the file name that is currently stored in the `CURRENT_SAMPLE` variable.
+-   `INDEX` stores the value of `SLURM_ARRAY_TASK_ID`, the number of the current job within the array. This is 1 for the first job, 2 for the second, ..., and 8 for the last one
+-   `sed -n "${INDEX}p" samples.txt` prints one line of `samples.txt`: line 1 for job 1, line 2 for job 2, and so on. We store this file name in the variable `CURRENT_SAMPLE`. For the first job, this is `Sample-DUMMY1_R1.fastq.gz`
+-   `echo` records which job works on which file
+-   Finally, we run FastQC on the file stored in `CURRENT_SAMPLE`
 
-If we check what is happening right after submitting the job with `squeue` we should see something like this:
+Submit the script with `sbatch scripts/array.sh`. If we check what is happening right after submitting the job with `squeue`, we should see something like this:
 
 ![](../img/arrays.png){width="50%" fig-align="left"}
 
-We see that jobs 1-4 are already running and the jobs 5-8 are currently waiting for space. That is one of the useful things using a job manager such as SLURM. It takes care of finding the appropriate resources on all nodes for us as long as we defined the required cpus and memory sensibly.
+We see that jobs 1-4 are already running, and jobs 5-8 are waiting for space. That is one of the useful things about a job manager such as SLURM: it finds the resources on all nodes for us, as long as we requested sensible amounts of CPUs and memory.
 
-If we check the log files we should see something like this:
+If we check the log files, we should see something like this:
 
 ![](../img/arrays2.png){width="50%" fig-align="left"}
 
-We see that we get an individual output and error file for each job. In the output we see what value is stored in the `INDEX`, here 1, and the `CURRENT_SAMPLE`, here `Sample-DUMMY1_R1.fastq.gz` and that the analysis finished successfully.
+We get an output and an error file for each job. In the output, we see the value stored in `INDEX`, here 1, and in `CURRENT_SAMPLE`, here `Sample-DUMMY1_R1.fastq.gz`, and that the analysis finished successfully.
+
+More about arrays and other SLURM options can be found on the [IBED SLURM basics page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/cli/slurm_basics.html).
 :::
 
 ## Installing software
@@ -524,23 +665,35 @@ In the majority of cases, you should be able to install software by using a pack
 
 A lot of systems already come with conda/mamba installed, however, if possible we recommend working with mamba instead of conda. mamba is a replacement and uses the same commands and configuration options as conda, however, it tends to be much faster. A useful thing is that if you find documentation for conda then you can swap almost all commands between conda & mamba.
 
+You can check if you have either with:
+
+```{bash}
+which conda
+which mamba
+```
+
 If you have conda installed and do not want to install anything else, that is fine. Just replace all instances of mamba with conda below.
 
-This command should work in most cases to setup conda together with mamba:
+If you don’t have access to either conda or mamba then you can install Miniforge (which includes conda and mamba by default) by running the following two commands:
 
 ```{bash}
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 bash Miniforge3-$(uname)-$(uname -m).sh
 ```
 
-When running the bash command, you get asked a few questions:
+During installation:
 
-1. Read the license and use arrow down to scroll down. Don't scroll too fast, so that you see the next question
-2. Decide where conda gets installed. You can say yes to the default location in your home. But don't forget that for Crunchomics your home only has 25G of space. You could also install the miniforge/mambaforge folder in your personal folder instead.
-3. Say yes, when you get asked whether conda should be initialized during start up
-4. Restart the shell (exit the terminal and use ssh to log back in) for the changes to take effect
-5. Check if conda is accessible by running `conda -h`
+1.    Read the license (scroll by pressing enter) and say “Yes” when asking for confirmation
+2.    Choose the installation location
+        Important: On Crunchomics, your home directory has only 25 GB of space. Therefore install everything into the personal folder that comes with 500 GB: `/zfs/omics/personal/uvanetID/miniforge3`
+3.    Say “yes” when asked if conda should be initialized
+4.    Restart your shell by typing `source ~/.bashrc`. You now should see a (base) in front of your prompt indicating that you are now inside conda’s base environment
+5. Verify the installation:
 
+```{bash}
+conda -h
+mamba -h
+```
 
 
 ### Setting up an environment
@@ -577,16 +730,15 @@ less -S results/seqkit/seqkit_stats.tsv
 conda deactivate
 ```
 
-When installing seqkit, we:
+**General recommendations**:
 
--   specify the exact version we want to download with `=2.6.1`. We could also install the newest version that conda/mamba can find by running `mamba install -n seqkit -c bioconda seqkit`.
--   specify that we want to look for seqkit in the bioconda channel with the option `-c`. Channels are the locations where packages are stored. They serve as the base for hosting and managing packages. Conda packages are downloaded from remote channels, which are URLs to directories containing conda packages. If you are unable to find a package it might be that you need to specify a channel.
+-    Whenever possible, use mamba instead of conda, it resolves dependencies faster
+-    Keep your base environment clean (the base environment is the conda environment you start with when you log into the HPC). Always create new environments for each tool (conda create -n toolname …) instead of installing everything in base
+-    Check the tool’s documentation for specific installation notes or version requirements
+-    You can install specific versions when needed with `mamba create -n seqkit_v2.6.1 -c bioconda seqkit=2.6.1`
+-    You can remove environments you no longer need with `conda env remove -n seqkit_v2.6.1`
+-    You can list all existing environments with `conda env list`
 
-Forgot what conda environments you installed in the past? You can run `conda env list` to generate a list of all existing environments.
-
-Unsure if a software can be installed with conda? Google conda together with the software name, which should lead you do a conda web page. This page should inform you whether you need to add a specific channel to install the software as well as the version numbers available.
-
-A full set of mamba/conda commands can be found [here](https://docs.conda.io/projects/conda/en/latest/commands/index.html.).
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Download and view the file `results/seqkit/seqkit_stats.tsv` on your own computer
@@ -595,7 +747,7 @@ A full set of mamba/conda commands can be found [here](https://docs.conda.io/pro
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
 # Question 1
-scp username@omics-h0.science.uva.nl:/home/ndombro/personal/projectX/results/seqkit/seqkit_stats.tsv .
+scp username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/seqkit/seqkit_stats.tsv .
 
 # Question 2 
 sbatch scripts/seqkit.sh

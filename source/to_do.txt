@@ -107,6 +107,27 @@ Project notes for Claude: CLAUDE.md (local only)
 
 ## Day 2: HPC (hpc_intro.qmd, hpc_howto.qmd)
 
+- ROUND 1 DONE 2026-10-06 (hpc_howto.qmd): wording + structure from the MicEco2025 hpc_howto page,
+  schedule order with FastQC only. Project folder on Crunchomics is now ~/personal/data_analysis
+  (was projectX), login with plain ssh (-X in a tip). New: host key tip, PATH defined, project
+  folder section, using_mobaxterm_tabs.png in scp, sinfo/squeue/srun explained, srun --pty bash,
+  sbatch in 5 steps with logs/ from the start + scancel, sacct + choosing resources after sbatch,
+  screen and arrays optional (arrays: dead link replaced by IBED SLURM page). FastQC exercise:
+  scp reports back + explorer.exe/open.
+- ROUND 2 (needs testing on Crunchomics): conda section (MicEco text: which conda, one-step
+  mamba create, conda activate, recommendations list; Miniforge into ~/personal) + fastp
+  (one sample with srun, loop with echo, loop in sbatch, output checks). The conda/seqkit part at
+  the end of hpc_howto.qmd is still the old text (only paths fixed).
+- To check on Crunchomics (not added yet, or written without a test run):
+  - MicEco says `srun ... echo "Hello world"` may print the output twice. Does it?
+  - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
+    without scp. Still available? Add as a tip?
+  - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
+  - Does FastQC write its progress messages to the .err log? (page says some programs do)
+  - ssh-keygen -R "omics-h0.science.uva.nl" (host key tip) in MobaXterm: does it use the
+    known_hosts file in the MobaXterm home?
+  - Day 2 outputs/screenshots (squeue2.png, arrays.png) show old job names; replace after a test run.
+
 - Replace seqkit with fastp everywhere: hpc_howto.qmd, conda section, exercises,
   example_doc/scripts/seqkit.sh, example_notebook.qmd.
 - Order: FastQC with srun (simple, wildcard) → fastp on one sample with srun (look at what it
@@ -122,15 +143,13 @@ Project notes for Claude: CLAUDE.md (local only)
 - omics_install_script: run in class, explain what it does (PATH, python, ~/personal link).
 - Miniforge: in class, after a short "what is conda/mamba" + instructor demo. Install into
   ~/personal (500 GB), not home (25 GB). Make this very visible.
-- Add interactive session with srun --pty bash (snippet below).
-- Add tip for "host key changed" after a Crunchomics reboot (snippet below). Path differs per
-  system (MobaXterm vs WSL/Mac).
-- Move sacct (and "choosing resources") after the first batch job.
-- Make screen optional (sbatch covers long jobs).
+- DONE: interactive session with srun --pty bash.
+- DONE: tip for "host key changed" (uses ssh-keygen -R without a path, see check above).
+- DONE: sacct and "choosing resources" after the first batch job.
+- DONE: screen optional.
 - Arrays as optional next step after the sbatch loop, link to the IBED SLURM page.
-- check: eduroam/VPN note already exists as a box in hpc_howto.qmd (line ~39). Still needed?
-- ssh: installation.qmd now logs in with plain `ssh`, hpc_howto.qmd uses `ssh -X`. Make consistent
-  or explain -X on day 2.
+- eduroam/VPN box kept in hpc_howto.qmd (MicEco has it too).
+- DONE: ssh is plain on both pages; -X explained in a collapsed tip on day 2.
 - Compute node names differ: img/crunchomics1.png says omics-h01-h05, hpc_intro.qmd (line 27) says
   omics-cn001 - omics-cn005. Check which is right.
 
