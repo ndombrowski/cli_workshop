@@ -13,46 +13,31 @@ bibliography: references.bib
 
 ## `pwd`: Find out where we are
 
-After installing and starting the terminal, let's orient ourselves by typing our first command, `pwd`, into the terminal and pressing enter.
+To get started, open your terminal and get yourself oriented by typing your first command, `pwd`, and then pressing enter:
 
 ```{bash}
 pwd
 ```
 
-`pwd` prints the location of the current working directory and tells you where exactly you are in the file system. When we start our terminal we typically start from what is called our home directory.
+The command `pwd` stands for *print working directory*. The **working directory** is the folder your shell is operating on right now, so `pwd` tells you where you currently are in the file system. You should see something like this:
 
-::: {.callout-tip title="Tip: finding the desktop on different user systems" collapse="true"}
-Your home directory will be something like /Users/YourUserName but the path might be slightly different depending on your operating system. Below you find some hints to orient yourself better for different terminal interfaces/operating systems:
+```
+/Users/YourUserName
+```
 
-For MAC users:
+When you open a new terminal, you start in what is called your **home directory**. This is your personal folder on the computer.
 
--   The home directory should be `/Users/YourUserName`
--   To access the current folder in Finder you can try using `open .`
--   Your desktop should be here `/Users/YourUserName/Desktop`
+What the path to your home directory looks like depends on your system:
 
-For Mobaxterm users:
+-   **Mac:** `/Users/YourUserName`
+-   **MobaXterm (Windows):** `/home/mobaxterm`
+-   **WSL2 (Windows) and Linux:** `/home/YourUserName`
 
--   Your home directory is `/home/mobaxterm`
--   By default this home directory is in a temporary folder that gets deleted every time you exit Mobaxterm, To give this folder a persistent home, do the following:
-    -   Settings --\> Configuration --\> General
-    -   In General set Persistent home directory to a folder of your choice
--   To access the current folder in the file explorer you can type `explorer.exe .`
--   The path to the desktop should something like this `/mnt/c/Users/YourUserName/OneDrive/Desktop` or `/mnt/c/Users/YourUserName/Desktop`
-
-For WSL2 users:
-
--   The home directory is `/home/YourUserName`
--   To access the current directory in the file explorer you can type `explorer.exe .`
--   The path to the desktop would be something like this `/mnt/c/Users/YourUserName/OneDrive/Desktop` or `/mnt/c/Users/YourUserName/Desktop`
-
-Accessing the Uva OneDrive folder:
-
-To access the OneDrive Uva folder, you need to add quotes between the absolute file path since bash does otherwise not know what to do with the space in the file name, i.e. `cd "/mnt/c/Users/UserName/OneDrive - Uva"`. This is also a good example for why you normally do NOT want to add spaces in your filepath.
-:::
+In this tutorial, we work inside the home directory. That way, the commands are the same for everybody.
 
 ## `ls`: List the contents of a directory
 
-Now that we know where we are, let's find out what files and folders exist in our home directory. For this you can use the `ls` command, which allows us to list all the contents of the directory you are currently in:
+Now that you know where you are, let's find out what is inside that location, i.e. what files and folders can be found there. The command `ls` (short for *list*) shows the files and folders in your current directory. Type the following and press enter:
 
 ```{bash}
 ls
@@ -66,13 +51,20 @@ In my case this returns something like this (and this will look different for yo
 
 </p>
 
-The colors will look different depending on the CLI you use but in the example above you see a list of files (in bold text) and folders (green-highlighted text) that can be found in my current directory.
+The colors and formatting depend on your terminal settings, but typically:
 
-Since this output can easily become over-whelming if we deal with a lot of files and folders, lets look a bit closer into how we can optimize our commands by looking at the general structure of a command.
+-   Folders (directories) appear in one color (in my example above: green)
+-   Files appear in another (in my example above: bold white)
+
+If your directory contains many items, the output can quickly become overwhelming. To make sense of it, we can use options and arguments to control how commands behave.
 
 ## The structure of a command
 
-A command generally consists of three elements, the command itself and some optional options and arguments:
+A command generally has three parts:
+
+-   A **command name**: the program you want to run, e.g. `ls`
+-   An **option** (or **flag**): a way to change how the command behaves, e.g. `-l` (long format). Options usually start with a `-`
+-   An **argument**: the input the command works on, e.g. a file or folder. Some commands work without an argument
 
 <p align="left">
 
@@ -80,41 +72,110 @@ A command generally consists of three elements, the command itself and some opti
 
 </p>
 
-Understanding better what a command looks like, let's use the `ls` command together with the option `-l`. This option results in `ls` printing the content of a folder in what is called a long listing format.
+Try the following command in your current directory to list (`ls`) the contents of the current folder and show details in long format (`-l`)":
 
 ```{bash}
 ls -l
 ```
 
-After running this, we see our files and folders again but in a long format, which gives more detailed information and structures our output a bit better. In the example below we can see that we now print additional information about who owns the files (i.e. access modes), how large the files are, when they were last modified and of course the name:
+After running this, we see our files and folders again but as a more detailed list. In the example below you can now see additional information about who is allowed to read and change the files (the access modes), who owns them, how large the files are, when they were last modified and of course their name:
 
 <p align="center">
 
-<img src="../img/ls2.png" width="400"/>
+<img src="../img/ls2.png" width="500"/>
 
 </p>
 
+::: {.callout-tip title="Tip: Using ls in practice" collapse="false"}
+Throughout this tutorial, you'll notice that we use `ls` a lot. There is a reason for that.
+
+When working with data, sanity checks are essential, because it is easy to make mistakes, overwrite files, or lose track of where things are. Simple commands like `ls`, `pwd`, `wc` or `grep` help you check what is happening to your files at every step of an analysis.
+
+These habits are not just for beginners, bioinformaticians rely on them constantly.
+:::
+
 ## Getting help
 
-If you want to know what options are available for a command (or software tool) it is always a good idea to check out the manual. In most of the cases you can do this with:
+At some point, you'll want to know what options a command has or how it works. In this case, first check if a **manual page** (or *man page*) is available for the command by typing `man` followed by the command name:
 
 ```{bash}
 man ls
 ```
 
-You exit the manual by pressing `q`.
+This opens the manual entry for the command `ls`. You can move through it using:
 
-In case you want to check what a program does or what options there are, depending on the program there might be different ways to access the manual. The most common ways are:
+-   the ↑ / ↓ arrow keys, or the space bar to move down one page
+-   `b` to move back up one page
+-   `q` to quit the manual
+
+Not all programs come with such a manual. Depending on the program, there are a few common ways to get help that you can try:
 
 -   `man ls`
 -   `ls --help`
 -   `ls -h`
 
+## `mkdir`: Make new folders
+
+Before we start moving around, let's first learn how to create new folders (also called directories). This is something we will do often, for example to keep raw data, results and scripts organized in separate places. The command we use for that is `mkdir`, which stands for *make directory*.
+
+We use `mkdir` to create a project folder called `data_analysis` for this tutorial. Don't worry about the `cd ~` in the first line yet, we cover moving around in the next section. For now, it is enough to know that it takes you to your home directory.
+
+```{bash}
+# Move into the home directory
+cd ~
+
+# Create a new folder called data_analysis
+mkdir data_analysis
+
+# Check that the folder was created
+ls
+```
+
+You should see a new folder called `data_analysis` in the list. We will use this folder as our project folder for all exercises in this tutorial.
+
+You can also look at the same folder in the file browser you know from Windows or Mac. The command below opens the folder you are in right now. The dot (`.`) is short for "the current folder":
+
+```{bash}
+# Windows (MobaXterm or WSL2): open the current folder in File Explorer
+explorer.exe .
+
+# Mac: open the current folder in Finder
+open .
+```
+
+Use the command for your own system. You should see a window with your home directory and the new `data_analysis` folder in it. This is useful later, for example to open a report that you made with the command line. (Linux users: try `xdg-open .`)
+
+::: {.callout-important title="MobaXterm users: did you choose a permanent folder?" collapse="false"}
+If `explorer.exe .` opens a folder in a temporary location, MobaXterm deletes your work when you close it. You can see this in the address bar of File Explorer: it shows `Temp`, for example `Local > Temp > Mxt265 > mx86_64b > tmp > home_YourUserName`. Before you continue, follow the steps in [MobaXterm: choose a permanent folder](installation.qmd#mobaxterm-choose-a-permanent-folder) on the "Before you start" page. Then make the `data_analysis` folder again.
+:::
+
+Next, let's make a `data` folder inside the new `data_analysis` folder:
+
+```{bash}
+# Make a data folder inside the data_analysis folder
+# The -p option also makes the parent folder (here: data_analysis) if it does not exist yet
+mkdir -p data_analysis/data
+
+# Check that the folder was created
+# Notice how we use ls with an option (-l) and an argument (data_analysis)?
+ls -l data_analysis
+```
+
+::: {.callout-tip title="Tip: Commenting your code" collapse="false"}
+Notice how I added a `#` and some notes above each command?
+
+Anything written after a `#` in bash is a **comment**. A comment is not executed, but it helps you (and others) understand what the code does.
+
+In your own work, add short, meaningful comments above key steps. Avoid restating the obvious. Instead, explain *why* you do something or what it achieves. A good rule: add a comment wherever you think that future you might get confused a month later.
+
+[Here](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) you find some examples for Python and R, but the same logic applies to bash. Some bash examples can be found [here](https://linuxize.com/post/bash-comments/).
+:::
+
 ## `cd`: Move around folders
 
-Most of the time you do not want to perform your analyses in the home directory but in a dedicated folder for your project. To get started, we will learn about the `cd` command that allows us to move around the file system.
+Now that we have our own project folder, let's learn how to move around the file system with `cd` (short for *change directory*).
 
-The file system is a hierarchical system used to organize files and directories. It is a tree-like structure that starts with a single directory called the root directory, which is denoted by a forward slash (`/`). All other files are "descendants" of the root. To move from the root into other folders, we can go via the descendants to, for example, reach the john folder as follows: `/users/john`.
+The file system is structured like a tree that starts from a single **root** directory, written as a forward slash (`/`). All other folders branch out from this root directory. For example, we can go from the root directory to the users folder, and from there into the john folder: `/users/john`.
 
 <p align="center">
 
@@ -122,155 +183,191 @@ The file system is a hierarchical system used to organize files and directories.
 
 </p>
 
-If we specify the location of a folder or file starting from the root directory, we use what is called an **absolute path**. If we specify the location relative to our current directory, such as our home directory, we use what is called a **relative path**.
+The location of a file or folder is written as a **path**: the folder names along the way, separated by `/`. There are two ways to write a path, for example to the portfolio folder:
 
-To start moving around the file system, let's begin by moving relative to our working directory by moving into any of the folders that you saw listed after you have used `ls -l`. In my case I want to move into the source directory. If you run this, choose any folder you see after running the `ls` command:
+-   An **absolute path** starts from the root, e.g. `cd /users/john/portfolio`
+-   A **relative path** starts from your current location, e.g. `cd portfolio` if you are already in `/users/john`
 
-```{bash}
-cd source/
-```
+It is generally recommended to use relative paths from inside your project folder. That makes your code more portable: it still works if you move the project folder or run it on another computer.
 
-If you use `pwd` after moving around directories, you should see that a different location is printed to the screen.
-
-We can also move back to our original directory using `cd ..`. This command will move us back one directory (and move us out of the source and back into the home directory).
+Let's practice moving between folders. At each step, use `pwd` if you feel that you get lost:
 
 ```{bash}
-cd ..
-```
-
-We can also move around multiple levels. In the example below, I am going into the source folder, then back to the home directory and then into the docs folder.
-
-```{bash}
-cd source/../docs
-```
-
-Another useful way to move around quickly is using the tilde symbol, `~`, which can be used as a shortcut to move directly into our home directory from wherever you are on the file system:
-
-```{bash}
-cd ~
-```
-
-::: {.callout-caution collapse="false" title="Exercise"}
-Explore your current location with `pwd` and `ls` and move around with `cd` and try to get used to these three commands. If you are more comfortable, try finding your Deskop based on the tip in the section about `pwd`.
-:::
-
-## `mkdir`: Make new folders
-
-Now that we know how to explore our surroundings, let's make a new folder in which we start our data analysis. For this we use the `mkdir` command.
-
-To do this, we will first move into our home directory and then create and move into a new folder called `data_analysis` as follows:
-
-```{bash}
-#go into the home directory
-cd ~
-
-#in the home directory make a new folder and name it data_analysis
-mkdir data_analysis
-
-#check if new folder was generated correctly
-ls
-
-#move into the newly generated folder
+# Move into the data_analysis folder
 cd data_analysis
 
-#check if we correctly changed our location
+# Check where you are
 pwd
 ```
 
-::: {.callout-tip title="Tip: Commenting your code" collapse="true"}
-Notice, how in the example below I added the commands to run as well as some explanation about what I did?
+You now should see something like `/Users/YourUserName/data_analysis`. You can use `cd` in multiple ways to move around:
 
-Here, I used a specific character `#` in front of a line of text to denote the beginning of a single-line comment. Anything coming after the character is considered a comment and won't be executed by the shell.
+```{bash}
+# Move into the data folder
+cd data
 
-In the above example I definitely commented the code too much as my comments basically duplicate the code and that should be avoided, however, it is useful to add comments in code to ensure that the purpose of the code is clear to others.
+# Move one level up (..), i.e. go back to the data_analysis folder
+cd ..
 
-You could, for example, add a comment above functions to describe what the function does and you can also add comments to "tricky" code where it is not immediately obvious what you are trying to do. Basically, you want to add comments to any section where you think that the future you might get confused a month later.
+# Quickly go back home (you now should be in the home directory)
+cd ~
 
-[Here](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) you find some examples for python and R but the same logic applies when writing code for bash, some examples for that can be found [here](https://linuxize.com/post/bash-comments/).
+# Move multiple levels down at once
+cd data_analysis/data
+
+# Move two levels up, i.e. back into the home directory
+cd ../..
+
+# And go back to the data_analysis folder
+cd data_analysis
+```
+
+In the code above, the tilde symbol (`~`) is a shortcut for your home directory. It is the same as typing the full absolute path to your home (e.g. `cd /Users/YourUserName`), but much faster to type. Two dots (`..`) always mean "the folder one level up".
+
+::: {.callout-tip title="Tip: Command-line completion" collapse="false"}
+Here are some tips for faster navigation (and fewer typos):
+
+-   Use the Tab key for autocompletion: type the first few letters of a folder or file name and press Tab. For example, go to your home directory, type `cd data_` and press Tab. The shell fills in `data_analysis` for you.
+-   If there is more than one match, the shell can not decide which one you mean. Press Tab twice to see all options.
+-   Use the ↑ / ↓ arrow keys to scroll through commands you ran before. This is useful to rerun a command or to change a small part of it.
+
+From now on, try to use the Tab key often, so that you do not have to type everything yourself.
 :::
 
-::: {.callout-tip title="Tip: Command-line completion" collapse="true"}
-Most command-line interpreters allow to automatically fill in partially typed commands, file paths or file names.
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+Get familiar with these first commands:
 
-So instead of having to type out `data_analysis` completely when changing the directory, we can let the interpreter do the work for us.
+1.  Create a new folder called `results` inside your `data_analysis` folder. We will use it later to store the output of our analyses
+2.  Move into the `results` folder and confirm your location with `pwd`
+3.  Move back into the `data_analysis` folder
+4.  Use `ls` to confirm that both `results` and `data` are there
 
-To do this, start from the home directory (or wherever you ran the `mkdir` command) and type `cd data_` and press the Tab-key on your keyboard. The cli should have auto-completed the folder name automatically.
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+```{bash}
+# Starting from inside data_analysis
+mkdir results
+cd results
+pwd
+cd ..
+ls
+```
+:::
+:::
 
-If there are multiple options, such as data and data_analysis, the cli can not autocomplete the folder name, however, by pressing Tab twice you will see all options to extend the name.
+::: {.callout-tip title="Tip: Finding your Desktop and OneDrive folders (optional)" collapse="true"}
+In this tutorial we stay inside the home directory. If you want to work with files that are somewhere else on your computer, for example on your Desktop, these paths help you find them:
 
-While we talk about being lazy: If you press the arrow-up key on your keyboard you can cycle through commands you already ran and this often times can be useful to recycle code snippets (i.e. if you are trying certain settings and want to quickly change a small section of your code).
+**Mac**
+
+-   Your Desktop is at `/Users/YourUserName/Desktop`, or with the `~` shortcut: `~/Desktop`
+
+**MobaXterm and WSL2 (Windows)**
+
+The terminal reaches your Windows files via the C drive, which is found at `/mnt/c`:
+
+-   Your Desktop is usually at `/mnt/c/Users/YourUserName/Desktop`
+-   Or at `/mnt/c/Users/YourUserName/OneDrive/Desktop` (when using OneDrive)
+
+**Accessing the UvA OneDrive folder**
+
+If your OneDrive folder name includes spaces (like `OneDrive - UvA`), put quotes around the path. Otherwise bash does not know what to do with the spaces:
+
+```{bash}
+cd "/mnt/c/Users/YourUserName/OneDrive - UvA"
+```
+
+This is also a good example of why you normally do NOT want spaces in your file and folder names.
+
+Be careful with large sequence files in OneDrive folders: OneDrive tries to upload every file you make there.
 :::
 
 ## `wget`: Download data
 
-Next, let's download our sequencing data, called seq_project.tar.gz using `wget`. In the command below we add the option `-P` to specify into which folder we want to download the data.
+Next, let's download our sequencing data, a file called `seq_project.tar.gz`, with `wget`. Make sure that you are inside your `data_analysis` folder (check with `pwd`), because `wget` saves the file in the folder you are currently in:
 
 ```{bash}
-#download data using link provided by the sequencing center on 23.01.2023
-wget https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
+# Download data using link provided by the sequencing center on 23.01.2023
+wget https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
 ```
 
-In this example, you can also see how I documented my code here in order to add some more specifics about where the link came from to help future me in case I, for example, need to look for some e-mails about the data later on.
+In this example, you can also see how I documented my code: I added where the link came from and when I got it. This helps future me in case I, for example, need to look for some e-mails about the data later on.
 
 ::: {.callout-important title="Wget for Mac users" collapse="false"}
-For Mac users wget is not installed by default. If you do not want to install it, run the following:
+For Mac users `wget` is not installed by default. If you do not want to install it, you can use the `curl` command instead:
 
 ```{bash}
-curl -LO https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
+# -L: if the server says that the file is somewhere else, follow it until you reach the actual file
+# -O: save the file under its original name
+curl -LO https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
 ```
 :::
 
-::: {.callout-caution collapse="false" title="Exercise"}
+After you download any kind of data, it is always a good idea to do a sanity check: is the file there, and how large is it? A file size of 0 means that something went wrong during the download.
+
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Check with `ls` if the file was downloaded correctly
-2.  Check the manual if there are extra options that we can use for `ls` to check the file size (advanced)
+2.  Check the manual if there are extra options that we can use for `ls` to see the file size in an easy-to-read unit, such as K (kilobytes) or M (megabytes) (advanced)
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#question 1:
+# Question 1:
 ls -l
 
-#question 2:
+# Question 2:
+# -h prints the size in a human-readable format
+# Options can be combined: -l and -h become -lh
 ls -lh
 ```
-
-</details>
+:::
 :::
 
 ## `cp`: Copying data
 
-When working with many files a good folder structure is essential to keep track of our files. To keep our project folder organized, we will copy the `seq_project.tar.gz` file we just downloaded into a special folder that we will call `data`.
+`cp` (short for *copy*) duplicates files or folders. When working with many files, a good folder structure is essential to keep track of them (useful folders are, for example, `data`, `scripts` and `results`). To keep our project folder organized, let's copy the `seq_project.tar.gz` file we just downloaded into the `data` folder we made earlier:
 
 ```{bash}
-#make a folder for our raw data
-mkdir data
-
-#move the tar.gz file into the data folder 
+# Copy the tar.gz file into the data folder
 cp seq_project.tar.gz data/
 
-#check what happened
+# Check what happened
 ls -l
 ls -l data
 ```
 
-When running the two `ls` commands, we see that we now have two copies of `seq_project.tar.gz`, one file is in our working directory and the other one is in our data folder. Copying large amounts of data is not ideal since we will use unneccassary space. However, we can use another command to move the tar folder into our data folder.
+When running the two `ls` commands, we see that we now have two copies of `seq_project.tar.gz`: one file is in our working directory and the other one is in our data folder. Copying large amounts of data is not ideal, since it uses unnecessary space. However, we can use another command to move the file into our data folder instead.
 
-## `mv`: Moving data
+## `mv`: Moving (and renaming) data
 
-`mv` is the command we can use to move data across locations without generating a copy. We run it as follows:
+`mv` (short for *move*) moves files or folders to a new location without creating a second copy:
 
 ```{bash}
-#move the tar.gz file into the data fodler 
+# Move the tar.gz file into the data folder
 mv seq_project.tar.gz data/
 
-#check what happened
+# Check what happened
 ls -l
 ls -l data
 ```
 
-Notice that `mv` will move the tar file and, without asking, overwrite the existing tar file we had in the data folder when we ran `cp`. This means for you that if you run move its best to make sure that you do not overwrite files by mistake.
+Notice that `mv` moved the file and, **without asking**, overwrote the copy that we had put into the data folder with `cp`. So whenever you use `mv`, make sure that you do not overwrite files by mistake.
+
+`mv` is also the command to rename a file: you "move" it to a new name, e.g. `mv old_name.txt new_name.txt`.
+
+::: {.callout-tip title="Tip: Downloading directly into a folder" collapse="true"}
+Instead of downloading a file and moving it afterwards, you can tell `wget` directly where to save the file with the `-P` option:
+
+```{bash}
+wget -P data https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
+```
+
+**MobaXterm users:** MobaXterm comes with a simpler version of `wget` that does not know the `-P` option. You see the error `wget: Unknown option P`. In that case, download the file first and then move it with `mv`, as we did above.
+
+**Mac users:** if you use `curl` instead of `wget`, you can save the file into a specific folder with `--output-dir`:
+
+```{bash}
+curl --output-dir data -LO https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
+```
+:::
 
 ## `tar`: Work with tar files
 
@@ -306,54 +403,52 @@ The options we use are:
 -   `z` use gzip compression when generating the tar file
 :::
 
-::: {.callout-caution collapse="false" title="Exercise"}
-1.  After extracting the tarball use `ls` to explore the content of the folder we just extracted. Ensure that you explore the content of potential sub-directories.
-2.  Find the path for at least one sequence file that ends on fastq.gz. Hint: to make your life easier, check the `Tip: Command-line completion` above to not have to type every single word.
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+1.  After extracting the tarball, use `ls` to explore the content of the folder we just extracted. Make sure that you also explore the content of the folders inside it.
+2.  Find the path for at least one sequence file that ends with `fastq.gz`. Hint: use the Tab key (see the tip on command-line completion above), so that you don't have to type every single word.
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#question 1:
+# Question 1:
 ls -l data/seq_project
 
-#question 2:
+# Question 2:
 ls -l data/seq_project/barcode001_User1_ITS_1_L001/
 ```
-
-</details>
+:::
 :::
 
 ## `rm`: Remove files and folders
 
-To remove files and folders, we use the `rm` command. We want to remove the seq_project.tar.gz file since we do not need it anymore once we have extracted the data:
+To remove files and folders, we use the `rm` command (short for *remove*). We want to remove the `seq_project.tar.gz` file, since we do not need it anymore once we have extracted the data:
 
 ```{bash}
-#rm a file
+# Remove the tar.gz file from the data folder
 rm data/seq_project.tar.gz
 
-#check if that worked
+# Check if that worked
 ls -l data
 ```
 
-If we want to remove a folder, we need to tell `rm` that we want to remove folders using an option. To do this, we use `-r` , which allows us to remove directories and their contents recursively.
+If we want to remove a folder, we need to tell `rm` with an option. For this, we use `-r` (short for *recursive*), which removes a folder together with everything inside it.
 
 ::: callout-important
 **Unix does not have an undelete command.**
 
-This means that if you delete something with rm, it's gone. Therefore, use `rm` with care and check what you write twice before pressing enter!
+This means that if you delete something with `rm`, it's gone. There is no recycle bin. Therefore, use `rm` with care and check what you wrote twice before pressing enter!
+
+Also, NEVER run `rm -r` or `rm -rf` on the root folder `/` or any other important path, such as your home directory. Always double check the path or file name before you press enter when using `rm`.
 :::
 
 ## Wildcards
 
 After we have explored the folder with our sequencing data with `ls`, we have seen that `data/seq_project` contains 4 folders, 2 folders for two different users who each generated two samples.
 
-You also might have also noticed that it gets tedious to figure out how many files are in each folder because we would need to run `ls` on each single folder and view its contents individually.
+You also might have noticed that it gets tedious to figure out how many files are in each folder, because we would need to run `ls` on each single folder and view its contents one by one. Typing every file name by hand also gets tedious, and you risk typos.
 
-Luckily, the shell provides special characters to rapidly specify groups of filenames or patterns. **Wild-cards** are characters that can be used as a substitute for any class of characters in a search.
+Luckily, the shell provides special characters to work with groups of files using pattern matching. These characters are called **wildcards**. The most useful wildcard is `*`, which stands for "any characters, any number of times (also zero times)". For example, `*.txt` matches all files that end with `.txt`.
 
-The `*` wildcard is the wildcard with the broadest meaning of any of the wildcards, it can represent 0 characters, all single characters or any string of characters. It allows us to list all files in the `seq_project` folder as follows:
+We can use `*` to list all files in the `seq_project` folder as follows:
 
 ```{bash}
 ls data/seq_project/*
@@ -361,7 +456,7 @@ ls data/seq_project/*
 
 ![](/img/wildcards_0.png){width="242"}
 
-You should have seen before that the sequencing files all end with `.fastq.gz` we can make this command a bit more specific and at the same time make the output a bit more readable:
+You should have seen before that the sequencing files all end with `.fastq.gz`. With this, we can make the command a bit more specific and at the same time make the output more readable. `*/*.gz` means "inside any folder, any file that ends with `.gz`":
 
 ```{bash}
 ls data/seq_project/*/*.gz
@@ -369,38 +464,35 @@ ls data/seq_project/*/*.gz
 
 ![](/img/wildcards_1.png){width="558"}
 
-If we wanted to print the absolute and not the relative path, we could do the following (beware that the absolute path will be slightly different depending in you system):
+If we wanted to print the absolute and not the relative path, we could do the following (beware that the absolute path will be slightly different depending on your system, check yours with `pwd`):
 
 ```{bash}
-ls /home/User_name/data/seq_project/*/*.gz
+ls /home/YourUserName/data_analysis/data/seq_project/*/*.gz
 ```
 
 Now we can easily see for each folder how many files we have.
 
-::: {.callout-caution collapse="false" title="Exercise"}
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Use a wildcard to list files for barcode001 only
 2.  Use a wildcard to only list R1 (i.e. forward) files
 3.  Use a wildcard to copy all R1 files into a new folder, call this new folder `R1_files`. Use `ls` to confirm if you copied the right files
 4.  To avoid duplicates, remove the R1_files folder from question 3 after you have ensured the command you used worked
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#question 1:
+# Question 1:
 ls data/seq_project/barcode001*/*gz
 
-#question 2:
+# Question 2:
 ls data/seq_project/*/*R1*
 
-#question 3:
+# Question 3:
 mkdir R1_files
 cp data/seq_project/*/*R1* R1_files
 ls data/seq_project/*/*.gz
 ls -l R1_files
 
-#question 4:
+# Question 4:
 rm -r R1_files
 ```
 
@@ -408,9 +500,8 @@ After solving question 2 you should see:
 
 ![](/img/wildcards_3.png){width="489"}
 
-After solving question 3, we should see that all files still exist in its original location but are now also inside of the `R1_files` folder. Notice, how we can use wildcards together with other commands to easily reorganize our data?
-
-</details>
+After solving question 3, we should see that all files still exist in their original location but are now also inside the `R1_files` folder. Notice how we can use wildcards together with other commands to easily reorganize our data?
+:::
 :::
 
 ::: {.callout-tip title="Tip: More wildcards" collapse="true"}
@@ -441,19 +532,34 @@ ls data/seq_project/barcode001_User1_ITS_1_[A-Z]001/*.gz
 
 ## I/O redirection to new files
 
-We have seen that by default our commands directly print the standard output to the terminal. For example, when we use `ls` the list of files and folders is printed to your terminal. However, we can also redirect the standard output to a file by using the `>` character.
+What a command prints is called its **standard output**. We have seen that by default, commands print their standard output directly to the terminal. For example, when we use `ls`, the list of files and folders is printed to your terminal. However, we can also **redirect** the standard output into a file by using the `>` character.
 
 For example, we might want to generate a list with all fastq files and can do this as follows:
 
 ```{bash}
+# Write the list of fastq files into a new file instead of to the screen
 ls data/seq_project/*/* > fastq_paths.txt
+
+# Check that the new file exists
+ls -l fastq_paths.txt
 ```
+
+Here:
+
+-   `ls data/seq_project/*/*` lists all files in the folders inside `seq_project`
+-   `>` tells the shell to write this list into a new file called `fastq_paths.txt`, instead of printing it to the screen
+
+::: {.callout-important title="Important: Be careful with >" collapse="false"}
+The `>` operator overwrites files **without asking**. If a file with the same name already exists, its content is replaced.
+
+If you want to add (append) to the end of an existing file instead of replacing it, use `>>`.
+:::
 
 ## Exploring the content of text files
 
 Next, let's view the content of the list we just generated. Viewing the actual files we work with is often important to ensure the integrity of our data.
 
-#### `head`: View the first rows of a file
+### `head`: View the first rows of a file
 
 `head` can be used to check the first 10 rows of our files:
 
@@ -466,22 +572,27 @@ head fastq_paths.txt
 If you want to check the last 10 rows use `tail`:
 
 ```{bash}
+# Show the last 10 lines
 tail fastq_paths.txt
+
+# Show the last 3 lines
+# The option -n controls how many lines get printed (this also works for head)
+tail -n 3 fastq_paths.txt
 ```
 
 ### `less`: View the full file
 
-`less` is a program that let's you view a file's contents one screen at a time. This is useful when dealing with a large text file (such as a sequence data file) because it doesn't load the entire file but accesses it page by page, resulting in fast loading speeds.
+`less` is a program that lets you view a file's contents one screen at a time. This is useful when dealing with a large text file (such as a sequence data file), because it doesn't load the entire file but accesses it page by page, resulting in fast loading speeds.
 
 ```{bash}
 less -S fastq_paths.txt
 ```
 
--   You can use the arrow Up and Page arrow keys to move through the text file
+-   You can use the ↑ / ↓ arrow keys and the Page Up / Page Down keys to move through the text file
 -   To exit less, type `q`
 
 ::: {.callout-tip title="Tip: Editing text files" collapse="true"}
-You can also edit the content of a text file and there are different programs available to do this on the command line, the most commonly used tool is `nano`, which should come with most command line interpreters. You can open any file as follows:
+You can also edit the content of a text file and there are different programs available to do this on the command line, the most commonly used tool is `nano`. It comes with WSL2, Mac and most Linux systems. You can open any file as follows:
 
 ```{bash}
 nano fastq_paths.txt
@@ -491,6 +602,8 @@ Once the document is open you can edit it however you want and then
 
 -   Close the document with `control + X`
 -   Type `y` to save changes and press enter
+
+**MobaXterm users:** `nano` is not installed in MobaXterm by default, and you see `nano: command not found`. You can install it with `apt install nano`. Like for `wget` above, it is only kept after a restart if you chose a permanent folder in MobaXterm.
 :::
 
 ## `wc`: Count things
@@ -509,39 +622,41 @@ One down-side of this approach is that to be able to count the number of files, 
 
 ## Pipes
 
-Pipes are a powerful utility to connect multiple commands together. Pipes allow us to feed the standard output of one command, such as `ls` as input into another command, such as `wc -l`, and as such combine multiple commands together.
+So far, we've run one command at a time. But often, you want to combine commands so that the output of one command becomes the input of the next one. That's what the **pipe** (`|`) does. It allows us to chain simple commands together to do more complex things.
 
-Therefore, let\`s use `ls` to first list all fastq files and then pipe the output from `ls` into the `wc` command in order to count with how many files we work with:
+Let's use `ls` to list all fastq files and then pipe the output from `ls` into the `wc` command, to count how many files we work with:
 
 ```{bash}
 ls data/seq_project/*/* | wc -l
 ```
 
+Here:
+
+-   `ls data/seq_project/*/*` lists all files in the folders inside `seq_project`
+-   The pipe (`|`) sends this list directly to the next command, instead of printing it to the screen
+-   `wc -l` counts the lines in this list, i.e. the number of files
+
 We should see again that we work with 8 files, but now we did not have to generate an intermediate text file and have a more condensed command.
 
-::: {.callout-caution collapse="false" title="Exercise"}
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Use ls and wc to count how many R1 files we have
 2.  Count how many R2 files we have
 3.  Count how many files were generated for User1
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#question 1: We see 4 files
+# Question 1: We see 4 files
 ls data/seq_project/*/*R1*gz | wc -l 
 
-#question 2: We see 4 files
+# Question 2: We see 4 files
 ls data/seq_project/*/*R2*gz | wc -l 
 
-#question 3: We see 4 files
+# Question 3: We see 4 files
 ls data/seq_project/*_User1_*/*gz | wc -l 
 ```
 
 Checking whether we have the same number of R1 and R2 files is a good sanity check, to ensure that we have received all the files from the sequencing center whenever we generate paired-end sequencing data.
-
-</details>
+:::
 :::
 
 ## `cut`: Extract elements from strings
@@ -587,27 +702,23 @@ Let's first ensure that our barcode list is sorted to then extract only the uniq
 cut -f3 -d "/" fastq_paths.txt | cut -f1 -d "_" | sort | uniq
 ```
 
-::: {.callout-caution collapse="false" title="Exercise"}
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Use cut on fastq_paths.txt to print the folder names in which the fastq.gz files reside (i.e. barcode001_User1_ITS_1_L001)
 2.  Print the folder names as in 1 and then extract the user names from this list
 3.  Ensure that when running the code from 2 that we print a unique list of user names
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#question 1:
+# Question 1:
 cut -f3 -d "/" fastq_paths.txt
 
-#question 2:
+# Question 2:
 cut -f3 -d "/" fastq_paths.txt | cut -f2 -d "_"
 
-#question 3:
+# Question 3:
 cut -f3 -d "/" fastq_paths.txt | cut -f2 -d "_" | sort | uniq
 ```
-
-</details>
+:::
 :::
 
 ## `cat`: Read and combine files
@@ -627,65 +738,68 @@ cat fastq_paths.txt
 To combine files we do:
 
 ```{bash}
-#combine files 
-cat fastq_paths.txt fastq_files.txt > combined_files.txt
+# Make a folder for the combined files inside results
+# -p: no error if the folder already exists, and also makes results/ if it is missing
+mkdir -p results/combined
 
-#view new file 
-cat combined_files.txt
+# Combine two files into one
+cat fastq_paths.txt fastq_files.txt > results/combined/combined_files.txt
+
+# View the new file
+cat results/combined/combined_files.txt
 ```
 
-::: {.callout-caution collapse="false" title="Exercise"}
+Notice how we keep the output in its own subfolder of `results`? Giving each analysis its own folder inside `results` keeps the project folder clean, and later you can see right away which files belong together.
+
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 Fastq.gz files can easily be combined using `cat` and while this is not strictly necessary in our case, you might need to do this with your sequence files in the future. For example if you sequenced a lot of data and for space reasons the sequencing center send you multiple files for a single sample.
 
-1.  Using wildcards and cat, combine all R1 fastq.gz files into a single file
+1.  Using wildcards and cat, combine all R1 fastq.gz files into a single file called `combined_R1.fastq.gz`. Store it in the `results/combined` folder
 2.  Use ls to judge the file size of the individual R1 files and the combined file to assess whether everything worked correctly
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#question 1:
-cat data/seq_project/*/*R1.fastq.gz > combined_R1.fastq.gz
+# Question 1:
+cat data/seq_project/*/*R1.fastq.gz > results/combined/combined_R1.fastq.gz
 
-#question 2:
+# Question 2:
 ls -lh data/seq_project/*/*R1.fastq.gz
-ls -lh combined_R1.fastq.gz
+ls -lh results/combined/combined_R1.fastq.gz
 ```
 
-If you compare the two numbers generated for question 2, you should see that the combined.fastq.gz file is roughly the sum of the individual files.
-
-</details>
+If you compare the two numbers generated for question 2, you should see that the combined_R1.fastq.gz file is roughly the sum of the individual files.
+:::
 :::
 
 ## Exploring the content of compressed fastq files
 
-::: {.callout-caution collapse="false" title="Exercise"}
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  View the first few rows of any one of the fastq.gz sequence files
 2.  Does this look like a normal sequence file to you?
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
 head data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
 ```
 
 After running this command you will see a lot of random letters and numbers but nothing that looks like a sequence, so what is going on?
-
-</details>
+:::
 :::
 
 ### `gzip`: (De)compress files
 
-After downloading and exploring the content of the downloaded folder, you have seen that the file we downloaded ends with `gz`. This indicates that we work with a gzip-compressed file. `gzip` is a tool used to (de)-compress the size of files.
+You might have noticed that our sequence files end with `.gz`. This extension is used for files that are compressed with a tool called `gzip`. Compressing makes a file smaller, which saves space, but it also makes the file unreadable for a human. That is why `head` showed us random characters.
 
-In order to view the content of compressed files, we sometimes need to de-compress them first. We can do this using the `gzip` command together with the decompress `-d` option:
+To view the content of a compressed file, we can decompress it first. We do this with the `gzip` command together with the `-d` (decompress) option. By default, `gzip` compresses a file:
 
 ```{bash}
+# Decompress one file
 gzip -d data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
 
+# Check that this worked: the file lost its .gz extension
+ls -l data/seq_project/barcode001_User1_ITS_1_L001/
+
+# View the first lines of the decompressed file
 head data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq
 ```
 
@@ -697,27 +811,23 @@ After running this, we finally see a sequence and some other information. Notice
 
 </p>
 
-::: {.callout-caution collapse="false" title="Exercise"}
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  After running the gzip command above, make a list of each sequence file with `ls`
 2.  Use `ls` with an option to also view the file size and compare the size of our compressed and uncompressed files.
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#question 1:
+# Question 1:
 ls -l data/seq_project/*/*
 
-#question 2:
+# Question 2:
 ls -lh data/seq_project/*/*
 ```
 
-We see that our file has a file size of about \~25M after compression while the compressed files are around \~5M.
+We see that the decompressed file has a size of about \~25M, while the compressed files are around \~5M.
 
 When working with sequencing files the data is usually much larger and its best to keep the files compressed to not clutter your computer.
-
-</details>
+:::
 :::
 
 To keep our files small its best to work with the compressed files. If we want to compress a file, we can do this as follows:
@@ -728,11 +838,11 @@ gzip data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq
 ls data/seq_project/*/*
 ```
 
-#### `zcat`: Decompress and print to screen
+### `zcat`: Decompress and print to screen
 
-We have seen that to view the content of a compressed file and make sense of the content we had to first decompress the file. However, sequence files tend to get rather large and we might not want to decompress our files to not clutter our system.
+We have seen that to view the content of a compressed file, we first had to decompress it. This is fine for small files, but sequence files tend to get large, and we might not want to decompress them so that they don't clutter our system.
 
-Luckily, there is one useful tool in bash to decompress the file and print the content to the screen called `zcat`. When running `zcat` on a file then the original compressed file is kept as is. We combine the `zcat` command with the `head` command, since we do not want to print millions of sequences to the screen but only want to explore the first few rows:
+Luckily, there is a useful tool in bash called `zcat`. It decompresses a file and prints the content to the screen, but leaves the compressed file as it is. We combine the `zcat` command with the `head` command, since we do not want to print millions of sequences to the screen but only want to explore the first few rows:
 
 ```{bash}
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
@@ -748,12 +858,14 @@ gzcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | h
 
 ## `grep`: Find patterns in data
 
-The grep command is used to search for words, or patterns, in any text file. This command is simple but very useful for sanity checks after file transformations.
+The `grep` command is used to search for words, or patterns, in any text file. This command is simple but very useful for sanity checks after file transformations.
 
-Let's first search for some things in the text files we generated, for example, we might want to only print information for the R1 files:
+The basic syntax is `grep "pattern" file`. Here, "pattern" is the text you want to search for, and file is the file you want to search in. The double quotes allow us to include special characters (like `>` or spaces) safely.
+
+Let's first search for something in the text file we generated. For example, we might want to only print information for the R1 files:
 
 ```{bash}
-#grep a pattern, here R1, in fastq_paths.txt
+# Print all lines in fastq_paths.txt that contain R1
 grep "R1" fastq_paths.txt
 ```
 
@@ -779,30 +891,26 @@ For example, `grep "User1_*"` does not mean "User1 followed by anything". It mea
 When you start out, search for plain text and always put your pattern in quotes, so that the shell does not try to treat it as a wildcard first.
 :::
 
-::: {.callout-caution collapse="false" title="Exercise"}
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Grep for paths containing the pattern "ITS_9" in fastq_paths.txt
 2.  Grep for the pattern "AAGACG" in any of the fastq.gz files (advanced)
 3.  Count how often "AAGACG" occurs in any in any of the fastq.gz files (advanced)
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-#1
+# Question 1
 grep "ITS_9" fastq_paths.txt
 
-#2
+# Question 2
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | grep "AAGACG"
 
-#3
+# Question 3
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | grep -c "AAGACG"
 
 ```
 
 The last two commands can be very useful to check if sequencing adapters or primers are still part of your sequence.
-
-</details>
+:::
 :::
 
 ## `wc`: Count things II
@@ -815,7 +923,7 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc
 
 After running this we see that we work with 179,384 / 4 sequences. We need to divide the number we see on the screen by 4 since each sequence is represented by 4 lines of information in our fastq file.
 
-::: {.callout-tip title="Avanced Tip: Better counting" collapse="true"}
+::: {.callout-tip title="Advanced tip: Better counting" collapse="true"}
 We have seen that we need to divide the output of `wc` by four to get the total number of sequences. We can do this with a calculator but actually, some intermediate bash can also be used to do this for us:
 
 ```{bash}
@@ -898,20 +1006,16 @@ done
 
 -   `zcat $i | wc -l`: This is the action performed inside the loop. zcat is used to concatenate and display the content of compressed files (\*.gz). The \| (pipe) symbol redirects this output to wc -l, which counts the number of lines in the uncompressed content.
 
-::: {.callout-caution collapse="false" title="Exercise"}
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Use a for loop and count how often grep finds the pattern "TAAGA" in each individual fastq.gz file
 
-<details>
-
-<summary>Click me to see an answer</summary>
-
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
 for i in data/seq_project/*/*.gz; do 
     zcat $i | grep -c "TAAGA"
 done
 ```
-
-</details>
+:::
 :::
 
 Sometimes it is useful to not store the full path in `i`, especially when we want to store the output of our loop in a new file. Luckily, we can use the list of files we stored in `fastq_files.txt` to rewrite this command a bit and make use of the fact that we can use `cat` to print something in a text file to the screen:
@@ -928,20 +1032,21 @@ done
 After this modification of the code, we can very easily store the output in a file instead of printing the results to the screen.
 
 ```{bash}
-#Count the number of lines in each sequencing file
-#Store the output in a new folder
-mkdir counts 
+# Count the number of lines in each sequencing file
+# Store the output in a new folder inside results
+mkdir -p results/counts
 
-for i in `cat fastq_files.txt`; do 
-    zcat data/seq_project/*/$i | wc -l > counts/$i.txt
+for i in `cat fastq_files.txt`; do
+    zcat data/seq_project/*/$i | wc -l > results/counts/$i.txt
 done
 
-ls -l counts/*txt 
+# Check that we have one count file per sequencing file (8 files)
+ls -l results/counts/*txt
 
-head counts/Sample-DUMMY1_R1.fastq.gz.txt
+head results/counts/Sample-DUMMY1_R1.fastq.gz.txt
 ```
 
-::: {.callout-tip title="Avanced Tip: Better counting in for loops" collapse="true"}
+::: {.callout-tip title="Advanced tip: Better counting in for loops" collapse="true"}
 Let's get a bit more advanced to show you some powerful features of bash. For this imagine that you would do this for 100 files. In this case it would be useful to see the file names next to the counts. We can achieve this by using what we have learned in the `Better counting tip` where we have learned about echo and command substitution.
 
 ```{bash}
@@ -967,7 +1072,7 @@ Notice, how we use both single brackets and double brackets?
 -   `$((...))` in contrast to `$(...)` is an arithmetic expansion in Bash. It allows you to perform arithmetic operations and substitute the result into the command line.
 :::
 
-::: {.callout-tip title="Avanced Tip: Using bash to make sample mapping files" collapse="true"}
+::: {.callout-tip title="Advanced tip: Using bash to make sample mapping files" collapse="true"}
 For a lot of mapping files for amplicon analyses, you need to prepare a table that lists your files, often with the R1 and R2 files in separate columns. How could we do this using bash?
 
 This code is more advanced and uses a few concepts we have not talked about but should give you an idea about the different data transformations you can do with bash.

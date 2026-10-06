@@ -50,7 +50,7 @@ cd /path_to_folder_you_analyse_the_data
 mamba activate seqkit_2.6.1
 
 #custom variables 
-download_link="https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz"
+download_link="https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz"
 ```
 
 ### Download the sequencing data

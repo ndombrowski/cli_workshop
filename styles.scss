@@ -1,0 +1,61 @@
+/*-- scss:defaults --*/
+
+// Colours for the exercise (question) and answer boxes, taken from the MicEco2025 course
+$exercise-border-color: #7e57c2 !default;   /* purple vertical bar */
+$exercise-header-light: #f3e8ff !default;   /* light purple header, light theme */
+$exercise-header-dark: #3b2a5c !default;    /* dark purple header, dark theme */
+
+
+
+/*-- scss:rules --*/
+
+// Exercise and answer boxes, used as:
+// ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+// ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+div.callout-question.callout,
+div.callout-answer.callout {
+  border-left: 4px solid $exercise-border-color;
+
+  .callout-title-container {
+    color: #333333;
+    font-weight: 600;
+  }
+
+  .callout-icon {
+    display: inline-block !important;
+    width: 1.2rem;
+    line-height: 1.6rem;
+    text-align: center;
+    margin-right: 0.6rem;
+  }
+
+  .callout-icon::before {
+    font-size: 1.2rem;
+  }
+
+  &.callout-style-default > .callout-header {
+    background-color: $exercise-header-light;
+  }
+}
+
+div.callout-question.callout .callout-icon::before {
+  content: "🟪";
+}
+
+div.callout-answer.callout .callout-icon::before {
+  content: "☑️";
+}
+
+// Dark theme: darker header and light title text
+body.quarto-dark {
+  div.callout-question.callout,
+  div.callout-answer.callout {
+    .callout-title-container {
+      color: #f0e8ff;
+    }
+
+    &.callout-style-default > .callout-header {
+      background-color: $exercise-header-dark;
+    }
+  }
+}

@@ -55,8 +55,8 @@ format:
     grid: 
       body-width: 1800px
     theme:
-      light: lumen
-      dark: cyborg
+      light: [lumen, styles.scss]
+      dark: [cyborg, styles.scss]
     toc: true
     toc-title: Contents
     toc-expand: 3

@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, enhanced, frame hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, boxrule=0pt, interior hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, enhanced]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -273,7 +273,8 @@ Here is what you will do:
 \item
   Learn a few terms: terminal, shell and prompt.
 \item
-  Install or open a terminal on your laptop.
+  Install or open a terminal on your laptop (MobaXterm: also choose a
+  permanent folder).
 \item
   Check 1: test that your terminal works.
 \item
@@ -282,7 +283,7 @@ Here is what you will do:
   Choose a text editor for your notes.
 \end{enumerate}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, leftrule=.75mm, breakable, bottomrule=.15mm, opacityback=0, bottomtitle=1mm, opacitybacktitle=0.6, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, colbacktitle=quarto-callout-important-color!10!white, toptitle=1mm, left=2mm, arc=.35mm, titlerule=0mm, toprule=.15mm, rightrule=.15mm, colback=white]
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, breakable, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, opacityback=0, arc=.35mm, toptitle=1mm, bottomrule=.15mm, colback=white, toprule=.15mm, rightrule=.15mm, titlerule=0mm]
 
 If something on this page does not work, please email Nina Dombrowski
 (n.dombrowski@uva.nl). Part of my job is to support students and
@@ -391,8 +392,18 @@ you need to install one. I recommend option 1.
     \href{https://hpc.ncsu.edu/Documents/mobaxterm.php}{MobaXterm
     setup}. The free Home Edition is all you need.
   \item
+    The Home Edition comes in two versions: the \textbf{installer
+    edition} and the \textbf{portable edition}. Both work for this
+    tutorial. The portable edition does not need administrator rights,
+    so choose it if you cannot install software on your computer (for
+    example on a UvA computer). You unzip it and start MobaXterm from
+    that folder.
+  \item
     After you install it, open MobaXterm and click on \textbf{Start
     local terminal}.
+  \item
+    Then change two settings, see ``MobaXterm: choose a permanent
+    folder'' below.
   \end{itemize}
 \item
   \textbf{Windows Subsystem for Linux (WSL2)}
@@ -417,6 +428,75 @@ you need to install one. I recommend option 1.
     menu.
   \end{itemize}
 \end{enumerate}
+
+\subsubsection{Windows + MobaXterm: choose a permanent
+folder}\label{windows-mobaxterm-choose-a-permanent-folder}
+
+If you installed MobaXterm, please read the text below!
+
+MobaXterm keeps two things in folders that you can choose:
+
+\begin{itemize}
+\tightlist
+\item
+  Your \textbf{home directory}: your personal folder in the terminal,
+  which MobaXterm calls \texttt{/home/mobaxterm}. This is where you work
+  during the tutorial.
+\item
+  The \textbf{root directory} \texttt{/}: the system part of the
+  terminal. Extra programs that you install into MobaXterm (for example
+  the text editor \texttt{nano}) are stored here.
+\end{itemize}
+
+Depending on the edition, MobaXterm keeps both in a temporary folder and
+\textbf{deletes them when you close MobaXterm} (the portable edition
+does this by default). Then all your work from day 1 would be gone on
+day 2, and you would have to install extra programs again every time.
+
+To prevent this, tell MobaXterm to use a normal folder on your computer.
+This has an extra advantage: you can find all your files from the
+tutorial in File Explorer.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Make a new folder.} Open File Explorer and go to \textbf{This
+  PC}, then the \textbf{C: drive} (it may be called ``OS (C:)'' or
+  ``Local Disk (C:)''), then \textbf{Users}, then the folder with your
+  user name. Make a new folder there and call it
+  \texttt{MobaXterm\_home}. The full path is then
+  \texttt{C:\textbackslash{}Users\textbackslash{}YourUserName\textbackslash{}MobaXterm\_home}.
+\item
+  \textbf{Tell MobaXterm to use it.} In MobaXterm, click on
+  \textbf{Settings} in the top toolbar, then \textbf{Configuration}, and
+  go to the \textbf{General} tab. Choose your new folder in two places:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Next to \textbf{Terminal home directory}, click on the yellow folder
+    icon and choose \texttt{MobaXterm\_home}.
+  \item
+    Next to \textbf{Terminal root (/) directory}, click on the yellow
+    folder icon and choose \texttt{MobaXterm\_home} as well.
+  \item
+    MobaXterm then shows the folders as
+    \texttt{\_ProfileDir\_\textbackslash{}MobaXterm\_home} and
+    \texttt{\_ProfileDir\_\textbackslash{}MobaXterm\_home\textbackslash{}slash}.
+    That is fine: \texttt{\_ProfileDir\_} is MobaXterm's short name for
+    \texttt{C:\textbackslash{}Users\textbackslash{}YourUserName}. (In
+    older MobaXterm versions, these fields are called \textbf{Persistent
+    home directory} and \textbf{Persistent root (/) directory}.)
+  \end{itemize}
+\item
+  Click \textbf{OK}. Close MobaXterm and open it again.
+\end{enumerate}
+
+Why not the Desktop or the Documents folder? On many computers, these
+folders are synced with \textbf{OneDrive}. OneDrive tries to upload
+every file you make there, and sequencing data can get large. A folder
+directly in your user folder is not synced.
 
 \subsection{Mac}\label{mac}
 
@@ -464,9 +544,15 @@ as it is shown. Capital letters matter.
 \texttt{echo} prints text to the screen. \texttt{\$SHELL} stands for the
 name of the shell you use, so together they print that name.
 
-You should see a line that ends with \texttt{bash} or \texttt{zsh}, for
-example \texttt{/bin/bash} or \texttt{/bin/zsh}. If you see this, your
-terminal works.
+On my computer (WSL with Ubuntu), this prints:
+
+\begin{verbatim}
+/bin/bash
+\end{verbatim}
+
+Your output may look a bit different. What matters is that you see a
+line that ends with \texttt{bash} or \texttt{zsh} (for example
+\texttt{/bin/zsh} on a newer Mac). If you see this, your terminal works.
 
 \section{Step 5: Check 2, log in to
 Crunchomics}\label{step-5-check-2-log-in-to-crunchomics}

@@ -2214,6 +2214,7 @@ vertical-align: -.125em;
   <li><a href="#step-3-install-or-open-a-terminal" id="toc-step-3-install-or-open-a-terminal" class="nav-link" data-scroll-target="#step-3-install-or-open-a-terminal">Step 3: Install or open a terminal</a>
   <ul class="collapse">
   <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  <li><a href="#mobaxterm-choose-a-permanent-folder" id="toc-mobaxterm-choose-a-permanent-folder" class="nav-link" data-scroll-target="#mobaxterm-choose-a-permanent-folder">MobaXterm: choose a permanent folder</a></li>
   <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac">Mac</a></li>
   <li><a href="#linux" id="toc-linux" class="nav-link" data-scroll-target="#linux">Linux</a></li>
   </ul></li>
@@ -2246,7 +2247,7 @@ vertical-align: -.125em;
 <ol type="1">
 <li>Request access to Crunchomics, the UvA computer cluster we use in the second part of the tutorial (day 2 of the workshop).</li>
 <li>Learn a few terms: terminal, shell and prompt.</li>
-<li>Install or open a terminal on your laptop.</li>
+<li>Install or open a terminal on your laptop (MobaXterm: also choose a permanent folder).</li>
 <li>Check 1: test that your terminal works.</li>
 <li>Check 2: log in to Crunchomics and log out again.</li>
 <li>Choose a text editor for your notes.</li>
@@ -2303,7 +2304,9 @@ vertical-align: -.125em;
 <li>A terminal program with the most common Linux commands built in. It can also connect to an HPC.</li>
 <li>Small and easy to install. This is the best option if you are new to the command line.</li>
 <li>Follow these installation instructions: <a href="https://hpc.ncsu.edu/Documents/mobaxterm.php">MobaXterm setup</a>. The free Home Edition is all you need.</li>
+<li>The Home Edition comes in two versions: the <strong>installer edition</strong> and the <strong>portable edition</strong>. Both work for this tutorial. The portable edition does not need administrator rights, so choose it if you cannot install software on your computer (for example on a UvA computer). You unzip it and start MobaXterm from that folder.</li>
 <li>After you install it, open MobaXterm and click on <strong>Start local terminal</strong>.</li>
+<li>Then change two settings, see “MobaXterm: choose a permanent folder” below.</li>
 </ul></li>
 <li><strong>Windows Subsystem for Linux (WSL2)</strong>
 <ul>
@@ -2314,6 +2317,27 @@ vertical-align: -.125em;
 <li>After you install it, open the <strong>Ubuntu</strong> app from the Start menu.</li>
 </ul></li>
 </ol>
+</section>
+<section id="mobaxterm-choose-a-permanent-folder" class="level3">
+<h3 class="anchored" data-anchor-id="mobaxterm-choose-a-permanent-folder">MobaXterm: choose a permanent folder</h3>
+<p>MobaXterm keeps two things in folders that you can choose:</p>
+<ul>
+<li>Your <strong>home directory</strong>: your personal folder in the terminal, which MobaXterm calls <code>/home/mobaxterm</code>. This is where you work during the tutorial.</li>
+<li>The <strong>root directory</strong> <code>/</code>: the system part of the terminal. Extra programs that you install into MobaXterm (for example the text editor <code>nano</code>) are stored here.</li>
+</ul>
+<p>Depending on the edition, MobaXterm keeps both in a temporary folder and <strong>deletes them when you close MobaXterm</strong> (the portable edition does this by default). Then all your work from day 1 would be gone on day 2, and you would have to install extra programs again every time.</p>
+<p>To prevent this, tell MobaXterm to use a normal folder on your computer. This has an extra advantage: you can find all your files from the tutorial in File Explorer.</p>
+<ol type="1">
+<li><strong>Make a new folder.</strong> Open File Explorer and go to <strong>This PC</strong>, then the <strong>C: drive</strong> (it may be called “OS (C:)” or “Local Disk (C:)”), then <strong>Users</strong>, then the folder with your user name. Make a new folder there and call it <code>MobaXterm_home</code>. The full path is then <code>C:\Users\YourUserName\MobaXterm_home</code>.</li>
+<li><strong>Tell MobaXterm to use it.</strong> In MobaXterm, click on <strong>Settings</strong> in the top toolbar, then <strong>Configuration</strong>, and go to the <strong>General</strong> tab. Choose your new folder in two places:
+<ul>
+<li>Next to <strong>Terminal home directory</strong>, click on the yellow folder icon and choose <code>MobaXterm_home</code>.</li>
+<li>Next to <strong>Terminal root (/) directory</strong>, click on the yellow folder icon and choose <code>MobaXterm_home</code> as well.</li>
+<li>MobaXterm then shows the folders as <code>_ProfileDir_\MobaXterm_home</code> and <code>_ProfileDir_\MobaXterm_home\slash</code>. That is fine: <code>_ProfileDir_</code> is MobaXterm’s short name for <code>C:\Users\YourUserName</code>. (In older MobaXterm versions, these fields are called <strong>Persistent home directory</strong> and <strong>Persistent root (/) directory</strong>.)</li>
+</ul></li>
+<li>Click <strong>OK</strong>. Close MobaXterm and open it again.</li>
+</ol>
+<p>Why not the Desktop or the Documents folder? On many computers, these folders are synced with <strong>OneDrive</strong>. OneDrive tries to upload every file you make there, and sequencing data can get large. A folder directly in your user folder is not synced.</p>
 </section>
 <section id="mac" class="level3">
 <h3 class="anchored" data-anchor-id="mac">Mac</h3>

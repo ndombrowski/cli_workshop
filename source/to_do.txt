@@ -31,6 +31,29 @@ Project notes for Claude: CLAUDE.md (local only)
   self-study; "Getting help" box with the one-week-before deadline.
 - After editing installation.qmd: rebuild source/installation_preworkshop.html (the email
   attachment) with the hidden command at the end of index.qmd.
+  NEEDED NOW: installation.qmd changed on 2026-10-06 (MobaXterm portable vs installer edition,
+  new step 3 subsection "MobaXterm: choose a permanent home folder" = C:\Users\<name>\MobaXterm_home,
+  no restart test anymore). bash_intro.qmd box after explorer.exe . points to it. Checked 2026-10-06
+  (portable v26.5, temporary home): explorer.exe . opens Local > Temp > Mxt265 > mx86_64b > tmp > home_<name>.
+  Also check whether _preworkshop_instructions.md should mention the new MobaXterm setting.
+  Changed again 2026-10-06: section is now "MobaXterm: choose a permanent folder": ONE folder
+  (MobaXterm_home) chosen for both home AND root. MobaXterm then makes the root
+  MobaXterm_home\slash by itself. Reason for setting root: nano is not in MobaXterm by default
+  ("command not found"), and with a temporary root, `apt install nano` was gone after a restart.
+  TESTED: with the permanent folder, nano survives a restart. The slash folder is not explained
+  on the page on purpose (Nina explains it if someone asks).
+  Also check: does `nano` work on current macOS (may start pico instead)?
+- MobaXterm home directory (added 2026-10-06): we work in the home directory on all systems and open
+  it with explorer.exe . / open . (no /mnt/c paths on the core path).
+  TESTED 2026-10-06, fresh portable v26.5 (old %AppData%\MobaXterm settings renamed away): "Terminal
+  home directory" defaults to <Temp directory>, a test file was gone after a restart. The portable
+  stores its settings in %AppData%\MobaXterm\MobaXterm.ini (not next to the .exe), so leftover
+  settings from an earlier install change what you see. Installer edition default was
+  _AppDataDir_\MobaXterm\home (seen with installer settings, not tested on a clean PC).
+  The online help (mobaxterm.mobatek.net/documentation.html, checked 2026-10-06) still calls the
+  field "Persistent home directory" and describes an older General tab.
+- Check that explorer.exe . works from the WSL home (/home/user), and that /mnt/c is the right path
+  to the C drive in MobaXterm (both used in bash_intro.qmd, not tested).
 - Check details written from general knowledge (not verified): MobaXterm button "Start local
   terminal"; what echo $SHELL prints in MobaXterm; ssh errors ("Permission denied" = wrong
   name/password/no account, "Connection timed out" = not on UvA network); RStudio menu
@@ -42,8 +65,21 @@ Project notes for Claude: CLAUDE.md (local only)
 
 ## Day 1: CLI basics (bash_intro.qmd)
 
-- Missing core skills, move into the main text (now only in a collapsed tip): Tab completion,
-  arrow up key. Add: Ctrl+C, reading error messages (first deliberate error: "No such file or directory").
+- DONE 2026-10-06: wording updated from the MicEco2025 CLI page (pwd, ls, command structure, man keys,
+  comments, Tab, wget/curl, cp, mv, rm, wildcards, > warning, tail -n, pipes, gzip, zcat, grep).
+  mkdir now comes before cd; cd is practised inside ~/data_analysis. Exercises use the new
+  question/answer callouts (styles.scss), also in hpc_howto.qmd.
+  - results/ (made in the cd exercise) now holds the day 1 analysis outputs in subfolders:
+    results/combined/ (cat section) and results/counts/ (loop). The file lists fastq_paths.txt and
+    fastq_files.txt stay in data_analysis/ (decided 2026-10-06, keeps commands short).
+  - pwd section shows "/Users/YourUserName" as example output (placeholder): replace after the trial run.
+  - zsh differences (promised by installation.qmd) still open: not added, because they could not be
+    tested on a Mac. Candidates: "#" comments in interactive zsh, "no matches found" for wildcards,
+    BSD ls without --help, wc -l padding.
+  - The <div style="text-align: justify"> at the top of bash_intro.qmd and hpc_howto.qmd is never
+    closed (pandoc warning "Div ... unclosed"). Close it at the end of the page or remove it.
+- Missing core skills, move into the main text: Tab completion and arrow up (DONE 2026-10-06, tip
+  now open by default). Add: Ctrl+C, reading error messages (first deliberate error: "No such file or directory").
 - Introduce variables before loops.
 - Loops stay simple: echo, then zcat | wc -l per file.
 - Introduce script files (.sh, run with bash) as preparation for sbatch on day 2.
@@ -53,6 +89,20 @@ Project notes for Claude: CLAUDE.md (local only)
   Existing screenshots (img/ls.png etc.): keep where the look matters, otherwise replace by text.
 - Make figure for cut.
 - check: curl alternative to wget already exists (Mac box). Keep as is?
+- Download URL (changed 2026-10-06): now raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/
+  seq_project.tar.gz everywhere (bash_intro, example_notebook.qmd). The old github.com/.../raw/... URL
+  redirects with a 4.4 KB response header; MobaXterm's built-in wget (toybox, via alias `_tob wget`)
+  fails on it with "response header too large". Direct URL tested OK in MobaXterm v26.5 (31994356 bytes).
+  toybox wget also has no -P: the tip now tells MobaXterm users to download + mv instead
+  (apt install wget advice removed, the alias would still run toybox first; not tested).
+  Day 2 pages don't download the data (they scp it), so no change needed there.
+- MobaXterm uses toybox versions of many commands (it suggests `apt-get install coreutils wget tar xz
+  cpio nc sed findutils` for the full ones). Test the day 1 core commands in MobaXterm during the trial run:
+  - OK (2026-10-06, v26.5): wget with the direct URL, tar -xvf ... -C data (4 folders, 8 fastq.gz),
+    and the other day 1 core commands (ls -lh, head/tail -n, wc -l, cut -f -d, sort, uniq, cp, mv,
+    rm -r, mkdir -p, grep -c, zcat, gzip -d, less -S, the for loops), tested by Nina.
+  - NOT OK: wget -P (workaround in the tip: download + mv). nano is missing (install tip in place).
+  - So no apt-get setup step needed in installation.qmd for day 1.
 
 
 ## Day 2: HPC (hpc_intro.qmd, hpc_howto.qmd)
@@ -155,7 +205,7 @@ srun --cpus-per-task 1 --mem=5G --time=01:00:00 --pty bash -i
 Wget alternative:
 
 ```{bash}
-curl -LO https://github.com/ndombrowski/cli_workshop/raw/main/data/seq_project.tar.gz
+curl -LO https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
 
 mv seq_project.tar.gz data
 ```

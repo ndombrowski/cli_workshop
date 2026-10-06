@@ -79,9 +79,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bac7817a19b16620a786cebd881f2c3d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-628d2d84b6326abc694bd53b000ea09e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-bac7817a19b16620a786cebd881f2c3d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c16977c9243bea85ee98617436fd64f4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-39ae85bfe5a33810539f007ef636a0b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-c16977c9243bea85ee98617436fd64f4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Request access to Crunchomics, the UvA computer cluster we use in the second part of the tutorial (day 2 of the workshop).</li>
 <li>Learn a few terms: terminal, shell and prompt.</li>
-<li>Install or open a terminal on your laptop.</li>
+<li>Install or open a terminal on your laptop (MobaXterm: also choose a permanent folder).</li>
 <li>Check 1: test that your terminal works.</li>
 <li>Check 2: log in to Crunchomics and log out again.</li>
 <li>Choose a text editor for your notes.</li>
@@ -486,7 +486,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>A terminal program with the most common Linux commands built in. It can also connect to an HPC.</li>
 <li>Small and easy to install. This is the best option if you are new to the command line.</li>
 <li>Follow these installation instructions: <a href="https://hpc.ncsu.edu/Documents/mobaxterm.php">MobaXterm setup</a>. The free Home Edition is all you need.</li>
+<li>The Home Edition comes in two versions: the <strong>installer edition</strong> and the <strong>portable edition</strong>. Both work for this tutorial. The portable edition does not need administrator rights, so choose it if you cannot install software on your computer (for example on a UvA computer). You unzip it and start MobaXterm from that folder.</li>
 <li>After you install it, open MobaXterm and click on <strong>Start local terminal</strong>.</li>
+<li>Then change two settings, see “MobaXterm: choose a permanent folder” below.</li>
 </ul></li>
 <li><strong>Windows Subsystem for Linux (WSL2)</strong>
 <ul>
@@ -497,6 +499,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>After you install it, open the <strong>Ubuntu</strong> app from the Start menu.</li>
 </ul></li>
 </ol>
+<section id="windows-mobaxterm-choose-a-permanent-folder" class="level4">
+<h4 class="anchored" data-anchor-id="windows-mobaxterm-choose-a-permanent-folder">Windows + MobaXterm: choose a permanent folder</h4>
+<p>If you installed MobaXterm, please read the text below!</p>
+<p>MobaXterm keeps two things in folders that you can choose:</p>
+<ul>
+<li>Your <strong>home directory</strong>: your personal folder in the terminal, which MobaXterm calls <code>/home/mobaxterm</code>. This is where you work during the tutorial.</li>
+<li>The <strong>root directory</strong> <code>/</code>: the system part of the terminal. Extra programs that you install into MobaXterm (for example the text editor <code>nano</code>) are stored here.</li>
+</ul>
+<p>Depending on the edition, MobaXterm keeps both in a temporary folder and <strong>deletes them when you close MobaXterm</strong> (the portable edition does this by default). Then all your work from day 1 would be gone on day 2, and you would have to install extra programs again every time.</p>
+<p>To prevent this, tell MobaXterm to use a normal folder on your computer. This has an extra advantage: you can find all your files from the tutorial in File Explorer.</p>
+<ol type="1">
+<li><strong>Make a new folder.</strong> Open File Explorer and go to <strong>This PC</strong>, then the <strong>C: drive</strong> (it may be called “OS (C:)” or “Local Disk (C:)”), then <strong>Users</strong>, then the folder with your user name. Make a new folder there and call it <code>MobaXterm_home</code>. The full path is then <code>C:\Users\YourUserName\MobaXterm_home</code>.</li>
+<li><strong>Tell MobaXterm to use it.</strong> In MobaXterm, click on <strong>Settings</strong> in the top toolbar, then <strong>Configuration</strong>, and go to the <strong>General</strong> tab. Choose your new folder in two places:
+<ul>
+<li>Next to <strong>Terminal home directory</strong>, click on the yellow folder icon and choose <code>MobaXterm_home</code>.</li>
+<li>Next to <strong>Terminal root (/) directory</strong>, click on the yellow folder icon and choose <code>MobaXterm_home</code> as well.</li>
+<li>MobaXterm then shows the folders as <code>_ProfileDir_\MobaXterm_home</code> and <code>_ProfileDir_\MobaXterm_home\slash</code>. That is fine: <code>_ProfileDir_</code> is MobaXterm’s short name for <code>C:\Users\YourUserName</code>. (In older MobaXterm versions, these fields are called <strong>Persistent home directory</strong> and <strong>Persistent root (/) directory</strong>.)</li>
+</ul></li>
+<li>Click <strong>OK</strong>. Close MobaXterm and open it again.</li>
+</ol>
+<p>Why not the Desktop or the Documents folder? On many computers, these folders are synced with <strong>OneDrive</strong>. OneDrive tries to upload every file you make there, and sequencing data can get large. A folder directly in your user folder is not synced.</p>
+</section>
 </section>
 <section id="mac" class="level3">
 <h3 class="anchored" data-anchor-id="mac">Mac</h3>
@@ -524,7 +548,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$SHELL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>echo</code> prints text to the screen. <code>$SHELL</code> stands for the name of the shell you use, so together they print that name.</p>
-<p>You should see a line that ends with <code>bash</code> or <code>zsh</code>, for example <code>/bin/bash</code> or <code>/bin/zsh</code>. If you see this, your terminal works.</p>
+<p>On my computer (WSL with Ubuntu), this prints:</p>
+<pre><code>/bin/bash</code></pre>
+<p>Your output may look a bit different. What matters is that you see a line that ends with <code>bash</code> or <code>zsh</code> (for example <code>/bin/zsh</code> on a newer Mac). If you see this, your terminal works.</p>
 </section>
 <section id="step-5-check-2-log-in-to-crunchomics" class="level2">
 <h2 class="anchored" data-anchor-id="step-5-check-2-log-in-to-crunchomics">Step 5: Check 2, log in to Crunchomics</h2>
@@ -541,8 +567,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="log-in">Log in</h3>
 <p>To log in to Crunchomics, type the command below. Replace <code>uvanetid</code> with your own UvAnetID, and press Enter.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log in to Crunchomics (replace uvanetid with your own UvAnetID)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> uvanetid@omics-h0.science.uva.nl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log in to Crunchomics (replace uvanetid with your own UvAnetID)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> uvanetid@omics-h0.science.uva.nl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What the parts mean:</p>
 <ul>
@@ -561,8 +587,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p></p>
 <p>Every command you type now runs on Crunchomics, not on your laptop. For now, log out again:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log out of Crunchomics and return to your own laptop</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log out of Crunchomics and return to your own laptop</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The prompt changes back to the one of your laptop. Check 2 is done.</p>
 </section>
