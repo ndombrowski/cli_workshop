@@ -9,53 +9,196 @@ bibliography: references.bib
 
 <div style="text-align: justify">
 
-# Setting up a terminal
+# Before you start
 
-## Terminology
+On this page you set up everything you need for this tutorial. It takes about 30 to 60 minutes.
 
-The **Linux command-line interface (CLI)** is an alternative to a graphical user interface (GUI) with which you are likely more familiar. Both interfaces allow you to interact with an operating system. The key difference between the CLI and GUI is that the interaction with the CLI is based on issuing commands. In contrast, the interaction with a GUI involves visual elements, such as windows, buttons, etc. The CLI is also referred to as the shell, terminal, console or prompt.
+- **If you join the in-person workshop:** please do this at home before day 1. Then we can use the time in class for the commands themselves.
+- **If you follow the tutorial on your own:** do this before you start with the first chapter.
 
-**Bash** is a type of interpreter that processes shell commands. A shell interpreter takes commands in plain text format and calls the operating system to do something, for example changing a directory or modifying the content of some files. Bash itself stands for Bourne Again Shell and it is one of the popular command-line shells used to run other programs, many of which are useful for bioinformatic workflows. In this tutorial, we assume that you work with a Bash shell.
+Here is what you will do:
 
-## Installation guides
+1. Request access to Crunchomics, the UvA computer cluster we use in the second part of the tutorial (day 2 of the workshop).
+2. Learn a few terms: terminal, shell and prompt.
+3. Install or open a terminal on your laptop.
+4. Check 1: test that your terminal works.
+5. Check 2: log in to Crunchomics and log out again.
+6. Choose a text editor for your notes.
 
-### Linux
+::: callout-important
+## Getting help
 
-The default shell is usually Bash and there is no need to install anything to be able to follow this tutorial. On most versions of Linux, the shell accessible by running the Gnome Terminal or KDE Konsole or xterm, which can be found via the applications menu or the search bar. If your machine is set up to use something other than Bash, you should be able to switch the shell by opening a terminal and typing `bash`.
+If something on this page does not work, please email Nina Dombrowski (n.dombrowski@uva.nl). Part of my job is to support students and researchers with bioinformatics, so you can also contact me if you follow this tutorial on your own, or if you run into problems later.
 
-### Mac
+If you join the workshop, please contact me **at the latest one week before the workshop**. That way we can solve the problem before day 1.
 
-For Mac running macOS Mojave or earlier releases, the default Unix Shell is Bash. For a Mac computer running macOS Catalina or later releases, the default Unix Shell is Zsh. To open a terminal, try one or both of the following:
+In your email, tell me which operating system you use (Windows, Mac or Linux), which step went wrong, and copy the exact error message (or add a screenshot).
+:::
 
--   In Finder, select the Go menu, then select Utilities. Locate Terminal in the Utilities folder and open it.
--   Use the Mac ‘Spotlight’ search function. Search for: Terminal and press Return.
+## Step 1: Request access to Crunchomics
 
-To ensure that you work with a consistent shell and to check if your machine is set up to use something other than Bash, type `echo $SHELL` in your terminal window. The name of the current shell should be printed to the terminal window.
+In the second part of this tutorial (day 2 of the workshop), we work on **Crunchomics**, a high-performance computer (**HPC**) at the UvA. An HPC is a group of powerful computers that many people share. You use it for analyses that are too large or too slow for your laptop.
 
-If your machine is set up to use something other than Bash, you can try switching to Bash by opening a terminal and typing `bash`. To check if that worked type `echo $SHELL` again. If you have trouble switching from zsh to bash, do not worry, most steps in the tutorial work with either shell.
+You need an account to use Crunchomics. Getting one usually takes 1 to 3 days, so do this step first.
+
+To request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl):
+
+- Ask for access to the Crunchomics HPC.
+- Include your **UvAnetID** (the ID you use to log in to UvA systems).
+- Put your PI or supervisor in cc. Each account needs to be linked to a permanent staff member.
+
+You get an email back once your account is ready. You need the account for Check 2 below.
+
+## Step 2: Some terms
+
+In this tutorial we use the **command-line interface (CLI)**. It is an alternative to the **graphical user interface (GUI)** that you probably know better. Both let you work with your computer, but in different ways:
+
+- In a GUI, you click on buttons, open folders and use menus.
+- In the CLI, you type text to give **commands** (instructions to the computer), and you see the result as text.
+
+When people talk about the CLI, you will also hear the words terminal, shell and prompt. They are related, but they are not the same:
+
+- The **terminal** is the window or program in which you type commands. Some people call it the **console**.
+- The **shell** is the program that reads the commands you type in the terminal and tells the operating system what to do. There are several shells, for example **bash** and **zsh**. They use slightly different rules, but the basic commands are the same. This tutorial uses bash.
+- The **prompt** is the text that the shell shows when it is ready for your next command. It often shows your user name, the name of your computer and the folder you are in. It usually ends with a `$` sign. For example: `user@laptop:~$`
+
+## Step 3: Install or open a terminal
 
 ### Windows
 
-Operating systems, like macOS and Linux, come with a native command-line terminal, making it straightforward to run bash commands. However, Windows users need to install some software first to be able to use bash. Below you find three options:
+Windows does not come with a terminal that understands bash commands, so you need to install one. I recommend option 1.
 
-1. **Mobaxterm** enables Windows users to execute basic Linux/Unix commands on their local machine, connect to an HPC with SSH and to transfer files with SCP/SFTP (more on that later). Installation instructions can be found [here](https://hpc.ncsu.edu/Documents/mobaxterm.php). This option should be the easiest to setup if you have little experience with the shell.
-2. **Git Bash** is another option, for detailed installation instructions please have a look at the [carpenties website](https://carpentries.github.io/workshop-template/install_instructions/#shell-windows).
-3. The **Windows Subsystem for Linux (WSL2)** lets users install a Linux distribution (such as Ubuntu, which is the default Linux distribution, which we recommend to use) and use Linux applications, utilities, and Bash command-line tools directly on Windows. This option is the most flexible as you have a full Linux system at your command but since you basically install a separate system on your PC you need to have enough memory to run this. Installation instructions can be found [here](https://learn.microsoft.com/en-us/windows/wsl/install).
+1. **MobaXterm** (recommended)
+    - A terminal program with the most common Linux commands built in. It can also connect to an HPC.
+    - Small and easy to install. This is the best option if you are new to the command line.
+    - Follow these installation instructions: [MobaXterm setup](https://hpc.ncsu.edu/Documents/mobaxterm.php). The free Home Edition is all you need.
+    - After you install it, open MobaXterm and click on **Start local terminal**.
+2. **Windows Subsystem for Linux (WSL2)**
+    - Installs a full Linux system inside Windows. We recommend Ubuntu, which is the default and uses bash.
+    - This is a heavier installation. It needs more disk space and more computer resources than MobaXterm.
+    - Choose this option if you are comfortable with installing software, or if you already use the command line.
+    - Follow the installation instructions from Microsoft: [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+    - After you install it, open the **Ubuntu** app from the Start menu.
 
-::: callout-note
-I am myself familiar with Linux, Mac and WSL and the following tutorial is tailored towards the location of things when using WSL. If you use another system that is no problem, however, your folder structure might be slightly different when using Git Bash or Mobaxterm.
+### Mac
 
-Similarly, I am mainly familiar with the bash not the zsh shell. For Mac users that have trouble switching to bash this might create some issues when using wildcards but these users should be able to otherwise follow most parts of this tutorial.
+Every Mac comes with a terminal. You do not need to install anything. To open it, do one of these:
 
-If parts of the tutorial do not work for you due to issues when working with different operating systems/shells, feel free to contact me and I can adjust the tutorial accordingly.
-:::
+- In Finder, go to **Go**, then **Utilities**, and open **Terminal**.
+- Or press Cmd + Space to open Spotlight, type `Terminal` and press Return.
 
-## Sanity check
+Newer Macs (macOS Catalina and later) use zsh as their shell, not bash. That is fine. Almost everything in this tutorial works the same way in zsh, and I point out the places where it is different.
 
-After you set everything up and opened a terminal you should see something like this and are good to go if you want to follow the tutorial:
+### Linux
+
+Every Linux system comes with a terminal, and the shell is usually bash. You do not need to install anything. Open the terminal from your applications menu, or search for "Terminal" (depending on your system it can also be called Konsole or xterm).
+
+## Step 4: Check 1, test your terminal
+
+When the terminal is open, you should see a window with a prompt, similar to the one below. Your prompt will show your own user name and computer name, and the colors may be different.
 
 <p align="left">
 
 <img src="../img/terminal.png" width="700"/>
 
 </p>
+
+Type the command below in your terminal and press Enter. Type it exactly as it is shown. Capital letters matter.
+
+```{bash}
+# Print the name of the shell you are using
+echo $SHELL
+```
+
+`echo` prints text to the screen. `$SHELL` stands for the name of the shell you use, so together they print that name.
+
+On my computer (WSL with Ubuntu), this prints:
+
+```
+/bin/bash
+```
+
+Your output may look a bit different. What matters is that you see a line that ends with `bash` or `zsh` (for example `/bin/zsh` on a newer Mac). If you see this, your terminal works.
+
+## Step 5: Check 2, log in to Crunchomics
+
+Do this check once you have the email that your Crunchomics account is ready.
+
+### Your network
+
+You can only connect to Crunchomics from the UvA network:
+
+- At the UvA, use the **eduroam** Wi-Fi. The open Amsterdam Science Park Wi-Fi does not work.
+- From home or anywhere else, connect to the **UvA VPN** first. If you have not set up the VPN, or it does not work, contact the UvA ICT service desk.
+
+### Log in
+
+To log in to Crunchomics, type the command below. Replace `uvanetid` with your own UvAnetID, and press Enter.
+
+```{bash}
+# Log in to Crunchomics (replace uvanetid with your own UvAnetID)
+ssh uvanetid@omics-h0.science.uva.nl
+```
+
+What the parts mean:
+
+- `ssh` (secure shell) is the command that connects your terminal to another computer.
+- `uvanetid@` tells Crunchomics who you are.
+- `omics-h0.science.uva.nl` is the address of the computer you connect to.
+
+Two things that surprise most people the first time:
+
+- The first time you connect, you may get a question that ends with `Are you sure you want to continue connecting (yes/no/[fingerprint])?`. Type `yes` and press Enter. Your computer then remembers Crunchomics and does not ask again.
+- Then you are asked for your password. Use your UvA password. **While you type the password, nothing appears on the screen.** No dots, no stars. That is normal. Type the password and press Enter.
+
+If the login works, you see a welcome message similar to the one below, and the prompt changes. It now shows your UvAnetID and `omics-h0`, the name of the Crunchomics computer. Some lines can look a bit different for you.
+
+<p align="left">
+
+<img src="../img/crunchomics_login.png" width="700"/>
+
+</p>
+
+Every command you type now runs on Crunchomics, not on your laptop. For now, log out again:
+
+```{bash}
+# Log out of Crunchomics and return to your own laptop
+exit
+```
+
+The prompt changes back to the one of your laptop. Check 2 is done.
+
+### If the login does not work
+
+Check these points first:
+
+- Did you get the email that your account is ready?
+- Did you type your UvAnetID correctly, and is there an `@` between your UvAnetID and the address?
+- Did you use the correct UvA password? Remember that nothing appears while you type it.
+- Are you on eduroam (at the UvA) or connected to the VPN (outside the UvA)?
+
+The error message also gives a hint. `Permission denied` usually means a wrong user name or password, or that the account is not ready yet. If the command takes a long time and then shows `Connection timed out`, it usually means you are not on the UvA network.
+
+If it still does not work, email me (see the box at the top of this page) and copy the error message.
+
+## Step 6: Choose a text editor for your notes
+
+While you work through the tutorial, you keep a notes file. Each time you run a command, you copy it into the file, with a short comment that says what it does. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later.
+
+For this you need a **plain text editor**, a program that saves only the text you type, without any layout. Do not use Word or a similar program. These programs change some characters, for example a straight quote `'` into a curly quote `’`. A command with a curly quote does not work anymore.
+
+Pick one of these options:
+
+- **RStudio**: if you already use R, this is the easiest choice. Go to **File**, then **New File**, then **Text File**.
+- **Notepad** (Windows, already installed) or [Notepad++](https://notepad-plus-plus.org/) (Windows, free, shows code in color).
+- **TextEdit** (Mac, already installed): first go to **Format**, then **Make Plain Text**, otherwise TextEdit saves the file with layout.
+- **Text Editor** or gedit (Linux, usually already installed).
+- [**VS Code**](https://code.visualstudio.com/): a powerful code editor for all systems. It takes a bit more time to set up, so I only recommend it if you already use it.
+
+To check that it works, open your editor, create a new file, type a line of text and save it as `cli_workshop_notes.txt`. You use this file from the first chapter on.
+
+## You are ready
+
+If both checks worked and you have a notes file, you are ready to start. If you join the workshop: see you on day 1!
+
+</div>

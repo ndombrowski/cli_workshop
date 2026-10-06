@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -7,21 +8,23 @@
   letterpaper,
   DIV=11,
   numbers=noendperiod]{scrreprt}
-
+\usepackage{xcolor}
+\usepackage[heightrounded]{geometry}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -39,23 +42,32 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\usepackage[heightrounded]{geometry}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -67,17 +79,33 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
 
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
@@ -133,15 +161,11 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, boxrule=0pt, colback={codebgcolor}, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, breakable, colback={codebgcolor}, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   colorlinks=true,
   linkcolor={blue},
@@ -150,9 +174,9 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
+
 \author{}
 \date{}
-
 \begin{document}
 
 \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
@@ -168,6 +192,7 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+
 \section{An example notebook}\label{an-example-notebook}
 
 If you want to see an example for documented code, check out
@@ -203,12 +228,12 @@ sections that you can see in the qmd file.
 
 \subsection{YAML headers}\label{yaml-headers}
 
-\includegraphics[width=7.84375in,height=\textheight]{../img/yaml_header.png}
+\includegraphics[width=7.84375in,height=\textheight,keepaspectratio]{../img/yaml_header.png}
 
 \subsection{Setting up your working
 directory}\label{setting-up-your-working-directory}
 
-\includegraphics[width=5.71875in,height=\textheight]{../img/general_setup.png}
+\includegraphics[width=5.71875in,height=\textheight,keepaspectratio]{../img/general_setup.png}
 
 In one of the first sections of my notebools I add everything that a
 user that wants to use my workflow has to change and I try to
@@ -242,7 +267,7 @@ an HPC to keep my user name and login information private.
 
 \subsection{Sanity checks}\label{sanity-checks}
 
-\includegraphics[width=5.84375in,height=\textheight]{../img/sanity_check.png}
+\includegraphics[width=5.84375in,height=\textheight,keepaspectratio]{../img/sanity_check.png}
 
 When I first start working with new data, I try to add as many sanity
 checks as possible to ensure that my data looks good. That way I avoid
@@ -262,7 +287,7 @@ unexpected things and you need to account for that.
 \subsection{Using markdown to make
 notes}\label{using-markdown-to-make-notes}
 
-\includegraphics[width=5.65625in,height=\textheight]{../img/comments_in_code.png}
+\includegraphics[width=5.65625in,height=\textheight,keepaspectratio]{../img/comments_in_code.png}
 
 In the example above I use markdown to not only document my code but
 also add some comments whenever I might need it. In the example above, I
@@ -287,7 +312,7 @@ This kind of documentation can be useful for:
 \subsection{Documenting external
 scripts}\label{documenting-external-scripts}
 
-\includegraphics[width=5.82292in,height=\textheight]{../img/external_scripts.png}
+\includegraphics[width=5.82292in,height=\textheight,keepaspectratio]{../img/external_scripts.png}
 
 This part might make more sense after you have worked through the part
 of the tutorial about using an HPC. But what you see here is how I have
@@ -314,6 +339,7 @@ I tend to prefer number 2 because I like to record the code in my
 notebooks exactly as I ran it but you can do it differently as long as
 all the code you ran is recorded and accessible to others once you
 publish your data.
+
 
 
 

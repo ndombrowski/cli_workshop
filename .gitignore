@@ -3,6 +3,7 @@ data/
 data_analysis/
 CLAUDE.md
 .DS_Store
+/tmp/
 
 # History files
 .Rhistory
@@ -17,3 +18,5 @@ CLAUDE.md
 
 # exceptions
 !data/seq_project.tar.gz
+
+**/*.quarto_ipynb

@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -7,21 +8,23 @@
   letterpaper,
   DIV=11,
   numbers=noendperiod]{scrreprt}
-
+\usepackage{xcolor}
+\usepackage[heightrounded]{geometry}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -39,10 +42,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\usepackage[heightrounded]{geometry}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -106,8 +105,7 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.01,0.18,0.38}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{1.00,0.33,0.33}{#1}}
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -132,6 +130,20 @@
 % Set default figure placement to htbp
 \def\fps@figure{htbp}
 \makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
 
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
@@ -202,13 +214,11 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, boxrule=0pt, breakable, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, enhanced, sharp corners, breakable]}{\end{tcolorbox}}\fi
 \makeatother
-
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   colorlinks=true,
   linkcolor={blue},
@@ -220,7 +230,6 @@
 
 \author{}
 \date{}
-
 \begin{document}
 
 \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
@@ -290,7 +299,7 @@ the command above to look like this:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacityback=0]
 
 If you want to log into Crunchomics while working from UvA use the
 eduroam network, not the open Amsterdam Science Park network.
@@ -399,7 +408,7 @@ important that:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to our own computer}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to our own computer}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, opacityback=0]
 
 We can also move data from the HPC to our own computer. For example,
 let's assume we want to move a single sequencing file from crunchomics
@@ -426,7 +435,7 @@ back to our computer. In this case,
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC using wildcards}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC using wildcards}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, opacityback=0]
 
 We can also move several files at once and ignore the whole folder
 structure by using wildcards when using \texttt{scp}.
@@ -476,7 +485,7 @@ environments might need slightly different solutions):
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files using the FileZilla GUI}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files using the FileZilla GUI}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, opacityback=0]
 
 \texttt{scp} takes some getting used to and there are several graphical
 user interface programs that are available which provide the same
@@ -695,11 +704,14 @@ Other flags:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{-\/-nodes=1}: Specifies the number of nodes. In this case,
-  it's set to 1 and tells slurm that we want to use a full node. Only
-  use this if you make use of all resources on that node, otherwise
-  omit. In our case this definitely is over-kill to request a full node
-  with 64 CPUs to print a single line of text to the screen.
+  \texttt{-\/-nodes=1}: Specifies the number of nodes (i.e.~separate
+  computers) your job runs on. This does not reserve the whole node for
+  you, jobs of other people can still run on the same node. The CPUs you
+  request with \texttt{-\/-cpus-per-task} always come from a single
+  node, so for the jobs in this tutorial you can leave this option out.
+  If you ever really need a whole node for yourself, the option for that
+  is \texttt{-\/-exclusive}, but on a shared system like Crunchomics you
+  rarely want this.
 \item
   \texttt{-\/-ntasks=1}: Defines the number of tasks to run. Here, we
   would set it to 1 since we want to use echo once
@@ -744,11 +756,14 @@ make informed choices:
     size) to check if the amount of memory allocated (--mem) was
     appropriate.
   \item
-    Ensuer that the job used the resources you requested. For instance,
-    if you would have used \texttt{-\/-cpus-per-task=4\ -\/-mem=4G}, you
-    would expect to use a total of 16 GB of memory (4 CPUs * 4 GB). You
-    can verify this with \texttt{sacct} to ensure your job's resource
-    requirements align with its actual usage.
+    Ensure that the job used the resources you requested. Be careful
+    with how memory is counted: \texttt{-\/-mem=4G} asks for 4 GB in
+    total for your job, no matter how many CPUs you request.
+    \texttt{-\/-mem-per-cpu=4G} instead asks for 4 GB for each CPU, so
+    \texttt{-\/-cpus-per-task=4\ -\/-mem-per-cpu=4G} gives you a total
+    of 16 GB of memory (4 CPUs * 4 GB). You can verify this with
+    \texttt{sacct} to ensure your job's resource requirements align with
+    its actual usage.
   \end{itemize}
 \item
   Fine-Tuning Resource Requests: If you encounter performance issues or
@@ -797,7 +812,7 @@ after the software and got the jobid 746):
 Additionally, after the run is completed, you should see that several
 HTML files were generated in our fastqc folder.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-caution-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-caution-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-caution-color!10!white, leftrule=.75mm, opacityback=0]
 
 Use scp to download the HTML files generated by fastqc to your own
 computer and view one of the HTML files.
@@ -1056,7 +1071,7 @@ This file is useful as it:
 Feel free to explore the content of the log file, do you see how the
 echo commands are used as well?
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: sbatch and better log files}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, opacityback=0]
 
 We have seen that by default \texttt{sbatch} redirects the standard
 output and error to our working directory and that it decides itself how
@@ -1094,7 +1109,7 @@ if you generate lots of files, you find below an example to:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, opacityback=0]
 
 With fastqc we are very lucky that the tool can identify all the fastq
 files in the directory we specify with \texttt{-o} by making use of the
@@ -1223,7 +1238,7 @@ The job does the following:
 If we check what is happening right after submitting the job with
 \texttt{squeue} we should see something like this:
 
-\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{../img/arrays.png}\hfill
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{../img/arrays.png}
 
 We see that jobs 1-4 are already running and the jobs 5-8 are currently
 waiting for space. That is one of the useful things using a job manager
@@ -1233,7 +1248,7 @@ sensibly.
 
 If we check the log files we should see something like this:
 
-\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{../img/arrays2.png}\hfill
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{../img/arrays2.png}
 
 We see that we get an individual output and error file for each job. In
 the output we see what value is stored in the \texttt{INDEX}, here 1,
@@ -1366,7 +1381,7 @@ install the software as well as the version numbers available.
 A full set of mamba/conda commands can be found
 \href{https://docs.conda.io/projects/conda/en/latest/commands/index.html.}{here}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-caution-color-frame, coltitle=black, opacitybacktitle=0.6, arc=.35mm, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, breakable, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, titlerule=0mm, colback=white, rightrule=.15mm, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colback=white, toprule=.15mm, arc=.35mm, breakable, bottomrule=.15mm, colframe=quarto-callout-caution-color-frame, toptitle=1mm, bottomtitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-caution-color!10!white, leftrule=.75mm, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

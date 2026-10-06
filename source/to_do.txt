@@ -9,6 +9,9 @@ Project notes for Claude: CLAUDE.md (local only)
 - Before 2026-10-24: send a short abstract + instructions on what participants need to
   download/install before the workshop. The instructions should match the new pre-workshop
   checklist (see "Before the workshop" below).
+  Drafted 2026-10-06: email text in _preworkshop_instructions.md, attachment
+  source/installation_preworkshop.html. Open: dates, time, location, registration deadline + link,
+  organiser. Then forward both files to the PhD and PostDoc council.
 
 
 ## General structure
@@ -22,13 +25,19 @@ Project notes for Claude: CLAUDE.md (local only)
 
 ## Before the workshop (installation.qmd)
 
-- Terminal setup moves to before the workshop (in-class setup took too long last time).
-- Rebuild installation.qmd from the MicEco2025 terminal page: terminal/shell/prompt terms,
-  MobaXterm or WSL2, Mac, Linux.
-- Checklist with "check that this works" steps: echo $SHELL, ssh login to Crunchomics, exit,
-  choose a text editor for the notes file.
-- Add a deadline to report problems before the workshop.
-- In the ssh check: mention eduroam (not the open network) and VPN when working from home.
+- DONE 2026-10-06: page rebuilt from the MicEco2025 terminal page. Steps: request Crunchomics
+  access, terms, terminal (MobaXterm first, WSL2 second, Git Bash dropped), echo $SHELL, ssh (no -X)
+  + exit with eduroam/VPN and troubleshooting, text editor (RStudio first). Works for workshop and
+  self-study; "Getting help" box with the one-week-before deadline.
+- After editing installation.qmd: rebuild source/installation_preworkshop.html (the email
+  attachment) with the hidden command at the end of index.qmd.
+- Check details written from general knowledge (not verified): MobaXterm button "Start local
+  terminal"; what echo $SHELL prints in MobaXterm; ssh errors ("Permission denied" = wrong
+  name/password/no account, "Connection timed out" = not on UvA network); RStudio menu
+  File > New File > Text File.
+- The Mac section promises "I point out the places where zsh is different": day 1 must do that.
+- img/using_mobaxterm_tabs.png (added 2026-10-06, not used yet): maybe for day 2 (scp in a second
+  tab while logged in to Crunchomics in the first). Not decided.
 
 
 ## Day 1: CLI basics (bash_intro.qmd)
@@ -38,6 +47,10 @@ Project notes for Claude: CLAUDE.md (local only)
 - Introduce variables before loops.
 - Loops stay simple: echo, then zcat | wc -l per file.
 - Introduce script files (.sh, run with bash) as preparation for sbatch on day 2.
+- Command output (convention in _course_schedule.md): decide per chunk which commands get a text
+  output block (e.g. pwd, ls, head, wc -l, the first error message). Needs real outputs from one
+  run of day 1 on the course data. Same later for day 2 (outputs from Crunchomics).
+  Existing screenshots (img/ls.png etc.): keep where the look matters, otherwise replace by text.
 - Make figure for cut.
 - check: curl alternative to wget already exists (Mac box). Keep as is?
 
@@ -66,6 +79,10 @@ Project notes for Claude: CLAUDE.md (local only)
 - Make screen optional (sbatch covers long jobs).
 - Arrays as optional next step after the sbatch loop, link to the IBED SLURM page.
 - check: eduroam/VPN note already exists as a box in hpc_howto.qmd (line ~39). Still needed?
+- ssh: installation.qmd now logs in with plain `ssh`, hpc_howto.qmd uses `ssh -X`. Make consistent
+  or explain -X on day 2.
+- Compute node names differ: img/crunchomics1.png says omics-h01-h05, hpc_intro.qmd (line 27) says
+  omics-cn001 - omics-cn005. Check which is right.
 
 
 ## Documenting code (code_documentation.qmd, example_doc.qmd)
@@ -93,6 +110,23 @@ Project notes for Claude: CLAUDE.md (local only)
   2026-10-06). Used in index.qmd and hpc_howto.qmd (sed link). New site:
   scienceparkstudygroup.github.io/ibed-bioinformatics-page/. Check all external links.
 - Other repo: IBED slurm_basics page has the same --nodes and --mem errors as fixed here.
+- Rendering (found 2026-10-06, Quarto 1.8.25):
+  - _quarto.yml now has `render: ["*.qmd", "!readme.md"]`, so CLAUDE.md and readme.md are no
+    longer rendered. The old docs/readme.html + docs/readme.pdf stay in docs/ and are not updated
+    anymore: delete them, or decide readme.md should be rendered after all.
+  - The root site_libs/ folder (tracked since commit dd98376, looked like a render accident) was
+    deleted by the render of 2026-10-06. Commit the deletion; check nothing links to it.
+  - Tracked source/*.tex files (keep-tex) were deleted on 2026-10-06 (cause unclear). Decide: keep
+    them out of git, or restore with `git checkout -- source/*.tex`.
+  - PDF build fails: LaTeX package fvextra.sty is not installed locally (loaded in _quarto.yml).
+    After installing: check that the curly quote ’ in installation.qmd (line ~182) works in pdflatex.
+  - Check whether the hidden HTML comment at the end of index.qmd is visible in the page source
+    of the rendered site (pandoc may copy HTML comments into the HTML).
+  - A test build inside the project (tmp/preworkshop, 2026-10-06) added the copy to
+    docs/search.json and docs/sitemap.xml. The tmp folders are deleted; the next full render should
+    rebuild both files. Before committing, check that this prints nothing:
+    grep tmp/preworkshop docs/search.json docs/sitemap.xml
+  - The same test build added 2 extra css files to docs/site_libs/ (a5dc..., c11d...). Harmless.
 
 
 ## Decisions (details in _course_schedule.md)

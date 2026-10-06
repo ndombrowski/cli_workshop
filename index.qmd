@@ -14,3 +14,34 @@ On the first pages you will get some introduction into setting up a terminal and
 This tutorial was written for researchers at the Institute for Biodiversity and Ecosystem Dynamics (IBED) at the University of Amsterdam who can get access to Crunchomics, the Genomics Compute Environment for SILS and IBED. For researchers that do not have access to Crunchomics, or another slurm-based HPC, then you still can follow most sections of this tutorial on your own computer if you are interested in learning about bash.
 
 For information not covered in this tutorial, check out [IBED's bioinformatics guidance page](https://scienceparkstudygroup.github.io/software_information/).
+
+<!--
+Maintainer note (not shown on the page): build a self-contained installation page
+to attach to the pre-workshop email (images built in, no sidebar links to the rest
+of the site). Run in bash (Git Bash or WSL) from the project root.
+
+The build folder (~/tmp/preworkshop, in your home folder) must be OUTSIDE the project.
+If it is inside (e.g. tmp/ without ~), Quarto treats the copy as a site page: it writes
+to docs/ and _freeze/ and adds the copy to the site search (docs/search.json).
+
+Don't use `quarto render source/installation.qmd` or `quarto preview` for this: inside
+the project they re-render other pages and change docs/. Rendering a copy outside the
+project renders only this one page.
+
+If you add images to installation.qmd, add them to the second `cp` line.
+
+```bash
+mkdir -p ~/tmp/preworkshop/source ~/tmp/preworkshop/img
+
+cp source/installation.qmd source/references.bib ~/tmp/preworkshop/source/
+cp img/terminal.png img/crunchomics_login.png ~/tmp/preworkshop/img/
+
+printf 'pagetitle: "Before you start"\nembed-resources: true\ntoc: true\n' > ~/tmp/preworkshop/meta.yml
+
+quarto render ~/tmp/preworkshop/source/installation.qmd --to html --metadata-file ~/tmp/preworkshop/meta.yml
+
+cp ~/tmp/preworkshop/source/installation.html source/installation_preworkshop.html
+ls -la source/installation_preworkshop.html
+```
+-->
+

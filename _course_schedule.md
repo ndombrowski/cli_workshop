@@ -8,14 +8,17 @@ in a collapsed box, so participants who want more can open them.
 
 ## Before the workshop (self-study, about 30-60 min)
 
-Page: reworked `source/installation.qmd`, based on the MicEco2025 terminal page.
+Page: reworked `source/installation.qmd`, based on the MicEco2025 terminal page (done 2026-10-06).
+Sent as a self-contained attachment (`source/installation_preworkshop.html`) with the
+announcement email (`_preworkshop_instructions.md`).
 
-1. Learn the terms: terminal, shell, prompt.
-2. Install a terminal: MobaXterm or WSL2 on Windows. Mac and Linux users open the built-in terminal.
-3. Check 1: `echo $SHELL` prints a shell name.
-4. Check 2: log in to Crunchomics with `ssh`, then `exit`. Tests account, password and eduroam/VPN.
-5. Choose a text editor for the notes file.
-6. Report problems before a fixed date (to be set), so they are solved before day 1.
+1. Request Crunchomics access (email to Wim de Leeuw, PI in cc; takes 1-3 days, so first).
+2. Learn the terms: terminal, shell, prompt.
+3. Install a terminal: MobaXterm (recommended) or WSL2 on Windows. Mac and Linux users open the built-in terminal.
+4. Check 1: `echo $SHELL` prints a shell name.
+5. Check 2: log in to Crunchomics with `ssh`, then `exit`. Tests account, password and eduroam/VPN.
+6. Choose a text editor for the notes file (RStudio, Notepad/Notepad++, TextEdit, VS Code).
+7. Report problems to Nina Dombrowski at the latest one week before the workshop.
 
 ## Day 1: command line basics on your own laptop (about 3h45)
 
@@ -61,3 +64,7 @@ Page: reworked `source/installation.qmd`, based on the MicEco2025 terminal page.
 | Miniforge install | In class on day 2, after a short explanation and an instructor demo. Install into `~/personal` (500 GB), not home (25 GB). |
 | `omics_install_script` | Run in class on day 2, with a short explanation of what it does. Must run before the conda install, because it creates the `~/personal` link. |
 | fastp loop: finding R1/R2 | Leaning towards a wildcard in the path, used to talk about wildcard care. Not final. |
+| Windows terminal | MobaXterm first (lighter install), WSL2 second. Git Bash dropped. |
+| Pre-workshop ssh check | Plain `ssh`, without `-X`. |
+| installation.qmd audience | Works for both workshop participants and self-study; contact Nina also outside the workshop. |
+| Showing command output | Plain text output block + lead-in sentence, copied from a real run. Screenshots only where the look on screen matters. No code run at render time. Not every chunk gets an output. |

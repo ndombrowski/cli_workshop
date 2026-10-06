@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "!readme.md"
 
 execute:
   freeze: auto  # re-render only when source changes
@@ -56,7 +59,7 @@ format:
       dark: cyborg
     toc: true
     toc-title: Contents
-    toc-expand: 2
+    toc-expand: 3
     link-external-newwindow: true
 
   pdf:
