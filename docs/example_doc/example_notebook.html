@@ -4067,76 +4067,81 @@ vertical-align: -.125em;
 
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>The goal of this workflow is to analyse sequencing data received on 23.01.2022 from Data Science Sequencing Centre. The sequencing data consists of 8 samples, 4 control samples and 4 sulfur-treatments. The code below documents the cleaning of the sequences and the analyses run in QIIME.</p>
+<p>The goal of this workflow is to analyse sequencing data received on 23.01.2023 from Data Science Sequencing Centre. The sequencing data consists of 4 samples, with a forward (R1) and a reverse (R2) read file for each sample. The code below documents the quality checks and the cleaning of the sequences.</p>
 </section>
 <section id="pre-requisites" class="level2">
 <h2 class="anchored" data-anchor-id="pre-requisites">Pre-requisites</h2>
-<p>All analyses were run on an HPC with an CentOS 7 operating system.</p>
+<p>All analyses were run on the UvA Crunchomics HPC with a CentOS 7 operating system.</p>
 <p>Dependencies:</p>
 <ul>
 <li>SeqKit v2.7.0 (pre-installed)</li>
 <li>fastp v1.4.0 (conda environment fastp_1.4.0)</li>
 <li>…</li>
 </ul>
-<p>Installation of software that was not pre-installed:</p>
+<p>Installation notes for software that was not pre-installed:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> fastp_1.4.0 <span class="at">-c</span> bioconda fastp=1.4.0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="analysis-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-workflow">Analysis workflow</h2>
-<section id="setup-working-directory" class="level3">
-<h3 class="anchored" data-anchor-id="setup-working-directory">Setup working directory</h3>
+<section id="settings-change-these-before-you-run-the-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="settings-change-these-before-you-run-the-workflow">Settings (change these before you run the workflow)</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#path to working directory</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path_to_folder_you_analyse_the_data</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to working directory</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">wdir</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$HOME</span><span class="st">/personal/data_analysis&quot;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#activate conda environment </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#custom variables </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">download_link</span><span class="op">=</span><span class="st">&quot;https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom variables</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">download_link</span><span class="op">=</span><span class="st">&quot;https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="download-the-sequencing-data" class="level3">
 <h3 class="anchored" data-anchor-id="download-the-sequencing-data">Download the sequencing data</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> scripts </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> logs </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#download data using link provided by the sequencing center on 23.01.2023</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-P</span> data <span class="va">$download_link</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> data/seq_project.tar.gz <span class="at">-C</span> data</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> data/<span class="pp">*</span>.tar.gz</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#generate a list for the files we work with </span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">&quot;/&quot;</span> <span class="op">&gt;</span> fastq_files.txt</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#generate a list of sample names (used in scripts/fastp.sh)</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>_R1.fastq.gz <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">&quot;/&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">&quot;_&quot;</span> <span class="op">&gt;</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Go to project dir</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="va">$wdir</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup base folders</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data scripts logs results</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data using link provided by the sequencing center on 23.01.2023</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-P</span> data <span class="va">$download_link</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> data/seq_project.tar.gz <span class="at">-C</span> data</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> data/<span class="pp">*</span>.tar.gz</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a list for the files we work with </span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">&quot;/&quot;</span> <span class="op">&gt;</span> fastq_files.txt</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a list of sample names (used in scripts/fastp.sh)</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>_R1.fastq.gz <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f4</span> <span class="at">-d</span> <span class="st">&quot;/&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">&quot;_&quot;</span> <span class="op">&gt;</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="perform-sanity-checks" class="level3">
 <h3 class="anchored" data-anchor-id="perform-sanity-checks">Perform sanity checks</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#we work with 8 files from 4 samples</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We work with 8 files from 4 samples</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> fastq_files.txt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> samples.txt</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#we have as many R1 as we have R2 files</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We have as many R1 as we have R2 files</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R1<span class="pp">*</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>R2<span class="pp">*</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#the sequence header looks as expected</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The sequence header looks as expected</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="kw">|</span> <span class="fu">head</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#R1 and R2 reads have the same number of reads </span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> fastq_files.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$fastq_file</span><span class="st">: </span><span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span><span class="dv">4</span> <span class="va">))</span><span class="st">&quot;</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&gt;</span> read_counts_per_sample.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># R1 and R2 reads have the same number of reads</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/counts</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> fastq_files.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$fastq_file</span><span class="st">: </span><span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span><span class="dv">4</span> <span class="va">))</span><span class="st">&quot;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&gt;</span> results/counts/read_counts.txt</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 8 lines, one per fastq file</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/counts/read_counts.txt</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/counts/read_counts.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We work with so many reads per sample:</p>
+<p>We work with so many reads per fastq file:</p>
 <p>Sample-DUMMY1_R1.fastq.gz: 44846<br>
 Sample-DUMMY1_R2.fastq.gz: 44846<br>
 Sample-DUMMY2_R1.fastq.gz: 19733<br>
@@ -4153,17 +4158,33 @@ Sample-DUMMY4_R2.fastq.gz: 24380</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/seqkit</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Submitted batch job 8100</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Submitted batch job 380625</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/seqkit.sh</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span> results/seqkit/<span class="pp">*</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/seqkit/stats_raw.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect one table with a header line and one line per fastq file (9 lines)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/seqkit</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/seqkit/stats_raw.txt</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/seqkit/stats_raw.txt</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get some basic summary statistics with awk:</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># -F&#39;\t&#39;: the columns in the table are separated by tabs</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># NR&gt;1: skip the first line (the header)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># reads+=$4; bp+=$5: add up column 4 (num_seqs) and column 5 (sum_len); n++ counts the files</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="re">END</span><span class="co"> {...}: after the last line, print the totals and the mean per fastq file</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">&#39;\t&#39;</span> <span class="st">&#39;NR&gt;1 {reads+=$4; bp+=$5; n++}</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print &quot;files:&quot;, n; print &quot;reads:&quot;, reads; print &quot;bp:&quot;, bp; printf &quot;mean reads per file: %.1f\n&quot;, reads/n; printf &quot;mean bp per file: %.1f\n&quot;, bp/n}&#39;</span> results/seqkit/stats_raw.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Comments on the visual inspection of the HTML reports generated by FastQC:</p>
+<p>Comments on the read statistics from seqkit stats:</p>
 <ul>
-<li>The sequence quality looks good, most reads have a phred score between 28-40 when looking at the per base quality</li>
-<li>The reads are typically 250 bp long (as expected)</li>
-<li>In the over-represented sequences no hits to Illumina adapters where found</li>
+<li>We work with a total of
+<ul>
+<li>217,486 reads (avg 27,186 read pairs per sample)</li>
+<li>54,493,987 bp (avg 6,811,748 bp per fastq file)</li>
+</ul></li>
+<li>The number of reads (<code>num_seqs</code>) matches the read counts from the sanity checks above, and R1 and R2 have the same number of reads for each sample</li>
+<li>The reads are typically 251 bp long (the average length is 250-251 bp), but each file also contains some shorter reads (shortest read: 35-239 bp). This suggests that there was some pre-trimming done by the sequencing center</li>
+<li>The R1 reads have a higher quality than the R2 reads: 94-95% of the bases in R1 have a quality score of at least 30 (<code>Q30(%)</code>), compared to 89-90% in R2</li>
+<li>The GC content is 53-57%</li>
 </ul>
 </section>
 </section>
@@ -4174,24 +4195,46 @@ Sample-DUMMY4_R2.fastq.gz: 24380</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastp</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Submitted batch job &lt;job ID&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Submitted batch job 380626</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/fastp.sh</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#we expect 4 samples x 4 files (2 trimmed fastq.gz, 1 html, 1 json) = 16 files</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 4 samples x 4 files (2 trimmed fastq.gz, 1 html, 1 json) = 16 files</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> results/fastp <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<!-- TO FILL after the test run: real job ID and comments on the fastp reports -->
-<p>Comments on the fastp reports:</p>
+</section>
+<section id="run-seqkit-stats-on-the-trimmed-reads" class="level4">
+<h4 class="anchored" data-anchor-id="run-seqkit-stats-on-the-trimmed-reads">Run seqkit stats on the trimmed reads</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Submitted batch job 380627</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/seqkit_trimmed.sh</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect one table with a header line and one line per trimmed fastq file (9 lines)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/seqkit</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/seqkit/stats_trimmed.txt</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Same summary statistics as for the raw reads</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">&#39;\t&#39;</span> <span class="st">&#39;NR&gt;1 {reads+=$4; bp+=$5; n++}</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print &quot;files:&quot;, n; print &quot;reads:&quot;, reads; print &quot;bp:&quot;, bp; printf &quot;mean reads per file: %.1f\n&quot;, reads/n; printf &quot;mean bp per file: %.1f\n&quot;, bp/n}&#39;</span> results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Comments on the seqkit output post trimming:</p>
 <ul>
-<li>…</li>
+<li>After cleaning we work with
+<ul>
+<li>214,906 out of 217,486 reads (98.8% maintained)</li>
+<li>53,826,288 out of 54,493,987 bp (98.8% maintained)</li>
+</ul></li>
+<li>Information from the fastp html:
+<ul>
+<li>Little adapter sequence signal (&lt; 0.05%)</li>
+<li>Read quality drops at the beginning and end of the read –&gt; reconsider re-running fastp and use <code>--cut_front</code>, <code>--cut_front_window_size 4</code> (default setting) and <code>--cut_front_mean_quality 20</code> (default setting). Note that <code>--cut_front</code> is disabled by default</li>
+</ul></li>
 </ul>
-<p>….</p>
 </section>
 </section>
 </section>
 <section id="citation" class="level2">
 <h2 class="anchored" data-anchor-id="citation">Citation</h2>
-<p>If your work gets published and you provide the code for example on Github its useful to add information about how to cite your work</p>
+<p>If your work gets published and you provide the code for example on Github it’s useful to add information about how to cite your work</p>
 </section>
 <section id="contact" class="level2">
 <h2 class="anchored" data-anchor-id="contact">Contact</h2>

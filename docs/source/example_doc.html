@@ -369,7 +369,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The link above leads you to an example for:</p>
 <ul>
 <li>How could I use github to make my code available to others</li>
-<li>How a “code book” could lool like. The example you see in the folder is provided as a Quarto markdown file <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd">here</a> and for convenience the report was also rendered as a <a href="https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html">html</a> to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.</li>
+<li>How a “code book” could look like. The example you see in the folder is provided as a Quarto markdown file <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd">here</a> and for convenience the report was also rendered as a <a href="https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html">html</a> to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.</li>
 </ul>
 <p>The example is based on the data you analyse throughout this tutorial, so the actual code might only make sense after you have finished the tutorial. Feel free to revisit this page after you have written some code yourself.</p>
 <p>Please note that this is just an example to get you started and such a report might look different depending on your needs.</p>
@@ -378,14 +378,14 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="yaml-headers">YAML headers</h3>
 <p><img src="..\img/yaml_header.png" class="img-fluid" width="753"></p>
 </section>
-<section id="setting-up-your-working-directory" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up-your-working-directory">Setting up your working directory</h3>
+<section id="settings-change-these-before-you-run-the-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="settings-change-these-before-you-run-the-workflow">Settings (change these before you run the workflow)</h3>
 <p><img src="..\img/general_setup.png" class="img-fluid" width="549"></p>
-<p>In one of the first sections of my notebools I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, i.e.&nbsp;I try to write it in a way so that it does not need to be changed. This ensures that another user could just run my code as is without having to edit anything other than this first section. Typically things to add are:</p>
+<p>In one of the first sections of my notebooks I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, i.e.&nbsp;I try to write it in a way so that it does not need to be changed. This ensures that another user could just run my code as is without having to edit anything other than this first section. Typically things to add are:</p>
 <ul>
 <li>From where to start the analyses, i.e.&nbsp;the location of the working directory or project folder</li>
 <li>Custom paths, to for example for databases that need to be downloaded from the web or repositories</li>
-<li>Custom variables: In the example above I store the link to the data in a variable called <code>download_link</code>, I then use the variable in the code below to download the data. By doing it this way I have one location in the code another person needs to change the code when for example the path to the data changes. The code below stays the same since I use the <code>download_link</code> variable and not the actual path any more. When writing code try to think ahead and minimize the number of instances where things need to be changed if for example the location to your data changes.</li>
+<li>Custom variables: In the example above I store the location of my project folder in a variable called <code>wdir</code>. I use <code>$HOME</code> in it instead of typing out my home directory, so the path works for anyone with the same folder structure on Crunchomics. I also store the link to the data in a variable called <code>download_link</code>, I then use the variable in the code below to download the data. By doing it this way I have one location in the code another person needs to change the code when for example the path to the data changes. The code below stays the same since I use the <code>download_link</code> variable and not the actual path any more. When writing code try to think ahead and minimize the number of instances where things need to be changed if for example the location to your data changes.</li>
 </ul>
 <p>I tend to NOT add the information on how I use <code>scp</code> to log into an HPC to keep my user name and login information private.</p>
 </section>
@@ -399,7 +399,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="using-markdown-to-make-notes" class="level3">
 <h3 class="anchored" data-anchor-id="using-markdown-to-make-notes">Using markdown to make notes</h3>
 <p><img src="..\img/comments_in_code.png" class="img-fluid" width="543"></p>
-<p>In the example above I use markdown to not only document my code but also add some comments whenever I might need it. In the example above, I added some notes about what the results from FastQC actually told me.</p>
+<p>In the example above I use markdown to not only document my code but also add some comments whenever I might need it. In the example above, I added some notes about what the results from seqkit stats and the fastp HTML reports actually told me.</p>
 <p>This kind of documentation can be useful for:</p>
 <ul>
 <li>Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, if I would have found a lot of low quality reads or the adapter still being part of the sequence then I would have specifically cleaned my sequences to deal with that</li>
@@ -409,7 +409,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="documenting-external-scripts" class="level3">
 <h3 class="anchored" data-anchor-id="documenting-external-scripts">Documenting external scripts</h3>
 <p><img src="..\img/external_scripts.png" class="img-fluid" width="559"></p>
-<p>This part might make more sense after you have worked through the part of the tutorial about using an HPC. But what you see here is how I have written down code that simply says that I submitted a script to a HPC but it does not actually say how I ran the FastQC software. The actual code is “hidden” inside of the run_fastqc.sh script. This also means that a person reading your workflow does not have the code right away. You can deal with this in two ways.</p>
+<p>This part might make more sense after you have worked through the part of the tutorial about using an HPC. But what you see here is how I have written down code that simply says that I submitted a script to a HPC but it does not actually say how I ran the SeqKit software. The actual code is “hidden” inside of the seqkit.sh script. This also means that a person reading your workflow does not have the code right away. You can deal with this in two ways.</p>
 <ol type="1">
 <li>Instead of the sbatch command, you can add the actual line of code that was run on the compute node.</li>
 <li>When publishing your code with your manuscript, add the whole scripts folder to where you publish the main code, i.e.&nbsp;on <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">github</a> or <a href="https://zenodo.org/records/3839790">zenodo</a></li>
@@ -856,7 +856,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-02-22</p>
+Last modified: 2026-10-07</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

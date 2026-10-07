@@ -6,8 +6,10 @@
 #SBATCH --mem=5G
 #SBATCH --time=01:00:00
 
-echo "Start seqkit stats"
+echo "seqkit job started on:"
+date
 
-seqkit stats -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
+seqkit stats -b -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
 
-echo "seqkit stats finished"
+echo "seqkit job finished on:"
+date

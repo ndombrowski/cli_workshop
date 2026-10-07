@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, boxrule=0pt, frame hidden, enhanced, sharp corners, colback={codebgcolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, breakable, frame hidden, sharp corners, colback={codebgcolor}, enhanced]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -206,7 +206,7 @@ The link above leads you to an example for:
 \item
   How could I use github to make my code available to others
 \item
-  How a ``code book'' could lool like. The example you see in the folder
+  How a ``code book'' could look like. The example you see in the folder
   is provided as a Quarto markdown file
   \href{https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd}{here}
   and for convenience the report was also rendered as a
@@ -230,12 +230,12 @@ sections that you can see in the qmd file.
 
 \includegraphics[width=7.84375in,height=\textheight,keepaspectratio]{../img/yaml_header.png}
 
-\subsection{Setting up your working
-directory}\label{setting-up-your-working-directory}
+\subsection{Settings (change these before you run the
+workflow)}\label{settings-change-these-before-you-run-the-workflow}
 
 \includegraphics[width=5.71875in,height=\textheight,keepaspectratio]{../img/general_setup.png}
 
-In one of the first sections of my notebools I add everything that a
+In one of the first sections of my notebooks I add everything that a
 user that wants to use my workflow has to change and I try to
 standardize the code below, i.e.~I try to write it in a way so that it
 does not need to be changed. This ensures that another user could just
@@ -251,15 +251,19 @@ section. Typically things to add are:
   Custom paths, to for example for databases that need to be downloaded
   from the web or repositories
 \item
-  Custom variables: In the example above I store the link to the data in
-  a variable called \texttt{download\_link}, I then use the variable in
-  the code below to download the data. By doing it this way I have one
-  location in the code another person needs to change the code when for
-  example the path to the data changes. The code below stays the same
-  since I use the \texttt{download\_link} variable and not the actual
-  path any more. When writing code try to think ahead and minimize the
-  number of instances where things need to be changed if for example the
-  location to your data changes.
+  Custom variables: In the example above I store the location of my
+  project folder in a variable called \texttt{wdir}. I use
+  \texttt{\$HOME} in it instead of typing out my home directory, so the
+  path works for anyone with the same folder structure on Crunchomics. I
+  also store the link to the data in a variable called
+  \texttt{download\_link}, I then use the variable in the code below to
+  download the data. By doing it this way I have one location in the
+  code another person needs to change the code when for example the path
+  to the data changes. The code below stays the same since I use the
+  \texttt{download\_link} variable and not the actual path any more.
+  When writing code try to think ahead and minimize the number of
+  instances where things need to be changed if for example the location
+  to your data changes.
 \end{itemize}
 
 I tend to NOT add the information on how I use \texttt{scp} to log into
@@ -291,7 +295,8 @@ notes}\label{using-markdown-to-make-notes}
 
 In the example above I use markdown to not only document my code but
 also add some comments whenever I might need it. In the example above, I
-added some notes about what the results from FastQC actually told me.
+added some notes about what the results from seqkit stats and the fastp
+HTML reports actually told me.
 
 This kind of documentation can be useful for:
 
@@ -317,10 +322,10 @@ scripts}\label{documenting-external-scripts}
 This part might make more sense after you have worked through the part
 of the tutorial about using an HPC. But what you see here is how I have
 written down code that simply says that I submitted a script to a HPC
-but it does not actually say how I ran the FastQC software. The actual
-code is ``hidden'' inside of the run\_fastqc.sh script. This also means
-that a person reading your workflow does not have the code right away.
-You can deal with this in two ways.
+but it does not actually say how I ran the SeqKit software. The actual
+code is ``hidden'' inside of the seqkit.sh script. This also means that
+a person reading your workflow does not have the code right away. You
+can deal with this in two ways.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

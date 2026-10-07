@@ -34,7 +34,7 @@ Project notes for Claude: CLAUDE.md (local only)
     installer name Miniforge3-Linux-x86_64.sh, `which mamba` and `(base)` after conda init) and fastp
     section (fastp 1.4.0 option names and default report names, whether the report counts R1+R2 reads
     together). Remove the comments after the test run. Also check that 1.4.0 runs without stalling.
-    example_notebook.qmd has a <!-- TO FILL --> comment (job ID, comments on the fastp reports).
+    DONE 2026-10-07: example_notebook.qmd job IDs and fastp notes filled in by Nina; CentOS confirmed.
   - Not run yet on the course data: all new day 1 and day 2 commands. Tested 2026-10-07 only on empty
     dummy files in WSL bash 5.2: samples.txt via ls | cut | cut, ${sample} vs $sample_R1 (the latter
     silently becomes empty), the echo dry run, the extra-syntax loop; Windows line endings in a script
@@ -51,8 +51,8 @@ Project notes for Claude: CLAUDE.md (local only)
     version, which fastp inside/outside the env, recommendations, small exercise. example_notebook.qmd
     and example_doc/scripts/fastp.sh (new, same as the tutorial job script) use fastp.
     example_doc/scripts/seqkit.sh deleted by Nina.
-  - example_notebook.qmd says "8 samples, 4 control and 4 sulfur-treatments", but the data has
-    4 samples with R1 + R2 each.
+  - DONE 2026-10-07: example_notebook.qmd description now says 4 samples with R1 + R2 each (QIIME
+    claim removed, both dates 2023).
 
 
 ## Before the workshop (installation.qmd)
@@ -120,7 +120,6 @@ Project notes for Claude: CLAUDE.md (local only)
   run of day 1 on the course data. Same later for day 2 (outputs from Crunchomics).
   Existing screenshots (img/ls.png etc.): keep where the look matters, otherwise replace by text.
 - Make figure for cut.
-- check: curl alternative to wget already exists (Mac box). Keep as is?
 - Download URL (changed 2026-10-06): now raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/
   seq_project.tar.gz everywhere (bash_intro, example_notebook.qmd). The old github.com/.../raw/... URL
   redirects with a 4.4 KB response header; MobaXterm's built-in wget (toybox, via alias `_tob wget`)
@@ -148,34 +147,37 @@ Project notes for Claude: CLAUDE.md (local only)
   scp reports back + explorer.exe/open.
 - ROUND 2 (needs testing on Crunchomics): conda section (MicEco text: which conda, one-step
   mamba create, conda activate, recommendations list; Miniforge into ~/personal) + fastp
-  (one sample with srun, loop with echo, loop in sbatch, output checks). Written 2026-10-07, not yet
-  tested on Crunchomics.
+  (one sample with srun, loop with echo, loop in sbatch, output checks). Written and tested on Crunchomics 2026-10-07.
 - To check on Crunchomics (not added yet, or written without a test run):
-  - MicEco says `srun ... echo "Hello world"` may print the output twice. Does it?
+  - MicEco says `srun ... echo "Hello world"` prints the output twice
   - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
-    without scp. Still available? Add as a tip?
+    without scp. It is still avail. and could be added as a tip for faster viewing of files without download
   - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
-  - Does seqkit stats write anything to the .err log? (page says some programs write progress messages there)
-  - ssh-keygen -R "omics-h0.science.uva.nl" (host key tip) in MobaXterm: does it use the
-    known_hosts file in the MobaXterm home?
   - Day 2 outputs/screenshots (squeue2.png, arrays.png, arrays2.png) show FastQC jobs/logs; replace
-    with seqkit runs after a test run (TO CHECK comments in hpc_howto.qmd). seqkit may finish too fast
+    with seqkit runs after a test run (DONE). seqkit may finish too fast
     to catch in squeue.
   - seqkit stats: full 8-file output of stats_raw.txt (page shows header + DUMMY1_R1 only), the
-    trimmed-reads table and the two awk commands in the optional before/after box (no output shown yet).
+    trimmed-reads table and the two awk commands in the optional before/after box (DONE).
 
 - DONE 2026-10-07: Replace seqkit with fastp everywhere: hpc_howto.qmd, conda section, exercises,
   example_doc/scripts/seqkit.sh, example_notebook.qmd.
 - DONE 2026-10-07: Replace FastQC with seqkit stats on day 2 (srun, sbatch, sacct, screen, arrays,
   example_doc). FastQC stays as a tip. New optional box: seqkit stats before vs after trimming, with awk.
 - Example doc after the seqkit switch (do in this order):
-  - example_doc/example_notebook.qmd (line ~119): rewrite the notes under "Run seqkit stats". They
-    still describe the FastQC HTML reports (phred per base quality, over-represented sequences).
-  - Take new screenshots of the notebook for source/example_doc.qmd: comments_in_code.png and
-    external_scripts.png show the old FastQC version.
-  - source/example_doc.qmd line 52 ("notes about what the results from FastQC actually told me") and
-    line 63 ("how I ran the FastQC software", "run_fastqc.sh"): change to seqkit / scripts/seqkit.sh,
-    so the text matches the new screenshots.
+  - DONE 2026-10-07: example_notebook.qmd made consistent with bash_intro + hpc_howto. seqkit notes
+    rewritten from the numbers in img/seqkit_out.png (Nina to review). conda activate removed from the
+    setup (it is in scripts/fastp.sh). Read counts now go to results/counts/read_counts.txt, with checks.
+    ll -> ls -l. Job script renamed run_seqkit.sh -> seqkit.sh in hpc_howto.qmd (now matches fastp.sh
+    and example_doc/scripts/seqkit.sh). -b added to every seqkit stats command (hpc_howto sbatch,
+    screen and array; example_doc/scripts/seqkit.sh, which now also prints date like the tutorial).
+    Screenshots that show seqkit output without -b: check after the qmd rewrite (Nina).
+  - DONE 2026-10-07: example_doc.qmd text changed to seqkit / fastp / scripts/seqkit.sh, heading
+    "Settings (change these before you run the workflow)", wdir with $HOME explained. Nina rewrites the
+    "Justifying decisions" bullet (line ~56) herself, e.g. pointing to the --cut_front note.
+  - Screenshots for source/example_doc.qmd, retake from the rendered notebook: general_setup.png
+    (wdir now uses $HOME), comments_in_code.png and external_scripts.png (comments now "# Capital"),
+    sanity_check.png (still from 2024: backtick loop over samples.txt, read_counts_per_sample.txt).
+    yaml_header.png still matches.
 - Order: seqkit stats with srun (simple, wildcard) → fastp on one sample with srun (look at what it
   produces) → the loop built step by step with echo → the same loop in an sbatch script →
   count and check outputs → optional: arrays, and seqkit stats + awk on the trimmed reads.
@@ -190,7 +192,6 @@ Project notes for Claude: CLAUDE.md (local only)
 - Miniforge: in class, after a short "what is conda/mamba" + instructor demo. Install into
   ~/personal (500 GB), not home (25 GB). Make this very visible.
 - DONE: interactive session with srun --pty bash.
-- DONE: tip for "host key changed" (uses ssh-keygen -R without a path, see check above).
 - DONE: sacct and "choosing resources" after the first batch job.
 - DONE: screen optional.
 - Arrays as optional next step after the sbatch loop, link to the IBED SLURM page.
@@ -256,12 +257,6 @@ Project notes for Claude: CLAUDE.md (local only)
 
 
 ## Snippets
-
-Issues with keys after Crunchomics reboot:
-
-```{bash}
-ssh-keygen -f /home/mobaxterm/.ssh/known_hosts -R "omics-h0.science.uva.nl"
-```
 
 Interactive bash:
 

@@ -399,7 +399,7 @@ We run `seqkit stats` again, but this time with `sbatch` instead of `srun`, so t
 Use `nano` to create a script file:
 
 ```{bash}
-nano scripts/run_seqkit.sh
+nano scripts/seqkit.sh
 ```
 
 Then add the following content:
@@ -416,7 +416,7 @@ Then add the following content:
 echo "seqkit job started on:"
 date
 
-seqkit stats -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
+seqkit stats -b -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
 
 echo "seqkit job finished on:"
 date
@@ -447,7 +447,7 @@ Notice that the `#SBATCH` lines start with `#`? For bash, these lines are commen
 
 ```{bash}
 # Submit the job script to SLURM
-sbatch scripts/run_seqkit.sh
+sbatch scripts/seqkit.sh
 
 # Check the job status (the job may run too fast to appear)
 squeue -u $USER
@@ -561,7 +561,7 @@ screen -r run_seqkit
 Inside the screen, we can run `seqkit stats` the same way as before, but now we don't risk losing a long-running job:
 
 ```{bash}
-srun --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
+srun --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -b -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
 ```
 
 If you want to completely close and remove a screen, type the following and press enter while you are inside the screen:
@@ -1078,7 +1078,7 @@ CURRENT_SAMPLE=$(sed -n "${INDEX}p" fastq_files.txt)
 echo "Now Job${INDEX} runs on ${CURRENT_SAMPLE}"
 
 # Run the actual job
-seqkit stats -a -T -o results/seqkit/${CURRENT_SAMPLE}_stats.txt data/seq_project/*/${CURRENT_SAMPLE} --threads 1
+seqkit stats -b -a -T -o results/seqkit/${CURRENT_SAMPLE}_stats.txt data/seq_project/*/${CURRENT_SAMPLE} --threads 1
 ```
 
 In the script, we use some new SLURM options:

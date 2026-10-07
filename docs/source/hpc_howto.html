@@ -907,7 +907,7 @@ Important
 <p>We run <code>seqkit stats</code> again, but this time with <code>sbatch</code> instead of <code>srun</code>, so that you can directly compare the two.</p>
 <p>Use <code>nano</code> to create a script file:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> scripts/run_seqkit.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> scripts/seqkit.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then add the following content:</p>
 <div class="cell">
@@ -922,7 +922,7 @@ Important
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit job started on:"</span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span></span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/stats_raw.txt data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">--threads</span> 1</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-b</span> <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/stats_raw.txt data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">--threads</span> 1</span>
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit job finished on:"</span></span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -954,7 +954,7 @@ Important
 <h4 class="anchored" data-anchor-id="step-4-submit-and-monitor-your-job">Step 4: Submit and monitor your job</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Submit the job script to SLURM</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/run_seqkit.sh</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/seqkit.sh</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the job status (the job may run too fast to appear)</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span>
@@ -1091,7 +1091,7 @@ Important
 </div>
 <p>Inside the screen, we can run <code>seqkit stats</code> the same way as before, but now we don’t risk losing a long-running job:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G <span class="at">--time</span><span class="op">=</span>00:30:00 seqkit stats <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/stats_raw.txt data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">--threads</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G <span class="at">--time</span><span class="op">=</span>00:30:00 seqkit stats <span class="at">-b</span> <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/stats_raw.txt data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>gz <span class="at">--threads</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you want to completely close and remove a screen, type the following and press enter while you are inside the screen:</p>
 <div class="cell">
@@ -1660,7 +1660,7 @@ Important
 <span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Now Job</span><span class="va">${INDEX}</span><span class="st"> runs on </span><span class="va">${CURRENT_SAMPLE}</span><span class="st">"</span></span>
 <span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the actual job</span></span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/<span class="va">${CURRENT_SAMPLE}</span>_stats.txt data/seq_project/<span class="pp">*</span>/<span class="va">${CURRENT_SAMPLE}</span> <span class="at">--threads</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-b</span> <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/<span class="va">${CURRENT_SAMPLE}</span>_stats.txt data/seq_project/<span class="pp">*</span>/<span class="va">${CURRENT_SAMPLE}</span> <span class="at">--threads</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In the script, we use some new SLURM options:</p>
 <ul>
