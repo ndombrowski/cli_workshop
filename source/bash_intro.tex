@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, breakable, borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, enhanced, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, enhanced, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -352,7 +352,7 @@ information about who is allowed to read and change the files (the
 access modes), who owns them, how large the files are, when they were
 last modified and of course their name:
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Using ls in practice}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Using ls in practice}, coltitle=black, breakable, toprule=.15mm]
 
 Throughout this tutorial, you'll notice that we use \texttt{ls} a lot.
 There is a reason for that.
@@ -456,9 +456,9 @@ The dot (\texttt{.}) is short for ``the current folder'':
 Use the command for your own system. You should see a window with your
 home directory and the new \texttt{data\_analysis} folder in it. This is
 useful later, for example to open a report that you made with the
-command line. (Linux users: try \texttt{xdg-open\ .})
+command line.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{MobaXterm users: did you choose a permanent folder?}, colframe=quarto-callout-important-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-important-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{MobaXterm users: did you choose a permanent folder?}, coltitle=black, breakable, toprule=.15mm]
 
 If \texttt{explorer.exe\ .} opens a folder in a temporary location,
 MobaXterm deletes your work when you close it. You can see this in the
@@ -486,7 +486,7 @@ Next, let's make a \texttt{data} folder inside the new
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Commenting your code}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Commenting your code}, coltitle=black, breakable, toprule=.15mm]
 
 Notice how I added a \texttt{\#} and some notes above each command?
 
@@ -498,11 +498,6 @@ In your own work, add short, meaningful comments above key steps. Avoid
 restating the obvious. Instead, explain \emph{why} you do something or
 what it achieves. A good rule: add a comment wherever you think that
 future you might get confused a month later.
-
-\href{https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html}{Here}
-you find some examples for Python and R, but the same logic applies to
-bash. Some bash examples can be found
-\href{https://linuxize.com/post/bash-comments/}{here}.
 
 \end{tcolorbox}
 
@@ -581,7 +576,7 @@ absolute path to your home (e.g.~\texttt{cd\ /Users/YourUserName}), but
 much faster to type. Two dots (\texttt{..}) always mean ``the folder one
 level up''.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Command-line completion}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Command-line completion}, coltitle=black, breakable, toprule=.15mm]
 
 Here are some tips for faster navigation (and fewer typos):
 
@@ -605,7 +600,7 @@ type everything yourself.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 Get familiar with these first commands:
 
@@ -643,7 +638,7 @@ Get familiar with these first commands:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding your Desktop and OneDrive folders (optional)}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding your Desktop and OneDrive folders (optional)}, coltitle=black, breakable, toprule=.15mm]
 
 In this tutorial we stay inside the home directory. If you want to work
 with files that are somewhere else on your computer, for example on your
@@ -703,7 +698,7 @@ because \texttt{wget} saves the file in the folder you are currently in:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Download data using link provided by the sequencing center on 23.01.2023}
+\CommentTok{\# Download data using link provided by the sequencing center XYZ on 23.01.2023}
 \FunctionTok{wget}\NormalTok{ https://raw.githubusercontent.com/ndombrowski/cli\_workshop/main/data/seq\_project.tar.gz}
 \end{Highlighting}
 \end{Shaded}
@@ -712,7 +707,7 @@ In this example, you can also see how I documented my code: I added
 where the link came from and when I got it. This helps future me in case
 I, for example, need to look for some e-mails about the data later on.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Wget for Mac users}, colframe=quarto-callout-important-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-important-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Wget for Mac users}, coltitle=black, breakable, toprule=.15mm]
 
 For Mac users \texttt{wget} is not installed by default. If you do not
 want to install it, you can use the \texttt{curl} command instead:
@@ -731,7 +726,7 @@ After you download any kind of data, it is always a good idea to do a
 sanity check: is the file there, and how large is it? A file size of 0
 means that something went wrong during the download.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -814,7 +809,7 @@ overwrite files by mistake.
 \texttt{mv} is also the command to rename a file: you ``move'' it to a
 new name, e.g.~\texttt{mv\ old\_name.txt\ new\_name.txt}.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Downloading directly into a folder}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Downloading directly into a folder}, coltitle=black, breakable, toprule=.15mm]
 
 Instead of downloading a file and moving it afterwards, you can tell
 \texttt{wget} directly where to save the file with the \texttt{-P}
@@ -883,7 +878,7 @@ The options we use with the \texttt{tar} command are:
   be unpacked there)
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: how to generate a tarball}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: how to generate a tarball}, coltitle=black, breakable, toprule=.15mm]
 
 If you ever want to generate a tarball you can do the following:
 
@@ -906,7 +901,7 @@ The options we use are:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -958,7 +953,7 @@ If we want to remove a folder, we need to tell \texttt{rm} with an
 option. For this, we use \texttt{-r} (short for \emph{recursive}), which
 removes a folder together with everything inside it.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colframe=quarto-callout-important-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-important-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, breakable, toprule=.15mm]
 
 \textbf{Unix does not have an undelete command.}
 
@@ -1000,7 +995,7 @@ folder as follows:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=2.52083in,height=\textheight,keepaspectratio]{../img/wildcards_0.png}
+\includegraphics[width=2.91667in,height=\textheight,keepaspectratio]{../img/wildcards_0.png}
 
 You should have seen before that the sequencing files all end with
 \texttt{.fastq.gz}. With this, we can make the command a bit more
@@ -1014,21 +1009,11 @@ specific and at the same time make the output more readable.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=5.8125in,height=\textheight,keepaspectratio]{../img/wildcards_1.png}
-
-If we wanted to print the absolute and not the relative path, we could
-do the following (beware that the absolute path will be slightly
-different depending on your system, check yours with \texttt{pwd}):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ls}\NormalTok{ /home/YourUserName/data\_analysis/data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz}
-\end{Highlighting}
-\end{Shaded}
+\includegraphics[width=6.25in,height=\textheight,keepaspectratio]{../img/wildcards_1.png}
 
 Now we can easily see for each folder how many files we have.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1080,7 +1065,7 @@ easily reorganize our data?
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: More wildcards}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: More wildcards}, coltitle=black, breakable, toprule=.15mm]
 
 \texttt{*} is not the only wildcard we can use and a full list can be
 found
@@ -1122,6 +1107,52 @@ times
 
 \end{tcolorbox}
 
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding files with find}, coltitle=black, breakable, toprule=.15mm]
+
+With \texttt{*/*.gz}, \texttt{ls} only looks exactly one folder deep
+inside \texttt{seq\_project}. If you don't know how deep your files are
+stored, you can use \texttt{find} instead. \texttt{find} searches a
+folder and all the folders inside it, at any depth:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Search data/seq\_project and all its subfolders for files ending in .gz}
+\FunctionTok{find}\NormalTok{ data/seq\_project }\AttributeTok{{-}name} \StringTok{"*.gz"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{data/seq\_project} is the folder where \texttt{find} starts
+  searching
+\item
+  \texttt{-name\ "*.gz"} tells \texttt{find} to only print files whose
+  name ends with \texttt{.gz}
+\end{itemize}
+
+We put quotes around \texttt{"*.gz"} so that the shell passes the
+\texttt{*} to \texttt{find} unchanged, and \texttt{find} uses it as a
+pattern while it searches.
+
+If you want to see the full (absolute) path of each file, start the
+search from your home directory with \texttt{\textasciitilde{}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{find}\NormalTok{ \textasciitilde{}/data\_analysis/data/seq\_project }\AttributeTok{{-}name} \StringTok{"*.gz"}
+\end{Highlighting}
+\end{Shaded}
+
+Because the shell replaces \texttt{\textasciitilde{}} with the absolute
+path to your home directory, \texttt{find} now prints absolute paths,
+and you don't need to type your user name. This works on every system.
+
+Note that \texttt{find} does not sort its output alphabetically like
+\texttt{ls} does, so the files may appear in a different order.
+
+\end{tcolorbox}
+
 \section{I/O redirection to new
 files}\label{io-redirection-to-new-files}
 
@@ -1158,7 +1189,7 @@ Here:
   screen
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Be careful with \textgreater{}}, colframe=quarto-callout-important-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-important-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Be careful with \textgreater{}}, coltitle=black, breakable, toprule=.15mm]
 
 The \texttt{\textgreater{}} operator overwrites files \textbf{without
 asking}. If a file with the same name already exists, its content is
@@ -1226,7 +1257,7 @@ but accesses it page by page, resulting in fast loading speeds.
   To exit less, type \texttt{q}
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Editing text files}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Editing text files with \texttt{nano}}, coltitle=black, breakable, toprule=.15mm]
 
 You can also edit the content of a text file and there are different
 programs available to do this on the command line, the most commonly
@@ -1271,7 +1302,7 @@ files we work with:
 \end{Highlighting}
 \end{Shaded}
 
-After running this we see that we work with 8 files.
+After running this we see that we work with a total of 8 files.
 
 We could of course easily count this ourselves, however, if we work with
 hundreds of files its a quick and easy way to get an overview about how
@@ -1281,7 +1312,7 @@ One down-side of this approach is that to be able to count the number of
 files, we first need to generate a file in which we count the number of
 files. This (i) can create files we do not actually need and (ii) we use
 two commands while ideally we want to get the information with a single
-command.
+command. Pipes, are a way around this problem.
 
 \section{Pipes}\label{pipes}
 
@@ -1318,7 +1349,7 @@ Here:
 We should see again that we work with 8 files, but now we did not have
 to generate an intermediate text file and have a more condensed command.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1418,7 +1449,8 @@ lists}{sort and uniq: Create unique lists}}\label{sort-and-uniq-create-unique-li
   \texttt{sort}: sorts lines in a file from A-Z
 \item
   \texttt{uniq}: removes or finds duplicates . For this command to work
-  you need to provide it with a sorted file
+  you need to provide it with a sorted file, which is why sort and uniq
+  almost always are used together
 \end{itemize}
 
 Let's first ensure that our barcode list is sorted to then extract only
@@ -1430,7 +1462,7 @@ the unique information:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1512,7 +1544,7 @@ Giving each analysis its own folder inside \texttt{results} keeps the
 project folder clean, and later you can see right away which files
 belong together.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 Fastq.gz files can easily be combined using \texttt{cat} and while this
 is not strictly necessary in our case, you might need to do this with
@@ -1556,7 +1588,7 @@ files.
 \section{Exploring the content of compressed fastq
 files}\label{exploring-the-content-of-compressed-fastq-files}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1612,7 +1644,7 @@ After running this, we finally see a sequence and some other
 information. Notice that for fastq files we always should see 4 rows of
 information for each sequence as shown below:
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1679,10 +1711,10 @@ sequences to the screen but only want to explore the first few rows:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Zcat for Mac users}, colframe=quarto-callout-important-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-important-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{\texttt{zcat} for Mac users}, coltitle=black, breakable, toprule=.15mm]
 
-For Mac users using the zsh shell, zcat might not work as expected. Try
-using gzcat instead:
+For Mac users using the zsh shell, \texttt{zcat} might not work as
+expected. Try using \texttt{gzcat} instead:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1734,28 +1766,7 @@ part of the file name:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colframe=quarto-callout-important-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, arc=.35mm]
-
-\textbf{grep patterns are not wildcards}
-
-In \texttt{grep}, characters such as \texttt{*} and \texttt{.} mean
-something different than the wildcards we used with \texttt{ls}. grep
-uses so-called \textbf{regular expressions}, a small language to
-describe text patterns. In a regular expression, \texttt{*} means ``the
-character before me, repeated zero or more times'' and \texttt{.} means
-``any single character''.
-
-For example, \texttt{grep\ "User1\_*"} does not mean ``User1 followed by
-anything''. It means ``User1 followed by zero or more underscores''. It
-would give the same result as \texttt{grep\ "User1"} here, but only by
-luck.
-
-When you start out, search for plain text and always put your pattern in
-quotes, so that the shell does not try to treat it as a wildcard first.
-
-\end{tcolorbox}
-
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1809,7 +1820,7 @@ After running this we see that we work with 179,384 / 4 sequences. We
 need to divide the number we see on the screen by 4 since each sequence
 is represented by 4 lines of information in our fastq file.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: Better counting}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: Better counting}, coltitle=black, breakable, toprule=.15mm]
 
 We have seen that we need to divide the output of \texttt{wc} by four to
 get the total number of sequences. We can do this with a calculator but
@@ -1850,25 +1861,93 @@ In the command above we have some new syntax:
 
 \end{tcolorbox}
 
+\section{\texorpdfstring{\texttt{echo} and variables: Storing
+information}{echo and variables: Storing information}}\label{echo-and-variables-storing-information}
+
+Before we learn how we can use the command line to automate repetitive
+tasks, we need two small building blocks.
+
+The first one is \texttt{echo}. It prints the text you give it to the
+screen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{echo} \StringTok{"Hello"}
+\end{Highlighting}
+\end{Shaded}
+
+The second one is a variable. A \textbf{variable} is a name that stores
+a value, for example a word, a number or a file path. You create a
+variable by writing its name, an equals sign and the value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Store the path to one sequencing file in a variable called fastq\_file}
+\VariableTok{fastq\_file}\OperatorTok{=}\NormalTok{data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R1.fastq.gz}
+\end{Highlighting}
+\end{Shaded}
+
+This prints nothing, however Bash will remember the value. To use the
+value, put a \texttt{\$} in front of the variable name. Bash then
+replaces \texttt{\$fastq\_file} with the path we stored:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print the value stored in the variable}
+\BuiltInTok{echo} \VariableTok{$fastq\_file}
+
+\CommentTok{\# Use the variable in a command, exactly like you would use the path itself}
+\FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+The second command gives the same result as typing out the full path. On
+its own, that does not save us much work. Variables become really useful
+when their value changes, and that is exactly what a for-loop does for
+us in the next section.
+
+A few rules for variables:
+
+\begin{itemize}
+\tightlist
+\item
+  The name can contain letters, numbers and underscores (\texttt{\_}),
+  but no spaces. Choose a name that tells you what is stored in it,
+  \texttt{fastq\_file} is easier to understand a year later than
+  \texttt{x}.
+\item
+  A variable only exists in the terminal window where you made it. If
+  you close the terminal, it is gone.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-important-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: No spaces around =}, coltitle=black, breakable, toprule=.15mm]
+
+Write \texttt{fastq\_file=data/...} without spaces around the
+\texttt{=}. If you add spaces (\texttt{fastq\_file\ =\ data/...}), bash
+thinks that \texttt{fastq\_file} is the name of a command, and you get
+an error that ends with \texttt{fastq\_file:\ command\ not\ found}.
+
+\end{tcolorbox}
+
 \section{For-loops}\label{for-loops}
 
-Imagine we want to count the lines not only from one but all files.
+Imagine we want to count the lines not only in one, but in all files.
 Could we do something like the code below?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{zcat}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\FunctionTok{zcat}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
 \end{Highlighting}
 \end{Shaded}
 
 When running this, we see that the command prints a single number, 869
-944, but not the counts for each file, so something did not work right.
+944, but not the counts for each individual file, so something did not
+work right.
 
 The problem with this command is that it prints the text from all 8
-fastq files and only afterwards performs the counting. We basically
-concatenated all files and then calculated the sum of all 8 files.
-However, what we want to do is to repeat the same operation over and
-over again:
+fastq files and only afterwards counts the lines. We basically combined
+all files and then counted the lines of all 8 files together. However,
+what we want is to repeat the steps below, individually for each file:
 
 \begin{itemize}
 \tightlist
@@ -1884,92 +1963,117 @@ over again:
   \ldots{}
 \end{itemize}
 
-A \textbf{for loop} is a bash programming language statement which
-allows code to be repeatedly executed. I.e. it allows us to run a
-command 2, 3, 5 or 100 times.
+A \textbf{for-loop} repeats one or more commands, once for each item in
+a list. Each round of the loop is called an \textbf{iteration}.
 
-Let's start with a simple example but before that let's introduce a
-simple command \texttt{echo}. \texttt{echo} is used to print
-information, such as \texttt{Hello} to the terminal:
+\subsection{Step 1: Check what the loop works
+on}\label{step-1-check-what-the-loop-works-on}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\BuiltInTok{echo} \StringTok{"Welcome 1 time!"}
-\end{Highlighting}
-\end{Shaded}
-
-We can use for-loops to print something to the screen not only one, but
-two, three, four \ldots{} times as follows:
+Let's write a first loop that does not change anything yet. It only
+prints the names of our sequencing files:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ 1 2 3}\KeywordTok{;} \ControlFlowTok{do} 
-    \BuiltInTok{echo} \StringTok{"Welcome }\VariableTok{$i}\StringTok{ times"}
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \VariableTok{$fastq\_file}
 \ControlFlowTok{done}
 \end{Highlighting}
 \end{Shaded}
 
-An alternative and more condensed way of writing this that you might
-encounter in the wild is the following:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ 1 2 3}\KeywordTok{;} \ControlFlowTok{do} \BuiltInTok{echo} \StringTok{"Welcome }\VariableTok{$i}\StringTok{ times"}\KeywordTok{;} \ControlFlowTok{done}
-\end{Highlighting}
-\end{Shaded}
-
-Here, you see what this command does step by step:
-
-Let's try to do the same but now for our sequencing files by storing the
-individual files found in \texttt{data/seq\_project/*/*.gz} in the
-variable i and print i to the screen in a for-loop.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz}\KeywordTok{;} \ControlFlowTok{do} 
-    \BuiltInTok{echo} \StringTok{"I work with: File }\VariableTok{$i}\StringTok{"}
-\ControlFlowTok{done}
-\end{Highlighting}
-\end{Shaded}
+This prints the paths of all 8 fastq files, one per line. Let's go
+through the parts of the loop:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{for\ i\ in\ data/seq\_project/*/*.gz;\ do}: This part
-  initializes a loop that iterates over all files matching the pattern
-  \texttt{data/seq\_project/*/*.gz}. The variable i is assigned to each
-  file in succession.
+  \texttt{for\ fastq\_file\ in\ data/seq\_project/*/*.fastq.gz;\ do}:
+  this line says what to repeat over. The wildcard gives the list, here
+  all 8 fastq files. In each iteration, bash stores the next file from
+  the list in the variable \texttt{fastq\_file}. You choose the name of
+  this variable yourself.
+\item
+  \texttt{echo\ \$fastq\_file}: the command we want to repeat, written
+  between \texttt{do} and \texttt{done}. Here, we print the value of the
+  variable. We indent this line with 4 spaces. Bash does not need this,
+  but it makes the loop easier to read.
+\item
+  \texttt{done}: marks the end of the loop.
 \end{itemize}
 
-We can then use these variables stored in i to perform more useful
-operations, for example for each file, step-by-step, count the number of
-lines in each file by using some of the tools we have seen before:
+In other words, the loop does the same as typing these commands one
+after the other:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz}\KeywordTok{;} \ControlFlowTok{do} 
-    \FunctionTok{zcat} \VariableTok{$i} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\CommentTok{\# You don\textquotesingle{}t need to run this, it only shows what the loop does for us}
+\VariableTok{fastq\_file}\OperatorTok{=}\NormalTok{data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R1.fastq.gz}
+\BuiltInTok{echo} \VariableTok{$fastq\_file}
+\VariableTok{fastq\_file}\OperatorTok{=}\NormalTok{data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R2.fastq.gz}
+\BuiltInTok{echo} \VariableTok{$fastq\_file}
+\CommentTok{\# ... and so on, for the other 6 files}
+\end{Highlighting}
+\end{Shaded}
+
+Starting a loop with \texttt{echo} is a good habit. This is called a
+\textbf{dry run}: the loop shows what it would work on, without changing
+anything. Before you add the real command, check the list. Do you see
+all 8 files, and only the files you expect?
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Typing a loop in the terminal}, coltitle=black, breakable, toprule=.15mm]
+
+When you press Enter after writing the first line of the loop, nothing
+runs yet. Instead, the prompt changes to \texttt{\textgreater{}}. This
+means bash waits for the rest of the loop. It only starts once you type
+\texttt{done} and press Enter. (On a Mac with zsh, this prompt may look
+slightly different, for example \texttt{for\textgreater{}}.)
+
+If you get stuck in this \texttt{\textgreater{}} prompt, for example
+because of a typo, press \texttt{Ctrl+C} to cancel and start again.
+
+\end{tcolorbox}
+
+\subsection{Step 2: Add the real
+command}\label{step-2-add-the-real-command}
+
+Now that we know the loop works on the right files, we replace
+\texttt{echo} with the command we actually want to run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
 \ControlFlowTok{done}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{zcat\ \$i\ \textbar{}\ wc\ -l}: This is the action performed
-  inside the loop. zcat is used to concatenate and display the content
-  of compressed files (*.gz). The \textbar{} (pipe) symbol redirects
-  this output to wc -l, which counts the number of lines in the
-  uncompressed content.
-\end{itemize}
+Now we get 8 numbers, one per file.
+\texttt{zcat\ \$fastq\_file\ \textbar{}\ wc\ -l} is the same command as
+in the variables section. The only difference is that bash now runs it 8
+times, each time with a different file stored in \texttt{fastq\_file}.
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colframe=quarto-callout-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Loops written on one line}, coltitle=black, breakable, toprule=.15mm]
+
+You might also see loops written on a single line, with \texttt{;} where
+we start a new line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do} \FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\KeywordTok{;} \ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+This does exactly the same as the loop above. For anything longer than
+one short command, the version over several lines is easier to read.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Use a for loop and count how often grep finds the pattern ``TAAGA'' in
+  Use a for-loop and count how often grep finds the pattern ``TAAGA'' in
   each individual fastq.gz file
 \end{enumerate}
 
@@ -1978,8 +2082,8 @@ lines in each file by using some of the tools we have seen before:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz}\KeywordTok{;} \ControlFlowTok{do} 
-    \FunctionTok{zcat} \VariableTok{$i} \KeywordTok{|} \FunctionTok{grep} \AttributeTok{{-}c} \StringTok{"TAAGA"}
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{grep} \AttributeTok{{-}c} \StringTok{"TAAGA"}
 \ControlFlowTok{done}
 \end{Highlighting}
 \end{Shaded}
@@ -1987,70 +2091,125 @@ lines in each file by using some of the tools we have seen before:
 
 \end{tcolorbox}
 
-Sometimes it is useful to not store the full path in \texttt{i},
-especially when we want to store the output of our loop in a new file.
-Luckily, we can use the list of files we stored in
-\texttt{fastq\_files.txt} to rewrite this command a bit and make use of
-the fact that we can use \texttt{cat} to print something in a text file
-to the screen:
+\section{\texorpdfstring{\texttt{\textgreater{}\textgreater{}}:
+Collecting the loop output in one
+file}{\textgreater\textgreater: Collecting the loop output in one file}}\label{collecting-the-loop-output-in-one-file}
+
+So far, the counts only appear on the screen. We cannot see which number
+belongs to which file, and the numbers are gone once we close the
+terminal. Let's write the file names and the counts into a file instead.
+
+In the section on I/O redirection, we have seen that
+\texttt{\textgreater{}} replaces the content of a file, and that
+\texttt{\textgreater{}\textgreater{}} adds (\textbf{appends}) text to
+the end of a file. Inside a loop, this difference matters. With
+\texttt{\textgreater{}}, each iteration would replace what the iteration
+before it wrote, and only the result for the last file would be left. So
+inside the loop we use \texttt{\textgreater{}\textgreater{}}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \KeywordTok{\textasciigrave{}}\FunctionTok{cat}\NormalTok{ fastq\_files.txt}\KeywordTok{\textasciigrave{};} \ControlFlowTok{do}  
-    \FunctionTok{zcat}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$i} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\CommentTok{\# Make a folder for the counts inside results}
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/counts}
+
+\CommentTok{\# Start the counts file with a first line that describes its content}
+\CommentTok{\# Because we use \textgreater{} here, an existing file is emptied first, so we start fresh each time}
+\BuiltInTok{echo} \StringTok{"Number of lines per fastq file"} \OperatorTok{\textgreater{}}\NormalTok{ results/counts/line\_counts.txt}
+
+\CommentTok{\# For each fastq file, add the file name and its number of lines to the end of the file}
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \VariableTok{$fastq\_file} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ results/counts/line\_counts.txt}
+    \FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ results/counts/line\_counts.txt}
 \ControlFlowTok{done}
+
+\CommentTok{\# Check the result: we expect 1 header line + 2 lines for each of the 8 files = 17 lines}
+\FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ results/counts/line\_counts.txt}
+\FunctionTok{cat}\NormalTok{ results/counts/line\_counts.txt}
 \end{Highlighting}
 \end{Shaded}
+
+Here:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{for\ i\ in\ \textasciigrave{}cat\ fastq\_files.txt\textasciigrave{};\ do}:
-  This initiates a loop that iterates over each item in the file
-  fastq\_files.txt. The backticks ` are used to execute the \texttt{cat}
-  command within the backticks to read the content of the text file and
-  assign its output to the variable i.
+  \texttt{mkdir\ -p\ results/counts}: we keep the output of each
+  analysis in its own folder inside \texttt{results}
 \item
-  \texttt{zcat\ data/seq\_project/*/\$i\ \textbar{}\ wc\ -l}: Like
-  before, this line uncompresses (zcat) and counts (wc) the number of
-  lines in the specified file. However, in this case, the file is
-  determined by the content of fastq\_files.txt, which contains a list
-  of file names.
+  \texttt{echo\ "Number\ of\ lines\ per\ fastq\ file"\ \textgreater{}\ results/counts/line\_counts.txt}:
+  before the loop starts, we write a first line that describes what is
+  in the file. Such a line is called a \textbf{header}. Because we use
+  \texttt{\textgreater{}} here, this also empties the file if it already
+  exists from an earlier run
+\item
+  Inside the loop, there are now two commands. The first one adds the
+  name of the file, the second one adds its number of lines. Both use
+  \texttt{\textgreater{}\textgreater{}}, so each iteration adds two
+  lines to the end of \texttt{line\_counts.txt}
 \end{itemize}
 
-After this modification of the code, we can very easily store the output
-in a file instead of printing the results to the screen.
+We will use these numbers again on day 2, to check what a quality
+filtering tool did to our data.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Count the number of lines in each sequencing file}
-\CommentTok{\# Store the output in a new folder inside results}
-\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/counts}
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, breakable, toprule=.15mm]
 
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \KeywordTok{\textasciigrave{}}\FunctionTok{cat}\NormalTok{ fastq\_files.txt}\KeywordTok{\textasciigrave{};} \ControlFlowTok{do}
-    \FunctionTok{zcat}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$i} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l} \OperatorTok{\textgreater{}}\NormalTok{ results/counts/}\VariableTok{$i}\NormalTok{.txt}
-\ControlFlowTok{done}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Run only the for-loop from the code above a second time, without the
+  \texttt{echo} line before it. How many lines does
+  \texttt{line\_counts.txt} have now? Why?
+\item
+  Now run the complete code again, including the \texttt{echo} line
+  before the loop. How many lines does \texttt{line\_counts.txt} have
+  now?
+\item
+  What do you think would happen if we used \texttt{\textgreater{}}
+  instead of \texttt{\textgreater{}\textgreater{}} inside the loop?
+  Think about it first, then try it. Afterwards, run the code with
+  \texttt{\textgreater{}\textgreater{}} once more, so that
+  \texttt{line\_counts.txt} is correct again.
+\end{enumerate}
 
-\CommentTok{\# Check that we have one count file per sequencing file (8 files)}
-\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/counts/}\PreprocessorTok{*}\NormalTok{txt}
+\begin{quote}
+\textbf{Click me to see an answer}
 
-\FunctionTok{head}\NormalTok{ results/counts/Sample{-}DUMMY1\_R1.fastq.gz.txt}
-\end{Highlighting}
-\end{Shaded}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The file now has 33 lines. The loop added its 16 lines a second time
+  to the end of the file, so all counts appear twice. This is something
+  to watch out for whenever you use
+  \texttt{\textgreater{}\textgreater{}}.
+\item
+  The file has 17 lines again. The \texttt{echo} line uses
+  \texttt{\textgreater{}}, which empties the file before the loop adds
+  the counts.
+\item
+  Each \texttt{\textgreater{}} replaces the content of the file. After
+  the loop, the file only contains a single line: the number of lines of
+  the last file. All other results were overwritten.
+\end{enumerate}
+\end{quote}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: Better counting in for loops}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: Better counting in for loops}, coltitle=black, breakable, toprule=.15mm]
 
 Let's get a bit more advanced to show you some powerful features of
-bash. For this imagine that you would do this for 100 files. In this
-case it would be useful to see the file names next to the counts. We can
-achieve this by using what we have learned in the
-\texttt{Better\ counting\ tip} where we have learned about echo and
-command substitution.
+bash. Above, the file name and its count end up on two separate lines.
+Imagine that you would do this for 100 files. In this case it would be
+useful to see each file name and its count on the same line. We can
+achieve this with the command substitution from the
+\texttt{Advanced\ tip:\ Better\ counting} in the \texttt{wc} section
+above.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz}\KeywordTok{;} \ControlFlowTok{do} 
-    \BuiltInTok{echo} \StringTok{"}\VariableTok{$i}\StringTok{: }\VariableTok{$(}\FunctionTok{zcat} \VariableTok{$i} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)}\StringTok{"}
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"}\VariableTok{$fastq\_file}\StringTok{: }\VariableTok{$(}\FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)}\StringTok{"}
 \ControlFlowTok{done}
 \end{Highlighting}
 \end{Shaded}
@@ -2060,25 +2219,27 @@ command substitution.
 \item
   The echo command is used to display messages or print information to
   the terminal. In our case it will print whatever is going on here
-  \texttt{"\$i:\ \$(zcat\ \$i\ \textbar{}\ wc\ -l)"}
+  \texttt{"\$fastq\_file:\ \$(zcat\ \$fastq\_file\ \textbar{}\ wc\ -l)"}
 \item
   \texttt{\$(...)}: These parentheses are used for command substitution.
-  It means that the command \texttt{zcat\ \$i\ \textbar{}\ wc\ -l} is
-  executed, and its output (the line count of the uncompressed content)
-  is substituted in that position.
+  It means that the command
+  \texttt{zcat\ \$fastq\_file\ \textbar{}\ wc\ -l} is executed, and its
+  output (the line count of the uncompressed content) is substituted in
+  that position.
 \item
   The double quotes (``\,``) perform what is called a string
-  concatenation. It concatenates the filename (\$i), a colon (:), a
-  space, and the line count obtained from the command substitution. The
-  entire string is then passed as a single argument to the echo command.
+  concatenation. It concatenates the filename (\$fastq\_file), a colon
+  (:), a space, and the line count obtained from the command
+  substitution. The entire string is then passed as a single argument to
+  the echo command.
 \end{itemize}
 
 Almost perfect, now we only want to divide this by 4:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz}\KeywordTok{;} \ControlFlowTok{do} 
-    \BuiltInTok{echo} \StringTok{"}\VariableTok{$i}\StringTok{: }\VariableTok{$((} \VariableTok{$(}\FunctionTok{zcat} \VariableTok{$i} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)} \OperatorTok{/}\DecValTok{4} \VariableTok{))}\StringTok{"}
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"}\VariableTok{$fastq\_file}\StringTok{: }\VariableTok{$((} \VariableTok{$(}\FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)} \OperatorTok{/}\DecValTok{4} \VariableTok{))}\StringTok{"}
 \ControlFlowTok{done}
 \end{Highlighting}
 \end{Shaded}
@@ -2095,7 +2256,7 @@ Notice, how we use both single brackets and double brackets?
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: Using bash to make sample mapping files}, colframe=quarto-callout-tip-color-frame, titlerule=0mm, breakable, left=2mm, colback=white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, opacityback=0, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-tip-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: Using bash to make sample mapping files}, coltitle=black, breakable, toprule=.15mm]
 
 For a lot of mapping files for amplicon analyses, you need to prepare a
 table that lists your files, often with the R1 and R2 files in separate
@@ -2173,7 +2334,7 @@ well. I.e. lets assume you only want to list the index:
 \begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{ file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz}\KeywordTok{;} \ControlFlowTok{do}
     \ControlFlowTok{if} \KeywordTok{[[} \VariableTok{$file} \OtherTok{==} \PreprocessorTok{*}\NormalTok{\_R1.fastq.gz }\KeywordTok{]];} \ControlFlowTok{then}
-        \VariableTok{sample\_name}\OperatorTok{=}\VariableTok{$(}\BuiltInTok{echo} \VariableTok{$file} \KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f3} \AttributeTok{{-}d} \StringTok{"/"}  \KeywordTok{|}\FunctionTok{cut} \AttributeTok{{-}f1} \AttributeTok{{-}d} \StringTok{"\_"} \VariableTok{)} 
+        \VariableTok{sample\_name}\OperatorTok{=}\VariableTok{$(}\BuiltInTok{echo} \VariableTok{$file} \KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f3} \AttributeTok{{-}d} \StringTok{"/"}  \KeywordTok{|}\FunctionTok{cut} \AttributeTok{{-}f1} \AttributeTok{{-}d} \StringTok{"\_"} \VariableTok{)}
         \VariableTok{r1\_file}\OperatorTok{=}\VariableTok{$file}
         \VariableTok{r2\_file}\OperatorTok{=}\VariableTok{$(}\BuiltInTok{echo} \VariableTok{$file} \KeywordTok{|} \FunctionTok{sed} \StringTok{\textquotesingle{}s/\_R1/\_R2/\textquotesingle{}}\VariableTok{)}
         \BuiltInTok{echo} \StringTok{"}\VariableTok{$sample\_name}\StringTok{,}\VariableTok{$r1\_file}\StringTok{,}\VariableTok{$r2\_file}\StringTok{"}
@@ -2181,6 +2342,137 @@ well. I.e. lets assume you only want to list the index:
 \ControlFlowTok{done}
 \end{Highlighting}
 \end{Shaded}
+
+\end{tcolorbox}
+
+\section{\texorpdfstring{\texttt{bash}: Running commands from a
+script}{bash: Running commands from a script}}\label{bash-running-commands-from-a-script}
+
+Our counting loop is now a few lines long, and we might want to run it
+again later, for example when new data arrives. Instead of typing or
+copying the loop each time, we can save it in a file. A text file that
+contains commands is called a \textbf{script}. Bash scripts usually end
+with \texttt{.sh}.
+
+To keep our project folder tidy, we store scripts in their own folder:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make a folder for scripts inside data\_analysis}
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ scripts}
+
+\CommentTok{\# Check that the folder was created}
+\FunctionTok{ls} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we create the script with the text editor \texttt{nano} (see the
+tip ``Editing text files with \texttt{nano}'' above):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nano}\NormalTok{ scripts/count\_lines.sh}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{MobaXterm users:} if you see
+\texttt{nano:\ command\ not\ found}, install it first with
+\texttt{apt\ install\ nano}, as explained in that tip.
+
+Type or copy the following into the editor:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\CommentTok{\# Count the number of lines in each fastq file}
+\CommentTok{\# Run this script from inside the data\_analysis folder}
+
+\CommentTok{\# Make a folder for the counts and start the counts file with a header}
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/counts}
+\BuiltInTok{echo} \StringTok{"Number of lines per fastq file"} \OperatorTok{\textgreater{}}\NormalTok{ results/counts/line\_counts\_bash.txt}
+
+\CommentTok{\# For each fastq file, add the file name and its number of lines to the end of the file}
+\ControlFlowTok{for}\NormalTok{ fastq\_file }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \VariableTok{$fastq\_file} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ results/counts/line\_counts\_bash.txt}
+    \FunctionTok{zcat} \VariableTok{$fastq\_file} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ results/counts/line\_counts\_bash.txt}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+Save and exit:
+
+\begin{itemize}
+\tightlist
+\item
+  Press \texttt{Ctrl+X} to exit, then \texttt{Y} to confirm that you
+  want to save the file, then Enter to keep the file name
+\end{itemize}
+
+The commands are the same as in the
+\texttt{\textgreater{}\textgreater{}} section. Two things are new:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\#!/bin/bash}: this first line is called the \textbf{shebang}.
+  It tells the system that the script should be run with bash. Put it at
+  the very top of every bash script.
+\item
+  The lines that start with \texttt{\#} are comments. Bash ignores them,
+  but they tell you (and others) what the script does and how to use it.
+\end{itemize}
+
+Now we can run the whole script with a single command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Run the script with bash}
+\FunctionTok{bash}\NormalTok{ scripts/count\_lines.sh}
+
+\CommentTok{\# Check the output: we again expect 17 lines}
+\FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ results/counts/line\_counts\_bash.txt}
+\FunctionTok{cat}\NormalTok{ results/counts/line\_counts\_bash.txt}
+\end{Highlighting}
+\end{Shaded}
+
+The script itself prints nothing to the screen, because all output goes
+into \texttt{line\_counts.txt}. That is why we check the file
+afterwards.
+
+Why is this useful?
+
+\begin{itemize}
+\tightlist
+\item
+  You can run the same analysis again, with exactly the same commands,
+  without typing mistakes.
+\item
+  The script documents what you did. Together with your notes file, it
+  tells future you how a result was made.
+\item
+  On day 2, we use exactly this kind of script on the HPC. There, we add
+  a few extra lines at the top that tell the HPC how many resources our
+  job needs.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, colframe=quarto-callout-important-color-frame, opacityback=0, left=2mm, opacitybacktitle=0.6, toptitle=1mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Write scripts in nano or a code editor, not in Word or
+Notepad}, coltitle=black, breakable, toprule=.15mm]
+
+Windows programs such as Notepad end every line with an extra invisible
+character. Bash on Linux does not understand this character, and the
+script fails with errors such as
+\texttt{\$\textquotesingle{}\textbackslash{}r\textquotesingle{}:\ command\ not\ found}
+or \texttt{syntax\ error\ near\ unexpected\ token}. Word processors such
+as Word also add formatting and can change straight quotes (\texttt{"})
+into curly quotes.
+
+To avoid this, write your scripts with \texttt{nano}. If you prefer a
+code editor such as VS Code, check that it saves the file with
+\texttt{LF} line endings (in VS Code, you see \texttt{LF} or
+\texttt{CRLF} in the bar at the bottom right, and can click it to change
+it). This becomes important on day 2, where the scripts run on a Linux
+computer.
 
 \end{tcolorbox}
 

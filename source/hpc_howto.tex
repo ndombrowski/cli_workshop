@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, enhanced, breakable, boxrule=0pt, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, boxrule=0pt, interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -328,7 +328,7 @@ checks. After logging in, the prompt changes: it now shows your UvAnetID
 and \texttt{omics-h0}. Every command you type now runs on Crunchomics,
 not on your own computer.
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-important-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 \textbf{Important tips for connecting:}
 
@@ -347,7 +347,7 @@ not on your own computer.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Viewing graphical output with ssh -X}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Viewing graphical output with ssh -X}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 Some programs on the HPC can open a window, for example to show a plot
 or a PDF. To see such windows on your own computer, log in with the
@@ -362,29 +362,6 @@ or a PDF. To see such windows on your own computer, log in with the
 \texttt{-X} enables what is called \textbf{X11 forwarding}: the HPC
 sends the graphical output to your computer. In this tutorial we don't
 need this, because we copy the results to our own computer instead.
-
-\end{tcolorbox}
-
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Warning about a changed host key}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
-
-The first time you connect, your computer stores a ``fingerprint'' of
-Crunchomics, the so-called host key. After maintenance of Crunchomics,
-this key can change. Then \texttt{ssh} refuses to connect and shows a
-warning like \texttt{REMOTE\ HOST\ IDENTIFICATION\ HAS\ CHANGED!}.
-
-If you know that Crunchomics had maintenance, you can remove the old key
-from your computer with the command below. Run it on your own computer,
-not on the HPC. Then log in again and type \texttt{yes} when you are
-asked whether you want to continue connecting.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Remove the stored host key for Crunchomics from your own computer}
-\FunctionTok{ssh{-}keygen} \AttributeTok{{-}R} \StringTok{"omics{-}h0.science.uva.nl"}
-\end{Highlighting}
-\end{Shaded}
-
-If you are unsure why the key changed, ask before you remove it.
 
 \end{tcolorbox}
 
@@ -519,7 +496,7 @@ that the files arrived:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to your own computer}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to your own computer}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 You can also copy results from the HPC to your own computer. For this,
 you switch source and destination. For example, to copy a single
@@ -546,7 +523,7 @@ sequencing file from Crunchomics:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files with wildcards}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files with wildcards}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 We can also copy several files at once with a wildcard. Then
 \texttt{scp} copies only the files, not the folders they are in.
@@ -592,49 +569,6 @@ setups might need slightly different solutions):
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files using the FileZilla GUI}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
-
-\texttt{scp} takes some getting used to, and there are several programs
-with a graphical user interface that do the same thing. Here, we look at
-FileZilla, which works on Windows, Mac and Linux.
-
-To use FileZilla, do the following:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Download the FileZilla Client
-  \href{https://filezilla-project.org/}{here}. The free version is all
-  we need.
-\item
-  Follow the installation instructions
-\item
-  Click the FileZilla app to start it
-\item
-  Add your UvA user credentials:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Enter \texttt{omics-h0.science.uva.nl} in host
-  \item
-    Enter your UvAnetID in user
-  \item
-    Enter your UvA password
-  \item
-    Port should be 22 to open an SFTP connection
-  \end{itemize}
-\item
-  Trust the host
-\item
-  You land in your home directory (on the right hand side)
-\item
-  You can copy data by dragging and dropping
-\end{enumerate}
-
-\end{tcolorbox}
-
 \section{Submitting jobs with SLURM}\label{submitting-jobs-with-slurm}
 
 \subsection{Login node and compute
@@ -658,56 +592,6 @@ to run, together with the resources it needs. The jobs are managed by
 \textbf{SLURM}, a workload manager that decides \emph{when},
 \emph{where} and \emph{how} your jobs run based on the available
 resources.
-
-\subsection{\texorpdfstring{\texttt{sinfo}: Get information about the
-cluster}{sinfo: Get information about the cluster}}\label{sinfo-get-information-about-the-cluster}
-
-When you start on a new HPC, it is useful to know which compute nodes
-exist and how busy they are. This helps you to choose how many resources
-to request, so that your job runs efficiently but also starts in time.
-
-To get a list of the compute nodes, type:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ExtensionTok{sinfo}
-\end{Highlighting}
-\end{Shaded}
-
-We will see something like this:
-
-\includegraphics[width=0.6\linewidth,height=\textheight,keepaspectratio]{../img/sinfo.png}\hfill
-
-Here, the different columns are:
-
-\begin{itemize}
-\tightlist
-\item
-  PARTITION: the queues that are available. Crunchomics has only a few
-  partitions, and you do not need to choose one. Other systems use
-  partitions to group nodes with different hardware or a different
-  maximum run time
-\item
-  STATE: tells you whether a node is busy or not:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    mix: some of the resources are in use
-  \item
-    idle: the node is free
-  \item
-    drain: unavailable, because the system administrator asked for it
-  \item
-    alloc: all resources are in use
-  \item
-    down: unavailable
-  \end{itemize}
-\item
-  NODES: the number of nodes in each state
-\item
-  NODELIST: the names of the compute nodes
-\end{itemize}
 
 \subsection{\texorpdfstring{\texttt{squeue}: View the jobs in the
 queue}{squeue: View the jobs in the queue}}\label{squeue-view-the-jobs-in-the-queue}
@@ -799,7 +683,7 @@ which resources your job needs on the compute node. The job runs so fast
 that you won't see it in \texttt{squeue}. But congratulations, you just
 communicated with a compute node for the first time.
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-important-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 Jobs started with \texttt{srun} stop if you lose the connection to the
 HPC, for example when you close your laptop. For longer jobs, use
@@ -807,7 +691,7 @@ HPC, for example when you close your laptop. For longer jobs, use
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Other srun options you might see}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Other srun options you might see}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 In examples online, you will often see two more options:
 
@@ -829,29 +713,31 @@ In examples online, you will often see two more options:
 
 \end{tcolorbox}
 
-\subsection{\texorpdfstring{Run FastQC with
-\texttt{srun}}{Run FastQC with srun}}\label{run-fastqc-with-srun}
+\subsection{\texorpdfstring{Run seqkit stats with
+\texttt{srun}}{Run seqkit stats with srun}}\label{run-seqkit-stats-with-srun}
 
 Next, let's use \texttt{srun} for something more useful.
-\href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}{FastQC}
-is a quality control tool for sequencing data that is already installed
-on Crunchomics. We use it to look more closely at the quality of the
-sequencing data that we just copied to Crunchomics.
+\href{https://bioinf.shenwei.me/seqkit/}{SeqKit} is a toolkit for
+working with sequence files, and it is already installed on Crunchomics
+(version 2.7.0). Its command \texttt{seqkit\ stats} gives a summary of
+each fastq file: how many reads it has, how long they are, and how good
+their quality is. We use it to get a first overview of the sequencing
+data that we just copied to Crunchomics.
 
 Whenever you use a tool for the first time, check its help page
-(e.g.~\texttt{fastqc\ -h}) to see all available options, or look online
-for a manual.
+(e.g.~\texttt{seqkit\ stats\ -h}) to see all available options, or look
+online for a manual.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Make a results folder with a fastqc folder inside}
-\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastqc}
+\CommentTok{\# Make a results folder with a seqkit folder inside}
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/seqkit}
 
-\CommentTok{\# Run FastQC on all fastq.gz files with srun}
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 fastqc data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\CommentTok{\# Run seqkit stats on all fastq.gz files with srun}
+\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
-\CommentTok{\# Check the output: we expect one HTML report (and one zip file) per fastq.gz file}
-\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/fastqc}
+\CommentTok{\# Check the output: we expect one table with a header line and one line per fastq.gz file}
+\FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ results/seqkit/stats\_raw.txt}
 \end{Highlighting}
 \end{Shaded}
 
@@ -860,13 +746,26 @@ Here:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{fastqc\ data/seq\_project/*/*gz}: run FastQC on all files in
-  the \texttt{seq\_project} folders that end with \texttt{gz}
+  \texttt{seqkit\ stats\ data/seq\_project/*/*gz}: run
+  \texttt{seqkit\ stats} on all files in the \texttt{seq\_project}
+  folders that end with \texttt{gz}
 \item
-  \texttt{-o\ results/fastqc}: write the output into the
-  \texttt{results/fastqc} folder
+  \texttt{-b}: only output the basename of files
 \item
-  \texttt{-\/-threads\ 1}: let FastQC use 1 CPU (in our case, thread and
+  \texttt{-a}: print all statistics. Without it, seqkit prints only the
+  basic ones, such as the number and length of the reads, but not their
+  quality
+\item
+  \texttt{-T}: print the output as a table in which the columns are
+  separated by tabs. This format is easy to read for other commands,
+  such as \texttt{cut}
+\item
+  \texttt{-o\ results/seqkit/stats\_raw.txt}: write the output into this
+  file. If you ever are unsure about what options come with a tool,
+  check the tool's manual or its help page with
+  \texttt{seqkit\ stats\ -h}
+\item
+  \texttt{-\/-threads\ 1}: let seqkit use 1 CPU (in our case, thread and
   CPU mean the same)
 
   \begin{itemize}
@@ -881,27 +780,74 @@ Here:
 \end{itemize}
 
 Since we work with little data, this runs fast despite only using 1 CPU.
-If you are logged in to Crunchomics in a second terminal and run
-\texttt{squeue} while FastQC is running, you should see your job (in the
-example below, the job is named after the software and got the job ID
-746):
+It may even finish within a second or two. If you are logged in to
+Crunchomics in a second terminal and run \texttt{squeue} while your job
+is running, you should see it (in the example below, the job is named
+after the software and got the job ID 379646):
 
 \includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{../img/squeue2.png}\hfill
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+Unlike the reports of many other tools, the output is a plain text file,
+so we can look at it directly on Crunchomics:
 
-The FastQC reports are HTML files, which are easiest to view in the
-internet browser of your own computer.
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{ results/seqkit/stats\_raw.txt}
+\end{Highlighting}
+\end{Shaded}
+
+The output should look like this:
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{../img/seqkit_out.png}\hfill
+
+The most useful columns for us are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{num\_seqs}: the number of reads in the file
+\item
+  \texttt{min\_len}, \texttt{avg\_len} and \texttt{max\_len}: the
+  shortest, average and longest read length
+\item
+  \texttt{Q20(\%)} and \texttt{Q30(\%)}: the percentage of bases with a
+  quality score of at least 20 or 30. A quality score of 20 means that
+  there is a 1 in 100 chance that the base is wrong, a score of 30 a 1
+  in 1000 chance
+\item
+  \texttt{GC(\%)}: the percentage of G and C bases
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: FastQC for visual quality reports}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+\texttt{seqkit\ stats} gives us numbers. A very common tool for a more
+detailed, visual check of sequencing quality is
+\href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}{FastQC},
+which is also installed on Crunchomics. It makes one HTML report per
+fastq file, with plots of the quality along the reads. You open these
+reports in the internet browser of your own computer, so you first copy
+them with \texttt{scp}. \href{https://seqera.io/multiqc/}{MultiQC} can
+combine many of these reports into one.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Use \texttt{scp} to copy the HTML files generated by FastQC from
-  Crunchomics into the \texttt{results/fastqc} folder of the
-  \texttt{data\_analysis} folder on your own computer
+  On day 1, we counted the lines in each fastq file
+  (\texttt{results/counts/line\_counts\_bash.txt} on your own computer).
+  Use this to work out how many reads
+  \texttt{Sample-DUMMY1\_R2.fastq.gz} has. Does this match
+  \texttt{num\_seqs} in the seqkit table?
 \item
-  Open the folder in your file browser and open one of the HTML files
+  Look at \texttt{num\_seqs} for the R1 and the R2 file of each sample.
+  What do you notice?
+\item
+  Use \texttt{cut} to print only the columns \texttt{file} and
+  \texttt{num\_seqs} of the table
 \end{enumerate}
 
 \begin{quote}
@@ -909,32 +855,30 @@ internet browser of your own computer.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Run all of this in the terminal on your OWN computer,}
-\CommentTok{\# from inside your local data\_analysis folder}
-
 \CommentTok{\# Question 1:}
-\CommentTok{\# Make the folder for the reports}
-\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastqc}
+\CommentTok{\# On your own computer }
+\CommentTok{\# Sample{-}DUMMY1\_R2 has 179384 lines}
+\FunctionTok{cat}\NormalTok{ results/counts/line\_counts\_bash.txt}
 
-\CommentTok{\# Copy all HTML reports}
-\CommentTok{\# The quotes make sure that the wildcard is used on Crunchomics, not on your own computer}
-\FunctionTok{scp} \StringTok{\textquotesingle{}username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/results/fastqc/*html\textquotesingle{}}\NormalTok{ results/fastqc/}
+\CommentTok{\# On Crunchomics}
+\CommentTok{\# Sample{-}DUMMY1\_R2 has 44846 seqs}
+\FunctionTok{cat}\NormalTok{ results/seqkit/stats\_raw.txt}
 
-\CommentTok{\# Check that the 8 reports arrived}
-\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/fastqc}
-
-\CommentTok{\# Question 2:}
-\CommentTok{\# Open the folder in your file browser}
-\BuiltInTok{cd}\NormalTok{ results/fastqc}
-\ExtensionTok{explorer.exe}\NormalTok{ .     }\CommentTok{\# Windows (MobaXterm or WSL2)}
-\ExtensionTok{open}\NormalTok{ .             }\CommentTok{\# Mac}
+\CommentTok{\# Question 3:}
+\CommentTok{\# file is the 1st column and num\_seqs is the 4th column}
+\CommentTok{\# cut uses tabs to split columns by default, so we don\textquotesingle{}t need {-}d here}
+\FunctionTok{cut} \AttributeTok{{-}f1,4}\NormalTok{ results/seqkit/stats\_raw.txt}
 \end{Highlighting}
 \end{Shaded}
 
-Double-click on one of the HTML files to open it in your browser. If you
-want to know more about how to interpret the output, visit
-\href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}{the
-FastQC website}, which gives examples of good and bad reports.
+For question 1: each read takes up 4 lines in a fastq file, so the
+number of reads is the number of lines divided by 4.
+\texttt{Sample-DUMMY1\_R2.fastq.gz} has 179,384 lines, which is 44,846
+reads. seqkit reports the same number. When two different methods give
+the same answer, we can trust the result a lot more.
+
+For question 2: the R1 and R2 file of the same sample always have the
+same number of reads. Each read in R1 has its partner read in R2.
 \end{quote}
 
 \end{tcolorbox}
@@ -978,7 +922,7 @@ When you are done, leave the compute node and go back to the login node:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-important-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 Always \texttt{exit} an interactive session when you are done. As long
 as the session is open, the CPUs and memory you requested stay reserved
@@ -1028,14 +972,14 @@ and for the log files that SLURM writes:
 \subsubsection{Step 2: Write a job
 script}\label{step-2-write-a-job-script}
 
-We run FastQC again, but this time with \texttt{sbatch} instead of
-\texttt{srun}, so that you can directly compare the two.
+We run \texttt{seqkit\ stats} again, but this time with \texttt{sbatch}
+instead of \texttt{srun}, so that you can directly compare the two.
 
 Use \texttt{nano} to create a script file:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{nano}\NormalTok{ scripts/run\_fastqc.sh}
+\FunctionTok{nano}\NormalTok{ scripts/run\_seqkit.sh}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1044,19 +988,19 @@ Then add the following content:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#!/bin/bash}
-\CommentTok{\#SBATCH {-}{-}job{-}name=fastqc}
-\CommentTok{\#SBATCH {-}{-}output=logs/fastqc\_\%j.out}
-\CommentTok{\#SBATCH {-}{-}error=logs/fastqc\_\%j.err}
+\CommentTok{\#SBATCH {-}{-}job{-}name=seqkit}
+\CommentTok{\#SBATCH {-}{-}output=logs/seqkit\_\%j.out}
+\CommentTok{\#SBATCH {-}{-}error=logs/seqkit\_\%j.err}
 \CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=1}
 \CommentTok{\#SBATCH {-}{-}mem=5G}
 \CommentTok{\#SBATCH {-}{-}time=01:00:00}
 
-\BuiltInTok{echo} \StringTok{"FastQC job started on:"}
+\BuiltInTok{echo} \StringTok{"seqkit job started on:"}
 \FunctionTok{date}
 
-\ExtensionTok{fastqc}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{seqkit}\NormalTok{ stats }\AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
-\BuiltInTok{echo} \StringTok{"FastQC job finished on:"}
+\BuiltInTok{echo} \StringTok{"seqkit job finished on:"}
 \FunctionTok{date}
 \end{Highlighting}
 \end{Shaded}
@@ -1070,9 +1014,10 @@ Save and exit:
   want to save the file, then Enter to keep the file name
 \end{itemize}
 
-Notice how the \texttt{fastqc} command looks exactly the same as when we
-used \texttt{srun}? The main difference between \texttt{srun} and
-\texttt{sbatch} is how we package the instructions for the compute node.
+Notice how the \texttt{seqkit\ stats} command looks exactly the same as
+when we used \texttt{srun}? The main difference between \texttt{srun}
+and \texttt{sbatch} is how we package the instructions for the compute
+node.
 
 \subsubsection{Step 3: Understanding your job
 script}\label{step-3-understanding-your-job-script}
@@ -1109,8 +1054,8 @@ In the job script above:
   \texttt{echo} and \texttt{date}: print messages with the time, so that
   you can follow the progress of the job in the log file
 \item
-  \texttt{fastqc\ ...}: the actual analysis that runs on the compute
-  node
+  \texttt{seqkit\ stats\ ...}: the actual analysis that runs on the
+  compute node
 \end{itemize}
 
 Notice that the \texttt{\#SBATCH} lines start with \texttt{\#}? For
@@ -1122,14 +1067,14 @@ job}\label{step-4-submit-and-monitor-your-job}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Submit the job script to SLURM}
-\ExtensionTok{sbatch}\NormalTok{ scripts/run\_fastqc.sh}
+\ExtensionTok{sbatch}\NormalTok{ scripts/run\_seqkit.sh}
 
 \CommentTok{\# Check the job status (the job may run too fast to appear)}
 \ExtensionTok{squeue} \AttributeTok{{-}u} \VariableTok{$USER}
 
 \CommentTok{\# Once the job is finished and no longer in the list, check the outputs}
 \FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ logs}
-\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/fastqc}
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/seqkit}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1140,24 +1085,26 @@ your \texttt{logs} folder:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{fastqc\_\textless{}jobID\textgreater{}.out}: the standard
+  \texttt{seqkit\_\textless{}jobID\textgreater{}.out}: the standard
   output, e.g.~the messages from \texttt{echo} and \texttt{date}
 \item
-  \texttt{fastqc\_\textless{}jobID\textgreater{}.err}: the error log.
+  \texttt{seqkit\_\textless{}jobID\textgreater{}.err}: the error log.
   Check this file if your job fails
 \end{itemize}
 
 Have a look at both log files, for example with
-\texttt{cat\ logs/fastqc\_*.out}. Do you see the messages from
+\texttt{cat\ logs/seqkit\_*.out}. Do you see the messages from
 \texttt{echo} and \texttt{date}? Some programs also write normal
 progress messages into the error log, so a \texttt{.err} file with
 content does not always mean that something went wrong.
 
-Since we gave FastQC the same output folder, the reports from the
-\texttt{srun} run were replaced by the new ones. Here that is fine,
-because the input is the same.
+Since we gave seqkit the same output file name, the table from the
+\texttt{srun} run was replaced by the new one. Look at the time in
+\texttt{ls\ -l\ results/seqkit} to see this. Here that is fine, because
+the input is the same. With real data, overwriting results by accident
+can cost you hours of work, so choose your output names with care.
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Debugging your first sbatch jobs}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Debugging your first sbatch jobs}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 If your job fails:
 
@@ -1197,7 +1144,7 @@ For example, if your job ID was 754:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Good HPC etiquette}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Good HPC etiquette}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 Always cancel jobs that run incorrectly or that you no longer need. This
 frees resources for others and avoids unnecessary load on the cluster.
@@ -1208,12 +1155,12 @@ frees resources for others and avoids unnecessary load on the cluster.
 used}{sacct: Checking the resources a job used}}\label{sacct-checking-the-resources-a-job-used}
 
 After a job has finished, you can check which resources it actually used
-with \texttt{sacct}. Replace \texttt{754} with the job ID of your FastQC
+with \texttt{sacct}. Replace \texttt{754} with the job ID of your seqkit
 job:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{sacct} \AttributeTok{{-}j}\NormalTok{ 754 }\AttributeTok{{-}{-}format}\OperatorTok{=}\NormalTok{User,JobID,JobName,State,Start,End,Elapsed,MaxRSS,NCPUS}
+\ExtensionTok{sacct} \AttributeTok{{-}j}\NormalTok{ 379723 }\AttributeTok{{-}{-}format}\OperatorTok{=}\NormalTok{User,JobID,JobName,State,Start,End,Elapsed,MaxRSS,NCPUS}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1222,7 +1169,7 @@ Here:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{-j\ 754}: show the information for job 754
+  \texttt{-j\ 379723}: show the information for job 379723
 \item
   \texttt{-\/-format=...}: choose which columns to show. The most useful
   ones are:
@@ -1281,7 +1228,7 @@ longer in the queue and can block others from running.
 \section{\texorpdfstring{\texttt{screen}: Keeping srun jobs running
 (optional)}{screen: Keeping srun jobs running (optional)}}\label{screen-keeping-srun-jobs-running-optional}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Using screen for long srun jobs}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Using screen for long srun jobs}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
 One downside of \texttt{srun} for long running jobs is that your
 terminal is ``blocked'' as long as the job runs, and your job is aborted
@@ -1320,7 +1267,7 @@ option:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{screen} \AttributeTok{{-}S}\NormalTok{ run\_fastqc}
+\ExtensionTok{screen} \AttributeTok{{-}S}\NormalTok{ run\_seqkit}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1337,16 +1284,16 @@ You can reconnect to an existing screen like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{screen} \AttributeTok{{-}r}\NormalTok{ run\_fastqc}
+\ExtensionTok{screen} \AttributeTok{{-}r}\NormalTok{ run\_seqkit}
 \end{Highlighting}
 \end{Shaded}
 
-Inside the screen, we can run FastQC the same way as before, but now we
-don't risk losing a long-running job:
+Inside the screen, we can run \texttt{seqkit\ stats} the same way as
+before, but now we don't risk losing a long-running job:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 fastqc data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}o}\NormalTok{ results/fastqc }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1361,16 +1308,823 @@ and press enter while you are inside the screen:
 
 \end{tcolorbox}
 
+\section{\texorpdfstring{\texttt{conda}: Installing your own
+software}{conda: Installing your own software}}\label{conda-installing-your-own-software}
+
+Crunchomics already has a lot of software installed, but not every tool,
+and not always the version you need. Let's look at fastp, the tool we
+use in the next section:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Which fastp does bash find, and which version is it?}
+\FunctionTok{which}\NormalTok{ fastp}
+\ExtensionTok{fastp} \AttributeTok{{-}{-}version}
+\end{Highlighting}
+\end{Shaded}
+
+fastp is installed on Crunchomics, but this is version 1.0.1. The newest
+version is 1.4.0 (October 2026). Newer versions fix errors and add
+features, and the version you use can change your results. That is why
+you should always write down which version of a tool you used, and why
+you sometimes want to install a specific version yourself.
+
+You can't install software into the shared software folders of
+Crunchomics, because you don't have administrator rights there. Instead,
+we use \textbf{conda}: a program that installs software into your own
+folders, without administrator rights. \textbf{mamba} does the same as
+conda, but faster. It understands the same commands, so you can swap
+\texttt{conda} and \texttt{mamba} in almost all commands that you find
+online.
+
+conda installs each tool into its own \textbf{environment}: a separate
+folder with the tool and all the other programs it needs, in exactly the
+right versions. This way, tools that need different versions of the same
+program don't get in each other's way. To use a tool, you
+\textbf{activate} its environment. Activating adds the environment's
+folder to the front of your PATH (remember, the list of folders in which
+bash looks for programs), so bash finds the tool there first.
+
+\subsection{Install Miniforge}\label{install-miniforge}
+
+First, check if you already have conda or mamba:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{conda} \AttributeTok{{-}{-}version}
+\ExtensionTok{mamba} \AttributeTok{{-}{-}version}
+\end{Highlighting}
+\end{Shaded}
+
+If both commands print a path, conda is already installed, and you can
+skip to the next section. If they print nothing or an error message (for
+example one that contains \texttt{no\ conda\ in}), install
+\textbf{Miniforge}, a small installer that contains conda and mamba.
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Install Miniforge into your personal folder, not into your
+home folder}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+Your home folder on Crunchomics has only 25 GB of space, and conda
+environments can take up several GB once you have a few of them. So we
+install Miniforge into your personal folder, which has 500 GB:
+\texttt{/zfs/omics/personal/\$USER/miniforge3}.
+
+\texttt{\$USER} is a variable that bash has already set for you. It
+contains your user name, so for you, \texttt{\$USER} is replaced by your
+UvAnetID. That way, you can copy the commands below exactly as they are.
+
+\end{tcolorbox}
+
+Installing Miniforge is a small job, so it is fine to run it on the
+login node. Run the commands one by one:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Go into your personal folder}
+\BuiltInTok{cd}\NormalTok{ /zfs/omics/personal/}\VariableTok{$USER}
+
+\CommentTok{\# Download the Miniforge installer}
+\ExtensionTok{curl} \AttributeTok{{-}L} \AttributeTok{{-}O}\NormalTok{ https://github.com/conda{-}forge/miniforge/releases/latest/download/Miniforge3{-}Linux{-}x86\_64.sh}
+
+\CommentTok{\# Check that the installer was downloaded}
+\FunctionTok{ls} \AttributeTok{{-}lh}\NormalTok{ Miniforge3{-}Linux{-}x86\_64.sh}
+
+\CommentTok{\# Run the installer}
+\CommentTok{\# {-}b: install without asking any questions}
+\CommentTok{\# {-}p: the folder to install Miniforge into}
+\FunctionTok{bash}\NormalTok{ Miniforge3{-}Linux{-}x86\_64.sh }\AttributeTok{{-}b} \AttributeTok{{-}p}\NormalTok{ /zfs/omics/personal/}\VariableTok{$USER}\NormalTok{/miniforge3}
+
+\CommentTok{\# Check that the folder was created}
+\FunctionTok{ls}\NormalTok{ /zfs/omics/personal/}\VariableTok{$USER}\NormalTok{/miniforge3}
+\end{Highlighting}
+\end{Shaded}
+
+Here:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{curl\ -L\ -O}: downloads the installer, like on day 1.
+  Crunchomics is a Linux computer with an x86\_64 processor, so we
+  download the installer for that system
+\item
+  \texttt{-b}: runs the installer without questions. Without
+  \texttt{-b}, the installer asks you to read the license and to type
+  the folder for the installation yourself. Typing that folder by hand
+  is easy to get wrong, which is why we give it with \texttt{-p} instead
+\item
+  By using \texttt{-b}, you accept the
+  \href{https://github.com/conda-forge/miniforge/blob/main/LICENSE}{Miniforge
+  license} without seeing it. The installer itself has a BSD-3-Clause
+  license, and the programs that come with it have their own licenses.
+  Have a look at it if you want to know what you agree to
+\end{itemize}
+
+The installer has now put conda into your personal folder, but bash does
+not know about it yet. The next command adds a few lines to your
+\texttt{\textasciitilde{}/.bashrc} file. This file contains settings
+that bash reads every time you log in. With these lines, bash can find
+conda from now on:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set up conda for bash (only needed once)}
+\ExtensionTok{/zfs/omics/personal/}\VariableTok{$USER}\ExtensionTok{/miniforge3/bin/conda}\NormalTok{ init}
+
+\CommentTok{\# Read the new settings without logging out and in again}
+\BuiltInTok{source}\NormalTok{ \textasciitilde{}/.bashrc}
+
+\CommentTok{\# Check that bash now finds conda and mamba}
+\ExtensionTok{conda} \AttributeTok{{-}{-}version}
+\ExtensionTok{mamba} \AttributeTok{{-}{-}version}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{conda\ init} prints a long list of files, most of them with ``no
+change''. That is fine. The output also tells you to close and re-open
+your shell. \texttt{source\ \textasciitilde{}/.bashrc} does the same
+thing, so you don't have to log out.
+
+You should now see \texttt{(base)} at the start of your prompt. This
+shows that conda is active, and that you are in its \textbf{base}
+environment, the environment that comes with Miniforge.
+
+\subsection{\texorpdfstring{\texttt{mamba\ create}: Make an environment
+with
+fastp}{mamba create: Make an environment with fastp}}\label{mamba-create-make-an-environment-with-fastp}
+
+Now we can install fastp 1.4.0 into a new environment. We put the
+version number into the name of the environment, so that we can see
+later which version it contains:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make a new environment called fastp\_1.4.0 and install fastp version 1.4.0 into it}
+\CommentTok{\# Press Y and Enter when mamba asks you to confirm}
+\ExtensionTok{mamba}\NormalTok{ create }\AttributeTok{{-}n}\NormalTok{ fastp\_1.4.0 }\AttributeTok{{-}c}\NormalTok{ bioconda fastp=1.4.0}
+\end{Highlighting}
+\end{Shaded}
+
+Here:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{-n\ fastp\_1.4.0}: the name of the new environment
+\item
+  \texttt{-c\ bioconda}: where to look for the software. Bioconda is a
+  collection (a \textbf{channel}) with thousands of bioinformatics
+  tools. You can search for tools and versions on
+  \href{https://anaconda.org/bioconda}{anaconda.org}
+\item
+  \texttt{fastp=1.4.0}: the tool to install, and the exact version.
+  Without \texttt{=1.4.0}, mamba installs the newest version, which
+  might be a different one the next time you run the same command
+\end{itemize}
+
+Let's use the new environment:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Activate the environment}
+\ExtensionTok{conda}\NormalTok{ activate fastp\_1.4.0}
+
+\CommentTok{\# Check which fastp bash finds now, and its version}
+\FunctionTok{which}\NormalTok{ fastp}
+\ExtensionTok{fastp} \AttributeTok{{-}{-}version}
+
+\CommentTok{\# Leave the environment again}
+\ExtensionTok{conda}\NormalTok{ deactivate}
+
+\CommentTok{\# Check which fastp bash finds now}
+\FunctionTok{which}\NormalTok{ fastp}
+\end{Highlighting}
+\end{Shaded}
+
+When the environment is active, you see \texttt{(fastp\_1.4.0)} at the
+start of your prompt, and \texttt{which\ fastp} shows a path inside your
+\texttt{miniforge3} folder. After \texttt{conda\ deactivate}, bash finds
+the fastp of Crunchomics again.
+
+\textbf{Recommendations}:
+
+\begin{itemize}
+\tightlist
+\item
+  Keep the base environment clean: make a new environment for each tool,
+  instead of installing everything into base
+\item
+  Always install a specific version (\texttt{tool=version}), and put the
+  version number in the name of the environment
+\item
+  Check the documentation of a tool for installation notes or version
+  requirements
+\item
+  List all your environments with \texttt{conda\ env\ list}
+\item
+  Remove an environment that you no longer need with
+  \texttt{conda\ env\ remove\ -n\ name\_of\_the\_environment}
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  List all conda environments that you have now
+\item
+  Activate the fastp environment again. In which folder is the fastp
+  program located? Keep the environment active for the next section
+\end{enumerate}
+
+\begin{quote}
+\textbf{Click me to see an answer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Question 1:}
+\ExtensionTok{conda}\NormalTok{ env list}
+
+\CommentTok{\# Question 2:}
+\ExtensionTok{conda}\NormalTok{ activate fastp\_1.4.0}
+\FunctionTok{which}\NormalTok{ fastp}
+\end{Highlighting}
+\end{Shaded}
+
+You should see two environments in the list: \texttt{base} and
+\texttt{fastp\_1.4.0}. The fastp program is in the \texttt{bin} folder
+of the environment, inside your \texttt{miniforge3} folder.
+\end{quote}
+
+\end{tcolorbox}
+
+\section{fastp: Running a tool for each sample with a
+for-loop}\label{fastp-running-a-tool-for-each-sample-with-a-for-loop}
+
+With \texttt{seqkit\ stats}, we were lucky: we could give it all fastq
+files at once with a wildcard. Many tools don't work this way. They work
+on one sample at a time. \href{https://github.com/OpenGene/fastp}{fastp}
+is such a tool. It removes low-quality parts of reads and leftover
+adapter sequences, which is called \textbf{trimming} or \textbf{quality
+filtering}. For paired-end data, fastp needs the R1 and the R2 file of
+the same sample together.
+
+To run fastp on all our samples, we combine three things from day 1:
+\texttt{cut} to make a list of samples, a for-loop to repeat the command
+for each sample, and a script file to run the loop as a job. We build
+the loop step by step, and look at what happens after each step.
+
+If it is not active yet, activate the conda environment with fastp that
+we made in the previous section:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{conda}\NormalTok{ activate fastp\_1.4.0}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Step 1: Run fastp on one
+sample}\label{step-1-run-fastp-on-one-sample}
+
+Before we write a loop, we run the tool on a single sample. This shows
+us what fastp needs as input and what it produces. Like for every new
+tool, start with the help page:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{fastp} \AttributeTok{{-}{-}help}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's run fastp on Sample-DUMMY1:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make a folder for the fastp results}
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastp}
+
+\CommentTok{\# Run fastp on the R1 and R2 file of the first sample}
+\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{2 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 fastp }\DataTypeTok{\textbackslash{}}
+    \AttributeTok{{-}i}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R1.fastq.gz }\DataTypeTok{\textbackslash{}}
+    \AttributeTok{{-}I}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R2.fastq.gz }\DataTypeTok{\textbackslash{}}
+    \AttributeTok{{-}o}\NormalTok{ results/fastp/Sample{-}DUMMY1\_R1.trimmed.fastq.gz }\DataTypeTok{\textbackslash{}}
+    \AttributeTok{{-}O}\NormalTok{ results/fastp/Sample{-}DUMMY1\_R2.trimmed.fastq.gz }\DataTypeTok{\textbackslash{}}
+    \AttributeTok{{-}{-}thread}\NormalTok{ 2}
+
+\CommentTok{\# Check what fastp made, in the results folder and in the current folder}
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/fastp}
+\FunctionTok{ls} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+This command is long, so we split it over several lines. The
+\texttt{\textbackslash{}} at the end of a line tells bash that the
+command continues on the next line. Be careful: the
+\texttt{\textbackslash{}} must be the very last character on the line,
+so don't add a space after it.
+
+Here:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{-i} and \texttt{-I}: the R1 and R2 input files
+\item
+  \texttt{-o} and \texttt{-O}: where to write the trimmed R1 and R2
+  files
+\item
+  \texttt{-\/-thread\ 2}: let fastp use 2 CPUs, the same number that we
+  requested from SLURM with \texttt{-\/-cpus-per-task=2}
+\end{itemize}
+
+When fastp is done, it prints a summary to the screen. It shows, for
+example, how many reads there were before and after filtering.
+
+Now look at the output of the two \texttt{ls} commands. The trimmed
+files are in \texttt{results/fastp}, as we asked. But fastp also made
+two reports, \texttt{fastp.html} and \texttt{fastp.json}, and put them
+in the folder we ran the command from. We never asked for these names.
+fastp uses them by default. If we now ran fastp on the next sample, it
+would write its reports under the same names, and overwrite the reports
+of Sample-DUMMY1.
+
+This is why it is worth running a tool on one sample first and looking
+carefully at the help page. In the help page, we find the options
+\texttt{-h} and \texttt{-j} to choose the names of the two reports
+ourselves. We use them in the loop below. The reports in the current
+folder are not needed anymore, so we remove them:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Remove the two reports with the default names}
+\FunctionTok{rm}\NormalTok{ fastp.html fastp.json}
+
+\CommentTok{\# Check that they are gone}
+\FunctionTok{ls} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Step 2: Make a list of
+samples}\label{step-2-make-a-list-of-samples}
+
+Our loop will repeat fastp once per sample, so we need a list with the 4
+sample names. We build this list from the file names with \texttt{cut},
+step by step:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# List the R1 files only. Each sample has exactly one R1 file, so each sample is listed once}
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{\_R1.fastq.gz}
+
+\CommentTok{\# Keep only the file name: the 4th field when we split the path at each /}
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{\_R1.fastq.gz }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f4} \AttributeTok{{-}d} \StringTok{"/"}
+
+\CommentTok{\# Keep only the sample name: the 1st field when we split the file name at each \_}
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{\_R1.fastq.gz }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f4} \AttributeTok{{-}d} \StringTok{"/"} \KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f1} \AttributeTok{{-}d} \StringTok{"\_"}
+\end{Highlighting}
+\end{Shaded}
+
+The last command prints exactly the list we want, so we store it in a
+file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{\_R1.fastq.gz }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f4} \AttributeTok{{-}d} \StringTok{"/"} \KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f1} \AttributeTok{{-}d} \StringTok{"\_"} \OperatorTok{\textgreater{}}\NormalTok{ samples.txt}
+
+\CommentTok{\# Check the list: we expect 4 sample names}
+\FunctionTok{cat}\NormalTok{ samples.txt}
+\FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ samples.txt}
+\end{Highlighting}
+\end{Shaded}
+
+A list file like \texttt{samples.txt} has a few advantages. You can open
+it and see exactly which samples the loop will work on. And if you later
+want to rerun only some samples, you can make a shorter list without
+changing the loop.
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Making a list file by hand}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+You can also type a list file yourself, one sample name per line. Use
+\texttt{nano} for this, not Notepad or Word. As we saw on day 1, Windows
+programs add an invisible character at the end of each line. In a list
+file, this character becomes part of each sample name, and the loop then
+looks for files that don't exist.
+
+\end{tcolorbox}
+
+\subsection{\texorpdfstring{Step 3: Build the loop with
+\texttt{echo}}{Step 3: Build the loop with echo}}\label{step-3-build-the-loop-with-echo}
+
+Like on day 1, we start with a loop that only prints what it works on:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ sample }\KeywordTok{in} \VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples.txt}\VariableTok{)}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \VariableTok{$sample}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+This should print the 4 sample names. One part is new here:
+\texttt{\$(cat\ samples.txt)}. \texttt{cat\ samples.txt} prints the
+content of the file. The \texttt{\$(\ )} around it takes this printed
+text and puts it into the command, at the place where it stands. This is
+called \textbf{command substitution}. So for bash, the first line
+becomes
+\texttt{for\ sample\ in\ Sample-DUMMY1\ Sample-DUMMY2\ Sample-DUMMY3\ Sample-DUMMY4;\ do}.
+
+Bash splits the text from \texttt{samples.txt} at every new line, but
+also at every space. So each line in the list file must contain one
+name, without spaces.
+
+Next, we check that we find the right input files for each sample. We
+use \texttt{ls} instead of \texttt{echo}, because \texttt{ls} shows us
+which files the wildcard actually matches:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ sample }\KeywordTok{in} \VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples.txt}\VariableTok{)}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"Sample: }\VariableTok{$sample}\StringTok{"}
+    \FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R1.fastq.gz}
+    \FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R2.fastq.gz}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+Each \texttt{ls} should print exactly \textbf{one} file. This is the
+moment to check what your wildcard matches. Imagine you had sequenced
+Sample-DUMMY1 twice, and had two folders with a
+\texttt{Sample-DUMMY1\_R1.fastq.gz} file. Then the wildcard would match
+both files, and fastp would get the wrong input. Always look at what a
+wildcard matches before you give it to a tool.
+
+Notice that we write \texttt{\$\{sample\}}, with curly brackets, and not
+\texttt{\$sample}. The curly brackets show bash where the variable name
+ends. Without them, bash reads \texttt{\$sample\_R1} as a variable
+called \texttt{sample\_R1}. That variable doesn't exist, so bash quietly
+replaces it with nothing, and the path becomes
+\texttt{data/seq\_project/*/.fastq.gz}. Bash does not give an error for
+this. Use the curly brackets whenever text follows directly after a
+variable name.
+
+\subsection{Step 4: A dry run of the full
+command}\label{step-4-a-dry-run-of-the-full-command}
+
+Now we put the whole fastp command into the loop, but with \texttt{echo}
+in front of it. Bash then prints each command instead of running it. We
+add \texttt{-h} and \texttt{-j} to give each sample its own reports:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ sample }\KeywordTok{in} \VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples.txt}\VariableTok{)}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{""} 
+    \BuiltInTok{echo}\NormalTok{ fastp }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}i}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R1.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}I}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R2.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}o}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{\_R1.trimmed.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}O}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{\_R2.trimmed.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}h}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{.html }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}j}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{.json }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}{-}thread}\NormalTok{ 2}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+This prints 4 fastp commands, one per sample. Read them carefully: do
+the R1 and R2 input files belong to the same sample? Does every sample
+get its own output names? If something looks wrong, it is much easier to
+fix it now than after the job has run.
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't put quotes around a path with a wildcard}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+In scripts that you find online, or that an AI tool writes for you,
+variables are often written in quotes, for example \texttt{"\$sample"}.
+That is a good habit in general. But be careful with wildcards. Inside
+quotes, bash does not replace the \texttt{*} with the matching file
+names. With
+\texttt{-i\ "data/seq\_project/*/\$\{sample\}\_R1.fastq.gz"}, fastp
+would look for a folder that is literally called \texttt{*}, and stop
+with an error.
+
+That is why we write the input paths without quotes, directly in the
+fastp command. Our names contain no spaces, so this is safe here.
+
+The \texttt{scp} command in the exercise below, where we copy the fastp
+reports to our own computer, is the opposite case. There, we put quotes
+around the wildcard on purpose: the quotes stop your own computer from
+using the wildcard, so that Crunchomics can use it to find the files.
+
+\end{tcolorbox}
+
+\subsection{Step 5: Run the loop as a
+job}\label{step-5-run-the-loop-as-a-job}
+
+The loop works, so we can run it for real. Our 4 samples are small, but
+with real data this can take hours, so we submit the loop as a job with
+\texttt{sbatch}. Create a new script:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nano}\NormalTok{ scripts/fastp.sh}
+\end{Highlighting}
+\end{Shaded}
+
+And add the following content:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=fastp}
+\CommentTok{\#SBATCH {-}{-}output=logs/fastp\_\%j.out}
+\CommentTok{\#SBATCH {-}{-}error=logs/fastp\_\%j.err}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=2}
+\CommentTok{\#SBATCH {-}{-}mem=5G}
+\CommentTok{\#SBATCH {-}{-}time=01:00:00}
+
+\CommentTok{\# Make conda available in the job, and activate the environment with fastp}
+\BuiltInTok{source}\NormalTok{ \textasciitilde{}/.bashrc}
+\ExtensionTok{conda}\NormalTok{ activate fastp\_1.4.0}
+
+\CommentTok{\# Make the output folder (no error if it already exists)}
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastp}
+
+\CommentTok{\# Run fastp on the R1 and R2 file of each sample in samples.txt}
+\ControlFlowTok{for}\NormalTok{ sample }\KeywordTok{in} \VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples.txt}\VariableTok{)}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"Start fastp for: }\VariableTok{$sample}\StringTok{"}
+
+    \ExtensionTok{fastp} \DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}i}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R1.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}I}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R2.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}o}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{\_R1.trimmed.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}O}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{\_R2.trimmed.fastq.gz }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}h}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{.html }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}j}\NormalTok{ results/fastp/}\VariableTok{$\{sample\}}\NormalTok{.json }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}{-}thread}\NormalTok{ 2}
+\ControlFlowTok{done}
+
+\BuiltInTok{echo} \StringTok{"fastp job finished on:"}
+\FunctionTok{date}
+\end{Highlighting}
+\end{Shaded}
+
+Save and exit with \texttt{Ctrl+X}, \texttt{Y} and Enter.
+
+The loop is the same as in our dry run, only without \texttt{echo} in
+front of fastp. Two parts are new compared to the seqkit job script:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{source\ \textasciitilde{}/.bashrc} and
+  \texttt{conda\ activate\ fastp\_1.4.0}: a job starts in a fresh
+  environment on a compute node, where conda is not set up yet.
+  \texttt{source\ \textasciitilde{}/.bashrc} runs the settings from your
+  \texttt{\textasciitilde{}/.bashrc} file, which include the setup of
+  conda. After that, we can activate the environment with fastp.
+\item
+  \texttt{echo\ "Start\ fastp\ for:\ \$sample"}: writes the sample name
+  into the log file before fastp starts. If something goes wrong, you
+  can see in the log at which sample it happened.
+\end{itemize}
+
+Submit the job and follow it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Submit the job script to SLURM}
+\ExtensionTok{sbatch}\NormalTok{ scripts/fastp.sh}
+
+\CommentTok{\# Check the job status}
+\ExtensionTok{squeue} \AttributeTok{{-}u} \VariableTok{$USER}
+
+\CommentTok{\# Once the job is done, look at the log files}
+\FunctionTok{cat}\NormalTok{ logs/fastp\_}\PreprocessorTok{*}\NormalTok{.out}
+\FunctionTok{less}\NormalTok{ logs/fastp\_}\PreprocessorTok{*}\NormalTok{.err}
+\end{Highlighting}
+\end{Shaded}
+
+fastp prints its summary for each sample into the log files. Have a look
+at both of them.
+
+\subsection{Step 6: Check the output}\label{step-6-check-the-output}
+
+Never assume that a job did what you wanted, just because it finished.
+We gave 4 samples to fastp, and for each sample we expect 2 trimmed
+files, 1 HTML report and 1 JSON report:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Look at the output files}
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/fastp}
+
+\CommentTok{\# Count them: we expect 4 samples x 4 files = 16 files}
+\FunctionTok{ls}\NormalTok{ results/fastp }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+Also check that none of the files is empty (a size of 0 in the
+\texttt{ls\ -l} output), and that each sample name appears in the
+\texttt{.out} log.
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Copy the 4 HTML reports to your own computer and open the report for
+  Sample-DUMMY1
+\item
+  On day 1, we counted the lines in each fastq file
+  (\texttt{results/counts/line\_counts\_bash.txt} on your own computer).
+  How many reads did Sample-DUMMY1 have before filtering? Does this
+  match the number in the fastp report?
+\item
+  Count the lines in
+  \texttt{results/fastp/Sample-DUMMY1\_R1.trimmed.fastq.gz} on
+  Crunchomics. How many reads are left after filtering?
+\end{enumerate}
+
+\begin{quote}
+\textbf{Click me to see an answer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Question 1:}
+\CommentTok{\# Run this in the terminal on your OWN computer, from inside your local data\_analysis folder}
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastp}
+\FunctionTok{scp} \StringTok{\textquotesingle{}username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/results/fastp/*html\textquotesingle{}}\NormalTok{ results/fastp/}
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/fastp}
+
+\CommentTok{\# Question 2:}
+\CommentTok{\# On your own computer}
+\FunctionTok{cat}\NormalTok{ results/counts/line\_counts\_bash.txt}
+
+\CommentTok{\# Question 3:}
+\CommentTok{\# On Crunchomics}
+\FunctionTok{zcat}\NormalTok{ results/fastp/Sample{-}DUMMY1\_R1.trimmed.fastq.gz }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+For question 2: each read takes up 4 lines in a fastq file, so the
+number of reads is the number of lines divided by 4. For example,
+\texttt{Sample-DUMMY1\_R2.fastq.gz} has 179,384 lines, which is 44,846
+reads. R1 and R2 of the same sample always have the same number of
+reads. The fastp report shows the number of reads before filtering for
+R1 and R2 together, so you should find twice this number there.
+
+For question 3: the number should be the same as, or smaller than,
+before filtering. Compare it with the number of reads after filtering in
+the fastp report.
+\end{quote}
+
+\end{tcolorbox}
+
+\subsection{Comparing reads before and after trimming
+(optional)}\label{comparing-reads-before-and-after-trimming-optional}
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{seqkit stats and awk: before vs after trimming}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+At the start of the day, we made a table with \texttt{seqkit\ stats} for
+the raw reads. If we make the same table for the trimmed reads, we can
+see what fastp changed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Run seqkit stats on the trimmed reads}
+\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_trimmed.txt results/fastp/}\PreprocessorTok{*}\NormalTok{trimmed.fastq.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+
+\CommentTok{\# Check the output: we expect a header line and 8 lines, one per trimmed file}
+\FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ results/seqkit/stats\_trimmed.txt}
+\FunctionTok{cat}\NormalTok{ results/seqkit/stats\_trimmed.txt}
+\end{Highlighting}
+\end{Shaded}
+
+Both tables have many columns, which makes them hard to compare by eye.
+On day 1, we used \texttt{cut} to select columns. Here, we use
+\textbf{awk}, a small programming language for working with tables in
+text files. awk reads a file line by line, splits each line into
+columns, and lets us choose what to do with each line.
+
+Let's print the file name, the number of reads and the average read
+length (columns 1, 4 and 7) of both tables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \AttributeTok{{-}F}\StringTok{\textquotesingle{}\textbackslash{}t\textquotesingle{}} \StringTok{\textquotesingle{}FNR \textgreater{} 1 \{print $1, $4, $7\}\textquotesingle{}}\NormalTok{ results/seqkit/stats\_raw.txt results/seqkit/stats\_trimmed.txt}
+\end{Highlighting}
+\end{Shaded}
+
+Here:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{-F\textquotesingle{}\textbackslash{}t\textquotesingle{}}: the
+  columns are separated by tabs (\texttt{\textbackslash{}t} stands for a
+  tab)
+\item
+  \texttt{\textquotesingle{}...\textquotesingle{}}: the awk program, in
+  single quotes so that bash does not change anything in it
+\item
+  \texttt{FNR\ \textgreater{}\ 1}: only work on lines with a line number
+  above 1. This skips the header line. \texttt{FNR} is the line number
+  within the current file, so the header is skipped in both files
+\item
+  \texttt{\{print\ \$1,\ \$4,\ \$7\}}: print columns 1, 4 and 7. In awk,
+  \texttt{\$4} means ``column 4''. This is not the same as a bash
+  variable
+\item
+  We give awk two files, and it works through them one after the other
+\end{itemize}
+
+This prints 16 lines: first the 8 raw files, then the 8 trimmed files.
+Compare the number of reads and the average length of Sample-DUMMY1
+before and after trimming.
+
+awk can do more than \texttt{cut}. It can also select lines based on a
+value. For example, which files have less than 95\% of bases with a
+quality score of at least 30 (column 15, \texttt{Q30(\%)})?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \AttributeTok{{-}F}\StringTok{\textquotesingle{}\textbackslash{}t\textquotesingle{}} \StringTok{\textquotesingle{}FNR \textgreater{} 1 \&\& $15 \textless{} 95 \{print $1, $15\}\textquotesingle{}}\NormalTok{ results/seqkit/stats\_raw.txt results/seqkit/stats\_trimmed.txt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{FNR\ \textgreater{}\ 1\ \&\&\ \$15\ \textless{}\ 95}: only
+  work on lines that are not the header \textbf{and} (\texttt{\&\&})
+  have a value below 95 in column 15
+\end{itemize}
+
+If this prints nothing, all files have at least 95\% of bases with a
+quality score of 30 or higher. Try a few other cut-off values and see
+how the output changes.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Extra bash syntax: Finding R2 without a list file (optional)}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
+
+For those who want to learn more bash: we can also write this loop
+without \texttt{samples.txt}. We then loop directly over the R1 files,
+and let bash work out the matching R2 file and the sample name:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ R1 }\KeywordTok{in}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{\_R1.fastq.gz}\KeywordTok{;} \ControlFlowTok{do}
+    \VariableTok{R2}\OperatorTok{=}\VariableTok{$\{R1}\OperatorTok{/}\SpecialStringTok{\_R1}\OperatorTok{/}\NormalTok{\_R2}\VariableTok{\}}
+    \VariableTok{sample}\OperatorTok{=}\VariableTok{$(}\FunctionTok{basename} \VariableTok{$R1}\NormalTok{ \_R1.fastq.gz}\VariableTok{)}
+    \BuiltInTok{echo} \StringTok{"Sample: }\VariableTok{$sample}\StringTok{, R1: }\VariableTok{$R1}\StringTok{, R2: }\VariableTok{$R2}\StringTok{"}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\$\{R1/\_R1/\_R2\}}: takes the value of \texttt{R1} and
+  replaces the first \texttt{\_R1} with \texttt{\_R2}. This turns the
+  path to the R1 file into the path to the R2 file
+\item
+  \texttt{basename\ \$R1\ \_R1.fastq.gz}: \texttt{basename} removes the
+  folders from a path and keeps only the file name. If you give it an
+  ending as second argument, it removes that ending too. What is left is
+  the sample name
+\item
+  \texttt{\$(\ )}: the command substitution from above stores the output
+  of \texttt{basename} in the variable \texttt{sample}
+\end{itemize}
+
+This is shorter, but you need to know the extra syntax to read it. A
+list file is easier to check, and easier to change if you want to run
+only some samples.
+
+If your list file has several columns, for example a sample name and a
+group, a \texttt{while} loop can read both columns into separate
+variables. The
+\href{https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html}{IBED
+for-loops page} explains this, and builds a loop step by step with
+another example.
+
+\end{tcolorbox}
+
 \section{Job arrays: Running many files in parallel
 (optional)}\label{job-arrays-running-many-files-in-parallel-optional}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, colback=white, opacityback=0, bottomtitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, coltitle=black, toptitle=1mm, titlerule=0mm, breakable, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, leftrule=.75mm, bottomrule=.15mm]
 
-With FastQC, we are lucky that we can give the tool all fastq files at
-once with a wildcard. Not all programs work this way.
+Our fastp loop runs inside a single job, so the samples are processed
+one after another. With 4 small samples, that is fine. With hundreds of
+samples, it can take a long time, while the HPC has enough space to run
+several of them at the same time.
 
-For this section, let's assume that we need to give the tool each file
-one by one. How would we run such a job efficiently?
+For this section, we go back to \texttt{seqkit\ stats} and run it on
+each file separately, one job per file. How would we run such jobs
+efficiently?
 
 We can use a \textbf{job array}, which allows us to:
 
@@ -1389,11 +2143,11 @@ what we learned on day 1:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f4} \AttributeTok{{-}d} \StringTok{"/"} \OperatorTok{\textgreater{}}\NormalTok{ samples.txt}
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f4} \AttributeTok{{-}d} \StringTok{"/"} \OperatorTok{\textgreater{}}\NormalTok{ fastq\_files.txt}
 
 \CommentTok{\# Check the list: we expect 8 file names}
-\FunctionTok{cat}\NormalTok{ samples.txt}
-\FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ samples.txt}
+\FunctionTok{cat}\NormalTok{ fastq\_files.txt}
+\FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ fastq\_files.txt}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1413,14 +2167,14 @@ Next, we use this text file in our job array. Store the following in
 \CommentTok{\# The number of the current job in the array (1 to 8 for our 8 files)}
 \VariableTok{INDEX}\OperatorTok{=}\VariableTok{$SLURM\_ARRAY\_TASK\_ID}
 
-\CommentTok{\# Read the file name on line number INDEX of samples.txt}
-\VariableTok{CURRENT\_SAMPLE}\OperatorTok{=}\VariableTok{$(}\FunctionTok{sed} \AttributeTok{{-}n} \StringTok{"}\VariableTok{$\{INDEX\}}\StringTok{p"}\NormalTok{ samples.txt}\VariableTok{)}
+\CommentTok{\# Read the file name on line number INDEX of fastq\_files.txt}
+\VariableTok{CURRENT\_SAMPLE}\OperatorTok{=}\VariableTok{$(}\FunctionTok{sed} \AttributeTok{{-}n} \StringTok{"}\VariableTok{$\{INDEX\}}\StringTok{p"}\NormalTok{ fastq\_files.txt}\VariableTok{)}
 
 \CommentTok{\# Print what is happening}
 \BuiltInTok{echo} \StringTok{"Now Job}\VariableTok{$\{INDEX\}}\StringTok{ runs on }\VariableTok{$\{CURRENT\_SAMPLE\}}\StringTok{"}
 
 \CommentTok{\# Run the actual job}
-\ExtensionTok{fastqc}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{CURRENT\_SAMPLE\}} \AttributeTok{{-}o}\NormalTok{ results/fastqc }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{seqkit}\NormalTok{ stats }\AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/}\VariableTok{$\{CURRENT\_SAMPLE\}}\NormalTok{\_stats.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{CURRENT\_SAMPLE\}} \AttributeTok{{-}{-}threads}\NormalTok{ 1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1454,14 +2208,16 @@ The script does the following:
   the number of the current job within the array. This is 1 for the
   first job, 2 for the second, \ldots, and 8 for the last one
 \item
-  \texttt{sed\ -n\ "\$\{INDEX\}p"\ samples.txt} prints one line of
-  \texttt{samples.txt}: line 1 for job 1, line 2 for job 2, and so on.
-  We store this file name in the variable \texttt{CURRENT\_SAMPLE}. For
-  the first job, this is \texttt{Sample-DUMMY1\_R1.fastq.gz}
+  \texttt{sed\ -n\ "\$\{INDEX\}p"\ fastq\_files.txt} prints one line of
+  \texttt{fastq\_files.txt}: line 1 for job 1, line 2 for job 2, and so
+  on. We store this file name in the variable \texttt{CURRENT\_SAMPLE}.
+  For the first job, this is \texttt{Sample-DUMMY1\_R1.fastq.gz}
 \item
   \texttt{echo} records which job works on which file
 \item
-  Finally, we run FastQC on the file stored in \texttt{CURRENT\_SAMPLE}
+  Finally, we run \texttt{seqkit\ stats} on the file stored in
+  \texttt{CURRENT\_SAMPLE}. Each job writes its own table, named after
+  its input file, so the 8 jobs don't overwrite each other's output
 \end{itemize}
 
 Submit the script with \texttt{sbatch\ scripts/array.sh}. If we check
@@ -1481,233 +2237,21 @@ If we check the log files, we should see something like this:
 
 We get an output and an error file for each job. In the output, we see
 the value stored in \texttt{INDEX}, here 1, and in
-\texttt{CURRENT\_SAMPLE}, here \texttt{Sample-DUMMY1\_R1.fastq.gz}, and
-that the analysis finished successfully.
+\texttt{CURRENT\_SAMPLE}, here \texttt{Sample-DUMMY1\_R1.fastq.gz}.
+
+Check that each job wrote its table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# We expect 8 tables, one per fastq.gz file}
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/seqkit/}\PreprocessorTok{*}\NormalTok{\_stats.txt}
+\FunctionTok{ls}\NormalTok{ results/seqkit/}\PreprocessorTok{*}\NormalTok{\_stats.txt }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
 
 More about arrays and other SLURM options can be found on the
 \href{https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/cli/slurm_basics.html}{IBED
 SLURM basics page}.
-
-\end{tcolorbox}
-
-\section{Installing software}\label{installing-software}
-
-There might be cases where the software you are interested in is not
-installed on the HPC you are working with (or on your own computer).
-
-In the majority of cases, you should be able to install software by
-using a package management system, such as conda or mamba. These systems
-allow you to find and install packages in their own environment without
-administrator privileges. Let's have a look at a very brief example:
-
-\subsection{Install conda/mamba}\label{install-condamamba}
-
-A lot of systems already come with conda/mamba installed, however, if
-possible we recommend working with mamba instead of conda. mamba is a
-replacement and uses the same commands and configuration options as
-conda, however, it tends to be much faster. A useful thing is that if
-you find documentation for conda then you can swap almost all commands
-between conda \& mamba.
-
-You can check if you have either with:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{which}\NormalTok{ conda}
-\FunctionTok{which}\NormalTok{ mamba}
-\end{Highlighting}
-\end{Shaded}
-
-If you have conda installed and do not want to install anything else,
-that is fine. Just replace all instances of mamba with conda below.
-
-If you don't have access to either conda or mamba then you can install
-Miniforge (which includes conda and mamba by default) by running the
-following two commands:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ExtensionTok{curl} \AttributeTok{{-}L} \AttributeTok{{-}O} \StringTok{"https://github.com/conda{-}forge/miniforge/releases/latest/download/Miniforge3{-}}\VariableTok{$(}\FunctionTok{uname}\VariableTok{)}\StringTok{{-}}\VariableTok{$(}\FunctionTok{uname} \AttributeTok{{-}m}\VariableTok{)}\StringTok{.sh"}
-\FunctionTok{bash}\NormalTok{ Miniforge3{-}}\VariableTok{$(}\FunctionTok{uname}\VariableTok{)}\NormalTok{{-}}\VariableTok{$(}\FunctionTok{uname} \AttributeTok{{-}m}\VariableTok{)}\NormalTok{.sh}
-\end{Highlighting}
-\end{Shaded}
-
-During installation:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Read the license (scroll by pressing enter) and say ``Yes'' when
-  asking for confirmation
-\item
-  Choose the installation location Important: On Crunchomics, your home
-  directory has only 25 GB of space. Therefore install everything into
-  the personal folder that comes with 500 GB:
-  \texttt{/zfs/omics/personal/uvanetID/miniforge3}
-\item
-  Say ``yes'' when asked if conda should be initialized
-\item
-  Restart your shell by typing
-  \texttt{source\ \textasciitilde{}/.bashrc}. You now should see a
-  (base) in front of your prompt indicating that you are now inside
-  conda's base environment
-\item
-  Verify the installation:
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ExtensionTok{conda} \AttributeTok{{-}h}
-\ExtensionTok{mamba} \AttributeTok{{-}h}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Setting up an environment}\label{setting-up-an-environment}
-
-Let's assume we want to install seqkit, a tool that allows us to
-calculate some statistics for sequencing data such as the number of
-sequences or average sequence length per sample.
-
-We can install seqkit into a separate environment, which we can give a
-descriptive name, as follows:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#check if the tool is installed (should return "command not" found if the software is not installed)}
-\ExtensionTok{seqkit} \AttributeTok{{-}h}
-
-\CommentTok{\#create an empty environment and name it seqkit and we add the version number to the name}
-\CommentTok{\#this basically sets up seqkit separate from our default working environment}
-\CommentTok{\#this is useful whenever software require complicated dependencies allowing us to have a separate install away from software that could conflict with each other}
-\ExtensionTok{mamba}\NormalTok{ create }\AttributeTok{{-}n}\NormalTok{ seqkit\_2.6.1}
-
-\CommentTok{\#install seqkit, into the environment we just created}
-\ExtensionTok{mamba}\NormalTok{ install }\AttributeTok{{-}n}\NormalTok{ seqkit\_2.6.1 }\AttributeTok{{-}c}\NormalTok{ bioconda seqkit=2.6.1}
-
-\CommentTok{\#to run seqkit, we need activate the environment first}
-\ExtensionTok{mamba}\NormalTok{ activate seqkit\_2.6.1}
-
-\CommentTok{\#check if tool is installed, }
-\CommentTok{\#if installed properly this should return some detailed information on how to run seqkit}
-\ExtensionTok{seqkit} \AttributeTok{{-}h}
-
-\CommentTok{\#run the tool via srun}
-\FunctionTok{mkdir}\NormalTok{ results/seqkit}
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\NormalTok{ 2 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{4G seqkit stats }\AttributeTok{{-}a} \AttributeTok{{-}To}\NormalTok{ results/seqkit/seqkit\_stats.tsv data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 2}
-\FunctionTok{less} \AttributeTok{{-}S}\NormalTok{ results/seqkit/seqkit\_stats.tsv }
-
-\CommentTok{\#close the environment}
-\ExtensionTok{conda}\NormalTok{ deactivate}
-\end{Highlighting}
-\end{Shaded}
-
-\textbf{General recommendations}:
-
-\begin{itemize}
-\tightlist
-\item
-  Whenever possible, use mamba instead of conda, it resolves
-  dependencies faster
-\item
-  Keep your base environment clean (the base environment is the conda
-  environment you start with when you log into the HPC). Always create
-  new environments for each tool (conda create -n toolname \ldots)
-  instead of installing everything in base
-\item
-  Check the tool's documentation for specific installation notes or
-  version requirements
-\item
-  You can install specific versions when needed with
-  \texttt{mamba\ create\ -n\ seqkit\_v2.6.1\ -c\ bioconda\ seqkit=2.6.1}
-\item
-  You can remove environments you no longer need with
-  \texttt{conda\ env\ remove\ -n\ seqkit\_v2.6.1}
-\item
-  You can list all existing environments with \texttt{conda\ env\ list}
-\end{itemize}
-
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colframe=quarto-callout-color-frame, toprule=.15mm, arc=.35mm, colback=white, colbacktitle=quarto-callout-color!10!white, opacitybacktitle=0.6, titlerule=0mm, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, leftrule=.75mm, breakable, rightrule=.15mm, coltitle=black]
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Download and view the file \texttt{results/seqkit/seqkit\_stats.tsv}
-  on your own computer
-\item
-  Run the seqkit again but this time submit the job via a sbatch script
-  instead of using srun. Notice, that you need to tell SLURM how it can
-  activate the conda environment that has seqkit installed. You might
-  need to google how to do that, since this requires some extra line of
-  code that we have not covered yet but see this as a good exercise for
-  how to handle error messages that you see in the log files for your
-  own analyses
-\end{enumerate}
-
-\begin{quote}
-\textbf{Click me to see an answer}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Question 1}
-\FunctionTok{scp}\NormalTok{ username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/results/seqkit/seqkit\_stats.tsv .}
-
-\CommentTok{\# Question 2 }
-\ExtensionTok{sbatch}\NormalTok{ scripts/seqkit.sh}
-\end{Highlighting}
-\end{Shaded}
-
-Content of \texttt{scripts/seqkit.sh}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#!/bin/bash}
-\CommentTok{\#SBATCH {-}{-}job{-}name=seqkit\_job}
-\CommentTok{\#SBATCH {-}{-}output=logs/seqkit\_\%j.out}
-\CommentTok{\#SBATCH {-}{-}error=logs/seqkit\_\%j.err}
-\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=2}
-\CommentTok{\#SBATCH {-}{-}mem=5G}
-
-\CommentTok{\#activate dependencies}
-\BuiltInTok{source}\NormalTok{ \textasciitilde{}/.bashrc}
-\ExtensionTok{mamba}\NormalTok{ activate seqkit\_2.6.1}
-
-\CommentTok{\#run seqkit}
-\BuiltInTok{echo} \StringTok{"Start seqkit"}
-
-\ExtensionTok{seqkit}\NormalTok{ stats }\AttributeTok{{-}a} \AttributeTok{{-}To}\NormalTok{ results/seqkit/seqkit\_stats.tsv data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 2}
-
-\BuiltInTok{echo} \StringTok{"seqkit finished"}
-\end{Highlighting}
-\end{Shaded}
-
-In the script above, we see that we need to add two lines of code to
-activate the seqkit conda environment:
-
-\begin{verbatim}
-source ~/.bashrc
-mamba activate seqkit_2.6.1
-\end{verbatim}
-
-When you run a script or a command, it operates in its own environment.
-The source command is like telling the script to look into another file,
-in this case, \texttt{\textasciitilde{}/.bashrc}, and execute the
-commands in that file as if they were written directly into the script.
-
-Here, \texttt{source\ \textasciitilde{}/.bashrc} is telling the script
-to execute the commands in the \texttt{\textasciitilde{}/.bashrc} file.
-This is typically done to set up environment variables, paths, and
-activate any software or tools that are required for the script to run
-successfully. In our case this tells Slurm where we have installed conda
-and thus enables Slurm to use conda itself.
-
-This allows slurm to, after executing
-\texttt{source\ \textasciitilde{}/.bashrc}, activates a Conda
-environment using \texttt{mamba\ activate\ seqkit\_2.6.1}. This ensures
-that the SeqKit tool and its dependencies are available and properly
-configured for use in the subsequent part of the script.
-\end{quote}
 
 \end{tcolorbox}
 

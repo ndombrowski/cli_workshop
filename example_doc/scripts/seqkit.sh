@@ -1,18 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=seqkit_job
+#SBATCH --job-name=seqkit
 #SBATCH --output=logs/seqkit_%j.out
 #SBATCH --error=logs/seqkit_%j.err
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=1
 #SBATCH --mem=5G
+#SBATCH --time=01:00:00
 
-#activate dependencies
-source ~/.bashrc
-mamba activate seqkit_2.6.1
+echo "Start seqkit stats"
 
-#run seqkit
-echo "Start seqkit"
+seqkit stats -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
 
-seqkit stats -a -To results/seqkit/seqkit_stats.tsv data/seq_project/*/*.gz --threads 2
-
-echo "seqkit finished"
-
+echo "seqkit stats finished"

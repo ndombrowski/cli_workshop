@@ -143,7 +143,7 @@ explorer.exe .
 open .
 ```
 
-Use the command for your own system. You should see a window with your home directory and the new `data_analysis` folder in it. This is useful later, for example to open a report that you made with the command line. (Linux users: try `xdg-open .`)
+Use the command for your own system. You should see a window with your home directory and the new `data_analysis` folder in it. This is useful later, for example to open a report that you made with the command line. 
 
 ::: {.callout-important title="MobaXterm users: did you choose a permanent folder?" collapse="false"}
 If `explorer.exe .` opens a folder in a temporary location, MobaXterm deletes your work when you close it. You can see this in the address bar of File Explorer: it shows `Temp`, for example `Local > Temp > Mxt265 > mx86_64b > tmp > home_YourUserName`. Before you continue, follow the steps in [MobaXterm: choose a permanent folder](installation.qmd#mobaxterm-choose-a-permanent-folder) on the "Before you start" page. Then make the `data_analysis` folder again.
@@ -167,8 +167,6 @@ Notice how I added a `#` and some notes above each command?
 Anything written after a `#` in bash is a **comment**. A comment is not executed, but it helps you (and others) understand what the code does.
 
 In your own work, add short, meaningful comments above key steps. Avoid restating the obvious. Instead, explain *why* you do something or what it achieves. A good rule: add a comment wherever you think that future you might get confused a month later.
-
-[Here](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) you find some examples for Python and R, but the same logic applies to bash. Some bash examples can be found [here](https://linuxize.com/post/bash-comments/).
 :::
 
 ## `cd`: Move around folders
@@ -286,7 +284,7 @@ Be careful with large sequence files in OneDrive folders: OneDrive tries to uplo
 Next, let's download our sequencing data, a file called `seq_project.tar.gz`, with `wget`. Make sure that you are inside your `data_analysis` folder (check with `pwd`), because `wget` saves the file in the folder you are currently in:
 
 ```{bash}
-# Download data using link provided by the sequencing center on 23.01.2023
+# Download data using link provided by the sequencing center XYZ on 23.01.2023
 wget https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
 ```
 
@@ -454,7 +452,7 @@ We can use `*` to list all files in the `seq_project` folder as follows:
 ls data/seq_project/*
 ```
 
-![](/img/wildcards_0.png){width="242"}
+![](/img/wildcards_0.png){width="280"}
 
 You should have seen before that the sequencing files all end with `.fastq.gz`. With this, we can make the command a bit more specific and at the same time make the output more readable. `*/*.gz` means "inside any folder, any file that ends with `.gz`":
 
@@ -462,13 +460,7 @@ You should have seen before that the sequencing files all end with `.fastq.gz`. 
 ls data/seq_project/*/*.gz
 ```
 
-![](/img/wildcards_1.png){width="558"}
-
-If we wanted to print the absolute and not the relative path, we could do the following (beware that the absolute path will be slightly different depending on your system, check yours with `pwd`):
-
-```{bash}
-ls /home/YourUserName/data_analysis/data/seq_project/*/*.gz
-```
+![](/img/wildcards_1.png){width="600"}
 
 Now we can easily see for each folder how many files we have.
 
@@ -528,6 +520,30 @@ ls data/seq_project/barcode00[12]*/*.gz
 ```{bash}
 ls data/seq_project/barcode001_User1_ITS_1_[A-Z]001/*.gz
 ```
+:::
+
+::: {.callout-tip title="Tip: Finding files with find" collapse="true"}
+With `*/*.gz`, `ls` only looks exactly one folder deep inside `seq_project`. If you don't know how deep your files are stored, you can use `find` instead. `find` searches a folder and all the folders inside it, at any depth:
+
+```{bash}
+# Search data/seq_project and all its subfolders for files ending in .gz
+find data/seq_project -name "*.gz"
+```
+
+-   `data/seq_project` is the folder where `find` starts searching
+-   `-name "*.gz"` tells `find` to only print files whose name ends with `.gz`
+
+We put quotes around `"*.gz"` so that the shell passes the `*` to `find` unchanged, and `find` uses it as a pattern while it searches.
+
+If you want to see the full (absolute) path of each file, start the search from your home directory with `~`:
+
+```{bash}
+find ~/data_analysis/data/seq_project -name "*.gz"
+```
+
+Because the shell replaces `~` with the absolute path to your home directory, `find` now prints absolute paths, and you don't need to type your user name. This works on every system.
+
+Note that `find` does not sort its output alphabetically like `ls` does, so the files may appear in a different order.
 :::
 
 ## I/O redirection to new files
@@ -591,7 +607,7 @@ less -S fastq_paths.txt
 -   You can use the ↑ / ↓ arrow keys and the Page Up / Page Down keys to move through the text file
 -   To exit less, type `q`
 
-::: {.callout-tip title="Tip: Editing text files" collapse="true"}
+::: {.callout-tip title="Tip: Editing text files with `nano`" collapse="true"}
 You can also edit the content of a text file and there are different programs available to do this on the command line, the most commonly used tool is `nano`. It comes with WSL2, Mac and most Linux systems. You can open any file as follows:
 
 ```{bash}
@@ -614,11 +630,11 @@ Another useful tool is the `wc` (= wordcount) command that allows us to count th
 wc -l fastq_paths.txt
 ```
 
-After running this we see that we work with 8 files.
+After running this we see that we work with a total of 8 files.
 
 We could of course easily count this ourselves, however, if we work with hundreds of files its a quick and easy way to get an overview about how much data we work with.
 
-One down-side of this approach is that to be able to count the number of files, we first need to generate a file in which we count the number of files. This (i) can create files we do not actually need and (ii) we use two commands while ideally we want to get the information with a single command.
+One down-side of this approach is that to be able to count the number of files, we first need to generate a file in which we count the number of files. This (i) can create files we do not actually need and (ii) we use two commands while ideally we want to get the information with a single command. Pipes, are a way around this problem.
 
 ## Pipes
 
@@ -694,7 +710,7 @@ Nice, we now only have a list with barcodes. However, its not yet ideal since we
 ## `sort` and `uniq`: Create unique lists
 
 -   `sort`: sorts lines in a file from A-Z
--   `uniq`: removes or finds duplicates . For this command to work you need to provide it with a sorted file
+-   `uniq`: removes or finds duplicates . For this command to work you need to provide it with a sorted file, which is why sort and uniq almost always are used together
 
 Let's first ensure that our barcode list is sorted to then extract only the unique information:
 
@@ -848,8 +864,8 @@ Luckily, there is a useful tool in bash called `zcat`. It decompresses a file an
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
 ```
 
-::: {.callout-important title="Zcat for Mac users" collapse="false"}
-For Mac users using the zsh shell, zcat might not work as expected. Try using gzcat instead:
+::: {.callout-important title="`zcat` for Mac users" collapse="false"}
+For Mac users using the zsh shell, `zcat` might not work as expected. Try using `gzcat` instead:
 
 ```{bash}
 gzcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
@@ -880,16 +896,6 @@ If we want to look only at samples from User1, we can search for that part of th
 ```{bash}
 grep "User1" fastq_paths.txt
 ```
-
-::: callout-important
-**grep patterns are not wildcards**
-
-In `grep`, characters such as `*` and `.` mean something different than the wildcards we used with `ls`. grep uses so-called **regular expressions**, a small language to describe text patterns. In a regular expression, `*` means "the character before me, repeated zero or more times" and `.` means "any single character".
-
-For example, `grep "User1_*"` does not mean "User1 followed by anything". It means "User1 followed by zero or more underscores". It would give the same result as `grep "User1"` here, but only by luck.
-
-When you start out, search for plain text and always put your pattern in quotes, so that the shell does not try to treat it as a wildcard first.
-:::
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Grep for paths containing the pattern "ITS_9" in fastq_paths.txt
@@ -938,17 +944,55 @@ In the command above we have some new syntax:
 -   `/4`: This is dividing the result obtained from wc -l by 4. Since each sequence in a FASTQ file is represented by four lines (identifier, sequence, separator, and quality scores), dividing the total number of lines by 4 gives the number of sequences.
 :::
 
-## For-loops
+## `echo` and variables: Storing information
 
-Imagine we want to count the lines not only from one but all files. Could we do something like the code below?
+Before we learn how we can use the command line to automate repetitive tasks, we need two small building blocks.
+
+The first one is `echo`. It prints the text you give it to the screen:
 
 ```{bash}
-zcat data/seq_project/*/*.gz | wc -l
+echo "Hello"
 ```
 
-When running this, we see that the command prints a single number, 869 944, but not the counts for each file, so something did not work right.
+The second one is a variable. A **variable** is a name that stores a value, for example a word, a number or a file path. You create a variable by writing its name, an equals sign and the value:
 
-The problem with this command is that it prints the text from all 8 fastq files and only afterwards performs the counting. We basically concatenated all files and then calculated the sum of all 8 files. However, what we want to do is to repeat the same operation over and over again:
+```{bash}
+# Store the path to one sequencing file in a variable called fastq_file
+fastq_file=data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
+```
+
+This prints nothing, however Bash will remember the value. To use the value, put a `$` in front of the variable name. Bash then replaces `$fastq_file` with the path we stored:
+
+```{bash}
+# Print the value stored in the variable
+echo $fastq_file
+
+# Use the variable in a command, exactly like you would use the path itself
+zcat $fastq_file | wc -l
+```
+
+The second command gives the same result as typing out the full path. On its own, that does not save us much work. Variables become really useful when their value changes, and that is exactly what a for-loop does for us in the next section.
+
+A few rules for variables:
+
+-   The name can contain letters, numbers and underscores (`_`), but no spaces. Choose a name that tells you what is stored in it, `fastq_file` is easier to understand a year later than `x`.
+-   A variable only exists in the terminal window where you made it. If you close the terminal, it is gone.
+
+::: {.callout-important title="Important: No spaces around =" collapse="false"}
+Write `fastq_file=data/...` without spaces around the `=`. If you add spaces (`fastq_file = data/...`), bash thinks that `fastq_file` is the name of a command, and you get an error that ends with `fastq_file: command not found`.
+:::
+
+## For-loops
+
+Imagine we want to count the lines not only in one, but in all files. Could we do something like the code below?
+
+```{bash}
+zcat data/seq_project/*/*.fastq.gz | wc -l
+```
+
+When running this, we see that the command prints a single number, 869 944, but not the counts for each individual file, so something did not work right.
+
+The problem with this command is that it prints the text from all 8 fastq files and only afterwards counts the lines. We basically combined all files and then counted the lines of all 8 files together. However, what we want is to repeat the steps below, individually for each file:
 
 -   Decompress a first file
 -   Count the lines in the first file
@@ -956,114 +1000,140 @@ The problem with this command is that it prints the text from all 8 fastq files 
 -   Count the lines in the second file
 -   ...
 
-A **for loop** is a bash programming language statement which allows code to be repeatedly executed. I.e. it allows us to run a command 2, 3, 5 or 100 times.
+A **for-loop** repeats one or more commands, once for each item in a list. Each round of the loop is called an **iteration**.
 
-Let's start with a simple example but before that let's introduce a simple command `echo`. `echo` is used to print information, such as `Hello` to the terminal:
+### Step 1: Check what the loop works on
 
-```{bash}
-echo "Welcome 1 time!"
-```
-
-We can use for-loops to print something to the screen not only one, but two, three, four ... times as follows:
+Let's write a first loop that does not change anything yet. It only prints the names of our sequencing files:
 
 ```{bash}
-for i in 1 2 3; do 
-    echo "Welcome $i times"
+for fastq_file in data/seq_project/*/*.fastq.gz; do
+    echo $fastq_file
 done
 ```
 
-An alternative and more condensed way of writing this that you might encounter in the wild is the following:
+This prints the paths of all 8 fastq files, one per line. Let's go through the parts of the loop:
+
+-   `for fastq_file in data/seq_project/*/*.fastq.gz; do`: this line says what to repeat over. The wildcard gives the list, here all 8 fastq files. In each iteration, bash stores the next file from the list in the variable `fastq_file`. You choose the name of this variable yourself.
+-   `echo $fastq_file`: the command we want to repeat, written between `do` and `done`. Here, we print the value of the variable. We indent this line with 4 spaces. Bash does not need this, but it makes the loop easier to read.
+-   `done`: marks the end of the loop.
+
+In other words, the loop does the same as typing these commands one after the other:
 
 ```{bash}
-for i in 1 2 3; do echo "Welcome $i times"; done
+# You don't need to run this, it only shows what the loop does for us
+fastq_file=data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
+echo $fastq_file
+fastq_file=data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz
+echo $fastq_file
+# ... and so on, for the other 6 files
 ```
 
-Here, you see what this command does step by step:
+Starting a loop with `echo` is a good habit. This is called a **dry run**: the loop shows what it would work on, without changing anything. Before you add the real command, check the list. Do you see all 8 files, and only the files you expect?
 
-<p align="left">
+::: {.callout-tip title="Tip: Typing a loop in the terminal" collapse="false"}
+When you press Enter after writing the first line of the loop, nothing runs yet. Instead, the prompt changes to `>`. This means bash waits for the rest of the loop. It only starts once you type `done` and press Enter. (On a Mac with zsh, this prompt may look slightly different, for example `for>`.)
 
-<img src="../img/loops.png" width="600"/>
+If you get stuck in this `>` prompt, for example because of a typo, press `Ctrl+C` to cancel and start again.
+:::
 
-</p>
+### Step 2: Add the real command
 
-Let's try to do the same but now for our sequencing files by storing the individual files found in `data/seq_project/*/*.gz` in the variable i and print i to the screen in a for-loop.
+Now that we know the loop works on the right files, we replace `echo` with the command we actually want to run:
 
 ```{bash}
-for i in data/seq_project/*/*.gz; do 
-    echo "I work with: File $i"
+for fastq_file in data/seq_project/*/*.fastq.gz; do
+    zcat $fastq_file | wc -l
 done
 ```
 
--   `for i in data/seq_project/*/*.gz; do`: This part initializes a loop that iterates over all files matching the pattern `data/seq_project/*/*.gz`. The variable i is assigned to each file in succession.
+Now we get 8 numbers, one per file. `zcat $fastq_file | wc -l` is the same command as in the variables section. The only difference is that bash now runs it 8 times, each time with a different file stored in `fastq_file`.
 
-We can then use these variables stored in i to perform more useful operations, for example for each file, step-by-step, count the number of lines in each file by using some of the tools we have seen before:
+::: {.callout-tip title="Tip: Loops written on one line" collapse="true"}
+You might also see loops written on a single line, with `;` where we start a new line:
 
 ```{bash}
-for i in data/seq_project/*/*.gz; do 
-    zcat $i | wc -l
-done
+for fastq_file in data/seq_project/*/*.fastq.gz; do zcat $fastq_file | wc -l; done
 ```
 
--   `zcat $i | wc -l`: This is the action performed inside the loop. zcat is used to concatenate and display the content of compressed files (\*.gz). The \| (pipe) symbol redirects this output to wc -l, which counts the number of lines in the uncompressed content.
+This does exactly the same as the loop above. For anything longer than one short command, the version over several lines is easier to read.
+:::
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  Use a for loop and count how often grep finds the pattern "TAAGA" in each individual fastq.gz file
+1.  Use a for-loop and count how often grep finds the pattern "TAAGA" in each individual fastq.gz file
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-for i in data/seq_project/*/*.gz; do 
-    zcat $i | grep -c "TAAGA"
+for fastq_file in data/seq_project/*/*.fastq.gz; do
+    zcat $fastq_file | grep -c "TAAGA"
 done
 ```
 :::
 :::
 
-Sometimes it is useful to not store the full path in `i`, especially when we want to store the output of our loop in a new file. Luckily, we can use the list of files we stored in `fastq_files.txt` to rewrite this command a bit and make use of the fact that we can use `cat` to print something in a text file to the screen:
+## `>>`: Collecting the loop output in one file
+
+So far, the counts only appear on the screen. We cannot see which number belongs to which file, and the numbers are gone once we close the terminal. Let's write the file names and the counts into a file instead.
+
+In the section on I/O redirection, we have seen that `>` replaces the content of a file, and that `>>` adds (**appends**) text to the end of a file. Inside a loop, this difference matters. With `>`, each iteration would replace what the iteration before it wrote, and only the result for the last file would be left. So inside the loop we use `>>`:
 
 ```{bash}
-for i in `cat fastq_files.txt`; do  
-    zcat data/seq_project/*/$i | wc -l
-done
-```
-
--   `` for i in `cat fastq_files.txt`; do ``: This initiates a loop that iterates over each item in the file fastq_files.txt. The backticks \` are used to execute the `cat` command within the backticks to read the content of the text file and assign its output to the variable i.
--   `zcat data/seq_project/*/$i | wc -l`: Like before, this line uncompresses (zcat) and counts (wc) the number of lines in the specified file. However, in this case, the file is determined by the content of fastq_files.txt, which contains a list of file names.
-
-After this modification of the code, we can very easily store the output in a file instead of printing the results to the screen.
-
-```{bash}
-# Count the number of lines in each sequencing file
-# Store the output in a new folder inside results
+# Make a folder for the counts inside results
 mkdir -p results/counts
 
-for i in `cat fastq_files.txt`; do
-    zcat data/seq_project/*/$i | wc -l > results/counts/$i.txt
+# Start the counts file with a first line that describes its content
+# Because we use > here, an existing file is emptied first, so we start fresh each time
+echo "Number of lines per fastq file" > results/counts/line_counts.txt
+
+# For each fastq file, add the file name and its number of lines to the end of the file
+for fastq_file in data/seq_project/*/*.fastq.gz; do
+    echo $fastq_file >> results/counts/line_counts.txt
+    zcat $fastq_file | wc -l >> results/counts/line_counts.txt
 done
 
-# Check that we have one count file per sequencing file (8 files)
-ls -l results/counts/*txt
-
-head results/counts/Sample-DUMMY1_R1.fastq.gz.txt
+# Check the result: we expect 1 header line + 2 lines for each of the 8 files = 17 lines
+wc -l results/counts/line_counts.txt
+cat results/counts/line_counts.txt
 ```
+
+Here:
+
+-   `mkdir -p results/counts`: we keep the output of each analysis in its own folder inside `results`
+-   `echo "Number of lines per fastq file" > results/counts/line_counts.txt`: before the loop starts, we write a first line that describes what is in the file. Such a line is called a **header**. Because we use `>` here, this also empties the file if it already exists from an earlier run
+-   Inside the loop, there are now two commands. The first one adds the name of the file, the second one adds its number of lines. Both use `>>`, so each iteration adds two lines to the end of `line_counts.txt`
+
+We will use these numbers again on day 2, to check what a quality filtering tool did to our data.
+
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+1.  Run only the for-loop from the code above a second time, without the `echo` line before it. How many lines does `line_counts.txt` have now? Why?
+2.  Now run the complete code again, including the `echo` line before the loop. How many lines does `line_counts.txt` have now?
+3.  What do you think would happen if we used `>` instead of `>>` inside the loop? Think about it first, then try it. Afterwards, run the code with `>>` once more, so that `line_counts.txt` is correct again.
+
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+1.  The file now has 33 lines. The loop added its 16 lines a second time to the end of the file, so all counts appear twice. This is something to watch out for whenever you use `>>`.
+2.  The file has 17 lines again. The `echo` line uses `>`, which empties the file before the loop adds the counts.
+3.  Each `>` replaces the content of the file. After the loop, the file only contains a single line: the number of lines of the last file. All other results were overwritten.
+:::
+:::
 
 ::: {.callout-tip title="Advanced tip: Better counting in for loops" collapse="true"}
-Let's get a bit more advanced to show you some powerful features of bash. For this imagine that you would do this for 100 files. In this case it would be useful to see the file names next to the counts. We can achieve this by using what we have learned in the `Better counting tip` where we have learned about echo and command substitution.
+Let's get a bit more advanced to show you some powerful features of bash. Above, the file name and its count end up on two separate lines. Imagine that you would do this for 100 files. In this case it would be useful to see each file name and its count on the same line. We can achieve this with the command substitution from the `Advanced tip: Better counting` in the `wc` section above.
 
 ```{bash}
-for i in data/seq_project/*/*.gz; do 
-    echo "$i: $(zcat $i | wc -l)"
+for fastq_file in data/seq_project/*/*.fastq.gz; do
+    echo "$fastq_file: $(zcat $fastq_file | wc -l)"
 done
 ```
 
--   The echo command is used to display messages or print information to the terminal. In our case it will print whatever is going on here `"$i: $(zcat $i | wc -l)"`
--   `$(...)`: These parentheses are used for command substitution. It means that the command `zcat $i | wc -l` is executed, and its output (the line count of the uncompressed content) is substituted in that position.
--   The double quotes ("") perform what is called a string concatenation. It concatenates the filename (\$i), a colon (:), a space, and the line count obtained from the command substitution. The entire string is then passed as a single argument to the echo command.
+-   The echo command is used to display messages or print information to the terminal. In our case it will print whatever is going on here `"$fastq_file: $(zcat $fastq_file | wc -l)"`
+-   `$(...)`: These parentheses are used for command substitution. It means that the command `zcat $fastq_file | wc -l` is executed, and its output (the line count of the uncompressed content) is substituted in that position.
+-   The double quotes ("") perform what is called a string concatenation. It concatenates the filename (\$fastq_file), a colon (:), a space, and the line count obtained from the command substitution. The entire string is then passed as a single argument to the echo command.
 
 Almost perfect, now we only want to divide this by 4:
 
 ```{bash}
-for i in data/seq_project/*/*.gz; do 
-    echo "$i: $(( $(zcat $i | wc -l) /4 ))"
+for fastq_file in data/seq_project/*/*.fastq.gz; do
+    echo "$fastq_file: $(( $(zcat $fastq_file | wc -l) /4 ))"
 done
 ```
 
@@ -1111,11 +1181,86 @@ You can easily combine this with some of the things we learned, such as using `c
 ```{bash}
 for file in data/seq_project/*/*.gz; do
     if [[ $file == *_R1.fastq.gz ]]; then
-        sample_name=$(echo $file | cut -f3 -d "/"  |cut -f1 -d "_" ) 
+        sample_name=$(echo $file | cut -f3 -d "/"  |cut -f1 -d "_" )
         r1_file=$file
         r2_file=$(echo $file | sed 's/_R1/_R2/')
         echo "$sample_name,$r1_file,$r2_file"
     fi
 done
 ```
+:::
+
+## `bash`: Running commands from a script
+
+Our counting loop is now a few lines long, and we might want to run it again later, for example when new data arrives. Instead of typing or copying the loop each time, we can save it in a file. A text file that contains commands is called a **script**. Bash scripts usually end with `.sh`.
+
+To keep our project folder tidy, we store scripts in their own folder:
+
+```{bash}
+# Make a folder for scripts inside data_analysis
+mkdir -p scripts
+
+# Check that the folder was created
+ls -l
+```
+
+Next, we create the script with the text editor `nano` (see the tip "Editing text files with `nano`" above):
+
+```{bash}
+nano scripts/count_lines.sh
+```
+
+**MobaXterm users:** if you see `nano: command not found`, install it first with `apt install nano`, as explained in that tip.
+
+Type or copy the following into the editor:
+
+```{bash}
+#!/bin/bash
+
+# Count the number of lines in each fastq file
+# Run this script from inside the data_analysis folder
+
+# Make a folder for the counts and start the counts file with a header
+mkdir -p results/counts
+echo "Number of lines per fastq file" > results/counts/line_counts_bash.txt
+
+# For each fastq file, add the file name and its number of lines to the end of the file
+for fastq_file in data/seq_project/*/*.fastq.gz; do
+    echo $fastq_file >> results/counts/line_counts_bash.txt
+    zcat $fastq_file | wc -l >> results/counts/line_counts_bash.txt
+done
+```
+
+Save and exit:
+
+-   Press `Ctrl+X` to exit, then `Y` to confirm that you want to save the file, then Enter to keep the file name
+
+The commands are the same as in the `>>` section. Two things are new:
+
+-   `#!/bin/bash`: this first line is called the **shebang**. It tells the system that the script should be run with bash. Put it at the very top of every bash script.
+-   The lines that start with `#` are comments. Bash ignores them, but they tell you (and others) what the script does and how to use it.
+
+Now we can run the whole script with a single command:
+
+```{bash}
+# Run the script with bash
+bash scripts/count_lines.sh
+
+# Check the output: we again expect 17 lines
+wc -l results/counts/line_counts_bash.txt
+cat results/counts/line_counts_bash.txt
+```
+
+The script itself prints nothing to the screen, because all output goes into `line_counts.txt`. That is why we check the file afterwards.
+
+Why is this useful?
+
+-   You can run the same analysis again, with exactly the same commands, without typing mistakes.
+-   The script documents what you did. Together with your notes file, it tells future you how a result was made.
+-   On day 2, we use exactly this kind of script on the HPC. There, we add a few extra lines at the top that tell the HPC how many resources our job needs.
+
+::: {.callout-important title="Important: Write scripts in nano or a code editor, not in Word or Notepad" collapse="false"}
+Windows programs such as Notepad end every line with an extra invisible character. Bash on Linux does not understand this character, and the script fails with errors such as `$'\r': command not found` or `syntax error near unexpected token`. Word processors such as Word also add formatting and can change straight quotes (`"`) into curly quotes.
+
+To avoid this, write your scripts with `nano`. If you prefer a code editor such as VS Code, check that it saves the file with `LF` line endings (in VS Code, you see `LF` or `CRLF` in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.
 :::

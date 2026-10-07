@@ -215,7 +215,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, colback={codebgcolor}, breakable, frame hidden, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={codebgcolor}, boxrule=0pt, breakable, frame hidden, sharp corners, enhanced]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -262,7 +262,7 @@ and reproducible code. The examples are mainly based on R but are
 general enough to apply to other computational languages (and scientific
 disciplines).
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, breakable, titlerule=0mm, bottomrule=.15mm, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, opacityback=0, toptitle=1mm, opacitybacktitle=0.6, leftrule=.75mm, bottomtitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, left=2mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, breakable, colback=white, leftrule=.75mm, opacitybacktitle=0.6, arc=.35mm, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, titlerule=0mm, rightrule=.15mm, coltitle=black]
 
 The information in this section is not part of the actual tutorial but
 was added to give you a starting point for how to document your code.

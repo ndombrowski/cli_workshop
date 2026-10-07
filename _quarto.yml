@@ -59,7 +59,7 @@ format:
       dark: [cyborg, styles.scss]
     toc: true
     toc-title: Contents
-    toc-expand: 3
+    toc-expand: 2
     link-external-newwindow: true
 
   pdf:

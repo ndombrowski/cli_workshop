@@ -17,10 +17,42 @@ Project notes for Claude: CLAUDE.md (local only)
 ## General structure
 
 - Mark a core path and an optional path. Optional = "(optional)" in the heading + collapsed box.
-  Candidates for day 1: cut, sort/uniq, cat (combining files), gzip, the second wc section, nano, advanced tips.
-- Day 1 covers a lot: move the harder loop parts (basename, output-name variables) to day 2,
-  where the fastp loop gives a real reason for them.
-- If cut becomes optional, check that day 2 does not depend on it (samples.txt in the array tip).
+  Candidates for day 1: sort/uniq, cat (combining files), gzip, the second wc section, nano, advanced tips.
+  cut stays core (decided 2026-10-07): day 2 uses it to make samples.txt.
+- DONE 2026-10-07: loops reworked over both days (decisions in _course_schedule.md).
+  Day 1 (bash_intro.qmd): new section "echo and variables", loop over a wildcard only (variable
+  fastq_file, echo dry run first, then zcat | wc -l), 1 2 3 warm-up + loops.png + backtick cat loop
+  removed, new ">>" section (results/counts/line_counts.txt, 17 lines, with exercise), new
+  "bash: Running commands from a script" section at the end (scripts/count_lines.sh, nano, shebang,
+  CRLF warning). One-line loop form moved into a collapsed tip.
+  Day 2 (hpc_howto.qmd): new section "fastp: Running a tool for each sample with a for-loop" at the
+  end of the page (6 steps: one sample with srun, samples.txt with ls | cut | cut, loop with echo/ls,
+  dry run, sbatch script, output checks + exercise), plus a collapsed "Extra bash syntax" box.
+  Array tip now uses fastq_files.txt instead of samples.txt. example_notebook.qmd: same rename.
+- Follow-ups from the loop rework:
+  - Hidden <!-- TO CHECK --> comments in hpc_howto.qmd: conda section (Crunchomics fastp still 1.0.1,
+    installer name Miniforge3-Linux-x86_64.sh, `which mamba` and `(base)` after conda init) and fastp
+    section (fastp 1.4.0 option names and default report names, whether the report counts R1+R2 reads
+    together). Remove the comments after the test run. Also check that 1.4.0 runs without stalling.
+    example_notebook.qmd has a <!-- TO FILL --> comment (job ID, comments on the fastp reports).
+  - Not run yet on the course data: all new day 1 and day 2 commands. Tested 2026-10-07 only on empty
+    dummy files in WSL bash 5.2: samples.txt via ls | cut | cut, ${sample} vs $sample_R1 (the latter
+    silently becomes empty), the echo dry run, the extra-syntax loop; Windows line endings in a script
+    give "$'\r': command not found" (Git Bash hides this, it ignores CRLF).
+  - Check on a Mac: the loop continuation prompt in zsh (page says it may look like "for>").
+  - MobaXterm: day 1 script section uses nano, installed in class with `apt install nano` (OK, decided
+    2026-10-07). Still to test: does MobaXterm's bash accept CRLF scripts (like Git Bash) or not (like WSL)?
+  - Local data_analysis now gets a scripts/ folder on day 1 (agreed 2026-10-07, CLAUDE.md updated).
+  - DONE 2026-10-07: array tip moved to the end of hpc_howto.qmd, after the fastp section. Its intro now
+    starts from the fastp loop (samples one after another) and still uses FastQC + fastq_files.txt.
+  - DONE 2026-10-07: conda section rewritten for fastp 1.4.0 (seqkit removed): why conda/environments,
+    `which fastp` + `fastp --version` as motivation, non-interactive Miniforge install on the login node into
+    /zfs/omics/personal/$USER/miniforge3 with a license link, conda init, mamba create with a pinned
+    version, which fastp inside/outside the env, recommendations, small exercise. example_notebook.qmd
+    and example_doc/scripts/fastp.sh (new, same as the tutorial job script) use fastp.
+    example_doc/scripts/seqkit.sh deleted by Nina.
+  - example_notebook.qmd says "8 samples, 4 control and 4 sulfur-treatments", but the data has
+    4 samples with R1 + R2 each.
 
 
 ## Before the workshop (installation.qmd)
@@ -80,9 +112,9 @@ Project notes for Claude: CLAUDE.md (local only)
     closed (pandoc warning "Div ... unclosed"). Close it at the end of the page or remove it.
 - Missing core skills, move into the main text: Tab completion and arrow up (DONE 2026-10-06, tip
   now open by default). Add: Ctrl+C, reading error messages (first deliberate error: "No such file or directory").
-- Introduce variables before loops.
-- Loops stay simple: echo, then zcat | wc -l per file.
-- Introduce script files (.sh, run with bash) as preparation for sbatch on day 2.
+- DONE 2026-10-07: Introduce variables before loops.
+- DONE 2026-10-07: Loops stay simple: echo, then zcat | wc -l per file.
+- DONE 2026-10-07: Introduce script files (.sh, run with bash) as preparation for sbatch on day 2.
 - Command output (convention in _course_schedule.md): decide per chunk which commands get a text
   output block (e.g. pwd, ls, head, wc -l, the first error message). Needs real outputs from one
   run of day 1 on the course data. Same later for day 2 (outputs from Crunchomics).
@@ -116,28 +148,42 @@ Project notes for Claude: CLAUDE.md (local only)
   scp reports back + explorer.exe/open.
 - ROUND 2 (needs testing on Crunchomics): conda section (MicEco text: which conda, one-step
   mamba create, conda activate, recommendations list; Miniforge into ~/personal) + fastp
-  (one sample with srun, loop with echo, loop in sbatch, output checks). The conda/seqkit part at
-  the end of hpc_howto.qmd is still the old text (only paths fixed).
+  (one sample with srun, loop with echo, loop in sbatch, output checks). Written 2026-10-07, not yet
+  tested on Crunchomics.
 - To check on Crunchomics (not added yet, or written without a test run):
   - MicEco says `srun ... echo "Hello world"` may print the output twice. Does it?
   - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
     without scp. Still available? Add as a tip?
   - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
-  - Does FastQC write its progress messages to the .err log? (page says some programs do)
+  - Does seqkit stats write anything to the .err log? (page says some programs write progress messages there)
   - ssh-keygen -R "omics-h0.science.uva.nl" (host key tip) in MobaXterm: does it use the
     known_hosts file in the MobaXterm home?
-  - Day 2 outputs/screenshots (squeue2.png, arrays.png) show old job names; replace after a test run.
+  - Day 2 outputs/screenshots (squeue2.png, arrays.png, arrays2.png) show FastQC jobs/logs; replace
+    with seqkit runs after a test run (TO CHECK comments in hpc_howto.qmd). seqkit may finish too fast
+    to catch in squeue.
+  - seqkit stats: full 8-file output of stats_raw.txt (page shows header + DUMMY1_R1 only), the
+    trimmed-reads table and the two awk commands in the optional before/after box (no output shown yet).
 
-- Replace seqkit with fastp everywhere: hpc_howto.qmd, conda section, exercises,
+- DONE 2026-10-07: Replace seqkit with fastp everywhere: hpc_howto.qmd, conda section, exercises,
   example_doc/scripts/seqkit.sh, example_notebook.qmd.
-- Order: FastQC with srun (simple, wildcard) → fastp on one sample with srun (look at what it
+- DONE 2026-10-07: Replace FastQC with seqkit stats on day 2 (srun, sbatch, sacct, screen, arrays,
+  example_doc). FastQC stays as a tip. New optional box: seqkit stats before vs after trimming, with awk.
+- Example doc after the seqkit switch (do in this order):
+  - example_doc/example_notebook.qmd (line ~119): rewrite the notes under "Run seqkit stats". They
+    still describe the FastQC HTML reports (phred per base quality, over-represented sequences).
+  - Take new screenshots of the notebook for source/example_doc.qmd: comments_in_code.png and
+    external_scripts.png show the old FastQC version.
+  - source/example_doc.qmd line 52 ("notes about what the results from FastQC actually told me") and
+    line 63 ("how I ran the FastQC software", "run_fastqc.sh"): change to seqkit / scripts/seqkit.sh,
+    so the text matches the new screenshots.
+- Order: seqkit stats with srun (simple, wildcard) → fastp on one sample with srun (look at what it
   produces) → the loop built step by step with echo → the same loop in an sbatch script →
-  count and check outputs → optional: arrays, and FastQC again on the trimmed reads.
-- Use the for-loops tutorial as a base for building the loop:
+  count and check outputs → optional: arrays, and seqkit stats + awk on the trimmed reads.
+- DONE 2026-10-07 (fastp section): Use the for-loops tutorial as a base for building the loop:
   https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html
 - fastp is a nice example of reading the help and thinking about outputs: it writes fastp.html and
   fastp.json by default, so in a loop it overwrites the reports of earlier samples.
-- Conda motivation: Crunchomics has fastp 1.0.1, the current version is 1.3.7 (checked 2026-10-06).
+- Conda motivation: Crunchomics has fastp 1.0.1, the current version is 1.4.0 (released 2026-10-07).
   Show fastp --version, explain why you may want a newer version, then install an own pinned
   version with mamba. The Crunchomics fastp is the backup if an install fails.
 - omics_install_script: run in class, explain what it does (PATH, python, ~/personal link).
@@ -201,10 +247,12 @@ Project notes for Claude: CLAUDE.md (local only)
 ## Decisions (details in _course_schedule.md)
 
 - Optional sections: "(optional)" in the heading + collapsed box.
-- Miniforge: in class on day 2, into ~/personal.
+- Miniforge: in class on day 2, into ~/personal, non-interactive (-b -p), on the login node.
+- fastp 1.4.0, environment fastp_1.4.0. conda in job scripts: source ~/.bashrc + conda activate.
 - omics_install_script: in class on day 2, before the conda install.
-- fastp loop: leaning towards a wildcard in the path, with a word on checking what a wildcard
-  matches. Not final.
+- fastp loop: samples.txt (4 sample names) + for sample in $(cat samples.txt), wildcard written
+  directly in the fastp command (not in a quoted variable). Extra syntax in a collapsed box. (2026-10-07)
+- cut stays core on day 1. Array tip uses fastq_files.txt. (2026-10-07)
 
 
 ## Snippets

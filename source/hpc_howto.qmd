@@ -67,19 +67,6 @@ ssh -X uvanetid@omics-h0.science.uva.nl
 `-X` enables what is called **X11 forwarding**: the HPC sends the graphical output to your computer. In this tutorial we don't need this, because we copy the results to our own computer instead.
 :::
 
-::: {.callout-tip title="Tip: Warning about a changed host key" collapse="true"}
-The first time you connect, your computer stores a "fingerprint" of Crunchomics, the so-called host key. After maintenance of Crunchomics, this key can change. Then `ssh` refuses to connect and shows a warning like `REMOTE HOST IDENTIFICATION HAS CHANGED!`.
-
-If you know that Crunchomics had maintenance, you can remove the old key from your computer with the command below. Run it on your own computer, not on the HPC. Then log in again and type `yes` when you are asked whether you want to continue connecting.
-
-```{bash}
-# Remove the stored host key for Crunchomics from your own computer
-ssh-keygen -R "omics-h0.science.uva.nl"
-```
-
-If you are unsure why the key changed, ask before you remove it.
-:::
-
 ### Crunchomics: Preparing your account
 
 If this is your **first time using Crunchomics**, you need to run a small bash script to set up your account. Ignore this section if you have done this before. The script:
@@ -207,23 +194,6 @@ scp 'data/seq_project/barcode00*/*fastq.gz' username@omics-h0.science.uva.nl:/ho
 ```
 :::
 
-::: {.callout-tip title="Tip: Moving files using the FileZilla GUI" collapse="true"}
-`scp` takes some getting used to, and there are several programs with a graphical user interface that do the same thing. Here, we look at FileZilla, which works on Windows, Mac and Linux.
-
-To use FileZilla, do the following:
-
-1.  Download the FileZilla Client [here](https://filezilla-project.org/). The free version is all we need.
-2.  Follow the installation instructions
-3.  Click the FileZilla app to start it
-4.  Add your UvA user credentials:
-    -   Enter `omics-h0.science.uva.nl` in host
-    -   Enter your UvAnetID in user
-    -   Enter your UvA password
-    -   Port should be 22 to open an SFTP connection
-5.  Trust the host
-6.  You land in your home directory (on the right hand side)
-7.  You can copy data by dragging and dropping
-:::
 
 ## Submitting jobs with SLURM
 
@@ -295,64 +265,84 @@ In examples online, you will often see two more options:
 -   `--ntasks=1`: the number of tasks to run. The default is 1, which is what we need in this tutorial
 :::
 
-### Run FastQC with `srun`
+### Run seqkit stats with `srun`
 
-Next, let's use `srun` for something more useful. [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a quality control tool for sequencing data that is already installed on Crunchomics. We use it to look more closely at the quality of the sequencing data that we just copied to Crunchomics.
+Next, let's use `srun` for something more useful. [SeqKit](https://bioinf.shenwei.me/seqkit/) is a toolkit for working with sequence files, and it is already installed on Crunchomics (version 2.7.0). Its command `seqkit stats` gives a summary of each fastq file: how many reads it has, how long they are, and how good their quality is. We use it to get a first overview of the sequencing data that we just copied to Crunchomics.
 
-Whenever you use a tool for the first time, check its help page (e.g. `fastqc -h`) to see all available options, or look online for a manual.
+Whenever you use a tool for the first time, check its help page (e.g. `seqkit stats -h`) to see all available options, or look online for a manual.
 
 ```{bash}
-# Make a results folder with a fastqc folder inside
-mkdir -p results/fastqc
+# Make a results folder with a seqkit folder inside
+mkdir -p results/seqkit
 
-# Run FastQC on all fastq.gz files with srun
-srun --cpus-per-task=1 --mem=5G --time=00:30:00 fastqc data/seq_project/*/*gz -o results/fastqc --threads 1
+# Run seqkit stats on all fastq.gz files with srun
+srun --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -b -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
 
-# Check the output: we expect one HTML report (and one zip file) per fastq.gz file
-ls -l results/fastqc
+# Check the output: we expect one table with a header line and one line per fastq.gz file
+wc -l results/seqkit/stats_raw.txt
 ```
 
 Here:
 
--   `fastqc data/seq_project/*/*gz`: run FastQC on all files in the `seq_project` folders that end with `gz`
--   `-o results/fastqc`: write the output into the `results/fastqc` folder
--   `--threads 1`: let FastQC use 1 CPU (in our case, thread and CPU mean the same)
+-   `seqkit stats data/seq_project/*/*gz`: run `seqkit stats` on all files in the `seq_project` folders that end with `gz`
+-   `-b`: only output the basename of files
+-   `-a`: print all statistics. Without it, seqkit prints only the basic ones, such as the number and length of the reads, but not their quality
+-   `-T`: print the output as a table in which the columns are separated by tabs. This format is easy to read for other commands, such as `cut`
+-   `-o results/seqkit/stats_raw.txt`: write the output into this file. If you ever are unsure about what options come with a tool, check the tool's manual or its help page with `seqkit stats -h`
+-   `--threads 1`: let seqkit use 1 CPU (in our case, thread and CPU mean the same)
     -   **Important**: always make sure that the number of CPUs you request from SLURM matches the number of CPUs (threads) the software uses. If the tool uses more than you requested, it competes with itself for CPUs. If you request more than the tool uses, the extra CPUs sit idle while others could use them
 
-Since we work with little data, this runs fast despite only using 1 CPU. If you are logged in to Crunchomics in a second terminal and run `squeue` while FastQC is running, you should see your job (in the example below, the job is named after the software and got the job ID 746):
+Since we work with little data, this runs fast despite only using 1 CPU. It may even finish within a second or two. If you are logged in to Crunchomics in a second terminal and run `squeue` while your job is running, you should see it (in the example below, the job is named after the software and got the job ID 379646):
 
 ![](../img/squeue2.png){width="50%" fig-align="left"}
 
-::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-The FastQC reports are HTML files, which are easiest to view in the internet browser of your own computer.
+Unlike the reports of many other tools, the output is a plain text file, so we can look at it directly on Crunchomics:
 
-1.  Use `scp` to copy the HTML files generated by FastQC from Crunchomics into the `results/fastqc` folder of the `data_analysis` folder on your own computer
-2.  Open the folder in your file browser and open one of the HTML files
+```{bash}
+cat results/seqkit/stats_raw.txt
+```
+
+The output should look like this:
+
+![](../img/seqkit_out.png){width="100%" fig-align="left"}
+
+
+The most useful columns for us are:
+
+-   `num_seqs`: the number of reads in the file
+-   `min_len`, `avg_len` and `max_len`: the shortest, average and longest read length
+-   `Q20(%)` and `Q30(%)`: the percentage of bases with a quality score of at least 20 or 30. A quality score of 20 means that there is a 1 in 100 chance that the base is wrong, a score of 30 a 1 in 1000 chance
+-   `GC(%)`: the percentage of G and C bases
+
+::: {.callout-tip title="Tip: FastQC for visual quality reports" collapse="true"}
+`seqkit stats` gives us numbers. A very common tool for a more detailed, visual check of sequencing quality is [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which is also installed on Crunchomics. It makes one HTML report per fastq file, with plots of the quality along the reads. You open these reports in the internet browser of your own computer, so you first copy them with `scp`. [MultiQC](https://seqera.io/multiqc/) can combine many of these reports into one.
+:::
+
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+1.  On day 1, we counted the lines in each fastq file (`results/counts/line_counts_bash.txt` on your own computer). Use this to work out how many reads `Sample-DUMMY1_R2.fastq.gz` has. Does this match `num_seqs` in the seqkit table?
+2.  Look at `num_seqs` for the R1 and the R2 file of each sample. What do you notice?
+3.  Use `cut` to print only the columns `file` and `num_seqs` of the table
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-# Run all of this in the terminal on your OWN computer,
-# from inside your local data_analysis folder
-
 # Question 1:
-# Make the folder for the reports
-mkdir -p results/fastqc
+# On your own computer 
+# Sample-DUMMY1_R2 has 179384 lines
+cat results/counts/line_counts_bash.txt
 
-# Copy all HTML reports
-# The quotes make sure that the wildcard is used on Crunchomics, not on your own computer
-scp 'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/fastqc/*html' results/fastqc/
+# On Crunchomics
+# Sample-DUMMY1_R2 has 44846 seqs
+cat results/seqkit/stats_raw.txt
 
-# Check that the 8 reports arrived
-ls -l results/fastqc
-
-# Question 2:
-# Open the folder in your file browser
-cd results/fastqc
-explorer.exe .     # Windows (MobaXterm or WSL2)
-open .             # Mac
+# Question 3:
+# file is the 1st column and num_seqs is the 4th column
+# cut uses tabs to split columns by default, so we don't need -d here
+cut -f1,4 results/seqkit/stats_raw.txt
 ```
 
-Double-click on one of the HTML files to open it in your browser. If you want to know more about how to interpret the output, visit [the FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which gives examples of good and bad reports.
+For question 1: each read takes up 4 lines in a fastq file, so the number of reads is the number of lines divided by 4. `Sample-DUMMY1_R2.fastq.gz` has 179,384 lines, which is 44,846 reads. seqkit reports the same number. When two different methods give the same answer, we can trust the result a lot more.
+
+For question 2: the R1 and R2 file of the same sample always have the same number of reads. Each read in R1 has its partner read in R2.
 :::
 :::
 
@@ -404,31 +394,31 @@ ls -l
 
 #### Step 2: Write a job script
 
-We run FastQC again, but this time with `sbatch` instead of `srun`, so that you can directly compare the two.
+We run `seqkit stats` again, but this time with `sbatch` instead of `srun`, so that you can directly compare the two.
 
 Use `nano` to create a script file:
 
 ```{bash}
-nano scripts/run_fastqc.sh
+nano scripts/run_seqkit.sh
 ```
 
 Then add the following content:
 
 ```{bash}
 #!/bin/bash
-#SBATCH --job-name=fastqc
-#SBATCH --output=logs/fastqc_%j.out
-#SBATCH --error=logs/fastqc_%j.err
+#SBATCH --job-name=seqkit
+#SBATCH --output=logs/seqkit_%j.out
+#SBATCH --error=logs/seqkit_%j.err
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=5G
 #SBATCH --time=01:00:00
 
-echo "FastQC job started on:"
+echo "seqkit job started on:"
 date
 
-fastqc data/seq_project/*/*gz -o results/fastqc --threads 1
+seqkit stats -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
 
-echo "FastQC job finished on:"
+echo "seqkit job finished on:"
 date
 ```
 
@@ -436,7 +426,7 @@ Save and exit:
 
 -   Press `Ctrl+X` to exit, then `Y` to confirm that you want to save the file, then Enter to keep the file name
 
-Notice how the `fastqc` command looks exactly the same as when we used `srun`? The main difference between `srun` and `sbatch` is how we package the instructions for the compute node.
+Notice how the `seqkit stats` command looks exactly the same as when we used `srun`? The main difference between `srun` and `sbatch` is how we package the instructions for the compute node.
 
 #### Step 3: Understanding your job script
 
@@ -449,7 +439,7 @@ In the job script above:
     -   `--error`: the file in which SLURM stores error messages (the **standard error**)
     -   `%j` in the file names is replaced by the job ID. This way, every job gets its own log files and nothing is overwritten
 -   `echo` and `date`: print messages with the time, so that you can follow the progress of the job in the log file
--   `fastqc ...`: the actual analysis that runs on the compute node
+-   `seqkit stats ...`: the actual analysis that runs on the compute node
 
 Notice that the `#SBATCH` lines start with `#`? For bash, these lines are comments. Only SLURM reads them.
 
@@ -457,24 +447,24 @@ Notice that the `#SBATCH` lines start with `#`? For bash, these lines are commen
 
 ```{bash}
 # Submit the job script to SLURM
-sbatch scripts/run_fastqc.sh
+sbatch scripts/run_seqkit.sh
 
 # Check the job status (the job may run too fast to appear)
 squeue -u $USER
 
 # Once the job is finished and no longer in the list, check the outputs
 ls -l logs
-ls -l results/fastqc
+ls -l results/seqkit
 ```
 
 When the job is submitted, you see something like `Submitted batch job 754`, and two new log files appear in your `logs` folder:
 
--   `fastqc_<jobID>.out`: the standard output, e.g. the messages from `echo` and `date`
--   `fastqc_<jobID>.err`: the error log. Check this file if your job fails
+-   `seqkit_<jobID>.out`: the standard output, e.g. the messages from `echo` and `date`
+-   `seqkit_<jobID>.err`: the error log. Check this file if your job fails
 
-Have a look at both log files, for example with `cat logs/fastqc_*.out`. Do you see the messages from `echo` and `date`? Some programs also write normal progress messages into the error log, so a `.err` file with content does not always mean that something went wrong.
+Have a look at both log files, for example with `cat logs/seqkit_*.out`. Do you see the messages from `echo` and `date`? Some programs also write normal progress messages into the error log, so a `.err` file with content does not always mean that something went wrong.
 
-Since we gave FastQC the same output folder, the reports from the `srun` run were replaced by the new ones. Here that is fine, because the input is the same.
+Since we gave seqkit the same output file name, the table from the `srun` run was replaced by the new one. Look at the time in `ls -l results/seqkit` to see this. Here that is fine, because the input is the same. With real data, overwriting results by accident can cost you hours of work, so choose your output names with care.
 
 ::: {.callout-tip title="Tip: Debugging your first sbatch jobs" collapse="false"}
 If your job fails:
@@ -504,15 +494,15 @@ Always cancel jobs that run incorrectly or that you no longer need. This frees r
 
 ### `sacct`: Checking the resources a job used
 
-After a job has finished, you can check which resources it actually used with `sacct`. Replace `754` with the job ID of your FastQC job:
+After a job has finished, you can check which resources it actually used with `sacct`. Replace `754` with the job ID of your seqkit job:
 
 ```{bash}
-sacct -j 754 --format=User,JobID,JobName,State,Start,End,Elapsed,MaxRSS,NCPUS
+sacct -j 379723 --format=User,JobID,JobName,State,Start,End,Elapsed,MaxRSS,NCPUS
 ```
 
 Here:
 
--   `-j 754`: show the information for job 754
+-   `-j 379723`: show the information for job 379723
 -   `--format=...`: choose which columns to show. The most useful ones are:
     -   `State`: whether the job finished successfully (COMPLETED) or not (e.g. FAILED, CANCELLED, TIMEOUT)
     -   `Elapsed`: how long the job ran
@@ -553,7 +543,7 @@ We **detach** from a screen (go outside of it but keep it running in the backgro
 If you want to run several analyses in several screens at the same time, it is useful to give your screens descriptive names with the `-S` option:
 
 ```{bash}
-screen -S run_fastqc
+screen -S run_seqkit
 ```
 
 After detaching from this screen again with `Ctrl+a` and then `d`, you can list all running screens with:
@@ -565,13 +555,13 @@ screen -ls
 You can reconnect to an existing screen like this:
 
 ```{bash}
-screen -r run_fastqc
+screen -r run_seqkit
 ```
 
-Inside the screen, we can run FastQC the same way as before, but now we don't risk losing a long-running job:
+Inside the screen, we can run `seqkit stats` the same way as before, but now we don't risk losing a long-running job:
 
 ```{bash}
-srun --cpus-per-task=1 --mem=5G --time=00:30:00 fastqc data/seq_project/*/*gz -o results/fastqc --threads 1
+srun --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
 ```
 
 If you want to completely close and remove a screen, type the following and press enter while you are inside the screen:
@@ -581,12 +571,476 @@ exit
 ```
 :::
 
+## `conda`: Installing your own software
+
+Crunchomics already has a lot of software installed, but not every tool, and not always the version you need. Let's look at fastp, the tool we use in the next section:
+
+```{bash}
+# Which fastp does bash find, and which version is it?
+which fastp
+fastp --version
+```
+
+fastp is installed on Crunchomics, but this is version 1.0.1. The newest version is 1.4.0 (October 2026). Newer versions fix errors and add features, and the version you use can change your results. That is why you should always write down which version of a tool you used, and why you sometimes want to install a specific version yourself.
+
+You can't install software into the shared software folders of Crunchomics, because you don't have administrator rights there. Instead, we use **conda**: a program that installs software into your own folders, without administrator rights. **mamba** does the same as conda, but faster. It understands the same commands, so you can swap `conda` and `mamba` in almost all commands that you find online.
+
+conda installs each tool into its own **environment**: a separate folder with the tool and all the other programs it needs, in exactly the right versions. This way, tools that need different versions of the same program don't get in each other's way. To use a tool, you **activate** its environment. Activating adds the environment's folder to the front of your PATH (remember, the list of folders in which bash looks for programs), so bash finds the tool there first.
+
+### Install Miniforge
+
+First, check if you already have conda or mamba:
+
+```{bash}
+conda --version
+mamba --version
+```
+
+If both commands print a path, conda is already installed, and you can skip to the next section. If they print nothing or an error message (for example one that contains `no conda in`), install **Miniforge**, a small installer that contains conda and mamba.
+
+::: {.callout-important title="Important: Install Miniforge into your personal folder, not into your home folder" collapse="false"}
+Your home folder on Crunchomics has only 25 GB of space, and conda environments can take up several GB once you have a few of them. So we install Miniforge into your personal folder, which has 500 GB: `/zfs/omics/personal/$USER/miniforge3`.
+
+`$USER` is a variable that bash has already set for you. It contains your user name, so for you, `$USER` is replaced by your UvAnetID. That way, you can copy the commands below exactly as they are.
+:::
+
+Installing Miniforge is a small job, so it is fine to run it on the login node. Run the commands one by one:
+
+<!-- TO CHECK in the test run: the installer name Miniforge3-Linux-x86_64.sh fits Crunchomics (uname -m prints x86_64). -->
+
+```{bash}
+# Go into your personal folder
+cd /zfs/omics/personal/$USER
+
+# Download the Miniforge installer
+curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+
+# Check that the installer was downloaded
+ls -lh Miniforge3-Linux-x86_64.sh
+
+# Run the installer
+# -b: install without asking any questions
+# -p: the folder to install Miniforge into
+bash Miniforge3-Linux-x86_64.sh -b -p /zfs/omics/personal/$USER/miniforge3
+
+# Check that the folder was created
+ls /zfs/omics/personal/$USER/miniforge3
+```
+
+Here:
+
+-   `curl -L -O`: downloads the installer, like on day 1. Crunchomics is a Linux computer with an x86_64 processor, so we download the installer for that system
+-   `-b`: runs the installer without questions. Without `-b`, the installer asks you to read the license and to type the folder for the installation yourself. Typing that folder by hand is easy to get wrong, which is why we give it with `-p` instead
+-   By using `-b`, you accept the [Miniforge license](https://github.com/conda-forge/miniforge/blob/main/LICENSE) without seeing it. The installer itself has a BSD-3-Clause license, and the programs that come with it have their own licenses. Have a look at it if you want to know what you agree to
+
+The installer has now put conda into your personal folder, but bash does not know about it yet. The next command adds a few lines to your `~/.bashrc` file. This file contains settings that bash reads every time you log in. With these lines, bash can find conda from now on:
+
+```{bash}
+# Set up conda for bash (only needed once)
+/zfs/omics/personal/$USER/miniforge3/bin/conda init
+
+# Read the new settings without logging out and in again
+source ~/.bashrc
+
+# Check that bash now finds conda and mamba
+conda --version
+mamba --version
+```
+
+`conda init` prints a long list of files, most of them with "no change". That is fine. The output also tells you to close and re-open your shell. `source ~/.bashrc` does the same thing, so you don't have to log out.
+
+You should now see `(base)` at the start of your prompt. This shows that conda is active, and that you are in its **base** environment, the environment that comes with Miniforge.
+
+### `mamba create`: Make an environment with fastp
+
+Now we can install fastp 1.4.0 into a new environment. We put the version number into the name of the environment, so that we can see later which version it contains:
+
+```{bash}
+# Make a new environment called fastp_1.4.0 and install fastp version 1.4.0 into it
+# Press Y and Enter when mamba asks you to confirm
+mamba create -n fastp_1.4.0 -c bioconda fastp=1.4.0
+```
+
+Here:
+
+-   `-n fastp_1.4.0`: the name of the new environment
+-   `-c bioconda`: where to look for the software. Bioconda is a collection (a **channel**) with thousands of bioinformatics tools. You can search for tools and versions on [anaconda.org](https://anaconda.org/bioconda)
+-   `fastp=1.4.0`: the tool to install, and the exact version. Without `=1.4.0`, mamba installs the newest version, which might be a different one the next time you run the same command
+
+Let's use the new environment:
+
+```{bash}
+# Activate the environment
+conda activate fastp_1.4.0
+
+# Check which fastp bash finds now, and its version
+which fastp
+fastp --version
+
+# Leave the environment again
+conda deactivate
+
+# Check which fastp bash finds now
+which fastp
+```
+
+When the environment is active, you see `(fastp_1.4.0)` at the start of your prompt, and `which fastp` shows a path inside your `miniforge3` folder. After `conda deactivate`, bash finds the fastp of Crunchomics again.
+
+**Recommendations**:
+
+-   Keep the base environment clean: make a new environment for each tool, instead of installing everything into base
+-   Always install a specific version (`tool=version`), and put the version number in the name of the environment
+-   Check the documentation of a tool for installation notes or version requirements
+-   List all your environments with `conda env list`
+-   Remove an environment that you no longer need with `conda env remove -n name_of_the_environment`
+
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+1.  List all conda environments that you have now
+2.  Activate the fastp environment again. In which folder is the fastp program located? Keep the environment active for the next section
+
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+```{bash}
+# Question 1:
+conda env list
+
+# Question 2:
+conda activate fastp_1.4.0
+which fastp
+```
+
+You should see two environments in the list: `base` and `fastp_1.4.0`. The fastp program is in the `bin` folder of the environment, inside your `miniforge3` folder.
+:::
+:::
+
+## fastp: Running a tool for each sample with a for-loop
+
+With `seqkit stats`, we were lucky: we could give it all fastq files at once with a wildcard. Many tools don't work this way. They work on one sample at a time. [fastp](https://github.com/OpenGene/fastp) is such a tool. It removes low-quality parts of reads and leftover adapter sequences, which is called **trimming** or **quality filtering**. For paired-end data, fastp needs the R1 and the R2 file of the same sample together.
+
+To run fastp on all our samples, we combine three things from day 1: `cut` to make a list of samples, a for-loop to repeat the command for each sample, and a script file to run the loop as a job. We build the loop step by step, and look at what happens after each step.
+
+If it is not active yet, activate the conda environment with fastp that we made in the previous section:
+
+```{bash}
+conda activate fastp_1.4.0
+```
+
+### Step 1: Run fastp on one sample
+
+Before we write a loop, we run the tool on a single sample. This shows us what fastp needs as input and what it produces. Like for every new tool, start with the help page:
+
+```{bash}
+fastp --help
+```
+
+<!-- TO CHECK in the test run: option names (-i, -I, -o, -O, -h, -j, --thread) and the default report names fastp.html / fastp.json in fastp 1.4.0. -->
+
+Now let's run fastp on Sample-DUMMY1:
+
+```{bash}
+# Make a folder for the fastp results
+mkdir -p results/fastp
+
+# Run fastp on the R1 and R2 file of the first sample
+srun --cpus-per-task=2 --mem=5G --time=00:30:00 fastp \
+    -i data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz \
+    -I data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz \
+    -o results/fastp/Sample-DUMMY1_R1.trimmed.fastq.gz \
+    -O results/fastp/Sample-DUMMY1_R2.trimmed.fastq.gz \
+    --thread 2
+
+# Check what fastp made, in the results folder and in the current folder
+ls -l results/fastp
+ls -l
+```
+
+This command is long, so we split it over several lines. The `\` at the end of a line tells bash that the command continues on the next line. Be careful: the `\` must be the very last character on the line, so don't add a space after it.
+
+Here:
+
+-   `-i` and `-I`: the R1 and R2 input files
+-   `-o` and `-O`: where to write the trimmed R1 and R2 files
+-   `--thread 2`: let fastp use 2 CPUs, the same number that we requested from SLURM with `--cpus-per-task=2`
+
+When fastp is done, it prints a summary to the screen. It shows, for example, how many reads there were before and after filtering.
+
+Now look at the output of the two `ls` commands. The trimmed files are in `results/fastp`, as we asked. But fastp also made two reports, `fastp.html` and `fastp.json`, and put them in the folder we ran the command from. We never asked for these names. fastp uses them by default. If we now ran fastp on the next sample, it would write its reports under the same names, and overwrite the reports of Sample-DUMMY1.
+
+This is why it is worth running a tool on one sample first and looking carefully at the help page. In the help page, we find the options `-h` and `-j` to choose the names of the two reports ourselves. We use them in the loop below. The reports in the current folder are not needed anymore, so we remove them:
+
+```{bash}
+# Remove the two reports with the default names
+rm fastp.html fastp.json
+
+# Check that they are gone
+ls -l
+```
+
+### Step 2: Make a list of samples
+
+Our loop will repeat fastp once per sample, so we need a list with the 4 sample names. We build this list from the file names with `cut`, step by step:
+
+```{bash}
+# List the R1 files only. Each sample has exactly one R1 file, so each sample is listed once
+ls data/seq_project/*/*_R1.fastq.gz
+
+# Keep only the file name: the 4th field when we split the path at each /
+ls data/seq_project/*/*_R1.fastq.gz | cut -f4 -d "/"
+
+# Keep only the sample name: the 1st field when we split the file name at each _
+ls data/seq_project/*/*_R1.fastq.gz | cut -f4 -d "/" | cut -f1 -d "_"
+```
+
+The last command prints exactly the list we want, so we store it in a file:
+
+```{bash}
+ls data/seq_project/*/*_R1.fastq.gz | cut -f4 -d "/" | cut -f1 -d "_" > samples.txt
+
+# Check the list: we expect 4 sample names
+cat samples.txt
+wc -l samples.txt
+```
+
+A list file like `samples.txt` has a few advantages. You can open it and see exactly which samples the loop will work on. And if you later want to rerun only some samples, you can make a shorter list without changing the loop.
+
+::: {.callout-tip title="Tip: Making a list file by hand" collapse="true"}
+You can also type a list file yourself, one sample name per line. Use `nano` for this, not Notepad or Word. As we saw on day 1, Windows programs add an invisible character at the end of each line. In a list file, this character becomes part of each sample name, and the loop then looks for files that don't exist.
+:::
+
+### Step 3: Build the loop with `echo`
+
+Like on day 1, we start with a loop that only prints what it works on:
+
+```{bash}
+for sample in $(cat samples.txt); do
+    echo $sample
+done
+```
+
+This should print the 4 sample names. One part is new here: `$(cat samples.txt)`. `cat samples.txt` prints the content of the file. The `$( )` around it takes this printed text and puts it into the command, at the place where it stands. This is called **command substitution**. So for bash, the first line becomes `for sample in Sample-DUMMY1 Sample-DUMMY2 Sample-DUMMY3 Sample-DUMMY4; do`.
+
+Bash splits the text from `samples.txt` at every new line, but also at every space. So each line in the list file must contain one name, without spaces.
+
+Next, we check that we find the right input files for each sample. We use `ls` instead of `echo`, because `ls` shows us which files the wildcard actually matches:
+
+```{bash}
+for sample in $(cat samples.txt); do
+    echo "Sample: $sample"
+    ls data/seq_project/*/${sample}_R1.fastq.gz
+    ls data/seq_project/*/${sample}_R2.fastq.gz
+done
+```
+
+Each `ls` should print exactly **one** file. This is the moment to check what your wildcard matches. Imagine you had sequenced Sample-DUMMY1 twice, and had two folders with a `Sample-DUMMY1_R1.fastq.gz` file. Then the wildcard would match both files, and fastp would get the wrong input. Always look at what a wildcard matches before you give it to a tool.
+
+Notice that we write `${sample}`, with curly brackets, and not `$sample`. The curly brackets show bash where the variable name ends. Without them, bash reads `$sample_R1` as a variable called `sample_R1`. That variable doesn't exist, so bash quietly replaces it with nothing, and the path becomes `data/seq_project/*/.fastq.gz`. Bash does not give an error for this. Use the curly brackets whenever text follows directly after a variable name.
+
+### Step 4: A dry run of the full command
+
+Now we put the whole fastp command into the loop, but with `echo` in front of it. Bash then prints each command instead of running it. We add `-h` and `-j` to give each sample its own reports:
+
+```{bash}
+for sample in $(cat samples.txt); do
+    echo "" 
+    echo fastp \
+        -i data/seq_project/*/${sample}_R1.fastq.gz \
+        -I data/seq_project/*/${sample}_R2.fastq.gz \
+        -o results/fastp/${sample}_R1.trimmed.fastq.gz \
+        -O results/fastp/${sample}_R2.trimmed.fastq.gz \
+        -h results/fastp/${sample}.html \
+        -j results/fastp/${sample}.json \
+        --thread 2
+done
+```
+
+This prints 4 fastp commands, one per sample. Read them carefully: do the R1 and R2 input files belong to the same sample? Does every sample get its own output names? If something looks wrong, it is much easier to fix it now than after the job has run.
+
+::: {.callout-important title="Important: Don't put quotes around a path with a wildcard" collapse="false"}
+In scripts that you find online, or that an AI tool writes for you, variables are often written in quotes, for example `"$sample"`. That is a good habit in general. But be careful with wildcards. Inside quotes, bash does not replace the `*` with the matching file names. With `-i "data/seq_project/*/${sample}_R1.fastq.gz"`, fastp would look for a folder that is literally called `*`, and stop with an error.
+
+That is why we write the input paths without quotes, directly in the fastp command. Our names contain no spaces, so this is safe here.
+
+The `scp` command in the exercise below, where we copy the fastp reports to our own computer, is the opposite case. There, we put quotes around the wildcard on purpose: the quotes stop your own computer from using the wildcard, so that Crunchomics can use it to find the files.
+:::
+
+### Step 5: Run the loop as a job
+
+The loop works, so we can run it for real. Our 4 samples are small, but with real data this can take hours, so we submit the loop as a job with `sbatch`. Create a new script:
+
+```{bash}
+nano scripts/fastp.sh
+```
+
+And add the following content:
+
+```{bash}
+#!/bin/bash
+#SBATCH --job-name=fastp
+#SBATCH --output=logs/fastp_%j.out
+#SBATCH --error=logs/fastp_%j.err
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=5G
+#SBATCH --time=01:00:00
+
+# Make conda available in the job, and activate the environment with fastp
+source ~/.bashrc
+conda activate fastp_1.4.0
+
+# Make the output folder (no error if it already exists)
+mkdir -p results/fastp
+
+# Run fastp on the R1 and R2 file of each sample in samples.txt
+for sample in $(cat samples.txt); do
+    echo "Start fastp for: $sample"
+
+    fastp \
+        -i data/seq_project/*/${sample}_R1.fastq.gz \
+        -I data/seq_project/*/${sample}_R2.fastq.gz \
+        -o results/fastp/${sample}_R1.trimmed.fastq.gz \
+        -O results/fastp/${sample}_R2.trimmed.fastq.gz \
+        -h results/fastp/${sample}.html \
+        -j results/fastp/${sample}.json \
+        --thread 2
+done
+
+echo "fastp job finished on:"
+date
+```
+
+Save and exit with `Ctrl+X`, `Y` and Enter.
+
+The loop is the same as in our dry run, only without `echo` in front of fastp. Two parts are new compared to the seqkit job script:
+
+-   `source ~/.bashrc` and `conda activate fastp_1.4.0`: a job starts in a fresh environment on a compute node, where conda is not set up yet. `source ~/.bashrc` runs the settings from your `~/.bashrc` file, which include the setup of conda. After that, we can activate the environment with fastp.
+-   `echo "Start fastp for: $sample"`: writes the sample name into the log file before fastp starts. If something goes wrong, you can see in the log at which sample it happened.
+
+Submit the job and follow it:
+
+```{bash}
+# Submit the job script to SLURM
+sbatch scripts/fastp.sh
+
+# Check the job status
+squeue -u $USER
+
+# Once the job is done, look at the log files
+cat logs/fastp_*.out
+less logs/fastp_*.err
+```
+
+fastp prints its summary for each sample into the log files. Have a look at both of them.
+
+### Step 6: Check the output
+
+Never assume that a job did what you wanted, just because it finished. We gave 4 samples to fastp, and for each sample we expect 2 trimmed files, 1 HTML report and 1 JSON report:
+
+```{bash}
+# Look at the output files
+ls -l results/fastp
+
+# Count them: we expect 4 samples x 4 files = 16 files
+ls results/fastp | wc -l
+```
+
+Also check that none of the files is empty (a size of 0 in the `ls -l` output), and that each sample name appears in the `.out` log.
+
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+1.  Copy the 4 HTML reports to your own computer and open the report for Sample-DUMMY1
+2.  On day 1, we counted the lines in each fastq file (`results/counts/line_counts_bash.txt` on your own computer). How many reads did Sample-DUMMY1 have before filtering? Does this match the number in the fastp report?
+3.  Count the lines in `results/fastp/Sample-DUMMY1_R1.trimmed.fastq.gz` on Crunchomics. How many reads are left after filtering?
+
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+```{bash}
+# Question 1:
+# Run this in the terminal on your OWN computer, from inside your local data_analysis folder
+mkdir -p results/fastp
+scp 'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/fastp/*html' results/fastp/
+ls -l results/fastp
+
+# Question 2:
+# On your own computer
+cat results/counts/line_counts_bash.txt
+
+# Question 3:
+# On Crunchomics
+zcat results/fastp/Sample-DUMMY1_R1.trimmed.fastq.gz | wc -l
+```
+
+For question 2: each read takes up 4 lines in a fastq file, so the number of reads is the number of lines divided by 4. For example, `Sample-DUMMY1_R2.fastq.gz` has 179,384 lines, which is 44,846 reads. R1 and R2 of the same sample always have the same number of reads. The fastp report shows the number of reads before filtering for R1 and R2 together, so you should find twice this number there.
+
+For question 3: the number should be the same as, or smaller than, before filtering. Compare it with the number of reads after filtering in the fastp report.
+:::
+:::
+
+
+### Comparing reads before and after trimming (optional)
+
+::: {.callout-tip title="seqkit stats and awk: before vs after trimming" collapse="true"}
+At the start of the day, we made a table with `seqkit stats` for the raw reads. If we make the same table for the trimmed reads, we can see what fastp changed:
+
+```{bash}
+# Run seqkit stats on the trimmed reads
+srun --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -b -a -T -o results/seqkit/stats_trimmed.txt results/fastp/*trimmed.fastq.gz --threads 1
+
+# Check the output: we expect a header line and 8 lines, one per trimmed file
+wc -l results/seqkit/stats_trimmed.txt
+cat results/seqkit/stats_trimmed.txt
+```
+
+Both tables have many columns, which makes them hard to compare by eye. On day 1, we used `cut` to select columns. Here, we use **awk**, a small programming language for working with tables in text files. awk reads a file line by line, splits each line into columns, and lets us choose what to do with each line.
+
+Let's print the file name, the number of reads and the average read length (columns 1, 4 and 7) of both tables:
+
+```{bash}
+awk -F'\t' 'FNR > 1 {print $1, $4, $7}' results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt
+```
+
+Here:
+
+-   `-F'\t'`: the columns are separated by tabs (`\t` stands for a tab)
+-   `'...'`: the awk program, in single quotes so that bash does not change anything in it
+-   `FNR > 1`: only work on lines with a line number above 1. This skips the header line. `FNR` is the line number within the current file, so the header is skipped in both files
+-   `{print $1, $4, $7}`: print columns 1, 4 and 7. In awk, `$4` means "column 4". This is not the same as a bash variable
+-   We give awk two files, and it works through them one after the other
+
+This prints 16 lines: first the 8 raw files, then the 8 trimmed files. Compare the number of reads and the average length of Sample-DUMMY1 before and after trimming.
+
+awk can do more than `cut`. It can also select lines based on a value. For example, which files have less than 95% of bases with a quality score of at least 30 (column 15, `Q30(%)`)?
+
+```{bash}
+awk -F'\t' 'FNR > 1 && $15 < 95 {print $1, $15}' results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt
+```
+
+-   `FNR > 1 && $15 < 95`: only work on lines that are not the header **and** (`&&`) have a value below 95 in column 15
+
+If this prints nothing, all files have at least 95% of bases with a quality score of 30 or higher. Try a few other cut-off values and see how the output changes.
+:::
+
+::: {.callout-tip title="Extra bash syntax: Finding R2 without a list file (optional)" collapse="true"}
+For those who want to learn more bash: we can also write this loop without `samples.txt`. We then loop directly over the R1 files, and let bash work out the matching R2 file and the sample name:
+
+```{bash}
+for R1 in data/seq_project/*/*_R1.fastq.gz; do
+    R2=${R1/_R1/_R2}
+    sample=$(basename $R1 _R1.fastq.gz)
+    echo "Sample: $sample, R1: $R1, R2: $R2"
+done
+```
+
+-   `${R1/_R1/_R2}`: takes the value of `R1` and replaces the first `_R1` with `_R2`. This turns the path to the R1 file into the path to the R2 file
+-   `basename $R1 _R1.fastq.gz`: `basename` removes the folders from a path and keeps only the file name. If you give it an ending as second argument, it removes that ending too. What is left is the sample name
+-   `$( )`: the command substitution from above stores the output of `basename` in the variable `sample`
+
+This is shorter, but you need to know the extra syntax to read it. A list file is easier to check, and easier to change if you want to run only some samples.
+
+If your list file has several columns, for example a sample name and a group, a `while` loop can read both columns into separate variables. The [IBED for-loops page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html) explains this, and builds a loop step by step with another example.
+:::
+
 ## Job arrays: Running many files in parallel (optional)
 
 ::: {.callout-tip title="Advanced tip: sbatch arrays to run multiple files in parallel" collapse="true"}
-With FastQC, we are lucky that we can give the tool all fastq files at once with a wildcard. Not all programs work this way.
+Our fastp loop runs inside a single job, so the samples are processed one after another. With 4 small samples, that is fine. With hundreds of samples, it can take a long time, while the HPC has enough space to run several of them at the same time.
 
-For this section, let's assume that we need to give the tool each file one by one. How would we run such a job efficiently?
+For this section, we go back to `seqkit stats` and run it on each file separately, one job per file. How would we run such jobs efficiently?
 
 We can use a **job array**, which allows us to:
 
@@ -596,11 +1050,11 @@ We can use a **job array**, which allows us to:
 Let's start with making a list of the files we want to work with, using what we learned on day 1:
 
 ```{bash}
-ls data/seq_project/*/*.gz | cut -f4 -d "/" > samples.txt
+ls data/seq_project/*/*.gz | cut -f4 -d "/" > fastq_files.txt
 
 # Check the list: we expect 8 file names
-cat samples.txt
-wc -l samples.txt
+cat fastq_files.txt
+wc -l fastq_files.txt
 ```
 
 Next, we use this text file in our job array. Store the following in `scripts/array.sh`:
@@ -617,14 +1071,14 @@ Next, we use this text file in our job array. Store the following in `scripts/ar
 # The number of the current job in the array (1 to 8 for our 8 files)
 INDEX=$SLURM_ARRAY_TASK_ID
 
-# Read the file name on line number INDEX of samples.txt
-CURRENT_SAMPLE=$(sed -n "${INDEX}p" samples.txt)
+# Read the file name on line number INDEX of fastq_files.txt
+CURRENT_SAMPLE=$(sed -n "${INDEX}p" fastq_files.txt)
 
 # Print what is happening
 echo "Now Job${INDEX} runs on ${CURRENT_SAMPLE}"
 
 # Run the actual job
-fastqc data/seq_project/*/${CURRENT_SAMPLE} -o results/fastqc --threads 1
+seqkit stats -a -T -o results/seqkit/${CURRENT_SAMPLE}_stats.txt data/seq_project/*/${CURRENT_SAMPLE} --threads 1
 ```
 
 In the script, we use some new SLURM options:
@@ -636,9 +1090,9 @@ In the script, we use some new SLURM options:
 The script does the following:
 
 -   `INDEX` stores the value of `SLURM_ARRAY_TASK_ID`, the number of the current job within the array. This is 1 for the first job, 2 for the second, ..., and 8 for the last one
--   `sed -n "${INDEX}p" samples.txt` prints one line of `samples.txt`: line 1 for job 1, line 2 for job 2, and so on. We store this file name in the variable `CURRENT_SAMPLE`. For the first job, this is `Sample-DUMMY1_R1.fastq.gz`
+-   `sed -n "${INDEX}p" fastq_files.txt` prints one line of `fastq_files.txt`: line 1 for job 1, line 2 for job 2, and so on. We store this file name in the variable `CURRENT_SAMPLE`. For the first job, this is `Sample-DUMMY1_R1.fastq.gz`
 -   `echo` records which job works on which file
--   Finally, we run FastQC on the file stored in `CURRENT_SAMPLE`
+-   Finally, we run `seqkit stats` on the file stored in `CURRENT_SAMPLE`. Each job writes its own table, named after its input file, so the 8 jobs don't overwrite each other's output
 
 Submit the script with `sbatch scripts/array.sh`. If we check what is happening right after submitting the job with `squeue`, we should see something like this:
 
@@ -650,142 +1104,15 @@ If we check the log files, we should see something like this:
 
 ![](../img/arrays2.png){width="50%" fig-align="left"}
 
-We get an output and an error file for each job. In the output, we see the value stored in `INDEX`, here 1, and in `CURRENT_SAMPLE`, here `Sample-DUMMY1_R1.fastq.gz`, and that the analysis finished successfully.
+We get an output and an error file for each job. In the output, we see the value stored in `INDEX`, here 1, and in `CURRENT_SAMPLE`, here `Sample-DUMMY1_R1.fastq.gz`.
+
+Check that each job wrote its table:
+
+```{bash}
+# We expect 8 tables, one per fastq.gz file
+ls -l results/seqkit/*_stats.txt
+ls results/seqkit/*_stats.txt | wc -l
+```
 
 More about arrays and other SLURM options can be found on the [IBED SLURM basics page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/cli/slurm_basics.html).
-:::
-
-## Installing software
-
-There might be cases where the software you are interested in is not installed on the HPC you are working with (or on your own computer).
-
-In the majority of cases, you should be able to install software by using a package management system, such as conda or mamba. These systems allow you to find and install packages in their own environment without administrator privileges. Let's have a look at a very brief example:
-
-### Install conda/mamba
-
-A lot of systems already come with conda/mamba installed, however, if possible we recommend working with mamba instead of conda. mamba is a replacement and uses the same commands and configuration options as conda, however, it tends to be much faster. A useful thing is that if you find documentation for conda then you can swap almost all commands between conda & mamba.
-
-You can check if you have either with:
-
-```{bash}
-which conda
-which mamba
-```
-
-If you have conda installed and do not want to install anything else, that is fine. Just replace all instances of mamba with conda below.
-
-If you don’t have access to either conda or mamba then you can install Miniforge (which includes conda and mamba by default) by running the following two commands:
-
-```{bash}
-curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-bash Miniforge3-$(uname)-$(uname -m).sh
-```
-
-During installation:
-
-1.    Read the license (scroll by pressing enter) and say “Yes” when asking for confirmation
-2.    Choose the installation location
-        Important: On Crunchomics, your home directory has only 25 GB of space. Therefore install everything into the personal folder that comes with 500 GB: `/zfs/omics/personal/uvanetID/miniforge3`
-3.    Say “yes” when asked if conda should be initialized
-4.    Restart your shell by typing `source ~/.bashrc`. You now should see a (base) in front of your prompt indicating that you are now inside conda’s base environment
-5. Verify the installation:
-
-```{bash}
-conda -h
-mamba -h
-```
-
-
-### Setting up an environment
-
-Let's assume we want to install seqkit, a tool that allows us to calculate some statistics for sequencing data such as the number of sequences or average sequence length per sample.
-
-We can install seqkit into a separate environment, which we can give a descriptive name, as follows:
-
-```{bash}
-#check if the tool is installed (should return "command not" found if the software is not installed)
-seqkit -h
-
-#create an empty environment and name it seqkit and we add the version number to the name
-#this basically sets up seqkit separate from our default working environment
-#this is useful whenever software require complicated dependencies allowing us to have a separate install away from software that could conflict with each other
-mamba create -n seqkit_2.6.1
-
-#install seqkit, into the environment we just created
-mamba install -n seqkit_2.6.1 -c bioconda seqkit=2.6.1
-
-#to run seqkit, we need activate the environment first
-mamba activate seqkit_2.6.1
-
-#check if tool is installed, 
-#if installed properly this should return some detailed information on how to run seqkit
-seqkit -h
-
-#run the tool via srun
-mkdir results/seqkit
-srun --cpus-per-task 2 --mem=4G seqkit stats -a -To results/seqkit/seqkit_stats.tsv data/seq_project/*/*.gz --threads 2
-less -S results/seqkit/seqkit_stats.tsv 
-
-#close the environment
-conda deactivate
-```
-
-**General recommendations**:
-
--    Whenever possible, use mamba instead of conda, it resolves dependencies faster
--    Keep your base environment clean (the base environment is the conda environment you start with when you log into the HPC). Always create new environments for each tool (conda create -n toolname …) instead of installing everything in base
--    Check the tool’s documentation for specific installation notes or version requirements
--    You can install specific versions when needed with `mamba create -n seqkit_v2.6.1 -c bioconda seqkit=2.6.1`
--    You can remove environments you no longer need with `conda env remove -n seqkit_v2.6.1`
--    You can list all existing environments with `conda env list`
-
-
-::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  Download and view the file `results/seqkit/seqkit_stats.tsv` on your own computer
-2.  Run the seqkit again but this time submit the job via a sbatch script instead of using srun. Notice, that you need to tell SLURM how it can activate the conda environment that has seqkit installed. You might need to google how to do that, since this requires some extra line of code that we have not covered yet but see this as a good exercise for how to handle error messages that you see in the log files for your own analyses
-
-::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
-```{bash}
-# Question 1
-scp username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/seqkit/seqkit_stats.tsv .
-
-# Question 2 
-sbatch scripts/seqkit.sh
-```
-
-Content of `scripts/seqkit.sh`:
-
-```{bash}
-#!/bin/bash
-#SBATCH --job-name=seqkit_job
-#SBATCH --output=logs/seqkit_%j.out
-#SBATCH --error=logs/seqkit_%j.err
-#SBATCH --cpus-per-task=2
-#SBATCH --mem=5G
-
-#activate dependencies
-source ~/.bashrc
-mamba activate seqkit_2.6.1
-
-#run seqkit
-echo "Start seqkit"
-
-seqkit stats -a -To results/seqkit/seqkit_stats.tsv data/seq_project/*/*.gz --threads 2
-
-echo "seqkit finished"
-```
-
-In the script above, we see that we need to add two lines of code to activate the seqkit conda environment:
-
-```         
-source ~/.bashrc
-mamba activate seqkit_2.6.1
-```
-
-When you run a script or a command, it operates in its own environment. The source command is like telling the script to look into another file, in this case, `~/.bashrc`, and execute the commands in that file as if they were written directly into the script.
-
-Here, `source ~/.bashrc` is telling the script to execute the commands in the `~/.bashrc` file. This is typically done to set up environment variables, paths, and activate any software or tools that are required for the script to run successfully. In our case this tells Slurm where we have installed conda and thus enables Slurm to use conda itself.
-
-This allows slurm to, after executing `source ~/.bashrc`, activates a Conda environment using `mamba activate seqkit_2.6.1`. This ensures that the SeqKit tool and its dependencies are available and properly configured for use in the subsequent part of the script.
-:::
 :::
