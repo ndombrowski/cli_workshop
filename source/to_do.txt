@@ -112,6 +112,15 @@ Project notes for Claude: CLAUDE.md (local only)
     closed (pandoc warning "Div ... unclosed"). Close it at the end of the page or remove it.
 - Missing core skills, move into the main text: Tab completion and arrow up (DONE 2026-10-06, tip
   now open by default). Add: Ctrl+C, reading error messages (first deliberate error: "No such file or directory").
+  DONE 2026-10-08: new section "Error messages and Ctrl+C: Getting unstuck" after the cd section
+  (before checkpoint 1): deliberate typo ls -l dta (output from WSL Ubuntu 24.04, GNU ls 9.4),
+  three causes, command not found in text only, Ctrl+C demo with cat, copy-paste tip.
+  - To check in the trial run: copy-paste shortcuts (MobaXterm select = copy + right-click = paste;
+    Ubuntu app Ctrl+Shift+C/V), written from general knowledge. Error wording in MobaXterm
+    (toybox ls) and on a Mac, if we want to show those too.
+- DONE 2026-10-08: gzip section now decompresses a COPY in results/gzip_test (raw data in data/
+  untouched), exercise compares copy vs original with ls -lh, then gzip + rm -r results/gzip_test.
+  Checkpoint 3 text adjusted.
 - DONE 2026-10-07: Introduce variables before loops.
 - DONE 2026-10-07: Loops stay simple: echo, then zcat | wc -l per file.
 - DONE 2026-10-07: Introduce script files (.sh, run with bash) as preparation for sbatch on day 2.

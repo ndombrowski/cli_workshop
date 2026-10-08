@@ -548,7 +548,7 @@ You don't need to copy the content of the job script into your notebook. It is s
 
 ### `sacct`: Checking the resources a job used
 
-After a job has finished, you can check which resources it actually used with `sacct`. Replace `754` with the job ID of your seqkit job:
+After a job has finished, you can check which resources it actually used with `sacct`. Replace `379723` with the job ID of your seqkit job:
 
 ```{bash}
 sacct -j 379723 --format=User,JobID,JobName,State,Start,End,Elapsed,MaxRSS,NCPUS

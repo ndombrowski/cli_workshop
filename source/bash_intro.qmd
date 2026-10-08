@@ -336,6 +336,66 @@ This is also a good example of why you normally do NOT want spaces in your file 
 Be careful with large sequence files in OneDrive folders: OneDrive tries to upload every file you make there.
 :::
 
+## Error messages and `Ctrl+C`: Getting unstuck
+
+Sooner or later, a command will not do what you expect. That is normal, also for people who use the command line every day. Two skills help you get unstuck: reading the error message, and stopping a command.
+
+### Reading an error message
+
+Let's make a mistake on purpose. From inside your `data_analysis` folder, list a folder with a typo in its name:
+
+```{bash}
+# A typo on purpose: the folder is called data, not dta
+ls -l dta
+```
+
+On my computer (WSL with Ubuntu), this prints:
+
+```
+ls: cannot access 'dta': No such file or directory
+```
+
+An **error message** is how the shell tells you what went wrong. Read it from left to right:
+
+-   `ls`: the command that ran into a problem
+-   `cannot access 'dta'`: what it tried to do, and with which file or folder
+-   `No such file or directory`: why it did not work
+
+The exact wording can be a bit different on your system, but you find the same three parts.
+
+`No such file or directory` is the error you will see most often. It usually has one of three causes:
+
+-   There is a typo in the name. Use the Tab key, so that the shell fills in names for you.
+-   You are in a different folder than you think. Check with `pwd` and `ls`.
+-   The file does not exist yet, for example because an earlier step did not work.
+
+If you make a typo in the name of the command itself, for example `lss` instead of `ls`, the message contains `command not found`. The shell does not know a command with that name.
+
+When you ask someone for help, always copy the complete error message. It tells them much more than "it does not work".
+
+### `Ctrl+C`: Stopping a command
+
+Sometimes a command does not finish, or you start something by mistake. The prompt does not come back, and you can't type a new command. Press `Ctrl+C` (the Control key and C at the same time) to stop the command and get your prompt back. On a Mac, this is also `Ctrl+C`, not `Cmd+C`.
+
+Let's try it. If you give `cat` no file name, it waits for you to type text (we use `cat` for other things later):
+
+```{bash}
+# cat without a file name waits for input, so the prompt does not come back
+cat
+```
+
+Nothing happens and there is no new prompt. Now press `Ctrl+C`. The prompt comes back.
+
+Keep in mind that `Ctrl+C` stops a command, but it does not undo what the command already did.
+
+::: {.callout-tip title="Tip: Copying and pasting in the terminal" collapse="false"}
+Because `Ctrl+C` stops commands, it usually does not copy text in a terminal. You will copy a lot, for example from the terminal into your notebook. This is how it works:
+
+-   **MobaXterm:** select text with the mouse to copy it. Right-click to paste it.
+-   **WSL2 (Ubuntu app):** `Ctrl+Shift+C` to copy, `Ctrl+Shift+V` to paste.
+-   **Mac:** `Cmd+C` to copy, `Cmd+V` to paste, as in other programs.
+:::
+
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Finding your way"}
 Open `notes.md` and add:
 
@@ -935,17 +995,25 @@ After running this command you will see a lot of random letters and numbers but 
 
 You might have noticed that our sequence files end with `.gz`. This extension is used for files that are compressed with a tool called `gzip`. Compressing makes a file smaller, which saves space, but it also makes the file unreadable for a human. That is why `head` showed us random characters.
 
-To view the content of a compressed file, we can decompress it first. We do this with the `gzip` command together with the `-d` (decompress) option. By default, `gzip` compresses a file:
+To view the content of a compressed file, we can decompress it first. We do this with the `gzip` command together with the `-d` (decompress) option. Without `-d`, `gzip` compresses a file.
+
+`gzip -d` replaces the compressed file with the decompressed one. We never want to change our raw data in `data/`: if something goes wrong, there is no way to get the original back. So we practise on a copy:
 
 ```{bash}
-# Decompress one file
-gzip -d data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
+# Make a folder for this test, so that the raw data in data/ stays as it is
+mkdir -p results/gzip_test
+
+# Copy one sequence file into it
+cp data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz results/gzip_test/
+
+# Decompress the copy
+gzip -d results/gzip_test/Sample-DUMMY1_R1.fastq.gz
 
 # Check that this worked: the file lost its .gz extension
-ls -l data/seq_project/barcode001_User1_ITS_1_L001/
+ls -l results/gzip_test
 
 # View the first lines of the decompressed file
-head data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq
+head results/gzip_test/Sample-DUMMY1_R1.fastq
 ```
 
 After running this, we finally see a sequence and some other information. Notice that for fastq files we always should see 4 rows of information for each sequence as shown below:
@@ -957,30 +1025,42 @@ After running this, we finally see a sequence and some other information. Notice
 </p>
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  After running the gzip command above, make a list of each sequence file with `ls`
-2.  Use `ls` with an option to also view the file size and compare the size of our compressed and uncompressed files.
+1.  Use `ls` with an option to view the file size in an easy-to-read unit (remember the `wget` exercise)
+2.  Compare the size of the decompressed copy in `results/gzip_test` with the compressed original in `data/`
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
-# Question 1:
-ls -l data/seq_project/*/*
+# The compressed original
+ls -lh data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
 
-# Question 2:
-ls -lh data/seq_project/*/*
+# The decompressed copy
+ls -lh results/gzip_test/Sample-DUMMY1_R1.fastq
 ```
 
-We see that the decompressed file has a size of about \~25M, while the compressed files are around \~5M.
+We see that the decompressed file has a size of about \~25M, while the compressed file is around \~5M.
 
-When working with sequencing files the data is usually much larger and its best to keep the files compressed to not clutter your computer.
+Real sequencing data is usually much larger, so it is best to keep the files compressed.
 :::
 :::
 
-To keep our files small its best to work with the compressed files. If we want to compress a file, we can do this as follows:
+To compress a file again, use `gzip` without `-d`:
 
 ```{bash}
-gzip data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq
+# Compress the copy again: it gets its .gz extension back
+gzip results/gzip_test/Sample-DUMMY1_R1.fastq
 
-ls data/seq_project/*/*
+# Check that this worked
+ls -l results/gzip_test
+```
+
+We don't need the test folder anymore, so we remove it. Check the path twice before you press Enter, `rm -r` does not ask:
+
+```{bash}
+# Remove the test folder and everything inside it
+rm -r results/gzip_test
+
+# Check that it is gone
+ls results
 ```
 
 ### `zcat`: Decompress and print to screen
@@ -1079,7 +1159,7 @@ Add a new heading `## Looking at the data` to `notes.md`, and below it:
 1.  A code block with the commands that made the two file lists, `fastq_paths.txt` and `fastq_files.txt`
 2.  In the same code block, the checks that told you something about the data: how many files there are, whether there are as many R1 as R2 files, what the first lines of a fastq file look like, and how many lines one file has
 3.  In normal text below the code block: what you learned about the data. How many lines does one read take? Why did `head` on a `.gz` file show strange characters?
-4.  Leave out the detour where we decompressed a file with `gzip -d` and compressed it again, because it ended with the data as it was. A short note on why we use `zcat` is enough
+4.  Leave out the `gzip` test on a copy, because we removed the test folder again. A short note on why we use `zcat` is enough
 
 Then a check that we come back to: run `ls` and `ls results` inside `data_analysis`. Can your notebook explain where every file and folder came from? If not, add a line about it, even if it is "practice file, not needed".
 
