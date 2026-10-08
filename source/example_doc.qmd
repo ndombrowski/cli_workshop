@@ -6,66 +6,68 @@ toc-depth: 2
 
 ## An example notebook
 
-If you want to see an example for documented code, check out [a notebook](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) I wrote based on what we are doing in this tutorial.
+If you want to see an example of documented code, have a look at [a notebook](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) that I wrote for the analysis we do in this tutorial. You can think of it as a cleaned-up version of the `notes.md` notebook that you kept during the workshop.
 
-The link above leads you to an example for:
+The link above shows you:
 
--   How could I use github to make my code available to others
--   How a "code book" could look like. The example you see in the folder is provided as a Quarto markdown file [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd) and for convenience the report was also rendered as a [html](https://ndombrowski.github.io/cli_workshop/example_doc/example_notebook.html) to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.
+-   How you can use GitHub to make your code available to others
+-   What a code notebook can look like. The notebook is a Quarto file, which you find [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd). To make it easier to read for collaborators, I also turned it into an [HTML report](https://ndombrowski.github.io/cli_workshop/example_doc/example_notebook.html). 
 
-The example is based on the data you analyse throughout this tutorial, so the actual code might only make sense after you have finished the tutorial. Feel free to revisit this page after you have written some code yourself.
+The example uses the same data as this tutorial, so the code might only make sense after you have finished the tutorial. Feel free to come back to this page after you have written some code yourself.
 
-Please note that this is just an example to get you started and such a report might look different depending on your needs.
+This is just one example to get you started. Your own notebook might look different, depending on your needs.
 
-Below you find some general hints for what to put into different sections that you can see in the qmd file.
+Below, you find some hints on what to put into the different sections of the notebook.
 
 ### YAML headers
 
 ![](/img/yaml_header.png){width="753"}
 
+The **YAML header** is the part between the two `---` lines at the very top of the file. It contains settings for the whole document, such as the title, the author and the output format. In my example, `eval: false` tells Quarto to only show the code, not to run it.
+
 ### Settings (change these before you run the workflow)
 
 ![](/img/general_setup.png){width="549"}
 
-In one of the first sections of my notebooks I add everything that a user that wants to use my workflow has to change and I try to standardize the code below, i.e. I try to write it in a way so that it does not need to be changed. This ensures that another user could just run my code as is without having to edit anything other than this first section. Typically things to add are:
+In one of the first sections of my notebooks, I collect everything that someone who wants to use my workflow has to change. I write the code below this section in a way that it does not need to be changed. This way, another person can run my code as it is, and only needs to edit this first section. Typical things to add here are:
 
--   From where to start the analyses, i.e. the location of the working directory or project folder
--   Custom paths, to for example for databases that need to be downloaded from the web or repositories
--   Custom variables: In the example above I store the location of my project folder in a variable called `wdir`. I use `$HOME` in it instead of typing out my home directory, so the path works for anyone with the same folder structure on Crunchomics. I also store the link to the data in a variable called `download_link`, I then use the variable in the code below to download the data. By doing it this way I have one location in the code another person needs to change the code when for example the path to the data changes. The code below stays the same since I use the `download_link` variable and not the actual path any more. When writing code try to think ahead and minimize the number of instances where things need to be changed if for example the location to your data changes. 
+-   Where the analysis starts: the location of the working directory or project folder
+-   Custom paths, for example to databases that need to be downloaded from the web
+-   Custom variables. In the example above, I store the location of my project folder in a variable called `wdir`. I use `$HOME` in it instead of typing out my home directory, so the path works for anyone with the same folder structure on Crunchomics. I also store the link to the data in a variable called `download_link`, and use this variable further down to download the data. If the link to the data ever changes, another person only needs to change it in this one place, and the code below stays the same. When you write code, try to think ahead: keep the number of places that need to be changed as small as possible.
 
-I tend to NOT add the information on how I use `scp` to log into an HPC to keep my user name and login information private.
+I tend NOT to write down how I log in to the HPC with `ssh` and copy data with `scp`. That way, my user name and login information stay private.
 
 ### Looking at the data (sanity checks)
 
 ![](/img/sanity_check.png){width="561"}
 
-When I first start working with new data, I try to add as many sanity checks as possible to ensure that my data looks good. That way I avoid that I don't notice an issue and run into trouble further down the line. I at the same time understand my data more and learn with how many samples and how much data I am working with.
+When I start working with new data, I add as many sanity checks as possible, to make sure that my data looks good. That way, I notice problems early, before they cause trouble further down the line. At the same time, I get to know my data better: how many samples and how much data I am working with.
 
-I also add such sanity checks whenever I modify my data. For example, when I merge individual files into a large file I might count the lines for the individual files and the combined file simply to ensure that I used my wildcards correctly.
+I also add sanity checks whenever I change my data. For example, when I merge several files into one large file, I might count the lines of the individual files and of the combined file, to make sure that I used my wildcards correctly.
 
-Remember: The computer is only as smart as the person using it and will blindly run your commands. Because of that the computer can do unexpected things and you need to account for that.
+Remember: the computer is only as smart as the person using it, and it runs your commands blindly. So the computer can do unexpected things, and you need to check for that.
 
-### Using markdown to make notes
+### Using Markdown to make notes
 
 ![](/img/comments_in_code.png){width="543"}
 
-In the example above I use markdown to not only document my code but also add some comments whenever I might need it. In the example above, I added some notes about what the results from seqkit stats and the fastp HTML reports actually told me.
+In the example above, I use Markdown not only to document my code, but also to add notes wherever I need them. Here, I wrote down what the results of seqkit stats and the fastp HTML reports actually told me.
 
 This kind of documentation can be useful for:
 
--   Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, if I would have found a lot of low quality reads or the adapter still being part of the sequence then I would have specifically cleaned my sequences to deal with that
+-   Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, when I looked at the FastP HTML report I noticed a dip in quality at the end of the sequence reads. Based on that I normally would make a decision to adjust re-run FastP and enable trimming of the reads.
 -   Future you. If you read the report a month, or a year, later you have the key information in your report and don't have to open any files or tables that are located elsewhere
 
 ### Documenting external scripts
 
 ![](/img/external_scripts.png){width="559"}
 
-This part might make more sense after you have worked through the part of the tutorial about using an HPC. But what you see here is how I have written down code that simply says that I submitted a script to a HPC but it does not actually say how I ran the SeqKit software. The actual code is "hidden" inside of the seqkit.sh script. This also means that a person reading your workflow does not have the code right away. You can deal with this in two ways.
+This part makes more sense after you have worked through the HPC part of the tutorial. Here, my notebook only says that I submitted a script to the HPC with `sbatch`. It does not say how I ran seqkit: that code is "hidden" inside the `seqkit.sh` script. So someone who reads only the notebook does not see the code right away. You can deal with this in two ways:
 
-1.  Instead of the sbatch command, you can add the actual line of code that was run on the compute node.
-2.  When publishing your code with your manuscript, add the whole scripts folder to where you publish the main code, i.e. on [github](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) or [zenodo](https://zenodo.org/records/3839790)
+1.  Instead of the `sbatch` command, write the actual command that ran on the compute node into your notebook.
+2.  Keep the scripts next to your notebook, and when you publish your code with a paper, publish the whole `scripts` folder too, for example on [GitHub](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) or [Zenodo](https://zenodo.org/records/3839790). This is why you copied the job scripts to your own computer at the end of day 2.
 
-I tend to prefer number 2 because I like to record the code in my notebooks exactly as I ran it but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.
+I prefer option 2, because I like to record the code in my notebooks exactly as I ran it. But you can do it differently, as long as all the code you ran is written down and available to others once you publish your data.
 
 ## Going further
 

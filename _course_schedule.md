@@ -32,7 +32,7 @@ announcement email (`_preworkshop_instructions.md`).
 | 35 min | Repeating things | Variables. Simple loop over a wildcard (`echo` first, then `zcat \| wc -l` for each file). `>>` to collect the counts in one file. Save the loop in a `.sh` file and run it with `bash` (prepares for `sbatch`).. Notebook checkpoint 4 at the end (no model notes from here on; the script itself is documentation). |
 | 10 min | Wrap-up | Notebook checkpoint 5 "Tidy your notebook": short description at the top, reread, every-file check, `## Questions for day 2`. |
 
-**Optional:** `sort` / `uniq`, `cat` for combining files, `nano`, advanced counting tips, sample mapping tip.
+**Optional:** `nano`, advanced counting tips, sample mapping tip. (`sort` / `uniq` and `cat` stay core: commands participants meet regularly in real work, decided 2026-10-08.)
 
 ## Day 2: working on Crunchomics (about 3h50)
 
@@ -76,4 +76,6 @@ announcement email (`_preworkshop_instructions.md`).
 | installation.qmd audience | Works for both workshop participants and self-study; contact Nina also outside the workshop. |
 | Notebook (documentation thread) | Participants keep `~/data_analysis/notes.md` in Markdown (RStudio recommended), one file on the laptop for both days (day 2 commands are copied from the ssh window into it). Made with `touch` after `mkdir data_analysis`, opened by double-click. Blue "Notebook checkpoint" box at the end of each schedule block, styles `.callout-notebook` + nested `.callout-notebook-answer` ("Compare with my notes") in `styles.scss`. Model notes only for the first checkpoints, later only the prompt. Time cost accepted: writing the notes is thinking time, and the block timings are generous. (Decided 2026-10-08.) |
 | code_documentation.qmd | Removed (decided 2026-10-08). Documentation is a thread through both days (notebook checkpoints); `example_doc.qmd` is the wrap-up and got a "Going further" section (Quarto, BES guide). Markdown Basics link in the day 1 notebook section. |
+| `sort` / `uniq`, `cat` | Core, not optional (decided 2026-10-08): participants meet them regularly in real work. |
+| hpc_intro.qmd | Style pass only, no trimming (decided 2026-10-08): the facts are current and change rarely, and the snapshot rules trip people up often. |
 | Showing command output | Plain text output block + lead-in sentence, copied from a real run. Screenshots only where the look on screen matters. No code run at render time. Not every chunk gets an output. |

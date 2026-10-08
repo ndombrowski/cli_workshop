@@ -18,6 +18,35 @@ Project notes for Claude: CLAUDE.md (local only)
 
 - Mark a core path and an optional path. Optional = "(optional)" in the heading + collapsed box.
   Candidates for day 1: sort/uniq, cat (combining files), gzip, the second wc section, nano, advanced tips.
+  Decided 2026-10-08: sort/uniq and cat stay core (not optional).
+- Style pass (consistent text across pages), started 2026-10-08:
+  DONE bash_intro.qmd: older sections rewritten in the newer style (head/tail/less, nano tip, wc, pipes,
+  cut, sort/uniq, cat, fastq/gzip intro, zcat, grep, wc II, More wildcards tip, both Better counting tips,
+  sample mapping tip). Commands unchanged; checks added after cut > fastq_files.txt (head + wc -l).
+  Terms now defined: delimiter, field, paired-end, read, pattern, adapters/primers, command substitution,
+  arithmetic expansion, sample mapping file. Small factual fixes: cut paths are relative to data_analysis
+  (not home); More wildcards said [012] matches 1 or 2 (the command uses [12]); grep -c counts matching
+  lines, not occurrences; zcat Mac box no longer blames zsh (the issue is the macOS zcat, not checked).
+  DONE hpc_intro.qmd (style only, all facts kept): terms defined (HPC, login/head node, compute node,
+  SLURM, workload manager/scheduler, job, queue, snapshot), the two storage lists merged into one
+  "Storage" section + a "Compute resources" section, grammar fixed. Removed: "compiling" (was only
+  an example of login node work). Last paragraph updated: seqkit stats + fastp with conda (said
+  "assess the quality"). Node names still omics-cn001 to cn005 (vs omics-h01-h05 in crunchomics1.png,
+  see Day 2 list).
+  DONE hpc_howto.qmd (was mostly consistent already): two i.e. removed, screen tip intro rewritten
+  (no more "terminal multiplexer" / "virtual terminals"; defines screen session), job array tip
+  variables INDEX / CURRENT_SAMPLE -> index / current_sample (lowercase like the rest of both days;
+  SLURM_ARRAY_TASK_ID stays). Printed log text unchanged, so arrays2.png still matches.
+  DONE example_doc.qmd (grammar + terms, Nina's voice kept): intro links the example to notes.md, YAML
+  header now explained (was image only), GitHub/Zenodo/Markdown capitalised, i.e. removed, "how I use scp
+  to log into an HPC" -> ssh to log in + scp to copy, option 2 for scripts links to the day 2 scp step.
+  NOT touched: the "Justifying decisions" bullet (Nina rewrites it herself).
+  - DONE 2026-10-08 (Nina): removed "you need to download it first" from example_doc.qmd; the HTML
+    report on GitHub Pages opens directly in the browser.
+  DONE index.qmd: welcome text in the new style, part 2 now says install software + check and clean
+  (was "assess the quality"), dead link replaced (see Site-wide). readme.md now has the same text
+  (copied by Nina 2026-10-08).
+  Style pass finished for all pages (2026-10-08).
   cut stays core (decided 2026-10-07): day 2 uses it to make samples.txt.
 - DONE 2026-10-07: loops reworked over both days (decisions in _course_schedule.md).
   Day 1 (bash_intro.qmd): new section "echo and variables", loop over a wildcard only (variable
@@ -253,7 +282,8 @@ Project notes for Claude: CLAUDE.md (local only)
     Nina 2026-10-08 (empty .md file, no YAML header).
 - Use example_doc.qmd as a wrap-up at the end of day 2. By then participants have written the
   code themselves, so the example makes sense. (Linked from day 2 checkpoint 5.)
-
+- Consider resutrcutring https://github.com/ndombrowski/cli_workshop/tree/main/example_doc so that 
+  it looks more like a real github page with a readme.md and a docs folder with the qmd files
 
 ## LLM page (later)
 
@@ -267,7 +297,8 @@ Project notes for Claude: CLAUDE.md (local only)
 
 - index.qmd + readme.md: add the 2-day overview, a time estimate for self-study users
   (_course_schedule.md is only visible on GitHub), and the pre-workshop checklist link.
-- Dead links: scienceparkstudygroup.github.io/software_information/ returns 404 (checked
+  readme.md is a copy of the index.qmd text (since 2026-10-08): change both together.
+- DONE 2026-10-08 in index.qmd (new URL returns 200; hpc_howto.qmd no longer uses it): Dead links: scienceparkstudygroup.github.io/software_information/ returns 404 (checked
   2026-10-06). Used in index.qmd and hpc_howto.qmd (sed link). New site:
   scienceparkstudygroup.github.io/ibed-bioinformatics-page/. Check all external links.
 - Other repo: IBED slurm_basics page has the same --nodes and --mem errors as fixed here.

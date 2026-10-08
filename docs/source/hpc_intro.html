@@ -340,14 +340,8 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul class="collapse">
-  <li><a href="#hpc-introduction" id="toc-hpc-introduction" class="nav-link active" data-scroll-target="#hpc-introduction">HPC introduction</a></li>
-  </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_intro.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hpc_intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hpc_intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../source/hpc_intro.html">Using an HPC</a></li><li class="breadcrumb-item"><a href="../source/hpc_intro.html">HPC introduction</a></li></ol></nav></header>
 
@@ -358,20 +352,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hpc-introduction" class="level2" style="text-align: justify">
+<div style="text-align: justify">
+<section id="hpc-introduction" class="level2">
 <h2 class="anchored" data-anchor-id="hpc-introduction">HPC introduction</h2>
-<p>If you work at IBED you can get access to the Crunchomics HPC, the Genomics Compute Environment for SILS and IBED. If you need access to Crunchomics, send an email to Wim de Leeuw <a href="mailto:w.c.deleeuw@uva.nl" class="email">w.c.deleeuw@uva.nl</a> to get an account set up by giving him your UvA netID.</p>
-<p>Using an HPC works a bit differently than running jobs on your computer, below you find a simplified schematic:</p>
+<p>On day 2, we work on <strong>Crunchomics</strong>, the Genomics Compute Environment for SILS and IBED. Crunchomics is an <strong>HPC</strong> (high-performance computer): a group of powerful computers that many people share. If you work at IBED, you can get access to it by sending an email with your UvAnetID to Wim de Leeuw (<a href="mailto:w.c.deleeuw@uva.nl" class="email">w.c.deleeuw@uva.nl</a>), as described on the <a href="../source/installation.html">Before you start</a> page.</p>
+<p>Working on an HPC is a bit different from working on your own computer. The figure below gives a simplified overview:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../img/crunchomics1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
-<p>Very briefly, you can log into an HPC onto a login node. The purpose of a <strong>login node</strong>, sometimes also called head node, is to prepare to run a program (e.g., moving and editing files as well as compiling and preparing a job script). You then submit a job script from the head to the compute nodes via Slurm. The <strong>compute nodes</strong> are used to actually run a program and <strong>Slurm</strong> is an open-source workload manager/scheduler that is used on many big HPCs. Slurm has three key functions:</p>
 <ul>
-<li>provide the users access to the resources on the compute nodes for a certain amount of time to perform any computation</li>
-<li>provide a framework to start, execute, and check the work on the set of allocated compute nodes</li>
-<li>mange the queue of submitted jobs based on the availability of resources</li>
+<li>When you log in, you arrive on the <strong>login node</strong>, also called the <strong>head node</strong>. This computer is for preparing your work, for example moving and editing files and writing job scripts. It is not for running analyses.</li>
+<li>The analyses run on the <strong>compute nodes</strong>. These computers have many more CPUs and much more memory.</li>
+<li>In between is <strong>SLURM</strong>, a <strong>workload manager</strong> (also called a <strong>scheduler</strong>) that is used on many large HPCs. You send your analysis to SLURM as a <strong>job</strong>, and SLURM runs it on a compute node. SLURM does three things:
+<ul>
+<li>It gives users access to CPUs and memory on the compute nodes, for a limited time</li>
+<li>It starts and runs the jobs, and lets you check on them</li>
+<li>It manages the <strong>queue</strong>: the list of jobs that wait until enough CPUs and memory are free</li>
+</ul></li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -384,48 +383,44 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Crunchomics etiquette</strong></p>
-<p>You share the HPC with other people, therefore, take care to only ask for the resources you actually use. Some general rules:</p>
+<p>You share Crunchomics with many other people, so only ask for the resources that you actually use. There are no hard limits, but please follow these rules:</p>
 <ul>
-<li>There are no hard limits on resource usage, instead we expect you to keep in mind that you are sharing the system with other users. Some rules of thumb:
-<ul>
-<li>Do NOT run jobs that request many CPUs and lots of memory on the head-node (omics-h0), use the compute nodes (omics-cn001 - omics-cn005) for this</li>
-<li>Do NOT allocate more than 20% (CPU or memory) of the cluster for more than a day. If you have large jobs, contact Wim de Leeuw</li>
-<li>Do not leave allocations unused and set reasonable time limits on you jobs</li>
-</ul></li>
-<li>For large compute jobs a job queuing system (SLURM) is available. Interactive usage is possible but is discouraged for larger jobs. We will learn how to use the queue during this tutorial</li>
-<li>Close applications when not in use, i.e.&nbsp;when running R interactively</li>
+<li>Do NOT run jobs that need many CPUs or a lot of memory on the login node (<code>omics-h0</code>). Use the compute nodes (<code>omics-cn001</code> to <code>omics-cn005</code>) for this</li>
+<li>Do NOT use more than 20% of the CPUs or memory of the cluster for more than a day. If you have large jobs, contact Wim de Leeuw</li>
+<li>Don’t leave resources that you reserved unused, and set reasonable time limits on your jobs</li>
+<li>Use the queue (SLURM) for large jobs. Working interactively is possible, but not for large jobs. We learn how to use the queue on day 2</li>
+<li>Close programs when you don’t use them anymore, for example an R session</li>
 </ul>
 </div>
 </div>
-<p>On crunchomics you:</p>
+</section>
+<section id="storage" class="level2">
+<h2 class="anchored" data-anchor-id="storage">Storage</h2>
+<p>On Crunchomics, you have two folders (<code>$USER</code> stands for your user name):</p>
 <ul>
-<li>Are granted a storage of 500 GB. After the duration of your grant, or when your UvAnetID expires, your data will be removed from the HPC. If you need more storage space, contact the Crunchomics team.</li>
-<li>In your home directory, <code>/home/$USER</code> , you have 25 G quotum</li>
-<li>In your personal directory, <code>/zfs/omics/personal/$USER</code> , you can store up to 500 GB data</li>
-<li>For larger, collaborative projects you can contact the Crunchomics team and ask for a shared folder to which several team members can have access</li>
-<li>You are in charge of backing up your own data and Crunchomics is NOT an archiving system. To learn about data archiving options at UvA visit the <a href="https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html">website of the computational support team</a></li>
-<li>A manual with more information and documentation about the cluster can be found <a href="https://crunchomics-documentation.readthedocs.io/en/latest">here</a></li>
+<li>Your <strong>home directory</strong>, <code>/home/$USER</code>, with 25 GB of space</li>
+<li>Your <strong>personal directory</strong>, <code>/zfs/omics/personal/$USER</code>, with 500 GB of space. On day 2, we make a shortcut to it, <code>~/personal</code>, and keep our project folder there</li>
 </ul>
-<p>Crunchomics gives you access to:</p>
+<p>Good to know:</p>
 <ul>
-<li>5 compute nodes</li>
-<li>Each compute node has 512 GB of memory and 64 CPUs</li>
-<li>If you need more resources (or access to GPUs), visit the <a href="https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html">website of the computational support team</a> for more information</li>
-<li>Access to two directories:
-<ul>
-<li>The home directory with 25 GB of storage</li>
-<li>your personal directory, with 500 GB of storage</li>
-</ul></li>
+<li>Your data is removed from Crunchomics when your UvAnetID expires</li>
+<li>If you need more space, or a shared folder for a larger project with several team members, contact the Crunchomics team</li>
+<li><strong>Snapshots:</strong> every day at midnight (00:00), Crunchomics makes a <strong>snapshot</strong>, a saved copy of your files, and keeps it for 2 weeks. So if you delete a file by mistake, it can be restored for up to 2 weeks. But this also means that files you delete still count towards your storage limit for 2 weeks</li>
+<li>Your data is stored on several disks, which protects it if one disk breaks. But it is not copied anywhere else. <strong>Crunchomics is not a backup or an archive.</strong> You are responsible for backing up your own data. The <a href="https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html">website of the IBED computational support team</a> explains the archiving options at the UvA</li>
 </ul>
-<p>Some information about storage:</p>
+</section>
+<section id="compute-resources" class="level2">
+<h2 class="anchored" data-anchor-id="compute-resources">Compute resources</h2>
 <ul>
-<li>Snapshots are made daily at 00.00.00 and kept for 2 weeks. This means that if you accidentally remove a file it can be restored up to 2 weeks after removal. This also means that even if you remove files to make space, these files will still count towards your quota for two weeks</li>
-<li>Data on Crunchomics is stored on multiple disks. Therefore, there is protection against disk failure. However, the data is not replicated and you are responsible for backing up and/or archiving your data.</li>
+<li>Crunchomics has 5 compute nodes, each with 64 CPUs and 512 GB of memory</li>
+<li>If you need more resources, or GPUs, see the <a href="https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html">website of the IBED computational support team</a></li>
+<li>You find more information in the <a href="https://crunchomics-documentation.readthedocs.io/en/latest">Crunchomics documentation</a></li>
 </ul>
-<p>On the next page you find a tutorial to move the sequencing data that we worked on during the introduction into bash onto the server and run software to assess the quality of our sequencing data. We will learn to use some pre-installed software and also install software ourselves with conda and we will learn different ways to submit jobs to the compute nodes using SLURM.</p>
+<p>On the next page, we copy the sequencing data from day 1 to Crunchomics and get read statistics with seqkit. Then we clean the reads with fastp, which we install ourselves with conda. On the way, we learn different ways to send jobs to the compute nodes with SLURM.</p>
 
 
 </section>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -866,8 +861,8 @@ Important
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2024-02-22</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_intro.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+Last modified: 2026-10-08</p>
+<div class="toc-actions"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_intro.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

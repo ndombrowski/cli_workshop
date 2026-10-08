@@ -37,7 +37,7 @@ In this tutorial, we work inside the home directory. That way, the commands are 
 
 ## `ls`: List the contents of a directory
 
-Now that you know where you are, let's find out what is inside that location, i.e. what files and folders can be found there. The command `ls` (short for *list*) shows the files and folders in your current directory. Type the following and press enter:
+Now that you know where you are, let's find out what is inside it: which files and folders are there. The command `ls` (short for *list*) shows the files and folders in your current directory. Type the following and press enter:
 
 ```{bash}
 ls
@@ -63,12 +63,12 @@ If your directory contains many items, the output can quickly become overwhelmin
 A command generally has three parts:
 
 -   A **command name**: the program you want to run, e.g. `ls`
--   An **option** (or **flag**): a way to change how the command behaves, e.g. `-l` (long format). Options usually start with a `-`
+-   An **option** (or **flag**): a way to change how the command behaves, e.g. `-l` changes the output from ls from long to list format. Options usually start with a `-`
 -   An **argument**: the input the command works on, e.g. a file or folder. Some commands work without an argument
 
 <p align="left">
 
-<img src="../img/unix_command.png" width="400"/>
+<img src="../img/unix_command.png" width="450"/>
 
 </p>
 
@@ -197,7 +197,7 @@ RStudio shows two buttons at the top left of a Markdown file: **Source** and **V
 The file ends in `.md` because we write it in **Markdown**: plain text with a few symbols that give it structure. For your notebook, you only need three of them:
 
 -   A line that starts with `#` and a space is a **heading**. More `#` symbols make a smaller heading (`##`, `###`).
--   Code goes into a **code block**: a line with three backticks and the word `bash` above the code, and a line with three backticks below it. The backtick (`` ` ``) is usually at the top left of your keyboard, next to the 1 (on some keyboards you need to press it twice or press the space bar after it).
+-   Code goes into a **code block**: a line with three backticks and the word `bash` above the code, and a line with three backticks below it. You can replace `bash` with other language names, like `python` or `r`, based on whatever coding language you use for a task. 
 -   Everything else is normal text, for example what you saw or why you did something.
 
 Notice that a `#` means something different in the two places: in normal Markdown text, it starts a heading. Inside a code block, it is a bash comment.
@@ -228,7 +228,7 @@ From now on, you find a blue notebook box at the end of each part of the tutoria
 
 ## `cd`: Move around folders
 
-Now that we have our own project folder, let's learn how to move around the file system with `cd` (short for *change directory*).
+Now that we have our own project folder and know how to document what we are doing, let's learn how to move around the file system with `cd` (short for *change directory*).
 
 The file system is structured like a tree that starts from a single **root** directory, written as a forward slash (`/`). All other folders branch out from this root directory. For example, we can go from the root directory to the users folder, and from there into the john folder: `/users/john`.
 
@@ -261,7 +261,7 @@ You now should see something like `/Users/YourUserName/data_analysis`. You can u
 # Move into the data folder
 cd data
 
-# Move one level up (..), i.e. go back to the data_analysis folder
+# Move one level up (..), back to the data_analysis folder
 cd ..
 
 # Quickly go back home (you now should be in the home directory)
@@ -270,7 +270,7 @@ cd ~
 # Move multiple levels down at once
 cd data_analysis/data
 
-# Move two levels up, i.e. back into the home directory
+# Move two levels up, back into the home directory
 cd ../..
 
 # And go back to the data_analysis folder
@@ -349,7 +349,7 @@ Let's make a mistake on purpose. From inside your `data_analysis` folder, list a
 ls -l dta
 ```
 
-On my computer (WSL with Ubuntu), this prints:
+This prints something like this:
 
 ```
 ls: cannot access 'dta': No such file or directory
@@ -375,7 +375,7 @@ When you ask someone for help, always copy the complete error message. It tells 
 
 ### `Ctrl+C`: Stopping a command
 
-Sometimes a command does not finish, or you start something by mistake. The prompt does not come back, and you can't type a new command. Press `Ctrl+C` (the Control key and C at the same time) to stop the command and get your prompt back. On a Mac, this is also `Ctrl+C`, not `Cmd+C`.
+Sometimes a command does not finish, or you start something by mistake. The prompt does not come back, and you can't type a new command. Press `Ctrl+C` to stop the command and get your prompt back.
 
 Let's try it. If you give `cat` no file name, it waits for you to type text (we use `cat` for other things later):
 
@@ -387,14 +387,6 @@ cat
 Nothing happens and there is no new prompt. Now press `Ctrl+C`. The prompt comes back.
 
 Keep in mind that `Ctrl+C` stops a command, but it does not undo what the command already did.
-
-::: {.callout-tip title="Tip: Copying and pasting in the terminal" collapse="false"}
-Because `Ctrl+C` stops commands, it usually does not copy text in a terminal. You will copy a lot, for example from the terminal into your notebook. This is how it works:
-
--   **MobaXterm:** select text with the mouse to copy it. Right-click to paste it.
--   **WSL2 (Ubuntu app):** `Ctrl+Shift+C` to copy, `Ctrl+Shift+V` to paste.
--   **Mac:** `Cmd+C` to copy, `Cmd+V` to paste, as in other programs.
-:::
 
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Finding your way"}
 Open `notes.md` and add:
@@ -591,7 +583,7 @@ Also, NEVER run `rm -r` or `rm -rf` on the root folder `/` or any other importan
 
 ## Wildcards
 
-After we have explored the folder with our sequencing data with `ls`, we have seen that `data/seq_project` contains 4 folders, 2 folders for two different users who each generated two samples.
+After we have explored the folder with our sequencing data with `ls`, we have seen that `data/seq_project` contains four folders: two folders for two different users who each generated two samples.
 
 You also might have noticed that it gets tedious to figure out how many files are in each folder, because we would need to run `ls` on each single folder and view its contents one by one. Typing every file name by hand also gets tedious, and you risk typos.
 
@@ -617,7 +609,7 @@ Now we can easily see for each folder how many files we have.
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Use a wildcard to list files for barcode001 only
-2.  Use a wildcard to only list R1 (i.e. forward) files
+2.  Use a wildcard to only list R1 (forward read) files
 3.  Use a wildcard to copy all R1 files into a new folder, call this new folder `R1_files`. Use `ls` to confirm if you copied the right files
 4.  To avoid duplicates, remove the R1_files folder from question 3 after you have ensured the command you used worked
 
@@ -648,29 +640,24 @@ After solving question 3, we should see that all files still exist in their orig
 :::
 
 ::: {.callout-tip title="Tip: More wildcards" collapse="true"}
-`*` is not the only wildcard we can use and a full list can be found [here](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm).
+`*` is not the only wildcard. Square brackets match exactly **one** character, chosen from a set or a range:
 
-Different wildcards can be useful in different contexts, not only only when listing files but also finding patterns in files. To make such searches as specific as possible there are different wildcards available. A few examples are:
-
-The \[0-9\] wildcard = matches any number exactly once and allows us to extract a range of files.
+-   `[0-9]`: any single digit
+-   `[12]`: a `1` or a `2`
+-   `[A-Z]`: any single capital letter (`[a-z]` for a small letter)
 
 ```{bash}
+# Folders whose name continues with any digit after barcode00
 ls data/seq_project/barcode00[0-9]*/*.gz
-```
 
-The \[012\] wildcard = matches 1 or 2 exactly once and allows us to extract a range of files.
-
-```{bash}
+# Only the folders of barcode001 and barcode002
 ls data/seq_project/barcode00[12]*/*.gz
-```
 
-\[A-Z\] matches any letter in capitals occurring once
-
-\[a-z\]\* matches any letter in non-capital letters occurring many times
-
-```{bash}
+# Any capital letter in front of 001 at the end of the folder name
 ls data/seq_project/barcode001_User1_ITS_1_[A-Z]001/*.gz
 ```
+
+You find a full list of wildcards [here](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm).
 :::
 
 ::: {.callout-tip title="Tip: Finding files with find" collapse="true"}
@@ -703,7 +690,6 @@ Add a new heading `## Getting the data` to `notes.md`, and below it:
 1.  A code block with the commands that got the data into place: download, move, extract, remove the tar file. Leave out the detours, such as the copy we made with `cp` and the `R1_files` folder from the exercise. Someone who runs your code block should end up with the same `data` folder as you
 2.  In the comment above the download command: where the link came from and on which date you downloaded the data
 3.  A check that shows what you got, and in normal text below the code block, what it showed: how many folders and how many `.fastq.gz` files
-4.  Optional: a warning to yourself about the commands that can destroy data without asking (`mv`, `rm`)
 
 ::: {.callout-notebook-answer .callout-note collapse="true" title="Compare with my notes"}
 ```` markdown
@@ -728,9 +714,6 @@ ls data/seq_project/*/*.gz
 
 The data has 4 folders, one per sample (2 users with 2 samples each).
 Each folder has 2 files, R1 and R2, so 8 `.fastq.gz` files in total.
-
-Careful: `mv` overwrites files with the same name without asking,
-and files removed with `rm` are gone for good.
 ````
 :::
 :::
@@ -739,7 +722,7 @@ and files removed with `rm` are gone for good.
 
 What a command prints is called its **standard output**. We have seen that by default, commands print their standard output directly to the terminal. For example, when we use `ls`, the list of files and folders is printed to your terminal. However, we can also **redirect** the standard output into a file by using the `>` character.
 
-For example, we might want to generate a list with all fastq files and can do this as follows:
+For example, let's write a list of all fastq files into a file:
 
 ```{bash}
 # Write the list of fastq files into a new file instead of to the screen
@@ -762,19 +745,20 @@ If you want to add (append) to the end of an existing file instead of replacing 
 
 ## Exploring the content of text files
 
-Next, let's view the content of the list we just generated. Viewing the actual files we work with is often important to ensure the integrity of our data.
+Next, let's look inside the list we just made. Looking at the actual content of your files is one of the best ways to catch mistakes early.
 
-### `head`: View the first rows of a file
+### `head`: View the first lines of a file
 
-`head` can be used to check the first 10 rows of our files:
+`head` prints the first 10 lines of a file:
 
 ```{bash}
+# Show the first 10 lines
 head fastq_paths.txt
 ```
 
-### `tail`: View the last rows of a file
+### `tail`: View the last lines of a file
 
-If you want to check the last 10 rows use `tail`:
+`tail` prints the last 10 lines:
 
 ```{bash}
 # Show the last 10 lines
@@ -787,43 +771,45 @@ tail -n 3 fastq_paths.txt
 
 ### `less`: View the full file
 
-`less` is a program that lets you view a file's contents one screen at a time. This is useful when dealing with a large text file (such as a sequence data file), because it doesn't load the entire file but accesses it page by page, resulting in fast loading speeds.
+`less` shows a file one screen at a time. It does not load the whole file at once, so it also opens very large files, such as sequence files, quickly.
 
 ```{bash}
 less -S fastq_paths.txt
 ```
 
--   You can use the ↑ / ↓ arrow keys and the Page Up / Page Down keys to move through the text file
--   To exit less, type `q`
+Here:
+
+-   `-S` keeps each long line on one line on the screen, instead of continuing it on the next line. Use the → / ← arrow keys to see the rest of a long line
+-   Move up and down with the ↑ / ↓ arrow keys, or with Page Up / Page Down
+-   Press `q` to quit
 
 ::: {.callout-tip title="Tip: Editing text files with `nano`" collapse="true"}
-You can also edit the content of a text file and there are different programs available to do this on the command line, the most commonly used tool is `nano`. It comes with WSL2, Mac and most Linux systems. You can open any file as follows:
+You can also change the content of a text file from the command line. The most common tool for this is the text editor `nano`. It comes with WSL2, Mac and most Linux systems:
 
 ```{bash}
 nano fastq_paths.txt
 ```
 
-Once the document is open you can edit it however you want and then
+Make your changes, and then:
 
--   Close the document with `control + X`
--   Type `y` to save changes and press enter
+-   Press `Ctrl+X` to close the file
+-   Press `Y` to save the changes, and Enter to keep the file name
 
 **MobaXterm users:** `nano` is not installed in MobaXterm by default, and you see `nano: command not found`. You can install it with `apt install nano`. Like for `wget` above, it is only kept after a restart if you chose a permanent folder in MobaXterm.
 :::
 
 ## `wc`: Count things
 
-Another useful tool is the `wc` (= wordcount) command that allows us to count the number of lines via `-l` in a file. It is an useful tool for sanity checking and here allows us to count how many files we work with:
+`wc` (short for *word count*) counts the lines, words and characters in a file. With the option `-l`, it counts only the lines. This is very useful for sanity checks. For example, `fastq_paths.txt` has one line per fastq file, so counting its lines tells us how many files we work with:
 
 ```{bash}
+# Count the lines in the file list: one line per fastq file
 wc -l fastq_paths.txt
 ```
 
-After running this we see that we work with a total of 8 files.
+We see that we work with 8 files. Here we could easily count them ourselves, but with hundreds of files, `wc -l` is much faster and more reliable.
 
-We could of course easily count this ourselves, however, if we work with hundreds of files its a quick and easy way to get an overview about how much data we work with.
-
-One down-side of this approach is that to be able to count the number of files, we first need to generate a file in which we count the number of files. This (i) can create files we do not actually need and (ii) we use two commands while ideally we want to get the information with a single command. Pipes, are a way around this problem.
+There is one downside: to count the files, we first had to make a file with the list. If we do this for every question we have, we end up with many files that we don't need. Pipes solve this problem.
 
 ## Pipes
 
@@ -839,12 +825,12 @@ Here:
 
 -   `ls data/seq_project/*/*` lists all files in the folders inside `seq_project`
 -   The pipe (`|`) sends this list directly to the next command, instead of printing it to the screen
--   `wc -l` counts the lines in this list, i.e. the number of files
+-   `wc -l` counts the lines in this list, which is the number of files
 
-We should see again that we work with 8 files, but now we did not have to generate an intermediate text file and have a more condensed command.
+Again we see 8 files, but this time without making an extra file first.
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  Use ls and wc to count how many R1 files we have
+1.  Use `ls` and `wc` to count how many R1 files we have
 2.  Count how many R2 files we have
 3.  Count how many files were generated for User1
 
@@ -860,57 +846,70 @@ ls data/seq_project/*/*R2*gz | wc -l
 ls data/seq_project/*_User1_*/*gz | wc -l 
 ```
 
-Checking whether we have the same number of R1 and R2 files is a good sanity check, to ensure that we have received all the files from the sequencing center whenever we generate paired-end sequencing data.
+Our data is **paired-end** sequencing data: each DNA fragment was read from both ends, which gives one R1 file and one R2 file per sample. Having as many R1 as R2 files is a good sanity check: it tells us that we received both files for every sample.
 :::
 :::
 
-## `cut`: Extract elements from strings
+## `cut`: Extract parts of each line
 
-Remember, how we stored a list of sequencing files and the path leading to these files (relative to our home directory in a text file called `fastq_paths.txt`)?
+Each line in `fastq_paths.txt` is the path to one fastq file, starting from the `data_analysis` folder. For example you might see this line: `data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz`. What if we only want the file names, without the folders in front of them?
 
-Imagine that we only wanted to have a list of files but not the path, how would we do that?
+For this, we can use `cut`, which splits each line into parts and prints only the parts we ask for. We tell `cut` where to split with a **delimiter**: a character that separates the parts. In a path, the `/` is a natural delimiter. Each part between two delimiters is called a **field**. If we split our example path at each `/`, we get four fields:
 
-There are different ways to do this, the simplest one is to use `cd` and go into the folder with our sequence files and generate a list in there.
+1.  `data`
+2.  `seq_project`
+3.  `barcode001_User1_ITS_1_L001`
+4.  `Sample-DUMMY1_R1.fastq.gz`
 
-However, another way in which we do not have move around (and learn some other concepts) is to use the `cut` command. `cut` allows us to separate lines of text into different elements using any kind of delimiter, for example the `/` that we use in the file path. To ensure that `/` is seen a separator we use the `-d` option and with `-f4` we tell cut to print the fourth element of each separated field.
+The file name we want is the 4th field and we can then combine this and use cut to extract that information as follows:
 
 ```{bash}
+# Look at the file list first
 head fastq_paths.txt
 
-#extract the file name (i.e. the fourth field when using a / separator)
+# Print only the file name: the 4th field when we split at each /
 cut -f4 -d "/" fastq_paths.txt
 
-#do the same as above but this time save the output in a new file
+# Do the same, but save the output in a new file
 cut -f4 -d "/" fastq_paths.txt > fastq_files.txt
+
+# Check the new file: we expect 8 file names
+head fastq_files.txt
+wc -l fastq_files.txt
 ```
+
+Here:
+
+-   `-d "/"`: use `/` as the delimiter
+-   `-f4`: print the 4th field
 
 ![](/img/cut_1.pnd.png){width="461"}
 
-We can also combine this with pipes in order to extract different pieces of information. Let's assume we start with extracting a folder name, such as `barcode002_User1_ITS_9_L001`, and from that we want to extract some other information, such as the barcode IDs. We can easily do this as follows:
+We can also chain several `cut` commands with a pipe. For example, each folder name, such as `barcode002_User1_ITS_9_L001`, starts with a barcode. To get the barcodes, we first extract the folder name (the 3rd field when we split at `/`), and then get the first part of the folder name (the 1st field when we split at `_`):
 
 ```{bash}
+# Take the folder name (3rd field at /), then the barcode (1st field at _)
 cut -f3 -d "/" fastq_paths.txt | cut -f1 -d "_"
 ```
 
 ![](/img/cut_2.png){width="388"}
 
-Nice, we now only have a list with barcodes. However, its not yet ideal since we have duplicated barcodes. If you want to extract this information for some metadata file this is not ideal and we need to get to know two more commands to make this work:
+This gives us a list of barcodes. But note how each barcode appears twice: once for the R1 file and once for the R2 file. If we want to make a table with information about each sample, we need each barcode only once. For that, we need to learn about two more commands.
 
 ## `sort` and `uniq`: Create unique lists
 
--   `sort`: sorts lines in a file from A-Z
--   `uniq`: removes or finds duplicates . For this command to work you need to provide it with a sorted file, which is why sort and uniq almost always are used together
-
-Let's first ensure that our barcode list is sorted to then extract only the unique information:
+-   `sort` sorts lines from A to Z
+-   `uniq` removes duplicate lines, but only when they are directly below each other. That is why we almost always use `sort` before `uniq`: sorting puts identical lines next to each other
 
 ```{bash}
+# Extract the barcodes, sorted, with each barcode appearing only once
 cut -f3 -d "/" fastq_paths.txt | cut -f1 -d "_" | sort | uniq
 ```
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  Use cut on fastq_paths.txt to print the folder names in which the fastq.gz files reside (i.e. barcode001_User1_ITS_1_L001)
-2.  Print the folder names as in 1 and then extract the user names from this list
-3.  Ensure that when running the code from 2 that we print a unique list of user names
+1.  Use `cut` on `fastq_paths.txt` to print the names of the folders that contain the fastq.gz files (for example `barcode001_User1_ITS_1_L001`)
+2.  Print the folder names as in question 1, and then extract the user names from them
+3.  Change the command from question 2, so that each user name is printed only once
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
@@ -928,23 +927,24 @@ cut -f3 -d "/" fastq_paths.txt | cut -f2 -d "_" | sort | uniq
 
 ## `cat`: Read and combine files
 
-`cat` can do different things:
+`cat` is short for *concatenate*, which means "link together". We use it for two things:
 
-1.  Create new files
-2.  Display the content of a file
-3.  Concatenate, i.e. combine, several files. For concatenation we can provide `cat` with multiple file listed after each other or use a wildcard.
+-   Print the content of a file to the screen
+-   Combine several files into one. You give `cat` the files one after the other, or use a wildcard
 
-To view files we do:
+To print a file:
 
 ```{bash}
+# Print the whole file to the screen
 cat fastq_paths.txt
 ```
 
-To combine files we do:
+Unlike `less`, `cat` prints the whole file at once. So only use it for short files.
+
+To combine files:
 
 ```{bash}
 # Make a folder for the combined files inside results
-# -p: no error if the folder already exists, and also makes results/ if it is missing
 mkdir -p results/combined
 
 # Combine two files into one
@@ -957,10 +957,10 @@ cat results/combined/combined_files.txt
 Notice how we keep the output in its own subfolder of `results`? Giving each analysis its own folder inside `results` keeps the project folder clean, and later you can see right away which files belong together.
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-Fastq.gz files can easily be combined using `cat` and while this is not strictly necessary in our case, you might need to do this with your sequence files in the future. For example if you sequenced a lot of data and for space reasons the sequencing center send you multiple files for a single sample.
+You can also combine fastq.gz files with `cat`. We don't need this for our data, but you might need it for your own. For example, a sequencing center sometimes sends several files for one sample, because the data is too large for a single file.
 
-1.  Using wildcards and cat, combine all R1 fastq.gz files into a single file called `combined_R1.fastq.gz`. Store it in the `results/combined` folder
-2.  Use ls to judge the file size of the individual R1 files and the combined file to assess whether everything worked correctly
+1.  Use a wildcard and `cat` to combine all R1 fastq.gz files into one file called `combined_R1.fastq.gz`, in the `results/combined` folder
+2.  Use `ls` to compare the size of the individual R1 files with the size of the combined file. Did it work?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
@@ -972,22 +972,22 @@ ls -lh data/seq_project/*/*R1.fastq.gz
 ls -lh results/combined/combined_R1.fastq.gz
 ```
 
-If you compare the two numbers generated for question 2, you should see that the combined_R1.fastq.gz file is roughly the sum of the individual files.
+The combined file should be about as large as all the individual R1 files together.
 :::
 :::
 
 ## Exploring the content of compressed fastq files
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  View the first few rows of any one of the fastq.gz sequence files
-2.  Does this look like a normal sequence file to you?
+1.  Use `head` to view the first lines of one of the fastq.gz files
+2.  Does this look like sequence data to you?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
 head data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
 ```
 
-After running this command you will see a lot of random letters and numbers but nothing that looks like a sequence, so what is going on?
+You see a lot of strange characters, but nothing that looks like a DNA sequence. What is going on?
 :::
 :::
 
@@ -997,7 +997,7 @@ You might have noticed that our sequence files end with `.gz`. This extension is
 
 To view the content of a compressed file, we can decompress it first. We do this with the `gzip` command together with the `-d` (decompress) option. Without `-d`, `gzip` compresses a file.
 
-`gzip -d` replaces the compressed file with the decompressed one. We never want to change our raw data in `data/`: if something goes wrong, there is no way to get the original back. So we practise on a copy:
+`gzip -d` replaces the compressed file with the decompressed one. We never want to change our raw data in `data/`: if something goes wrong, there is no way to get the original back. So we instead make us of a copy:
 
 ```{bash}
 # Make a folder for this test, so that the raw data in data/ stays as it is
@@ -1016,7 +1016,7 @@ ls -l results/gzip_test
 head results/gzip_test/Sample-DUMMY1_R1.fastq
 ```
 
-After running this, we finally see a sequence and some other information. Notice that for fastq files we always should see 4 rows of information for each sequence as shown below:
+Now we finally see DNA sequences, plus some other information. Each sequence that the sequencer read from a DNA fragment is called a **read**. In a fastq file, every read always takes 4 lines:
 
 <p align="left">
 
@@ -1065,16 +1065,15 @@ ls results
 
 ### `zcat`: Decompress and print to screen
 
-We have seen that to view the content of a compressed file, we first had to decompress it. This is fine for small files, but sequence files tend to get large, and we might not want to decompress them so that they don't clutter our system.
-
-Luckily, there is a useful tool in bash called `zcat`. It decompresses a file and prints the content to the screen, but leaves the compressed file as it is. We combine the `zcat` command with the `head` command, since we do not want to print millions of sequences to the screen but only want to explore the first few rows:
+Decompressing a file to look at it works, but it takes extra space and changes the file. `zcat` is a better way: it decompresses the file and prints the content to the screen, but leaves the compressed file as it is. We combine it with `head`, because we only want to see the first lines, not millions of reads:
 
 ```{bash}
+# Print the first 10 lines of a compressed file, without changing the file
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
 ```
 
 ::: {.callout-important title="`zcat` for Mac users" collapse="false"}
-For Mac users using the zsh shell, `zcat` might not work as expected. Try using `gzcat` instead:
+On a Mac, `zcat` might not work as expected. Try `gzcat` instead:
 
 ```{bash}
 gzcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
@@ -1083,33 +1082,35 @@ gzcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | h
 
 ## `grep`: Find patterns in data
 
-The `grep` command is used to search for words, or patterns, in any text file. This command is simple but very useful for sanity checks after file transformations.
+`grep` searches a file for lines that contain a word or a **pattern** (a piece of text you search for), and prints these lines. It is simple, but very useful for sanity checks.
 
-The basic syntax is `grep "pattern" file`. Here, "pattern" is the text you want to search for, and file is the file you want to search in. The double quotes allow us to include special characters (like `>` or spaces) safely.
+The basic form is `grep "pattern" file`. We put quotes around the pattern, so that special characters, such as `>` or spaces, are passed on to `grep` safely.
 
-Let's first search for something in the text file we generated. For example, we might want to only print information for the R1 files:
+For example, to print only the lines for the R1 files:
 
 ```{bash}
 # Print all lines in fastq_paths.txt that contain R1
 grep "R1" fastq_paths.txt
 ```
 
-We see the list of files that match our pattern. If we simply are interested in the number of files that match our pattern, we could add the option `-c` to count how often the pattern we search for occurs.
+If you only want to know how many lines match, add the option `-c` (*count*):
 
 ```{bash}
+# Count the lines in fastq_paths.txt that contain R1
 grep -c "R1" fastq_paths.txt
 ```
 
-If we want to look only at samples from User1, we can search for that part of the file name:
+To look only at the samples from User1, we search for that part of the path:
 
 ```{bash}
+# Print all lines in fastq_paths.txt that contain User1
 grep "User1" fastq_paths.txt
 ```
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  Grep for paths containing the pattern "ITS_9" in fastq_paths.txt
-2.  Grep for the pattern "AAGACG" in any of the fastq.gz files (advanced)
-3.  Count how often "AAGACG" occurs in any in any of the fastq.gz files (advanced)
+1.  Use `grep` to print the paths in `fastq_paths.txt` that contain the pattern "ITS_9"
+2.  Search for the pattern "AAGACG" in one of the fastq.gz files (advanced)
+3.  Count how many lines in that file contain "AAGACG" (advanced)
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
@@ -1124,33 +1125,33 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | gr
 
 ```
 
-The last two commands can be very useful to check if sequencing adapters or primers are still part of your sequence.
+For questions 2 and 3, `grep` can't read the compressed file directly, so we send the output of `zcat` to it with a pipe. Commands like these are useful to check whether **adapters** or **primers** are still part of your reads. These are short, known DNA sequences that are added to or used on the DNA before sequencing.
 :::
 :::
 
 ## `wc`: Count things II
 
-We have seen before that `wc` is a command that allows us to count the number of lines in a file and we can easily use it on fastq files to get an idea about how many sequences we work with:
+`wc -l` also works on the output of `zcat`. Since every read takes 4 lines, this tells us how many reads a fastq file has:
 
 ```{bash}
+# Count the lines in one compressed fastq file
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc -l
 ```
 
-After running this we see that we work with 179,384 / 4 sequences. We need to divide the number we see on the screen by 4 since each sequence is represented by 4 lines of information in our fastq file.
+For `Sample-DUMMY1_R2.fastq.gz`, this gives 179,384 lines. Every read takes 4 lines, so the file has 179,384 / 4 = 44,846 reads.
 
 ::: {.callout-tip title="Advanced tip: Better counting" collapse="true"}
-We have seen that we need to divide the output of `wc` by four to get the total number of sequences. We can do this with a calculator but actually, some intermediate bash can also be used to do this for us:
+Dividing by 4 with a calculator works, but bash can also do it for us:
 
 ```{bash}
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | echo $(( $(wc -l) /4))
 ```
 
-In the command above we have some new syntax:
+Here:
 
--   The `echo` command is used to display messages or print information to the terminal. In our case it will print whatever is going on in this section `$(( $(wc -l) /4))`
--   `$(...)` indicates a command substitution. It allows the output of the enclosed command (wc -l) to be used as part of another command. Without command substitution (wc -l alone), you would not capture the output; instead, you would only see the literal text "wc -l".
--   `$((...))`: This is an arithmetic expansion in Bash. It allows you to perform arithmetic operations inside the brackets and substitute the result into the command line. In this case, it calculates the result of dividing the number of lines in the fastq file by 4.
--   `/4`: This is dividing the result obtained from wc -l by 4. Since each sequence in a FASTQ file is represented by four lines (identifier, sequence, separator, and quality scores), dividing the total number of lines by 4 gives the number of sequences.
+-   `$( )` is called **command substitution**. Bash runs the command inside the brackets, here `wc -l`, and puts its output in its place. `wc -l` counts the lines that `zcat` sends through the pipe
+-   `$(( ))` is called **arithmetic expansion**. Bash calculates what is inside the double brackets, here the number of lines divided by 4, and puts the result in its place
+-   `echo` prints the result
 :::
 
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Looking at the data"}
@@ -1158,7 +1159,7 @@ Add a new heading `## Looking at the data` to `notes.md`, and below it:
 
 1.  A code block with the commands that made the two file lists, `fastq_paths.txt` and `fastq_files.txt`
 2.  In the same code block, the checks that told you something about the data: how many files there are, whether there are as many R1 as R2 files, what the first lines of a fastq file look like, and how many lines one file has
-3.  In normal text below the code block: what you learned about the data. How many lines does one read take? Why did `head` on a `.gz` file show strange characters?
+3.  In normal text below the code block: what you learned about the data. How many lines does one read take?
 4.  Leave out the `gzip` test on a copy, because we removed the test folder again. A short note on why we use `zcat` is enough
 
 Then a check that we come back to: run `ls` and `ls results` inside `data_analysis`. Can your notebook explain where every file and folder came from? If not, add a line about it, even if it is "practice file, not needed".
@@ -1189,8 +1190,6 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc
 ```
 
 There are 8 files, 4 R1 and 4 R2, so every sample has both.
-The files are compressed with gzip, so `head` on a `.gz` file shows unreadable characters.
-I use `zcat` to look inside: decompressing with `gzip -d` makes the files about 5 times larger.
 In a fastq file, each read takes 4 lines: identifier, sequence, separator (`+`) and quality scores.
 Sample-DUMMY1_R2 has 179,384 lines, so 179,384 / 4 = 44,846 reads.
 
@@ -1201,7 +1200,7 @@ Sample-DUMMY1_R2 has 179,384 lines, so 179,384 / 4 = 44,846 reads.
 
 ## `echo` and variables: Storing information
 
-Before we learn how we can use the command line to automate repetitive tasks, we need two small building blocks.
+Next, we learn how we can use the command line to automate repetitive tasks. But first, we need to learn about two small building blocks.
 
 The first one is `echo`. It prints the text you give it to the screen:
 
@@ -1284,7 +1283,7 @@ echo $fastq_file
 # ... and so on, for the other 6 files
 ```
 
-Starting a loop with `echo` is a good habit. This is called a **dry run**: the loop shows what it would work on, without changing anything. Before you add the real command, check the list. Do you see all 8 files, and only the files you expect?
+Starting a loop with `echo` is a good habit. This is called a **dry run**: the loop shows what it would work on, without changing anything. Before you add the real command, check the list. Do you see all 8 files, and only the files you expect? If yes, then you can continue with the next step and build up the loop for more complex tasks.
 
 ::: {.callout-tip title="Tip: Typing a loop in the terminal" collapse="false"}
 When you press Enter after writing the first line of the loop, nothing runs yet. Instead, the prompt changes to `>`. This means bash waits for the rest of the loop. It only starts once you type `done` and press Enter. (On a Mac with zsh, this prompt may look slightly different, for example `for>`.)
@@ -1294,7 +1293,7 @@ If you get stuck in this `>` prompt, for example because of a typo, press `Ctrl+
 
 ### Step 2: Add the real command
 
-Now that we know the loop works on the right files, we replace `echo` with the command we actually want to run:
+Now that we know the loop works on the right files, we can replace `echo` with the command we actually want to run:
 
 ```{bash}
 for fastq_file in data/seq_project/*/*.fastq.gz; do
@@ -1372,7 +1371,7 @@ We will use these numbers again on day 2, to check what a quality filtering tool
 :::
 
 ::: {.callout-tip title="Advanced tip: Better counting in for loops" collapse="true"}
-Let's get a bit more advanced to show you some powerful features of bash. Above, the file name and its count end up on two separate lines. Imagine that you would do this for 100 files. In this case it would be useful to see each file name and its count on the same line. We can achieve this with the command substitution from the `Advanced tip: Better counting` in the `wc` section above.
+In our counts file, each file name and its count end up on two separate lines. With 100 files, it is much easier to read if the file name and its count are on the same line. We can do this with the command substitution from the tip "Better counting" in the section "`wc`: Count things II":
 
 ```{bash}
 for fastq_file in data/seq_project/*/*.fastq.gz; do
@@ -1380,11 +1379,12 @@ for fastq_file in data/seq_project/*/*.fastq.gz; do
 done
 ```
 
--   The echo command is used to display messages or print information to the terminal. In our case it will print whatever is going on here `"$fastq_file: $(zcat $fastq_file | wc -l)"`
--   `$(...)`: These parentheses are used for command substitution. It means that the command `zcat $fastq_file | wc -l` is executed, and its output (the line count of the uncompressed content) is substituted in that position.
--   The double quotes ("") perform what is called a string concatenation. It concatenates the filename (\$fastq_file), a colon (:), a space, and the line count obtained from the command substitution. The entire string is then passed as a single argument to the echo command.
+Here:
 
-Almost perfect, now we only want to divide this by 4:
+-   `echo "..."` prints the text between the double quotes. Inside double quotes, bash still replaces `$fastq_file` with the file name, and `$( )` with the output of the command inside it
+-   So for each file, `echo` prints the file name, a colon, a space and the number of lines
+
+To get the number of reads, we also divide by 4 with the arithmetic expansion `$(( ))`:
 
 ```{bash}
 for fastq_file in data/seq_project/*/*.fastq.gz; do
@@ -1392,15 +1392,13 @@ for fastq_file in data/seq_project/*/*.fastq.gz; do
 done
 ```
 
-Notice, how we use both single brackets and double brackets?
-
--   `$((...))` in contrast to `$(...)` is an arithmetic expansion in Bash. It allows you to perform arithmetic operations and substitute the result into the command line.
+Notice the single and the double brackets: `$( )` runs a command, `$(( ))` calculates.
 :::
 
 ::: {.callout-tip title="Advanced tip: Using bash to make sample mapping files" collapse="true"}
-For a lot of mapping files for amplicon analyses, you need to prepare a table that lists your files, often with the R1 and R2 files in separate columns. How could we do this using bash?
+Many tools for amplicon analysis need a table that lists your files, often with the R1 and the R2 file of each sample in separate columns. This is called a **sample mapping file**. Let's have a look at how we could automatically make one with bash.
 
-This code is more advanced and uses a few concepts we have not talked about but should give you an idea about the different data transformations you can do with bash.
+The code below uses a few things we have not covered. We won't go into every detail but the goal is to show you what is possible with bash.
 
 ```{bash}
 for file in data/seq_project/*/*.gz; do
@@ -1412,13 +1410,15 @@ for file in data/seq_project/*/*.gz; do
 done
 ```
 
-1.  `for file in data/seq_project/*/*.gz`: We loop through all fastq.gz files
-2.  `if [[ $file == *_R1.fastq.gz ]]; then`: This line checks if the current file's name matches the pattern \*\_R1.fastq.gz. The `[[ ... ]]` is a conditional construct in bash, and the == is used for string comparison. If the condition is true (i.e., the file is an R1 file), then the code inside the if block will be executed. The block starts with `if`and finishes at the `fi`.
-3.  `r1_file=$file`: This line involves creating a variable named r1_file and assigning it the value of the current file `($file)`. A variable is a symbolic name or identifier associated with a value or data. It allows you to store and retrieve information for later use. Here, r1_file is used to store the name of the current R1 file.
-4.  `r2_file=$(echo $file | sed 's/_R1/_R2/')`: This line sets the variable r2_file by replacing \_R1 with \_R2 in the current file name. This is done using the sed command, which is a stream editor for filtering and transforming text.
-5.  `echo "$r1_file,$r2_file"`: This line prints the R1 and R2 file names separated by a comma. This will be part of the output in the format R1,R2.
+Here:
 
-We can do even more and add a column with the sample name with what we have learned before:
+1.  `for file in data/seq_project/*/*.gz`: loop over all fastq.gz files
+2.  `if [[ $file == *_R1.fastq.gz ]]; then` ... `fi`: run the lines between `then` and `fi` only if the file name ends in `_R1.fastq.gz`. So the loop skips the R2 files
+3.  `r1_file=$file`: store the path of the R1 file in the variable `r1_file`
+4.  `r2_file=$(echo $file | sed 's/_R1/_R2/')`: the command `sed` replaces `_R1` with `_R2` in the path. This gives the path of the matching R2 file, which we store in the variable `r2_file`
+5.  `echo "$r1_file,$r2_file"`: print both paths on one line, separated by a comma
+
+We can add a column with the name of the sample folder, with `cut` from above:
 
 ```{bash}
 for file in data/seq_project/*/*.gz; do
@@ -1431,7 +1431,7 @@ for file in data/seq_project/*/*.gz; do
 done
 ```
 
-You can easily combine this with some of the things we learned, such as using `cut` to extract specific parts of the sample_name as well. I.e. lets assume you only want to list the index:
+Or, with a second `cut`, we could only add the barcode:
 
 ```{bash}
 for file in data/seq_project/*/*.gz; do
@@ -1525,7 +1525,6 @@ Add a new heading `## Counting lines per file` to `notes.md`, and below it:
 
 1.  The command that ran the script, with a comment that says what the script does and which file it makes. We use `results/counts/line_counts_bash.txt` again on day 2
 2.  The check you ran afterwards, and below the code block, what you expected and what you saw
-3.  In your own words: what happens when you run a loop with `>>` twice, and how the `echo` line with `>` before the loop prevents this
 
 You don't need to copy the loop itself into your notebook, because it is saved in `scripts/count_lines.sh`. The script is part of your documentation. Your notebook only needs to say which script you ran and what it made.
 :::
@@ -1538,7 +1537,7 @@ You now have a project folder with data, results, a script, and a notebook that 
 1.  Below the main heading at the top of `notes.md`, add 2 or 3 sentences: what data this is, where it came from, and what you did with it today
 2.  Read your notebook from the top. Could you redo today's analysis from it alone, without this tutorial? Add what is missing
 3.  Check once more that your notebook explains every file and folder in your project. Run these inside `data_analysis`: `ls`, `ls results/*` and `ls scripts`
-4.  Add a heading `## Questions for day 2` and write down anything that is still unclear
+4.  Add a heading `## Questions for day 2` and write down anything that is still unclear. This is also handy for a real analysis and lets you keep track of loose ends.
 
 On day 2, you keep writing in the same `notes.md` on your own computer, also for the commands that you run on the HPC.
 :::

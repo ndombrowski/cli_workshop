@@ -177,7 +177,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={codebgcolor}, frame hidden, boxrule=0pt, sharp corners, breakable, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, frame hidden, boxrule=0pt, colback={codebgcolor}, sharp corners, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -211,153 +211,143 @@
 
 \section{HPC introduction}\label{hpc-introduction}
 
-If you work at IBED you can get access to the Crunchomics HPC, the
-Genomics Compute Environment for SILS and IBED. If you need access to
-Crunchomics, send an email to Wim de Leeuw
-\href{mailto:w.c.deleeuw@uva.nl}{\nolinkurl{w.c.deleeuw@uva.nl}} to get
-an account set up by giving him your UvA netID.
+On day 2, we work on \textbf{Crunchomics}, the Genomics Compute
+Environment for SILS and IBED. Crunchomics is an \textbf{HPC}
+(high-performance computer): a group of powerful computers that many
+people share. If you work at IBED, you can get access to it by sending
+an email with your UvAnetID to Wim de Leeuw
+(\href{mailto:w.c.deleeuw@uva.nl}{\nolinkurl{w.c.deleeuw@uva.nl}}), as
+described on the \href{installation.qmd}{Before you start} page.
 
-Using an HPC works a bit differently than running jobs on your computer,
-below you find a simplified schematic:
+Working on an HPC is a bit different from working on your own computer.
+The figure below gives a simplified overview:
 
 \begin{center}
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{../img/crunchomics1.png}
 \end{center}
 
-Very briefly, you can log into an HPC onto a login node. The purpose of
-a \textbf{login node}, sometimes also called head node, is to prepare to
-run a program (e.g., moving and editing files as well as compiling and
-preparing a job script). You then submit a job script from the head to
-the compute nodes via Slurm. The \textbf{compute nodes} are used to
-actually run a program and \textbf{Slurm} is an open-source workload
-manager/scheduler that is used on many big HPCs. Slurm has three key
-functions:
-
 \begin{itemize}
 \tightlist
 \item
-  provide the users access to the resources on the compute nodes for a
-  certain amount of time to perform any computation
+  When you log in, you arrive on the \textbf{login node}, also called
+  the \textbf{head node}. This computer is for preparing your work, for
+  example moving and editing files and writing job scripts. It is not
+  for running analyses.
 \item
-  provide a framework to start, execute, and check the work on the set
-  of allocated compute nodes
+  The analyses run on the \textbf{compute nodes}. These computers have
+  many more CPUs and much more memory.
 \item
-  mange the queue of submitted jobs based on the availability of
-  resources
-\end{itemize}
-
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, toprule=.15mm, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, colback=white, left=2mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, breakable, toptitle=1mm, coltitle=black, arc=.35mm, bottomrule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, opacityback=0]
-
-\textbf{Crunchomics etiquette}
-
-You share the HPC with other people, therefore, take care to only ask
-for the resources you actually use. Some general rules:
-
-\begin{itemize}
-\tightlist
-\item
-  There are no hard limits on resource usage, instead we expect you to
-  keep in mind that you are sharing the system with other users. Some
-  rules of thumb:
+  In between is \textbf{SLURM}, a \textbf{workload manager} (also called
+  a \textbf{scheduler}) that is used on many large HPCs. You send your
+  analysis to SLURM as a \textbf{job}, and SLURM runs it on a compute
+  node. SLURM does three things:
 
   \begin{itemize}
   \tightlist
   \item
-    Do NOT run jobs that request many CPUs and lots of memory on the
-    head-node (omics-h0), use the compute nodes (omics-cn001 -
-    omics-cn005) for this
+    It gives users access to CPUs and memory on the compute nodes, for a
+    limited time
   \item
-    Do NOT allocate more than 20\% (CPU or memory) of the cluster for
-    more than a day. If you have large jobs, contact Wim de Leeuw
+    It starts and runs the jobs, and lets you check on them
   \item
-    Do not leave allocations unused and set reasonable time limits on
-    you jobs
+    It manages the \textbf{queue}: the list of jobs that wait until
+    enough CPUs and memory are free
   \end{itemize}
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, toprule=.15mm, left=2mm, rightrule=.15mm, leftrule=.75mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, breakable, toptitle=1mm, bottomrule=.15mm, colframe=quarto-callout-important-color-frame, colback=white, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, opacityback=0, arc=.35mm, opacitybacktitle=0.6]
+
+\textbf{Crunchomics etiquette}
+
+You share Crunchomics with many other people, so only ask for the
+resources that you actually use. There are no hard limits, but please
+follow these rules:
+
+\begin{itemize}
+\tightlist
 \item
-  For large compute jobs a job queuing system (SLURM) is available.
-  Interactive usage is possible but is discouraged for larger jobs. We
-  will learn how to use the queue during this tutorial
+  Do NOT run jobs that need many CPUs or a lot of memory on the login
+  node (\texttt{omics-h0}). Use the compute nodes (\texttt{omics-cn001}
+  to \texttt{omics-cn005}) for this
 \item
-  Close applications when not in use, i.e.~when running R interactively
+  Do NOT use more than 20\% of the CPUs or memory of the cluster for
+  more than a day. If you have large jobs, contact Wim de Leeuw
+\item
+  Don't leave resources that you reserved unused, and set reasonable
+  time limits on your jobs
+\item
+  Use the queue (SLURM) for large jobs. Working interactively is
+  possible, but not for large jobs. We learn how to use the queue on day
+  2
+\item
+  Close programs when you don't use them anymore, for example an R
+  session
 \end{itemize}
 
 \end{tcolorbox}
 
-On crunchomics you:
+\section{Storage}\label{storage}
+
+On Crunchomics, you have two folders (\texttt{\$USER} stands for your
+user name):
 
 \begin{itemize}
 \tightlist
 \item
-  Are granted a storage of 500 GB. After the duration of your grant, or
-  when your UvAnetID expires, your data will be removed from the HPC. If
-  you need more storage space, contact the Crunchomics team.
+  Your \textbf{home directory}, \texttt{/home/\$USER}, with 25 GB of
+  space
 \item
-  In your home directory, \texttt{/home/\$USER} , you have 25 G quotum
+  Your \textbf{personal directory}, \texttt{/zfs/omics/personal/\$USER},
+  with 500 GB of space. On day 2, we make a shortcut to it,
+  \texttt{\textasciitilde{}/personal}, and keep our project folder there
+\end{itemize}
+
+Good to know:
+
+\begin{itemize}
+\tightlist
 \item
-  In your personal directory, \texttt{/zfs/omics/personal/\$USER} , you
-  can store up to 500 GB data
+  Your data is removed from Crunchomics when your UvAnetID expires
 \item
-  For larger, collaborative projects you can contact the Crunchomics
-  team and ask for a shared folder to which several team members can
-  have access
+  If you need more space, or a shared folder for a larger project with
+  several team members, contact the Crunchomics team
 \item
-  You are in charge of backing up your own data and Crunchomics is NOT
-  an archiving system. To learn about data archiving options at UvA
-  visit the
+  \textbf{Snapshots:} every day at midnight (00:00), Crunchomics makes a
+  \textbf{snapshot}, a saved copy of your files, and keeps it for 2
+  weeks. So if you delete a file by mistake, it can be restored for up
+  to 2 weeks. But this also means that files you delete still count
+  towards your storage limit for 2 weeks
+\item
+  Your data is stored on several disks, which protects it if one disk
+  breaks. But it is not copied anywhere else. \textbf{Crunchomics is not
+  a backup or an archive.} You are responsible for backing up your own
+  data. The
   \href{https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html}{website
-  of the computational support team}
-\item
-  A manual with more information and documentation about the cluster can
-  be found
-  \href{https://crunchomics-documentation.readthedocs.io/en/latest}{here}
+  of the IBED computational support team} explains the archiving options
+  at the UvA
 \end{itemize}
 
-Crunchomics gives you access to:
+\section{Compute resources}\label{compute-resources}
 
 \begin{itemize}
 \tightlist
 \item
-  5 compute nodes
+  Crunchomics has 5 compute nodes, each with 64 CPUs and 512 GB of
+  memory
 \item
-  Each compute node has 512 GB of memory and 64 CPUs
-\item
-  If you need more resources (or access to GPUs), visit the
+  If you need more resources, or GPUs, see the
   \href{https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html}{website
-  of the computational support team} for more information
+  of the IBED computational support team}
 \item
-  Access to two directories:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    The home directory with 25 GB of storage
-  \item
-    your personal directory, with 500 GB of storage
-  \end{itemize}
+  You find more information in the
+  \href{https://crunchomics-documentation.readthedocs.io/en/latest}{Crunchomics
+  documentation}
 \end{itemize}
 
-Some information about storage:
-
-\begin{itemize}
-\tightlist
-\item
-  Snapshots are made daily at 00.00.00 and kept for 2 weeks. This means
-  that if you accidentally remove a file it can be restored up to 2
-  weeks after removal. This also means that even if you remove files to
-  make space, these files will still count towards your quota for two
-  weeks
-\item
-  Data on Crunchomics is stored on multiple disks. Therefore, there is
-  protection against disk failure. However, the data is not replicated
-  and you are responsible for backing up and/or archiving your data.
-\end{itemize}
-
-On the next page you find a tutorial to move the sequencing data that we
-worked on during the introduction into bash onto the server and run
-software to assess the quality of our sequencing data. We will learn to
-use some pre-installed software and also install software ourselves with
-conda and we will learn different ways to submit jobs to the compute
-nodes using SLURM.
+On the next page, we copy the sequencing data from day 1 to Crunchomics
+and get read statistics with seqkit. Then we clean the reads with fastp,
+which we install ourselves with conda. On the way, we learn different
+ways to send jobs to the compute nodes with SLURM.
 
 
 

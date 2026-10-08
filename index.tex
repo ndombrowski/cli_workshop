@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, enhanced, colback={codebgcolor}, boxrule=0pt, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, boxrule=0pt, sharp corners, enhanced, colback={codebgcolor}, frame hidden]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -195,39 +195,36 @@
 
 \section{Welcome page}\label{welcome-page}
 
-On this website you will find a short tutorial that will explain how to
-use bash and connect and work with an HPC.
+On this website, you find a short tutorial that teaches you how to use
+the command line with bash, and how to connect to and work on an HPC.
 
-On the first page you will set up a terminal. Afterwards, the actual
-tutorial will begin, in which you will assume the role of a researcher
-who received data from a sequencing center and wants to start analysing
-this data using the command line interface. While you work, you keep a
-notebook in which you document what you did and why. This tutorial is
-divided into two main parts:
+On the first page, you set up a terminal. Then the actual tutorial
+begins. In it, you take the role of a researcher who received data from
+a sequencing center, and who wants to start analysing this data on the
+command line. While you work, you keep a notebook in which you document
+what you did and why. The tutorial has two main parts:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  In the first section, you will learn how to organize, view and extract
-  information from your data using bash and the command line interface
+  In the first part, you will use bash on your own computer: you learn
+  how to organize your data, look at it and extract information from it
 \item
-  In the second section, you will learn how to work with data on an HPC.
-  Therefore, you will learn how to connect to an HPC, upload your
-  sequencing data and submit a job in order to assess the quality of
-  your sequencing data
+  In the second part, you learn how to work with your data on an HPC:
+  you learn how to connect to the HPC, copy your sequencing data to it,
+  install software and run jobs that check and clean your sequencing
+  data
 \end{enumerate}
 
-This tutorial was written for researchers at the Institute for
-Biodiversity and Ecosystem Dynamics (IBED) at the University of
-Amsterdam who can get access to Crunchomics, the Genomics Compute
-Environment for SILS and IBED. For researchers that do not have access
-to Crunchomics, or another slurm-based HPC, then you still can follow
-most sections of this tutorial on your own computer if you are
-interested in learning about bash.
+I wrote this tutorial for researchers at the Institute for Biodiversity
+and Ecosystem Dynamics (IBED) at the University of Amsterdam, who can
+get access to Crunchomics, the Genomics Compute Environment for SILS and
+IBED. If you don't have access to Crunchomics or another HPC that uses
+SLURM, you can still follow most of the tutorial on your own computer.
 
-For information not covered in this tutorial, check out
-\href{https://scienceparkstudygroup.github.io/software_information/}{IBED's
+For topics that this tutorial does not cover, have a look at
+\href{https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/}{IBED's
 bioinformatics guidance page}.
 
 

@@ -18,9 +18,9 @@ On this page you set up everything you need for this tutorial. It takes about 30
 
 Here is what you will do:
 
-1. Request access to Crunchomics, the UvA computer cluster we use in the second part of the tutorial (day 2 of the workshop).
+1. Request access to Crunchomics, the UvA computer cluster that we will use in the second part of the tutorial.
 2. Learn a few terms: terminal, shell and prompt.
-3. Install or open a terminal on your laptop (MobaXterm: also choose a permanent folder).
+3. Install or open a terminal on your laptop.
 4. Check 1: test that your terminal works.
 5. Check 2: log in to Crunchomics and log out again.
 6. Choose a text editor for your notes.
@@ -28,7 +28,7 @@ Here is what you will do:
 ::: callout-important
 ## Getting help
 
-If something on this page does not work, please email Nina Dombrowski (n.dombrowski@uva.nl). Part of my job is to support students and researchers with bioinformatics, so you can also contact me if you follow this tutorial on your own, or if you run into problems later.
+If something on this page does not work, please email Nina Dombrowski (n.dombrowski@uva.nl). Part of my job is to support IBED students and researchers with bioinformatics, so you can also contact me if you follow this tutorial on your own, or if you run into problems later.
 
 If you join the workshop, please contact me **at the latest one week before the workshop**. That way we can solve the problem before day 1.
 
@@ -37,11 +37,9 @@ In your email, tell me which operating system you use (Windows, Mac or Linux), w
 
 ## Step 1: Request access to Crunchomics
 
-In the second part of this tutorial (day 2 of the workshop), we work on **Crunchomics**, a high-performance computer (**HPC**) at the UvA. An HPC is a group of powerful computers that many people share. You use it for analyses that are too large or too slow for your laptop.
+In the second part of this tutorial, we work on **Crunchomics**, a high-performance computer (**HPC**) at the UvA. An HPC is a group of powerful computers that many people share. You use it for analyses that are too large or too slow for your laptop. You need an account to use Crunchomics. Getting one usually takes 1 to 3 days, so do this step first.
 
-You need an account to use Crunchomics. Getting one usually takes 1 to 3 days, so do this step first.
-
-To request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl):
+To request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl) with the following information:
 
 - Ask for access to the Crunchomics HPC.
 - Include your **UvAnetID** (the ID you use to log in to UvA systems).
@@ -95,7 +93,7 @@ Depending on the edition, MobaXterm keeps both in a temporary folder and **delet
 
 To prevent this, tell MobaXterm to use a normal folder on your computer. This has an extra advantage: you can find all your files from the tutorial in File Explorer.
 
-1. **Make a new folder.** Open File Explorer and go to **This PC**, then the **C: drive** (it may be called "OS (C:)" or "Local Disk (C:)"), then **Users**, then the folder with your user name. Make a new folder there and call it `MobaXterm_home`. The full path is then `C:\Users\YourUserName\MobaXterm_home`.
+1. **Make a new folder.** Open File Explorer and go to **This PC**, then the **C: drive**, then **Users**, then the folder with your user name. Make a new folder there and call it `MobaXterm_home`. The full path is then `C:\Users\YourUserName\MobaXterm_home`.
 2. **Tell MobaXterm to use it.** In MobaXterm, click on **Settings** in the top toolbar, then **Configuration**, and go to the **General** tab. Choose your new folder in two places:
     - Next to **Terminal home directory**, click on the yellow folder icon and choose `MobaXterm_home`.
     - Next to **Terminal root (/) directory**, click on the yellow folder icon and choose `MobaXterm_home` as well.
@@ -175,7 +173,7 @@ Two things that surprise most people the first time:
 - The first time you connect, you may get a question that ends with `Are you sure you want to continue connecting (yes/no/[fingerprint])?`. Type `yes` and press Enter. Your computer then remembers Crunchomics and does not ask again.
 - Then you are asked for your password. Use your UvA password. **While you type the password, nothing appears on the screen.** No dots, no stars. That is normal. Type the password and press Enter.
 
-If the login works, you see a welcome message similar to the one below, and the prompt changes. It now shows your UvAnetID and `omics-h0`, the name of the Crunchomics computer. Some lines can look a bit different for you.
+If the login works, you see a welcome message similar to the one below, and the prompt changes. It now shows your UvAnetID and `omics-h0`, the name of the Crunchomics computer. 
 
 <p align="left">
 

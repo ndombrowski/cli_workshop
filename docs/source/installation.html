@@ -421,9 +421,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Here is what you will do:</p>
 <ol type="1">
-<li>Request access to Crunchomics, the UvA computer cluster we use in the second part of the tutorial (day 2 of the workshop).</li>
+<li>Request access to Crunchomics, the UvA computer cluster that we will use in the second part of the tutorial.</li>
 <li>Learn a few terms: terminal, shell and prompt.</li>
-<li>Install or open a terminal on your laptop (MobaXterm: also choose a permanent folder).</li>
+<li>Install or open a terminal on your laptop.</li>
 <li>Check 1: test that your terminal works.</li>
 <li>Check 2: log in to Crunchomics and log out again.</li>
 <li>Choose a text editor for your notes.</li>
@@ -438,16 +438,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If something on this page does not work, please email Nina Dombrowski (n.dombrowski@uva.nl). Part of my job is to support students and researchers with bioinformatics, so you can also contact me if you follow this tutorial on your own, or if you run into problems later.</p>
+<p>If something on this page does not work, please email Nina Dombrowski (n.dombrowski@uva.nl). Part of my job is to support IBED students and researchers with bioinformatics, so you can also contact me if you follow this tutorial on your own, or if you run into problems later.</p>
 <p>If you join the workshop, please contact me <strong>at the latest one week before the workshop</strong>. That way we can solve the problem before day 1.</p>
 <p>In your email, tell me which operating system you use (Windows, Mac or Linux), which step went wrong, and copy the exact error message (or add a screenshot).</p>
 </div>
 </div>
 <section id="step-1-request-access-to-crunchomics" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-request-access-to-crunchomics">Step 1: Request access to Crunchomics</h2>
-<p>In the second part of this tutorial (day 2 of the workshop), we work on <strong>Crunchomics</strong>, a high-performance computer (<strong>HPC</strong>) at the UvA. An HPC is a group of powerful computers that many people share. You use it for analyses that are too large or too slow for your laptop.</p>
-<p>You need an account to use Crunchomics. Getting one usually takes 1 to 3 days, so do this step first.</p>
-<p>To request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl):</p>
+<p>In the second part of this tutorial, we work on <strong>Crunchomics</strong>, a high-performance computer (<strong>HPC</strong>) at the UvA. An HPC is a group of powerful computers that many people share. You use it for analyses that are too large or too slow for your laptop. You need an account to use Crunchomics. Getting one usually takes 1 to 3 days, so do this step first.</p>
+<p>To request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl) with the following information:</p>
 <ul>
 <li>Ask for access to the Crunchomics HPC.</li>
 <li>Include your <strong>UvAnetID</strong> (the ID you use to log in to UvA systems).</li>
@@ -504,7 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Depending on the edition, MobaXterm keeps both in a temporary folder and <strong>deletes them when you close MobaXterm</strong> (the portable edition does this by default). Then all your work from day 1 would be gone on day 2, and you would have to install extra programs again every time.</p>
 <p>To prevent this, tell MobaXterm to use a normal folder on your computer. This has an extra advantage: you can find all your files from the tutorial in File Explorer.</p>
 <ol type="1">
-<li><strong>Make a new folder.</strong> Open File Explorer and go to <strong>This PC</strong>, then the <strong>C: drive</strong> (it may be called “OS (C:)” or “Local Disk (C:)”), then <strong>Users</strong>, then the folder with your user name. Make a new folder there and call it <code>MobaXterm_home</code>. The full path is then <code>C:\Users\YourUserName\MobaXterm_home</code>.</li>
+<li><strong>Make a new folder.</strong> Open File Explorer and go to <strong>This PC</strong>, then the <strong>C: drive</strong>, then <strong>Users</strong>, then the folder with your user name. Make a new folder there and call it <code>MobaXterm_home</code>. The full path is then <code>C:\Users\YourUserName\MobaXterm_home</code>.</li>
 <li><strong>Tell MobaXterm to use it.</strong> In MobaXterm, click on <strong>Settings</strong> in the top toolbar, then <strong>Configuration</strong>, and go to the <strong>General</strong> tab. Choose your new folder in two places:
 <ul>
 <li>Next to <strong>Terminal home directory</strong>, click on the yellow folder icon and choose <code>MobaXterm_home</code>.</li>
@@ -575,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The first time you connect, you may get a question that ends with <code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code>. Type <code>yes</code> and press Enter. Your computer then remembers Crunchomics and does not ask again.</li>
 <li>Then you are asked for your password. Use your UvA password. <strong>While you type the password, nothing appears on the screen.</strong> No dots, no stars. That is normal. Type the password and press Enter.</li>
 </ul>
-<p>If the login works, you see a welcome message similar to the one below, and the prompt changes. It now shows your UvAnetID and <code>omics-h0</code>, the name of the Crunchomics computer. Some lines can look a bit different for you.</p>
+<p>If the login works, you see a welcome message similar to the one below, and the prompt changes. It now shows your UvAnetID and <code>omics-h0</code>, the name of the Crunchomics computer.</p>
 <p align="left">
 </p><p><img src="../img/crunchomics_login.png" width="700"></p>
 <p></p>
