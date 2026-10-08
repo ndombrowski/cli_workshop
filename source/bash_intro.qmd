@@ -169,6 +169,63 @@ Anything written after a `#` in bash is a **comment**. A comment is not executed
 In your own work, add short, meaningful comments above key steps. Avoid restating the obvious. Instead, explain *why* you do something or what it achieves. A good rule: add a comment wherever you think that future you might get confused a month later.
 :::
 
+## `touch`: Starting your notebook
+
+Now that we have a project folder, it gets a **notebook**: a file in which you write down the commands you ran, a comment on what each one does, and a few words about what you saw. Think of it as the lab book of your analysis. Writing it while you work takes a bit of time, but it also makes you stop and think about what you just did. And a month from now, it tells you exactly how you got your results.
+
+We create an empty file for the notebook with `touch`:
+
+```{bash}
+# Create an empty file called notes.md inside the data_analysis folder
+touch data_analysis/notes.md
+
+# Check that the file was created: it has a size of 0, because it is still empty
+ls -l data_analysis
+```
+
+`touch` creates an empty file if it does not exist yet. If the file already exists, `touch` leaves its content alone, so you can not lose your notes by running it twice.
+
+To open the notebook, go to the File Explorer (Windows) or Finder (Mac) window that you opened before, double-click the `data_analysis` folder and then double-click `notes.md`. If it opens in a program other than your text editor, right-click the file, choose **Open with** and pick your editor (for example RStudio).
+<!-- TO CHECK: Mac, double-click on a .md file (may open Xcode or TextEdit); MobaXterm and WSL2 "Open with" on a fresh laptop. Double-click opened RStudio on Nina's Windows laptop (2026-10-08). -->
+
+::: {.callout-tip title="Tip: RStudio users, stay in Source mode" collapse="false"}
+RStudio shows two buttons at the top left of a Markdown file: **Source** and **Visual**. Stay in **Source**. Then you see exactly what you type, including the `#` and the backticks.
+:::
+
+### Writing the notebook in Markdown
+
+The file ends in `.md` because we write it in **Markdown**: plain text with a few symbols that give it structure. For your notebook, you only need three of them:
+
+-   A line that starts with `#` and a space is a **heading**. More `#` symbols make a smaller heading (`##`, `###`).
+-   Code goes into a **code block**: a line with three backticks and the word `bash` above the code, and a line with three backticks below it. The backtick (`` ` ``) is usually at the top left of your keyboard, next to the 1 (on some keyboards you need to press it twice or press the space bar after it).
+-   Everything else is normal text, for example what you saw or why you did something.
+
+Notice that a `#` means something different in the two places: in normal Markdown text, it starts a heading. Inside a code block, it is a bash comment.
+
+A first entry in your notebook could look like this:
+
+```` markdown
+# Notes: Introduction to the command line
+
+## Setting up the project folder
+
+I made a project folder for this workshop in my home directory.
+
+```bash
+# Go to the home directory and make the project folder with a data folder inside
+cd ~
+mkdir data_analysis
+mkdir -p data_analysis/data
+
+# Make the notebook
+touch data_analysis/notes.md
+```
+````
+
+Markdown can do more, for example lists, links and tables. You don't need these for the workshop, but if you are curious, [Markdown Basics](https://quarto.org/docs/authoring/markdown-basics.html) on the Quarto website gives an overview.
+
+From now on, you find a blue notebook box at the end of each part of the tutorial. It tells you what to add to your notebook. For the first few, you can compare your notes with mine. Your notes do not have to look the same as mine, as long as future you understands them.
+
 ## `cd`: Move around folders
 
 Now that we have our own project folder, let's learn how to move around the file system with `cd` (short for *change directory*).
@@ -277,6 +334,40 @@ cd "/mnt/c/Users/YourUserName/OneDrive - UvA"
 This is also a good example of why you normally do NOT want spaces in your file and folder names.
 
 Be careful with large sequence files in OneDrive folders: OneDrive tries to upload every file you make there.
+:::
+
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Finding your way"}
+Open `notes.md` and add:
+
+1.  The `mkdir` command from the exercise above, which made the `results` folder, with a comment
+2.  One sentence on the difference between an absolute and a relative path
+
+Save the file.
+
+::: {.callout-notebook-answer .callout-note collapse="true" title="Compare with my notes"}
+```` markdown
+## Setting up the project folder
+
+I made a project folder for this workshop in my home directory.
+
+```bash
+# Go to the home directory and make the project folder with a data folder inside
+cd ~
+mkdir data_analysis
+mkdir -p data_analysis/data
+
+# Make the notebook
+touch data_analysis/notes.md
+
+# Make a results folder for the output of the analyses
+cd data_analysis
+mkdir results
+```
+
+An absolute path starts at the root `/` and works from anywhere.
+A relative path starts from the folder I am in, so it only works from the right place.
+````
+:::
 :::
 
 ## `wget`: Download data
@@ -544,6 +635,44 @@ find ~/data_analysis/data/seq_project -name "*.gz"
 Because the shell replaces `~` with the absolute path to your home directory, `find` now prints absolute paths, and you don't need to type your user name. This works on every system.
 
 Note that `find` does not sort its output alphabetically like `ls` does, so the files may appear in a different order.
+:::
+
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Getting the data"}
+Add a new heading `## Getting the data` to `notes.md`, and below it:
+
+1.  A code block with the commands that got the data into place: download, move, extract, remove the tar file. Leave out the detours, such as the copy we made with `cp` and the `R1_files` folder from the exercise. Someone who runs your code block should end up with the same `data` folder as you
+2.  In the comment above the download command: where the link came from and on which date you downloaded the data
+3.  A check that shows what you got, and in normal text below the code block, what it showed: how many folders and how many `.fastq.gz` files
+4.  Optional: a warning to yourself about the commands that can destroy data without asking (`mv`, `rm`)
+
+::: {.callout-notebook-answer .callout-note collapse="true" title="Compare with my notes"}
+```` markdown
+## Getting the data
+
+```bash
+# Download the data
+# Link from the sequencing center XYZ, received by email on 23.01.2023
+cd ~/data_analysis
+wget https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
+
+# Move the tar file into the data folder and extract it there
+mv seq_project.tar.gz data/
+tar -xvf data/seq_project.tar.gz -C data
+
+# Remove the tar file, we only need the extracted data
+rm data/seq_project.tar.gz
+
+# Check: list all sequence files
+ls data/seq_project/*/*.gz
+```
+
+The data has 4 folders, one per sample (2 users with 2 samples each).
+Each folder has 2 files, R1 and R2, so 8 `.fastq.gz` files in total.
+
+Careful: `mv` overwrites files with the same name without asking,
+and files removed with `rm` are gone for good.
+````
+:::
 :::
 
 ## I/O redirection to new files
@@ -944,6 +1073,52 @@ In the command above we have some new syntax:
 -   `/4`: This is dividing the result obtained from wc -l by 4. Since each sequence in a FASTQ file is represented by four lines (identifier, sequence, separator, and quality scores), dividing the total number of lines by 4 gives the number of sequences.
 :::
 
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Looking at the data"}
+Add a new heading `## Looking at the data` to `notes.md`, and below it:
+
+1.  A code block with the commands that made the two file lists, `fastq_paths.txt` and `fastq_files.txt`
+2.  In the same code block, the checks that told you something about the data: how many files there are, whether there are as many R1 as R2 files, what the first lines of a fastq file look like, and how many lines one file has
+3.  In normal text below the code block: what you learned about the data. How many lines does one read take? Why did `head` on a `.gz` file show strange characters?
+4.  Leave out the detour where we decompressed a file with `gzip -d` and compressed it again, because it ended with the data as it was. A short note on why we use `zcat` is enough
+
+Then a check that we come back to: run `ls` and `ls results` inside `data_analysis`. Can your notebook explain where every file and folder came from? If not, add a line about it, even if it is "practice file, not needed".
+
+::: {.callout-notebook-answer .callout-note collapse="true" title="Compare with my notes"}
+```` markdown
+## Looking at the data
+
+```bash
+# Make a list of all fastq files with their paths
+ls data/seq_project/*/* > fastq_paths.txt
+
+# Make a list of the file names only, without the folder names
+cut -f4 -d "/" fastq_paths.txt > fastq_files.txt
+
+# Check: we expect 8 files
+wc -l fastq_paths.txt
+
+# Check: as many R1 as R2 files
+ls data/seq_project/*/*R1*gz | wc -l
+ls data/seq_project/*/*R2*gz | wc -l
+
+# Look at the first reads of one file, without decompressing it
+zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | head
+
+# Count the lines in one file
+zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc -l
+```
+
+There are 8 files, 4 R1 and 4 R2, so every sample has both.
+The files are compressed with gzip, so `head` on a `.gz` file shows unreadable characters.
+I use `zcat` to look inside: decompressing with `gzip -d` makes the files about 5 times larger.
+In a fastq file, each read takes 4 lines: identifier, sequence, separator (`+`) and quality scores.
+Sample-DUMMY1_R2 has 179,384 lines, so 179,384 / 4 = 44,846 reads.
+
+`results/combined/` has the practice files from the `cat` section. Not needed for the analysis.
+````
+:::
+:::
+
 ## `echo` and variables: Storing information
 
 Before we learn how we can use the command line to automate repetitive tasks, we need two small building blocks.
@@ -1251,16 +1426,39 @@ wc -l results/counts/line_counts_bash.txt
 cat results/counts/line_counts_bash.txt
 ```
 
-The script itself prints nothing to the screen, because all output goes into `line_counts.txt`. That is why we check the file afterwards.
+The script itself prints nothing to the screen, because all output goes into `line_counts_bash.txt`. That is why we check the file afterwards.
 
 Why is this useful?
 
 -   You can run the same analysis again, with exactly the same commands, without typing mistakes.
--   The script documents what you did. Together with your notes file, it tells future you how a result was made.
+-   The script documents what you did. Together with your notebook (`notes.md`), it tells future you how a result was made.
 -   On day 2, we use exactly this kind of script on the HPC. There, we add a few extra lines at the top that tell the HPC how many resources our job needs.
 
 ::: {.callout-important title="Important: Write scripts in nano or a code editor, not in Word or Notepad" collapse="false"}
 Windows programs such as Notepad end every line with an extra invisible character. Bash on Linux does not understand this character, and the script fails with errors such as `$'\r': command not found` or `syntax error near unexpected token`. Word processors such as Word also add formatting and can change straight quotes (`"`) into curly quotes.
 
 To avoid this, write your scripts with `nano`. If you prefer a code editor such as VS Code, check that it saves the file with `LF` line endings (in VS Code, you see `LF` or `CRLF` in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.
+:::
+
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Counting lines per file"}
+Add a new heading `## Counting lines per file` to `notes.md`, and below it:
+
+1.  The command that ran the script, with a comment that says what the script does and which file it makes. We use `results/counts/line_counts_bash.txt` again on day 2
+2.  The check you ran afterwards, and below the code block, what you expected and what you saw
+3.  In your own words: what happens when you run a loop with `>>` twice, and how the `echo` line with `>` before the loop prevents this
+
+You don't need to copy the loop itself into your notebook, because it is saved in `scripts/count_lines.sh`. The script is part of your documentation. Your notebook only needs to say which script you ran and what it made.
+:::
+
+## Wrapping up day 1
+
+You now have a project folder with data, results, a script, and a notebook that explains how they got there. Before you close the terminal, take a few minutes to read through your notebook.
+
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Tidy your notebook"}
+1.  Below the main heading at the top of `notes.md`, add 2 or 3 sentences: what data this is, where it came from, and what you did with it today
+2.  Read your notebook from the top. Could you redo today's analysis from it alone, without this tutorial? Add what is missing
+3.  Check once more that your notebook explains every file and folder in your project. Run these inside `data_analysis`: `ls`, `ls results/*` and `ls scripts`
+4.  Add a heading `## Questions for day 2` and write down anything that is still unclear
+
+On day 2, you keep writing in the same `notes.md` on your own computer, also for the commands that you run on the HPC.
 :::

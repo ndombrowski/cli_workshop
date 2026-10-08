@@ -1,5 +1,5 @@
 ---
-title: "My report  for analysis X (project title)"
+title: "My report for analysis X (project title)"
 
 author: Nina Dombrowski
 date: 12/18/2023
@@ -21,7 +21,7 @@ engine: knitr
 
 The goal of this workflow is to analyse sequencing data received on 23.01.2023 from Data Science Sequencing Centre. The sequencing data consists of 4 samples, with a forward (R1) and a reverse (R2) read file for each sample. The code below documents the quality checks and the cleaning of the sequences.
 
-## Pre-requisites
+## Software
 
 All analyses were run on the UvA Crunchomics HPC with a CentOS 7 operating system.
 
@@ -49,7 +49,7 @@ wdir="$HOME/personal/data_analysis"
 download_link="https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz"
 ```
 
-### Download the sequencing data
+### Getting the data
 
 ```{bash}
 # Go to project dir
@@ -70,7 +70,7 @@ ls data/seq_project/*/*.gz | cut -f4 -d "/" > fastq_files.txt
 ls data/seq_project/*/*_R1.fastq.gz | cut -f4 -d "/" | cut -f1 -d "_" > samples.txt
 ```
 
-### Perform sanity checks
+### Looking at the data
 
 ```{bash}
 # We work with 8 files from 4 samples
@@ -107,7 +107,7 @@ Sample-DUMMY3_R2.fastq.gz: 19784\
 Sample-DUMMY4_R1.fastq.gz: 24380\
 Sample-DUMMY4_R2.fastq.gz: 24380
 
-### Get read statistics
+### Read statistics with seqkit
 
 #### Run seqkit stats
 
@@ -141,7 +141,7 @@ Comments on the read statistics from seqkit stats:
 -   The R1 reads have a higher quality than the R2 reads: 94-95% of the bases in R1 have a quality score of at least 30 (`Q30(%)`), compared to 89-90% in R2
 -   The GC content is 53-57%
 
-### Quality filtering
+### Quality filtering with fastp
 
 #### Run fastp
 

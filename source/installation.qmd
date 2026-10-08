@@ -207,22 +207,22 @@ If it still does not work, email me (see the box at the top of this page) and co
 
 ## Step 6: Choose a text editor for your notes
 
-While you work through the tutorial, you keep a notes file. Each time you run a command, you copy it into the file, with a short comment that says what it does. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later.
+While you work through the tutorial, you keep a notebook. Each time you run a command, you copy it into the notebook, with a short comment that says what it does and a few words about what you saw. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later. We write the notebook in **Markdown**, plain text with a few symbols for headings and code. You learn the few rules you need on day 1.
 
 For this you need a **plain text editor**, a program that saves only the text you type, without any layout. Do not use Word or a similar program. These programs change some characters, for example a straight quote `'` into a curly quote `’`. A command with a curly quote does not work anymore.
 
 Pick one of these options:
 
-- **RStudio**: if you already use R, this is the easiest choice. Go to **File**, then **New File**, then **Text File**.
+- **RStudio** (recommended): it shows Markdown in color, and many of you already use it for R. Go to **File**, then **New File**, then **Markdown File**. This opens an empty Markdown file.
 - **Notepad** (Windows, already installed) or [Notepad++](https://notepad-plus-plus.org/) (Windows, free, shows code in color).
 - **TextEdit** (Mac, already installed): first go to **Format**, then **Make Plain Text**, otherwise TextEdit saves the file with layout.
 - **Text Editor** or gedit (Linux, usually already installed).
 - [**VS Code**](https://code.visualstudio.com/): a powerful code editor for all systems. It takes a bit more time to set up, so I only recommend it if you already use it.
 
-To check that it works, open your editor, create a new file, type a line of text and save it as `cli_workshop_notes.txt`. You use this file from the first chapter on.
+To check that it works, open your editor, create a new file, type a line of text and save it as `test.md`. You can delete this file afterwards: on day 1, we make the real notebook inside the project folder.
 
 ## You are ready
 
-If both checks worked and you have a notes file, you are ready to start. If you join the workshop: see you on day 1!
+If both checks worked and your editor can save a `.md` file, you are ready to start. If you join the workshop: see you on day 1!
 
 </div>

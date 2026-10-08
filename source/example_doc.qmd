@@ -11,7 +11,7 @@ If you want to see an example for documented code, check out [a notebook](https:
 The link above leads you to an example for:
 
 -   How could I use github to make my code available to others
--   How a "code book" could look like. The example you see in the folder is provided as a Quarto markdown file [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd) and for convenience the report was also rendered as a [html](https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html) to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.
+-   How a "code book" could look like. The example you see in the folder is provided as a Quarto markdown file [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd) and for convenience the report was also rendered as a [html](https://ndombrowski.github.io/cli_workshop/example_doc/example_notebook.html) to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.
 
 The example is based on the data you analyse throughout this tutorial, so the actual code might only make sense after you have finished the tutorial. Feel free to revisit this page after you have written some code yourself.
 
@@ -35,7 +35,7 @@ In one of the first sections of my notebooks I add everything that a user that w
 
 I tend to NOT add the information on how I use `scp` to log into an HPC to keep my user name and login information private.
 
-### Sanity checks
+### Looking at the data (sanity checks)
 
 ![](/img/sanity_check.png){width="561"}
 
@@ -66,3 +66,22 @@ This part might make more sense after you have worked through the part of the tu
 2.  When publishing your code with your manuscript, add the whole scripts folder to where you publish the main code, i.e. on [github](https://github.com/ndombrowski/cli_workshop/tree/main/example_doc) or [zenodo](https://zenodo.org/records/3839790)
 
 I tend to prefer number 2 because I like to record the code in my notebooks exactly as I ran it but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.
+
+## Going further
+
+### From `notes.md` to a Quarto document
+
+Your `notes.md` and my example notebook are written in the same way: Markdown text with code blocks. The difference is that the example notebook is a **Quarto** document (it ends in `.qmd`). Quarto turns such a file into a web page (HTML), a PDF or a Word file, with a table of contents and colored code. That makes it easier to share your notebook with others, for example with your supervisor or together with a paper.
+
+If you want to try this in RStudio (recent versions of RStudio come with Quarto):
+
+1.  Go to **File**, then **New File**, then **Quarto Document**
+2.  Copy the content of your `notes.md` into the new file, below the YAML header at the top (see "YAML headers" above)
+3.  Save the file and click **Render**
+
+Code blocks that you wrote as ```` ```bash ````, like in your notes, are only shown on the page, not run. The [Quarto tutorial for RStudio](https://quarto.org/docs/get-started/hello/rstudio.html) explains the next steps.
+
+### Further reading
+
+-   [A Guide to Reproducible Code in Ecology and Evolution](https://assets.britishecologicalsociety.org/2017/12/guide-to-reproducible-code.pdf) from the British Ecological Society explains how to organize project folders and how to write clear code that others can rerun. The examples are mostly in R, but the advice applies to bash and other languages as well.
+-   [Markdown Basics](https://quarto.org/docs/authoring/markdown-basics.html) on the Quarto website lists everything else you can do with Markdown, for example lists, links, bold text, images and tables.

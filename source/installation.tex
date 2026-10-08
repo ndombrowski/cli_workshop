@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, interior hidden, enhanced, frame hidden, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, enhanced, breakable, boxrule=0pt, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -283,7 +283,7 @@ Here is what you will do:
   Choose a text editor for your notes.
 \end{enumerate}
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-important-color!10!white, breakable, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, left=2mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, toprule=.15mm, rightrule=.15mm, coltitle=black, bottomrule=.15mm, colframe=quarto-callout-important-color-frame, colback=white]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, coltitle=black, arc=.35mm, opacitybacktitle=0.6, bottomtitle=1mm, titlerule=0mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, left=2mm, breakable, rightrule=.15mm, colback=white]
 
 If something on this page does not work, please email Nina Dombrowski
 (n.dombrowski@uva.nl). Part of my job is to support students and
@@ -665,10 +665,13 @@ page) and copy the error message.
 \section{Step 6: Choose a text editor for your
 notes}\label{step-6-choose-a-text-editor-for-your-notes}
 
-While you work through the tutorial, you keep a notes file. Each time
-you run a command, you copy it into the file, with a short comment that
-says what it does. This is the start of documenting your code: it lets
-you, and others, repeat and understand your analysis later.
+While you work through the tutorial, you keep a notebook. Each time you
+run a command, you copy it into the notebook, with a short comment that
+says what it does and a few words about what you saw. This is the start
+of documenting your code: it lets you, and others, repeat and understand
+your analysis later. We write the notebook in \textbf{Markdown}, plain
+text with a few symbols for headings and code. You learn the few rules
+you need on day 1.
 
 For this you need a \textbf{plain text editor}, a program that saves
 only the text you type, without any layout. Do not use Word or a similar
@@ -681,8 +684,9 @@ Pick one of these options:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{RStudio}: if you already use R, this is the easiest choice. Go
-  to \textbf{File}, then \textbf{New File}, then \textbf{Text File}.
+  \textbf{RStudio} (recommended): it shows Markdown in color, and many
+  of you already use it for R. Go to \textbf{File}, then \textbf{New
+  File}, then \textbf{Markdown File}. This opens an empty Markdown file.
 \item
   \textbf{Notepad} (Windows, already installed) or
   \href{https://notepad-plus-plus.org/}{Notepad++} (Windows, free, shows
@@ -700,13 +704,14 @@ Pick one of these options:
 \end{itemize}
 
 To check that it works, open your editor, create a new file, type a line
-of text and save it as \texttt{cli\_workshop\_notes.txt}. You use this
-file from the first chapter on.
+of text and save it as \texttt{test.md}. You can delete this file
+afterwards: on day 1, we make the real notebook inside the project
+folder.
 
 \section{You are ready}\label{you-are-ready}
 
-If both checks worked and you have a notes file, you are ready to start.
-If you join the workshop: see you on day 1!
+If both checks worked and your editor can save a \texttt{.md} file, you
+are ready to start. If you join the workshop: see you on day 1!
 
 
 

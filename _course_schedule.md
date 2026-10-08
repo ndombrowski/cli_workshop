@@ -17,20 +17,20 @@ announcement email (`_preworkshop_instructions.md`).
 3. Install a terminal: MobaXterm (recommended) or WSL2 on Windows. Mac and Linux users open the built-in terminal.
 4. Check 1: `echo $SHELL` prints a shell name.
 5. Check 2: log in to Crunchomics with `ssh`, then `exit`. Tests account, password and eduroam/VPN.
-6. Choose a text editor for the notes file (RStudio, Notepad/Notepad++, TextEdit, VS Code).
+6. Choose a text editor for the notebook (RStudio recommended, Notepad/Notepad++, TextEdit, VS Code) and save a test `.md` file.
 7. Report problems to Nina Dombrowski at the latest one week before the workshop.
 
 ## Day 1: command line basics on your own laptop (about 3h45)
 
 | Time | Block | Content |
 |---|---|---|
-| 15 min | Start | How the two days work. Create the notes file (start of the documentation thread). |
-| 50 min | Finding your way | Prompt, `pwd`, `ls`, command structure (options, arguments), `man` / `--help`, file system, absolute and relative paths, `cd`, `mkdir`. Survival skills in the main text: Tab, arrow up, `Ctrl+C`, reading a first error message. |
-| 45 min | Getting the data | `wget` / `curl`, `cp`, `mv`, `tar`, `rm` (with warning), wildcards |
+| 15 min | Start | How the two days work. Introduce the notebook idea (the file itself is made after `mkdir`, see next row). |
+| 50 min | Finding your way | Prompt, `pwd`, `ls`, command structure (options, arguments), `man` / `--help`, file system, absolute and relative paths, `cd`, `mkdir`. `touch data_analysis/notes.md` right after `mkdir`, with the three Markdown elements (heading, code block, text). Notebook checkpoint 1 at the end. Survival skills in the main text: Tab, arrow up, `Ctrl+C`, reading a first error message. |
+| 45 min | Getting the data | `wget` / `curl`, `cp`, `mv`, `tar`, `rm` (with warning), wildcards. Notebook checkpoint 2 at the end (only the commands that rebuild the data folder, no detours). |
 | 15 min | Break | |
-| 55 min | Looking at the data | `>`, `head` / `tail` / `less`, `wc -l`, pipes, `cut` (makes `fastq_files.txt`), fastq format, `gzip` / `zcat`, `grep` |
-| 35 min | Repeating things | Variables. Simple loop over a wildcard (`echo` first, then `zcat \| wc -l` for each file). `>>` to collect the counts in one file. Save the loop in a `.sh` file and run it with `bash` (prepares for `sbatch`). |
-| 10 min | Wrap-up | Tidy the notes file |
+| 55 min | Looking at the data | `>`, `head` / `tail` / `less`, `wc -l`, pipes, `cut` (makes `fastq_files.txt`), fastq format, `gzip` / `zcat`, `grep`. Notebook checkpoint 3 at the end, with the "can your notebook explain every file?" check. |
+| 35 min | Repeating things | Variables. Simple loop over a wildcard (`echo` first, then `zcat \| wc -l` for each file). `>>` to collect the counts in one file. Save the loop in a `.sh` file and run it with `bash` (prepares for `sbatch`).. Notebook checkpoint 4 at the end (no model notes from here on; the script itself is documentation). |
+| 10 min | Wrap-up | Notebook checkpoint 5 "Tidy your notebook": short description at the top, reread, every-file check, `## Questions for day 2`. |
 
 **Optional:** `sort` / `uniq`, `cat` for combining files, `nano`, advanced counting tips, sample mapping tip.
 
@@ -38,15 +38,15 @@ announcement email (`_preworkshop_instructions.md`).
 
 | Time | Block | Content |
 |---|---|---|
-| 10 min | Recap | Day 1 in 5 commands |
+| 10 min | Recap | Day 1 in 5 commands, from the participants' own notebooks. No separate checkpoint box at the start of the page (merged into checkpoints 1 and 5, decided 2026-10-08). |
 | 35 min | What an HPC is | Login node vs compute nodes, SLURM, etiquette, storage (25 GB home vs 500 GB personal directory). `ssh`. The prompt shows where you are (laptop or HPC). Run `omics_install_script` and explain what it does: adds the shared software folder to the PATH, sets up python, creates the `~/personal` link to the 500 GB directory. Make the project folder. |
-| 20 min | Moving data | `scp` from the laptop terminal, check with `ls`. FileZilla as a tip. |
+| 20 min | Moving data | `scp` from the laptop terminal, check with `ls`. FileZilla as a tip. Notebook checkpoint 1 at the end (with model notes): introduces `# On my computer` / `# On Crunchomics` at the top of each code block. |
 | 35 min | First jobs | `sinfo`, `squeue`, `srun echo`, `seqkit stats` with `srun` (wildcard, simple). Read the table on Crunchomics with `cat`, compare `num_seqs` with the day 1 line counts, select columns with `cut`. Interactive session with `srun --pty bash`. |
-| 30 min | sbatch | Parts of a job script, `logs/` folder, using `seqkit stats` (same command as with `srun`, so the two can be compared). Submit, `squeue`, read the log, `scancel`. Then `sacct` and choosing resources. |
+| 30 min | sbatch | Parts of a job script, `logs/` folder, using `seqkit stats` (same command as with `srun`, so the two can be compared). Submit, `squeue`, read the log, `scancel`. Then `sacct` and choosing resources. Notebook checkpoint 2 after `scancel`, before `sacct`: seqkit version (`seqkit version`), sbatch command, job ID, which run made the current table, read count vs day 1. |
 | 15 min | Break | |
-| 25 min | Installing software with conda | What conda/mamba is and why environments exist. Motivation: `fastp --version` on Crunchomics shows 1.0.1, the current version is 1.4.0 (released 2026-10-07). Instructor demo install first. Then participants install Miniforge on the login node **into `/zfs/omics/personal/$USER/miniforge3` (= `~/personal`), not the 25 GB home**, and create a pinned environment `fastp_1.4.0`. |
-| 45 min | fastp | Run fastp on **one** sample with `srun` and look at what it produces. Make `samples.txt` (4 sample names) with `ls \| cut \| cut`. Build the loop `for sample in $(cat samples.txt)` step by step with `echo` (dry run first), following the IBED for-loops page. R1/R2 found with a wildcard written directly in the fastp command (not stored in a variable), used as the moment to talk about checking what a wildcard matches. Put the loop in an `sbatch` script with conda activation (`source ~/.bashrc` + `conda activate`), submit, read the log. Check outputs: 4 samples in, so 8 trimmed files + 4 HTML + 4 JSON reports = 16 files. Compare read counts with the day 1 `line_counts.txt`. |
-| 15 min | Wrap-up | Walk through `example_doc.qmd` ("this is what your notes can become"). Where to get help. Pointer to the LLM page (later). |
+| 25 min | Installing software with conda | What conda/mamba is and why environments exist. Motivation: `fastp --version` on Crunchomics shows 1.0.1, the current version is 1.4.0 (released 2026-10-07). Instructor demo install first. Then participants install Miniforge on the login node **into `/zfs/omics/personal/$USER/miniforge3` (= `~/personal`), not the 25 GB home**, and create a pinned environment `fastp_1.4.0`. Notebook checkpoint 3: `## Software` section near the top of the notebook (tools + versions, Miniforge folder, `mamba create`, why an own fastp). |
+| 45 min | fastp | Run fastp on **one** sample with `srun` and look at what it produces. Make `samples.txt` (4 sample names) with `ls \| cut \| cut`. Build the loop `for sample in $(cat samples.txt)` step by step with `echo` (dry run first), following the IBED for-loops page. R1/R2 found with a wildcard written directly in the fastp command (not stored in a variable), used as the moment to talk about checking what a wildcard matches. Put the loop in an `sbatch` script with conda activation (`source ~/.bashrc` + `conda activate`), submit, read the log. Check outputs: 4 samples in, so 8 trimmed files + 4 HTML + 4 JSON reports = 16 files. Compare read counts with the day 1 `line_counts.txt`. Notebook checkpoint 4 after the Step 6 exercise: samples.txt, sbatch + job ID, 16-file check, scp of reports, what the report showed. Test run on one sample = one sentence only. |
+| 15 min | Wrap-up | New section "Wrapping up day 2": copy the job scripts to the local `scripts/` with `scp`, then notebook checkpoint 5 (update description, every-file check incl. `logs/`, answer "Questions for day 2", compare with the example notebook). Walk through `example_doc.qmd` ("this is what your notes can become"). Where to get help. Pointer to the LLM page (later). |
 
 **Optional:** "Extra bash syntax" box (`${R1/_R1/_R2}`, `basename`, `while read`), `screen`, arrays over `fastq_files.txt` (link to the IBED SLURM page), `seqkit stats` on the trimmed reads with `awk` (before vs after), FastQC tip (visual reports), `scp` with wildcards, better log file names.
 
@@ -74,4 +74,6 @@ announcement email (`_preworkshop_instructions.md`).
 | Windows terminal | MobaXterm first (lighter install), WSL2 second. Git Bash dropped. |
 | Pre-workshop ssh check | Plain `ssh`, without `-X`. |
 | installation.qmd audience | Works for both workshop participants and self-study; contact Nina also outside the workshop. |
+| Notebook (documentation thread) | Participants keep `~/data_analysis/notes.md` in Markdown (RStudio recommended), one file on the laptop for both days (day 2 commands are copied from the ssh window into it). Made with `touch` after `mkdir data_analysis`, opened by double-click. Blue "Notebook checkpoint" box at the end of each schedule block, styles `.callout-notebook` + nested `.callout-notebook-answer` ("Compare with my notes") in `styles.scss`. Model notes only for the first checkpoints, later only the prompt. Time cost accepted: writing the notes is thinking time, and the block timings are generous. (Decided 2026-10-08.) |
+| code_documentation.qmd | Removed (decided 2026-10-08). Documentation is a thread through both days (notebook checkpoints); `example_doc.qmd` is the wrap-up and got a "Going further" section (Quarto, BES guide). Markdown Basics link in the day 1 notebook section. |
 | Showing command output | Plain text output block + lead-in sentence, copied from a real run. Screenshots only where the look on screen matters. No code run at render time. Not every chunk gets an output. |

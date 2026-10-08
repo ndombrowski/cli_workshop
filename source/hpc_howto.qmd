@@ -19,6 +19,7 @@ Now that you are more familiar with the command line, we will learn how to work 
     -   `srun` for short, interactive analyses
     -   `sbatch` for longer running, more resource intensive analyses
 -   Install your own software with conda
+-   Keep documenting what you do in the notebook (`notes.md`) that you started on day 1
 
 For people following this tutorial outside of UvA:
 
@@ -192,6 +193,48 @@ noglob scp data/seq_project/barcode00*/*fastq.gz username@omics-h0.science.uva.n
 
 scp 'data/seq_project/barcode00*/*fastq.gz' username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/transfer_test
 ```
+:::
+
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Setting up on Crunchomics"}
+Today you keep writing in the same `notes.md` on your own computer. You copy the commands from the terminal that is logged in to Crunchomics into it.
+
+Since you now work on two computers, your notebook needs to say **where** each command ran. Start every code block with a comment: `# On my computer` or `# On Crunchomics`.
+
+Add a new heading `## Setting up on Crunchomics`, and below it:
+
+1.  The command you used to log in
+2.  The account setup with `omics_install_script`, with a note that this is only needed once
+3.  The commands that made your project folder, and in normal text, where this folder is
+4.  The `scp` command that copied the data, and the check that all files arrived
+
+::: {.callout-notebook-answer .callout-note collapse="true" title="Compare with my notes"}
+```` markdown
+## Setting up on Crunchomics
+
+```bash
+# On my computer: log in to Crunchomics (on eduroam or with the VPN)
+ssh uvanetid@omics-h0.science.uva.nl
+
+# On Crunchomics: set up my account (only needed once)
+# Adds the Crunchomics software to my PATH and makes the ~/personal link (500 GB)
+/zfs/omics/software/script/omics_install_script
+
+# On Crunchomics: make the project folder inside my personal folder
+cd ~/personal
+mkdir data_analysis
+```
+
+My project folder on Crunchomics is `~/personal/data_analysis`, with the same name as on my computer.
+
+```bash
+# On my computer, inside my local data_analysis folder: copy the data to Crunchomics
+scp -r data uvanetid@omics-h0.science.uva.nl:/home/uvanetid/personal/data_analysis
+
+# On Crunchomics, inside data_analysis: check that all 8 fastq.gz files arrived
+ls data/seq_project/*/*fastq.gz | wc -l
+```
+````
+:::
 :::
 
 
@@ -492,6 +535,17 @@ scancel 754
 Always cancel jobs that run incorrectly or that you no longer need. This frees resources for others and avoids unnecessary load on the cluster.
 :::
 
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Read statistics with seqkit"}
+Add a new heading `## Read statistics with seqkit` to `notes.md`, and below it:
+
+1.  Which tool you used, and which version. Run `seqkit version` to find out, and write the version in the comment above the command
+2.  The `sbatch` command, with a comment that names the script and the file it makes. Below the code block, write down the job ID that `sbatch` printed (`Submitted batch job ...`). The job ID is also part of the names of the log files, so with it you can find the logs of this run later
+3.  We ran seqkit twice, first with `srun` and then with `sbatch`, and the second run replaced the table of the first one. Write down which run made the table that is there now
+4.  Below the code block: does the number of reads of `Sample-DUMMY1_R2` match your count from day 1?
+
+You don't need to copy the content of the job script into your notebook. It is saved in `scripts/seqkit.sh`, and at the end of the day, we copy it to your own computer.
+:::
+
 ### `sacct`: Checking the resources a job used
 
 After a job has finished, you can check which resources it actually used with `sacct`. Replace `754` with the job ID of your seqkit job:
@@ -710,6 +764,17 @@ which fastp
 
 You should see two environments in the list: `base` and `fastp_1.4.0`. The fastp program is in the `bin` folder of the environment, inside your `miniforge3` folder.
 :::
+:::
+
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Installing fastp"}
+Software gets its own place in your notebook: near the **top**, below the short description. Someone who wants to repeat your analysis then sees right away what they need to install first.
+
+Add a heading `## Software` below the description at the top of `notes.md`, and below it:
+
+1.  The tools that were already installed on Crunchomics, with their version (seqkit)
+2.  Where you installed Miniforge, and that you ran `conda init` (only needed once)
+3.  The `mamba create` command, and the name of the environment
+4.  One sentence on why you installed fastp yourself, instead of using the fastp of Crunchomics
 :::
 
 ## fastp: Running a tool for each sample with a for-loop
@@ -971,6 +1036,18 @@ For question 3: the number should be the same as, or smaller than, before filter
 :::
 :::
 
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Quality filtering with fastp"}
+Add a new heading `## Quality filtering with fastp` to `notes.md`, and below it:
+
+1.  The command that made `samples.txt`, and the check
+2.  The `sbatch` command with a comment that names the script, and below the code block, the job ID
+3.  The checks on the output: what you expected and what you saw
+4.  The `scp` command that copied the reports to your computer (remember: `# On my computer`)
+5.  Below the code block, in your own words: what did the fastp report show for Sample-DUMMY1? How many reads were there before and after filtering? Did anything surprise you?
+
+The test run on one sample was a detour, so you don't need its commands. One sentence on what it taught you is enough, for example that fastp writes its reports to `fastp.html` and `fastp.json` unless you give other names.
+:::
+
 
 ### Comparing reads before and after trimming (optional)
 
@@ -1033,6 +1110,29 @@ done
 This is shorter, but you need to know the extra syntax to read it. A list file is easier to check, and easier to change if you want to run only some samples.
 
 If your list file has several columns, for example a sample name and a group, a `while` loop can read both columns into separate variables. The [IBED for-loops page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html) explains this, and builds a loop step by step with another example.
+:::
+
+## Wrapping up day 2
+
+Your analysis now lives in two places: the data, results and job scripts on Crunchomics, and the notebook on your own computer. The notebook mentions the job scripts, so let's copy them next to it. Run this in the terminal on your **own** computer:
+
+```{bash}
+# Run this on your OWN computer, inside your local data_analysis folder
+# Replace both instances of 'username' with your UvAnetID
+scp 'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/scripts/*.sh' scripts/
+
+# Check: we expect count_lines.sh from day 1, and seqkit.sh and fastp.sh from today
+ls -l scripts
+```
+
+As in the fastp exercise, the quotes around the path stop your own computer from using the wildcard, so that Crunchomics can use it to find the files.
+
+::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Tidy your notebook (day 2)"}
+1.  Add the `scp` command that copied the scripts to your notebook
+2.  Update the description at the top of `notes.md`, so that it covers both days
+3.  Check that your notebook explains every file and folder in your project on Crunchomics. Run these inside `~/personal/data_analysis`: `ls`, `ls results/*` and `ls scripts logs`. Can you tell which log file belongs to which job?
+4.  Read your `## Questions for day 2` again. Write down the answers you found, and ask about the rest now
+5.  Compare your notebook with my [example notebook](example_doc.qmd). What does it have that yours doesn't? Is there anything you want to add?
 :::
 
 ## Job arrays: Running many files in parallel (optional)

@@ -174,7 +174,8 @@ Project notes for Claude: CLAUDE.md (local only)
   - DONE 2026-10-07: example_doc.qmd text changed to seqkit / fastp / scripts/seqkit.sh, heading
     "Settings (change these before you run the workflow)", wdir with $HOME explained. Nina rewrites the
     "Justifying decisions" bullet (line ~56) herself, e.g. pointing to the --cut_front note.
-  - Screenshots for source/example_doc.qmd, retake from the rendered notebook: general_setup.png
+  - DONE 2026-10-07 (checked by Nina 2026-10-08: $HOME, capital comments and the loop are in the
+    new images). Screenshots for source/example_doc.qmd, retake from the rendered notebook: general_setup.png
     (wdir now uses $HOME), comments_in_code.png and external_scripts.png (comments now "# Capital"),
     sanity_check.png (still from 2024: backtick loop over samples.txt, read_counts_per_sample.txt).
     yaml_header.png still matches.
@@ -201,13 +202,48 @@ Project notes for Claude: CLAUDE.md (local only)
   omics-cn001 - omics-cn005. Check which is right.
 
 
-## Documenting code (code_documentation.qmd, example_doc.qmd)
+## Documenting code (notebook thread, example_doc.qmd)
 
-- Make documentation a thread through both days. From minute one, participants keep a notes
-  file and paste in each command with a comment.
+- Make documentation a thread through both days. Decisions in _course_schedule.md (2026-10-08):
+  ~/data_analysis/notes.md, Markdown, RStudio recommended, blue checkpoint box per schedule block.
+  PILOT DONE 2026-10-08 (bash_intro.qmd): new section "touch: Starting your notebook" after mkdir,
+  checkpoint 1 (end of "Finding your way", before wget), checkpoint 2 (end of "Getting the data",
+  before I/O redirection). installation.qmd step 6 now saves test.md.
+  DONE 2026-10-08: checkpoints 3 (Looking at the data, with model notes + every-file check),
+  4 (Counting lines per file, no model notes) and 5 (new section "Wrapping up day 1").
+  Also fixed: script section said line_counts.txt, the script writes line_counts_bash.txt.
+  DONE 2026-10-08 (hpc_howto.qmd): checkpoints 1 Setting up on Crunchomics (model notes,
+  '# On my computer' / '# On Crunchomics' rule), 2 Read statistics with seqkit (before sacct),
+  3 Installing fastp (## Software near the top), 4 Quality filtering with fastp, and a new section
+  "Wrapping up day 2" (scp of scripts/*.sh to the laptop + checkpoint 5). Intro bullet added.
+  seqkit version: confirmed by Nina on Crunchomics 2026-10-08.
+  - DONE 2026-10-08: scp 'username@...:/home/username/personal/data_analysis/scripts/*.sh' scripts/ works (tested by Nina).
+  - sacct: Nina considers cutting it or making it optional. Checkpoint 2 sits before it, so no change needed.
+  DONE 2026-10-08: example_notebook.qmd headings match the checkpoints (Software, Getting the data,
+  Looking at the data, Read statistics with seqkit, Quality filtering with fastp); content unchanged.
+  example_doc.qmd: "Sanity checks" -> "Looking at the data (sanity checks)". No screenshot retake
+  needed: the screenshots are taken without the headings (Nina, 2026-10-08).
+  Kept different on purpose (material for the wrap-up comparison): example has Settings/wdir,
+  awk summaries, Citation/Contact; it leaves out ssh/scp and the On my computer/On Crunchomics markers.
+  DONE 2026-10-08: code_documentation.qmd removed (decided by Nina: not kept as extra page).
+  Kept from it: BES reproducible code guide (new URL assets.britishecologicalsociety.org) and a
+  "next step: Quarto document" paragraph, both in a new "Going further" section at the end of
+  example_doc.qmd; Markdown Basics link (quarto.org) in the bash_intro notebook section.
+  Dropped: editor list (installation.qmd step 6 covers it), VS Code setup, Markdown reference.
+  Removed from the _quarto.yml sidebar; index.qmd intro sentence changed; source/code_documentation.qmd
+  and .tex deleted (still in git history).
+  - After the next full render: delete the old outputs docs/source/code_documentation.html and
+    .pdf if Quarto leaves them in docs/ (Nina's render of 2026-10-08 rebuilt them from the old sidebar).
+  - DONE 2026-10-08: rebuilt source/installation_preworkshop.html (step 6 changed), built in the
+    Claude scratchpad instead of ~/tmp/preworkshop (also outside the project, same result).
+  - Found 2026-10-08: hidden <!-- TO CHECK --> comments in installation.qmd are copied into the
+    rendered HTML, so they end up in the emailed attachment. Keep installation.qmd free of them
+    (put open checks here instead). Probably the same for the site pages (see "Site-wide").
+  - TO CHECK comments: TextEdit saving .md (installation.qmd), double-click on notes.md on
+    Mac / fresh laptops (bash_intro.qmd). RStudio File > New File > Markdown File confirmed by
+    Nina 2026-10-08 (empty .md file, no YAML header).
 - Use example_doc.qmd as a wrap-up at the end of day 2. By then participants have written the
-  code themselves, so the example makes sense.
-- Both pages may be reworked (this is where participants struggle most).
+  code themselves, so the example makes sense. (Linked from day 2 checkpoint 5.)
 
 
 ## LLM page (later)

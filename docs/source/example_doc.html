@@ -43,9 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b0957973abd6230c3392f6d387fb2470.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a891026ddfd95a10b69719ae6af49143.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-b0957973abd6230c3392f6d387fb2470.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-09666e9bd05a9b7048e97aee7f6ed88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-08aeed349c2252358fc0aae548c86d70.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-09666e9bd05a9b7048e97aee7f6ed88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -298,12 +298,6 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../source/code_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documenting code</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../source/bash_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Bash</span></a>
   </div>
@@ -345,14 +339,8 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul class="collapse">
-  <li><a href="#an-example-notebook" id="toc-an-example-notebook" class="nav-link active" data-scroll-target="#an-example-notebook">An example notebook</a></li>
-  </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="example_doc.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="example_doc.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
@@ -363,13 +351,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="an-example-notebook" class="level2" style="text-align: justify">
+<div style="text-align: justify">
+<section id="an-example-notebook" class="level2">
 <h2 class="anchored" data-anchor-id="an-example-notebook">An example notebook</h2>
 <p>If you want to see an example for documented code, check out <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">a notebook</a> I wrote based on what we are doing in this tutorial.</p>
 <p>The link above leads you to an example for:</p>
 <ul>
 <li>How could I use github to make my code available to others</li>
-<li>How a “code book” could look like. The example you see in the folder is provided as a Quarto markdown file <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd">here</a> and for convenience the report was also rendered as a <a href="https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html">html</a> to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.</li>
+<li>How a “code book” could look like. The example you see in the folder is provided as a Quarto markdown file <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd">here</a> and for convenience the report was also rendered as a <a href="https://ndombrowski.github.io/cli_workshop/example_doc/example_notebook.html">html</a> to make it easier to read for potential collaborators. To view the HTML report, you need to download it first.</li>
 </ul>
 <p>The example is based on the data you analyse throughout this tutorial, so the actual code might only make sense after you have finished the tutorial. Feel free to revisit this page after you have written some code yourself.</p>
 <p>Please note that this is just an example to get you started and such a report might look different depending on your needs.</p>
@@ -389,8 +378,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>I tend to NOT add the information on how I use <code>scp</code> to log into an HPC to keep my user name and login information private.</p>
 </section>
-<section id="sanity-checks" class="level3">
-<h3 class="anchored" data-anchor-id="sanity-checks">Sanity checks</h3>
+<section id="looking-at-the-data-sanity-checks" class="level3">
+<h3 class="anchored" data-anchor-id="looking-at-the-data-sanity-checks">Looking at the data (sanity checks)</h3>
 <p><img src="..\img/sanity_check.png" class="img-fluid" width="561"></p>
 <p>When I first start working with new data, I try to add as many sanity checks as possible to ensure that my data looks good. That way I avoid that I don’t notice an issue and run into trouble further down the line. I at the same time understand my data more and learn with how many samples and how much data I am working with.</p>
 <p>I also add such sanity checks whenever I modify my data. For example, when I merge individual files into a large file I might count the lines for the individual files and the combined file simply to ensure that I used my wildcards correctly.</p>
@@ -415,10 +404,32 @@ ul.task-list li input[type="checkbox"] {
 <li>When publishing your code with your manuscript, add the whole scripts folder to where you publish the main code, i.e.&nbsp;on <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">github</a> or <a href="https://zenodo.org/records/3839790">zenodo</a></li>
 </ol>
 <p>I tend to prefer number 2 because I like to record the code in my notebooks exactly as I ran it but you can do it differently as long as all the code you ran is recorded and accessible to others once you publish your data.</p>
+</section>
+</section>
+<section id="going-further" class="level2">
+<h2 class="anchored" data-anchor-id="going-further">Going further</h2>
+<section id="from-notes.md-to-a-quarto-document" class="level3">
+<h3 class="anchored" data-anchor-id="from-notes.md-to-a-quarto-document">From <code>notes.md</code> to a Quarto document</h3>
+<p>Your <code>notes.md</code> and my example notebook are written in the same way: Markdown text with code blocks. The difference is that the example notebook is a <strong>Quarto</strong> document (it ends in <code>.qmd</code>). Quarto turns such a file into a web page (HTML), a PDF or a Word file, with a table of contents and colored code. That makes it easier to share your notebook with others, for example with your supervisor or together with a paper.</p>
+<p>If you want to try this in RStudio (recent versions of RStudio come with Quarto):</p>
+<ol type="1">
+<li>Go to <strong>File</strong>, then <strong>New File</strong>, then <strong>Quarto Document</strong></li>
+<li>Copy the content of your <code>notes.md</code> into the new file, below the YAML header at the top (see “YAML headers” above)</li>
+<li>Save the file and click <strong>Render</strong></li>
+</ol>
+<p>Code blocks that you wrote as <code>```bash</code>, like in your notes, are only shown on the page, not run. The <a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto tutorial for RStudio</a> explains the next steps.</p>
+</section>
+<section id="further-reading" class="level3">
+<h3 class="anchored" data-anchor-id="further-reading">Further reading</h3>
+<ul>
+<li><a href="https://assets.britishecologicalsociety.org/2017/12/guide-to-reproducible-code.pdf">A Guide to Reproducible Code in Ecology and Evolution</a> from the British Ecological Society explains how to organize project folders and how to write clear code that others can rerun. The examples are mostly in R, but the advice applies to bash and other languages as well.</li>
+<li><a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown Basics</a> on the Quarto website lists everything else you can do with Markdown, for example lists, links, bold text, images and tables.</li>
+</ul>
 
 
 </section>
 </section>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -856,8 +867,8 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2026-10-07</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+Last modified: 2026-10-08</p>
+<div class="toc-actions"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

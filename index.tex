@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, breakable, colback={codebgcolor}, frame hidden, sharp corners, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, enhanced, colback={codebgcolor}, boxrule=0pt, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -198,12 +198,12 @@
 On this website you will find a short tutorial that will explain how to
 use bash and connect and work with an HPC.
 
-On the first pages you will get some introduction into setting up a
-terminal and documenting your code. Afterwards, the actual tutorial will
-begin, in which you will assume the role of a researcher who received
-data from a sequencing center and wants to start analysing this data
-using the command line interface. This tutorial is divided into two main
-parts:
+On the first page you will set up a terminal. Afterwards, the actual
+tutorial will begin, in which you will assume the role of a researcher
+who received data from a sequencing center and wants to start analysing
+this data using the command line interface. While you work, you keep a
+notebook in which you document what you did and why. This tutorial is
+divided into two main parts:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

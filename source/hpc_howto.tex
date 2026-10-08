@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, boxrule=0pt, frame hidden, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, sharp corners, interior hidden, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -269,6 +269,9 @@ to work on the UvA Crunchomics HPC. On this page, you will:
   \end{itemize}
 \item
   Install your own software with conda
+\item
+  Keep documenting what you do in the notebook (\texttt{notes.md}) that
+  you started on day 1
 \end{itemize}
 
 For people following this tutorial outside of UvA:
@@ -328,7 +331,7 @@ checks. After logging in, the prompt changes: it now shows your UvAnetID
 and \texttt{omics-h0}. Every command you type now runs on Crunchomics,
 not on your own computer.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-important-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 \textbf{Important tips for connecting:}
 
@@ -347,7 +350,7 @@ not on your own computer.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Viewing graphical output with ssh -X}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Viewing graphical output with ssh -X}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 Some programs on the HPC can open a window, for example to show a plot
 or a PDF. To see such windows on your own computer, log in with the
@@ -496,7 +499,7 @@ that the files arrived:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to your own computer}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to your own computer}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 You can also copy results from the HPC to your own computer. For this,
 you switch source and destination. For example, to copy a single
@@ -523,7 +526,7 @@ sequencing file from Crunchomics:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files with wildcards}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files with wildcards}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 We can also copy several files at once with a wildcard. Then
 \texttt{scp} copies only the files, not the folders they are in.
@@ -566,6 +569,70 @@ setups might need slightly different solutions):
 \FunctionTok{scp} \StringTok{\textquotesingle{}data/seq\_project/barcode00*/*fastq.gz\textquotesingle{}}\NormalTok{ username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/transfer\_test}
 \end{Highlighting}
 \end{Shaded}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Setting up on Crunchomics}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
+
+Today you keep writing in the same \texttt{notes.md} on your own
+computer. You copy the commands from the terminal that is logged in to
+Crunchomics into it.
+
+Since you now work on two computers, your notebook needs to say
+\textbf{where} each command ran. Start every code block with a comment:
+\texttt{\#\ On\ my\ computer} or \texttt{\#\ On\ Crunchomics}.
+
+Add a new heading \texttt{\#\#\ Setting\ up\ on\ Crunchomics}, and below
+it:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The command you used to log in
+\item
+  The account setup with \texttt{omics\_install\_script}, with a note
+  that this is only needed once
+\item
+  The commands that made your project folder, and in normal text, where
+  this folder is
+\item
+  The \texttt{scp} command that copied the data, and the check that all
+  files arrived
+\end{enumerate}
+
+\begin{quote}
+\textbf{Compare with my notes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\#\# Setting up on Crunchomics}
+
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}bash}
+\CommentTok{\# On my computer: log in to Crunchomics (on eduroam or with the VPN)}
+\FunctionTok{ssh}\NormalTok{ uvanetid@omics{-}h0.science.uva.nl}
+
+\CommentTok{\# On Crunchomics: set up my account (only needed once)}
+\CommentTok{\# Adds the Crunchomics software to my PATH and makes the \textasciitilde{}/personal link (500 GB)}
+\ExtensionTok{/zfs/omics/software/script/omics\_install\_script}
+
+\CommentTok{\# On Crunchomics: make the project folder inside my personal folder}
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}/personal}
+\FunctionTok{mkdir}\NormalTok{ data\_analysis}
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{My project folder on Crunchomics is }\InformationTok{\textasciigrave{}\textasciitilde{}/personal/data\_analysis\textasciigrave{}}\NormalTok{, with the same name as on my computer.}
+
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}bash}
+\CommentTok{\# On my computer, inside my local data\_analysis folder: copy the data to Crunchomics}
+\FunctionTok{scp} \AttributeTok{{-}r}\NormalTok{ data uvanetid@omics{-}h0.science.uva.nl:/home/uvanetid/personal/data\_analysis}
+
+\CommentTok{\# On Crunchomics, inside data\_analysis: check that all 8 fastq.gz files arrived}
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{fastq.gz }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+\end{quote}
 
 \end{tcolorbox}
 
@@ -683,7 +750,7 @@ which resources your job needs on the compute node. The job runs so fast
 that you won't see it in \texttt{squeue}. But congratulations, you just
 communicated with a compute node for the first time.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-important-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 Jobs started with \texttt{srun} stop if you lose the connection to the
 HPC, for example when you close your laptop. For longer jobs, use
@@ -691,7 +758,7 @@ HPC, for example when you close your laptop. For longer jobs, use
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Other srun options you might see}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Other srun options you might see}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 In examples online, you will often see two more options:
 
@@ -818,7 +885,7 @@ The most useful columns for us are:
   \texttt{GC(\%)}: the percentage of G and C bases
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: FastQC for visual quality reports}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: FastQC for visual quality reports}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 \texttt{seqkit\ stats} gives us numbers. A very common tool for a more
 detailed, visual check of sequencing quality is
@@ -831,7 +898,7 @@ combine many of these reports into one.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -922,7 +989,7 @@ When you are done, leave the compute node and go back to the login node:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-important-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 Always \texttt{exit} an interactive session when you are done. As long
 as the session is open, the CPUs and memory you requested stay reserved
@@ -1104,7 +1171,7 @@ Since we gave seqkit the same output file name, the table from the
 the input is the same. With real data, overwriting results by accident
 can cost you hours of work, so choose your output names with care.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Debugging your first sbatch jobs}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Debugging your first sbatch jobs}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 If your job fails:
 
@@ -1144,10 +1211,42 @@ For example, if your job ID was 754:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Good HPC etiquette}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Good HPC etiquette}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 Always cancel jobs that run incorrectly or that you no longer need. This
 frees resources for others and avoids unnecessary load on the cluster.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Read statistics with seqkit}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
+
+Add a new heading \texttt{\#\#\ Read\ statistics\ with\ seqkit} to
+\texttt{notes.md}, and below it:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Which tool you used, and which version. Run \texttt{seqkit\ version}
+  to find out, and write the version in the comment above the command
+\item
+  The \texttt{sbatch} command, with a comment that names the script and
+  the file it makes. Below the code block, write down the job ID that
+  \texttt{sbatch} printed (\texttt{Submitted\ batch\ job\ ...}). The job
+  ID is also part of the names of the log files, so with it you can find
+  the logs of this run later
+\item
+  We ran seqkit twice, first with \texttt{srun} and then with
+  \texttt{sbatch}, and the second run replaced the table of the first
+  one. Write down which run made the table that is there now
+\item
+  Below the code block: does the number of reads of
+  \texttt{Sample-DUMMY1\_R2} match your count from day 1?
+\end{enumerate}
+
+You don't need to copy the content of the job script into your notebook.
+It is saved in \texttt{scripts/seqkit.sh}, and at the end of the day, we
+copy it to your own computer.
 
 \end{tcolorbox}
 
@@ -1228,7 +1327,7 @@ longer in the queue and can block others from running.
 \section{\texorpdfstring{\texttt{screen}: Keeping srun jobs running
 (optional)}{screen: Keeping srun jobs running (optional)}}\label{screen-keeping-srun-jobs-running-optional}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Using screen for long srun jobs}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Using screen for long srun jobs}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 One downside of \texttt{srun} for long running jobs is that your
 terminal is ``blocked'' as long as the job runs, and your job is aborted
@@ -1361,8 +1460,8 @@ skip to the next section. If they print nothing or an error message (for
 example one that contains \texttt{no\ conda\ in}), install
 \textbf{Miniforge}, a small installer that contains conda and mamba.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Install Miniforge into your personal folder, not into your
-home folder}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-important-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Install Miniforge into your personal folder, not into your
+home folder}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 Your home folder on Crunchomics has only 25 GB of space, and conda
 environments can take up several GB once you have a few of them. So we
@@ -1526,7 +1625,7 @@ the fastp of Crunchomics again.
   \texttt{conda\ env\ remove\ -n\ name\_of\_the\_environment}
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1556,6 +1655,33 @@ You should see two environments in the list: \texttt{base} and
 \texttt{fastp\_1.4.0}. The fastp program is in the \texttt{bin} folder
 of the environment, inside your \texttt{miniforge3} folder.
 \end{quote}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Installing fastp}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
+
+Software gets its own place in your notebook: near the \textbf{top},
+below the short description. Someone who wants to repeat your analysis
+then sees right away what they need to install first.
+
+Add a heading \texttt{\#\#\ Software} below the description at the top
+of \texttt{notes.md}, and below it:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The tools that were already installed on Crunchomics, with their
+  version (seqkit)
+\item
+  Where you installed Miniforge, and that you ran \texttt{conda\ init}
+  (only needed once)
+\item
+  The \texttt{mamba\ create} command, and the name of the environment
+\item
+  One sentence on why you installed fastp yourself, instead of using the
+  fastp of Crunchomics
+\end{enumerate}
 
 \end{tcolorbox}
 
@@ -1703,7 +1829,7 @@ it and see exactly which samples the loop will work on. And if you later
 want to rerun only some samples, you can make a shorter list without
 changing the loop.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Making a list file by hand}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Making a list file by hand}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 You can also type a list file yourself, one sample name per line. Use
 \texttt{nano} for this, not Notepad or Word. As we saw on day 1, Windows
@@ -1796,7 +1922,7 @@ the R1 and R2 input files belong to the same sample? Does every sample
 get its own output names? If something looks wrong, it is much easier to
 fix it now than after the job has run.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't put quotes around a path with a wildcard}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-important-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't put quotes around a path with a wildcard}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 In scripts that you find online, or that an AI tool writes for you,
 variables are often written in quotes, for example \texttt{"\$sample"}.
@@ -1927,7 +2053,7 @@ Also check that none of the files is empty (a size of 0 in the
 \texttt{ls\ -l} output), and that each sample name appears in the
 \texttt{.out} log.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1981,10 +2107,41 @@ the fastp report.
 
 \end{tcolorbox}
 
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Quality filtering with fastp}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
+
+Add a new heading \texttt{\#\#\ Quality\ filtering\ with\ fastp} to
+\texttt{notes.md}, and below it:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The command that made \texttt{samples.txt}, and the check
+\item
+  The \texttt{sbatch} command with a comment that names the script, and
+  below the code block, the job ID
+\item
+  The checks on the output: what you expected and what you saw
+\item
+  The \texttt{scp} command that copied the reports to your computer
+  (remember: \texttt{\#\ On\ my\ computer})
+\item
+  Below the code block, in your own words: what did the fastp report
+  show for Sample-DUMMY1? How many reads were there before and after
+  filtering? Did anything surprise you?
+\end{enumerate}
+
+The test run on one sample was a detour, so you don't need its commands.
+One sentence on what it taught you is enough, for example that fastp
+writes its reports to \texttt{fastp.html} and \texttt{fastp.json} unless
+you give other names.
+
+\end{tcolorbox}
+
 \subsection{Comparing reads before and after trimming
 (optional)}\label{comparing-reads-before-and-after-trimming-optional}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{seqkit stats and awk: before vs after trimming}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{seqkit stats and awk: before vs after trimming}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 At the start of the day, we made a table with \texttt{seqkit\ stats} for
 the raw reads. If we make the same table for the trimmed reads, we can
@@ -2067,7 +2224,7 @@ how the output changes.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Extra bash syntax: Finding R2 without a list file (optional)}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Extra bash syntax: Finding R2 without a list file (optional)}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 For those who want to learn more bash: we can also write this loop
 without \texttt{samples.txt}. We then loop directly over the R1 files,
@@ -2112,10 +2269,59 @@ another example.
 
 \end{tcolorbox}
 
+\section{Wrapping up day 2}\label{wrapping-up-day-2}
+
+Your analysis now lives in two places: the data, results and job scripts
+on Crunchomics, and the notebook on your own computer. The notebook
+mentions the job scripts, so let's copy them next to it. Run this in the
+terminal on your \textbf{own} computer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Run this on your OWN computer, inside your local data\_analysis folder}
+\CommentTok{\# Replace both instances of \textquotesingle{}username\textquotesingle{} with your UvAnetID}
+\FunctionTok{scp} \StringTok{\textquotesingle{}username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/scripts/*.sh\textquotesingle{}}\NormalTok{ scripts/}
+
+\CommentTok{\# Check: we expect count\_lines.sh from day 1, and seqkit.sh and fastp.sh from today}
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ scripts}
+\end{Highlighting}
+\end{Shaded}
+
+As in the fastp exercise, the quotes around the path stop your own
+computer from using the wildcard, so that Crunchomics can use it to find
+the files.
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Tidy your notebook (day 2)}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Add the \texttt{scp} command that copied the scripts to your notebook
+\item
+  Update the description at the top of \texttt{notes.md}, so that it
+  covers both days
+\item
+  Check that your notebook explains every file and folder in your
+  project on Crunchomics. Run these inside
+  \texttt{\textasciitilde{}/personal/data\_analysis}: \texttt{ls},
+  \texttt{ls\ results/*} and \texttt{ls\ scripts\ logs}. Can you tell
+  which log file belongs to which job?
+\item
+  Read your \texttt{\#\#\ Questions\ for\ day\ 2} again. Write down the
+  answers you found, and ask about the rest now
+\item
+  Compare your notebook with my \href{example_doc.qmd}{example
+  notebook}. What does it have that yours doesn't? Is there anything you
+  want to add?
+\end{enumerate}
+
+\end{tcolorbox}
+
 \section{Job arrays: Running many files in parallel
 (optional)}\label{job-arrays-running-many-files-in-parallel-optional}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colback=white, rightrule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, leftrule=.75mm, coltitle=black, breakable, opacityback=0, titlerule=0mm, arc=.35mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Advanced tip: sbatch arrays to run multiple files in parallel}, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, left=2mm, opacityback=0, coltitle=black]
 
 Our fastp loop runs inside a single job, so the samples are processed
 one after another. With 4 small samples, that is fine. With hundreds of

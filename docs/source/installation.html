@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../source/code_documentation.html" rel="next">
+<link href="../source/bash_intro.html" rel="next">
 <link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -79,9 +79,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c16977c9243bea85ee98617436fd64f4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-39ae85bfe5a33810539f007ef636a0b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-c16977c9243bea85ee98617436fd64f4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-15588f69a37eaca1ec2d86b480f3dace.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-eccef429d0d31bd68d5910419204386c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-15588f69a37eaca1ec2d86b480f3dace.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -330,12 +330,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../source/installation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Before you start</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../source/code_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documenting code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -607,21 +601,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-6-choose-a-text-editor-for-your-notes" class="level2">
 <h2 class="anchored" data-anchor-id="step-6-choose-a-text-editor-for-your-notes">Step 6: Choose a text editor for your notes</h2>
-<p>While you work through the tutorial, you keep a notes file. Each time you run a command, you copy it into the file, with a short comment that says what it does. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later.</p>
+<p>While you work through the tutorial, you keep a notebook. Each time you run a command, you copy it into the notebook, with a short comment that says what it does and a few words about what you saw. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later. We write the notebook in <strong>Markdown</strong>, plain text with a few symbols for headings and code. You learn the few rules you need on day 1.</p>
 <p>For this you need a <strong>plain text editor</strong>, a program that saves only the text you type, without any layout. Do not use Word or a similar program. These programs change some characters, for example a straight quote <code>'</code> into a curly quote <code>’</code>. A command with a curly quote does not work anymore.</p>
 <p>Pick one of these options:</p>
 <ul>
-<li><strong>RStudio</strong>: if you already use R, this is the easiest choice. Go to <strong>File</strong>, then <strong>New File</strong>, then <strong>Text File</strong>.</li>
+<li><strong>RStudio</strong> (recommended): it shows Markdown in color, and many of you already use it for R. Go to <strong>File</strong>, then <strong>New File</strong>, then <strong>Markdown File</strong>. This opens an empty Markdown file.</li>
 <li><strong>Notepad</strong> (Windows, already installed) or <a href="https://notepad-plus-plus.org/">Notepad++</a> (Windows, free, shows code in color).</li>
 <li><strong>TextEdit</strong> (Mac, already installed): first go to <strong>Format</strong>, then <strong>Make Plain Text</strong>, otherwise TextEdit saves the file with layout.</li>
 <li><strong>Text Editor</strong> or gedit (Linux, usually already installed).</li>
 <li><a href="https://code.visualstudio.com/"><strong>VS Code</strong></a>: a powerful code editor for all systems. It takes a bit more time to set up, so I only recommend it if you already use it.</li>
 </ul>
-<p>To check that it works, open your editor, create a new file, type a line of text and save it as <code>cli_workshop_notes.txt</code>. You use this file from the first chapter on.</p>
+<p>To check that it works, open your editor, create a new file, type a line of text and save it as <code>test.md</code>. You can delete this file afterwards: on day 1, we make the real notebook inside the project folder.</p>
 </section>
 <section id="you-are-ready" class="level2">
 <h2 class="anchored" data-anchor-id="you-are-ready">You are ready</h2>
-<p>If both checks worked and you have a notes file, you are ready to start. If you join the workshop: see you on day 1!</p>
+<p>If both checks worked and your editor can save a <code>.md</code> file, you are ready to start. If you join the workshop: see you on day 1!</p>
 </section>
 </section>
 
@@ -1053,8 +1047,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../source/code_documentation.html" class="pagination-link" aria-label="Documenting code">
-        <span class="nav-page-text">Documenting code</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../source/bash_intro.html" class="pagination-link" aria-label="Introduction to Bash">
+        <span class="nav-page-text">Introduction to Bash</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1066,7 +1060,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2026-10-06</p>
+Last modified: 2026-10-08</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/installation.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

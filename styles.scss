@@ -5,6 +5,11 @@ $exercise-border-color: #7e57c2 !default;   /* purple vertical bar */
 $exercise-header-light: #f3e8ff !default;   /* light purple header, light theme */
 $exercise-header-dark: #3b2a5c !default;    /* dark purple header, dark theme */
 
+// Colours for the notebook checkpoint boxes (blue, so they look different from the exercises and the green tips)
+$notebook-border-color: #1976d2 !default;   /* blue vertical bar */
+$notebook-header-light: #e3f2fd !default;   /* light blue header, light theme */
+$notebook-header-dark: #123a63 !default;    /* dark blue header, dark theme */
+
 
 
 /*-- scss:rules --*/
@@ -46,6 +51,43 @@ div.callout-answer.callout .callout-icon::before {
   content: "☑️";
 }
 
+// Notebook checkpoint boxes, used as:
+// ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: ..."}
+// with a nested answer box: ::: {.callout-notebook-answer .callout-note collapse="true" title="Compare with my notes"}
+div.callout-notebook.callout,
+div.callout-notebook-answer.callout {
+  border-left: 4px solid $notebook-border-color;
+
+  .callout-title-container {
+    color: #333333;
+    font-weight: 600;
+  }
+
+  .callout-icon {
+    display: inline-block !important;
+    width: 1.2rem;
+    line-height: 1.6rem;
+    text-align: center;
+    margin-right: 0.6rem;
+  }
+
+  .callout-icon::before {
+    font-size: 1.2rem;
+  }
+
+  &.callout-style-default > .callout-header {
+    background-color: $notebook-header-light;
+  }
+}
+
+div.callout-notebook.callout .callout-icon::before {
+  content: "📓";
+}
+
+div.callout-notebook-answer.callout .callout-icon::before {
+  content: "📝";
+}
+
 // Dark theme: darker header and light title text
 body.quarto-dark {
   div.callout-question.callout,
@@ -56,6 +98,17 @@ body.quarto-dark {
 
     &.callout-style-default > .callout-header {
       background-color: $exercise-header-dark;
+    }
+  }
+
+  div.callout-notebook.callout,
+  div.callout-notebook-answer.callout {
+    .callout-title-container {
+      color: #e3f2fd;
+    }
+
+    &.callout-style-default > .callout-header {
+      background-color: $notebook-header-dark;
     }
   }
 }

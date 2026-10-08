@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, breakable, frame hidden, sharp corners, colback={codebgcolor}, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={codebgcolor}, enhanced, breakable, sharp corners, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -210,7 +210,7 @@ The link above leads you to an example for:
   is provided as a Quarto markdown file
   \href{https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd}{here}
   and for convenience the report was also rendered as a
-  \href{https://github.com/ndombrowski/cli_workshop/blob/main/docs/example_doc/example_notebook.html}{html}
+  \href{https://ndombrowski.github.io/cli_workshop/example_doc/example_notebook.html}{html}
   to make it easier to read for potential collaborators. To view the
   HTML report, you need to download it first.
 \end{itemize}
@@ -269,7 +269,8 @@ section. Typically things to add are:
 I tend to NOT add the information on how I use \texttt{scp} to log into
 an HPC to keep my user name and login information private.
 
-\subsection{Sanity checks}\label{sanity-checks}
+\subsection{Looking at the data (sanity
+checks)}\label{looking-at-the-data-sanity-checks}
 
 \includegraphics[width=5.84375in,height=\textheight,keepaspectratio]{../img/sanity_check.png}
 
@@ -344,6 +345,57 @@ I tend to prefer number 2 because I like to record the code in my
 notebooks exactly as I ran it but you can do it differently as long as
 all the code you ran is recorded and accessible to others once you
 publish your data.
+
+\section{Going further}\label{going-further}
+
+\subsection{\texorpdfstring{From \texttt{notes.md} to a Quarto
+document}{From notes.md to a Quarto document}}\label{from-notes.md-to-a-quarto-document}
+
+Your \texttt{notes.md} and my example notebook are written in the same
+way: Markdown text with code blocks. The difference is that the example
+notebook is a \textbf{Quarto} document (it ends in \texttt{.qmd}).
+Quarto turns such a file into a web page (HTML), a PDF or a Word file,
+with a table of contents and colored code. That makes it easier to share
+your notebook with others, for example with your supervisor or together
+with a paper.
+
+If you want to try this in RStudio (recent versions of RStudio come with
+Quarto):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Go to \textbf{File}, then \textbf{New File}, then \textbf{Quarto
+  Document}
+\item
+  Copy the content of your \texttt{notes.md} into the new file, below
+  the YAML header at the top (see ``YAML headers'' above)
+\item
+  Save the file and click \textbf{Render}
+\end{enumerate}
+
+Code blocks that you wrote as
+\texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}bash}, like
+in your notes, are only shown on the page, not run. The
+\href{https://quarto.org/docs/get-started/hello/rstudio.html}{Quarto
+tutorial for RStudio} explains the next steps.
+
+\subsection{Further reading}\label{further-reading}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://assets.britishecologicalsociety.org/2017/12/guide-to-reproducible-code.pdf}{A
+  Guide to Reproducible Code in Ecology and Evolution} from the British
+  Ecological Society explains how to organize project folders and how to
+  write clear code that others can rerun. The examples are mostly in R,
+  but the advice applies to bash and other languages as well.
+\item
+  \href{https://quarto.org/docs/authoring/markdown-basics.html}{Markdown
+  Basics} on the Quarto website lists everything else you can do with
+  Markdown, for example lists, links, bold text, images and tables.
+\end{itemize}
 
 
 
