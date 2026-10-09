@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, sharp corners, breakable, colback={codebgcolor}, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, frame hidden, colback={codebgcolor}, enhanced, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -208,13 +208,22 @@ The link above shows you:
 \item
   How you can use GitHub to make your code available to others
 \item
+  How you can organize a project folder, with a \texttt{README.md} file
+  that explains what is in the folder and where to start
+\item
   What a code notebook can look like. The notebook is a Quarto file,
   which you find
-  \href{https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd}{here}.
+  \href{https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/notebook/example_notebook.qmd}{here}.
   To make it easier to read for collaborators, I also turned it into an
-  \href{https://ndombrowski.github.io/cli_workshop/example_doc/example_notebook.html}{HTML
+  \href{https://ndombrowski.github.io/cli_workshop/example_doc/notebook/example_notebook.html}{HTML
   report}.
 \end{itemize}
+
+In the example, the notebook has its own folder, \texttt{notebook/},
+next to the \texttt{scripts/} folder. In the tutorial, you kept your
+\texttt{notes.md} directly in \texttt{data\_analysis/}. Both work. A
+separate folder keeps a bigger project tidy, but all commands still run
+from the project folder itself.
 
 The example uses the same data as this tutorial, so the code might only
 make sense after you have finished the tutorial. Feel free to come back

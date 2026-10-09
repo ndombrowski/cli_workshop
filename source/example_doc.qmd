@@ -11,7 +11,10 @@ If you want to see an example of documented code, have a look at [a notebook](ht
 The link above shows you:
 
 -   How you can use GitHub to make your code available to others
--   What a code notebook can look like. The notebook is a Quarto file, which you find [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/example_notebook.qmd). To make it easier to read for collaborators, I also turned it into an [HTML report](https://ndombrowski.github.io/cli_workshop/example_doc/example_notebook.html). 
+-   How you can organize a project folder, with a `README.md` file that explains what is in the folder and where to start
+-   What a code notebook can look like. The notebook is a Quarto file, which you find [here](https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/notebook/example_notebook.qmd). To make it easier to read for collaborators, I also turned it into an [HTML report](https://ndombrowski.github.io/cli_workshop/example_doc/notebook/example_notebook.html).
+
+In the example, the notebook has its own folder, `notebook/`, next to the `scripts/` folder. In the tutorial, you kept your `notes.md` directly in `data_analysis/`. Both work. A separate folder keeps a bigger project tidy, but all commands still run from the project folder itself.
 
 The example uses the same data as this tutorial, so the code might only make sense after you have finished the tutorial. Feel free to come back to this page after you have written some code yourself.
 

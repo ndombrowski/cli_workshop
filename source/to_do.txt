@@ -3,6 +3,9 @@
 Schedule and core/optional split: _course_schedule.md
 Project notes for Claude: CLAUDE.md (local only)
 
+Each topic has a "To do" and a "Done" part. Items marked "(status unclear)" could not be
+sorted from the notes alone: check them and move them.
+
 
 ## Deadlines
 
@@ -16,9 +19,24 @@ Project notes for Claude: CLAUDE.md (local only)
 
 ## General structure
 
+### To do
+
 - Mark a core path and an optional path. Optional = "(optional)" in the heading + collapsed box.
   Candidates for day 1: sort/uniq, cat (combining files), gzip, the second wc section, nano, advanced tips.
   Decided 2026-10-08: sort/uniq and cat stay core (not optional).
+  cut stays core (decided 2026-10-07): day 2 uses it to make samples.txt.
+  Still open: gzip, the second wc section, nano, advanced tips.
+- Follow-ups from the loop rework:
+  - Hidden <!-- TO CHECK --> comments in hpc_howto.qmd: conda section (Crunchomics fastp still 1.0.1,
+    installer name Miniforge3-Linux-x86_64.sh, `which mamba` and `(base)` after conda init) and fastp
+    section (fastp 1.4.0 option names and default report names, whether the report counts R1+R2 reads
+    together). Remove the comments after the test run. Also check that 1.4.0 runs without stalling.
+  - Check on a Mac: the loop continuation prompt in zsh (page says it may look like "for>").
+  - MobaXterm: day 1 script section uses nano, installed in class with `apt install nano` (OK, decided
+    2026-10-07). Still to test: does MobaXterm's bash accept CRLF scripts (like Git Bash) or not (like WSL)?
+
+### Done
+
 - Style pass (consistent text across pages), started 2026-10-08:
   DONE bash_intro.qmd: older sections rewritten in the newer style (head/tail/less, nano tip, wc, pipes,
   cut, sort/uniq, cat, fastq/gzip intro, zcat, grep, wc II, More wildcards tip, both Better counting tips,
@@ -40,14 +58,13 @@ Project notes for Claude: CLAUDE.md (local only)
   DONE example_doc.qmd (grammar + terms, Nina's voice kept): intro links the example to notes.md, YAML
   header now explained (was image only), GitHub/Zenodo/Markdown capitalised, i.e. removed, "how I use scp
   to log into an HPC" -> ssh to log in + scp to copy, option 2 for scripts links to the day 2 scp step.
-  NOT touched: the "Justifying decisions" bullet (Nina rewrites it herself).
+  NOT touched: the "Justifying decisions" bullet (Nina rewrites it herself, see Day 2 To do).
   - DONE 2026-10-08 (Nina): removed "you need to download it first" from example_doc.qmd; the HTML
     report on GitHub Pages opens directly in the browser.
   DONE index.qmd: welcome text in the new style, part 2 now says install software + check and clean
   (was "assess the quality"), dead link replaced (see Site-wide). readme.md now has the same text
   (copied by Nina 2026-10-08).
   Style pass finished for all pages (2026-10-08).
-  cut stays core (decided 2026-10-07): day 2 uses it to make samples.txt.
 - DONE 2026-10-07: loops reworked over both days (decisions in _course_schedule.md).
   Day 1 (bash_intro.qmd): new section "echo and variables", loop over a wildcard only (variable
   fastq_file, echo dry run first, then zcat | wc -l), 1 2 3 warm-up + loops.png + backtick cat loop
@@ -58,19 +75,13 @@ Project notes for Claude: CLAUDE.md (local only)
   end of the page (6 steps: one sample with srun, samples.txt with ls | cut | cut, loop with echo/ls,
   dry run, sbatch script, output checks + exercise), plus a collapsed "Extra bash syntax" box.
   Array tip now uses fastq_files.txt instead of samples.txt. example_notebook.qmd: same rename.
-- Follow-ups from the loop rework:
-  - Hidden <!-- TO CHECK --> comments in hpc_howto.qmd: conda section (Crunchomics fastp still 1.0.1,
-    installer name Miniforge3-Linux-x86_64.sh, `which mamba` and `(base)` after conda init) and fastp
-    section (fastp 1.4.0 option names and default report names, whether the report counts R1+R2 reads
-    together). Remove the comments after the test run. Also check that 1.4.0 runs without stalling.
-    DONE 2026-10-07: example_notebook.qmd job IDs and fastp notes filled in by Nina; CentOS confirmed.
+- Done follow-ups from the loop rework:
   - Not run yet on the course data: all new day 1 and day 2 commands. Tested 2026-10-07 only on empty
     dummy files in WSL bash 5.2: samples.txt via ls | cut | cut, ${sample} vs $sample_R1 (the latter
     silently becomes empty), the echo dry run, the extra-syntax loop; Windows line endings in a script
     give "$'\r': command not found" (Git Bash hides this, it ignores CRLF).
-  - Check on a Mac: the loop continuation prompt in zsh (page says it may look like "for>").
-  - MobaXterm: day 1 script section uses nano, installed in class with `apt install nano` (OK, decided
-    2026-10-07). Still to test: does MobaXterm's bash accept CRLF scripts (like Git Bash) or not (like WSL)?
+    DONE: first test run by Nina, went well (noted 2026-10-09).
+  - DONE 2026-10-07: example_notebook.qmd job IDs and fastp notes filled in by Nina; CentOS confirmed.
   - Local data_analysis now gets a scripts/ folder on day 1 (agreed 2026-10-07, CLAUDE.md updated).
   - DONE 2026-10-07: array tip moved to the end of hpc_howto.qmd, after the fastp section. Its intro now
     starts from the fastp loop (samples one after another) and still uses FastQC + fastq_files.txt.
@@ -86,33 +97,14 @@ Project notes for Claude: CLAUDE.md (local only)
 
 ## Before the workshop (installation.qmd)
 
-- DONE 2026-10-06: page rebuilt from the MicEco2025 terminal page. Steps: request Crunchomics
-  access, terms, terminal (MobaXterm first, WSL2 second, Git Bash dropped), echo $SHELL, ssh (no -X)
-  + exit with eduroam/VPN and troubleshooting, text editor (RStudio first). Works for workshop and
-  self-study; "Getting help" box with the one-week-before deadline.
-- After editing installation.qmd: rebuild source/installation_preworkshop.html (the email
-  attachment) with the hidden command at the end of index.qmd.
-  NEEDED NOW: installation.qmd changed on 2026-10-06 (MobaXterm portable vs installer edition,
-  new step 3 subsection "MobaXterm: choose a permanent home folder" = C:\Users\<name>\MobaXterm_home,
-  no restart test anymore). bash_intro.qmd box after explorer.exe . points to it. Checked 2026-10-06
-  (portable v26.5, temporary home): explorer.exe . opens Local > Temp > Mxt265 > mx86_64b > tmp > home_<name>.
-  Also check whether _preworkshop_instructions.md should mention the new MobaXterm setting.
-  Changed again 2026-10-06: section is now "MobaXterm: choose a permanent folder": ONE folder
-  (MobaXterm_home) chosen for both home AND root. MobaXterm then makes the root
-  MobaXterm_home\slash by itself. Reason for setting root: nano is not in MobaXterm by default
-  ("command not found"), and with a temporary root, `apt install nano` was gone after a restart.
-  TESTED: with the permanent folder, nano survives a restart. The slash folder is not explained
-  on the page on purpose (Nina explains it if someone asks).
-  Also check: does `nano` work on current macOS (may start pico instead)?
-- MobaXterm home directory (added 2026-10-06): we work in the home directory on all systems and open
-  it with explorer.exe . / open . (no /mnt/c paths on the core path).
-  TESTED 2026-10-06, fresh portable v26.5 (old %AppData%\MobaXterm settings renamed away): "Terminal
-  home directory" defaults to <Temp directory>, a test file was gone after a restart. The portable
-  stores its settings in %AppData%\MobaXterm\MobaXterm.ini (not next to the .exe), so leftover
-  settings from an earlier install change what you see. Installer edition default was
-  _AppDataDir_\MobaXterm\home (seen with installer settings, not tested on a clean PC).
-  The online help (mobaxterm.mobatek.net/documentation.html, checked 2026-10-06) still calls the
-  field "Persistent home directory" and describes an older General tab.
+Rule: after editing installation.qmd, rebuild source/installation_preworkshop.html (the email
+attachment) with the hidden command at the end of index.qmd.
+
+### To do
+
+- Check whether _preworkshop_instructions.md should mention the new MobaXterm setting
+  ("MobaXterm: choose a permanent folder", see Done).
+- Check: does `nano` work on current macOS (may start pico instead)?
 - Check that explorer.exe . works from the WSL home (/home/user), and that /mnt/c is the right path
   to the C drive in MobaXterm (both used in bash_intro.qmd, not tested).
 - Check details written from general knowledge (not verified): MobaXterm button "Start local
@@ -122,9 +114,57 @@ Project notes for Claude: CLAUDE.md (local only)
 - The Mac section promises "I point out the places where zsh is different": day 1 must do that.
 - img/using_mobaxterm_tabs.png (added 2026-10-06, not used yet): maybe for day 2 (scp in a second
   tab while logged in to Crunchomics in the first). Not decided.
+  (Checked 2026-10-09: no .qmd page uses it, although Day 2 ROUND 1 says "using_mobaxterm_tabs.png in scp".)
+
+### Done
+
+- DONE 2026-10-06: page rebuilt from the MicEco2025 terminal page. Steps: request Crunchomics
+  access, terms, terminal (MobaXterm first, WSL2 second, Git Bash dropped), echo $SHELL, ssh (no -X)
+  + exit with eduroam/VPN and troubleshooting, text editor (RStudio first). Works for workshop and
+  self-study; "Getting help" box with the one-week-before deadline.
+- installation.qmd changed on 2026-10-06 (MobaXterm portable vs installer edition,
+  new step 3 subsection "MobaXterm: choose a permanent home folder" = C:\Users\<name>\MobaXterm_home,
+  no restart test anymore). bash_intro.qmd box after explorer.exe . points to it. Checked 2026-10-06
+  (portable v26.5, temporary home): explorer.exe . opens Local > Temp > Mxt265 > mx86_64b > tmp > home_<name>.
+  Changed again 2026-10-06: section is now "MobaXterm: choose a permanent folder": ONE folder
+  (MobaXterm_home) chosen for both home AND root. MobaXterm then makes the root
+  MobaXterm_home\slash by itself. Reason for setting root: nano is not in MobaXterm by default
+  ("command not found"), and with a temporary root, `apt install nano` was gone after a restart.
+  TESTED: with the permanent folder, nano survives a restart. The slash folder is not explained
+  on the page on purpose (Nina explains it if someone asks).
+  The rebuild of installation_preworkshop.html that this needed was done 2026-10-08 (see Documenting code).
+- MobaXterm home directory (added 2026-10-06): we work in the home directory on all systems and open
+  it with explorer.exe . / open . (no /mnt/c paths on the core path).
+  TESTED 2026-10-06, fresh portable v26.5 (old %AppData%\MobaXterm settings renamed away): "Terminal
+  home directory" defaults to <Temp directory>, a test file was gone after a restart. The portable
+  stores its settings in %AppData%\MobaXterm\MobaXterm.ini (not next to the .exe), so leftover
+  settings from an earlier install change what you see. Installer edition default was
+  _AppDataDir_\MobaXterm\home (seen with installer settings, not tested on a clean PC).
+  The online help (mobaxterm.mobatek.net/documentation.html, checked 2026-10-06) still calls the
+  field "Persistent home directory" and describes an older General tab.
 
 
 ## Day 1: CLI basics (bash_intro.qmd)
+
+### To do
+
+- pwd section shows "/Users/YourUserName" as example output (placeholder): replace after the trial run.
+- zsh differences (promised by installation.qmd) still open: not added, because they could not be
+  tested on a Mac. Candidates: "#" comments in interactive zsh, "no matches found" for wildcards,
+  BSD ls without --help, wc -l padding.
+- The <div style="text-align: justify"> at the top of bash_intro.qmd and hpc_howto.qmd is never
+  closed (pandoc warning "Div ... unclosed"). Close it at the end of the page or remove it.
+  (Checked 2026-10-09: still unclosed on both pages.)
+- To check in the trial run: copy-paste shortcuts (MobaXterm select = copy + right-click = paste;
+  Ubuntu app Ctrl+Shift+C/V), written from general knowledge. Error wording in MobaXterm
+  (toybox ls) and on a Mac, if we want to show those too.
+- Command output (convention in _course_schedule.md): decide per chunk which commands get a text
+  output block (e.g. pwd, ls, head, wc -l, the first error message). Needs real outputs from one
+  run of day 1 on the course data. Same later for day 2 (outputs from Crunchomics).
+  Existing screenshots (img/ls.png etc.): keep where the look matters, otherwise replace by text.
+- Make figure for cut.
+
+### Done
 
 - DONE 2026-10-06: wording updated from the MicEco2025 CLI page (pwd, ls, command structure, man keys,
   comments, Tab, wget/curl, cp, mv, rm, wildcards, > warning, tail -n, pipes, gzip, zcat, grep).
@@ -133,31 +173,17 @@ Project notes for Claude: CLAUDE.md (local only)
   - results/ (made in the cd exercise) now holds the day 1 analysis outputs in subfolders:
     results/combined/ (cat section) and results/counts/ (loop). The file lists fastq_paths.txt and
     fastq_files.txt stay in data_analysis/ (decided 2026-10-06, keeps commands short).
-  - pwd section shows "/Users/YourUserName" as example output (placeholder): replace after the trial run.
-  - zsh differences (promised by installation.qmd) still open: not added, because they could not be
-    tested on a Mac. Candidates: "#" comments in interactive zsh, "no matches found" for wildcards,
-    BSD ls without --help, wc -l padding.
-  - The <div style="text-align: justify"> at the top of bash_intro.qmd and hpc_howto.qmd is never
-    closed (pandoc warning "Div ... unclosed"). Close it at the end of the page or remove it.
 - Missing core skills, move into the main text: Tab completion and arrow up (DONE 2026-10-06, tip
   now open by default). Add: Ctrl+C, reading error messages (first deliberate error: "No such file or directory").
   DONE 2026-10-08: new section "Error messages and Ctrl+C: Getting unstuck" after the cd section
   (before checkpoint 1): deliberate typo ls -l dta (output from WSL Ubuntu 24.04, GNU ls 9.4),
   three causes, command not found in text only, Ctrl+C demo with cat, copy-paste tip.
-  - To check in the trial run: copy-paste shortcuts (MobaXterm select = copy + right-click = paste;
-    Ubuntu app Ctrl+Shift+C/V), written from general knowledge. Error wording in MobaXterm
-    (toybox ls) and on a Mac, if we want to show those too.
 - DONE 2026-10-08: gzip section now decompresses a COPY in results/gzip_test (raw data in data/
   untouched), exercise compares copy vs original with ls -lh, then gzip + rm -r results/gzip_test.
   Checkpoint 3 text adjusted.
 - DONE 2026-10-07: Introduce variables before loops.
 - DONE 2026-10-07: Loops stay simple: echo, then zcat | wc -l per file.
 - DONE 2026-10-07: Introduce script files (.sh, run with bash) as preparation for sbatch on day 2.
-- Command output (convention in _course_schedule.md): decide per chunk which commands get a text
-  output block (e.g. pwd, ls, head, wc -l, the first error message). Needs real outputs from one
-  run of day 1 on the course data. Same later for day 2 (outputs from Crunchomics).
-  Existing screenshots (img/ls.png etc.): keep where the look matters, otherwise replace by text.
-- Make figure for cut.
 - Download URL (changed 2026-10-06): now raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/
   seq_project.tar.gz everywhere (bash_intro, example_notebook.qmd). The old github.com/.../raw/... URL
   redirects with a 4.4 KB response header; MobaXterm's built-in wget (toybox, via alias `_tob wget`)
@@ -176,6 +202,23 @@ Project notes for Claude: CLAUDE.md (local only)
 
 ## Day 2: HPC (hpc_intro.qmd, hpc_howto.qmd)
 
+### To do
+
+- To check on Crunchomics (not added yet, or written without a test run):
+  - MicEco says `srun ... echo "Hello world"` prints the output twice
+  - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
+    without scp. It is still avail. and could be added as a tip for faster viewing of files without download
+  - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
+- Compute node names differ: img/crunchomics1.png says omics-h01-h05, hpc_intro.qmd (line 27) says
+  omics-cn001 - omics-cn005. Check which is right.
+- example_doc.qmd: Nina rewrites the "Justifying decisions" bullet (line ~56) herself, e.g. pointing
+  to the --cut_front note.
+
+### Done
+
+- Screenshots that show seqkit output without -b: check after the qmd rewrite (Nina).
+  DONE: the seqkit screenshot shows the output with -b (Nina, 2026-10-09).
+
 - ROUND 1 DONE 2026-10-06 (hpc_howto.qmd): wording + structure from the MicEco2025 hpc_howto page,
   schedule order with FastQC only. Project folder on Crunchomics is now ~/personal/data_analysis
   (was projectX), login with plain ssh (-X in a tip). New: host key tip, PATH defined, project
@@ -186,17 +229,12 @@ Project notes for Claude: CLAUDE.md (local only)
 - ROUND 2 (needs testing on Crunchomics): conda section (MicEco text: which conda, one-step
   mamba create, conda activate, recommendations list; Miniforge into ~/personal) + fastp
   (one sample with srun, loop with echo, loop in sbatch, output checks). Written and tested on Crunchomics 2026-10-07.
-- To check on Crunchomics (not added yet, or written without a test run):
-  - MicEco says `srun ... echo "Hello world"` prints the output twice
-  - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
-    without scp. It is still avail. and could be added as a tip for faster viewing of files without download
-  - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
+- Done checks on Crunchomics:
   - Day 2 outputs/screenshots (squeue2.png, arrays.png, arrays2.png) show FastQC jobs/logs; replace
     with seqkit runs after a test run (DONE). seqkit may finish too fast
     to catch in squeue.
   - seqkit stats: full 8-file output of stats_raw.txt (page shows header + DUMMY1_R1 only), the
     trimmed-reads table and the two awk commands in the optional before/after box (DONE).
-
 - DONE 2026-10-07: Replace seqkit with fastp everywhere: hpc_howto.qmd, conda section, exercises,
   example_doc/scripts/seqkit.sh, example_notebook.qmd.
 - DONE 2026-10-07: Replace FastQC with seqkit stats on day 2 (srun, sbatch, sacct, screen, arrays,
@@ -208,39 +246,48 @@ Project notes for Claude: CLAUDE.md (local only)
     ll -> ls -l. Job script renamed run_seqkit.sh -> seqkit.sh in hpc_howto.qmd (now matches fastp.sh
     and example_doc/scripts/seqkit.sh). -b added to every seqkit stats command (hpc_howto sbatch,
     screen and array; example_doc/scripts/seqkit.sh, which now also prints date like the tutorial).
-    Screenshots that show seqkit output without -b: check after the qmd rewrite (Nina).
   - DONE 2026-10-07: example_doc.qmd text changed to seqkit / fastp / scripts/seqkit.sh, heading
-    "Settings (change these before you run the workflow)", wdir with $HOME explained. Nina rewrites the
-    "Justifying decisions" bullet (line ~56) herself, e.g. pointing to the --cut_front note.
+    "Settings (change these before you run the workflow)", wdir with $HOME explained.
   - DONE 2026-10-07 (checked by Nina 2026-10-08: $HOME, capital comments and the loop are in the
     new images). Screenshots for source/example_doc.qmd, retake from the rendered notebook: general_setup.png
     (wdir now uses $HOME), comments_in_code.png and external_scripts.png (comments now "# Capital"),
     sanity_check.png (still from 2024: backtick loop over samples.txt, read_counts_per_sample.txt).
     yaml_header.png still matches.
-- Order: seqkit stats with srun (simple, wildcard) → fastp on one sample with srun (look at what it
-  produces) → the loop built step by step with echo → the same loop in an sbatch script →
-  count and check outputs → optional: arrays, and seqkit stats + awk on the trimmed reads.
 - DONE 2026-10-07 (fastp section): Use the for-loops tutorial as a base for building the loop:
   https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html
-- fastp is a nice example of reading the help and thinking about outputs: it writes fastp.html and
-  fastp.json by default, so in a loop it overwrites the reports of earlier samples.
-- Conda motivation: Crunchomics has fastp 1.0.1, the current version is 1.4.0 (released 2026-10-07).
-  Show fastp --version, explain why you may want a newer version, then install an own pinned
-  version with mamba. The Crunchomics fastp is the backup if an install fails.
-- omics_install_script: run in class, explain what it does (PATH, python, ~/personal link).
-- Miniforge: in class, after a short "what is conda/mamba" + instructor demo. Install into
-  ~/personal (500 GB), not home (25 GB). Make this very visible.
 - DONE: interactive session with srun --pty bash.
 - DONE: sacct and "choosing resources" after the first batch job.
 - DONE: screen optional.
-- Arrays as optional next step after the sbatch loop, link to the IBED SLURM page.
-- eduroam/VPN box kept in hpc_howto.qmd (MicEco has it too).
 - DONE: ssh is plain on both pages; -X explained in a collapsed tip on day 2.
-- Compute node names differ: img/crunchomics1.png says omics-h01-h05, hpc_intro.qmd (line 27) says
-  omics-cn001 - omics-cn005. Check which is right.
+- eduroam/VPN box kept in hpc_howto.qmd (MicEco has it too).
+- Plans from the conda/fastp rework. They now show up in hpc_howto.qmd (checked 2026-10-09:
+  omics_install_script, fastp 1.0.1, fastp.html and the IBED SLURM link for arrays are on the page):
+  - Order: seqkit stats with srun (simple, wildcard) → fastp on one sample with srun (look at what it
+    produces) → the loop built step by step with echo → the same loop in an sbatch script →
+    count and check outputs → optional: arrays, and seqkit stats + awk on the trimmed reads.
+  - fastp is a nice example of reading the help and thinking about outputs: it writes fastp.html and
+    fastp.json by default, so in a loop it overwrites the reports of earlier samples.
+  - Conda motivation: Crunchomics has fastp 1.0.1, the current version is 1.4.0 (released 2026-10-07).
+    Show fastp --version, explain why you may want a newer version, then install an own pinned
+    version with mamba. The Crunchomics fastp is the backup if an install fails.
+  - omics_install_script: run in class, explain what it does (PATH, python, ~/personal link).
+  - Miniforge: in class, after a short "what is conda/mamba" + instructor demo. Install into
+    ~/personal (500 GB), not home (25 GB). Make this very visible.
+  - Arrays as optional next step after the sbatch loop, link to the IBED SLURM page.
 
 
 ## Documenting code (notebook thread, example_doc.qmd)
+
+### To do
+
+- sacct: Nina considers cutting it or making it optional. Checkpoint 2 sits before it, so no change needed.
+- Found 2026-10-08: hidden <!-- TO CHECK --> comments in installation.qmd are copied into the
+  rendered HTML, so they end up in the emailed attachment. Keep installation.qmd free of them
+  (put open checks here instead). Probably the same for the site pages (see "Site-wide").
+- TO CHECK comments: TextEdit saving .md (installation.qmd), double-click on notes.md on
+  Mac / fresh laptops (bash_intro.qmd).
+
+### Done
 
 - Make documentation a thread through both days. Decisions in _course_schedule.md (2026-10-08):
   ~/data_analysis/notes.md, Markdown, RStudio recommended, blue checkpoint box per schedule block.
@@ -256,14 +303,13 @@ Project notes for Claude: CLAUDE.md (local only)
   "Wrapping up day 2" (scp of scripts/*.sh to the laptop + checkpoint 5). Intro bullet added.
   seqkit version: confirmed by Nina on Crunchomics 2026-10-08.
   - DONE 2026-10-08: scp 'username@...:/home/username/personal/data_analysis/scripts/*.sh' scripts/ works (tested by Nina).
-  - sacct: Nina considers cutting it or making it optional. Checkpoint 2 sits before it, so no change needed.
   DONE 2026-10-08: example_notebook.qmd headings match the checkpoints (Software, Getting the data,
   Looking at the data, Read statistics with seqkit, Quality filtering with fastp); content unchanged.
   example_doc.qmd: "Sanity checks" -> "Looking at the data (sanity checks)". No screenshot retake
   needed: the screenshots are taken without the headings (Nina, 2026-10-08).
   Kept different on purpose (material for the wrap-up comparison): example has Settings/wdir,
   awk summaries, Citation/Contact; it leaves out ssh/scp and the On my computer/On Crunchomics markers.
-  DONE 2026-10-08: code_documentation.qmd removed (decided by Nina: not kept as extra page).
+- DONE 2026-10-08: code_documentation.qmd removed (decided by Nina: not kept as extra page).
   Kept from it: BES reproducible code guide (new URL assets.britishecologicalsociety.org) and a
   "next step: Quarto document" paragraph, both in a new "Going further" section at the end of
   example_doc.qmd; Markdown Basics link (quarto.org) in the bash_intro notebook section.
@@ -272,20 +318,24 @@ Project notes for Claude: CLAUDE.md (local only)
   and .tex deleted (still in git history).
   - After the next full render: delete the old outputs docs/source/code_documentation.html and
     .pdf if Quarto leaves them in docs/ (Nina's render of 2026-10-08 rebuilt them from the old sidebar).
-  - DONE 2026-10-08: rebuilt source/installation_preworkshop.html (step 6 changed), built in the
-    Claude scratchpad instead of ~/tmp/preworkshop (also outside the project, same result).
-  - Found 2026-10-08: hidden <!-- TO CHECK --> comments in installation.qmd are copied into the
-    rendered HTML, so they end up in the emailed attachment. Keep installation.qmd free of them
-    (put open checks here instead). Probably the same for the site pages (see "Site-wide").
-  - TO CHECK comments: TextEdit saving .md (installation.qmd), double-click on notes.md on
-    Mac / fresh laptops (bash_intro.qmd). RStudio File > New File > Markdown File confirmed by
-    Nina 2026-10-08 (empty .md file, no YAML header).
+    (Checked 2026-10-09: both are gone from docs/.)
+- DONE 2026-10-08: rebuilt source/installation_preworkshop.html (step 6 changed), built in the
+  Claude scratchpad instead of ~/tmp/preworkshop (also outside the project, same result).
+- RStudio File > New File > Markdown File confirmed by
+  Nina 2026-10-08 (empty .md file, no YAML header).
 - Use example_doc.qmd as a wrap-up at the end of day 2. By then participants have written the
   code themselves, so the example makes sense. (Linked from day 2 checkpoint 5.)
-- Consider resutrcutring https://github.com/ndombrowski/cli_workshop/tree/main/example_doc so that 
+- Consider resutrcutring https://github.com/ndombrowski/cli_workshop/tree/main/example_doc so that
   it looks more like a real github page with a readme.md and a docs folder with the qmd files
+  - DONE 2026-10-09: notebook moved to example_doc/notebook/ (not docs/, to avoid confusion with
+    the site output folder docs/). New example_doc/README.md (overview, folder tree, what is not
+    on GitHub, how to rerun). Links in example_doc.qmd updated; HTML report now at
+    docs/example_doc/notebook/example_notebook.html. Old docs HTML and _freeze entry removed.
+
 
 ## LLM page (later)
+
+### To do
 
 - Place: end of day 2 pointer + separate follow-up page.
 - Natural bridge: the conda sbatch exercise tells participants to "google how to activate conda".
@@ -295,29 +345,42 @@ Project notes for Claude: CLAUDE.md (local only)
 
 ## Site-wide
 
+Rule: readme.md is a copy of the index.qmd text (since 2026-10-08): change both together.
+
+### To do
+
 - index.qmd + readme.md: add the 2-day overview, a time estimate for self-study users
   (_course_schedule.md is only visible on GitHub), and the pre-workshop checklist link.
-  readme.md is a copy of the index.qmd text (since 2026-10-08): change both together.
+- Check all external links.
+- Other repo: IBED slurm_basics page has the same --nodes and --mem errors as fixed here.
+- Rendering (found 2026-10-06, Quarto 1.8.25):
+  - The root site_libs/ folder (tracked since commit dd98376, looked like a render accident) was
+    deleted by the render of 2026-10-06. Commit the deletion; check nothing links to it.
+    (Checked 2026-10-09: site_libs/ exists again and 22 files in it are tracked in git.)
+  - Check whether the hidden HTML comment at the end of index.qmd is visible in the page source
+    of the rendered site (pandoc may copy HTML comments into the HTML).
+
+### Done
+
 - DONE 2026-10-08 in index.qmd (new URL returns 200; hpc_howto.qmd no longer uses it): Dead links: scienceparkstudygroup.github.io/software_information/ returns 404 (checked
   2026-10-06). Used in index.qmd and hpc_howto.qmd (sed link). New site:
-  scienceparkstudygroup.github.io/ibed-bioinformatics-page/. Check all external links.
-- Other repo: IBED slurm_basics page has the same --nodes and --mem errors as fixed here.
+  scienceparkstudygroup.github.io/ibed-bioinformatics-page/.
 - Rendering (found 2026-10-06, Quarto 1.8.25):
   - _quarto.yml now has `render: ["*.qmd", "!readme.md"]`, so CLAUDE.md and readme.md are no
     longer rendered. The old docs/readme.html + docs/readme.pdf stay in docs/ and are not updated
     anymore: delete them, or decide readme.md should be rendered after all.
-  - The root site_libs/ folder (tracked since commit dd98376, looked like a render accident) was
-    deleted by the render of 2026-10-06. Commit the deletion; check nothing links to it.
+    (Checked 2026-10-09: both are gone from docs/.)
   - Tracked source/*.tex files (keep-tex) were deleted on 2026-10-06 (cause unclear). Decide: keep
     them out of git, or restore with `git checkout -- source/*.tex`.
+    (Checked 2026-10-09: the .tex files are tracked in git again.)
   - PDF build fails: LaTeX package fvextra.sty is not installed locally (loaded in _quarto.yml).
     After installing: check that the curly quote ’ in installation.qmd (line ~182) works in pdflatex.
-  - Check whether the hidden HTML comment at the end of index.qmd is visible in the page source
-    of the rendered site (pandoc may copy HTML comments into the HTML).
+    DONE: the render of 2026-10-09 built all page PDFs, and the curly quote looks fine in the PDF (Nina).
   - A test build inside the project (tmp/preworkshop, 2026-10-06) added the copy to
     docs/search.json and docs/sitemap.xml. The tmp folders are deleted; the next full render should
     rebuild both files. Before committing, check that this prints nothing:
     grep tmp/preworkshop docs/search.json docs/sitemap.xml
+    (Checked 2026-10-09: prints nothing.)
   - The same test build added 2 extra css files to docs/site_libs/ (a5dc..., c11d...). Harmless.
 
 
