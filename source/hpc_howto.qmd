@@ -91,6 +91,14 @@ ls -lh
 ls -lh
 ```
 
+After the script, `ls -lh` prints a line like this (your date and group name can differ):
+
+```
+lrwxrwxrwx.  1 username sils-omics-unix-fnwi 27 Sep  4  2023 personal -> /zfs/omics/personal/username
+```
+
+The arrow (`->`) tells you that `personal` is not a normal folder. We come back to this in the next section.
+
 ### Preparing your working directory
 
 Next, let's make a project folder for our analyses. Always make project folders inside your personal directory, since it has much more space than your home directory. We give the folder the same name as on our own computer, `data_analysis`:
@@ -106,6 +114,14 @@ cd data_analysis
 # Check that you are in the right folder
 pwd
 ```
+
+`pwd` prints `/home/username/personal/data_analysis`, so it looks like you are in your home directory. But your files are not stored there. `personal` is a **link** (also called a **symbolic link** or **symlink**): a shortcut that points to another folder, here `/zfs/omics/personal/username`. That is what the arrow in the `ls -lh` output showed. So `~/personal/data_analysis` and `/zfs/omics/personal/username/data_analysis` are two paths to the same folder:
+
+<p align="center">
+
+<img src="../img/filesystem_crunchomics.png" width="650"/>
+
+</p>
 
 You now have a clean workspace for all the analyses that you will run on Crunchomics. As on your own computer, it is good practice to keep your raw data, results and scripts in separate folders.
 

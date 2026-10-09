@@ -230,18 +230,20 @@ From now on, you find a blue notebook box at the end of each part of the tutoria
 
 Now that we have our own project folder and know how to document what we are doing, let's learn how to move around the file system with `cd` (short for *change directory*).
 
-The file system is structured like a tree that starts from a single **root** directory, written as a forward slash (`/`). All other folders branch out from this root directory. For example, we can go from the root directory to the users folder, and from there into the john folder: `/users/john`.
+The file system is structured like a tree that starts from a single **root** directory, written as a forward slash (`/`). All other folders branch out from this root directory. For example, we can go from the root directory to the home folder, and from there into the folder with your user name: `/home/username`.
 
 <p align="center">
 
-<img src="../img/filesystem.png" width="400"/>
+<img src="../img/filesystem.png" width="500"/>
 
 </p>
 
-The location of a file or folder is written as a **path**: the folder names along the way, separated by `/`. There are two ways to write a path, for example to the portfolio folder:
+On your own computer, the start of this path can look different, for example `/Users/username` on a Mac. Use `pwd` to see yours.
 
--   An **absolute path** starts from the root, e.g. `cd /users/john/portfolio`
--   A **relative path** starts from your current location, e.g. `cd portfolio` if you are already in `/users/john`
+The location of a file or folder is written as a **path**: the folder names along the way, separated by `/`. There are two ways to write a path, for example to the data folder:
+
+-   An **absolute path** starts from the root, e.g. `cd /home/username/data_analysis/data`
+-   A **relative path** starts from your current location, e.g. `cd data` if you are already in `/home/username/data_analysis`
 
 It is generally recommended to use relative paths from inside your project folder. That makes your code more portable: it still works if you move the project folder or run it on another computer.
 
