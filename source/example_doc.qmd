@@ -90,3 +90,5 @@ Code blocks that you wrote as ```` ```bash ````, like in your notes, are only sh
 
 -   [A Guide to Reproducible Code in Ecology and Evolution](https://assets.britishecologicalsociety.org/2017/12/guide-to-reproducible-code.pdf) from the British Ecological Society explains how to organize project folders and how to write clear code that others can rerun. The examples are mostly in R, but the advice applies to bash and other languages as well.
 -   [Markdown Basics](https://quarto.org/docs/authoring/markdown-basics.html) on the Quarto website lists everything else you can do with Markdown, for example lists, links, bold text, images and tables.
+
+</div>

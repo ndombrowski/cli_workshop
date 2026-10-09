@@ -52,3 +52,5 @@ Good to know:
 -   You find more information in the [Crunchomics documentation](https://crunchomics-documentation.readthedocs.io/en/latest)
 
 On the next page, we copy the sequencing data from day 1 to Crunchomics and get read statistics with seqkit. Then we clean the reads with fastp, which we install ourselves with conda. On the way, we learn different ways to send jobs to the compute nodes with SLURM.
+
+</div>

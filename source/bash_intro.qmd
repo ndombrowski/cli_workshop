@@ -494,7 +494,7 @@ Notice that `mv` moved the file and, **without asking**, overwrote the copy that
 
 `mv` is also the command to rename a file: you "move" it to a new name, e.g. `mv old_name.txt new_name.txt`.
 
-::: {.callout-tip title="Tip: Downloading directly into a folder" collapse="true"}
+::: {.callout-tip title="Tip: Downloading directly into a folder (optional)" collapse="true"}
 Instead of downloading a file and moving it afterwards, you can tell `wget` directly where to save the file with the `-P` option:
 
 ```{bash}
@@ -531,7 +531,7 @@ The options we use with the `tar` command are:
 -   `f` specifies the file name
 -   `C` tells tar to change directory (so the package content will be unpacked there)
 
-::: {.callout-tip title="Tip: how to generate a tarball" collapse="true"}
+::: {.callout-tip title="Tip: How to generate a tarball (optional)" collapse="true"}
 If you ever want to generate a tarball you can do the following:
 
 ```{bash}
@@ -639,7 +639,7 @@ After solving question 3, we should see that all files still exist in their orig
 :::
 :::
 
-::: {.callout-tip title="Tip: More wildcards" collapse="true"}
+::: {.callout-tip title="Tip: More wildcards (optional)" collapse="true"}
 `*` is not the only wildcard. Square brackets match exactly **one** character, chosen from a set or a range:
 
 -   `[0-9]`: any single digit
@@ -660,7 +660,7 @@ ls data/seq_project/barcode001_User1_ITS_1_[A-Z]001/*.gz
 You find a full list of wildcards [here](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm).
 :::
 
-::: {.callout-tip title="Tip: Finding files with find" collapse="true"}
+::: {.callout-tip title="Tip: Finding files with find (optional)" collapse="true"}
 With `*/*.gz`, `ls` only looks exactly one folder deep inside `seq_project`. If you don't know how deep your files are stored, you can use `find` instead. `find` searches a folder and all the folders inside it, at any depth:
 
 ```{bash}
@@ -783,7 +783,7 @@ Here:
 -   Move up and down with the ↑ / ↓ arrow keys, or with Page Up / Page Down
 -   Press `q` to quit
 
-::: {.callout-tip title="Tip: Editing text files with `nano`" collapse="true"}
+::: {.callout-tip title="Tip: Editing text files with `nano` (optional)" collapse="true"}
 You can also change the content of a text file from the command line. The most common tool for this is the text editor `nano`. It comes with WSL2, Mac and most Linux systems:
 
 ```{bash}
@@ -1140,7 +1140,7 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc
 
 For `Sample-DUMMY1_R2.fastq.gz`, this gives 179,384 lines. Every read takes 4 lines, so the file has 179,384 / 4 = 44,846 reads.
 
-::: {.callout-tip title="Advanced tip: Better counting" collapse="true"}
+::: {.callout-tip title="Tip: Better counting (optional)" collapse="true"}
 Dividing by 4 with a calculator works, but bash can also do it for us:
 
 ```{bash}
@@ -1303,7 +1303,7 @@ done
 
 Now we get 8 numbers, one per file. `zcat $fastq_file | wc -l` is the same command as in the variables section. The only difference is that bash now runs it 8 times, each time with a different file stored in `fastq_file`.
 
-::: {.callout-tip title="Tip: Loops written on one line" collapse="true"}
+::: {.callout-tip title="Tip: Loops written on one line (optional)" collapse="true"}
 You might also see loops written on a single line, with `;` where we start a new line:
 
 ```{bash}
@@ -1370,7 +1370,7 @@ We will use these numbers again on day 2, to check what a quality filtering tool
 :::
 :::
 
-::: {.callout-tip title="Advanced tip: Better counting in for loops" collapse="true"}
+::: {.callout-tip title="Tip: Better counting in for loops (optional)" collapse="true"}
 In our counts file, each file name and its count end up on two separate lines. With 100 files, it is much easier to read if the file name and its count are on the same line. We can do this with the command substitution from the tip "Better counting" in the section "`wc`: Count things II":
 
 ```{bash}
@@ -1395,7 +1395,7 @@ done
 Notice the single and the double brackets: `$( )` runs a command, `$(( ))` calculates.
 :::
 
-::: {.callout-tip title="Advanced tip: Using bash to make sample mapping files" collapse="true"}
+::: {.callout-tip title="Tip: Using bash to make sample mapping files (optional)" collapse="true"}
 Many tools for amplicon analysis need a table that lists your files, often with the R1 and the R2 file of each sample in separate columns. This is called a **sample mapping file**. Let's have a look at how we could automatically make one with bash.
 
 The code below uses a few things we have not covered. We won't go into every detail but the goal is to show you what is possible with bash.
@@ -1541,3 +1541,5 @@ You now have a project folder with data, results, a script, and a notebook that 
 
 On day 2, you keep writing in the same `notes.md` on your own computer, also for the commands that you run on the HPC.
 :::
+
+</div>

@@ -58,7 +58,7 @@ You did the same during the [Before you start](installation.qmd) checks. After l
 -   Always double-check your username and the server address to avoid login errors
 :::
 
-::: {.callout-tip title="Tip: Viewing graphical output with ssh -X" collapse="true"}
+::: {.callout-tip title="Tip: Viewing graphical output with ssh -X (optional)" collapse="true"}
 Some programs on the HPC can open a window, for example to show a plot or a PDF. To see such windows on your own computer, log in with the `-X` option:
 
 ```{bash}
@@ -151,7 +151,7 @@ ls -l data/seq_project/*/*fastq.gz
 ls data/seq_project/*/*fastq.gz | wc -l
 ```
 
-::: {.callout-tip title="Tip: Moving data from the HPC to your own computer" collapse="true"}
+::: {.callout-tip title="Tip: Moving data from the HPC to your own computer (optional)" collapse="true"}
 You can also copy results from the HPC to your own computer. For this, you switch source and destination. For example, to copy a single sequencing file from Crunchomics:
 
 -   We do not need `-r`, since we only copy a single file
@@ -163,7 +163,7 @@ scp username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/data/
 ```
 :::
 
-::: {.callout-tip title="Tip: Moving files with wildcards" collapse="true"}
+::: {.callout-tip title="Tip: Moving files with wildcards (optional)" collapse="true"}
 We can also copy several files at once with a wildcard. Then `scp` copies only the files, not the folders they are in.
 
 ```{bash}
@@ -349,7 +349,7 @@ The most useful columns for us are:
 -   `Q20(%)` and `Q30(%)`: the percentage of bases with a quality score of at least 20 or 30. A quality score of 20 means that there is a 1 in 100 chance that the base is wrong, a score of 30 a 1 in 1000 chance
 -   `GC(%)`: the percentage of G and C bases
 
-::: {.callout-tip title="Tip: FastQC for visual quality reports" collapse="true"}
+::: {.callout-tip title="Tip: FastQC for visual quality reports (optional)" collapse="true"}
 `seqkit stats` gives us summary numbers, which might not be enough to accurately assess our data. Another very common tool for a more detailed, visual check of sequencing quality is [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which is also installed on Crunchomics. It makes one HTML report per fastq file, with plots of the quality along the reads. You open these reports in the internet browser of your own computer, so you first copy them with `scp`. [MultiQC](https://seqera.io/multiqc/) can combine many of these reports into one.
 :::
 
@@ -381,8 +381,8 @@ For question 2: the R1 and R2 file of the same sample always have the same numbe
 :::
 :::
 
-### `srun --pty bash`: Working interactively on a compute node
 
+::: {.callout-tip title="Tip: Working interactively on a compute node (optional)" collapse="true"}
 Sometimes you want to try out several commands after each other on a compute node, for example to test a new tool. Instead of putting `srun` in front of every command, you can open an **interactive session**: a shell that runs on a compute node.
 
 ```{bash}
@@ -405,6 +405,56 @@ exit
 ::: callout-important
 Always `exit` an interactive session when you are done. As long as the session is open, the CPUs and memory you requested stay reserved for you, even if you don't use them, and other people have to wait for them.
 :::
+:::
+
+
+::: {.callout-tip title="Tip: Keeping srun jobs running with screen (optional)" collapse="true"}
+`srun` has two downsides for jobs that run for a long time: you can't use your terminal while the job runs, and the job stops if you lose the connection to the HPC, for example when you close your laptop. There are two ways around this:
+
+1.  Use `sbatch` (see below)
+2.  Run the `srun` command inside `screen`
+
+`screen` opens a terminal that keeps running on Crunchomics, even when you are not connected. Such a terminal is called a **screen session**. You can leave a session and come back to it later, and everything that runs inside it continues in the meantime, as long as Crunchomics itself is running.
+
+To start a screen session:
+
+```{bash}
+screen
+```
+
+We **detach** from a screen (go outside of it but keep it running in the background) by pressing `Ctrl+a` and then `d`.
+
+If you want to run several analyses in several screens at the same time, it is useful to give your screens descriptive names with the `-S` option:
+
+```{bash}
+screen -S run_seqkit
+```
+
+After detaching from this screen again with `Ctrl+a` and then `d`, you can list all running screens with:
+
+```{bash}
+screen -ls
+```
+
+You can reconnect to an existing screen like this:
+
+```{bash}
+screen -r run_seqkit
+```
+
+Inside the screen, we can run `seqkit stats` the same way as before, but now we don't risk losing a long-running job:
+
+```{bash}
+srun --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -b -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
+```
+
+If you want to completely close and remove a screen, type the following and press enter while you are inside the screen:
+
+```{bash}
+exit
+```
+:::
+
 
 ### `sbatch`: Submitting a long-running job
 
@@ -538,8 +588,20 @@ Add a new heading `## Read statistics with seqkit` to `notes.md`, and below it:
 You don't need to copy the content of the job script into your notebook. It is saved in `scripts/seqkit.sh`, and at the end of the day, we copy it to your own computer.
 :::
 
-### `sacct`: Checking the resources a job used
+### Choosing the right amount of resources
 
+When you are just starting, choosing the right amount of CPUs, memory and run time can be tricky. The resources a job needs vary a lot between tools and datasets. Here are a few rules of thumb:
+
+-   **Start small**: a lot of tools don't need huge resources, especially for small test runs
+-   **Check the tool's documentation**: some tools recommend resource settings
+-   **Test with a small dataset first**: a subset of your data runs faster and helps you find and fix problems
+-   **Be careful with how memory is counted**: `--mem=4G` asks for 4 GB in total for your job, no matter how many CPUs you request. `--mem-per-cpu=4G` instead asks for 4 GB for each CPU, so `--cpus-per-task=4 --mem-per-cpu=4G` gives you a total of 16 GB of memory (4 CPUs \* 4 GB)
+
+Remember: requesting more resources than you need makes your jobs wait longer in the queue and can block others from running.
+
+If you want to know how much a finished job actually used, have a look at the optional `sacct` box below.
+
+::: {.callout-tip title="Tip: Checking the resources a job used with sacct (optional)" collapse="true"}
 After a job has finished, you can check which resources it actually used with `sacct`. Replace `379723` with the job ID of your seqkit job:
 
 ```{bash}
@@ -555,66 +617,10 @@ Here:
     -   `MaxRSS`: the maximum amount of memory the job used. Compare this with the memory you requested with `--mem`
     -   `NCPUS`: the number of CPUs the job had
 
-### Choosing the right amount of resources
+How to use this information:
 
-When you are just starting, choosing the right amount of CPUs, memory and run time can be tricky. The resources a job needs vary a lot between tools and datasets. Here are a few rules of thumb:
-
--   **Start small**: a lot of tools don't need huge resources, especially for small test runs
--   **Check the tool's documentation**: some tools recommend resource settings
--   **Test with a small dataset first**: a subset of your data runs faster and helps you find and fix problems
--   **Check what your job used**: use `sacct` (see above) to compare what your job used with what you requested. If you plan to run similar jobs over and over again, adjust your requests
--   **Be careful with how memory is counted**: `--mem=4G` asks for 4 GB in total for your job, no matter how many CPUs you request. `--mem-per-cpu=4G` instead asks for 4 GB for each CPU, so `--cpus-per-task=4 --mem-per-cpu=4G` gives you a total of 16 GB of memory (4 CPUs \* 4 GB)
+-   **Compare what your job used with what you requested**: if you plan to run similar jobs over and over again, adjust your requests
 -   **Adjust step by step**: if your job fails or runs out of memory or time, increase the resources gradually
-
-Remember: requesting more resources than you need makes your jobs wait longer in the queue and can block others from running.
-
-## `screen`: Keeping srun jobs running (optional)
-
-::: {.callout-tip title="Using screen for long srun jobs" collapse="true"}
-`srun` has two downsides for jobs that run for a long time: you can't use your terminal while the job runs, and the job stops if you lose the connection to the HPC, for example when you close your laptop. There are two ways around this:
-
-1.  Use `sbatch` (see above)
-2.  Run the `srun` command inside `screen`
-
-`screen` opens a terminal that keeps running on Crunchomics, even when you are not connected. Such a terminal is called a **screen session**. You can leave a session and come back to it later, and everything that runs inside it continues in the meantime, as long as Crunchomics itself is running.
-
-To start a screen session:
-
-```{bash}
-screen
-```
-
-We **detach** from a screen (go outside of it but keep it running in the background) by pressing `Ctrl+a` and then `d`.
-
-If you want to run several analyses in several screens at the same time, it is useful to give your screens descriptive names with the `-S` option:
-
-```{bash}
-screen -S run_seqkit
-```
-
-After detaching from this screen again with `Ctrl+a` and then `d`, you can list all running screens with:
-
-```{bash}
-screen -ls
-```
-
-You can reconnect to an existing screen like this:
-
-```{bash}
-screen -r run_seqkit
-```
-
-Inside the screen, we can run `seqkit stats` the same way as before, but now we don't risk losing a long-running job:
-
-```{bash}
-srun --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -b -a -T -o results/seqkit/stats_raw.txt data/seq_project/*/*gz --threads 1
-```
-
-If you want to completely close and remove a screen, type the following and press enter while you are inside the screen:
-
-```{bash}
-exit
-```
 :::
 
 ## `conda`: Installing your own software
@@ -856,7 +862,7 @@ wc -l samples.txt
 
 A list file like `samples.txt` has a few advantages. You can open it and see exactly which samples the loop will work on. And if you later want to rerun only some samples, you can make a shorter list without changing the loop.
 
-::: {.callout-tip title="Tip: Making a list file by hand" collapse="true"}
+::: {.callout-tip title="Tip: Making a list file by hand (optional)" collapse="true"}
 You can also type a list file yourself, one sample name per line. Use `nano` for this, not Notepad or Word. As we saw on day 1, Windows programs add an invisible character at the end of each line. In a list file, this character becomes part of each sample name, and the loop then looks for files that don't exist.
 :::
 
@@ -1037,10 +1043,7 @@ Add a new heading `## Quality filtering with fastp` to `notes.md`, and below it:
 The test run on one sample was a detour, so you don't need its commands. One sentence on what it taught you is enough, for example that fastp writes its reports to `fastp.html` and `fastp.json` unless you give other names.
 :::
 
-
-### Comparing reads before and after trimming (optional)
-
-::: {.callout-tip title="seqkit stats and awk: before vs after trimming" collapse="true"}
+::: {.callout-tip title="Tip: Comparing reads before and after trimming (optional)" collapse="true"}
 At the start of the day, we made a table with `seqkit stats` for the raw reads. If we make the same table for the trimmed reads, we can see what fastp changed:
 
 ```{bash}
@@ -1072,7 +1075,7 @@ This prints 16 lines: first the 8 raw files, then the 8 trimmed files. Compare t
 
 :::
 
-::: {.callout-tip title="Extra bash syntax: Finding R2 without a list file (optional)" collapse="true"}
+::: {.callout-tip title="Tip: Finding R2 without a list file (optional)" collapse="true"}
 For those who want to learn more bash: we can also write this loop without `samples.txt`. We then loop directly over the R1 files, and let bash work out the matching R2 file and the sample name:
 
 ```{bash}
@@ -1114,9 +1117,9 @@ As in the fastp exercise, the quotes around the path stop your own computer from
 4.  Compare your notebook with my [example notebook](example_doc.qmd). What does it have that yours doesn't? Is there anything you want to add?
 :::
 
-## Job arrays: Running many files in parallel (optional)
+## Going further
 
-::: {.callout-tip title="Advanced tip: sbatch arrays to run multiple files in parallel" collapse="true"}
+::: {.callout-tip title="Tip: Running many files in parallel with job arrays (optional)" collapse="true"}
 Our fastp loop runs inside a single job, so the samples are processed one after another. With 4 small samples, that is fine. With hundreds of samples, it can take a long time, while the HPC has enough space to run several of them at the same time.
 
 For this section, we go back to `seqkit stats` and run it on each file separately, one job per file. How would we run such jobs efficiently?
@@ -1195,3 +1198,5 @@ ls results/seqkit/*_stats.txt | wc -l
 
 More about arrays and other SLURM options can be found on the [IBED SLURM basics page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/cli/slurm_basics.html).
 :::
+
+</div>

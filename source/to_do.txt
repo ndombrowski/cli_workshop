@@ -21,7 +21,7 @@ sorted from the notes alone: check them and move them.
 
 ### To do
 
-- Mark a core path and an optional path. Optional = "(optional)" in the heading + collapsed box.
+- Mark a core path and an optional path. Optional = collapsed box titled "Tip: ... (optional)", no own heading (changed 2026-10-09).
   Candidates for day 1: sort/uniq, cat (combining files), gzip, the second wc section, nano, advanced tips.
   Decided 2026-10-08: sort/uniq and cat stay core (not optional).
   cut stays core (decided 2026-10-07): day 2 uses it to make samples.txt.
@@ -101,20 +101,6 @@ Rule: after editing installation.qmd, rebuild source/installation_preworkshop.ht
 attachment) with the hidden command at the end of index.qmd.
 
 ### To do
-
-- Check whether _preworkshop_instructions.md should mention the new MobaXterm setting
-  ("MobaXterm: choose a permanent folder", see Done).
-- Check: does `nano` work on current macOS (may start pico instead)?
-- Check that explorer.exe . works from the WSL home (/home/user), and that /mnt/c is the right path
-  to the C drive in MobaXterm (both used in bash_intro.qmd, not tested).
-- Check details written from general knowledge (not verified): MobaXterm button "Start local
-  terminal"; what echo $SHELL prints in MobaXterm; ssh errors ("Permission denied" = wrong
-  name/password/no account, "Connection timed out" = not on UvA network); RStudio menu
-  File > New File > Text File.
-- The Mac section promises "I point out the places where zsh is different": day 1 must do that.
-- img/using_mobaxterm_tabs.png (added 2026-10-06, not used yet): maybe for day 2 (scp in a second
-  tab while logged in to Crunchomics in the first). Not decided.
-  (Checked 2026-10-09: no .qmd page uses it, although Day 2 ROUND 1 says "using_mobaxterm_tabs.png in scp".)
 
 ### Done
 
@@ -205,14 +191,12 @@ attachment) with the hidden command at the end of index.qmd.
 ### To do
 
 - To check on Crunchomics (not added yet, or written without a test run):
-  - MicEco says `srun ... echo "Hello world"` prints the output twice
+  - MicEco says `srun ... echo "Hello world"` prints the output twice --> checked that is the behavior on Crunchomics
   - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
-    without scp. It is still avail. and could be added as a tip for faster viewing of files without download
+    without scp --> checked and its still avail. and could be added as a tip for faster viewing of files without download
   - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
 - Compute node names differ: img/crunchomics1.png says omics-h01-h05, hpc_intro.qmd (line 27) says
   omics-cn001 - omics-cn005. Check which is right.
-- example_doc.qmd: Nina rewrites the "Justifying decisions" bullet (line ~56) herself, e.g. pointing
-  to the --cut_front note.
 
 ### Done
 
@@ -280,12 +264,11 @@ attachment) with the hidden command at the end of index.qmd.
 
 ### To do
 
-- sacct: Nina considers cutting it or making it optional. Checkpoint 2 sits before it, so no change needed.
+- DONE 2026-10-09: sacct and srun --pty bash are optional boxes. "Choosing resources" split: short
+  rules of thumb stay core (before sacct), the sacct-based advice moved into the sacct box.
 - Found 2026-10-08: hidden <!-- TO CHECK --> comments in installation.qmd are copied into the
   rendered HTML, so they end up in the emailed attachment. Keep installation.qmd free of them
   (put open checks here instead). Probably the same for the site pages (see "Site-wide").
-- TO CHECK comments: TextEdit saving .md (installation.qmd), double-click on notes.md on
-  Mac / fresh laptops (bash_intro.qmd).
 
 ### Done
 
@@ -386,7 +369,7 @@ Rule: readme.md is a copy of the index.qmd text (since 2026-10-08): change both 
 
 ## Decisions (details in _course_schedule.md)
 
-- Optional sections: "(optional)" in the heading + collapsed box.
+- Optional content: collapsed box titled "Tip: ... (optional)", no own heading (changed 2026-10-09).
 - Miniforge: in class on day 2, into ~/personal, non-interactive (-b -p), on the login node.
 - fastp 1.4.0, environment fastp_1.4.0. conda in job scripts: source ~/.bashrc + conda activate.
 - omics_install_script: in class on day 2, before the conda install.
