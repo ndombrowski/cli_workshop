@@ -667,14 +667,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="cd-move-around-folders" class="level2">
 <h2 class="anchored" data-anchor-id="cd-move-around-folders"><code>cd</code>: Move around folders</h2>
 <p>Now that we have our own project folder and know how to document what we are doing, let’s learn how to move around the file system with <code>cd</code> (short for <em>change directory</em>).</p>
-<p>The file system is structured like a tree that starts from a single <strong>root</strong> directory, written as a forward slash (<code>/</code>). All other folders branch out from this root directory. For example, we can go from the root directory to the users folder, and from there into the john folder: <code>/users/john</code>.</p>
+<p>The file system is structured like a tree that starts from a single <strong>root</strong> directory, written as a forward slash (<code>/</code>). All other folders branch out from this root directory. For example, we can go from the root directory to the home folder, and from there into the folder with your user name: <code>/home/username</code>.</p>
 <p align="center">
-</p><p><img src="../img/filesystem.png" width="400"></p>
+</p><p><img src="../img/filesystem.png" width="500"></p>
 <p></p>
-<p>The location of a file or folder is written as a <strong>path</strong>: the folder names along the way, separated by <code>/</code>. There are two ways to write a path, for example to the portfolio folder:</p>
+<p>On your own computer, the start of this path can look different, for example <code>/Users/username</code> on a Mac. Use <code>pwd</code> to see yours.</p>
+<p>The location of a file or folder is written as a <strong>path</strong>: the folder names along the way, separated by <code>/</code>. There are two ways to write a path, for example to the data folder:</p>
 <ul>
-<li>An <strong>absolute path</strong> starts from the root, e.g.&nbsp;<code>cd /users/john/portfolio</code></li>
-<li>A <strong>relative path</strong> starts from your current location, e.g.&nbsp;<code>cd portfolio</code> if you are already in <code>/users/john</code></li>
+<li>An <strong>absolute path</strong> starts from the root, e.g.&nbsp;<code>cd /home/username/data_analysis/data</code></li>
+<li>A <strong>relative path</strong> starts from your current location, e.g.&nbsp;<code>cd data</code> if you are already in <code>/home/username/data_analysis</code></li>
 </ul>
 <p>It is generally recommended to use relative paths from inside your project folder. That makes your code more portable: it still works if you move the project folder or run it on another computer.</p>
 <p>Let’s practice moving between folders. At each step, use <code>pwd</code> if you feel that you get lost:</p>
