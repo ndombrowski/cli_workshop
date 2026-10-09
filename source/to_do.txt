@@ -49,8 +49,8 @@ sorted from the notes alone: check them and move them.
   SLURM, workload manager/scheduler, job, queue, snapshot), the two storage lists merged into one
   "Storage" section + a "Compute resources" section, grammar fixed. Removed: "compiling" (was only
   an example of login node work). Last paragraph updated: seqkit stats + fastp with conda (said
-  "assess the quality"). Node names still omics-cn001 to cn005 (vs omics-h01-h05 in crunchomics1.png,
-  see Day 2 list).
+  "assess the quality"). Node names omics-cn001 to cn005 (crunchomics1.png fixed to match on
+  2026-10-09, see Day 2 Done).
   DONE hpc_howto.qmd (was mostly consistent already): two i.e. removed, screen tip intro rewritten
   (no more "terminal multiplexer" / "virtual terminals"; defines screen session), job array tip
   variables INDEX / CURRENT_SAMPLE -> index / current_sample (lowercase like the rest of both days;
@@ -152,6 +152,9 @@ attachment) with the hidden command at the end of index.qmd.
 
 ### Done
 
+- DONE 2026-10-09: img/filesystem.png redrawn as /home/username/data_analysis (data, results, scripts)
+  instead of /users/john/portfolio; the cd section text matches (absolute/relative path examples use
+  data, plus a note that Mac paths start with /Users). Source: img/filesystem.svg.
 - DONE 2026-10-06: wording updated from the MicEco2025 CLI page (pwd, ls, command structure, man keys,
   comments, Tab, wget/curl, cp, mv, rm, wildcards, > warning, tail -n, pipes, gzip, zcat, grep).
   mkdir now comes before cd; cd is practised inside ~/data_analysis. Exercises use the new
@@ -195,10 +198,17 @@ attachment) with the hidden command at the end of index.qmd.
   - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
     without scp --> checked and its still avail. and could be added as a tip for faster viewing of files without download
   - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
-- Compute node names differ: img/crunchomics1.png says omics-h01-h05, hpc_intro.qmd (line 27) says
-  omics-cn001 - omics-cn005. Check which is right.
 
 ### Done
+
+- DONE 2026-10-09: compute node names differed (img/crunchomics1.png said omics-h01-h05, hpc_intro.qmd
+  says omics-cn001 - omics-cn005; cn is right, still 5 nodes). crunchomics1.png now says
+  "omics-cn001 to omics-cn005" and the "Resources" part is cropped off (it called the 500 GB folder a
+  home directory and had an unverified 512 GB memory figure; the Storage section covers it).
+  Source: img/crunchomics1.svg.
+- DONE 2026-10-09: hpc_howto.qmd explains the ~/personal link (symlink): the real ls -lh line after
+  omics_install_script, and after the pwd in "Preparing your working directory" a short text + new
+  figure img/filesystem_crunchomics.png (/home/username/personal -> /zfs/omics/personal/username).
 
 - Screenshots that show seqkit output without -b: check after the qmd rewrite (Nina).
   DONE: the seqkit screenshot shows the output with -b (Nina, 2026-10-09).
@@ -335,6 +345,9 @@ Rule: readme.md is a copy of the index.qmd text (since 2026-10-08): change both 
 - index.qmd + readme.md: add the 2-day overview, a time estimate for self-study users
   (_course_schedule.md is only visible on GitHub), and the pre-workshop checklist link.
 - Check all external links.
+- After rendering: check the size of the new figures on the page (filesystem.png at width 500 in
+  bash_intro, filesystem_crunchomics.png at 650 in hpc_howto, crunchomics1.png at 70% in hpc_intro),
+  then commit .gitignore + the img/ changes.
 - Other repo: IBED slurm_basics page has the same --nodes and --mem errors as fixed here.
 - Rendering (found 2026-10-06, Quarto 1.8.25):
   - The root site_libs/ folder (tracked since commit dd98376, looked like a render accident) was
@@ -348,6 +361,9 @@ Rule: readme.md is a copy of the index.qmd text (since 2026-10-08): change both 
 - DONE 2026-10-08 in index.qmd (new URL returns 200; hpc_howto.qmd no longer uses it): Dead links: scienceparkstudygroup.github.io/software_information/ returns 404 (checked
   2026-10-06). Used in index.qmd and hpc_howto.qmd (sed link). New site:
   scienceparkstudygroup.github.io/ibed-bioinformatics-page/.
+- DONE 2026-10-09: line endings normalized to LF (commit bde407f). .gitattributes (* text=auto eol=lf)
+  keeps it that way despite the machine-wide core.autocrlf=true; .vscode/settings.json (in .gitignore)
+  sets LF for new files.
 - Rendering (found 2026-10-06, Quarto 1.8.25):
   - _quarto.yml now has `render: ["*.qmd", "!readme.md"]`, so CLAUDE.md and readme.md are no
     longer rendered. The old docs/readme.html + docs/readme.pdf stay in docs/ and are not updated
