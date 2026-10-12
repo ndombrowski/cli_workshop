@@ -10,6 +10,13 @@ $notebook-border-color: #1976d2 !default;   /* blue vertical bar */
 $notebook-header-light: #e3f2fd !default;   /* light blue header, light theme */
 $notebook-header-dark: #123a63 !default;    /* dark blue header, dark theme */
 
+// Colours for the tab headers of a tabset (::: {.panel-tabset}), cyan like the code block border
+$tab-accent-color: #31BAE9 !default;        /* top bar of the open tab */
+$tab-active-light: #e0f5fc !default;        /* open tab, light theme */
+$tab-inactive-light: #f1f1f1 !default;      /* closed tab, light theme */
+$tab-active-dark: #0f4a5e !default;         /* open tab, dark theme */
+$tab-inactive-dark: #2a2a2a !default;       /* closed tab, dark theme */
+
 
 
 /*-- scss:rules --*/
@@ -88,6 +95,31 @@ div.callout-notebook-answer.callout .callout-icon::before {
   content: "📝";
 }
 
+// Tab headers of a tabset, used as:
+// ::: {.panel-tabset}
+// ### First tab title
+// ...
+// :::
+// The open tab is coloured and bold, the closed tabs are grey
+.panel-tabset .nav-tabs .nav-link {
+  background-color: $tab-inactive-light;
+  color: #555555;
+  border-top: 3px solid transparent;
+  margin-right: 0.25rem;
+}
+
+.panel-tabset .nav-tabs .nav-link:hover {
+  color: #222222;
+  border-top-color: lighten($tab-accent-color, 20%);
+}
+
+.panel-tabset .nav-tabs .nav-link.active {
+  background-color: $tab-active-light;
+  color: #222222;
+  font-weight: 600;
+  border-top: 3px solid $tab-accent-color;
+}
+
 // Dark theme: darker header and light title text
 body.quarto-dark {
   div.callout-question.callout,
@@ -110,5 +142,15 @@ body.quarto-dark {
     &.callout-style-default > .callout-header {
       background-color: $notebook-header-dark;
     }
+  }
+
+  .panel-tabset .nav-tabs .nav-link {
+    background-color: $tab-inactive-dark;
+    color: #bbbbbb;
+  }
+
+  .panel-tabset .nav-tabs .nav-link.active {
+    background-color: $tab-active-dark;
+    color: #ffffff;
   }
 }

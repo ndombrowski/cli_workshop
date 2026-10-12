@@ -12,7 +12,7 @@ Bring: your own laptop (Windows, Mac or Linux). No coding experience needed.
 1. On day 1 you work on your own laptop. You learn how to use the command line and find your way around folders, download and unpack data, look inside large data files, and count and search through them with a few simple commands. You also learn how to repeat a step for many files at once and how to save your commands in a script.
 2. On day 2 we move to Crunchomics, the UvA high-performance computer. You learn how to log in, copy your data there, install your own software and send analysis jobs to the cluster. As a worked example, we check and clean sequencing reads with SeqKit and fastp.
 
-Requirements: before the workshop, please (1) request access to the Crunchomics HPC and (2) set up a terminal on your laptop and test your login. The attached instructions take about 30 to 60 minutes. Requesting access to the HPC can take a few days, so please start early. If something does not work, contact Nina Dombrowski (n.dombrowski@uva.nl) at the latest one week before the workshop.
+Requirements: you do not need to request access to the Crunchomics HPC yourself. We create the accounts for all participants with the information you give when you register, and we email you once your account is ready. Before the workshop, please set up a terminal on your laptop and test your login, following the attached instructions (about 30 to 60 minutes). If something does not work, contact Nina Dombrowski (n.dombrowski@uva.nl) at the latest a few days before the workshop.
 
 Interested? Save the dates and register before [TBD] here: [link].
 

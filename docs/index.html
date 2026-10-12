@@ -43,9 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-09666e9bd05a9b7048e97aee7f6ed88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-08aeed349c2252358fc0aae548c86d70.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-09666e9bd05a9b7048e97aee7f6ed88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-e790f3d65fd9eca10cfb964798bbecd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-12286dae951c8df8034ecb99b9d584bd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e790f3d65fd9eca10cfb964798bbecd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -382,13 +382,18 @@ project renders only this one page.
 
 If you add images to installation.qmd, add them to the second `cp` line.
 
+The copy is outside the project, so it does not get the theme from _quarto.yml.
+That is why styles.scss is copied and the theme is set in meta.yml (added 2026-10-12;
+without it, the attachment used plain Bootstrap: other font, no tab colours).
+
 ```bash
 mkdir -p ~/tmp/preworkshop/source ~/tmp/preworkshop/img
 
 cp source/installation.qmd source/references.bib ~/tmp/preworkshop/source/
 cp img/terminal.png img/crunchomics_login.png ~/tmp/preworkshop/img/
+cp styles.scss ~/tmp/preworkshop/
 
-printf 'pagetitle: "Before you start"\nembed-resources: true\ntoc: true\n' > ~/tmp/preworkshop/meta.yml
+printf 'pagetitle: "Before you start"\nembed-resources: true\ntoc: true\ntheme: [lumen, ../styles.scss]\n' > ~/tmp/preworkshop/meta.yml
 
 quarto render ~/tmp/preworkshop/source/installation.qmd --to html --metadata-file ~/tmp/preworkshop/meta.yml
 
@@ -836,7 +841,7 @@ ls -la source/installation_preworkshop.html
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2026-10-08</p>
+Last modified: 2026-10-12</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

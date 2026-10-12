@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, interior hidden, breakable, enhanced, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, borderline west={3pt}{0pt}{shadecolor}, breakable, frame hidden, interior hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -268,8 +268,9 @@ Here is what you will do:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Request access to Crunchomics, the UvA computer cluster that we will
-  use in the second part of the tutorial.
+  Get access to Crunchomics, the UvA computer cluster that we will use
+  in the second part of the tutorial. If you join the workshop, we
+  arrange this for you.
 \item
   Learn a few terms: terminal, shell and prompt.
 \item
@@ -282,15 +283,15 @@ Here is what you will do:
   Choose a text editor for your notes.
 \end{enumerate}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, coltitle=black, colback=white, bottomrule=.15mm, toptitle=1mm, leftrule=.75mm, opacityback=0, titlerule=0mm, rightrule=.15mm, left=2mm, bottomtitle=1mm, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, colback=white, toprule=.15mm, coltitle=black, opacityback=0, breakable, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, bottomtitle=1mm, rightrule=.15mm, left=2mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, arc=.35mm, titlerule=0mm, bottomrule=.15mm]
 
 If something on this page does not work, please email Nina Dombrowski
 (n.dombrowski@uva.nl). Part of my job is to support IBED students and
 researchers with bioinformatics, so you can also contact me if you
 follow this tutorial on your own, or if you run into problems later.
 
-If you join the workshop, please contact me \textbf{at the latest one
-week before the workshop}. That way we can solve the problem before day
+If you join the workshop, please contact me \textbf{at the latest a few
+days before the workshop}. That way we can solve the problem before day
 1.
 
 In your email, tell me which operating system you use (Windows, Mac or
@@ -305,12 +306,33 @@ Crunchomics}\label{step-1-request-access-to-crunchomics}
 In the second part of this tutorial, we work on \textbf{Crunchomics}, a
 high-performance computer (\textbf{HPC}) at the UvA. An HPC is a group
 of powerful computers that many people share. You use it for analyses
-that are too large or too slow for your laptop. You need an account to
-use Crunchomics. Getting one usually takes 1 to 3 days, so do this step
-first.
+that are too large or too slow for your laptop. To be able to use
+Crunchomics, you first need to organize for an account to be made
 
-To request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl)
-with the following information:
+What you need to do depends on how you follow this tutorial. Choose the
+part that fits you.
+
+\subsection{I join the workshop}
+
+You do not need to request an account yourself. You already gave us the
+information we need when you signed up for the workshop, and we request
+the accounts for all participants together.
+
+\begin{itemize}
+\tightlist
+\item
+  We will send you an email once the accounts are ready. After that, do
+  Check 2 below.
+\item
+  If you do not have this email a few days before the workshop, please
+  contact Nina Dombrowski (n.dombrowski@uva.nl).
+\end{itemize}
+
+\subsection{I follow the tutorial on my own}
+
+Getting an account usually takes 1 to 3 days, so do this step first. To
+request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl) with
+the following information:
 
 \begin{itemize}
 \tightlist
@@ -513,7 +535,7 @@ open it, do one of these:
 
 Newer Macs (macOS Catalina and later) use zsh as their shell, not bash.
 That is fine. Almost everything in this tutorial works the same way in
-zsh, and I point out the places where it is different.
+zsh, and I point out the places where I know it behaves different.
 
 \subsection{Linux}\label{linux}
 
@@ -556,7 +578,7 @@ line that ends with \texttt{bash} or \texttt{zsh} (for example
 Crunchomics}\label{step-5-check-2-log-in-to-crunchomics}
 
 Do this check once you have the email that your Crunchomics account is
-ready.
+ready (see Step 1).
 
 \subsection{Your network}\label{your-network}
 
@@ -671,7 +693,7 @@ text with a few symbols for headings and code. You learn the few rules
 you need on day 1.
 
 For this you need a \textbf{plain text editor}, a program that saves
-only the text you type, without any layout. Do not use Word or a similar
+only the text you type, without any layout. Do NOT use Word or a similar
 program. These programs change some characters, for example a straight
 quote \texttt{\textquotesingle{}} into a curly quote \texttt{’}. A
 command with a curly quote does not work anymore.
@@ -694,10 +716,6 @@ Pick one of these options:
   saves the file with layout.
 \item
   \textbf{Text Editor} or gedit (Linux, usually already installed).
-\item
-  \href{https://code.visualstudio.com/}{\textbf{VS Code}}: a powerful
-  code editor for all systems. It takes a bit more time to set up, so I
-  only recommend it if you already use it.
 \end{itemize}
 
 To check that it works, open your editor, create a new file, type a line

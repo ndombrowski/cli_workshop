@@ -30,13 +30,18 @@ project renders only this one page.
 
 If you add images to installation.qmd, add them to the second `cp` line.
 
+The copy is outside the project, so it does not get the theme from _quarto.yml.
+That is why styles.scss is copied and the theme is set in meta.yml (added 2026-10-12;
+without it, the attachment used plain Bootstrap: other font, no tab colours).
+
 ```bash
 mkdir -p ~/tmp/preworkshop/source ~/tmp/preworkshop/img
 
 cp source/installation.qmd source/references.bib ~/tmp/preworkshop/source/
 cp img/terminal.png img/crunchomics_login.png ~/tmp/preworkshop/img/
+cp styles.scss ~/tmp/preworkshop/
 
-printf 'pagetitle: "Before you start"\nembed-resources: true\ntoc: true\n' > ~/tmp/preworkshop/meta.yml
+printf 'pagetitle: "Before you start"\nembed-resources: true\ntoc: true\ntheme: [lumen, ../styles.scss]\n' > ~/tmp/preworkshop/meta.yml
 
 quarto render ~/tmp/preworkshop/source/installation.qmd --to html --metadata-file ~/tmp/preworkshop/meta.yml
 

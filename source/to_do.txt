@@ -102,8 +102,25 @@ attachment) with the hidden command at the end of index.qmd.
 
 ### To do
 
+- Check the Requirements paragraph in _preworkshop_instructions.md with the organisers (it
+  depends on what the sign-up form asks: UvAnetID, PI, existing account). Added 2026-10-12.
+- Once the batch account timing is known, check that "a few days before the workshop" still fits
+  (installation.qmd Step 1 + Getting help box, email, _course_schedule.md).
+
 ### Done
 
+- DONE 2026-10-12: Crunchomics access split by audience. Workshop participants no longer email
+  Wim: accounts are requested in one batch from the sign-up form (UvAnetID, PI; existing accounts
+  also asked there, organisers informed by Nina). First batch run, so the timing is not known yet;
+  we email participants when the accounts are ready. Self-learners: email Wim, PI in cc (unchanged).
+  - Step 1 is now a tabset (`::: {.panel-tabset}`, tab titles as ### so the PDF shows them as
+    subsections under Step 1). Tab colours (cyan #31BAE9, open tab bold) in styles.scss.
+  - Overview list item 1, Check 2 lead-in ("see Step 1") and the Getting help deadline adjusted:
+    "as soon as possible, and at the latest a few days before the workshop" (was one week).
+    Same change in _preworkshop_instructions.md (Requirements paragraph) and _course_schedule.md.
+  - Attachment build command (index.qmd) now copies styles.scss and sets
+    theme: [lumen, ../styles.scss] in meta.yml. Before, the attachment used plain Bootstrap
+    (other font, no custom styles). Attachment rebuilt by Nina, looks as expected.
 - DONE 2026-10-06: page rebuilt from the MicEco2025 terminal page. Steps: request Crunchomics
   access, terms, terminal (MobaXterm first, WSL2 second, Git Bash dropped), echo $SHELL, ssh (no -X)
   + exit with eduroam/VPN and troubleshooting, text editor (RStudio first). Works for workshop and

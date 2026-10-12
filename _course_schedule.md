@@ -12,13 +12,13 @@ Page: reworked `source/installation.qmd`, based on the MicEco2025 terminal page 
 Sent as a self-contained attachment (`source/installation_preworkshop.html`) with the
 announcement email (`_preworkshop_instructions.md`).
 
-1. Request Crunchomics access (email to Wim de Leeuw, PI in cc; takes 1-3 days, so first).
+1. Crunchomics access. Workshop participants: batch request from the sign-up form information (UvAnetID, PI; existing accounts also noted there), we email them when the accounts are ready (decided 2026-10-12, first batch run, timing not known yet). Self-learners: email to Wim de Leeuw, PI in cc; takes 1-3 days, so first. On the page as a tabset (`::: {.panel-tabset}`, tab colours in `styles.scss`).
 2. Learn the terms: terminal, shell, prompt.
 3. Install a terminal: MobaXterm (recommended) or WSL2 on Windows. Mac and Linux users open the built-in terminal.
 4. Check 1: `echo $SHELL` prints a shell name.
 5. Check 2: log in to Crunchomics with `ssh`, then `exit`. Tests account, password and eduroam/VPN.
 6. Choose a text editor for the notebook (RStudio recommended, Notepad/Notepad++, TextEdit, VS Code) and save a test `.md` file.
-7. Report problems to Nina Dombrowski at the latest one week before the workshop.
+7. Report problems to Nina Dombrowski as soon as possible, at the latest a few days before the workshop (was one week; shortened 2026-10-12 because batch accounts may arrive late).
 
 ## Day 1: command line basics on your own laptop (about 3h45)
 
