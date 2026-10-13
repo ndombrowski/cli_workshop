@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>llm_usage – Introduction to the cli</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../source/example_doc.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b078364992e40da23e457b65144f21d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-36be29a51d63d259ea3491f71d071286.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b078364992e40da23e457b65144f21d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../source/llm_usage.html">Using LLMs</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome page</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cli basics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../source/installation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Before you start</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../source/bash_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Bash</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Using an HPC</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../source/hpc_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HPC introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../source/hpc_howto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using an HPC</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../source/example_doc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">An example notebook</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../source/llm_usage.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Using LLMs</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#using-llms-to-understand-and-check-code" id="toc-using-llms-to-understand-and-check-code" class="nav-link active" data-scroll-target="#using-llms-to-understand-and-check-code">Using LLMs to understand and check code</a>
+  <ul class="collapse">
+  <li><a href="#why-learn-the-command-line-if-an-llm-can-write-the-code" id="toc-why-learn-the-command-line-if-an-llm-can-write-the-code" class="nav-link" data-scroll-target="#why-learn-the-command-line-if-an-llm-can-write-the-code">Why learn the command line if an LLM can write the code?</a></li>
+  <li><a href="#start-with-the-basics-without-an-llm" id="toc-start-with-the-basics-without-an-llm" class="nav-link" data-scroll-target="#start-with-the-basics-without-an-llm">Start with the basics, without an LLM</a></li>
+  <li><a href="#which-tool-can-you-use" id="toc-which-tool-can-you-use" class="nav-link" data-scroll-target="#which-tool-can-you-use">Which tool can you use?</a>
+  <ul class="collapse">
+  <li><a href="#rules-at-the-uva" id="toc-rules-at-the-uva" class="nav-link" data-scroll-target="#rules-at-the-uva">Rules at the UvA</a></li>
+  <li><a href="#different-tools-same-advice" id="toc-different-tools-same-advice" class="nav-link" data-scroll-target="#different-tools-same-advice">Different tools, same advice</a></li>
+  </ul></li>
+  <li><a href="#how-i-suggest-you-use-an-llm" id="toc-how-i-suggest-you-use-an-llm" class="nav-link" data-scroll-target="#how-i-suggest-you-use-an-llm">How I suggest you use an LLM</a></li>
+  <li><a href="#using-an-llm-to-understand-code" id="toc-using-an-llm-to-understand-code" class="nav-link" data-scroll-target="#using-an-llm-to-understand-code">Using an LLM to understand code</a></li>
+  <li><a href="#checking-code-with-the-commands-from-day-1" id="toc-checking-code-with-the-commands-from-day-1" class="nav-link" data-scroll-target="#checking-code-with-the-commands-from-day-1">Checking code with the commands from day 1</a></li>
+  <li><a href="#worked-example-an-llm-writes-a-fastp-job-script" id="toc-worked-example-an-llm-writes-a-fastp-job-script" class="nav-link" data-scroll-target="#worked-example-an-llm-writes-a-fastp-job-script">Worked example: an LLM writes a fastp job script</a></li>
+  <li><a href="#less-code-is-often-better" id="toc-less-code-is-often-better" class="nav-link" data-scroll-target="#less-code-is-often-better">Less code is often better</a></li>
+  <li><a href="#when-your-code-does-not-work" id="toc-when-your-code-does-not-work" class="nav-link" data-scroll-target="#when-your-code-does-not-work">When your code does not work</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/llm_usage.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="llm_usage.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+<header id="title-block-header">
+
+
+</header>
+
+
+<section id="using-llms-to-understand-and-check-code" class="level1">
+<h1>Using LLMs to understand and check code</h1>
+<p>Tools like ChatGPT, Claude, Copilot or Gemini can write bash code in seconds, so why would you still want to learn how to use bash?</p>
+<p>For this, lets first understand what these tools are. Very briefly, all these tools are built on a <strong>large language model (LLM)</strong>: a program that has been trained on huge amounts of text, including a lot of code, and that writes an answer by predicting which words are likely to come next. On this page, I use “LLM” for all of these chat tools.</p>
+<p>LLMs are useful, and some of you may already use them. This page is about how to use them without losing control over your analysis. It is written based on my own experience using LLMs, for people who work with biological data and who have just started with the command line. You can read it after the workshop, at your own pace.</p>
+<p>The short version:</p>
+<ul>
+<li><strong>Learn the basics first</strong>, with this tutorial, and don’t let an LLM write code for you while you do. The basics give you the tools you need for all the other advice on this page</li>
+<li>Especially while still learning but also when letting it generate code, use an LLM as a <strong>tutor</strong> that explains code, more than as a machine that writes code for you</li>
+<li>Treat every piece of code an LLM writes as a <strong>first draft</strong>: run it on one sample and check the output before you use it for real</li>
+<li>You need to be able to <strong>explain</strong> and <strong>justify</strong> every step of your analysis, whoever wrote the code</li>
+<li>You need to <strong>understand</strong> what each option of a tool does to your data. For the code around it, you can <strong>check</strong> that it does what you want with the simple commands from day 1</li>
+</ul>
+<section id="why-learn-the-command-line-if-an-llm-can-write-the-code" class="level2">
+<h2 class="anchored" data-anchor-id="why-learn-the-command-line-if-an-llm-can-write-the-code">Why learn the command line if an LLM can write the code?</h2>
+<p>This is a fair question. My answer is that writing the code is only a small part of what is needed to be able to analyse our data. Even with an LLM, someone still has to:</p>
+<ul>
+<li><strong>Run the code</strong> in the right place: on the right computer, in the right folder, with the right paths, on the login node or as a job. The LLM does not know your folder structure, your file names or the HPC you work on</li>
+<li><strong>Read the code</strong>, to know what it will do to your files before you run it. This means understanding details like how exactly the data is summarized or how the options of a command, for example fastp, affect your output</li>
+<li><strong>Check the input and output</strong>: what does your input data look like, did every sample get processed, how many reads are left, does that make sense for your data?</li>
+<li><strong>Explain and justify</strong> your choices: to your supervisor, to your co-authors, in the methods section of a paper. “The LLM chose this cutoff” is not really an acceptable answer if someone asks you about your choices</li>
+</ul>
+<p>All four need the skills from this workshop. An LLM can help with each of them, but it cannot take over the responsibility. That stays with you.</p>
+</section>
+<section id="start-with-the-basics-without-an-llm" class="level2">
+<h2 class="anchored" data-anchor-id="start-with-the-basics-without-an-llm">Start with the basics, without an LLM</h2>
+<p>All the advice on this page depends on the basics from this tutorial. To check code you need to be able to navigate the file system with the terminal and know about basic commands like <code>ls</code>, <code>wc -l</code> or <code>head</code>. To notice that a loop skipped a sample, you need to have written a few loops yourself. And to see that an output looks wrong, you need to know what a normal output looks like.</p>
+<p>So while you learn the basics, with this tutorial and your first own analyses, my advice is:</p>
+<ul>
+<li><strong>Don’t use an LLM to write code.</strong> Type the commands yourself, make mistakes and read the error messages. This is how you learn what normal looks like, and you need exactly that later, to spot when something is wrong. Struggle is a normal part of the learning experience and you don’t want to outsource this to an LLM.</li>
+<li><strong>Use an LLM only when you don’t understand something and can’t ask anyone</strong>: not your supervisor, not a colleague, not the instructor. Even then, ask it to explain, not to give you the solution</li>
+</ul>
+<p>Once you are comfortable with the basics, the rest of this page applies.</p>
+</section>
+<section id="which-tool-can-you-use" class="level2">
+<h2 class="anchored" data-anchor-id="which-tool-can-you-use">Which tool can you use?</h2>
+<section id="rules-at-the-uva" class="level3">
+<h3 class="anchored" data-anchor-id="rules-at-the-uva">Rules at the UvA</h3>
+<p>Universities have their own rules for LLMs, mostly about privacy. At the UvA (checked in October 2026, rules may change):</p>
+<ul>
+<li>The UvA offers its own tool, <a href="https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html">UvA AI Chat</a>, to students and staff. It is free with your UvAnetID and works much like ChatGPT. According to UvA, what you type stays within the UvA environment and is not used to train the models</li>
+<li>For <strong>students</strong>, UvA writes that commercial tools such as ChatGPT are <a href="https://student.uva.nl/en/information/ai-tools-and-your-studies">not allowed in the context of your studies</a>, because they don’t meet the UvA privacy rules. Your study programme and your course decide what you may use an LLM for, and you are expected to be open about how you used it</li>
+<li>For <strong>everyone</strong>, also in UvA AI Chat, the normal rules for privacy and research data still apply. The UvA’s <a href="https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat-rai.html">page on responsible use</a> says, for example, never to upload lists of names of students, patients or research participants, and to contact your faculty’s data steward when in doubt</li>
+</ul>
+<p>If you are not at the UvA, check the rules of your own institution.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Important: Don't paste your data into an LLM">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Important: Don’t paste your data into an LLM
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Don’t share confidential information, unpublished data, sequences or results with an LLM. You rarely need to. To ask about a problem, a few lines are enough: the command you ran, the error message, and the first lines of a file (<code>head -n 8</code> shows the first two reads of a fastq file). Replace sample names or other details if they are sensitive.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="different-tools-same-advice" class="level3">
+<h3 class="anchored" data-anchor-id="different-tools-same-advice">Different tools, same advice</h3>
+<p>LLM tools differ a lot: free or paid, a chat window in your browser, or a tool inside a code editor that can read your files and run commands itself. Names, features and prices change every few months, so I don’t recommend a specific one here.</p>
+<p>Everything on this page works with a free chat tool, such as UvA AI Chat: you paste code, you ask a question, you read the answer. If you use a tool that runs commands for you, the advice matters even more. You see less of what happens, so checking the result becomes even more important.</p>
+</section>
+</section>
+<section id="how-i-suggest-you-use-an-llm" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-suggest-you-use-an-llm">How I suggest you use an LLM</h2>
+<p>These are the rules I give the students I supervise:</p>
+<ul>
+<li><strong>Ask it to explain, not only to write.</strong> When you learn a new concept, you can even tell it not to write code, for example: “Give advice and best practices, but do NOT give me a code solution”</li>
+<li><strong>Ask specific questions.</strong> Give it the actual command, the actual error message and the biological context. The more specific the question, the more useful the answer</li>
+<li><strong>Ask for the simplest version.</strong> LLMs tend to write more code than you need: error handling for every possible case, a variable for every path. The code is not always wrong, but it is harder to understand what it does. Ask for the simplest version first, and add complexity only when you understand why you need it</li>
+<li><strong>Treat generated code as a first draft.</strong> Run it on one sample, look at the output, and check that it makes biological sense before you run it on all samples</li>
+<li><strong>Don’t let it rewrite code that fails.</strong> This usually replaces code you don’t understand with more code you don’t understand. Ask it to explain the error or a specific line instead (more on this <a href="#when-your-code-does-not-work">below</a>)</li>
+<li><strong>Check suggested options against the help page of the version you use.</strong> An LLM has learned from documentation of many versions of a tool, often older ones. Remember from day 2: Crunchomics has fastp 1.0.1, and we installed 1.4.0. Options can change between versions. <code>fastp --help</code> on your own installation is always more reliable than an LLM’s suggestion</li>
+</ul>
+<p>And the most important rule: <strong>if you can’t explain a step, don’t use it yet.</strong> It is completely fine to ask for help with a step you don’t understand, from an LLM or from a person. Struggling with code is a normal part of learning.</p>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>On day 2, we ran fastp without any filtering options. Let’s use an LLM to find out whether it filtered all reads anyway:</p>
+<ol type="1">
+<li>Ask in the UvA AI Chat: “What does fastp do by default to filter reads? Which options control this, and what are their default values?” Write down its answer</li>
+<li>On Crunchomics, activate the <code>fastp_1.4.0</code> environment and look at the help page. Find the options the LLM mentioned. Do the descriptions and default values match?</li>
+<li>Deactivate the environment and look at the help page of the fastp 1.0.1 of Crunchomics. Is there anything different?</li>
+</ol>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2: the help page of fastp 1.4.0</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--version</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--help</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">less</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 3: the help page of the fastp of Crunchomics</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--version</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--help</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>2&gt;&amp;1</code> sends the error output to the same place as the normal output. Some tools print their help page as error output, and then <code>less</code> would not get it. Inside <code>less</code>, type <code>/quality</code> and press Enter to jump to the word “quality”, and <code>n</code> to jump to the next match.</p>
+<p>Look for the options about quality and length filtering. For fastp 1.4.0 on Crunchomics, these are the lines:</p>
+<pre><code>  -Q, --disable_quality_filtering      quality filtering is enabled by default. If this option is specified, quality filtering is disabled
+  -q, --qualified_quality_phred        the quality value that a base is qualified. Default 15 means phred quality &gt;=Q15 is qualified. (int [=15])
+  -u, --unqualified_percent_limit      how many percents of bases are allowed to be unqualified (0~100). Default 40 means 40% (int [=40])
+  -n, --n_base_limit                   if one read's number of N base is &gt;n_base_limit, then this read/pair is discarded. Default is 5 (int [=5])
+  -e, --average_qual                   if one read's average quality score &lt;avg_qual, then this read/pair is discarded. Default 0 means no requirement (int [=0])
+  -L, --disable_length_filtering       length filtering is enabled by default. If this option is specified, length filtering is disabled
+  -l, --length_required                reads shorter than length_required will be discarded, default is 15. (int [=15])</code></pre>
+<p>In plain words:</p>
+<ul>
+<li><code>-q</code> and <code>-u</code>: a base with a quality score of 15 or more counts as good. A read is removed if more than 40% of its bases are not good</li>
+<li><code>-n</code>: a read is removed if it has more than 5 N bases (positions where the sequencer could not tell which base it was)</li>
+<li><code>-e</code>: the minimum average quality of a read. The default is 0, so this filter is off unless you switch it on</li>
+<li><code>-l</code>: a read is removed if it is shorter than 15 bases</li>
+</ul>
+<p>So yes: even without options, fastp filtered the reads on day 2. Your fastp report from day 2 shows how many reads were removed, and by which filter.</p>
+<p>Filtering is not the only thing that is on by default. The same help page says that adapter trimming is on by default (<code>-A</code> switches it off), while quality trimming with <code>--cut_front</code>, <code>--cut_tail</code> or <code>--cut_right</code> is off until you ask for it. So “fastp trims and filters my reads” is only half true, and which half depends on the option. This is exactly the kind of detail that an LLM easily blurs: its answer may sound right in general, mix up what is on and off, or describe an older version.</p>
+<p>For each step of your analysis, check in the help page whether it is on or off by default. This decides what “I ran fastp with default settings” actually means, for example in the methods section of a paper.</p>
+<p>Compare all this with what the LLM told you, and with the help page of the version you actually use. If they differ, the help page of your own installation wins.</p>
+<p>For question 3, scrolling through two long help pages is tiring. Instead, we can save both in a file and let the computer compare them. <code>diff</code> compares two files line by line and prints only the lines that differ:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the help page of each version in a file</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--help</span> <span class="op">&gt;</span> help_1.4.0.txt <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--help</span> <span class="op">&gt;</span> help_1.0.1.txt <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print only the lines that differ</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span> help_1.0.1.txt help_1.4.0.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>On Crunchomics, this prints:</p>
+<pre><code>16c16
+&lt;       --stdin                          input from STDIN. If the STDIN is interleaved paired-end FASTQ, please also add --interleaved_in.
+---
+&gt;       --stdin                          input from STDIN. If the STDIN is interleaved paired-end FASTQ, please also add --interleaved_in. Adapter auto-detection is disabled for STDIN mode
+28a29
+&gt;       --dimer_max_len                  if the read length is less than or equal to this value after adapter trimming, it is considered an adapter dimer. Requires adapter evidence. (int [=2])
+36c37
+&lt;       --dup_calc_accuracy              accuracy level to calculate duplication (1~6), higher level uses more memory (1G, 2G, 4G, 8G, 16G, 24G). Default 1 for no-dedup mode, and 3 for dedup mode. (int [=0])
+---
+&gt;       --dup_calc_accuracy              accuracy level to calculate duplication (1~6), higher level uses more memory (1G, 2G, 4G, 8G, 16G, 32G). Default 1 for no-dedup mode, and 3 for dedup mode. (int [=0])</code></pre>
+<p>Lines that start with <code>&lt;</code> come from the first file (1.0.1), lines with <code>&gt;</code> from the second file (1.4.0). The numbers above them say where in each file the lines are.</p>
+<p>So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to <em>know</em>, not to find a difference. Three other lines did change. The most interesting one is <code>--dimer_max_len</code>, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn’t say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn’t list this option at all (checked in October 2026). So even the official documentation online can lag behind the program. Yet another reason why the help page of your own installation wins.</p>
+<p><strong>What two LLMs answered (October 2026)</strong></p>
+<p>I asked this question to UvA AI Chat (with its default model) and to ChatGPT, and compared both answers with the help page of fastp 1.4.0:</p>
+<ol type="1">
+<li>Both got every default value right. Checking this took me a few minutes, and that is the point: often the LLM is right, and a quick look at the help page is how you know</li>
+<li>Quality trimming was hidden in one answer, in a side note near the end, and missing from the other. Both answered the question I asked, which was about filtering. But for most of us, the practical question is “were my reads trimmed?”, and that answer got lost. A useful follow-up question is “What does fastp <em>not</em> do by default?”</li>
+<li>Both wrote that fastp removes reads shorter than 15 bases “after trimming”. That may well be true, but the help page doesn’t say it. One answer also stayed vague (“fastp <em>can</em> discard a pair … depending on …”) about what happens to the other read of a pair when one read fails, while the help page says clearly that it is discarded by default</li>
+<li>Neither answer said which version of fastp it described</li>
+<li>One answer ended with advice tailored to one of my own research projects, which I had not mentioned in the question. It assumed a different kind of data than the data I was asking about. The reason for that is that depending on your settings an LLM can remember earlier conversations. This can be useful for some things but you have to decide if this is what you want and whether this fits into the privacy rules of your organisation.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: An LLM that looks something up has not always read the page">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: An LLM that looks something up has not always read the page
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Some LLM tools can search the web or open a link you give them. That sounds like they read the page, but often they don’t read all of it. Some tools pass the page through a second, smaller model that summarises it, and the main model only sees that summary. Claude Code works like this, for example (checked in October 2026; other tools may work differently). An answer can also be based only on the short snippets that a search engine shows for each result.</p>
+<p>There is a good reason for this: a long web page is a lot of text to process, and a summary makes the answer faster and cheaper. So I don’t expect this to disappear, even if the details change from tool to tool. And for many questions, a summary is all you need, for example “What is fastp used for?” or “Which tools are often used to trim reads?”.</p>
+<p>It becomes a problem when the detail is the point. A summary can drop a detail, mix up two options, or smooth over exactly the sentence that matters, and it reads just as convincingly as a correct answer. So when you need a default value, an option name or the version a page describes, open the page or the help page yourself and read the lines in question. Ask the LLM to quote the exact sentence it relies on, so you can find it and check it.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-an-llm-to-understand-code" class="level2">
+<h2 class="anchored" data-anchor-id="using-an-llm-to-understand-code">Using an LLM to understand code</h2>
+<p>This is where I find LLMs most useful. You can paste a command and ask what each part does. This works well with free chat tools.</p>
+<p>Some questions that work well:</p>
+<pre><code>Explain this bash command line by line. I am a biologist and new to the command line:
+
+&lt;paste the command here&gt;</code></pre>
+<pre><code>What happens to each file when I run this loop?
+What happens if one of the input files is missing?</code></pre>
+<pre><code>What is the difference between the -o and the -h option of fastp?</code></pre>
+<p>Keep in mind that the answer you get can still be wrong. An explanation is easier to check than a full script, though: you can test each claim with a small command or by looking at the help function yourself.</p>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>In the optional box at the end of the fastp section on day 2, we used this awk command:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li>Paste the command into the UvA AI Chat and ask it to explain each part. This exercise is about practicing checking an answer from an LLM, not about getting the code answer.</li>
+<li>Pick one thing the explanation claims, for example what <code>FNR &gt; 1</code> does. How can you check this claim yourself, with the commands from day 1?</li>
+</ol>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For question 2: the explanation should say that <code>FNR &gt; 1</code> skips the first line of each file, the header. You can check this by comparing the input with the output:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first lines of the input: the first line is the header</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 results/seqkit/stats_raw.txt</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run awk on one file only: the header line should be missing</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 3</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the lines: the awk output should have one line less than the input</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/seqkit/stats_raw.txt</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You don’t need to know awk to do this. You only need to know what the output <em>should</em> look like. This is also a good example for how knowing basic bash commands allows you to perform the suggested checks yourself, no LLM needed.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-code-with-the-commands-from-day-1" class="level2">
+<h2 class="anchored" data-anchor-id="checking-code-with-the-commands-from-day-1">Checking code with the commands from day 1</h2>
+<p>This is the main point of this page. Not all code needs the same level of understanding:</p>
+<ul>
+<li><strong>The analysis itself: understand every option.</strong> The options of a tool like fastp decide what happens to your data: which reads are removed, and how much of each read is trimmed. These are scientific choices. You need to know what each option does and why you use it, whether you or an LLM wrote the command. Look them up with <code>fastp --help</code> or in the manual, and ask an LLM to explain an option if the manual is unclear</li>
+<li><strong>The code around it: know what it should do, then check.</strong> Some code only organises the work: an <code>if</code>/<code>else</code> block that skips finished samples, or a <code>sed</code> or <code>awk</code> command that picks lines from a file. You may not understand every detail of how it works. But you must know what it is supposed to do to your files, and check that it really does</li>
+</ul>
+<p>For these checks, the commands from day 1 are enough:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Did I get all the output files I expected?</td>
+<td><code>ls -l results/fastp</code>, <code>ls results/fastp \| wc -l</code></td>
+</tr>
+<tr class="even">
+<td>Is any file empty?</td>
+<td><code>ls -l</code> (look for a size of 0)</td>
+</tr>
+<tr class="odd">
+<td>Which samples will the loop work on?</td>
+<td><code>cat samples.txt</code>, <code>wc -l samples.txt</code></td>
+</tr>
+<tr class="even">
+<td>What does a wildcard match?</td>
+<td><code>ls data/seq_project/*/*_R1.fastq.gz</code></td>
+</tr>
+<tr class="odd">
+<td>How many reads are in a file?</td>
+<td><code>zcat file.fastq.gz \| wc -l</code> (divided by 4)</td>
+</tr>
+<tr class="even">
+<td>Does the output look right?</td>
+<td><code>head</code>, <code>less -S</code></td>
+</tr>
+<tr class="odd">
+<td>Did every sample show up in the log?</td>
+<td><code>grep -c "Start fastp" logs/fastp_*.out</code></td>
+</tr>
+<tr class="even">
+<td>What will the loop do, before it does it?</td>
+<td>put <code>echo</code> in front of the command (a dry run)</td>
+</tr>
+</tbody>
+</table>
+<p>Before you run anything, think about what you expect: how many samples, how many files, roughly how many reads. Then compare. If the numbers don’t match, you have found a problem, even if you can’t yet say where it is.</p>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Imagine you ask an LLM how to count the reads in a fastq file, and it suggests:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-c</span> <span class="st">"^@"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The idea: each read starts with a header line that begins with <code>@</code>, so counting those lines should count the reads (<code>^@</code> means “a line that starts with @”).</p>
+<ol type="1">
+<li>Run the command. How many reads does it report?</li>
+<li>Count the reads in the same file the way we did on day 1. Do the two numbers match?</li>
+<li>Can you think of a reason why they don’t match? Hint: look at the fastq format again. Which other line of a read could start with <code>@</code>?</li>
+</ol>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>On my computer (Git Bash on Windows), the <code>grep</code> command prints:</p>
+<pre><code>44882</code></pre>
+<p>The day 1 way:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints:</p>
+<pre><code>179384</code></pre>
+<p>179,384 lines divided by 4 is 44,846 reads. So the <code>grep</code> command counts 36 reads too many.</p>
+<p>The reason: the fourth line of each read holds the quality scores, and <code>@</code> is one of the characters used for a quality score. In 36 reads, the quality line happens to start with <code>@</code>, so <code>grep</code> counts these lines as well.</p>
+<p>The command looked sensible, and the number looked plausible. Only the comparison with a second, simple count showed the problem.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="worked-example-an-llm-writes-a-fastp-job-script" class="level2">
+<h2 class="anchored" data-anchor-id="worked-example-an-llm-writes-a-fastp-job-script">Worked example: an LLM writes a fastp job script</h2>
+<p>Let’s look at a realistic example. I asked an LLM:</p>
+<pre><code>I work with samples S1-S100. I want to run fastp for quality trimming and
+remove reads below an average quality score of 20 and use the same cutoff
+for quality trimming of the reads themselves. Can you write a script to
+process all these samples at once on a HPC with slurm?</code></pre>
+<p>The prompt could be better, but it is roughly what many of us would type. This is the script it wrote (I only shortened the decorative lines in the comments):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_trim</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-100</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16G</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=04:00:00</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_%A_%a.out</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_%A_%a.err</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Paths --</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_DIR</span><span class="op">=</span><span class="st">"data"</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="va">OUT_DIR</span><span class="op">=</span><span class="st">"trimmed"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">"</span> logs</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Sample name derived from array index --</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="va">SAMPLE</span><span class="op">=</span><span class="st">"S</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">"</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="va">R1</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R1.fastq.gz"</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="va">R2</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R2.fastq.gz"</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Guard: skip if input files are missing --</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">${R1}</span><span class="st">"</span> <span class="kw">||</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">${R2}</span><span class="st">"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"ERROR: Input files not found for </span><span class="va">${SAMPLE}</span><span class="st">: </span><span class="va">${R1}</span><span class="st"> / </span><span class="va">${R2}</span><span class="st">"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Run fastp --</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in1</span>  <span class="st">"</span><span class="va">${R1}</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in2</span>  <span class="st">"</span><span class="va">${R2}</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">--out1</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R1_trimmed.fastq.gz"</span> <span class="dt">\</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">--out2</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R2_trimmed.fastq.gz"</span> <span class="dt">\</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">--average_qual</span>        20 <span class="dt">\ </span>  <span class="co"># discard reads with mean quality &lt; 20</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_mean_quality</span>    20 <span class="dt">\ </span>  <span class="co"># sliding-window trimming threshold</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_front</span>              <span class="dt">\ </span>  <span class="co"># trim low-quality bases from 5' end</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_tail</span>               <span class="dt">\ </span>  <span class="co"># trim low-quality bases from 3' end</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--thread</span>              8  <span class="dt">\</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">--json</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_fastp.json"</span> <span class="dt">\</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">--html</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_fastp.html"</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done: </span><span class="va">${SAMPLE}</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>It looks professional: tidy comments, a check on the input files, separate log files per sample. It uses a <strong>job array</strong>, which we only saw in an optional box on day 2: SLURM starts the same script many times (here 100 times), and each copy gets its own number in the variable <code>SLURM_ARRAY_TASK_ID</code>. The script uses the long names of the fastp options (<code>--in1</code> instead of <code>-i</code>, <code>--out1</code> instead of <code>-o</code>); both forms do the same thing.</p>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Read the script carefully, as if you were going to run it on your own data. Write down everything you would check or change. Some questions to guide you:</p>
+<ol type="1">
+<li>Which fastp options will fastp actually receive? Look closely at the lines with a comment at the end</li>
+<li>What does the script assume about your file names and folders? Would it work with the files from this workshop?</li>
+<li>Which fastp is used when the job runs on Crunchomics?</li>
+<li>Where do the numbers for CPUs, memory and time come from?</li>
+<li>Compare it with the fastp script from day 2. Is it wrong, or just different?</li>
+</ol>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I sort the problems from most to least serious.</p>
+<p><strong>1. It runs, but does the wrong thing</strong></p>
+<ul>
+<li><strong>The comments at the end of the lines break the command.</strong> The <code>\</code> only joins two lines when it is the very last character on the line (we saw this on day 2). Here, spaces and a comment follow it. The <code>\</code> then only protects the space after it, and the command ends at the end of that line. fastp receives the input and output files, <code>--average_qual 20</code>, and one extra argument that is just a space. Bash then tries to run the lines that follow as commands of their own, and each attempt fails with <code>command not found</code>. The <code>--thread</code> line has no comment, so its <code>\</code> works again, and <code>--thread</code>, <code>--json</code> and <code>--html</code> end up together in one failing command. So fastp never gets the trimming options, <code>--thread</code>, <code>--json</code> or <code>--html</code>. I missed this myself when I first read the script, which shows that reading is not enough: you also have to run it on one sample and look at the output. See the next exercise for a small test.</li>
+<li><strong>The job reports success anyway.</strong> The last line, <code>echo "Done"</code>, always works. A job counts as successful when its last command works, so SLURM reports every task as finished without problems. The errors are only visible in the <code>.err</code> files. (With <code>set -euo pipefail</code> at the top of the script, it would have stopped at the first <code>command not found</code>, and SLURM would have reported the task as failed. fastp would still have run once with the incomplete options before that. See the tip on <code>set -euo pipefail</code> further down.)</li>
+<li><strong>The <code>logs</code> folder is made too late.</strong> SLURM opens the log files before the script starts. If the <code>logs</code> folder doesn’t exist yet, the job can’t write its log files and fails without leaving a trace. Make the folder before you run <code>sbatch</code>, as we did on day 2.</li>
+</ul>
+<p><strong>2. It makes assumptions about your data</strong></p>
+<ul>
+<li><strong>The file names are invented.</strong> <code>S${SLURM_ARRAY_TASK_ID}</code> only works because the prompt said “S1-S100”. Real file names rarely look like that. In this workshop, the files are called <code>Sample-DUMMY1_R1.fastq.gz</code> and are in separate folders. A list file like <code>samples.txt</code> works with any names, and you can open it to see which samples will be processed.</li>
+<li><strong>It chose a trimming method for you.</strong> The prompt was not clear about how to trim, so the LLM chose trimming from both ends of the read (without asking me for clarification). Is that what you want? fastp 1.4.0 offers three methods, each with a window of 4 bases that moves along the read: <code>--cut_front</code> (from the start of the read, removes bases until the quality is good enough), <code>--cut_tail</code> (the same, from the end of the read) and <code>--cut_right</code> (from the start; at the first window with low quality, it removes that window and everything after it). Which one fits depends on your data. <code>--cut_mean_quality</code> only sets the quality threshold that these three methods use. On its own, it does nothing: fastp only trims by quality if you also add <code>--cut_front</code>, <code>--cut_tail</code> or <code>--cut_right</code>. (And 20 is already the default threshold, so the script would trim the same way without this line.) And fastp already filters reads by default, also without any of these options (see the exercise on default filtering above). Check <code>fastp --help</code> for the version you use, and ask yourself (or the LLM) why these options and not others.</li>
+<li><strong>The resources are guesses.</strong> 8 CPUs, 16 GB of memory and 4 hours per sample are not based on your data. Asking for too much time means a longer wait in the queue. Run one sample first, then check what it actually used (the optional <code>sacct</code> box on day 2).</li>
+<li><strong>No software is activated.</strong> There is no <code>conda activate</code>, so the script doesn’t say which fastp it needs. Which one the job uses then depends on your terminal at the moment you submit the job: SLURM normally copies its settings, including the PATH, into the job. If the <code>fastp_1.4.0</code> environment happened to be active, the job uses fastp 1.4.0. If not, it uses the fastp 1.0.1 of Crunchomics. Your results should not depend on such an accident.</li>
+</ul>
+<p><strong>3. It is harder to read than needed</strong></p>
+<ul>
+<li><code>DATA_DIR</code> and <code>OUT_DIR</code> hide two short folder names. You have to look them up to know where the files go. Variables like <code>SAMPLE</code>, <code>R1</code> and <code>R2</code>, however, are useful, because they are used many times.</li>
+<li>The one place where a variable <em>would</em> help is the number 8: it appears twice (<code>--cpus-per-task=8</code> and <code>--thread 8</code>). If you change one, you have to remember the other. <code>--thread ${SLURM_CPUS_PER_TASK}</code> would always use the number of CPUs you requested.</li>
+<li>The check on the input files looks safe, but it is easy to overlook when it fires. If a file is missing, only that one task stops. Its error message ends up in one <code>.err</code> file among many, and the other tasks finish normally. With 4 samples you might notice. With 1000 samples, one failed task is easy to miss, and you continue with 999 samples without knowing it. I personally prefer checks that fail loudly, before anything runs: check that all input files exist <em>before</em> you submit the job, with <code>wc -l samples.txt</code> and a loop that runs <code>ls</code> on every R1 and R2 file. If a file is missing, you see it right away and the job never starts. And after the job, count the output files, whatever checks the script contains.</li>
+</ul>
+<p><strong>4. Different from day 2: wrong, or just different?</strong></p>
+<p>The LLM used a job array, while we used a for-loop inside one job script. Both are fine. An array runs the samples at the same time, a loop runs them one after the other. Something different from what you learned is not wrong by itself. But you should understand it before you use it. Also be careful with arrays on a shared HPC: <code>--array=1-100</code> with 8 CPUs each can ask for 800 CPUs at once. <code>--array=1-100%8</code> runs at most 8 tasks at the same time.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>You can test the first problem without fastp and without an HPC. Put <code>echo</code> in front of the command, as in a dry run, and add comments at the end of the lines like the LLM did. Save these lines in a script called <code>comment_test.sh</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> fastp <span class="dt">\</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in1</span> Sample-DUMMY1_R1.fastq.gz <span class="dt">\ </span>  <span class="co"># the R1 file</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--in2</span> Sample-DUMMY1_R2.fastq.gz <span class="dt">\ </span>  <span class="co"># the R2 file</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--thread</span> 2</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then run it with <code>bash comment_test.sh</code>. On my computer (Git Bash on Windows), this prints:</p>
+<pre><code>fastp --in1 Sample-DUMMY1_R1.fastq.gz
+comment_test.sh: line 3: --in2: command not found
+comment_test.sh: line 4: --thread: command not found
+Done</code></pre>
+<p>The first line shows the full command that fastp would receive: only the R1 file. The R2 file and <code>--thread</code> never reach it.</p>
+</section>
+<section id="less-code-is-often-better" class="level2">
+<h2 class="anchored" data-anchor-id="less-code-is-often-better">Less code is often better</h2>
+<p>LLMs have learned from a lot of code written for large, automated software systems. There, a script should keep running no matter what goes wrong. In a scientific analysis, you usually want the opposite: if something goes wrong, you want to know.</p>
+<p>A common example is a check that skips a sample when its input file is missing. Here, I made a typo in <code>samples.txt</code> (<code>Sample-DUMY3</code> instead of <code>Sample-DUMMY3</code>) and ran a loop in the style that LLMs often write. To keep it short, the loop only prints which sample it would work on:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">R1</span><span class="op">=</span><span class="va">$(</span><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dv">2</span><span class="op">&gt;</span>/dev/null<span class="va">)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$R1</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Processing </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All samples done"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>On my computer, this prints:</p>
+<pre><code>Processing Sample-DUMMY1
+Processing Sample-DUMMY2
+Processing Sample-DUMMY4
+All samples done</code></pre>
+<p><code>continue</code> tells the loop to skip the rest of this round and go on with the next sample. The loop skipped sample 3 without a single word, and then reported that all samples were done. If this were a long fastp job, the results would look complete, but cover only 3 of the 4 samples. <code>2&gt;/dev/null</code> makes it worse: it throws away the error message of <code>ls</code>.</p>
+<p>Compare this with the simple loop from day 2 (here with <code>ls</code> instead of fastp):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Start: </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints:</p>
+<pre><code>Start: Sample-DUMMY1
+data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
+Start: Sample-DUMMY2
+data/seq_project/barcode002_User1_ITS_9_L001/Sample-DUMMY2_R1.fastq.gz
+Start: Sample-DUMY3
+ls: cannot access 'data/seq_project/*/Sample-DUMY3_R1.fastq.gz': No such file or directory
+Start: Sample-DUMMY4
+data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></pre>
+<p>The simple loop has no check at all, and that is exactly why the problem is visible: the error message appears right below the sample name, and ends up in the log file of a job. Together with a check of the output (4 samples in, 16 files out), you would notice the missing sample right away.</p>
+<p>So knowing your own data and checking it with basic commands often works better than adding checks to the code. Before you submit a job, check the inputs with <code>cat samples.txt</code>, <code>wc -l samples.txt</code> and an <code>ls</code> loop like the one above. After the job, count the outputs.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Skipping samples that are already done (optional)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Skipping samples that are already done (optional)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sometimes a check in the loop does make sense. Say a job stopped halfway, and you don’t want to run fastp again for the samples that are already done. Then write the check so that you can read it, and so that every skip shows up in the log:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-s</span> results/fastp/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Skip </span><span class="va">$sample</span><span class="st">: output already exists"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Run fastp for </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li><code>if [ ... ]; then ... else ... fi</code>: if the test between the square brackets is true, bash runs the commands after <code>then</code>. Otherwise, it runs the commands after <code>else</code>. <code>fi</code> (if spelled backwards) closes the block</li>
+<li><code>-s</code>: true if the file exists <em>and</em> is not empty. A job that crashed can leave an empty file behind, which <code>-f</code> (true if the file exists) would accept</li>
+<li>Neither <code>-s</code> nor <code>-f</code> checks that a file is complete. A job that ran out of time can leave a half-written file. When in doubt, delete the outputs of the sample that was running when the job stopped, and run it again</li>
+</ul>
+<p>Replace the <code>echo</code> after <code>else</code> with the fastp command once the dry run looks right.</p>
+<p>The IBED bioinformatics pages explain this in more detail, each with a note on code written by LLMs:</p>
+<ul>
+<li><a href="https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-input-validation.html">if/else, <code>continue</code> and <code>break</code></a>: checking input files</li>
+<li><a href="https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-pipefail.html"><code>set -euo pipefail</code></a>: a line that LLMs often put at the top of a script. It makes a script stop at the first command that fails. That sounds like exactly the loud failure I recommend on this page, and in the worked example it would have helped. But it also stops a script for things that are not errors. For example, <code>grep</code> counts as failed when it finds no match, even if “no match” is a perfectly fine answer. While you develop a script, this makes it harder to see what is going on. So leave it out while you develop, and only consider adding it once the script works and you know which of your commands can “fail” without a real problem</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Take the LLM script from the worked example, and change it into a script that works for the data of this workshop, in the style of day 2. Keep the job array if you like, or use a for-loop.</p>
+<p>Then answer: which lines did you remove, and why? Which lines did you add?</p>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There are several good answers. This one keeps the array, and takes the sample name from <code>samples.txt</code>. Make the <code>logs</code> folder before you submit it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_array</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_array_%A_%a.out</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_array_%A_%a.err</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Make conda available in the job, and activate the environment with fastp</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Take the line with the number of this task from samples.txt</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">p"</span> samples.txt<span class="va">)</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start fastp for: </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">-i</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dt">\</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">-I</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R2.fastq.gz <span class="dt">\</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> results/fastp_array/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="dt">\</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> results/fastp_array/<span class="va">${sample}</span>_R2.trimmed.fastq.gz <span class="dt">\</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">-h</span> results/fastp_array/<span class="va">${sample}</span>.html <span class="dt">\</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">-j</span> results/fastp_array/<span class="va">${sample}</span>.json <span class="dt">\</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">--average_qual</span> 20 <span class="dt">\</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">--thread</span> <span class="va">${SLURM_CPUS_PER_TASK}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li><code>--array=1-4</code>: one task per line in <code>samples.txt</code>. Check the number with <code>wc -l samples.txt</code></li>
+<li><code>sed -n "${SLURM_ARRAY_TASK_ID}p" samples.txt</code>: prints only line number <code>SLURM_ARRAY_TASK_ID</code> of the file. Task 1 gets the first sample, task 2 the second, and so on</li>
+<li><code>--thread ${SLURM_CPUS_PER_TASK}</code>: SLURM stores the number of CPUs you requested with <code>--cpus-per-task</code> in this variable. fastp now always uses as many CPUs as the job has, also if you change the number later</li>
+<li>Removed: <code>DATA_DIR</code>, <code>OUT_DIR</code>, the check on the input files (check the inputs before you submit instead), the comments at the end of the lines and <code>echo "Done"</code></li>
+<li>Left out on purpose: the quality trimming. The prompt asked for it, but not for a specific method. fastp has three ways to trim reads by quality (<code>--cut_front</code>, <code>--cut_tail</code> and <code>--cut_right</code>, see the answer to the worked example and <code>fastp --help</code>). Read about them first, decide which one fits your data, and only then add it, with a note in your notebook on why you chose it</li>
+<li>Added: <code>conda activate</code>, <code>samples.txt</code>, and our own names for the reports</li>
+<li>Make the output folder before you submit: <code>mkdir -p logs results/fastp_array</code></li>
+</ul>
+<p>Before you run it on all samples: set <code>--array=1</code> to run only the first sample, and check the output and the fastp report.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="when-your-code-does-not-work" class="level2">
+<h2 class="anchored" data-anchor-id="when-your-code-does-not-work">When your code does not work</h2>
+<p>When your code crashes or gives strange results, it is tempting to paste everything into an LLM and ask it to fix it. I suggest a different order:</p>
+<ol type="1">
+<li><strong>Read the error message.</strong> As on day 1: which command complains, and about which file? Often, the message already tells you what is wrong</li>
+<li><strong>Narrow it down.</strong> Bugs are almost always small and in one place. Run the steps one by one. Put <code>echo</code> in front of a command to see what bash actually runs, or <code>echo $sample</code> to see what is in a variable</li>
+<li><strong>Then ask a specific question.</strong> Give the LLM the one command that fails, the exact error message and a few lines of the input (no real data, see above). Ask what the error means, not for a new script</li>
+</ol>
+<p>A rewritten script may run without errors, but you then have to check all of it again, and you have learned nothing about why the first version failed.</p>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<ul>
+<li><a href="https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html">On GenAI usage</a>, at the end of the IBED for-loops page: what to look out for in loops written by an LLM</li>
+<li>The UvA’s <a href="https://edu.nl/gakhm">AI literacy course for students</a>: what generative AI is, how it works and what its limits are (about 45 to 60 minutes)</li>
+<li><a href="https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html">UvA AI Chat</a> and the UvA <a href="https://student.uva.nl/en/information/ai-tools-and-your-studies">rules for students</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ndombrowski\.github\.io\/cli_workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../source/example_doc.html" class="pagination-link" aria-label="An example notebook">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">An example notebook</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2024, Nina Dombrowski,<br>
+Last modified: 2026-10-13</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/llm_usage.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

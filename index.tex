@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, boxrule=0pt, sharp corners, colback={codebgcolor}, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, frame hidden, enhanced, boxrule=0pt, colback={codebgcolor}]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -223,6 +223,12 @@ and Ecosystem Dynamics (IBED) at the University of Amsterdam, who can
 get access to Crunchomics, the Genomics Compute Environment for SILS and
 IBED. If you don't have access to Crunchomics or another HPC that uses
 SLURM, you can still follow most of the tutorial on your own computer.
+
+AI chat tools such as ChatGPT can write bash code for you, so why learn
+it yourself? Someone still has to run the code, read it and check what
+it did to your data, and that is what this tutorial teaches. At the end,
+the page \href{source/llm_usage.qmd}{Using LLMs} describes how I suggest
+you use these tools once you know the basics.
 
 For topics that this tutorial does not cover, have a look at
 \href{https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/}{IBED's

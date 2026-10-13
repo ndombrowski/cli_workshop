@@ -343,10 +343,89 @@ attachment) with the hidden command at the end of index.qmd.
     docs/example_doc/notebook/example_notebook.html. Old docs HTML and _freeze entry removed.
 
 
-## LLM page (later)
+## LLM page (llm_usage.qmd)
 
 ### To do
 
+- After the next render + push: check that the readme.md link
+  (https://ndombrowski.github.io/cli_workshop/source/llm_usage.html) works.
+- DONE 2026-10-13: links to the page. Pointer paragraph in hpc_howto.qmd after the day 2 wrap-up
+  checkpoint (before "Going further"); same paragraph in index.qmd and readme.md, before "For topics
+  that this tutorial does not cover" (index links source/llm_usage.qmd, readme the full site URL).
+- Render the site (page is not in docs/ yet) and check the PDF build of llm_usage.qmd (only the HTML
+  was rendered, in the scratchpad). Long help-output lines in the plain output blocks may run off the
+  page in the PDF.
+- To check on Crunchomics:
+  - What real fastp does with the stray " " argument (error, or runs and writes fastp.json/fastp.html
+    in the current folder?).
+  - PATH in jobs: the page says SLURM normally copies the terminal's settings (incl. PATH) into the job
+    (sbatch default --export=ALL, from the SLURM docs, not checked on Crunchomics), so the LLM script
+    would use fastp 1.4.0 if the env was active at submit time, else 1.0.1. hpc_howto.qmd says a job
+    "starts in a fresh environment ... where conda is not set up yet"; true for conda's shell function,
+    but PATH may be inherited. Make both pages agree after the test.
+  - logs/ folder missing -> job fails without a log (from SLURM experience, not tested).
+  - The rewrite-exercise answer script (sed -n + --array=1-4, --average_qual 20, --thread
+    ${SLURM_CPUS_PER_TASK}): not run yet.
+  - The awk exercise answer (not run; depends on the header line in stats_raw.txt).
+  - Does fastp print --help to stdout or stderr? Run `fastp --help > test.txt` and check whether
+    test.txt is empty. If not, drop 2>&1 and its explanation from the page.
+- Recheck before each workshop: UvA rules (links + wording), the Claude Code "summarises web pages"
+  claim in the tip box.
+
+### Done
+
+- In the _quarto.yml sidebar since 2026-10-13 ("Using LLMs", after "An example notebook").
+- DRAFT 2026-10-13: source/llm_usage.qmd.
+  Sections: why learn the CLI, start with the basics without an LLM (added 2026-10-13: no LLM for
+  writing code while learning; only when you don't understand something and can't ask anyone), which tool (UvA rules), how I suggest you use an LLM (from
+  ai_pol_v1.md), understanding code (awk exercise), checking code with day 1 commands (table +
+  grep -c "^@" exercise), worked example (fastp array script + 4-part answer + comment_test.sh),
+  less code is better (silent continue vs plain loop, if/else skip tip, IBED links, rewrite exercise),
+  when your code does not work, further reading. Rendered OK in the scratchpad (HTML only, no PDF).
+  - Real outputs (Git Bash 5.2.12 on Windows, course data, 2026-10-13): grep -c "^@" = 44882 vs
+    wc -l = 179384 (44846 reads, 36 quality lines start with @), the silent continue loop, the plain
+    loop, comment_test.sh. Page says "On my computer (Git Bash on Windows)".
+  - UvA rules checked 2026-10-13 (raw fetch): UvA AI Chat free with UvAnetID for students + staff;
+    student.uva.nl: commercial tools like ChatGPT "not allowed in the context of your studies";
+    RAI page: privacy/RDM rules still apply, no lists of names, ask data steward. NOT found: rules
+    for staff/PhDs using commercial tools for research (UvA says research rollout comes later).
+  - fastp default filtering checked against 1.4.0 --help (2026-10-13). --cut_right vs --cut_tail:
+    page describes all three methods from the help and recommends none. Other open checks: see To do.
+  - Review round 2026-10-13 (from another Claude session), done on the page: answer script keeps
+    trimming out ON PURPOSE (decide the method with fastp --help first) instead of "not asked for";
+    --thread ${SLURM_CPUS_PER_TASK} now used in the answer script; set -euo pipefail tip explains why
+    "leave it out while developing" despite the "fail loudly" stance (grep no-match example), and the
+    "reports success anyway" bullet says set -e would have stopped the task; backslash explanation now
+    mentions the stray " " argument and the joined --thread/--json/--html line.
+  - Added 2026-10-13 (review point): exercise after the rules list in "How I suggest you use an LLM":
+    ask an LLM about fastp's default read filtering, compare with fastp --help of 1.4.0 and 1.0.1.
+    DONE 2026-10-13: answer now shows the real fastp 1.4.0 --help lines from Crunchomics (pasted by
+    Nina): -Q/-q 15/-u 40/-n 5/-e 0/-L/-l 15, plus a plain-words list. Same values as the README.
+    Also confirmed by that help: -h/-j default fastp.html/fastp.json (--dont_overwrite off by
+    default), --cut_mean_quality default 20 (worked example, reworded 2026-10-13: main point is that
+    --cut_mean_quality only sets the threshold and does nothing without --cut_front/--cut_tail/
+    --cut_right; that 20 is the default is a side note), cut_front/cut_tail/cut_right descriptions (added, window default 4),
+    --thread default 3.
+    Added 2026-10-13: paragraph in the answer on what is on/off by default (adapter trimming on, -A
+    off; quality trimming off; LLMs blur this) + "default settings" in a methods section. New open tip
+    box after the exercise: "An LLM that looks something up has not always read the page". Claude Code
+    claim (WebFetch passes the page through a smaller model that summarises it) is from Claude Code's
+    own tool description, Oct 2026; not checked for other tools (page says "may work differently").
+    Recheck before each workshop.
+    Added 2026-10-13: "What two LLMs answered (October 2026)" list in the same answer, from Nina's
+    real runs of the question in UvA AI Chat (default model) and ChatGPT, checked against 1.4.0 --help:
+    all defaults right; quality trimming buried (UvA) / missing (ChatGPT); both "after trimming" (not
+    in help); ChatGPT vague on pairs (help: --unpaired1, other read discarded by default); no version;
+    UvA AI Chat added advice for one of Nina's own projects (source of that context unknown: custom
+    instructions, Persona or chat memory?). Project names and model names left out on purpose.
+    DONE 2026-10-13: question 3 answered with a real diff of the 1.0.1 and 1.4.0 help pages on
+    Crunchomics (run by Nina): filtering/trimming lines identical; 3 differences (--stdin note, new
+    --dimer_max_len, --dup_calc_accuracy 24G -> 32G). Page introduces diff in one sentence. README at
+    tags v1.0.1/v1.4.0 (raw fetch) has no --dimer_max_len: page says the README lags behind the program.
+  - The "google how to activate conda" bridge is gone from hpc_howto.qmd (the page now explains
+    source ~/.bashrc), so it is not used on the LLM page.
+  - Decorative "──" lines in the LLM script replaced by "--" (pdflatex), page says so.
+- Planning notes from 2026-10-12 (all used on the page; kept for reference):
 - Place: end of day 2 pointer + separate follow-up page.
 - Natural bridge: the conda sbatch exercise tells participants to "google how to activate conda".
   Many will use an LLM for this anyway. Could become the first worked example on the LLM page.
@@ -450,8 +529,10 @@ Thoughts (Nina + Claude, 2026-10-13). Possible ranking for students:
     careful reading is not enough, you also have to run it on one sample and look at the output).
     `\   # comment`: the \ escapes the space, not the line break, so the command ends there.
     TESTED 2026-10-13 in Git Bash with a fake fastp that prints its arguments: it got --in1 ...
-    --average_qual 20 plus a stray " " argument; the next lines gave "--cut_mean_quality: command not
-    found" and "--thread: command not found" (--json/--html were part of the --thread line).
+    --average_qual 20 plus a stray " " argument (11 arguments); then 4 "command not found":
+    --cut_mean_quality, --cut_front, --cut_tail, --thread (--json/--html were part of the --thread
+    line, which has no comment). Exit code 0. With set -euo pipefail: stops at --cut_mean_quality,
+    exit code 127 (retested 2026-10-13; an earlier note listed only 2 errors).
     So fastp never gets the cut options, --thread, --json or --html.
     NOT TESTED: what real fastp does with the stray " " argument. If it runs, it writes the default
     fastp.json/fastp.html, and all 100 tasks overwrite the same report (default names: check for 1.4.0).
@@ -478,10 +559,14 @@ Thoughts (Nina + Claude, 2026-10-13). Possible ranking for students:
     (--cpus-per-task=8 and --thread 8, can go out of sync): --thread "${SLURM_CPUS_PER_TASK}".
     Lesson: use a variable when it removes a real repetition.
   - Guard with -f + exit 1: exit 1 stops only that array task (each task is its own job), the other 99
-    continue, and the task shows as FAILED in sacct, which is useful. -s would also catch an empty file;
-    neither checks that the file is complete. Better: check before submitting, on the login node, with
-    a loop that runs ls -l on every expected R1/R2 file + wc -l on the sample list. Then the guard only
-    gives a clearer error message than fastp's own.
+    continue, and the task shows as FAILED in sacct. Not wrong, but easy to overlook (changed view,
+    2026-10-13): the error sits in one .err file among many, and with e.g. 1 of 1023 files missing a
+    beginner who doesn't check the output continues with the rest without knowing. Without the guard
+    fastp would fail in that one task just as quietly, so the guard is not the cause; per-sample failure
+    in a big run is. Prefer a loud failure before anything runs: check before submitting, on the login
+    node, with a loop that runs ls -l on every expected R1/R2 file + wc -l on the sample list, and count
+    the outputs afterwards. Then the guard only gives a clearer error message than fastp's own.
+    -s would also catch an empty file; neither checks that the file is complete.
   - Side note on not overloading the cluster: --array=1-100 with 8 CPUs each can ask for 800 CPUs at
     once. --array=1-100%8 runs at most 8 tasks at a time. Check the Crunchomics docs for a stated limit.
   - Course link: day 2 uses a for loop inside one sbatch script, the LLM used an array. Discussion

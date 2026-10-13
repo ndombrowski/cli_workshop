@@ -1166,6 +1166,8 @@ As in the fastp exercise, the quotes around the path stop your own computer from
 4.  Compare your notebook with my [example notebook](example_doc.qmd). What does it have that yours doesn't? Is there anything you want to add?
 :::
 
+You now know enough to write and, just as important, to check your own code. Many of you will also use AI chat tools such as ChatGPT or UvA AI Chat for coding. On the page [Using LLMs](llm_usage.qmd), I describe how I suggest you use them: as a tutor that explains code, and always with the checks from these two days. You can read it after the workshop, at your own pace.
+
 ## Going further
 
 ::: {.callout-tip title="Tip: Running many samples in parallel with job arrays (optional)" collapse="true"}

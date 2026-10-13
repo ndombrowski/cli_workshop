@@ -42,6 +42,9 @@ website:
       - text: "An example notebook"
         href: source/example_doc.qmd
 
+      - text: "Using LLMs"
+        href: source/llm_usage.qmd
+
 
   page-navigation: true
   page-footer:  
