@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, borderline west={3pt}{0pt}{shadecolor}, breakable, frame hidden, interior hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, breakable, boxrule=0pt, sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -269,21 +269,20 @@ Here is what you will do:
 \tightlist
 \item
   Get access to Crunchomics, the UvA computer cluster that we will use
-  in the second part of the tutorial. If you join the workshop, we
-  arrange this for you.
+  in the second part of the tutorial. If you don't work at UvA but have
+  access to an HPC that uses SLURM you still can follow most of the
+  second part of this tutorial.
 \item
-  Learn a few terms: terminal, shell and prompt.
+  Install and open a terminal on your laptop.
 \item
-  Install or open a terminal on your laptop.
+  Run check 1: test that your terminal works.
 \item
-  Check 1: test that your terminal works.
-\item
-  Check 2: log in to Crunchomics and log out again.
+  Run check 2: log in to Crunchomics and log out again.
 \item
   Choose a text editor for your notes.
 \end{enumerate}
 
-\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, colback=white, toprule=.15mm, coltitle=black, opacityback=0, breakable, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, bottomtitle=1mm, rightrule=.15mm, left=2mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, arc=.35mm, titlerule=0mm, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, toprule=.15mm, arc=.35mm, colback=white, leftrule=.75mm, breakable, titlerule=0mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, left=2mm, bottomrule=.15mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, opacitybacktitle=0.6, opacityback=0]
 
 If something on this page does not work, please email Nina Dombrowski
 (n.dombrowski@uva.nl). Part of my job is to support IBED students and
@@ -291,8 +290,8 @@ researchers with bioinformatics, so you can also contact me if you
 follow this tutorial on your own, or if you run into problems later.
 
 If you join the workshop, please contact me \textbf{at the latest a few
-days before the workshop}. That way we can solve the problem before day
-1.
+days before the workshop}. That way we can solve any problems you have
+with the setup before the actual workshop begins.
 
 In your email, tell me which operating system you use (Windows, Mac or
 Linux), which step went wrong, and copy the exact error message (or add
@@ -305,9 +304,10 @@ Crunchomics}\label{step-1-request-access-to-crunchomics}
 
 In the second part of this tutorial, we work on \textbf{Crunchomics}, a
 high-performance computer (\textbf{HPC}) at the UvA. An HPC is a group
-of powerful computers that many people share. You use it for analyses
-that are too large or too slow for your laptop. To be able to use
-Crunchomics, you first need to organize for an account to be made
+of powerful computers that many people share. During this tutorial you
+will use it for analyses that are too large or too slow for your laptop.
+To be able to use Crunchomics, you first need to organize for an account
+to be made
 
 What you need to do depends on how you follow this tutorial. Choose the
 part that fits you.
@@ -321,8 +321,8 @@ the accounts for all participants together.
 \begin{itemize}
 \tightlist
 \item
-  We will send you an email once the accounts are ready. After that, do
-  Check 2 below.
+  We will send you an email once the accounts are ready. After that, you
+  can do Check 2 below.
 \item
   If you do not have this email a few days before the workshop, please
   contact Nina Dombrowski (n.dombrowski@uva.nl).
@@ -349,45 +349,16 @@ the following information:
 You get an email back once your account is ready. You need the account
 for Check 2 below.
 
-\section{Step 2: Some terms}\label{step-2-some-terms}
+\section{Step 2: Install or open a
+terminal}\label{step-2-install-or-open-a-terminal}
 
-In this tutorial we use the \textbf{command-line interface (CLI)}. It is
-an alternative to the \textbf{graphical user interface (GUI)} that you
-probably know better. Both let you work with your computer, but in
-different ways:
-
-\begin{itemize}
-\tightlist
-\item
-  In a GUI, you click on buttons, open folders and use menus.
-\item
-  In the CLI, you type text to give \textbf{commands} (instructions to
-  the computer), and you see the result as text.
-\end{itemize}
-
-When people talk about the CLI, you will also hear the words terminal,
-shell and prompt. They are related, but they are not the same:
-
-\begin{itemize}
-\tightlist
-\item
-  The \textbf{terminal} is the window or program in which you type
-  commands. Some people call it the \textbf{console}.
-\item
-  The \textbf{shell} is the program that reads the commands you type in
-  the terminal and tells the operating system what to do. There are
-  several shells, for example \textbf{bash} and \textbf{zsh}. They use
-  slightly different rules, but the basic commands are the same. This
-  tutorial uses bash.
-\item
-  The \textbf{prompt} is the text that the shell shows when it is ready
-  for your next command. It often shows your user name, the name of your
-  computer and the folder you are in. It usually ends with a \texttt{\$}
-  sign. For example: \texttt{user@laptop:\textasciitilde{}\$}
-\end{itemize}
-
-\section{Step 3: Install or open a
-terminal}\label{step-3-install-or-open-a-terminal}
+For this tutorial you need a \textbf{terminal}: a window in which you
+type \textbf{commands} (instructions to the computer) as text, instead
+of clicking on buttons and menus. The terminal passes what you type to a
+\textbf{shell}, the program that reads your commands and tells the
+computer what to do. There are several shells, for example \textbf{bash}
+and \textbf{zsh}. They differ in small details, but the basic commands
+are the same. This tutorial uses bash.
 
 \subsection{Windows}\label{windows}
 
@@ -505,18 +476,17 @@ tutorial in File Explorer.
     \texttt{\_ProfileDir\_\textbackslash{}MobaXterm\_home} and
     \texttt{\_ProfileDir\_\textbackslash{}MobaXterm\_home\textbackslash{}slash}.
     That is fine: \texttt{\_ProfileDir\_} is MobaXterm's short name for
-    \texttt{C:\textbackslash{}Users\textbackslash{}YourUserName}. (In
-    older MobaXterm versions, these fields are called \textbf{Persistent
-    home directory} and \textbf{Persistent root (/) directory}.)
+    \texttt{C:\textbackslash{}Users\textbackslash{}YourUserName}.
   \end{itemize}
 \item
   Click \textbf{OK}. Close MobaXterm and open it again.
 \end{enumerate}
 
-Why not the Desktop or the Documents folder? On many computers, these
-folders are synced with \textbf{OneDrive}. OneDrive tries to upload
-every file you make there, and sequencing data can get large. A folder
-directly in your user folder is not synced.
+Why I would not recommend setting this to the Desktop or the Documents
+folder: On many computers, these folders are synced with
+\textbf{OneDrive}. OneDrive tries to upload every file you make there,
+and sequencing data can get large. A folder directly in your user folder
+is not synced.
 
 \subsection{Mac}\label{mac}
 
@@ -544,12 +514,14 @@ You do not need to install anything. Open the terminal from your
 applications menu, or search for ``Terminal'' (depending on your system
 it can also be called Konsole or xterm).
 
-\section{Step 4: Check 1, test your
-terminal}\label{step-4-check-1-test-your-terminal}
+\section{Step 3: Check 1, test your
+terminal}\label{step-3-check-1-test-your-terminal}
 
-When the terminal is open, you should see a window with a prompt,
-similar to the one below. Your prompt will show your own user name and
-computer name, and the colors may be different.
+When the terminal is open, you should see a window with a
+\textbf{prompt}, similar to the one below. The prompt is the text that
+the shell shows when it is ready for your next command. It often shows
+your user name and the name of your computer. Your prompt will show your
+own user name and computer name, and the colors may be different.
 
 Type the command below in your terminal and press Enter. Type it exactly
 as it is shown. Capital letters matter.
@@ -574,8 +546,8 @@ Your output may look a bit different. What matters is that you see a
 line that ends with \texttt{bash} or \texttt{zsh} (for example
 \texttt{/bin/zsh} on a newer Mac). If you see this, your terminal works.
 
-\section{Step 5: Check 2, log in to
-Crunchomics}\label{step-5-check-2-log-in-to-crunchomics}
+\section{Step 4: Check 2, log in to
+Crunchomics}\label{step-4-check-2-log-in-to-crunchomics}
 
 Do this check once you have the email that your Crunchomics account is
 ready (see Step 1).
@@ -681,8 +653,8 @@ network.
 If it still does not work, email me (see the box at the top of this
 page) and copy the error message.
 
-\section{Step 6: Choose a text editor for your
-notes}\label{step-6-choose-a-text-editor-for-your-notes}
+\section{Step 5: Choose a text editor for your
+notes}\label{step-5-choose-a-text-editor-for-your-notes}
 
 While you work through the tutorial, you keep a notebook. Each time you
 run a command, you copy it into the notebook, with a short comment that

@@ -368,12 +368,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="yaml-headers" class="level3">
 <h3 class="anchored" data-anchor-id="yaml-headers">YAML headers</h3>
 <p><img src="..\img/yaml_header.png" class="img-fluid" width="753"></p>
-<p>The <strong>YAML header</strong> is the part between the two <code>---</code> lines at the very top of the file. It contains settings for the whole document, such as the title, the author and the output format. In my example, <code>eval: false</code> tells Quarto to only show the code, not to run it.</p>
 </section>
 <section id="settings-change-these-before-you-run-the-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="settings-change-these-before-you-run-the-workflow">Settings (change these before you run the workflow)</h3>
 <p><img src="..\img/general_setup.png" class="img-fluid" width="549"></p>
-<p>In one of the first sections of my notebooks, I collect everything that someone who wants to use my workflow has to change. I write the code below this section in a way that it does not need to be changed. This way, another person can run my code as it is, and only needs to edit this first section. Typical things to add here are:</p>
+<p>In one of the first sections of my notebooks, I typically collect everything that someone who wants to use my workflow has to change. I write the code below this section in a way that it does not need to be changed. This way, another person can run my code as it is, and only needs to edit this first section. Typical things to add here are:</p>
 <ul>
 <li>Where the analysis starts: the location of the working directory or project folder</li>
 <li>Custom paths, for example to databases that need to be downloaded from the web</li>
@@ -384,7 +383,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="looking-at-the-data-sanity-checks" class="level3">
 <h3 class="anchored" data-anchor-id="looking-at-the-data-sanity-checks">Looking at the data (sanity checks)</h3>
 <p><img src="..\img/sanity_check.png" class="img-fluid" width="561"></p>
-<p>When I start working with new data, I add as many sanity checks as possible, to make sure that my data looks good. That way, I notice problems early, before they cause trouble further down the line. At the same time, I get to know my data better: how many samples and how much data I am working with.</p>
+<p>When I start working with new data, I add as many sanity checks as possible, to make sure that I understand my data and that the data looks good. That way, I notice problems early, before they cause trouble further down the line. At the same time, I get to know my data better and learn how many samples and how much data I am working with.</p>
 <p>I also add sanity checks whenever I change my data. For example, when I merge several files into one large file, I might count the lines of the individual files and of the combined file, to make sure that I used my wildcards correctly.</p>
 <p>Remember: the computer is only as smart as the person using it, and it runs your commands blindly. So the computer can do unexpected things, and you need to check for that.</p>
 </section>
@@ -870,7 +869,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2026-10-09</p>
+Last modified: 2026-10-13</p>
 <div class="toc-actions"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

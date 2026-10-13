@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, breakable, colback={codebgcolor}, sharp corners, frame hidden, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, colback={codebgcolor}, frame hidden, breakable, sharp corners, enhanced]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -239,22 +239,16 @@ the notebook.
 
 \includegraphics[width=7.84375in,height=\textheight,keepaspectratio]{../img/yaml_header.png}
 
-The \textbf{YAML header} is the part between the two \texttt{-\/-\/-}
-lines at the very top of the file. It contains settings for the whole
-document, such as the title, the author and the output format. In my
-example, \texttt{eval:\ false} tells Quarto to only show the code, not
-to run it.
-
 \subsection{Settings (change these before you run the
 workflow)}\label{settings-change-these-before-you-run-the-workflow}
 
 \includegraphics[width=5.71875in,height=\textheight,keepaspectratio]{../img/general_setup.png}
 
-In one of the first sections of my notebooks, I collect everything that
-someone who wants to use my workflow has to change. I write the code
-below this section in a way that it does not need to be changed. This
-way, another person can run my code as it is, and only needs to edit
-this first section. Typical things to add here are:
+In one of the first sections of my notebooks, I typically collect
+everything that someone who wants to use my workflow has to change. I
+write the code below this section in a way that it does not need to be
+changed. This way, another person can run my code as it is, and only
+needs to edit this first section. Typical things to add here are:
 
 \begin{itemize}
 \tightlist
@@ -287,10 +281,10 @@ checks)}\label{looking-at-the-data-sanity-checks}
 \includegraphics[width=5.84375in,height=\textheight,keepaspectratio]{../img/sanity_check.png}
 
 When I start working with new data, I add as many sanity checks as
-possible, to make sure that my data looks good. That way, I notice
-problems early, before they cause trouble further down the line. At the
-same time, I get to know my data better: how many samples and how much
-data I am working with.
+possible, to make sure that I understand my data and that the data looks
+good. That way, I notice problems early, before they cause trouble
+further down the line. At the same time, I get to know my data better
+and learn how many samples and how much data I am working with.
 
 I also add sanity checks whenever I change my data. For example, when I
 merge several files into one large file, I might count the lines of the

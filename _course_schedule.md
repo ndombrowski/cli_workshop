@@ -13,19 +13,18 @@ Sent as a self-contained attachment (`source/installation_preworkshop.html`) wit
 announcement email (`_preworkshop_instructions.md`).
 
 1. Crunchomics access. Workshop participants: batch request from the sign-up form information (UvAnetID, PI; existing accounts also noted there), we email them when the accounts are ready (decided 2026-10-12, first batch run, timing not known yet). Self-learners: email to Wim de Leeuw, PI in cc; takes 1-3 days, so first. On the page as a tabset (`::: {.panel-tabset}`, tab colours in `styles.scss`).
-2. Learn the terms: terminal, shell, prompt.
-3. Install a terminal: MobaXterm (recommended) or WSL2 on Windows. Mac and Linux users open the built-in terminal.
-4. Check 1: `echo $SHELL` prints a shell name.
-5. Check 2: log in to Crunchomics with `ssh`, then `exit`. Tests account, password and eduroam/VPN.
-6. Choose a text editor for the notebook (RStudio recommended, Notepad/Notepad++, TextEdit, VS Code) and save a test `.md` file.
-7. Report problems to Nina Dombrowski as soon as possible, at the latest a few days before the workshop (was one week; shortened 2026-10-12 because batch accounts may arrive late).
+2. Install a terminal (the page defines terminal and shell here, the prompt in Check 1; the separate "Some terms" step was moved to the start of bash_intro on 2026-10-12): MobaXterm (recommended) or WSL2 on Windows. Mac and Linux users open the built-in terminal.
+3. Check 1: `echo $SHELL` prints a shell name.
+4. Check 2: log in to Crunchomics with `ssh`, then `exit`. Tests account, password and eduroam/VPN.
+5. Choose a text editor for the notebook (RStudio recommended, Notepad/Notepad++, TextEdit, VS Code) and save a test `.md` file.
+6. Report problems to Nina Dombrowski as soon as possible, at the latest a few days before the workshop (was one week; shortened 2026-10-12 because batch accounts may arrive late).
 
 ## Day 1: command line basics on your own laptop (about 3h45)
 
 | Time | Block | Content |
 |---|---|---|
 | 15 min | Start | How the two days work. Introduce the notebook idea (the file itself is made after `mkdir`, see next row). |
-| 50 min | Finding your way | Prompt, `pwd`, `ls`, command structure (options, arguments), `man` / `--help`, file system, absolute and relative paths, `cd`, `mkdir`. `touch data_analysis/notes.md` right after `mkdir`, with the three Markdown elements (heading, code block, text). Notebook checkpoint 1 at the end. Survival skills in the main text: Tab, arrow up, `Ctrl+C`, reading a first error message. |
+| 50 min | Finding your way | Terminal, shell and prompt (CLI vs GUI; opening section of bash_intro, moved from installation.qmd on 2026-10-12), `pwd`, `ls`, command structure (options, arguments), `man` / `--help`, file system, absolute and relative paths, `cd`, `mkdir`. `touch data_analysis/notes.md` right after `mkdir`, with the three Markdown elements (heading, code block, text). Notebook checkpoint 1 at the end. Survival skills in the main text: Tab, arrow up, `Ctrl+C`, reading a first error message. |
 | 45 min | Getting the data | `wget` / `curl`, `cp`, `mv`, `tar`, `rm` (with warning), wildcards. Notebook checkpoint 2 at the end (only the commands that rebuild the data folder, no detours). |
 | 15 min | Break | |
 | 55 min | Looking at the data | `>`, `head` / `tail` / `less`, `wc -l`, pipes, `cut` (makes `fastq_files.txt`), fastq format, `gzip` / `zcat`, `grep`. Notebook checkpoint 3 at the end, with the "can your notebook explain every file?" check. |
@@ -48,7 +47,7 @@ announcement email (`_preworkshop_instructions.md`).
 | 45 min | fastp | Run fastp on **one** sample with `srun` and look at what it produces. Make `samples.txt` (4 sample names) with `ls \| cut \| cut`. Build the loop `for sample in $(cat samples.txt)` step by step with `echo` (dry run first), following the IBED for-loops page. R1/R2 found with a wildcard written directly in the fastp command (not stored in a variable), used as the moment to talk about checking what a wildcard matches. Put the loop in an `sbatch` script with conda activation (`source ~/.bashrc` + `conda activate`), submit, read the log. Check outputs: 4 samples in, so 8 trimmed files + 4 HTML + 4 JSON reports = 16 files. Compare read counts with the day 1 `line_counts.txt`. Notebook checkpoint 4 after the Step 6 exercise: samples.txt, sbatch + job ID, 16-file check, scp of reports, what the report showed. Test run on one sample = one sentence only. |
 | 15 min | Wrap-up | New section "Wrapping up day 2": copy the job scripts to the local `scripts/` with `scp`, then notebook checkpoint 5 (update description, every-file check incl. `logs/`, answer "Questions for day 2", compare with the example notebook). Walk through `example_doc.qmd` ("this is what your notes can become"). Where to get help. Pointer to the LLM page (later). |
 
-**Optional:** `srun --pty bash` (interactive session), `sacct` (with "compare used vs requested" and "adjust step by step", decided 2026-10-09), "Finding R2 without a list file" box (`${R1/_R1/_R2}`, `basename`, `while read`), `screen`, arrays over `fastq_files.txt` (link to the IBED SLURM page), `seqkit stats` on the trimmed reads with `awk` (before vs after), FastQC tip (visual reports), `scp` with wildcards, better log file names.
+**Optional:** `srun --pty bash` (interactive session), `sacct` (with "compare used vs requested" and "adjust step by step", decided 2026-10-09), "Finding R2 without a list file" box (`${R1/_R1/_R2}`, `basename`, `while read`), `screen`, fastp as a job array over `samples.txt`, one job per sample, output in `results/fastp_array/` (changed from seqkit over `fastq_files.txt` on 2026-10-13; link to the IBED SLURM page), `seqkit stats` on the trimmed reads with `awk` (before vs after), FastQC tip (visual reports), `scp` with wildcards, better log file names.
 
 ## Risks
 
@@ -70,7 +69,7 @@ announcement email (`_preworkshop_instructions.md`).
 | `cut` | Core on day 1, not optional (decided 2026-10-07): very useful in bioinformatics, and day 2 uses it to make `samples.txt`. |
 | Day 1 loop | Loop over a wildcard only, with a readable variable name (`file`, not `i`). Variables get their own short section first. The `1 2 3` warm-up, `loops.png` and the backtick `cat` loop are dropped. Counts collected with `>>` (appending was mentioned but never shown). (Decided 2026-10-07.) |
 | fastp loop: finding R1/R2 | List file `samples.txt` with the 4 sample names, loop with `for sample in $(cat samples.txt)`. No new syntax like `${R1/_R1/_R2}` in the core path; that goes in a collapsed "Finding R2 without a list file" box. The wildcard path is written directly in the fastp command, not stored in a variable: bash does not expand a wildcard in a quoted variable (`"$R1"` stays `data/seq_project/*/...`, tested in Git Bash 5.2 on 2026-10-07). (Decided 2026-10-07.) |
-| List file names | `samples.txt` = 4 sample names (fastp loop). `fastq_files.txt` = 8 file names (day 1 `cut` section, and the optional array tip on day 2). |
+| List file names | `samples.txt` = 4 sample names (fastp loop, and the optional array tip on day 2). `fastq_files.txt` = 8 file names (day 1 `cut` section). |
 | Windows terminal | MobaXterm first (lighter install), WSL2 second. Git Bash dropped. |
 | Pre-workshop ssh check | Plain `ssh`, without `-X`. |
 | installation.qmd audience | Works for both workshop participants and self-study; contact Nina also outside the workshop. |

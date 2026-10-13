@@ -177,7 +177,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={codebgcolor}, boxrule=0pt, sharp corners, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, colback={codebgcolor}, boxrule=0pt, frame hidden, enhanced, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -255,7 +255,7 @@ The figure below gives a simplified overview:
   \end{itemize}
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-important-color-frame, breakable, left=2mm, opacitybacktitle=0.6, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, toptitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, bottomrule=.15mm, rightrule=.15mm, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, toprule=.15mm, opacitybacktitle=0.6, left=2mm, colbacktitle=quarto-callout-important-color!10!white, colback=white, leftrule=.75mm, bottomrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, opacityback=0, breakable, rightrule=.15mm, colframe=quarto-callout-important-color-frame, arc=.35mm, titlerule=0mm]
 
 \textbf{Crunchomics etiquette}
 
@@ -298,8 +298,10 @@ user name):
   space
 \item
   Your \textbf{personal directory}, \texttt{/zfs/omics/personal/\$USER},
-  with 500 GB of space. On day 2, we make a shortcut to it,
-  \texttt{\textasciitilde{}/personal}, and keep our project folder there
+  with 500 GB of space. Since this directory is larger, you want to run
+  all your analyses and install all software in this directory. On day
+  2, we make a shortcut to it, \texttt{\textasciitilde{}/personal}, and
+  keep our project folder there
 \end{itemize}
 
 Good to know:

@@ -351,6 +351,143 @@ attachment) with the hidden command at the end of index.qmd.
 - Natural bridge: the conda sbatch exercise tells participants to "google how to activate conda".
   Many will use an LLM for this anyway. Could become the first worked example on the LLM page.
 - Seed material: "On GenAI usage" section of the IBED for-loops page.
+- Central point of the page: participants must be able to at least CHECK code with very simple
+  commands (ls, wc -l, head, cut, sort, uniq, grep). They don't need to know e.g. awk, as long as
+  they can double-check that the output looks as desired (right number of files, reads lost,
+  expected patterns). (2026-10-12)
+- "Why learn the CLI when an LLM writes the code?": put the full argument here. Short version:
+  someone still has to run the code (right machine, right folder, paths), read it, and check the
+  output. Maybe one sentence + link in the welcome text (index.qmd + readme.md) later. (2026-10-12)
+- Reading exercises ("What does this command do?", "This looks right but has one problem, find it"),
+  built from the tutorial's own commands, so participants check them with tools from day 1.
+  Ideas: the counts loop with > instead of >>; a wildcard that matches too many files. (2026-10-12)
+- Understanding is still essential, even if an LLM can write a lot of the code. And an LLM is
+  also a very useful tool FOR understanding: ask it to explain a command line by line, what
+  happens to each file, what happens if a file is missing. Works with free chat tools too (paste
+  code, ask for an explanation), so fine for mixed AI access. (2026-10-12)
+- Understand LLM code, or trim it down to the basics. LLMs often add extra logic (continue, break,
+  if-checks that skip files) that people use without knowing what happens to which files. For most
+  biological studies, knowing your own data and checking it with basic commands (ls -lh, wc -l)
+  fixes things naturally, without complex code. Possible exercise: take an over-engineered LLM loop
+  and reduce it to the simple version from the tutorial. (2026-10-12)
+  - Example of the risk: `if [ ! -f "$file" ]; then continue; fi` silently skips a missing sample.
+    The output looks complete but covers 3 of 4 samples. A plain loop would fail loudly.
+  - Contrast with the preferred pattern for "skip if output exists": an explicit if ... then ... else
+    block, with -f (file exists) or -s (exists and not empty, catches half-written output from a
+    crashed job), and an echo so the skip shows up in the log.
+  - Link as advanced topics (optional, for the curious; both returned HTTP 200 on 2026-10-12):
+    - if/else, continue, break (input validation):
+      https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-input-validation.html
+    - set -euo pipefail:
+      https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-pipefail.html
+    - Both pages already end with a GenAI note (checked 2026-10-12): input validation warns about
+      silent continue, -f where an integrity check is better, and `|| continue` in command chains;
+      pipefail says leave set -euo pipefail out while developing (grep no-match example). Link to
+      them from the LLM page, don't repeat the content.
+
+### Worked example: fastp array script (added 2026-10-13)
+
+Candidate main example for "critically checking LLM code". The prompt could be better, but it is
+roughly what a student would write.
+
+Prompt (by Nina):
+
+  I work with samples S1-S100. I want to run fastp for quality trimming and remove reads below an
+  average quality score of 20 and use the same cutoff for quality trimming of the reads themselves.
+  Can you write  a script to process all these samples at once on a HPC with slurm?
+
+LLM output:
+
+```{bash}
+#!/bin/bash
+#SBATCH --job-name=fastp_trim
+#SBATCH --array=1-100
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16G
+#SBATCH --time=04:00:00
+#SBATCH --output=logs/fastp_%A_%a.out
+#SBATCH --error=logs/fastp_%A_%a.err
+
+# ── Paths ────────────────────────────────────────────────────────────────────
+DATA_DIR="data"
+OUT_DIR="trimmed"
+mkdir -p "${OUT_DIR}" logs
+
+# ── Sample name derived from array index ─────────────────────────────────────
+SAMPLE="S${SLURM_ARRAY_TASK_ID}"
+
+R1="${DATA_DIR}/${SAMPLE}_R1.fastq.gz"
+R2="${DATA_DIR}/${SAMPLE}_R2.fastq.gz"
+
+# ── Guard: skip if input files are missing ───────────────────────────────────
+if [[ ! -f "${R1}" || ! -f "${R2}" ]]; then
+    echo "ERROR: Input files not found for ${SAMPLE}: ${R1} / ${R2}" >&2
+    exit 1
+fi
+
+# ── Run fastp ─────────────────────────────────────────────────────────────────
+fastp \
+    --in1  "${R1}" \
+    --in2  "${R2}" \
+    --out1 "${OUT_DIR}/${SAMPLE}_R1_trimmed.fastq.gz" \
+    --out2 "${OUT_DIR}/${SAMPLE}_R2_trimmed.fastq.gz" \
+    --average_qual        20 \   # discard reads with mean quality < 20
+    --cut_mean_quality    20 \   # sliding-window trimming threshold
+    --cut_front              \   # trim low-quality bases from 5' end
+    --cut_tail               \   # trim low-quality bases from 3' end
+    --thread              8  \
+    --json "${OUT_DIR}/${SAMPLE}_fastp.json" \
+    --html "${OUT_DIR}/${SAMPLE}_fastp.html"
+
+echo "Done: ${SAMPLE}"
+```
+
+Thoughts (Nina + Claude, 2026-10-13). Possible ranking for students:
+(1) runs but does the wrong thing, (2) assumes things about your data, (3) harder to read than needed.
+
+1. Runs but does the wrong thing:
+  - Line continuation broken by the inline comments (Nina missed it at first: good point for the page,
+    careful reading is not enough, you also have to run it on one sample and look at the output).
+    `\   # comment`: the \ escapes the space, not the line break, so the command ends there.
+    TESTED 2026-10-13 in Git Bash with a fake fastp that prints its arguments: it got --in1 ...
+    --average_qual 20 plus a stray " " argument; the next lines gave "--cut_mean_quality: command not
+    found" and "--thread: command not found" (--json/--html were part of the --thread line).
+    So fastp never gets the cut options, --thread, --json or --html.
+    NOT TESTED: what real fastp does with the stray " " argument. If it runs, it writes the default
+    fastp.json/fastp.html, and all 100 tasks overwrite the same report (default names: check for 1.4.0).
+    The script ends with echo "Done", so every task exits 0: SLURM says COMPLETED, the errors are only
+    in the .err files.
+  - mkdir -p logs inside the script comes too late: SLURM opens the --output/--error files before the
+    script starts, so without logs/ the job fails and writes no log at all. Make logs/ before sbatch.
+    (From SLURM experience, not tested on Crunchomics.)
+2. Assumes things about your data:
+  - Invented file names (data/S1_R1.fastq.gz). S${SLURM_ARRAY_TASK_ID} only works because the prompt
+    said S1-S100; real names rarely look like that (course data: barcode00X_UserY_ITS_Z_L001).
+    More honest: a samples.txt read with sed -n "${SLURM_ARRAY_TASK_ID}p" samples.txt.
+  - The prompt is ambiguous ("same cutoff for quality trimming"); the LLM silently chose sliding-window
+    trimming from both ends. From memory, check with fastp --help (1.4.0): fastp also filters by default
+    (--qualified_quality_phred 15, --unqualified_percent_limit 40) next to --average_qual, and many
+    people prefer --cut_right over --cut_tail. Good questions for students to ask back to the LLM.
+  - Guessed resources (8 CPUs, 16G, 4 h per sample). A long --time means a longer wait in the queue.
+    Better: run one sample first (--array=1), then check the real use with sacct or seff.
+  - No module load / conda activate. On Crunchomics the job picks up the system fastp 1.0.1 (if on the
+    PATH), not the pinned fastp_1.4.0 environment.
+3. Harder to read than needed:
+  - DATA_DIR / OUT_DIR hide two short folder names, harder to read for beginners. SAMPLE, R1, R2 are
+    fine (used many times). Twist: the one place a variable WOULD help is the 8 written twice
+    (--cpus-per-task=8 and --thread 8, can go out of sync): --thread "${SLURM_CPUS_PER_TASK}".
+    Lesson: use a variable when it removes a real repetition.
+  - Guard with -f + exit 1: exit 1 stops only that array task (each task is its own job), the other 99
+    continue, and the task shows as FAILED in sacct, which is useful. -s would also catch an empty file;
+    neither checks that the file is complete. Better: check before submitting, on the login node, with
+    a loop that runs ls -l on every expected R1/R2 file + wc -l on the sample list. Then the guard only
+    gives a clearer error message than fastp's own.
+  - Side note on not overloading the cluster: --array=1-100 with 8 CPUs each can ask for 800 CPUs at
+    once. --array=1-100%8 runs at most 8 tasks at a time. Check the Crunchomics docs for a stated limit.
+  - Course link: day 2 uses a for loop inside one sbatch script, the LLM used an array. Discussion
+    point: "different from what you learned: wrong, or just different?"
+- Exercise idea: "Here is a script an LLM wrote. Run it on one sample. Which options did fastp actually
+  use?" The fastp report should list the command it ran (check that it does).
 
 
 ## Site-wide

@@ -18,26 +18,25 @@ On this page you set up everything you need for this tutorial. It takes about 30
 
 Here is what you will do:
 
-1. Get access to Crunchomics, the UvA computer cluster that we will use in the second part of the tutorial. If you join the workshop, we arrange this for you.
-2. Learn a few terms: terminal, shell and prompt.
-3. Install or open a terminal on your laptop.
-4. Check 1: test that your terminal works.
-5. Check 2: log in to Crunchomics and log out again.
-6. Choose a text editor for your notes.
+1. Get access to Crunchomics, the UvA computer cluster that we will use in the second part of the tutorial. If you don't work at UvA but have access to an HPC that uses SLURM you still can follow most of the second part of this tutorial.
+2. Install and open a terminal on your laptop.
+3. Run check 1: test that your terminal works.
+4. Run check 2: log in to Crunchomics and log out again.
+5. Choose a text editor for your notes.
 
 ::: callout-important
 ## Getting help
 
 If something on this page does not work, please email Nina Dombrowski (n.dombrowski@uva.nl). Part of my job is to support IBED students and researchers with bioinformatics, so you can also contact me if you follow this tutorial on your own, or if you run into problems later.
 
-If you join the workshop, please contact me **at the latest a few days before the workshop**. That way we can solve the problem before day 1.
+If you join the workshop, please contact me **at the latest a few days before the workshop**. That way we can solve any problems you have with the setup before the actual workshop begins.
 
 In your email, tell me which operating system you use (Windows, Mac or Linux), which step went wrong, and copy the exact error message (or add a screenshot).
 :::
 
 ## Step 1: Request access to Crunchomics
 
-In the second part of this tutorial, we work on **Crunchomics**, a high-performance computer (**HPC**) at the UvA. An HPC is a group of powerful computers that many people share. You use it for analyses that are too large or too slow for your laptop. To be able to use Crunchomics, you first need to organize for an account to be made
+In the second part of this tutorial, we work on **Crunchomics**, a high-performance computer (**HPC**) at the UvA. An HPC is a group of powerful computers that many people share. During this tutorial you will use it for analyses that are too large or too slow for your laptop. To be able to use Crunchomics, you first need to organize for an account to be made
 
 What you need to do depends on how you follow this tutorial. Choose the part that fits you.
 
@@ -47,7 +46,7 @@ What you need to do depends on how you follow this tutorial. Choose the part tha
 
 You do not need to request an account yourself. You already gave us the information we need when you signed up for the workshop, and we request the accounts for all participants together.
 
-- We will send you an email once the accounts are ready. After that, do Check 2 below.
+- We will send you an email once the accounts are ready. After that, you can do Check 2 below.
 - If you do not have this email a few days before the workshop, please contact Nina Dombrowski (n.dombrowski@uva.nl).
 
 ### I follow the tutorial on my own
@@ -62,20 +61,9 @@ You get an email back once your account is ready. You need the account for Check
 
 :::
 
-## Step 2: Some terms
+## Step 2: Install or open a terminal
 
-In this tutorial we use the **command-line interface (CLI)**. It is an alternative to the **graphical user interface (GUI)** that you probably know better. Both let you work with your computer, but in different ways:
-
-- In a GUI, you click on buttons, open folders and use menus.
-- In the CLI, you type text to give **commands** (instructions to the computer), and you see the result as text.
-
-When people talk about the CLI, you will also hear the words terminal, shell and prompt. They are related, but they are not the same:
-
-- The **terminal** is the window or program in which you type commands. Some people call it the **console**.
-- The **shell** is the program that reads the commands you type in the terminal and tells the operating system what to do. There are several shells, for example **bash** and **zsh**. They use slightly different rules, but the basic commands are the same. This tutorial uses bash.
-- The **prompt** is the text that the shell shows when it is ready for your next command. It often shows your user name, the name of your computer and the folder you are in. It usually ends with a `$` sign. For example: `user@laptop:~$`
-
-## Step 3: Install or open a terminal
+For this tutorial you need a **terminal**: a window in which you type **commands** (instructions to the computer) as text, instead of clicking on buttons and menus. The terminal passes what you type to a **shell**, the program that reads your commands and tells the computer what to do. There are several shells, for example **bash** and **zsh**. They differ in small details, but the basic commands are the same. This tutorial uses bash.
 
 ### Windows
 
@@ -112,10 +100,10 @@ To prevent this, tell MobaXterm to use a normal folder on your computer. This ha
 2. **Tell MobaXterm to use it.** In MobaXterm, click on **Settings** in the top toolbar, then **Configuration**, and go to the **General** tab. Choose your new folder in two places:
     - Next to **Terminal home directory**, click on the yellow folder icon and choose `MobaXterm_home`.
     - Next to **Terminal root (/) directory**, click on the yellow folder icon and choose `MobaXterm_home` as well.
-    - MobaXterm then shows the folders as `_ProfileDir_\MobaXterm_home` and `_ProfileDir_\MobaXterm_home\slash`. That is fine: `_ProfileDir_` is MobaXterm's short name for `C:\Users\YourUserName`. (In older MobaXterm versions, these fields are called **Persistent home directory** and **Persistent root (/) directory**.)
+    - MobaXterm then shows the folders as `_ProfileDir_\MobaXterm_home` and `_ProfileDir_\MobaXterm_home\slash`. That is fine: `_ProfileDir_` is MobaXterm's short name for `C:\Users\YourUserName`. 
 3. Click **OK**. Close MobaXterm and open it again.
 
-Why not the Desktop or the Documents folder? On many computers, these folders are synced with **OneDrive**. OneDrive tries to upload every file you make there, and sequencing data can get large. A folder directly in your user folder is not synced.
+Why I would not recommend setting this to the Desktop or the Documents folder: On many computers, these folders are synced with **OneDrive**. OneDrive tries to upload every file you make there, and sequencing data can get large. A folder directly in your user folder is not synced.
 
 ### Mac
 
@@ -130,9 +118,9 @@ Newer Macs (macOS Catalina and later) use zsh as their shell, not bash. That is 
 
 Every Linux system comes with a terminal, and the shell is usually bash. You do not need to install anything. Open the terminal from your applications menu, or search for "Terminal" (depending on your system it can also be called Konsole or xterm).
 
-## Step 4: Check 1, test your terminal
+## Step 3: Check 1, test your terminal
 
-When the terminal is open, you should see a window with a prompt, similar to the one below. Your prompt will show your own user name and computer name, and the colors may be different.
+When the terminal is open, you should see a window with a **prompt**, similar to the one below. The prompt is the text that the shell shows when it is ready for your next command. It often shows your user name and the name of your computer. Your prompt will show your own user name and computer name, and the colors may be different.
 
 <p align="left">
 
@@ -157,7 +145,7 @@ On my computer (WSL with Ubuntu), this prints:
 
 Your output may look a bit different. What matters is that you see a line that ends with `bash` or `zsh` (for example `/bin/zsh` on a newer Mac). If you see this, your terminal works.
 
-## Step 5: Check 2, log in to Crunchomics
+## Step 4: Check 2, log in to Crunchomics
 
 Do this check once you have the email that your Crunchomics account is ready (see Step 1).
 
@@ -218,7 +206,7 @@ The error message also gives a hint. `Permission denied` usually means a wrong u
 
 If it still does not work, email me (see the box at the top of this page) and copy the error message.
 
-## Step 6: Choose a text editor for your notes
+## Step 5: Choose a text editor for your notes
 
 While you work through the tutorial, you keep a notebook. Each time you run a command, you copy it into the notebook, with a short comment that says what it does and a few words about what you saw. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later. We write the notebook in **Markdown**, plain text with a few symbols for headings and code. You learn the few rules you need on day 1.
 

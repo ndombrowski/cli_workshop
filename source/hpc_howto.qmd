@@ -70,7 +70,7 @@ ssh -X uvanetid@omics-h0.science.uva.nl
 
 ### Crunchomics: Preparing your account
 
-If this is your **first time using Crunchomics**, you need to run a small bash script to set up your account. Ignore this section if you have done this before. The script:
+If this is your **first time using Crunchomics**, you need to run a small bash script to set up your account. Ignore this section if you have done this before. The script does the following:
 
 -   Adds `/zfs/omics/software/bin` to your PATH. The **PATH** is the list of folders in which bash looks for programs. With this change, bash can find the software that is already installed on Crunchomics
 -   Sets up a Python 3 environment with some useful Python packages
@@ -97,7 +97,7 @@ After the script, `ls -lh` prints a line like this (your date and group name can
 lrwxrwxrwx.  1 username sils-omics-unix-fnwi 27 Sep  4  2023 personal -> /zfs/omics/personal/username
 ```
 
-The arrow (`->`) tells you that `personal` is not a normal folder. We come back to this in the next section.
+The arrow (`->`) tells you that `personal` is not a normal folder. We come back to what this exactly means in the next section.
 
 ### Preparing your working directory
 
@@ -115,7 +115,7 @@ cd data_analysis
 pwd
 ```
 
-`pwd` prints `/home/username/personal/data_analysis`, so it looks like you are in your home directory. But your files are not stored there. `personal` is a **link** (also called a **symbolic link** or **symlink**): a shortcut that points to another folder, here `/zfs/omics/personal/username`. That is what the arrow in the `ls -lh` output showed. So `~/personal/data_analysis` and `/zfs/omics/personal/username/data_analysis` are two paths to the same folder:
+`pwd` prints `/home/username/personal/data_analysis`, so it looks like you are in your home directory. But your files are not actually stored there. The reason is that `personal` is a **link** (also called a **symbolic link** or **symlink**): a shortcut that points to another folder, here `/zfs/omics/personal/username`. That is what the arrow in the `ls -lh` output showed. For us this means that `~/personal/data_analysis` and `/zfs/omics/personal/username/data_analysis` are two paths to the same folder:
 
 <p align="center">
 
@@ -219,7 +219,7 @@ Since you now work on two computers, your notebook needs to say **where** each c
 Add a new heading `## Setting up on Crunchomics`, and below it:
 
 1.  The command you used to log in
-2.  The account setup with `omics_install_script`, with a note that this is only needed once
+2.  The account setup with `omics_install_script`, with a note that this is only needed once. You can also add a `#` in front of that line of code to not accidentally run it again.
 3.  The commands that made your project folder, and in normal text, where this folder is
 4.  The `scp` command that copied the data, and the check that all files arrived
 
@@ -283,11 +283,23 @@ Some useful columns to know:
 -   JOBID: a unique number for each job. You can use it to check on or cancel a job later
 -   ST: the current state of the job, e.g. R = running, PD = pending (waiting). A full list of SLURM job state codes can be found [here](https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html)
 
-Once you have submitted a job, it appears in this list as well. To see only your own jobs, add the `-u` option followed by your user name. `$USER` is a shortcut that bash replaces with your own user name:
+Once you have submitted a job, it appears in this list as well. To see only your own jobs, add the `-u` option followed by your user name. Instead of typing your user name, you can use `$USER`. This is an **environment variable**, a variable that is already set for you when you log in. Before running the command, bash replaces `$USER` with your user name:
 
 ```{bash}
+# Check what is stored in the USER variable 
+echo $USER 
+
+# Check if you have any running jobs
 squeue -u $USER
 ```
+
+::: {.callout-important title="Important: Don't overwrite environment variables" collapse="false"}
+Environment variables are written in capitals. Besides `USER`, there are, for example, `HOME` (the path to your home directory) and `PATH`, which you met when you set up your account: the list of folders in which bash looks for programs. You can look at them with `echo`, just like `$USER`.
+
+Do NOT use these names for your own variables. If you do, you replace the value that bash needs. For example, if you write `PATH=data/seq_project`, bash no longer knows where to find its programs, and even `ls` stops working with a `command not found` error.
+
+If this happens, close the terminal, or log out and log in again. As with your own variables, the change only lasted in the terminal window where you made it.
+:::
 
 ### `srun`: Submitting a job interactively
 
@@ -669,27 +681,25 @@ If both commands print a version number, then conda is already installed, and yo
 ::: {.callout-important title="Important: Install Miniforge into your personal folder, not into your home folder" collapse="false"}
 Your home folder on Crunchomics has only 25 GB of space, and conda environments can take up several GB once you have a few of them. So we install Miniforge into your personal folder, which has 500 GB: `/zfs/omics/personal/$USER/miniforge3`.
 
-`$USER` is a variable that bash has already set for you. It contains your user name, so for you, `$USER` is replaced by your UvAnetID. That way, you can copy the commands below exactly as they are.
+Remember, we have seen above that `$USER` is a variable that bash has already set for you. It contains your user name, so for you, `$USER` is replaced by your UvAnetID. That way, you can copy the commands below exactly as they are.
 :::
 
 Installing Miniforge is a small job, so it is fine to run it on the login node. Run the commands one by one:
-
-<!-- TO CHECK in the test run: the installer name Miniforge3-Linux-x86_64.sh fits Crunchomics (uname -m prints x86_64). -->
 
 ```{bash}
 # Go into your personal folder
 cd /zfs/omics/personal/$USER
 
 # Download the Miniforge installer
-curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
 # Check that the installer was downloaded
-ls -lh Miniforge3-Linux-x86_64.sh
+ls -lh Miniforge3-$(uname)-$(uname -m).sh
 
 # Run the installer
 # -b: install without asking any questions
 # -p: define the folder to install Miniforge into
-bash Miniforge3-Linux-x86_64.sh -b -p /zfs/omics/personal/$USER/miniforge3
+bash Miniforge3-$(uname)-$(uname -m).sh -b -p /zfs/omics/personal/$USER/miniforge3
 
 # Check that the folder was created
 ls /zfs/omics/personal/$USER/miniforge3
@@ -697,9 +707,34 @@ ls /zfs/omics/personal/$USER/miniforge3
 
 Here:
 
--   `curl -L -O`: downloads the installer, like on day 1. Crunchomics is a Linux computer with an x86_64 processor, so we download the installer for that system
+-   `curl -L -O`: downloads the installer, like on day 1
+-   `$(uname)-$(uname -m)`: fills in the type of computer you work on, so that you download the installer that fits it. On Crunchomics, this becomes `Linux-x86_64`, so the installer is called `Miniforge3-Linux-x86_64.sh`
 -   `-b`: runs the installer without questions. Without `-b`, the installer asks you to read the license and to type the folder for the installation yourself. Typing that folder by hand is easy to get wrong, which is why we give it with `-p` instead
 -   By using `-b`, you accept the [Miniforge license](https://github.com/conda-forge/miniforge/blob/main/LICENSE) without seeing it. The installer itself has a BSD-3-Clause license, and the programs that come with it have their own licenses. Have a look at it if you want to know what you agree to
+
+::: {.callout-tip title="Tip: How `uname` picks the right installer (optional)" collapse="true"}
+Miniforge has a separate installer for each type of computer. The installer must match two things: the **operating system** (the basic software that runs the computer, for example Linux or macOS) and the type of **processor** (the chip that does the calculations). Two commands tell you both:
+
+```{bash}
+# Print the name of the operating system
+uname
+
+# Print the type of processor
+uname -m
+```
+
+On Crunchomics, `uname` prints `Linux` and `uname -m` prints:
+
+```
+x86_64
+```
+
+In the download command, we wrote `$(uname)` and `$(uname -m)` instead of typing `Linux` and `x86_64` ourselves. This is the command substitution from day 1: bash runs the command inside `$( )` and puts its output in its place. So on Crunchomics, bash turns `Miniforge3-$(uname)-$(uname -m).sh` into `Miniforge3-Linux-x86_64.sh`.
+
+The advantage is that the same command also works on other computers. On a Mac with an Apple chip, for example, `uname` prints `Darwin` and `uname -m` prints `arm64`, and Miniforge has an installer called `Miniforge3-Darwin-arm64.sh`. So you can use the same commands if you later want to install Miniforge on your own Mac or in WSL.
+
+This does not work in Git Bash on Windows. There, `uname` prints a long name that starts with `MINGW64`, and no installer has that name. For Windows itself, Miniforge has a separate `.exe` installer on the [Miniforge page](https://github.com/conda-forge/miniforge).
+:::
 
 The installer has now put conda into your personal folder, but bash does not know about it yet. The next command adds a few lines to your `~/.bashrc` file. This file contains settings that bash reads every time you log in. By adding the lines below, bash can find conda from now on:
 
@@ -841,7 +876,7 @@ When fastp is done, it prints a summary to the screen. It shows, for example, ho
 
 Now look at the output of the two `ls` commands. The trimmed files are in `results/fastp`, as we asked. But fastp also made two reports, `fastp.html` and `fastp.json`, and put them in the folder we ran the command from. We never asked for these names and fastp uses them by default. If we now ran fastp on the next sample, it would write its reports under the same names, and overwrite the reports of Sample-DUMMY1.
 
-This is why it is worth running a tool on one sample first and looking carefully at the help page. In the help page, we find the options `-h` and `-j` to choose the names of the two reports ourselves. We use them in the loop below. The reports in the current folder are not needed anymore, so we remove them:
+This is why it is worth running a tool on one sample first and looking carefully at the help page and the generated outputs. In the help page, we find the options `-h` and `-j` to choose the names of the two reports ourselves and we will use them in the loop below. The reports in the current folder are not needed anymore, so we remove them:
 
 ```{bash}
 # Remove the two reports with the default names
@@ -866,7 +901,7 @@ ls data/seq_project/*/*_R1.fastq.gz | cut -f4 -d "/"
 ls data/seq_project/*/*_R1.fastq.gz | cut -f4 -d "/" | cut -f1 -d "_"
 ```
 
-The last command prints exactly the list we want, so we store it in a file:
+The last command prints exactly the list we want, so we can now store it in a file:
 
 ```{bash}
 ls data/seq_project/*/*_R1.fastq.gz | cut -f4 -d "/" | cut -f1 -d "_" > samples.txt
@@ -892,7 +927,7 @@ for sample in $(cat samples.txt); do
 done
 ```
 
-This should print the 4 sample names. One part is new here: `$(cat samples.txt)`. `cat samples.txt` prints the content of the file. The `$( )` around it takes this printed text and puts it into the command, at the place where it stands. This is called **command substitution**. So for bash, the first line becomes `for sample in Sample-DUMMY1 Sample-DUMMY2 Sample-DUMMY3 Sample-DUMMY4; do`.
+This should print the 4 sample names. Let's look closer at `$(cat samples.txt)`. `cat samples.txt` prints the content of the file. The `$( )` around it takes this printed text and puts it into the command, at the place where it stands. This is the **command substitution** we already used on day 1. So for bash, the first line becomes `for sample in Sample-DUMMY1 Sample-DUMMY2 Sample-DUMMY3 Sample-DUMMY4; do`.
 
 Important: Bash splits the text from `samples.txt` at every new line, but also at every space. So each line in the list file must contain one name, without spaces.
 
@@ -934,8 +969,6 @@ This prints 4 fastp commands, one per sample. Read them carefully: do the R1 and
 In scripts that you find online, or that an AI tool writes for you, variables are often written in quotes, for example `"$sample"`. That is a good habit in general. But be careful with wildcards. Inside quotes, bash does not replace the `*` with the matching file names. With `-i "data/seq_project/*/${sample}_R1.fastq.gz"`, fastp would look for a folder that is literally called `*`, and stop with an error.
 
 That is why we write the input paths without quotes, directly in the fastp command. Our names contain no spaces, so this is safe here.
-
-The `scp` command in the exercise below, where we copy the fastp reports to our own computer, is the opposite case. There, we put quotes around the wildcard on purpose: the quotes stop your own computer from using the wildcard, so that Crunchomics can use it to find the files.
 :::
 
 ### Step 5: Run the loop as a job
@@ -1029,7 +1062,7 @@ Also check that none of the files is empty (a size of 0 in the `ls -l` output), 
 # Question 1:
 # Run this in the terminal on your OWN computer, from inside your local data_analysis folder
 mkdir -p results/fastp
-scp 'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/fastp/*html' results/fastp/
+scp username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/results/fastp/*html results/fastp/
 ls -l results/fastp
 
 # Question 2:
@@ -1071,7 +1104,7 @@ wc -l results/seqkit/stats_trimmed.txt
 cat results/seqkit/stats_trimmed.txt
 ```
 
-Both tables have many columns, which makes them hard to compare by eye. On day 1, we used `cut` to select columns. Here, we use **awk**, a small programming language for working with tables in text files. awk reads a file line by line, splits each line into columns, and lets us choose what to do with each line.
+Both tables have many columns, which makes them hard to compare by eye. On day 1, we used `cut` to select columns. Here, we take a brief look into **awk**, a small programming language for working with tables in text files. awk reads a file line by line, splits each line into columns, and lets us choose what to do with each line.
 
 Let's print the file name, the number of reads and the average read length (columns 1, 4 and 7) of both tables:
 
@@ -1135,81 +1168,103 @@ As in the fastp exercise, the quotes around the path stop your own computer from
 
 ## Going further
 
-::: {.callout-tip title="Tip: Running many files in parallel with job arrays (optional)" collapse="true"}
+::: {.callout-tip title="Tip: Running many samples in parallel with job arrays (optional)" collapse="true"}
 Our fastp loop runs inside a single job, so the samples are processed one after another. With 4 small samples, that is fine. With hundreds of samples, it can take a long time, while the HPC has enough space to run several of them at the same time.
 
-For this section, we go back to `seqkit stats` and run it on each file separately, one job per file. How would we run such jobs efficiently?
+So let's run fastp again, but this time with one job per sample. How would we run such jobs efficiently?
 
 We can use a **job array**, which allows us to:
 
 -   Run several jobs with the same settings: the same CPUs, memory and software
 -   Run these jobs in parallel (at the same time), instead of one after the other
 
-Let's start with making a list of the files we want to work with, using what we learned on day 1:
+We already have a list with one sample name per line, `samples.txt`, which we made for the fastp loop. Check that it is still there:
 
 ```{bash}
-ls data/seq_project/*/*.gz | cut -f4 -d "/" > fastq_files.txt
-
-# Check the list: we expect 8 file names
-cat fastq_files.txt
-wc -l fastq_files.txt
+# Check the list: we expect 4 sample names
+cat samples.txt
+wc -l samples.txt
 ```
 
-Next, we use this text file in our job array. Store the following in `scripts/array.sh`:
+Next, we use this text file in our job array. Store the following in `scripts/fastp_array.sh`:
 
 ```{bash}
 #!/bin/bash
-#SBATCH --job-name=my_array
-#SBATCH --output=logs/array_%A_%a.out
-#SBATCH --error=logs/array_%A_%a.err
-#SBATCH --array=1-8
-#SBATCH --cpus-per-task=1
+#SBATCH --job-name=fastp_array
+#SBATCH --output=logs/fastp_array_%A_%a.out
+#SBATCH --error=logs/fastp_array_%A_%a.err
+#SBATCH --array=1-4
+#SBATCH --cpus-per-task=2
 #SBATCH --mem=5G
+#SBATCH --time=01:00:00
 
-# The number of the current job in the array (1 to 8 for our 8 files)
-index=$SLURM_ARRAY_TASK_ID
+# Make conda available in the job, and activate the environment with fastp
+source ~/.bashrc
+conda activate fastp_1.4.0
 
-# Read the file name on line number $index of fastq_files.txt
-current_sample=$(sed -n "${index}p" fastq_files.txt)
+# Make a new output folder, so that we don't overwrite the results of the loop
+mkdir -p results/fastp_array
+
+# SLURM_ARRAY_TASK_ID is set by SLURM: 1 for the first job in the array, 2 for the second, and so on
+# Read the sample name on that line number of samples.txt
+sample=$(sed -n "${SLURM_ARRAY_TASK_ID}p" samples.txt)
 
 # Print what is happening
-echo "Now Job${index} runs on ${current_sample}"
+echo "Now job ${SLURM_ARRAY_TASK_ID} runs fastp for: ${sample}"
 
-# Run the actual job
-seqkit stats -b -a -T -o results/seqkit/${current_sample}_stats.txt data/seq_project/*/${current_sample} --threads 1
+# Run fastp on the R1 and R2 file of this one sample
+fastp \
+    -i data/seq_project/*/${sample}_R1.fastq.gz \
+    -I data/seq_project/*/${sample}_R2.fastq.gz \
+    -o results/fastp_array/${sample}_R1.trimmed.fastq.gz \
+    -O results/fastp_array/${sample}_R2.trimmed.fastq.gz \
+    -h results/fastp_array/${sample}.html \
+    -j results/fastp_array/${sample}.json \
+    --thread 2
 ```
 
 In the script, we use some new SLURM options:
 
--   `#SBATCH --array=1-8`: sets up a job array with 8 jobs, numbered 1 to 8. We choose 1-8 because we have exactly 8 fastq.gz files
--   `#SBATCH --output=logs/array_%A_%a.out`: `%A` is replaced by the job ID that SLURM assigns, and `%a` by the number of the job in the array
--   **Important**: do the individual jobs in your array use a lot of CPUs or memory? Then you might not want to run all of them at the same time. With `#SBATCH --array=1-8%2`, SLURM runs at most 2 jobs at the same time, and starts the next ones when these have finished. Try to use no more than ~20% of the Crunchomics cluster at the same time.
+-   `#SBATCH --array=1-4`: sets up a job array with 4 jobs, numbered 1 to 4. We choose 1-4 because we have exactly 4 samples in `samples.txt`
+-   `#SBATCH --output=logs/fastp_array_%A_%a.out`: `%A` is replaced by the job ID that SLURM assigns, and `%a` by the number of the job in the array
+-   `--cpus-per-task`, `--mem` and `--time` now apply to **each** job in the array. So every sample gets 2 CPUs, 5G of memory and up to 1 hour
+-   **Important**: do the individual jobs in your array use a lot of CPUs or memory? Then you might not want to run all of them at the same time. With `#SBATCH --array=1-4%2`, SLURM runs at most 2 jobs at the same time, and starts the next ones when these have finished. Try to use no more than ~20% of the Crunchomics cluster at the same time.
 
 The script does the following:
 
--   `index` stores the value of `SLURM_ARRAY_TASK_ID`, the number of the current job within the array. This is 1 for the first job, 2 for the second, ..., and 8 for the last one
--   `sed -n "${index}p" fastq_files.txt` prints one line of `fastq_files.txt`: line 1 for job 1, line 2 for job 2, and so on. We store this file name in the variable `current_sample`. For the first job, this is `Sample-DUMMY1_R1.fastq.gz`
--   `echo` records which job works on which file
--   Finally, we run `seqkit stats` on the file stored in `current_sample`. Each job writes its own table, named after its input file, so the 8 jobs don't overwrite each other's output
+-   `SLURM_ARRAY_TASK_ID` is a variable that SLURM sets for us in each job of the array. It holds the number of the current job: 1 for the first job, 2 for the second, ..., and 4 for the last one. We don't create this variable ourselves, we only use it
+-   `sed -n "${SLURM_ARRAY_TASK_ID}p" samples.txt` prints one line of `samples.txt`: line 1 for job 1, line 2 for job 2, and so on. We store this sample name in the variable `sample`. For the first job, this is `Sample-DUMMY1`
+-   `echo` records which job works on which sample
+-   Finally, we run fastp on the R1 and R2 file of this sample. The fastp command is the same as in our loop, but there is no loop around it: each job handles only one sample. Each job writes its own files, named after its sample, so the 4 jobs don't overwrite each other's output
 
-Submit the script with `sbatch scripts/array.sh`. If we check what is happening right after submitting the job with `squeue`, we should see something like this:
+Compare this with the loop in `scripts/fastp.sh`. In the loop, bash goes through `samples.txt` line by line inside one job. In the array, SLURM starts one job per line, and each job picks its own line with `sed`.
 
-![](../img/arrays.png){width="50%" fig-align="left"}
-
-We see that jobs 1-4 are already running, and jobs 5-8 are waiting for space. That is one of the useful things about a job manager such as SLURM: it finds the resources on all nodes for us, as long as we requested sensible amounts of CPUs and memory.
-
-If we check the log files, we should see something like this:
-
-![](../img/arrays2.png){width="50%" fig-align="left"}
-
-We get an output and an error file for each job. In the output, we see the value stored in `index`, here 1, and in `current_sample`, here `Sample-DUMMY1_R1.fastq.gz`.
-
-Check that each job wrote its table:
+Before we submit the script, let's check that `sed` picks the right sample. `SLURM_ARRAY_TASK_ID` only exists inside an array job, so we test the line selection on the login node with a number in its place:
 
 ```{bash}
-# We expect 8 tables, one per fastq.gz file
-ls -l results/seqkit/*_stats.txt
-ls results/seqkit/*_stats.txt | wc -l
+# Which sample would job 1 get? And job 4?
+sed -n "1p" samples.txt
+sed -n "4p" samples.txt
+
+# Compare with the full list
+cat samples.txt
+```
+
+Each `sed` command should print exactly one sample name: the first and the last line of `samples.txt`. Testing a small part of a script like this takes seconds, and it is much faster than finding a mistake in the log files of 4 jobs.
+
+Submit the script with `sbatch scripts/fastp_array.sh`. If you check what is happening right after submitting with `squeue`, you see one line per job in the array, with the array number after an underscore in the job ID (for example `<jobID>_1`). 
+
+In the `logs` folder, you get an output and an error file for each job in the array. In each output file, you see the message from `echo`, for example `Now job 1 runs fastp for: Sample-DUMMY1`. The fastp summary for each sample is in the log files of its job.
+
+Check that each job wrote its files:
+
+```{bash}
+# We expect 2 log files per job, so 8 in total
+ls -l logs/fastp_array_*
+
+# We expect 4 files per sample (2 trimmed files, 1 HTML and 1 JSON report), so 16 in total
+ls -l results/fastp_array
+ls results/fastp_array | wc -l
 ```
 
 More about arrays and other SLURM options can be found on the [IBED SLURM basics page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/cli/slurm_basics.html).

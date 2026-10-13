@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, breakable, frame hidden, colback={codebgcolor}, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, boxrule=0pt, sharp corners, colback={codebgcolor}, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -198,7 +198,7 @@
 On this website, you find a short tutorial that teaches you how to use
 the command line with bash, and how to connect to and work on an HPC.
 
-On the first page, you set up a terminal. Then the actual tutorial
+You will first learn how to set up a terminal. Then the actual tutorial
 begins. In it, you take the role of a researcher who received data from
 a sequencing center, and who wants to start analysing this data on the
 command line. While you work, you keep a notebook in which you document
@@ -208,13 +208,14 @@ what you did and why. The tutorial has two main parts:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  In the first part, you will use bash on your own computer: you learn
-  how to organize your data, look at it and extract information from it
+  In the first part, you will learn how to use bash on your own
+  computer: you learn how to organize, inspect and extract information
+  from your data.
 \item
-  In the second part, you learn how to work with your data on an HPC:
-  you learn how to connect to the HPC, copy your sequencing data to it,
-  install software and run jobs that check and clean your sequencing
-  data
+  In the second part, you will learn how to work with your data on an
+  HPC: you learn how to connect to the HPC, copy your sequencing data to
+  it, install software and run jobs that check and clean your sequencing
+  data.
 \end{enumerate}
 
 I wrote this tutorial for researchers at the Institute for Biodiversity

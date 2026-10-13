@@ -36,7 +36,7 @@ You share Crunchomics with many other people, so only ask for the resources that
 On Crunchomics, you have two folders (`$USER` stands for your user name):
 
 -   Your **home directory**, `/home/$USER`, with 25 GB of space
--   Your **personal directory**, `/zfs/omics/personal/$USER`, with 500 GB of space. On day 2, we make a shortcut to it, `~/personal`, and keep our project folder there
+-   Your **personal directory**, `/zfs/omics/personal/$USER`, with 500 GB of space. Since this directory is larger, you want to run all your analyses and install all software in this directory. On day 2, we make a shortcut to it, `~/personal`, and keep our project folder there
 
 Good to know:
 

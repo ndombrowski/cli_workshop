@@ -11,9 +11,37 @@ bibliography: references.bib
 
 # Introduction to Bash
 
+In this first part, we learn to work on your own computer from the command line. On this page, you will:
+
+-   Learn what the terminal, the shell and the prompt are
+-   Move around your computer and create, copy, move and remove files and folders
+-   Download the sequencing data and look inside it, for example by counting files and lines
+-   Combine commands with pipes, and repeat a command for many files with a for-loop
+-   Save your commands in a script, so that you can run them again later
+-   Start a notebook (`notes.md`) where you write down what you do and why
+
+## The terminal, the shell and the prompt
+
+In this tutorial we use the **command-line interface (CLI)**. It is an alternative to the **graphical user interface (GUI)** that you probably know better. Both let you work with your computer, but in different ways:
+
+-   In a GUI, you click on buttons, open folders and use menus.
+-   In the CLI, you type text to give **commands** (instructions to the computer), and you see the result as text.
+
+When people talk about the CLI, you will hear the words terminal, shell and prompt. They are related, but they are not the same:
+
+-   The **terminal** is the window in which you type commands. It is sometimes also called a **console**.
+-   The **shell** is the program that reads the commands you type in the terminal and tells the operating system what to do. There are several shells, for example **bash** and **zsh**. They use slightly different rules, but the basic commands are the same. This tutorial uses bash.
+-   The **prompt** is the text that the shell shows when it is ready for your next command. It often shows your user name, the name of your computer and the folder you are in. It usually ends with a `$` sign. For example:
+
+```
+user@laptop:~$
+```
+
+After you type a command and press Enter, the shell runs it. When the command is done, a new prompt appears and you can type the next one.
+
 ## `pwd`: Find out where we are
 
-To get started, open your terminal and get yourself oriented by typing your first command, `pwd`, and then pressing enter:
+Now you will learn your first command. Begin by opening your terminal and type `pwd`, and then press enter:
 
 ```{bash}
 pwd
@@ -37,7 +65,7 @@ In this tutorial, we work inside the home directory. That way, the commands are 
 
 ## `ls`: List the contents of a directory
 
-Now that you know where you are, let's find out what is inside it: which files and folders are there. The command `ls` (short for *list*) shows the files and folders in your current directory. Type the following and press enter:
+Now that you know where you are, let's find out what files and folders are inside this directory. The command `ls` (short for *list*) shows the files and folders in your current directory. Type the following and press enter:
 
 ```{bash}
 ls
@@ -186,7 +214,6 @@ ls -l data_analysis
 `touch` creates an empty file if it does not exist yet. If the file already exists, `touch` leaves its content alone, so you can not lose your notes by running it twice.
 
 To open the notebook, go to the File Explorer (Windows) or Finder (Mac) window that you opened before, double-click the `data_analysis` folder and then double-click `notes.md`. If it opens in a program other than your text editor, right-click the file, choose **Open with** and pick your editor (for example RStudio).
-<!-- TO CHECK: Mac, double-click on a .md file (may open Xcode or TextEdit); MobaXterm and WSL2 "Open with" on a fresh laptop. Double-click opened RStudio on Nina's Windows laptop (2026-10-08). -->
 
 ::: {.callout-tip title="Tip: RStudio users, stay in Source mode" collapse="false"}
 RStudio shows two buttons at the top left of a Markdown file: **Source** and **Visual**. Stay in **Source**. Then you see exactly what you type, including the `#` and the backticks.
@@ -237,8 +264,6 @@ The file system is structured like a tree that starts from a single **root** dir
 <img src="../img/filesystem.png" width="500"/>
 
 </p>
-
-On your own computer, the start of this path can look different, for example `/Users/username` on a Mac. Use `pwd` to see yours.
 
 The location of a file or folder is written as a **path**: the folder names along the way, separated by `/`. There are two ways to write a path, for example to the data folder:
 
@@ -426,7 +451,7 @@ A relative path starts from the folder I am in, so it only works from the right 
 
 ## `wget`: Download data
 
-Next, let's download our sequencing data, a file called `seq_project.tar.gz`, with `wget`. Make sure that you are inside your `data_analysis` folder (check with `pwd`), because `wget` saves the file in the folder you are currently in:
+Next, let's download our sequencing data, a file called `seq_project.tar.gz`, with the `wget` command. Make sure that you are inside your `data_analysis` folder (check with `pwd`), because `wget` saves the file in the folder you are currently in:
 
 ```{bash}
 # Download data using link provided by the sequencing center XYZ on 23.01.2023
@@ -449,7 +474,7 @@ After you download any kind of data, it is always a good idea to do a sanity che
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Check with `ls` if the file was downloaded correctly
-2.  Check the manual if there are extra options that we can use for `ls` to see the file size in an easy-to-read unit, such as K (kilobytes) or M (megabytes) (advanced)
+2.  Check the manual for `ls` if there are extra options that we can use for `ls` to see the file size in an easy-to-read unit, such as K (kilobytes) or M (megabytes) (advanced)
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
@@ -520,7 +545,7 @@ The data we downloaded is provided as a tar file:
 -   The TAR file format is commonly used when storing data
 -   TAR files are often compressed after being created and then become TGZ files, using the tgz, tar.gz, or gz extension.
 
-We can decompress the data into our data folder as follows:
+We can decompress the content of the tarball into our data folder using the following command:
 
 ```{bash}
 tar -xvf data/seq_project.tar.gz -C data
@@ -642,9 +667,9 @@ After solving question 3, we should see that all files still exist in their orig
 :::
 
 ::: {.callout-tip title="Tip: More wildcards (optional)" collapse="true"}
-`*` is not the only wildcard. Square brackets match exactly **one** character, chosen from a set or a range:
+`*` is not the only wildcard. Another useful wildcard are square brackets, which match exactly **one** character, chosen from a set or a range:
 
--   `[0-9]`: any single digit
+-   `[0-9]`: any single digit from 0-9
 -   `[12]`: a `1` or a `2`
 -   `[A-Z]`: any single capital letter (`[a-z]` for a small letter)
 
@@ -1233,6 +1258,7 @@ A few rules for variables:
 
 -   The name can contain letters, numbers and underscores (`_`), but no spaces. Choose a name that tells you what is stored in it, `fastq_file` is easier to understand a year later than `x`.
 -   A variable only exists in the terminal window where you made it. If you close the terminal, it is gone.
+-   Use lowercase names for your own variables. Bash already uses some names in capitals for its own settings, for example `PATH`, `HOME` and `USER`. If you give your variable one of these names, you replace bash's value, and things stop working.
 
 ::: {.callout-important title="Important: No spaces around =" collapse="false"}
 Write `fastq_file=data/...` without spaces around the `=`. If you add spaces (`fastq_file = data/...`), bash thinks that `fastq_file` is the name of a command, and you get an error that ends with `fastq_file: command not found`.
@@ -1519,7 +1545,7 @@ Why is this useful?
 ::: {.callout-important title="Important: Write scripts in nano or a code editor, not in Word or Notepad" collapse="false"}
 Windows programs such as Notepad end every line with an extra invisible character. Bash on Linux does not understand this character, and the script fails with errors such as `$'\r': command not found` or `syntax error near unexpected token`. Word processors such as Word also add formatting and can change straight quotes (`"`) into curly quotes.
 
-To avoid this, write your scripts with `nano`. If you prefer a code editor such as VS Code, check that it saves the file with `LF` line endings (in VS Code, you see `LF` or `CRLF` in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.
+To avoid this, write your scripts with `nano`. If you prefer a code editor such as RStudio or VS Code, check that it saves the file with `LF` line endings (in VS Code, you see `LF` or `CRLF` in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.
 :::
 
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Counting lines per file"}
