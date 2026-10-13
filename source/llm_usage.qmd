@@ -76,8 +76,9 @@ These are the rules I give the students I supervise:
 -   **Treat generated code as a first draft.** Run it on one sample, look at the output, and check that it makes biological sense before you run it on all samples
 -   **Don't let it rewrite code that fails.** This usually replaces code you don't understand with more code you don't understand. Ask it to explain the error or a specific line instead (more on this [below](#when-your-code-does-not-work))
 -   **Check suggested options against the help page of the version you use.** An LLM has learned from documentation of many versions of a tool, often older ones. Remember from day 2: Crunchomics has fastp 1.0.1, and we installed 1.4.0. Options can change between versions. `fastp --help` on your own installation is always more reliable than an LLM's suggestion
+-   **Write down what each result means, in your own words.** Your notebook is not only a record of what you did. It is also a place to slow down and think. After each analysis step, write at least one sentence about what the result means for your data, for example: "fastp removed 3% of the reads" and also think about whether that number is something that you expected. Make sure to write this yourself, not with an LLM
 
-And the most important rule: **if you can't explain a step, don't use it yet.** It is completely fine to ask for help with a step you don't understand, from an LLM or from a person. Struggling with code is a normal part of learning.
+And the most important rule: **if you can't explain a step, don't use it yet.** It is completely fine to ask for help with a step you don't understand, from a person or from a LLM. Struggling with code is a normal part of learning.
 
 :::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 On day 2, we ran fastp without any filtering options. Let's use an LLM to find out whether it filtered all reads anyway:

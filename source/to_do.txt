@@ -588,14 +588,29 @@ Exception (2026-10-13): "License" and "Use of AI tools" are only in readme.md.
 
 ### To do
 
+- Final pre-workshop version (planned, added 2026-10-13):
+  1. Full test run of ALL code on the course data (local + Crunchomics), including answers that
+     "obviously work" (e.g. the LLM page answer scripts: sed -n array script, awk exercise).
+     Replace or confirm outputs on the pages. The untested items are listed in the LLM page To do.
+  2. Final review round for length and voice (LLM page grew one review point at a time; read it
+     once as a participant would and cut what is not essential). Reread first-person sentences
+     ("I ...") written by Claude: do they still describe what Nina did?
+     LLM page length (discussed 2026-10-13): keep it wordier than the tutorial (different purpose;
+     the details in the collapsed answers ARE the lesson). Open question: a one-line takeaway after
+     each exercise box (outside the answer)? Pro: scanners get the point. Con (Nina): readers may
+     then skip the details. Also: "whether it filtered all reads anyway" (default filtering
+     exercise intro) reads as "removed all reads"; maybe "whether it filtered reads at all".
+  3. After the final version: git tag for the 2026 workshop (e.g. `workshop-2026`), so the next
+     year's update can start from / compare with it. Wording reviews in between are not tagged.
 - License ownership (added 2026-10-13): CC BY 4.0 chosen (LICENSE, readme.md "License" section,
   site footer "© 2024-2026 Nina Dombrowski, CC BY 4.0"). Check who holds the copyright: Nina or
   the UvA (Dutch law: employer often holds copyright of work made for the job; not verified).
   Nina asks a colleague who makes similar tutorials. If it is the UvA, change the © line in
   readme.md and in the _quarto.yml footer.
-- Commit + push (not done yet, 2026-10-13): LICENSE (new), readme.md (License + Use of AI tools
-  sections), _quarto.yml (footer), .gitignore (.claude/settings.local.json), to_do.txt.
-  After the push: GitHub sidebar should show the license as CC-BY-4.0.
+- DONE 2026-10-13: license + AI statement committed and pushed (commit 1a2c1df "add license and genAI
+  statement"); GitHub sidebar shows "CC-BY-4.0 license". Claude stays in the Contributors list because
+  of the co-author line in commit bde407f (history not rewritten on purpose); new commits made with
+  Claude Code on this computer have no attribution (~/.claude/settings.json).
 - After the next render: check the new footer (two lines: "© ... CC BY 4.0" and "Last modified").
   The line break is a "\" at the end of the line, because the editor strips trailing spaces.
 - Optional: .claude/settings.local.json (attribution off) now repeats ~/.claude/settings.json; it
