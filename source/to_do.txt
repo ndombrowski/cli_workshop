@@ -371,6 +371,12 @@ attachment) with the hidden command at the end of index.qmd.
     test.txt is empty. If not, drop 2>&1 and its explanation from the page.
 - Recheck before each workshop: UvA rules (links + wording), the Claude Code "summarises web pages"
   claim in the tip box.
+- Typo in the intro (line 13): "lets first understand" -> "let's first understand".
+- UvA AI Chat added advice for one of Nina's own projects (exercise answer, point 5). Find out where
+  that context came from (custom instructions, a Persona, or memory of earlier chats; the UvA RAI
+  page mentions personalisation settings). If chats are remembered, the privacy box ("Don't paste
+  your data into an LLM") could mention it.
+- CLAUDE.md (local) "LLM stance" still says "a separate, later page": drop "later".
 
 ### Done
 
@@ -578,8 +584,22 @@ Thoughts (Nina + Claude, 2026-10-13). Possible ranking for students:
 ## Site-wide
 
 Rule: readme.md is a copy of the index.qmd text (since 2026-10-08): change both together.
+Exception (2026-10-13): "License" and "Use of AI tools" are only in readme.md.
 
 ### To do
+
+- License ownership (added 2026-10-13): CC BY 4.0 chosen (LICENSE, readme.md "License" section,
+  site footer "© 2024-2026 Nina Dombrowski, CC BY 4.0"). Check who holds the copyright: Nina or
+  the UvA (Dutch law: employer often holds copyright of work made for the job; not verified).
+  Nina asks a colleague who makes similar tutorials. If it is the UvA, change the © line in
+  readme.md and in the _quarto.yml footer.
+- Commit + push (not done yet, 2026-10-13): LICENSE (new), readme.md (License + Use of AI tools
+  sections), _quarto.yml (footer), .gitignore (.claude/settings.local.json), to_do.txt.
+  After the push: GitHub sidebar should show the license as CC-BY-4.0.
+- After the next render: check the new footer (two lines: "© ... CC BY 4.0" and "Last modified").
+  The line break is a "\" at the end of the line, because the editor strips trailing spaces.
+- Optional: .claude/settings.local.json (attribution off) now repeats ~/.claude/settings.json; it
+  can be deleted (then also its .gitignore line).
 
 - index.qmd + readme.md: add the 2-day overview, a time estimate for self-study users
   (_course_schedule.md is only visible on GitHub), and the pre-workshop checklist link.
