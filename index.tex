@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, frame hidden, enhanced, boxrule=0pt, colback={codebgcolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, colback={codebgcolor}, enhanced, breakable, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -195,12 +195,19 @@
 
 \section{Welcome page}\label{welcome-page}
 
-On this website, you find a short tutorial that teaches you how to use
-the command line with bash, and how to connect to and work on an HPC.
+Research projects often generate data that is too big for a spreadsheet,
+too slow for a laptop, or spread over hundreds of files you don't want
+to handle one by one. The command line lets you work with large files
+and automate repetitive steps, and an HPC lets you run analyses that are
+too slow for a laptop. This hands-on workshop teaches you how to use
+these tools and is aimed at researchers who have never typed a command
+before. We use DNA sequencing data as the running example, but the
+skills apply to any project with many files or large text-based data.
 
-You will first learn how to set up a terminal. Then the actual tutorial
-begins. In it, you take the role of a researcher who received data from
-a sequencing center, and who wants to start analysing this data on the
+You will first learn how to set up a terminal, a tool that lets you type
+commands for your computer to run. Then the actual tutorial begins. In
+it, you take the role of a researcher who received data from a
+sequencing center, and who wants to start analysing this data on the
 command line. While you work, you keep a notebook in which you document
 what you did and why. The tutorial has two main parts:
 
@@ -225,10 +232,11 @@ IBED. If you don't have access to Crunchomics or another HPC that uses
 SLURM, you can still follow most of the tutorial on your own computer.
 
 AI chat tools such as ChatGPT can write bash code for you, so why learn
-it yourself? Someone still has to run the code, read it and check what
-it did to your data, and that is what this tutorial teaches. At the end,
-the page \href{source/llm_usage.qmd}{Using LLMs} describes how I suggest
-you use these tools once you know the basics.
+it yourself? Someone still has to read the code, understand what the
+code does for your data, run the code, and verify the output, and that
+is what this tutorial teaches. At the end, the page
+\href{source/llm_usage.qmd}{Using LLMs} describes how I suggest you use
+these tools once you know the basics.
 
 For topics that this tutorial does not cover, have a look at
 \href{https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/}{IBED's

@@ -6,21 +6,26 @@ toc-depth: 2
 
 ## HPC introduction
 
-On day 2, we work on **Crunchomics**, the Genomics Compute Environment for SILS and IBED. Crunchomics is an **HPC** (high-performance computer): a group of powerful computers that many people share. If you work at IBED, you can get access to it by sending an email with your UvAnetID to Wim de Leeuw ([w.c.deleeuw\@uva.nl](mailto:w.c.deleeuw@uva.nl){.email}), as described on the [Before you start](installation.qmd) page.
+On day 2, we work on **Crunchomics**, the Genomics Compute Environment for SILS and IBED. Crunchomics is an **HPC** (high-performance computer): a group of powerful computers that many people share. If you work at IBED, you can get access to it as described on the [Before you start](installation.qmd) page.
 
 Working on an HPC is a bit different from working on your own computer. The figure below gives a simplified overview:
 
 ![](../img/crunchomics1.png){width="70%" fig-align="center"}
 
+-   You log in from your own computer with `ssh`, as in the check on the [Before you start](installation.qmd) page (the left arrow in the figure). 
 -   When you log in, you arrive on the **login node**, also called the **head node**. This computer is for preparing your work, for example moving and editing files and writing job scripts. It is not for running analyses.
--   The analyses run on the **compute nodes**. These computers have many more CPUs and much more memory.
--   In between is **SLURM**, a **workload manager** (also called a **scheduler**) that is used on many large HPCs. You send your analysis to SLURM as a **job**, and SLURM runs it on a compute node.  SLURM does three things:
+-   The analyses run on the **compute nodes**. These computers have many more CPUs and much more memory. 
+    -   A **CPU** is what does the calculations, so more CPUs means more work can get done at the same time. 
+    -   **Memory (RAM)** is the working space a program uses while it runs. 
+    -   Memory is not the same as storage, which is where your files are kept.
+-   In between is **SLURM**, a **workload manager** (also called a **scheduler**) that is used on many large HPCs. You send your analysis to SLURM as a **job**, and SLURM runs it on a compute node. In the figure, this is the arrow "Submit to queue". `sbatch` and `srun` are the two commands that send a job to SLURM. We use both on the next page. SLURM does three things:
     -   It gives users access to CPUs and memory on the compute nodes, for a limited time
     -   It starts and runs the jobs, and lets you check on them
     -   It manages the **queue**: the list of jobs that wait until enough CPUs and memory are free
 
 ::: callout-important
-**Crunchomics etiquette**
+
+## Crunchomics etiquette
 
 You share Crunchomics with many other people, so only ask for the resources that you actually use. There are no hard limits, but please follow these rules:
 
@@ -29,6 +34,8 @@ You share Crunchomics with many other people, so only ask for the resources that
 -   Don't leave resources that you reserved unused, and set reasonable time limits on your jobs
 -   Use the queue (SLURM) for large jobs. Working interactively is possible, but not for large jobs. We learn how to use the queue on day 2
 -   Close programs when you don't use them anymore, for example an R session
+
+You learn how to ask for resources and time on the next page, please look back into the etiquette rules once you run your own analyses.
 :::
 
 ## Storage
@@ -42,7 +49,7 @@ Good to know:
 
 -   Your data is removed from Crunchomics when your UvAnetID expires
 -   If you need more space, or a shared folder for a larger project with several team members, contact the Crunchomics team
--   **Snapshots:** every day at midnight (00:00), Crunchomics makes a **snapshot**, a saved copy of your files, and keeps it for 2 weeks. So if you delete a file by mistake, it can be restored for up to 2 weeks. But this also means that files you delete still count towards your storage limit for 2 weeks
+-   **Snapshots:** Crunchomics automatically makes **snapshots**, saved copies of your files, without you having to do anything. It makes one every hour, which is kept for 24 hours, and one every day around midnight, which is kept for a week. So if you delete a file by mistake, you can still get it back for up to a week. You can look at the snapshots and read the files in them in the hidden `.zfs/snapshot` folder, for example with `ls /zfs/omics/personal/$USER/.zfs/snapshot`. But snapshots also mean that files you delete still count towards your storage limit until the last snapshot with them is removed. Keep this in mind if you make many or large temporary files. If you need a file restored, or snapshots removed to free up space, contact Wim de Leeuw
 -   Your data is stored on several disks, which protects it if one disk breaks. But it is not copied anywhere else. **Crunchomics is not a backup or an archive.** You are responsible for backing up your own data. The [website of the IBED computational support team](https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html) explains the archiving options at the UvA
 
 ## Compute resources
@@ -51,6 +58,6 @@ Good to know:
 -   If you need more resources, or GPUs, see the [website of the IBED computational support team](https://ibed.uva.nl/facilities/computational-facilities/ibed-computational-support-team/ibed-computational-support-team.html)
 -   You find more information in the [Crunchomics documentation](https://crunchomics-documentation.readthedocs.io/en/latest)
 
-On the next page, we copy the sequencing data from day 1 to Crunchomics and get read statistics with seqkit. Then we clean the reads with fastp, which we install ourselves with conda. On the way, we learn different ways to send jobs to the compute nodes with SLURM.
+On the next page, we copy the sequencing data from day 1 to Crunchomics and get read statistics with seqkit. Then we clean the reads with fastp, which we install ourselves with conda, a tool to install software. On the way, we learn different ways to send jobs to the compute nodes with SLURM.
 
 </div>

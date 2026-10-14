@@ -2,6 +2,7 @@
 #SBATCH --job-name=seqkit_trimmed
 #SBATCH --output=logs/seqkit_trimmed_%j.out
 #SBATCH --error=logs/seqkit_trimmed_%j.err
+#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=5G
 #SBATCH --time=01:00:00

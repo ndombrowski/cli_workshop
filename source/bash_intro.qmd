@@ -22,7 +22,7 @@ In this first part, we learn to work on your own computer from the command line.
 
 ## The terminal, the shell and the prompt
 
-In this tutorial we use the **command-line interface (CLI)**. It is an alternative to the **graphical user interface (GUI)** that you probably know better. Both let you work with your computer, but in different ways:
+In this tutorial we use the **command-line interface (CLI)** to interact with our computer. It is an alternative to the **graphical user interface (GUI)** that you probably know better. Both let you work with your computer, but in different ways:
 
 -   In a GUI, you click on buttons, open folders and use menus.
 -   In the CLI, you type text to give **commands** (instructions to the computer), and you see the result as text.
@@ -41,7 +41,7 @@ After you type a command and press Enter, the shell runs it. When the command is
 
 ## `pwd`: Find out where we are
 
-Now you will learn your first command. Begin by opening your terminal and type `pwd`, and then press enter:
+Let's type and run our first command. Begin by opening your terminal and type `pwd`, and then press enter:
 
 ```{bash}
 pwd
@@ -75,7 +75,7 @@ In my case this returns something like this (and this will look different for yo
 
 <p align="left">
 
-<img src="../img/ls.png" width="500"/>
+<img src="../img/ls.png" width="600"/>
 
 </p>
 
@@ -91,7 +91,7 @@ If your directory contains many items, the output can quickly become overwhelmin
 A command generally has three parts:
 
 -   A **command name**: the program you want to run, e.g. `ls`
--   An **option** (or **flag**): a way to change how the command behaves, e.g. `-l` changes the output from ls from long to list format. Options usually start with a `-`
+-   An **option** (or **flag**): a way to change how the command behaves, e.g. `-l` shows the list in long format, with more details. Options usually start with a `-`
 -   An **argument**: the input the command works on, e.g. a file or folder. Some commands work without an argument
 
 <p align="left">
@@ -100,13 +100,13 @@ A command generally has three parts:
 
 </p>
 
-Try the following command in your current directory to list (`ls`) the contents of the current folder and show details in long format (`-l`)":
+Try the following command in your current directory to list (`ls`) the contents of the current folder and show details in long format (`-l`):
 
 ```{bash}
 ls -l
 ```
 
-After running this, we see our files and folders again but as a more detailed list. In the example below you can now see additional information about who is allowed to read and change the files (the access modes), who owns them, how large the files are, when they were last modified and of course their name:
+After running this, we see our files and folders again but as a more detailed list. In the example below you can now see additional information about who is allowed to read and change the files (the access modes that determine exactly who can do what to a file or folder), who owns them, how large the files are, when they were last modified and of course their name:
 
 <p align="center">
 
@@ -114,12 +114,32 @@ After running this, we see our files and folders again but as a more detailed li
 
 </p>
 
+::: {.callout-tip title="Tip: Reading the access modes (optional)" collapse="true"}
+Let's look at one line from the example above:
+
+```
+drwxrwxrwx 1 ndombrowski ndombrowski 4096 Dec  1 08:51 docs
+```
+
+The first column, `drwxrwxrwx`, shows the access modes. Read it in parts:
+
+-   The first letter tells you what kind of item it is: `d` for a directory (folder), `-` for a normal file.
+-   The next nine letters are three groups of three. The first group is for the **owner** of the file, the second for the **group** (a set of users who share access), and the third for **everyone else**.
+-   In each group, `r` means the user can **read** the file, `w` means they can **write** (change or delete) it, and `x` means they can **execute** it (run it as a program). For a folder, `x` means they can open the folder. A `-` in a position means that this permission is missing.
+
+So `drwxrwxrwx` is a folder that everyone can read, change and open. You will often also see `-rw-r--r--`: a file that the owner can read and change, and that everyone else can only read.
+
+The third and fourth columns show the owner (here `ndombrowski`) and the group.
+
+You don't need to change access modes in this tutorial. They become important when you share data with others, for example on an HPC. If you try to open or change a file that you don't have permission for, you get the error `Permission denied`. If the file or folder belongs to a colleague (check the owner column), you can't fix this yourself. Ask the owner to give you access, or to make a copy for you.
+:::
+
 ::: {.callout-tip title="Tip: Using ls in practice" collapse="false"}
 Throughout this tutorial, you'll notice that we use `ls` a lot. There is a reason for that.
 
 When working with data, sanity checks are essential, because it is easy to make mistakes, overwrite files, or lose track of where things are. Simple commands like `ls`, `pwd`, `wc` or `grep` help you check what is happening to your files at every step of an analysis.
 
-These habits are not just for beginners, bioinformaticians rely on them constantly.
+These habits are not just for beginners. Bioinformaticians rely on them constantly.
 :::
 
 ## Getting help
@@ -127,7 +147,7 @@ These habits are not just for beginners, bioinformaticians rely on them constant
 At some point, you'll want to know what options a command has or how it works. In this case, first check if a **manual page** (or *man page*) is available for the command by typing `man` followed by the command name:
 
 ```{bash}
-man ls
+man pwd
 ```
 
 This opens the manual entry for the command `ls`. You can move through it using:
@@ -136,11 +156,13 @@ This opens the manual entry for the command `ls`. You can move through it using:
 -   `b` to move back up one page
 -   `q` to quit the manual
 
+**MobaXterm users:** MobaXterm does not come with manual pages, so `man pwd` does not work. Use `pwd -h` instead (see below), or read the manual page online, for example at [man7.org](https://man7.org/linux/man-pages/man1/pwd.1.html).
+
 Not all programs come with such a manual. Depending on the program, there are a few common ways to get help that you can try:
 
--   `man ls`
--   `ls --help`
--   `ls -h`
+-   `man pwd`
+-   `pwd --help`
+-   `pwd -h`
 
 ## `mkdir`: Make new folders
 
@@ -174,7 +196,7 @@ open .
 Use the command for your own system. You should see a window with your home directory and the new `data_analysis` folder in it. This is useful later, for example to open a report that you made with the command line. 
 
 ::: {.callout-important title="MobaXterm users: did you choose a permanent folder?" collapse="false"}
-If `explorer.exe .` opens a folder in a temporary location, MobaXterm deletes your work when you close it. You can see this in the address bar of File Explorer: it shows `Temp`, for example `Local > Temp > Mxt265 > mx86_64b > tmp > home_YourUserName`. Before you continue, follow the steps in [MobaXterm: choose a permanent folder](installation.qmd#mobaxterm-choose-a-permanent-folder) on the "Before you start" page. Then make the `data_analysis` folder again.
+If `explorer.exe .` opens a folder in a temporary location, MobaXterm deletes your work when you close it. You can see this in the address bar of File Explorer: it shows `Temp`, for example `Local > Temp > Mxt265 > mx86_64b > tmp > home_YourUserName`. Before you continue, follow the steps in [Windows + MobaXterm: choose a permanent folder](installation.qmd#windows-mobaxterm-choose-a-permanent-folder) on the "Before you start" page. Then make the `data_analysis` folder again.
 :::
 
 Next, let's make a `data` folder inside the new `data_analysis` folder:
@@ -199,7 +221,7 @@ In your own work, add short, meaningful comments above key steps. Avoid restatin
 
 ## `touch`: Starting your notebook
 
-Now that we have a project folder, it gets a **notebook**: a file in which you write down the commands you ran, a comment on what each one does, and a few words about what you saw. Think of it as the lab book of your analysis. Writing it while you work takes a bit of time, but it also makes you stop and think about what you just did. And a month from now, it tells you exactly how you got your results.
+Now that we have a project folder, let us generate a **notebook**: a file in which you write down the commands you ran, a comment on what each one does, and a few words about what you saw. Think of it as the lab book of your analysis. Writing it while you work takes a bit of time, but it also makes you stop and think about what you just did. And a month from now, it tells you exactly how you got your results.
 
 We create an empty file for the notebook with `touch`:
 
@@ -221,7 +243,7 @@ RStudio shows two buttons at the top left of a Markdown file: **Source** and **V
 
 ### Writing the notebook in Markdown
 
-The file ends in `.md` because we write it in **Markdown**: plain text with a few symbols that give it structure. For your notebook, you only need three of them:
+The file ends in `.md` because we write it in **Markdown**: plain text with a few symbols that give it structure. For your notebook, you only need to know about a few things:
 
 -   A line that starts with `#` and a space is a **heading**. More `#` symbols make a smaller heading (`##`, `###`).
 -   Code goes into a **code block**: a line with three backticks and the word `bash` above the code, and a line with three backticks below it. You can replace `bash` with other language names, like `python` or `r`, based on whatever coding language you use for a task. 
@@ -257,7 +279,7 @@ From now on, you find a blue notebook box at the end of each part of the tutoria
 
 Now that we have our own project folder and know how to document what we are doing, let's learn how to move around the file system with `cd` (short for *change directory*).
 
-The file system is structured like a tree that starts from a single **root** directory, written as a forward slash (`/`). All other folders branch out from this root directory. For example, we can go from the root directory to the home folder, and from there into the folder with your user name: `/home/username`.
+The file system is structured like a tree that starts from a single **root** directory, written as a forward slash (`/`). All other folders branch out from this root directory. For example, we can go from the root directory to the home folder, and from there into the folder with your user name.
 
 <p align="center">
 
@@ -265,7 +287,7 @@ The file system is structured like a tree that starts from a single **root** dir
 
 </p>
 
-The location of a file or folder is written as a **path**: the folder names along the way, separated by `/`. There are two ways to write a path, for example to the data folder:
+The location of a file or folder is written as a **path**: the folder names along the way, separated by `/`, e.g. `/home/username`. There are two ways to write a path, for example to the data folder:
 
 -   An **absolute path** starts from the root, e.g. `cd /home/username/data_analysis/data`
 -   A **relative path** starts from your current location, e.g. `cd data` if you are already in `/home/username/data_analysis`
@@ -282,16 +304,16 @@ cd data_analysis
 pwd
 ```
 
-You now should see something like `/Users/YourUserName/data_analysis`. You can use `cd` in multiple ways to move around:
+You should now see something like `/Users/YourUserName/data_analysis`. You can use `cd` in multiple ways to move around:
 
 ```{bash}
 # Move into the data folder
 cd data
 
-# Move one level up (..), back to the data_analysis folder
+# Move one level up in the tree (..), back to the data_analysis folder
 cd ..
 
-# Quickly go back home (you now should be in the home directory)
+# Quickly go back home (you should now be in the home directory)
 cd ~
 
 # Move multiple levels down at once
@@ -402,7 +424,7 @@ When you ask someone for help, always copy the complete error message. It tells 
 
 ### `Ctrl+C`: Stopping a command
 
-Sometimes a command does not finish, or you start something by mistake. The prompt does not come back, and you can't type a new command. Press `Ctrl+C` to stop the command and get your prompt back.
+Sometimes a command does not finish, or you start something by mistake. The prompt does not come back, and you can't type a new command. Press `Ctrl+C` (or `Cmd+C` on a Mac) to stop the command and get your prompt back.
 
 Let's try it. If you give `cat` no file name, it waits for you to type text (we use `cat` for other things later):
 
@@ -451,7 +473,7 @@ A relative path starts from the folder I am in, so it only works from the right 
 
 ## `wget`: Download data
 
-Next, let's download our sequencing data, a file called `seq_project.tar.gz`, with the `wget` command. Make sure that you are inside your `data_analysis` folder (check with `pwd`), because `wget` saves the file in the folder you are currently in:
+Next, let's use `wget` to download our sequencing data, a file called `seq_project.tar.gz`. Make sure that you are inside your `data_analysis` folder (check with `pwd`), because `wget` saves the file in the folder you are currently in:
 
 ```{bash}
 # Download data using link provided by the sequencing center XYZ on 23.01.2023
@@ -491,7 +513,7 @@ ls -lh
 
 ## `cp`: Copying data
 
-`cp` (short for *copy*) duplicates files or folders. When working with many files, a good folder structure is essential to keep track of them (useful folders are, for example, `data`, `scripts` and `results`). To keep our project folder organized, let's copy the `seq_project.tar.gz` file we just downloaded into the `data` folder we made earlier:
+`cp` (short for *copy*) duplicates files or folders. When working with many files, a good folder structure is essential to keep track of files (useful folders are, for example, `data`, `scripts` and `results`). To keep our project folder organized, let's copy the `seq_project.tar.gz` file we just downloaded into the `data` folder we made earlier:
 
 ```{bash}
 # Copy the tar.gz file into the data folder
@@ -517,7 +539,7 @@ ls -l
 ls -l data
 ```
 
-Notice that `mv` moved the file and, **without asking**, overwrote the copy that we had put into the data folder with `cp`. So whenever you use `mv`, make sure that you do not overwrite files by mistake.
+Notice that `mv` moved the file and, **without asking and without showing**, overwrote the copy that we had put into the data folder with `cp` (we only would know that if we carefully tracked the modification date of the file). So whenever you use `mv`, make sure that you do not overwrite files by mistake.
 
 `mv` is also the command to rename a file: you "move" it to a new name, e.g. `mv old_name.txt new_name.txt`.
 
@@ -539,11 +561,7 @@ curl --output-dir data -LO https://raw.githubusercontent.com/ndombrowski/cli_wor
 
 ## `tar`: Work with tar files
 
-The data we downloaded is provided as a tar file:
-
--   tar is short for Tape Archive, and sometimes referred to as tarball
--   The TAR file format is commonly used when storing data
--   TAR files are often compressed after being created and then become TGZ files, using the tgz, tar.gz, or gz extension.
+The data we downloaded is provided as a tar file. A tar file (also called a tarball) bundles many files and folders into one file. It is often also compressed with gzip, which gives the extension `.tar.gz` or `.tgz`.
 
 We can decompress the content of the tarball into our data folder using the following command:
 
@@ -553,10 +571,11 @@ tar -xvf data/seq_project.tar.gz -C data
 
 The options we use with the `tar` command are:
 
--   `x` tells tar to extract files from the archive
--   `v` (verbose) prints the name of each file while it is being extracted, so you can see what happens
--   `f` specifies the file name
+-   `x` tells tar to e**x**tract files from the archive
+-   `v` prints the name of each file while it is being extracted, so you can see what happens (also called **v**erbose)
+-   `f` specifies the **f**ile name
 -   `C` tells tar to change directory (so the package content will be unpacked there)
+-   `tar` detects the compression automatically when it extracts and we don't need an extra options to tell it to uncompress the file in our command
 
 ::: {.callout-tip title="Tip: How to generate a tarball (optional)" collapse="true"}
 If you ever want to generate a tarball you can do the following:
@@ -567,13 +586,13 @@ tar -cvzf my_tarball.tar.gz folder_to_tar
 
 The options we use are:
 
--   `c` create an archive by bundling files and directories together
--   `z` use gzip compression when generating the tar file
+-   `c` **c**reate an archive by bundling files and directories together
+-   `z` use g**z**ip compression when generating the tar file
 :::
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  After extracting the tarball, use `ls` to explore the content of the folder we just extracted. Make sure that you also explore the content of the folders inside it.
-2.  Find the path for at least one sequence file that ends with `fastq.gz`. Hint: use the Tab key (see the tip on command-line completion above), so that you don't have to type every single word.
+1.  After extracting the tarball, use `ls` to explore the content of the folder we just extracted. Make sure that you also explore the content of the folders inside it. Hint: use the Tab key (see the tip on command-line completion above), so that you don't have to type every single word.
+2.  Find the path for at least one sequence file that ends with `fastq.gz`. 
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
@@ -581,14 +600,14 @@ The options we use are:
 ls -l data/seq_project
 
 # Question 2:
-ls -l data/seq_project/barcode001_User1_ITS_1_L001/
+ls -l data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz
 ```
 :::
 :::
 
 ## `rm`: Remove files and folders
 
-To remove files and folders, we use the `rm` command (short for *remove*). We want to remove the `seq_project.tar.gz` file, since we do not need it anymore once we have extracted the data:
+To remove files and folders, we use the `rm` command (short for *remove*). We want to remove the `seq_project.tar.gz` file, since we do not need it anymore once we have extracted the data (and we can download it again if needed). For your own raw data, this is important: Make backups and only delete data if you are absolutely sure that you can recover it from somewhere.
 
 ```{bash}
 # Remove the tar.gz file from the data folder
@@ -605,7 +624,7 @@ If we want to remove a folder, we need to tell `rm` with an option. For this, we
 
 This means that if you delete something with `rm`, it's gone. There is no recycle bin. Therefore, use `rm` with care and check what you wrote twice before pressing enter!
 
-Also, NEVER run `rm -r` or `rm -rf` on the root folder `/` or any other important path, such as your home directory. Always double check the path or file name before you press enter when using `rm`.
+Also, NEVER run `rm -r` or `rm -rf` (`-f`: "force: don't ask, don't complain") on the root folder `/` or any other important path, such as your home directory. Always double check the path or file name before you press enter when using `rm`.
 :::
 
 ## Wildcards
@@ -638,7 +657,7 @@ Now we can easily see for each folder how many files we have.
 1.  Use a wildcard to list files for barcode001 only
 2.  Use a wildcard to only list R1 (forward read) files
 3.  Use a wildcard to copy all R1 files into a new folder, call this new folder `R1_files`. Use `ls` to confirm if you copied the right files
-4.  To avoid duplicates, remove the R1_files folder from question 3 after you have ensured the command you used worked
+4.  To avoid duplicates, remove the R1_files folder from question 3 after you have ensured the command you used worked. Use `ls` to confirm that your command worked
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
@@ -660,7 +679,7 @@ rm -r R1_files
 
 After solving question 2 you should see:
 
-![](/img/wildcards_3.png){width="489"}
+![](/img/wildcards_3.png){width="550"}
 
 After solving question 3, we should see that all files still exist in their original location but are now also inside the `R1_files` folder. Notice how we can use wildcards together with other commands to easily reorganize our data?
 :::
@@ -684,7 +703,7 @@ ls data/seq_project/barcode00[12]*/*.gz
 ls data/seq_project/barcode001_User1_ITS_1_[A-Z]001/*.gz
 ```
 
-You find a full list of wildcards [here](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm).
+You find a full list of wildcards when you open [this link](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm).
 :::
 
 ::: {.callout-tip title="Tip: Finding files with find (optional)" collapse="true"}
@@ -755,7 +774,7 @@ For example, let's write a list of all fastq files into a file:
 # Write the list of fastq files into a new file instead of to the screen
 ls data/seq_project/*/* > fastq_paths.txt
 
-# Check that the new file exists
+# Check that the new file exists and that it is not empty
 ls -l fastq_paths.txt
 ```
 
@@ -789,6 +808,7 @@ head fastq_paths.txt
 
 ```{bash}
 # Show the last 10 lines
+# Our file has only 8 lines, so both head and tail show everything
 tail fastq_paths.txt
 
 # Show the last 3 lines
@@ -810,7 +830,7 @@ Here:
 -   Move up and down with the ↑ / ↓ arrow keys, or with Page Up / Page Down
 -   Press `q` to quit
 
-::: {.callout-tip title="Tip: Editing text files with `nano` (optional)" collapse="true"}
+::: {#nano-tip .callout-tip title="Tip: Editing text files with `nano` (optional)" collapse="true"}
 You can also change the content of a text file from the command line. The most common tool for this is the text editor `nano`. It comes with WSL2, Mac and most Linux systems:
 
 ```{bash}
@@ -834,7 +854,7 @@ Make your changes, and then:
 wc -l fastq_paths.txt
 ```
 
-We see that we work with 8 files. Here we could easily count them ourselves, but with hundreds of files, `wc -l` is much faster and more reliable.
+We see that we work with 8 files. Here we could easily count that ourselves, but with hundreds of files, `wc -l` is much faster and more reliable.
 
 There is one downside: to count the files, we first had to make a file with the list. If we do this for every question we have, we end up with many files that we don't need. Pipes solve this problem.
 
@@ -845,12 +865,12 @@ So far, we've run one command at a time. But often, you want to combine commands
 Let's use `ls` to list all fastq files and then pipe the output from `ls` into the `wc` command, to count how many files we work with:
 
 ```{bash}
-ls data/seq_project/*/* | wc -l
+ls data/seq_project/*/*.gz | wc -l
 ```
 
 Here:
 
--   `ls data/seq_project/*/*` lists all files in the folders inside `seq_project`
+-   `ls data/seq_project/*/*.gz` lists all .gz files in the folders inside `seq_project`
 -   The pipe (`|`) sends this list directly to the next command, instead of printing it to the screen
 -   `wc -l` counts the lines in this list, which is the number of files
 
@@ -873,7 +893,7 @@ ls data/seq_project/*/*R2*gz | wc -l
 ls data/seq_project/*_User1_*/*gz | wc -l 
 ```
 
-Our data is **paired-end** sequencing data: each DNA fragment was read from both ends, which gives one R1 file and one R2 file per sample. Having as many R1 as R2 files is a good sanity check: it tells us that we received both files for every sample.
+This exercise also tells us something about our data since we see that for each sample we have a R1 and R2 file. This setup is also called **paired-end** sequencing data: each DNA fragment was read from both ends, which gives one R1 (forward end) file and one R2 (reverse end) file per sample. Having as many R1 as R2 files is a good sanity check: it tells us that we received both files for every sample.
 :::
 :::
 
@@ -888,7 +908,7 @@ For this, we can use `cut`, which splits each line into parts and prints only th
 3.  `barcode001_User1_ITS_1_L001`
 4.  `Sample-DUMMY1_R1.fastq.gz`
 
-The file name we want is the 4th field and we can then combine this and use cut to extract that information as follows:
+The file name is the 4th field, so we ask cut for that:
 
 ```{bash}
 # Look at the file list first
@@ -926,7 +946,7 @@ This gives us a list of barcodes. But note how each barcode appears twice: once 
 ## `sort` and `uniq`: Create unique lists
 
 -   `sort` sorts lines from A to Z
--   `uniq` removes duplicate lines, but only when they are directly below each other. That is why we almost always use `sort` before `uniq`: sorting puts identical lines next to each other
+-   `uniq` removes duplicate lines, but only when they are sorted directly below each other. That is why we almost always use `sort` before `uniq` to put identical lines next to each other
 
 ```{bash}
 # Extract the barcodes, sorted, with each barcode appearing only once
@@ -986,12 +1006,13 @@ Notice how we keep the output in its own subfolder of `results`? Giving each ana
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 You can also combine fastq.gz files with `cat`. We don't need this for our data, but you might need it for your own. For example, a sequencing center sometimes sends several files for one sample, because the data is too large for a single file.
 
-1.  Use a wildcard and `cat` to combine all R1 fastq.gz files into one file called `combined_R1.fastq.gz`, in the `results/combined` folder
+1.  Use a wildcard and `cat` to combine all R1 fastq.gz files into one file called `combined_R1.fastq.gz`, in the `results/combined` folder. If you are unsure whether your wildcards capture the right files, it is a good habit to first check the behavior with `ls` before concatenating files with `cat` 
 2.  Use `ls` to compare the size of the individual R1 files with the size of the combined file. Did it work?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 ```{bash}
 # Question 1:
+ls data/seq_project/*/*R1.fastq.gz
 cat data/seq_project/*/*R1.fastq.gz > results/combined/combined_R1.fastq.gz
 
 # Question 2:
@@ -1024,7 +1045,7 @@ You might have noticed that our sequence files end with `.gz`. This extension is
 
 To view the content of a compressed file, we can decompress it first. We do this with the `gzip` command together with the `-d` (decompress) option. Without `-d`, `gzip` compresses a file.
 
-`gzip -d` replaces the compressed file with the decompressed one. We never want to change our raw data in `data/`: if something goes wrong, there is no way to get the original back. So we instead make us of a copy:
+`gzip -d` replaces the compressed file with the decompressed one. We never want to change our raw data in `data/`: if something goes wrong, there is no way to get the original back. So we instead make use of a copy:
 
 ```{bash}
 # Make a folder for this test, so that the raw data in data/ stays as it is
@@ -1047,7 +1068,7 @@ Now we finally see DNA sequences, plus some other information. Each sequence tha
 
 <p align="left">
 
-<img src="../img/fastq_format.png" width="700"/>
+<img src="../img/fastq_format.png" width="800"/>
 
 </p>
 
@@ -1080,7 +1101,7 @@ gzip results/gzip_test/Sample-DUMMY1_R1.fastq
 ls -l results/gzip_test
 ```
 
-We don't need the test folder anymore, so we remove it. Check the path twice before you press Enter, `rm -r` does not ask:
+We don't need the test folder anymore, so we remove it. Check the path twice before you press Enter. `rm -r` does not ask:
 
 ```{bash}
 # Remove the test folder and everything inside it
@@ -1147,12 +1168,19 @@ grep "ITS_9" fastq_paths.txt
 # Question 2
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | grep "AAGACG"
 
+# Question 2, but only show the first 10 matching lines
+zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | grep "AAGACG" | head
+
 # Question 3
 zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz | grep -c "AAGACG"
 
 ```
 
-For questions 2 and 3, `grep` can't read the compressed file directly, so we send the output of `zcat` to it with a pipe. Commands like these are useful to check whether **adapters** or **primers** are still part of your reads. These are short, known DNA sequences that are added to or used on the DNA before sequencing.
+For questions 2 and 3, `grep` can't read the compressed file directly, so we send the output of `zcat` to it with a pipe.
+
+In question 2, without `| head` the matching lines scroll past faster than you can read them: thousands of reads contain this pattern. When the output is too long for the screen, add another pipe at the end. `| head` shows only the first lines, `| less -S` lets you scroll through all of them, and `grep -c` (question 3) tells you how many there are.
+
+Commands like these are useful to check whether **adapters** or **primers** are still part of your reads. These are short, known DNA sequences that are added to or used on the DNA before sequencing.
 :::
 :::
 
@@ -1171,12 +1199,12 @@ For `Sample-DUMMY1_R2.fastq.gz`, this gives 179,384 lines. Every read takes 4 li
 Dividing by 4 with a calculator works, but bash can also do it for us:
 
 ```{bash}
-zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | echo $(( $(wc -l) /4))
+echo $(( $(zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz  | wc -l) / 4 ))
 ```
 
 Here:
 
--   `$( )` is called **command substitution**. Bash runs the command inside the brackets, here `wc -l`, and puts its output in its place. `wc -l` counts the lines that `zcat` sends through the pipe
+-   `$( )` is called **command substitution**. Bash runs the command inside the brackets, here `zcat file | wc -l`, and puts its output in its place. `wc -l` counts the lines that `zcat` sends through the pipe
 -   `$(( ))` is called **arithmetic expansion**. Bash calculates what is inside the double brackets, here the number of lines divided by 4, and puts the result in its place
 -   `echo` prints the result
 :::
@@ -1256,7 +1284,7 @@ The second command gives the same result as typing out the full path. On its own
 
 A few rules for variables:
 
--   The name can contain letters, numbers and underscores (`_`), but no spaces. Choose a name that tells you what is stored in it, `fastq_file` is easier to understand a year later than `x`.
+-   The name can contain letters, numbers and underscores (`_`), but no spaces. Choose a name that tells you what is stored in it. `fastq_file` is easier to understand a year later than `x`.
 -   A variable only exists in the terminal window where you made it. If you close the terminal, it is gone.
 -   Use lowercase names for your own variables. Bash already uses some names in capitals for its own settings, for example `PATH`, `HOME` and `USER`. If you give your variable one of these names, you replace bash's value, and things stop working.
 
@@ -1314,7 +1342,7 @@ echo $fastq_file
 Starting a loop with `echo` is a good habit. This is called a **dry run**: the loop shows what it would work on, without changing anything. Before you add the real command, check the list. Do you see all 8 files, and only the files you expect? If yes, then you can continue with the next step and build up the loop for more complex tasks.
 
 ::: {.callout-tip title="Tip: Typing a loop in the terminal" collapse="false"}
-When you press Enter after writing the first line of the loop, nothing runs yet. Instead, the prompt changes to `>`. This means bash waits for the rest of the loop. It only starts once you type `done` and press Enter. (On a Mac with zsh, this prompt may look slightly different, for example `for>`.)
+When you press Enter after writing the first line of the loop, nothing runs yet. Instead, the prompt changes to `>` (this `>` is only the prompt, it doesn't write anything). This means bash waits for the rest of the loop. It only starts once you type `done` and press Enter. (On a Mac with zsh, this prompt may look slightly different, for example `for>`.)
 
 If you get stuck in this `>` prompt, for example because of a typo, press `Ctrl+C` to cancel and start again.
 :::
@@ -1487,7 +1515,7 @@ mkdir -p scripts
 ls -l
 ```
 
-Next, we create the script with the text editor `nano` (see the tip "Editing text files with `nano`" above):
+Next, we create the script with the text editor `nano` (see the tip [Editing text files with `nano`](#nano-tip) above):
 
 ```{bash}
 nano scripts/count_lines.sh
@@ -1496,14 +1524,15 @@ nano scripts/count_lines.sh
 **MobaXterm users:** if you see `nano: command not found`, install it first with `apt install nano`, as explained in that tip.
 
 Type or copy the following into the editor:
-
+code s
 ```{bash}
 #!/bin/bash
 
 # Count the number of lines in each fastq file
 # Run this script from inside the data_analysis folder
 
-# Make a folder for the counts and start the counts file with a header
+# Make a folder for the counts and start the counts file with a header 
+# We give this output a new name, so you can compare it with the file from the loop
 mkdir -p results/counts
 echo "Number of lines per fastq file" > results/counts/line_counts_bash.txt
 
@@ -1516,7 +1545,7 @@ done
 
 Save and exit:
 
--   Press `Ctrl+X` to exit, then `Y` to confirm that you want to save the file, then Enter to keep the file name
+-   Press `Ctrl+X` to exit (indicated with `^^X` in nano), then `Y` to confirm that you want to save the file, then Enter to keep the file name
 
 The commands are the same as in the `>>` section. Two things are new:
 
@@ -1546,6 +1575,8 @@ Why is this useful?
 Windows programs such as Notepad end every line with an extra invisible character. Bash on Linux does not understand this character, and the script fails with errors such as `$'\r': command not found` or `syntax error near unexpected token`. Word processors such as Word also add formatting and can change straight quotes (`"`) into curly quotes.
 
 To avoid this, write your scripts with `nano`. If you prefer a code editor such as RStudio or VS Code, check that it saves the file with `LF` line endings (in VS Code, you see `LF` or `CRLF` in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.
+
+If you like writing in RStudio, you can write the script there and copy it into `nano`. Or set RStudio to save with `LF` line endings: in **Tools > Global Options > Code > Saving**, set **Line ending conversion** to **Posix (LF)**.
 :::
 
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Counting lines per file"}

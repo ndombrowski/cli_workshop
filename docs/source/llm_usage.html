@@ -417,22 +417,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-llms-to-understand-and-check-code" class="level1">
 <h1>Using LLMs to understand and check code</h1>
 <p>Tools like ChatGPT, Claude, Copilot or Gemini can write bash code in seconds, so why would you still want to learn how to use bash?</p>
-<p>For this, lets first understand what these tools are. Very briefly, all these tools are built on a <strong>large language model (LLM)</strong>: a program that has been trained on huge amounts of text, including a lot of code, and that writes an answer by predicting which words are likely to come next. On this page, I use “LLM” for all of these chat tools.</p>
+<p>For this, let’s first understand what these tools are. Very briefly, all these tools are built on a <strong>large language model (LLM)</strong>: a program that has been trained on huge amounts of text, including a lot of code, and that writes an answer by predicting which words are likely to come next. On this page, I use “LLM” for all of these chat tools.</p>
 <p>LLMs are useful, and some of you may already use them. This page is about how to use them without losing control over your analysis. It is written based on my own experience using LLMs, for people who work with biological data and who have just started with the command line. You can read it after the workshop, at your own pace.</p>
 <p>The short version:</p>
 <ul>
 <li><strong>Learn the basics first</strong>, with this tutorial, and don’t let an LLM write code for you while you do. The basics give you the tools you need for all the other advice on this page</li>
-<li>Especially while still learning but also when letting it generate code, use an LLM as a <strong>tutor</strong> that explains code, more than as a machine that writes code for you</li>
+<li>Both while you learn and later, use an LLM as a <strong>tutor</strong> that explains code, more than as a machine that writes code for you</li>
 <li>Treat every piece of code an LLM writes as a <strong>first draft</strong>: run it on one sample and check the output before you use it for real</li>
 <li>You need to be able to <strong>explain</strong> and <strong>justify</strong> every step of your analysis, whoever wrote the code</li>
 <li>You need to <strong>understand</strong> what each option of a tool does to your data. For the code around it, you can <strong>check</strong> that it does what you want with the simple commands from day 1</li>
 </ul>
 <section id="why-learn-the-command-line-if-an-llm-can-write-the-code" class="level2">
 <h2 class="anchored" data-anchor-id="why-learn-the-command-line-if-an-llm-can-write-the-code">Why learn the command line if an LLM can write the code?</h2>
-<p>This is a fair question. My answer is that writing the code is only a small part of what is needed to be able to analyse our data. Even with an LLM, someone still has to:</p>
+<p>This is a fair question. In my opinion, even if you use an LLM, someone still has to:</p>
 <ul>
-<li><strong>Run the code</strong> in the right place: on the right computer, in the right folder, with the right paths, on the login node or as a job. The LLM does not know your folder structure, your file names or the HPC you work on</li>
 <li><strong>Read the code</strong>, to know what it will do to your files before you run it. This means understanding details like how exactly the data is summarized or how the options of a command, for example fastp, affect your output</li>
+<li><strong>Run the code</strong> in the right place: on the right computer, in the right folder, with the right paths, on the login node or as a job. The LLM does not know your folder structure, your file names or the HPC you work on</li>
 <li><strong>Check the input and output</strong>: what does your input data look like, did every sample get processed, how many reads are left, does that make sense for your data?</li>
 <li><strong>Explain and justify</strong> your choices: to your supervisor, to your co-authors, in the methods section of a paper. “The LLM chose this cutoff” is not really an acceptable answer if someone asks you about your choices</li>
 </ul>
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="how-i-suggest-you-use-an-llm" class="level2">
 <h2 class="anchored" data-anchor-id="how-i-suggest-you-use-an-llm">How I suggest you use an LLM</h2>
-<p>These are the rules I give the students I supervise:</p>
+<p>These are the rules I give the students I supervise for how to interact with an LLM. As I mentioned above, I advise students to not let an LLM write their code and not outsource their learning. Your internships are not only for you to produce results, they give you the time and space to learn about the process of producing good and reliable results. However, I am also aware that everyone has access to these tools, so these recommendations also cover how I would use LLMs for coding:</p>
 <ul>
 <li><strong>Ask it to explain, not only to write.</strong> When you learn a new concept, you can even tell it not to write code, for example: “Give advice and best practices, but do NOT give me a code solution”</li>
 <li><strong>Ask specific questions.</strong> Give it the actual command, the actual error message and the biological context. The more specific the question, the more useful the answer</li>
@@ -492,8 +492,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Treat generated code as a first draft.</strong> Run it on one sample, look at the output, and check that it makes biological sense before you run it on all samples</li>
 <li><strong>Don’t let it rewrite code that fails.</strong> This usually replaces code you don’t understand with more code you don’t understand. Ask it to explain the error or a specific line instead (more on this <a href="#when-your-code-does-not-work">below</a>)</li>
 <li><strong>Check suggested options against the help page of the version you use.</strong> An LLM has learned from documentation of many versions of a tool, often older ones. Remember from day 2: Crunchomics has fastp 1.0.1, and we installed 1.4.0. Options can change between versions. <code>fastp --help</code> on your own installation is always more reliable than an LLM’s suggestion</li>
+<li><strong>Write down what each result means, in your own words.</strong> Your notebook is not only a record of what you did. It is also a place to slow down and think. After each analysis step, write at least one sentence about what the result means for your data, for example: “fastp removed 3% of the reads” and also think about whether that number is something that you expected. Make sure to write this yourself, not with an LLM</li>
 </ul>
-<p>And the most important rule: <strong>if you can’t explain a step, don’t use it yet.</strong> It is completely fine to ask for help with a step you don’t understand, from an LLM or from a person. Struggling with code is a normal part of learning.</p>
+<p>And the most important rule: <strong>if you can’t explain a step, don’t use it yet.</strong> It is completely fine to ask for help with a step you don’t understand, from a person or from an LLM. Struggling with code is a normal part of learning.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -508,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>On day 2, we ran fastp without any filtering options. Let’s use an LLM to find out whether it filtered all reads anyway:</p>
 <ol type="1">
-<li>Ask in the UvA AI Chat: “What does fastp do by default to filter reads? Which options control this, and what are their default values?” Write down its answer</li>
+<li>Ask in UvA AI Chat (or another chat tool that you are allowed to use): “What does fastp do by default to filter reads? Which options control this, and what are their default values?” Write down its answer</li>
 <li>On Crunchomics, activate the <code>fastp_1.4.0</code> environment and look at the help page. Find the options the LLM mentioned. Do the descriptions and default values match?</li>
 <li>Deactivate the environment and look at the help page of the fastp 1.0.1 of Crunchomics. Is there anything different?</li>
 </ol>
@@ -524,6 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p><strong>The help page of fastp 1.4.0 (question 2)</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2: the help page of fastp 1.4.0</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
@@ -552,10 +554,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>-l</code>: a read is removed if it is shorter than 15 bases</li>
 </ul>
 <p>So yes: even without options, fastp filtered the reads on day 2. Your fastp report from day 2 shows how many reads were removed, and by which filter.</p>
-<p>Filtering is not the only thing that is on by default. The same help page says that adapter trimming is on by default (<code>-A</code> switches it off), while quality trimming with <code>--cut_front</code>, <code>--cut_tail</code> or <code>--cut_right</code> is off until you ask for it. So “fastp trims and filters my reads” is only half true, and which half depends on the option. This is exactly the kind of detail that an LLM easily blurs: its answer may sound right in general, mix up what is on and off, or describe an older version.</p>
-<p>For each step of your analysis, check in the help page whether it is on or off by default. This decides what “I ran fastp with default settings” actually means, for example in the methods section of a paper.</p>
-<p>Compare all this with what the LLM told you, and with the help page of the version you actually use. If they differ, the help page of your own installation wins.</p>
-<p>For question 3, scrolling through two long help pages is tiring. Instead, we can save both in a file and let the computer compare them. <code>diff</code> compares two files line by line and prints only the lines that differ:</p>
+<p>Filtering is not the only thing that is on by default. The same help page says that adapter trimming is on by default (<code>-A</code> switches it off), while quality trimming with <code>--cut_front</code>, <code>--cut_tail</code> or <code>--cut_right</code> is off until you ask for it. So “fastp trims and filters my reads” is only half true, and which half depends on the option. This decides what “I ran fastp with default settings” actually means, for example in the methods section of a paper.</p>
+<p><strong>What two LLMs answered (question 1, October 2026)</strong></p>
+<p>I asked this question to UvA AI Chat (with its default model) and to ChatGPT, and compared both answers with the help page of fastp 1.4.0. I used ChatGPT on purpose, without any memory of earlier chats, because it knows nothing about me. UvA AI Chat does remember my earlier conversations (see point 5 below). As a student, use UvA AI Chat (see the UvA rules above).</p>
+<ol type="1">
+<li>Both got every default value right, but they also didn’t give me the full output of the help function. Checking this took me a few minutes, and that is the point: often the LLM is right and often it might only give you a partial answer based on what you asked. A quick look at the help page is how you know</li>
+<li>Quality trimming was hidden in one answer, in a side note near the end, and missing from the other. Both answered the question I asked, which was about filtering. But for most of us, another relevant question is “were my reads trimmed?”. With Illumina data, the quality often drops towards the end of the read, so you may want to cut those ends off. To ask about that, though, you first need to know it. As I mentioned in point 1, an LLM answers only what you ask. It may tell you only part of what matters for your data, and nothing in the answer tells you that something is missing. The help page doesn’t depend on your question: it lists every option, including the ones that are off and the ones you didn’t know to ask about.</li>
+<li>Both wrote that fastp removes reads shorter than 15 bases “after trimming”. That may well be true, but the help page doesn’t say it. One answer also stayed vague (“fastp <em>can</em> discard a pair … depending on …”) about what happens to the other read of a pair when one read fails, while the help page says clearly that it is discarded by default</li>
+<li>Neither answer said which version of fastp it described</li>
+<li>One answer ended with advice tailored to one of my own research projects, which I had not mentioned in the question. It assumed a different kind of data than the data I was asking about. The reason for that is that depending on your settings an LLM can remember earlier conversations. This can be useful for some things but you have to decide if this is what you want and whether this fits into the privacy rules of your organisation.</li>
+</ol>
+<p><strong>Differences between versions (question 3)</strong></p>
+<p>Scrolling through two long help pages is tiring. Instead, we can save both in a file and let the computer compare them. <code>diff</code> compares two files line by line and prints only the lines that differ:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the help page of each version in a file</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
@@ -578,29 +588,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ---
 &gt;       --dup_calc_accuracy              accuracy level to calculate duplication (1~6), higher level uses more memory (1G, 2G, 4G, 8G, 16G, 32G). Default 1 for no-dedup mode, and 3 for dedup mode. (int [=0])</code></pre>
 <p>Lines that start with <code>&lt;</code> come from the first file (1.0.1), lines with <code>&gt;</code> from the second file (1.4.0). The numbers above them say where in each file the lines are.</p>
-<p>So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to <em>know</em>, not to find a difference. Three other lines did change. The most interesting one is <code>--dimer_max_len</code>, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn’t say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn’t list this option at all (checked in October 2026). So even the official documentation online can lag behind the program. Yet another reason why the help page of your own installation wins.</p>
-<p><strong>What two LLMs answered (October 2026)</strong></p>
-<p>I asked this question to UvA AI Chat (with its default model) and to ChatGPT, and compared both answers with the help page of fastp 1.4.0:</p>
-<ol type="1">
-<li>Both got every default value right. Checking this took me a few minutes, and that is the point: often the LLM is right, and a quick look at the help page is how you know</li>
-<li>Quality trimming was hidden in one answer, in a side note near the end, and missing from the other. Both answered the question I asked, which was about filtering. But for most of us, the practical question is “were my reads trimmed?”, and that answer got lost. A useful follow-up question is “What does fastp <em>not</em> do by default?”</li>
-<li>Both wrote that fastp removes reads shorter than 15 bases “after trimming”. That may well be true, but the help page doesn’t say it. One answer also stayed vague (“fastp <em>can</em> discard a pair … depending on …”) about what happens to the other read of a pair when one read fails, while the help page says clearly that it is discarded by default</li>
-<li>Neither answer said which version of fastp it described</li>
-<li>One answer ended with advice tailored to one of my own research projects, which I had not mentioned in the question. It assumed a different kind of data than the data I was asking about. The reason for that is that depending on your settings an LLM can remember earlier conversations. This can be useful for some things but you have to decide if this is what you want and whether this fits into the privacy rules of your organisation.</li>
-</ol>
+<p>So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to <em>know</em>, not to find a difference. Three other lines did change. The most interesting one is <code>--dimer_max_len</code>, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn’t say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn’t list this option at all (checked in October 2026). So even the official documentation online can lag behind the program.</p>
+<p><strong>Key points</strong></p>
+<ul>
+<li>Often the LLM is right but it might also blur things in its response. A quick look at the help page is how you <em>know</em></li>
+<li>An LLM answers only what you ask, and it won’t tell you what you didn’t ask. The help page lists every option, also the ones that are off</li>
+<li>“Default settings” only means something if you know what is on and what is off</li>
+<li>If the LLM, the online documentation and your help page differ, the help page of your own installation wins</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Tip: An LLM that looks something up has not always read the page">
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: An LLM that looks something up has not always read the page (optional)">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Tip: An LLM that looks something up has not always read the page
+<span class="screen-reader-only">Tip</span>Tip: An LLM that looks something up has not always read the page (optional)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -636,12 +644,12 @@ What happens if one of the input files is missing?</code></pre>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>In the optional box at the end of the fastp section on day 2, we used this awk command:</p>
+<p>In the optional box at the end of the fastp section on day 2, we used this awk command (if you skipped that box, you don’t have <code>stats_trimmed.txt</code>, but you can still do the checks in the answer on <code>stats_raw.txt</code>):</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
-<li>Paste the command into the UvA AI Chat and ask it to explain each part. This exercise is about practicing checking an answer from an LLM, not about getting the code answer.</li>
+<li>Paste the command into UvA AI Chat (or another chat tool that you are allowed to use) and ask it to explain each part. This exercise is about practicing checking an answer from an LLM, not about getting the code answer.</li>
 <li>Pick one thing the explanation claims, for example what <code>FNR &gt; 1</code> does. How can you check this claim yourself, with the commands from day 1?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
@@ -669,9 +677,51 @@ What happens if one of the input files is missing?</code></pre>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You don’t need to know awk to do this. You only need to know what the output <em>should</em> look like. This is also a good example for how knowing basic bash commands allows you to perform the suggested checks yourself, no LLM needed.</p>
+<p>Another claim worth checking is what columns 1, 4 and 7 contain. When I asked ChatGPT (October 2026), its first answer showed an example row where column 7 was <code>Q30</code>. Further down, it did say that its examples were only illustrative. But if you skim a long answer, it is easy to miss that sentence and remember the example as a fact.</p>
+<p>The header line of the file tells you what each column really is:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print only the header line</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 1 results/seqkit/stats_raw.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints:</p>
+<pre><code>file    format  type    num_seqs        sum_len min_len avg_len max_len Q1      Q2      Q3      sum_gap N50       Q20(%)  Q30(%)  AvgQual GC(%)</code></pre>
+<p>If you count the columns, column 1 is <code>file</code>, column 4 is <code>num_seqs</code> and column 7 is <code>avg_len</code>, the average read length. So the command prints the file name, the number of reads and the average read length, not a quality value.</p>
+<p>What makes this mistake tricky is that the answer started out right. The command mentions <code>results/seqkit/</code>, and the example file in the answer began with the real seqkit column names: <code>file</code>, <code>format</code>, <code>type</code>, <code>num_seqs</code>. The example values for columns 2 to 6 also fit those columns. Only column 7 was suddenly a quality value. When the first part of an answer checks out, it is tempting to trust the rest as well. But an LLM doesn’t get more reliable further into an answer, and one correct detail says nothing about the next one.</p>
+<p>So check the detail that matters to you, not the first one you can check. And whenever an answer depends on your own files, look at the file yourself, for example with <code>head</code>.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: When the answer is longer than you want to read (optional)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: When the answer is longer than you want to read (optional)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>LLM answers are often long. When I asked ChatGPT (October 2026) to explain the one-line awk command from the exercise above line by line, I got seven sections, two tables, example files and a summary at the end. I used ChatGPT without any memory of earlier chats on purpose, so it knew nothing about me except what I wrote in the question. Most of it was correct (the answer above shows one detail that was not). But the part I actually needed fits in one sentence, and it was near the top:</p>
+<pre><code>Read two files, skip the first line of each file, and print columns 1, 4, and 7 from every remaining line.</code></pre>
+<p>The rest explained things like what the folder <code>results/</code> is, and why a biologist might want to use this command. The few details that really matter, such as how <code>FNR</code> is different from <code>NR</code>, were somewhere in the middle. If you are new to the command line, it is hard to tell which parts are important and which are filler. And scrolling through a long, well-written answer can feel like learning, even when not much of it sticks.</p>
+<p>You don’t need a perfect question to avoid this. You can simply say what is wrong with the answer. I replied that most students would not read through this much text, and the second answer was much shorter. Its core was this table:</p>
+<pre><code>Part                Meaning
+awk                 Reads and processes text, one line at a time.
+-F'\t'              Treats tabs as column separators.
+FNR &gt; 1             Skips the first line of each file (usually the header).
+print $1, $4, $7    Prints columns 1, 4, and 7.
+stats_raw.txt       First input file.
+stats_trimmed.txt   Second input file.</code></pre>
+<p>That fits on one screen, and every line is something you can check. Other short follow-ups that work:</p>
+<pre><code>Shorter please, max 5 lines.</code></pre>
+<pre><code>Only explain what FNR &gt; 1 does.</code></pre>
+<pre><code>Which part of your answer should I check myself, and how?</code></pre>
+<p>Asking about one part at a time also makes each answer easier to check.</p>
 </div>
 </div>
 </div>
@@ -732,7 +782,7 @@ What happens if one of the input files is missing?</code></pre>
 </table>
 <p>Before you run anything, think about what you expect: how many samples, how many files, roughly how many reads. Then compare. If the numbers don’t match, you have found a problem, even if you can’t yet say where it is.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -741,11 +791,11 @@ What happens if one of the input files is missing?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Imagine you ask an LLM how to count the reads in a fastq file, and it suggests:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-c</span> <span class="st">"^@"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-c</span> <span class="st">"^@"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The idea: each read starts with a header line that begins with <code>@</code>, so counting those lines should count the reads (<code>^@</code> means “a line that starts with @”).</p>
 <ol type="1">
@@ -754,7 +804,7 @@ What happens if one of the input files is missing?</code></pre>
 <li>Can you think of a reason why they don’t match? Hint: look at the fastq format again. Which other line of a read could start with <code>@</code>?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -763,13 +813,13 @@ What happens if one of the input files is missing?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>On my computer (Git Bash on Windows), the <code>grep</code> command prints:</p>
+<p>On my computer (WSL on Windows), the <code>grep</code> command prints:</p>
 <pre><code>44882</code></pre>
 <p>The day 1 way:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This prints:</p>
 <pre><code>179384</code></pre>
@@ -792,51 +842,51 @@ for quality trimming of the reads themselves. Can you write a script to
 process all these samples at once on a HPC with slurm?</code></pre>
 <p>The prompt could be better, but it is roughly what many of us would type. This is the script it wrote (I only shortened the decorative lines in the comments):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_trim</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-100</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16G</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=04:00:00</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_%A_%a.out</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_%A_%a.err</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Paths --</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_DIR</span><span class="op">=</span><span class="st">"data"</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="va">OUT_DIR</span><span class="op">=</span><span class="st">"trimmed"</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">"</span> logs</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Sample name derived from array index --</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="va">SAMPLE</span><span class="op">=</span><span class="st">"S</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">"</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="va">R1</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R1.fastq.gz"</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="va">R2</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R2.fastq.gz"</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Guard: skip if input files are missing --</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">${R1}</span><span class="st">"</span> <span class="kw">||</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">${R2}</span><span class="st">"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"ERROR: Input files not found for </span><span class="va">${SAMPLE}</span><span class="st">: </span><span class="va">${R1}</span><span class="st"> / </span><span class="va">${R2}</span><span class="st">"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Run fastp --</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in1</span>  <span class="st">"</span><span class="va">${R1}</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in2</span>  <span class="st">"</span><span class="va">${R2}</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">--out1</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R1_trimmed.fastq.gz"</span> <span class="dt">\</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">--out2</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R2_trimmed.fastq.gz"</span> <span class="dt">\</span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">--average_qual</span>        20 <span class="dt">\ </span>  <span class="co"># discard reads with mean quality &lt; 20</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_mean_quality</span>    20 <span class="dt">\ </span>  <span class="co"># sliding-window trimming threshold</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_front</span>              <span class="dt">\ </span>  <span class="co"># trim low-quality bases from 5' end</span></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_tail</span>               <span class="dt">\ </span>  <span class="co"># trim low-quality bases from 3' end</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--thread</span>              8  <span class="dt">\</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">--json</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_fastp.json"</span> <span class="dt">\</span></span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">--html</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_fastp.html"</span></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done: </span><span class="va">${SAMPLE}</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_trim</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-100</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16G</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=04:00:00</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_%A_%a.out</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_%A_%a.err</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Paths --</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_DIR</span><span class="op">=</span><span class="st">"data"</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="va">OUT_DIR</span><span class="op">=</span><span class="st">"trimmed"</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">"</span> logs</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Sample name derived from array index --</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="va">SAMPLE</span><span class="op">=</span><span class="st">"S</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">"</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="va">R1</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R1.fastq.gz"</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="va">R2</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R2.fastq.gz"</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Guard: skip if input files are missing --</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">${R1}</span><span class="st">"</span> <span class="kw">||</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">${R2}</span><span class="st">"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"ERROR: Input files not found for </span><span class="va">${SAMPLE}</span><span class="st">: </span><span class="va">${R1}</span><span class="st"> / </span><span class="va">${R2}</span><span class="st">"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Run fastp --</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in1</span>  <span class="st">"</span><span class="va">${R1}</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in2</span>  <span class="st">"</span><span class="va">${R2}</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">--out1</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R1_trimmed.fastq.gz"</span> <span class="dt">\</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">--out2</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_R2_trimmed.fastq.gz"</span> <span class="dt">\</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">--average_qual</span>        20 <span class="dt">\ </span>  <span class="co"># discard reads with mean quality &lt; 20</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_mean_quality</span>    20 <span class="dt">\ </span>  <span class="co"># sliding-window trimming threshold</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_front</span>              <span class="dt">\ </span>  <span class="co"># trim low-quality bases from 5' end</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--cut_tail</span>               <span class="dt">\ </span>  <span class="co"># trim low-quality bases from 3' end</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--thread</span>              8  <span class="dt">\</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">--json</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_fastp.json"</span> <span class="dt">\</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">--html</span> <span class="st">"</span><span class="va">${OUT_DIR}</span><span class="st">/</span><span class="va">${SAMPLE}</span><span class="st">_fastp.html"</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done: </span><span class="va">${SAMPLE}</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It looks professional: tidy comments, a check on the input files, separate log files per sample. It uses a <strong>job array</strong>, which we only saw in an optional box on day 2: SLURM starts the same script many times (here 100 times), and each copy gets its own number in the variable <code>SLURM_ARRAY_TASK_ID</code>. The script uses the long names of the fastp options (<code>--in1</code> instead of <code>-i</code>, <code>--out1</code> instead of <code>-o</code>); both forms do the same thing.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -845,7 +895,7 @@ process all these samples at once on a HPC with slurm?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Read the script carefully, as if you were going to run it on your own data. Write down everything you would check or change. Some questions to guide you:</p>
 <ol type="1">
@@ -856,7 +906,7 @@ process all these samples at once on a HPC with slurm?</code></pre>
 <li>Compare it with the fastp script from day 2. Is it wrong, or just different?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -865,14 +915,14 @@ process all these samples at once on a HPC with slurm?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>I sort the problems from most to least serious.</p>
 <p><strong>1. It runs, but does the wrong thing</strong></p>
 <ul>
 <li><strong>The comments at the end of the lines break the command.</strong> The <code>\</code> only joins two lines when it is the very last character on the line (we saw this on day 2). Here, spaces and a comment follow it. The <code>\</code> then only protects the space after it, and the command ends at the end of that line. fastp receives the input and output files, <code>--average_qual 20</code>, and one extra argument that is just a space. Bash then tries to run the lines that follow as commands of their own, and each attempt fails with <code>command not found</code>. The <code>--thread</code> line has no comment, so its <code>\</code> works again, and <code>--thread</code>, <code>--json</code> and <code>--html</code> end up together in one failing command. So fastp never gets the trimming options, <code>--thread</code>, <code>--json</code> or <code>--html</code>. I missed this myself when I first read the script, which shows that reading is not enough: you also have to run it on one sample and look at the output. See the next exercise for a small test.</li>
 <li><strong>The job reports success anyway.</strong> The last line, <code>echo "Done"</code>, always works. A job counts as successful when its last command works, so SLURM reports every task as finished without problems. The errors are only visible in the <code>.err</code> files. (With <code>set -euo pipefail</code> at the top of the script, it would have stopped at the first <code>command not found</code>, and SLURM would have reported the task as failed. fastp would still have run once with the incomplete options before that. See the tip on <code>set -euo pipefail</code> further down.)</li>
-<li><strong>The <code>logs</code> folder is made too late.</strong> SLURM opens the log files before the script starts. If the <code>logs</code> folder doesn’t exist yet, the job can’t write its log files and fails without leaving a trace. Make the folder before you run <code>sbatch</code>, as we did on day 2.</li>
+<li><strong>The <code>logs</code> folder is made too late.</strong> SLURM opens the log files before the script starts, so the <code>mkdir</code> for <code>logs</code> inside the script comes too late to matter. On Crunchomics, SLURM then makes a missing <code>logs</code> folder itself, but inside the folder where you typed <code>sbatch</code>, which is not always where you expect your logs (we saw this on day 2). Make the folder before you run <code>sbatch</code>, as we did on day 2, so that you know where your logs end up.</li>
 </ul>
 <p><strong>2. It makes assumptions about your data</strong></p>
 <ul>
@@ -897,32 +947,32 @@ process all these samples at once on a HPC with slurm?</code></pre>
 </div>
 <p>You can test the first problem without fastp and without an HPC. Put <code>echo</code> in front of the command, as in a dry run, and add comments at the end of the lines like the LLM did. Save these lines in a script called <code>comment_test.sh</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> fastp <span class="dt">\</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in1</span> Sample-DUMMY1_R1.fastq.gz <span class="dt">\ </span>  <span class="co"># the R1 file</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--in2</span> Sample-DUMMY1_R2.fastq.gz <span class="dt">\ </span>  <span class="co"># the R2 file</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--thread</span> 2</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> fastp <span class="dt">\</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--in1</span> Sample-DUMMY1_R1.fastq.gz <span class="dt">\ </span>  <span class="co"># the R1 file</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--in2</span> Sample-DUMMY1_R2.fastq.gz <span class="dt">\ </span>  <span class="co"># the R2 file</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--thread</span> 2</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Then run it with <code>bash comment_test.sh</code>. On my computer (Git Bash on Windows), this prints:</p>
+<p>Then run it with <code>bash comment_test.sh</code>. On my computer (WSL with Ubuntu), this prints:</p>
 <pre><code>fastp --in1 Sample-DUMMY1_R1.fastq.gz
 comment_test.sh: line 3: --in2: command not found
 comment_test.sh: line 4: --thread: command not found
 Done</code></pre>
-<p>The first line shows the full command that fastp would receive: only the R1 file. The R2 file and <code>--thread</code> never reach it.</p>
+<p>The first line shows the full command that fastp would receive: only the R1 file. The R2 file and <code>--thread</code> never reach it, and bash simply continues with the next lines. In the worked example, this is what makes the mistake dangerous: fastp still gets the input and output files and <code>--average_qual 20</code>, so it runs, writes trimmed files, and SLURM reports success. The output looks normal, but it was made without the trimming options you asked for.</p>
 </section>
 <section id="less-code-is-often-better" class="level2">
 <h2 class="anchored" data-anchor-id="less-code-is-often-better">Less code is often better</h2>
 <p>LLMs have learned from a lot of code written for large, automated software systems. There, a script should keep running no matter what goes wrong. In a scientific analysis, you usually want the opposite: if something goes wrong, you want to know.</p>
 <p>A common example is a check that skips a sample when its input file is missing. Here, I made a typo in <code>samples.txt</code> (<code>Sample-DUMY3</code> instead of <code>Sample-DUMMY3</code>) and ran a loop in the style that LLMs often write. To keep it short, the loop only prints which sample it would work on:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">R1</span><span class="op">=</span><span class="va">$(</span><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dv">2</span><span class="op">&gt;</span>/dev/null<span class="va">)</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$R1</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Processing </span><span class="va">$sample</span><span class="st">"</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All samples done"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">R1</span><span class="op">=</span><span class="va">$(</span><span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dv">2</span><span class="op">&gt;</span>/dev/null<span class="va">)</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$R1</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Processing </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All samples done"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>On my computer, this prints:</p>
 <pre><code>Processing Sample-DUMMY1
@@ -932,10 +982,10 @@ All samples done</code></pre>
 <p><code>continue</code> tells the loop to skip the rest of this round and go on with the next sample. The loop skipped sample 3 without a single word, and then reported that all samples were done. If this were a long fastp job, the results would look complete, but cover only 3 of the 4 samples. <code>2&gt;/dev/null</code> makes it worse: it throws away the error message of <code>ls</code>.</p>
 <p>Compare this with the simple loop from day 2 (here with <code>ls</code> instead of fastp):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Start: </span><span class="va">$sample</span><span class="st">"</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Start: </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This prints:</p>
 <pre><code>Start: Sample-DUMMY1
@@ -949,7 +999,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 <p>The simple loop has no check at all, and that is exactly why the problem is visible: the error message appears right below the sample name, and ends up in the log file of a job. Together with a check of the output (4 samples in, 16 files out), you would notice the missing sample right away.</p>
 <p>So knowing your own data and checking it with basic commands often works better than adding checks to the code. Before you submit a job, check the inputs with <code>cat samples.txt</code>, <code>wc -l samples.txt</code> and an <code>ls</code> loop like the one above. After the job, count the outputs.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Skipping samples that are already done (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -958,17 +1008,17 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Sometimes a check in the loop does make sense. Say a job stopped halfway, and you don’t want to run fastp again for the samples that are already done. Then write the check so that you can read it, and so that every skip shows up in the log:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-s</span> results/fastp/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Skip </span><span class="va">$sample</span><span class="st">: output already exists"</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Run fastp for </span><span class="va">$sample</span><span class="st">"</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-s</span> results/fastp/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Skip </span><span class="va">$sample</span><span class="st">: output already exists"</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Run fastp for </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><code>if [ ... ]; then ... else ... fi</code>: if the test between the square brackets is true, bash runs the commands after <code>then</code>. Otherwise, it runs the commands after <code>else</code>. <code>fi</code> (if spelled backwards) closes the block</li>
@@ -985,7 +1035,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 </div>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -994,12 +1044,12 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Take the LLM script from the worked example, and change it into a script that works for the data of this workshop, in the style of day 2. Keep the job array if you like, or use a for-loop.</p>
 <p>Then answer: which lines did you remove, and why? Which lines did you add?</p>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1008,36 +1058,37 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are several good answers. This one keeps the array, and takes the sample name from <code>samples.txt</code>. Make the <code>logs</code> folder before you submit it.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_array</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_array_%A_%a.out</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_array_%A_%a.err</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Make conda available in the job, and activate the environment with fastp</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Take the line with the number of this task from samples.txt</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">p"</span> samples.txt<span class="va">)</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start fastp for: </span><span class="va">$sample</span><span class="st">"</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">-i</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dt">\</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">-I</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R2.fastq.gz <span class="dt">\</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> results/fastp_array/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="dt">\</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> results/fastp_array/<span class="va">${sample}</span>_R2.trimmed.fastq.gz <span class="dt">\</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">-h</span> results/fastp_array/<span class="va">${sample}</span>.html <span class="dt">\</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">-j</span> results/fastp_array/<span class="va">${sample}</span>.json <span class="dt">\</span></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">--average_qual</span> 20 <span class="dt">\</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">--thread</span> <span class="va">${SLURM_CPUS_PER_TASK}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_array</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_array_%A_%a.out</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_array_%A_%a.err</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks=1</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Make conda available in the job, and activate the environment with fastp</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Take the line with the number of this task from samples.txt</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">p"</span> samples.txt<span class="va">)</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Start fastp for: </span><span class="va">$sample</span><span class="st">"</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">-i</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dt">\</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">-I</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R2.fastq.gz <span class="dt">\</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> results/fastp_array/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="dt">\</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> results/fastp_array/<span class="va">${sample}</span>_R2.trimmed.fastq.gz <span class="dt">\</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">-h</span> results/fastp_array/<span class="va">${sample}</span>.html <span class="dt">\</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">-j</span> results/fastp_array/<span class="va">${sample}</span>.json <span class="dt">\</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">--average_qual</span> 20 <span class="dt">\</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">--thread</span> <span class="va">${SLURM_CPUS_PER_TASK}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><code>--array=1-4</code>: one task per line in <code>samples.txt</code>. Check the number with <code>wc -l samples.txt</code></li>
@@ -1062,7 +1113,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 <ol type="1">
 <li><strong>Read the error message.</strong> As on day 1: which command complains, and about which file? Often, the message already tells you what is wrong</li>
 <li><strong>Narrow it down.</strong> Bugs are almost always small and in one place. Run the steps one by one. Put <code>echo</code> in front of a command to see what bash actually runs, or <code>echo $sample</code> to see what is in a variable</li>
-<li><strong>Then ask a specific question.</strong> Give the LLM the one command that fails, the exact error message and a few lines of the input (no real data, see above). Ask what the error means, not for a new script</li>
+<li><strong>Then ask a specific question.</strong> Give the LLM the one command that fails, the exact error message and a few lines of the input (replace anything sensitive, see above). Ask what the error means, not for a new script</li>
 </ol>
 <p>A rewritten script may run without errors, but you then have to check all of it again, and you have learned nothing about why the first version failed.</p>
 </section>
@@ -1513,8 +1564,8 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Copyright 2024, Nina Dombrowski,<br>
-Last modified: 2026-10-13</p>
+<p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
+Last modified: 2026-10-14</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/llm_usage.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

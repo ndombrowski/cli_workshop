@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, breakable, boxrule=0pt, frame hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, frame hidden, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, breakable, interior hidden, enhanced]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -293,9 +293,9 @@ For people following this tutorial outside of UvA:
 \subsection{\texorpdfstring{\texttt{ssh}: Connecting to a
 server}{ssh: Connecting to a server}}\label{ssh-connecting-to-a-server}
 
-\textbf{SSH} (Secure Shell) is a network protocol that allows you to
-securely connect to a remote computer, such as the Crunchomics HPC. The
-general command looks like this:
+\textbf{SSH} (Secure Shell) is a way for two computers to connect to
+each other securely. Here, we use it to connect our computer with the
+Crunchomics HPC. The general command looks like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -331,9 +331,7 @@ checks. After logging in, the prompt changes: it now shows your UvAnetID
 and \texttt{omics-h0}. Every command you type now runs on Crunchomics,
 not on your own computer.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-important-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
-
-\textbf{Important tips for connecting:}
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important tips for connecting}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, colback=white]
 
 \begin{itemize}
 \tightlist
@@ -350,7 +348,7 @@ not on your own computer.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Viewing graphical output with ssh -X (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Viewing graphical output with ssh -X (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 Some programs on the HPC can open a window, for example to show a plot
 or a PDF. To see such windows on your own computer, log in with the
@@ -407,16 +405,25 @@ To set up your account, run the following commands:
 \end{Highlighting}
 \end{Shaded}
 
-After the script, \texttt{ls\ -lh} prints a line like this (your date
-and group name can differ):
+On a new account \texttt{ls\ -lh} is probably empty and after the
+script, \texttt{ls\ -lh} prints a line like this (your date and group
+name can differ):
 
 \begin{verbatim}
 lrwxrwxrwx.  1 username sils-omics-unix-fnwi 27 Sep  4  2023 personal -> /zfs/omics/personal/username
 \end{verbatim}
 
-The arrow (\texttt{-\textgreater{}}) tells you that \texttt{personal} is
-not a normal folder. We come back to what this exactly means in the next
-section.
+Here:
+
+\begin{itemize}
+\tightlist
+\item
+  The arrow (\texttt{-\textgreater{}}) tells you that \texttt{personal}
+  is not a normal folder. We come back to what this exactly means in the
+  next section.
+\item
+  The \texttt{l} in the access mode means link
+\end{itemize}
 
 \subsection{Preparing your working
 directory}\label{preparing-your-working-directory}
@@ -446,7 +453,7 @@ actually stored there. The reason is that \texttt{personal} is a
 \textbf{link} (also called a \textbf{symbolic link} or
 \textbf{symlink}): a shortcut that points to another folder, here
 \texttt{/zfs/omics/personal/username}. That is what the arrow in the
-\texttt{ls\ -lh} output showed. For us this means that
+\texttt{ls\ -lh} output above showed. For us this means that
 \texttt{\textasciitilde{}/personal/data\_analysis} and
 \texttt{/zfs/omics/personal/username/data\_analysis} are two paths to
 the same folder:
@@ -481,13 +488,32 @@ To keep yourself organized, it is useful to have two terminals open: one
 on your own computer and one on Crunchomics. In MobaXterm, you can open
 a second terminal in a new tab:
 
+On other systems:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{WSL2 (Windows):} click the \textbf{+} at the top of the Ubuntu
+  window to open a new tab. If the new tab opens PowerShell instead of
+  Ubuntu, click the small arrow next to the \textbf{+} and choose
+  \textbf{Ubuntu}
+\item
+  \textbf{Mac:} in Terminal, press Command-N, or choose \textbf{Shell},
+  then \textbf{New Window}, then \textbf{New Window with Profile}
+\end{itemize}
+
 To copy the entire \texttt{data} folder into your Crunchomics project
 folder, use:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Run this in the terminal on your OWN computer (not on the HPC),}
-\CommentTok{\# from inside your local data\_analysis folder (where the data folder is)}
+\CommentTok{\# go to your local data\_analysis folder (where the data folder is)}
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}/data\_analysis}
+
+\CommentTok{\# Check that the data folder is present }
+\FunctionTok{ls} \AttributeTok{{-}l}
+
 \CommentTok{\# Replace both instances of \textquotesingle{}username\textquotesingle{} with your UvAnetID}
 \FunctionTok{scp} \AttributeTok{{-}r}\NormalTok{ data username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis}
 \end{Highlighting}
@@ -506,6 +532,9 @@ Here:
 \item
   \texttt{username@omics-h0.science.uva.nl:/home/username/personal/data\_analysis}
   is the destination: your project folder on Crunchomics
+\item
+  Same as when you use \texttt{ssh} you will get asked for your Uva
+  password and also here you won't see anything when you type
 \end{itemize}
 
 Now switch to the terminal that is logged in to Crunchomics and check
@@ -521,7 +550,7 @@ that the files arrived:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to your own computer (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving data from the HPC to your own computer (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 You can also copy results from the HPC to your own computer. For this,
 you switch source and destination. For example, to copy a single
@@ -548,7 +577,7 @@ sequencing file from Crunchomics:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files with wildcards (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Moving files with wildcards (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 We can also copy several files at once with a wildcard. Then
 \texttt{scp} copies only the files, not the folders they are in.
@@ -564,45 +593,41 @@ We can also copy several files at once with a wildcard. Then
 \CommentTok{\# On Crunchomics: view the data}
 \CommentTok{\# See how the folder structure is different compared to our first example?}
 \FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ transfer\_test/}\PreprocessorTok{*}
+
+\CommentTok{\# On Crunchomics:}
+\CommentTok{\# After you checked that everything worked, remove the folder since it is no longer needed }
+\FunctionTok{rm} \AttributeTok{{-}r}\NormalTok{ transfer\_test}
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Notice for Mac users}:
-
-For Mac users who work with the zsh shell, the command above might not
-work, and you might get an error like ``file not found'', ``no matches
-found'' or something similar. That is because zsh handles wildcards
-slightly differently than bash. If you see this error and you are sure
-that the files exist, try this version of the command:
+\textbf{Copying from Crunchomics with a wildcard:} if the wildcard is in
+the path on Crunchomics, for example when you copy results back to your
+own computer, put the server part in quotes:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{\textbackslash{}scp}\NormalTok{ data/seq\_project/barcode00}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{fastq.gz username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/transfer\_test}
+\CommentTok{\# On your own computer: copy all fastq.gz files of one sample from Crunchomics into the current folder}
+\FunctionTok{scp} \StringTok{\textquotesingle{}username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/data/seq\_project/barcode001\_User1\_ITS\_1\_L001/*fastq.gz\textquotesingle{}}\NormalTok{ .}
 \end{Highlighting}
 \end{Shaded}
 
-If that does not work, these are some other things to try (different zsh
-setups might need slightly different solutions):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ExtensionTok{noglob}\NormalTok{ scp data/seq\_project/barcode00}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{fastq.gz username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/transfer\_test}
-
-\FunctionTok{scp} \StringTok{\textquotesingle{}data/seq\_project/barcode00*/*fastq.gz\textquotesingle{}}\NormalTok{ username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/transfer\_test}
-\end{Highlighting}
-\end{Shaded}
+The quotes stop the shell on your own computer from looking for these
+files, so the wildcard is passed on to Crunchomics. Without quotes, this
+often works in bash, but zsh (the default shell on a Mac) stops with
+\texttt{no\ matches\ found}. With quotes, it works in both.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Setting up on Crunchomics}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Setting up on Crunchomics}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 Today you keep writing in the same \texttt{notes.md} on your own
 computer. You copy the commands from the terminal that is logged in to
 Crunchomics into it.
 
 Since you now work on two computers, your notebook needs to say
-\textbf{where} each command ran. Start every code block with a comment:
-\texttt{\#\ On\ my\ computer} or \texttt{\#\ On\ Crunchomics}.
+\textbf{where} each command ran. Start code blocks where you switch
+terminals with a comment: \texttt{\#\ On\ my\ computer} or
+\texttt{\#\ On\ Crunchomics}.
 
 Add a new heading \texttt{\#\#\ Setting\ up\ on\ Crunchomics}, and below
 it:
@@ -697,7 +722,7 @@ in the queue:
 
 This shows all jobs on the system and might look something like this:
 
-\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{../img/squeue.png}\hfill
+\includegraphics[width=0.6\linewidth,height=\textheight,keepaspectratio]{../img/squeue.png}\hfill
 
 Some useful columns to know:
 
@@ -709,15 +734,16 @@ Some useful columns to know:
 \item
   ST: the current state of the job, e.g.~R = running, PD = pending
   (waiting). A full list of SLURM job state codes can be found
-  \href{https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html}{here}
+  \href{https://curc.readthedocs.io/en/latest/running-jobs/squeue-status-codes.html}{on
+  this webpage}
 \end{itemize}
 
 Once you have submitted a job, it appears in this list as well. To see
 only your own jobs, add the \texttt{-u} option followed by your user
 name. Instead of typing your user name, you can use \texttt{\$USER}.
-This is an \textbf{environment variable}, a variable that is already set
-for you when you log in. Before running the command, bash replaces
-\texttt{\$USER} with your user name:
+This variable is an \textbf{environment variable}, a variable that is
+already set for you when you log in. Before running the command, bash
+replaces \texttt{\$USER} with your user name:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -729,7 +755,7 @@ for you when you log in. Before running the command, bash replaces
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't overwrite environment variables}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-important-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't overwrite environment variables}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, colback=white]
 
 Environment variables are written in capitals. Besides \texttt{USER},
 there are, for example, \texttt{HOME} (the path to your home directory)
@@ -744,7 +770,7 @@ programs, and even \texttt{ls} stops working with a
 \texttt{command\ not\ found} error.
 
 If this happens, close the terminal, or log out and log in again. As
-with your own variables, the change only lasted in the terminal window
+with your own variables, the change only lasts in the terminal window
 where you made it.
 
 \end{tcolorbox}
@@ -759,20 +785,20 @@ to submit jobs: \texttt{srun} and \texttt{sbatch}. We start with
 \begin{itemize}
 \tightlist
 \item
-  You want to run tasks \textbf{interactively} and see the output
-  directly on your screen
+  You want to run tasks \textbf{interactively}, which means that you see
+  the output directly on your screen
 \item
   You are \textbf{testing or debugging} your commands before writing a
   job script
 \item
-  You have \textbf{short jobs} (usually less than a few hours)
+  You have \textbf{short jobs} (usually less than an hour)
 \end{itemize}
 
 Let's start with a very simple example to see how \texttt{srun} works:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{1G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:10:00 echo }\StringTok{"Hello world"}
+\ExtensionTok{srun} \AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{1G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:10:00 echo }\StringTok{"Hello world"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -784,7 +810,11 @@ Here's what each part means:
   \texttt{srun}: tells SLURM that you want to run something on a compute
   node, with the resources that follow
 \item
-  \texttt{-\/-cpus-per-task=1}: request 1 CPU
+  \texttt{-\/-ntasks=1}: run the command once. A \textbf{task} is one
+  copy of your command. Without this option, SLURM can start more than
+  one copy, and you would see ``Hello world'' twice
+\item
+  \texttt{-\/-cpus-per-task=1}: request 1 CPU for that task
 \item
   \texttt{-\/-mem=1G}: request 1 GB of memory
 \item
@@ -800,7 +830,28 @@ that you won't see it in \texttt{squeue}. But congratulations, after
 submitting this, you just communicated with a compute node for the first
 time.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-important-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+If the compute nodes are busy, for example when everybody in the
+workshop submits a job at the same time, your job has to wait in the
+queue until enough CPUs and memory are free. \texttt{srun} then first
+prints a message like this (with a different job number):
+
+\begin{verbatim}
+srun: job 387583 queued and waiting for resources
+\end{verbatim}
+
+As soon as a compute node is free, it continues with:
+
+\begin{verbatim}
+srun: job 387583 has been allocated resources
+\end{verbatim}
+
+While your job waits, the prompt does not come back. That is normal.
+Don't press \texttt{Ctrl+C}, because that cancels your job and you have
+to queue again. How long you wait depends on how busy Crunchomics is and
+on how many resources you ask for. Small and short jobs often start
+sooner.
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, colback=white]
 
 Jobs started with \texttt{srun} stop if you lose the connection to the
 HPC, for example when you close your laptop. For longer jobs, use
@@ -829,9 +880,10 @@ online for a manual.
 \FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/seqkit}
 
 \CommentTok{\# Run seqkit stats on all fastq.gz files with srun}
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{srun} \AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
 \CommentTok{\# Check the output: we expect one table with a header line and one line per fastq.gz file}
+\CommentTok{\# We see 9 (1 header + 8 files)}
 \FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ results/seqkit/stats\_raw.txt}
 \end{Highlighting}
 \end{Shaded}
@@ -845,8 +897,8 @@ Here:
   \texttt{seqkit\ stats} on all files in the \texttt{seq\_project}
   folders that end with \texttt{gz}
 \item
-  \texttt{-b}: only output the basename of files instead of printing the
-  relative path to the fastq.gz files
+  \texttt{-b}: only output the file name, without the folders in front
+  of it
 \item
   \texttt{-a}: print all statistics. Without it, seqkit prints only the
   basic ones, such as the number and length of the reads, but not their
@@ -881,7 +933,7 @@ after the software and got the job ID 379646):
 
 \includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{../img/squeue2.png}\hfill
 
-It is a good habit to look at the outputs of whatever software to run,
+It is a good habit to look at the outputs of whatever software you run,
 not only to understand your data but also to make sure that the software
 ran correctly:
 
@@ -913,7 +965,7 @@ The most useful columns for us are:
   \texttt{GC(\%)}: the percentage of G and C bases
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: FastQC for visual quality reports (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: FastQC for visual quality reports (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 \texttt{seqkit\ stats} gives us summary numbers, which might not be
 enough to accurately assess our data. Another very common tool for a
@@ -923,11 +975,13 @@ which is also installed on Crunchomics. It makes one HTML report per
 fastq file, with plots of the quality along the reads. You open these
 reports in the internet browser of your own computer, so you first copy
 them with \texttt{scp}. \href{https://seqera.io/multiqc/}{MultiQC} can
-combine many of these reports into one.
+combine many of these reports into one. MultiQC is not installed on
+Crunchomics, but below we will also learn how to install software
+ourselves.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -939,11 +993,13 @@ combine many of these reports into one.
   \texttt{Sample-DUMMY1\_R2.fastq.gz} has. Does this match
   \texttt{num\_seqs} in the seqkit table?
 \item
-  Look at \texttt{num\_seqs} for the R1 and the R2 file of each sample.
-  What do you notice?
+  Use \texttt{grep} to print only the rows for the R1 and the R2 file of
+  \texttt{Sample-DUMMY1}. Compare their \texttt{num\_seqs}. What do you
+  notice?
 \item
   Use \texttt{cut} to print only the columns \texttt{file} and
-  \texttt{num\_seqs} of the table
+  \texttt{num\_seqs} of the table. Is what you noticed in question 2
+  true for all samples?
 \end{enumerate}
 
 \begin{quote}
@@ -952,13 +1008,20 @@ combine many of these reports into one.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Question 1:}
-\CommentTok{\# On your own computer }
-\CommentTok{\# Sample{-}DUMMY1\_R2 has 179384 lines}
-\FunctionTok{cat}\NormalTok{ results/counts/line\_counts\_bash.txt}
+\CommentTok{\# On your own computer: find the file name, plus the line after it ({-}A 1), which holds the count}
+\FunctionTok{grep} \AttributeTok{{-}A}\NormalTok{ 1 }\StringTok{"Sample{-}DUMMY1\_R2.fastq.gz"}\NormalTok{ results/counts/line\_counts\_bash.txt}
 
-\CommentTok{\# On Crunchomics}
-\CommentTok{\# Sample{-}DUMMY1\_R2 has 44846 seqs}
-\FunctionTok{cat}\NormalTok{ results/seqkit/stats\_raw.txt}
+\CommentTok{\# Let bash divide the number of lines by 4}
+\CommentTok{\# Here, we use the command substitution for our previous command and combine it with tail {-}n 1 }
+\CommentTok{\# to only extract the counts themselves}
+\BuiltInTok{echo} \VariableTok{$((} \VariableTok{$(}\FunctionTok{grep} \AttributeTok{{-}A}\NormalTok{ 1 }\StringTok{"Sample{-}DUMMY1\_R2.fastq.gz"}\NormalTok{ results/counts/line\_counts\_bash.txt }\KeywordTok{|} \FunctionTok{tail} \AttributeTok{{-}n}\NormalTok{ 1}\VariableTok{)} \OperatorTok{/} \DecValTok{4} \VariableTok{))}
+
+\CommentTok{\# On Crunchomics: print only the row for this file from the seqkit table}
+\FunctionTok{grep} \StringTok{"Sample{-}DUMMY1\_R2"}\NormalTok{ results/seqkit/stats\_raw.txt}
+
+\CommentTok{\# Question 2:}
+\CommentTok{\# On Crunchomics: show the R1 and R2 rows of one sample together}
+\FunctionTok{grep} \StringTok{"Sample{-}DUMMY1"}\NormalTok{ results/seqkit/stats\_raw.txt}
 
 \CommentTok{\# Question 3:}
 \CommentTok{\# file is the 1st column and num\_seqs is the 4th column}
@@ -966,6 +1029,13 @@ combine many of these reports into one.
 \FunctionTok{cut} \AttributeTok{{-}f1,4}\NormalTok{ results/seqkit/stats\_raw.txt}
 \end{Highlighting}
 \end{Shaded}
+
+In \texttt{line\_counts\_bash.txt}, each file name and its count are on
+two separate lines. A plain \texttt{grep} only prints the line with the
+file name. The option \texttt{-A\ 1} (\emph{after}) also prints the line
+after each match, which holds the count. With 8 files, you can also just
+read the whole file with \texttt{cat}. With 100 files, \texttt{grep}
+finds the right line much faster.
 
 For question 1: each read takes up 4 lines in a fastq file, so the
 number of reads is the number of lines divided by 4.
@@ -975,13 +1045,17 @@ the same answer, we can trust the result a lot more.
 
 For question 2: the R1 and R2 file of the same sample always have the
 same number of reads. Each read in R1 has its partner read in R2. This
-is what you expect for paired end sequencing data and is a good sanity
-check to implement to ensure that your sequence data is not corrupted.
+is what you expect for paired-end sequencing data and is a good sanity
+check that no reads went missing in R1 or R2.
+
+For question 3: with only two columns left, you can check all 8 files at
+a glance. For every sample, the R1 and the R2 file have the same number
+of reads, so we can safely continue with the next steps of our analysis.
 \end{quote}
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Working interactively on a compute node (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Working interactively on a compute node (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 Sometimes you want to try out several commands after each other on a
 compute node, for example to test a new tool. Instead of putting
@@ -991,7 +1065,7 @@ compute node, for example to test a new tool. Instead of putting
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Open an interactive bash shell on a compute node for at most 1 hour}
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{01:00:00 }\AttributeTok{{-}{-}pty}\NormalTok{ bash }\AttributeTok{{-}i}
+\ExtensionTok{srun} \AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{01:00:00 }\AttributeTok{{-}{-}pty}\NormalTok{ bash }\AttributeTok{{-}i}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1029,7 +1103,7 @@ them.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Keeping srun jobs running with screen (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Keeping srun jobs running with screen (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 \texttt{srun} has two downsides for jobs that run for a long time: you
 can't use your terminal while the job runs, and the job stops if you
@@ -1045,11 +1119,11 @@ There are two ways around this:
   Run the \texttt{srun} command inside \texttt{screen}
 \end{enumerate}
 
-\texttt{screen} opens a terminal that keeps running on Crunchomics, even
-when you are not connected. Such a terminal is called a \textbf{screen
-session}. You can leave a session and come back to it later, and
-everything that runs inside it continues in the meantime, as long as
-Crunchomics itself is running.
+We will first discuss option 2. \texttt{screen} opens a terminal that
+keeps running on Crunchomics, even when you are not connected. Such a
+terminal is called a \textbf{screen session}. You can leave a session
+and come back to it later, and everything that runs inside it continues
+in the meantime, as long as Crunchomics itself is running.
 
 To start a screen session:
 
@@ -1081,6 +1155,9 @@ After detaching from this screen again with \texttt{Ctrl+a} and then
 \end{Highlighting}
 \end{Shaded}
 
+We see the run\_seqkit and the screen that we didn't give a name, which
+should be named something like \texttt{3399729.pts-22.omics-h0}.
+
 You can reconnect to an existing screen like this:
 
 \begin{Shaded}
@@ -1094,7 +1171,7 @@ before, but now we don't risk losing a long-running job:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{srun} \AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1106,6 +1183,11 @@ and press enter while you are inside the screen:
 \BuiltInTok{exit}
 \end{Highlighting}
 \end{Shaded}
+
+Make sure that you close both screens we generated in this session. For
+the screen that we did not give a name first run
+\texttt{screen\ -r\ pts-22.omics-h0} (replace the exact name, with the
+name you see with \texttt{screen\ -ls}) and then type \texttt{exit}.
 
 \end{tcolorbox}
 
@@ -1169,13 +1251,18 @@ Then add the following content inside that file:
 \CommentTok{\#SBATCH {-}{-}job{-}name=seqkit}
 \CommentTok{\#SBATCH {-}{-}output=logs/seqkit\_\%j.out}
 \CommentTok{\#SBATCH {-}{-}error=logs/seqkit\_\%j.err}
+\CommentTok{\#SBATCH {-}{-}ntasks=1}
 \CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=1}
 \CommentTok{\#SBATCH {-}{-}mem=5G}
 \CommentTok{\#SBATCH {-}{-}time=01:00:00}
 
+\CommentTok{\# This script generates a tsv with sequence read statistics}
+\CommentTok{\# Run it from inside the data\_analysis folder with \textasciigrave{}sbatch scripts/seqkit.sh\textasciigrave{}}
+
 \BuiltInTok{echo} \StringTok{"seqkit job started on:"}
 \FunctionTok{date}
 
+\CommentTok{\# Run seqkit stats on the raw sequence data}
 \ExtensionTok{seqkit}\NormalTok{ stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_raw.txt data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
 \BuiltInTok{echo} \StringTok{"seqkit job finished on:"}
@@ -1205,9 +1292,9 @@ In the job script above:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{\#!/bin/bash}: this so-called \textbf{shebang} line tells the
-  system to run the script with bash. Add it at the very top of every
-  job script
+  \texttt{\#!/bin/bash}: As in the day 1 script the \textbf{shebang}
+  line tells the system to run the script with bash. Add it at the very
+  top of every job script
 \item
   \texttt{\#SBATCH\ -\/-...}: these lines tell SLURM which resources the
   job needs and how to name things. They are the same options that you
@@ -1239,6 +1326,10 @@ In the job script above:
 Notice that the \texttt{\#SBATCH} lines start with \texttt{\#}? For
 bash, these lines are comments. Only SLURM reads them.
 
+\textbf{Important}: Generate the logs folder in which we safe the output
+and error files before you run any sbatch script as SLURM doesn't create
+these folder itself.
+
 \subsubsection{Step 4: Submit and monitor your
 job}\label{step-4-submit-and-monitor-your-job}
 
@@ -1256,8 +1347,26 @@ job}\label{step-4-submit-and-monitor-your-job}
 \end{Highlighting}
 \end{Shaded}
 
+\textbf{Important}: The job runs from the folder in which you typed
+\texttt{sbatch}, so relative paths start from there. In our case, this
+means that it runs from inside the \texttt{data\_analysis} folder and
+from this location can find \texttt{data/seq\_project/*/*gz}. Do NOT run
+\texttt{sbatch} from inside the scripts folder, as this would break the
+path to e.g.~the data folder.
+
+If you do run \texttt{sbatch} from inside \texttt{scripts}, SLURM makes
+a new \texttt{logs} folder inside \texttt{scripts}, and the error log
+shows that seqkit can't find the data:
+
+\begin{verbatim}
+[ERRO] stat data/seq_project/*/*gz: no such file or directory
+\end{verbatim}
+
+This is also the error from day 1
+(\texttt{No\ such\ file\ or\ directory}), only in other words.
+
 When the job is submitted, you see something like
-\texttt{Submitted\ batch\ job\ 754}, and two new log files appear in
+\texttt{Submitted\ batch\ job\ 379723}, and two new log files appear in
 your \texttt{logs} folder:
 
 \begin{itemize}
@@ -1274,7 +1383,10 @@ Have a look at both log files, for example with
 \texttt{cat\ logs/seqkit\_*.out}. Do you see the messages from
 \texttt{echo} and \texttt{date}? Some programs also write normal
 progress messages into the error log, so a \texttt{.err} file with
-content does not always mean that something went wrong.
+content does not always mean that something went wrong. Seqkit is one of
+them: its \texttt{.err} file shows how many files it processed (you
+should see
+\texttt{processed\ files:\ \ 8\ /\ 8\ {[}{]}\ ETA:\ 0s.\ done}).
 
 Since we gave seqkit the same output file name, the table from the
 \texttt{srun} run was replaced by the new one. Look at the time in
@@ -1282,7 +1394,7 @@ Since we gave seqkit the same output file name, the table from the
 the input is the same. With real data, overwriting results by accident
 can cost you hours of work, so choose your output names with care.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Debugging your first sbatch jobs}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Debugging your first sbatch jobs}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 If your job fails:
 
@@ -1314,22 +1426,25 @@ wrong resources. You can cancel it with \texttt{scancel} and the job ID:
 \end{Highlighting}
 \end{Shaded}
 
-For example, if your job ID was 754:
+For example, if your job ID was 379723:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{scancel}\NormalTok{ 754}
+\ExtensionTok{scancel}\NormalTok{ 379723}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Good HPC etiquette}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+You don't need to worry to about cancelling someone else's job by
+accident. \texttt{scancel} only works on your own jobs.
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Good HPC etiquette}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 Always cancel jobs that run incorrectly or that you no longer need. This
-frees resources for others and avoids unnecessary load on the cluster.
+frees resources for others and avoids unnecessary load on Crunchomics.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Read statistics with seqkit}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Read statistics with seqkit}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 Add a new heading \texttt{\#\#\ Read\ statistics\ with\ seqkit} to
 \texttt{notes.md}, and below it:
@@ -1393,7 +1508,7 @@ longer in the queue and can block others from running.
 If you want to know how much a finished job actually used, have a look
 at the optional \texttt{sacct} box below.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Checking the resources a job used with sacct (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Checking the resources a job used with sacct (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 After a job has finished, you can check which resources it actually used
 with \texttt{sacct}. Replace \texttt{379723} with the job ID of your
@@ -1430,6 +1545,30 @@ Here:
   \end{itemize}
 \end{itemize}
 
+For my seqkit job, this prints:
+
+\begin{verbatim}
+     User JobID           JobName      State               Start                 End    Elapsed     MaxRSS      NCPUS
+--------- ------------ ---------- ---------- ------------------- ------------------- ---------- ---------- ----------
+  ndombro 379723           seqkit  COMPLETED 2026-10-07T09:16:07 2026-10-07T09:16:10   00:00:03                     2
+          379723.batch      batch  COMPLETED 2026-10-07T09:16:07 2026-10-07T09:16:10   00:00:03      8384K          2
+          379723.exte+     extern  COMPLETED 2026-10-07T09:16:07 2026-10-07T09:16:10   00:00:03                     2
+\end{verbatim}
+
+You see three lines for one job. SLURM splits a job into parts, called
+\textbf{job steps}. The first line is the job as a whole. The
+\texttt{.batch} line is your job script, and this is the line that shows
+the memory your commands used. You can ignore the \texttt{.extern} line
+(the \texttt{+} means that the name was cut off because it is too long
+for the column).
+
+The job ran for 3 seconds and used at most 8384K, which is about 8 MB of
+memory (K stands for kilobytes). We asked for 5 GB, so for this small
+dataset we could have asked for much less.
+
+\texttt{NCPUS} shows 2, although we asked for 1. This is how Crunchomics
+counts CPUs, and you don't need to change anything because of it.
+
 How to use this information:
 
 \begin{itemize}
@@ -1448,7 +1587,7 @@ How to use this information:
 software}{conda: Installing your own software}}\label{conda-installing-your-own-software}
 
 Crunchomics already has a lot of software installed, but it doesn't have
-every tool, and not always comes with the version you need. Let's look
+every tool, and it doesn't always have the version you need. Let's look
 at fastp, the tool we use in the next section:
 
 \begin{Shaded}
@@ -1468,12 +1607,12 @@ tool you used, and why you sometimes want to install a specific version
 yourself.
 
 You can't install software into the shared software folders of
-Crunchomics, because you don't have administrator rights there. However,
-we can use \textbf{conda}: a program that installs software into your
-own folders, without administrator rights. \textbf{mamba} does the same
-as conda, but faster. It understands the same commands, so you can swap
-\texttt{conda} and \texttt{mamba} in almost all commands that you find
-online.
+Crunchomics, because you don't have administrator rights, which give
+permission to change the software for everyone. However, we can use
+\textbf{conda}: a program that installs software into your own folders,
+without administrator rights. \textbf{mamba} does the same as conda, but
+faster. It understands the same commands, so you can swap \texttt{conda}
+and \texttt{mamba} in almost all commands that you find online.
 
 conda installs each tool into its own \textbf{environment}: a separate
 folder with the tool and all the other programs it needs, in exactly the
@@ -1497,11 +1636,11 @@ First, check if you already have conda or mamba:
 If both commands print a version number, then conda is already
 installed, and you can skip to the next section. If they print nothing
 or an error message (for example one that contains
-\texttt{no\ conda\ in}), install \textbf{Miniforge}, a small installer
-that contains conda and mamba.
+\texttt{conda:\ command\ not\ found}), install \textbf{Miniforge}, a
+small installer that contains conda and mamba.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Install Miniforge into your personal folder, not into your
-home folder}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-important-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Install Miniforge into your personal folder, not into your
+home folder}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, colback=white]
 
 Your home folder on Crunchomics has only 25 GB of space, and conda
 environments can take up several GB once you have a few of them. So we
@@ -1563,7 +1702,7 @@ Here:
   Have a look at it if you want to know what you agree to
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: How \texttt{uname} picks the right installer (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: How \texttt{uname} picks the right installer (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 Miniforge has a separate installer for each type of computer. The
 installer must match two things: the \textbf{operating system} (the
@@ -1596,18 +1735,12 @@ place. So on Crunchomics, bash turns
 \texttt{Miniforge3-\$(uname)-\$(uname\ -m).sh} into
 \texttt{Miniforge3-Linux-x86\_64.sh}.
 
-The advantage is that the same command also works on other computers. On
-a Mac with an Apple chip, for example, \texttt{uname} prints
-\texttt{Darwin} and \texttt{uname\ -m} prints \texttt{arm64}, and
+The advantage is that the same command also works on mostother
+computers. On a Mac with an Apple chip, for example, \texttt{uname}
+prints \texttt{Darwin} and \texttt{uname\ -m} prints \texttt{arm64}, and
 Miniforge has an installer called \texttt{Miniforge3-Darwin-arm64.sh}.
 So you can use the same commands if you later want to install Miniforge
 on your own Mac or in WSL.
-
-This does not work in Git Bash on Windows. There, \texttt{uname} prints
-a long name that starts with \texttt{MINGW64}, and no installer has that
-name. For Windows itself, Miniforge has a separate \texttt{.exe}
-installer on the
-\href{https://github.com/conda-forge/miniforge}{Miniforge page}.
 
 \end{tcolorbox}
 
@@ -1628,6 +1761,10 @@ can find conda from now on:
 \CommentTok{\# Check that bash now finds conda and mamba}
 \ExtensionTok{conda} \AttributeTok{{-}{-}version}
 \ExtensionTok{mamba} \AttributeTok{{-}{-}version}
+
+\CommentTok{\# Once conda works, remove the installer and check that it is gone}
+\FunctionTok{rm}\NormalTok{ Miniforge3{-}}\VariableTok{$(}\FunctionTok{uname}\VariableTok{)}\NormalTok{{-}}\VariableTok{$(}\FunctionTok{uname} \AttributeTok{{-}m}\VariableTok{)}\NormalTok{.sh}
+\FunctionTok{ls} \AttributeTok{{-}l}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1706,7 +1843,10 @@ the fastp of Crunchomics again.
   instead of installing everything into base
 \item
   Always install a specific version (\texttt{tool=version}), and put the
-  version number in the name of the environment
+  version number in the name of the environment. We don't do this for
+  the installer itself, the newest version is fine, but in your notebook
+  you can write down which conda version you got
+  (\texttt{conda\ -\/-version})
 \item
   Check the documentation of a tool for installation notes or version
   requirements
@@ -1717,7 +1857,7 @@ the fastp of Crunchomics again.
   \texttt{conda\ env\ remove\ -n\ name\_of\_the\_environment}
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1744,13 +1884,13 @@ the fastp of Crunchomics again.
 \end{Shaded}
 
 You should see two environments in the list: \texttt{base} and
-\texttt{fastp\_1.4.0}. The fastp program is in the \texttt{bin} folder
-of the environment, inside your \texttt{miniforge3} folder.
+\texttt{fastp\_1.4.0}. The fastp program itself should be in
+\texttt{/zfs/omics/personal/username/miniforge3/envs/fastp\_1.4.0/bin/fastp}
 \end{quote}
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Installing fastp}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Installing fastp}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 Software gets its own place in your notebook: near the \textbf{top},
 below the short description. Someone who wants to repeat your analysis
@@ -1766,8 +1906,8 @@ of \texttt{notes.md}, and below it:
   The tools that were already installed on Crunchomics, with their
   version (seqkit)
 \item
-  Where you installed Miniforge, and that you ran \texttt{conda\ init}
-  (only needed once)
+  Where you installed Miniforge, which conda version you got, and that
+  you ran \texttt{conda\ init} (only needed once)
 \item
   The \texttt{mamba\ create} command, and the name of the environment
 \end{enumerate}
@@ -1809,6 +1949,11 @@ tool, start with the help page:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Go back to our data\_analysis folder }
+\CommentTok{\# Remember: We switched to the personal folder when we installed conda }
+\BuiltInTok{cd}\NormalTok{ /zfs/omics/personal/}\VariableTok{$USER}\NormalTok{/data\_analysis}
+
+\CommentTok{\# View the help for fastp}
 \ExtensionTok{fastp} \AttributeTok{{-}{-}help}
 \end{Highlighting}
 \end{Shaded}
@@ -1821,7 +1966,7 @@ Now let's run fastp on Sample-DUMMY1:
 \FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastp}
 
 \CommentTok{\# Run fastp on the R1 and R2 file of the first sample}
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{2 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 fastp }\DataTypeTok{\textbackslash{}}
+\ExtensionTok{srun} \AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{2 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 fastp }\DataTypeTok{\textbackslash{}}
     \AttributeTok{{-}i}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R1.fastq.gz }\DataTypeTok{\textbackslash{}}
     \AttributeTok{{-}I}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R2.fastq.gz }\DataTypeTok{\textbackslash{}}
     \AttributeTok{{-}o}\NormalTok{ results/fastp/Sample{-}DUMMY1\_R1.trimmed.fastq.gz }\DataTypeTok{\textbackslash{}}
@@ -1919,7 +2064,7 @@ it and see exactly which samples the loop will work on. And if you later
 want to rerun only some samples, you can make a shorter list without
 changing the loop.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Making a list file by hand (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Making a list file by hand (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 You can also type a list file yourself, one sample name per line. Use
 \texttt{nano} for this, not Notepad or Word. As we saw on day 1, Windows
@@ -1950,9 +2095,9 @@ the \textbf{command substitution} we already used on day 1. So for bash,
 the first line becomes
 \texttt{for\ sample\ in\ Sample-DUMMY1\ Sample-DUMMY2\ Sample-DUMMY3\ Sample-DUMMY4;\ do}.
 
-Important: Bash splits the text from \texttt{samples.txt} at every new
-line, but also at every space. So each line in the list file must
-contain one name, without spaces.
+\textbf{Important}: Bash splits the text from \texttt{samples.txt} at
+every new line, but also at every space. So each line in the list file
+must contain one name, without spaces.
 
 Next, we check that we find the right input files for each sample. We
 use \texttt{ls} instead of \texttt{echo}, because \texttt{ls} shows us
@@ -1989,12 +2134,29 @@ command}\label{step-4-a-dry-run-of-the-full-command}
 
 Now we put the whole fastp command into the loop, but with \texttt{echo}
 in front of it. Bash then prints each command instead of running it. We
-add \texttt{-h} and \texttt{-j} to give each sample its own reports:
+add \texttt{-h} and \texttt{-j} to give each sample its own reports.
+
+Note:
+
+\begin{itemize}
+\tightlist
+\item
+  here \texttt{-h} stands for html, not help. The same letter can mean
+  different things in different tools, so always check the help page.
+\item
+  the command below uses \texttt{thread} with seqkit we used
+  \texttt{threads}. Different tools often have different convention for
+  how things are named and this is another example for always carefully
+  checking the help page.
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{ sample }\KeywordTok{in} \VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples.txt}\VariableTok{)}\KeywordTok{;} \ControlFlowTok{do}
+    \CommentTok{\# print an empty line between the commands}
     \BuiltInTok{echo} \StringTok{""} 
+
+    \CommentTok{\# Dry run for our command}
     \BuiltInTok{echo}\NormalTok{ fastp }\DataTypeTok{\textbackslash{}}
         \AttributeTok{{-}i}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R1.fastq.gz }\DataTypeTok{\textbackslash{}}
         \AttributeTok{{-}I}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\VariableTok{$\{sample\}}\NormalTok{\_R2.fastq.gz }\DataTypeTok{\textbackslash{}}
@@ -2012,7 +2174,7 @@ the R1 and R2 input files belong to the same sample? Does every sample
 get its own output names? If something looks wrong, it is much easier to
 fix it now than after the job has run.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't put quotes around a path with a wildcard}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-important-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't put quotes around a path with a wildcard}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, colback=white]
 
 In scripts that you find online, or that an AI tool writes for you,
 variables are often written in quotes, for example \texttt{"\$sample"}.
@@ -2049,6 +2211,7 @@ And add the following content:
 \CommentTok{\#SBATCH {-}{-}job{-}name=fastp}
 \CommentTok{\#SBATCH {-}{-}output=logs/fastp\_\%j.out}
 \CommentTok{\#SBATCH {-}{-}error=logs/fastp\_\%j.err}
+\CommentTok{\#SBATCH {-}{-}ntasks=1}
 \CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=2}
 \CommentTok{\#SBATCH {-}{-}mem=5G}
 \CommentTok{\#SBATCH {-}{-}time=01:00:00}
@@ -2138,14 +2301,16 @@ Also check that none of the files is empty (a size of 0 in the
 \texttt{ls\ -l} output), and that each sample name appears in the
 \texttt{.out} log.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   Copy the 4 HTML reports to your own computer and open the report for
-  Sample-DUMMY1
+  Sample-DUMMY1. Remember that on your computer you can use
+  \texttt{explorer.exe\ .} (Windows) and \texttt{open\ .} to open the
+  folder you are to get easy access to the HTMLs you just downloaded.
 \item
   On day 1, we counted the lines in each fastq file
   (\texttt{results/counts/line\_counts\_bash.txt} on your own computer).
@@ -2165,34 +2330,37 @@ Also check that none of the files is empty (a size of 0 in the
 \CommentTok{\# Question 1:}
 \CommentTok{\# Run this in the terminal on your OWN computer, from inside your local data\_analysis folder}
 \FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastp}
-\FunctionTok{scp}\NormalTok{ username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/results/fastp/}\PreprocessorTok{*}\NormalTok{html results/fastp/}
+\FunctionTok{scp} \StringTok{\textquotesingle{}username@omics{-}h0.science.uva.nl:/home/username/personal/data\_analysis/results/fastp/*html\textquotesingle{}}\NormalTok{ results/fastp/}
+
 \FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ results/fastp}
 
 \CommentTok{\# Question 2:}
-\CommentTok{\# On your own computer}
-\FunctionTok{cat}\NormalTok{ results/counts/line\_counts\_bash.txt}
+\CommentTok{\# On your own computer we get 179 384}
+\FunctionTok{grep} \AttributeTok{{-}A}\NormalTok{ 1 }\StringTok{"Sample{-}DUMMY1"}\NormalTok{ results/counts/line\_counts\_bash.txt}
 
 \CommentTok{\# Question 3:}
-\CommentTok{\# On Crunchomics}
+\CommentTok{\# On Crunchomics we get 177 400}
 \FunctionTok{zcat}\NormalTok{ results/fastp/Sample{-}DUMMY1\_R1.trimmed.fastq.gz }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
 \end{Highlighting}
 \end{Shaded}
 
 For question 2: each read takes up 4 lines in a fastq file, so the
 number of reads is the number of lines divided by 4. For example,
-\texttt{Sample-DUMMY1\_R2.fastq.gz} has 179,384 lines, which is 44,846
+\texttt{Sample-DUMMY1\_R2.fastq.gz} has 179 384 lines, which is 44 846
 reads. R1 and R2 of the same sample always have the same number of
 reads. The fastp report shows the number of reads before filtering for
 R1 and R2 together, so you should find twice this number there.
 
 For question 3: the number should be the same as, or smaller than,
 before filtering. Compare it with the number of reads after filtering in
-the fastp report.
+the fastp report. For my run, I see 177 400 lines. This means that we
+now work with 44 350 reads, telling us that fastp removed 496 read
+pairs.
 \end{quote}
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Quality filtering with fastp}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Quality filtering with fastp}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 Add a new heading \texttt{\#\#\ Quality\ filtering\ with\ fastp} to
 \texttt{notes.md}, and below it:
@@ -2223,7 +2391,7 @@ you give other names.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Comparing reads before and after trimming (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Comparing reads before and after trimming (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 At the start of the day, we made a table with \texttt{seqkit\ stats} for
 the raw reads. If we make the same table for the trimmed reads, we can
@@ -2232,7 +2400,7 @@ see what fastp changed:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Run seqkit stats on the trimmed reads}
-\ExtensionTok{srun} \AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_trimmed.txt results/fastp/}\PreprocessorTok{*}\NormalTok{trimmed.fastq.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
+\ExtensionTok{srun} \AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}mem}\OperatorTok{=}\NormalTok{5G }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{00:30:00 seqkit stats }\AttributeTok{{-}b} \AttributeTok{{-}a} \AttributeTok{{-}T} \AttributeTok{{-}o}\NormalTok{ results/seqkit/stats\_trimmed.txt results/fastp/}\PreprocessorTok{*}\NormalTok{trimmed.fastq.gz }\AttributeTok{{-}{-}threads}\NormalTok{ 1}
 
 \CommentTok{\# Check the output: we expect a header line and 8 lines, one per trimmed file}
 \FunctionTok{wc} \AttributeTok{{-}l}\NormalTok{ results/seqkit/stats\_trimmed.txt}
@@ -2284,7 +2452,7 @@ before and after trimming.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding R2 without a list file (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding R2 without a list file (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 For those who want to learn more bash: we can also write this loop
 without \texttt{samples.txt}. We then loop directly over the R1 files,
@@ -2351,7 +2519,7 @@ As in the fastp exercise, the quotes around the path stop your own
 computer from using the wildcard, so that Crunchomics can use it to find
 the files.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Tidy your notebook (day 2)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Tidy your notebook (day 2)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-color!10!white, colback=white]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2384,11 +2552,11 @@ workshop, at your own pace.
 
 \section{Going further}\label{going-further}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Running many samples in parallel with job arrays (optional)}, breakable, leftrule=.75mm, coltitle=black, opacitybacktitle=0.6, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, colback=white, bottomrule=.15mm, toprule=.15mm, arc=.35mm, toptitle=1mm, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, arc=.35mm, bottomtitle=1mm, rightrule=.15mm, breakable, coltitle=black, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Running many samples in parallel with job arrays (optional)}, toprule=.15mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colback=white]
 
 Our fastp loop runs inside a single job, so the samples are processed
 one after another. With 4 small samples, that is fine. With hundreds of
-samples, it can take a long time, while the HPC has enough space to run
+samples, it can take a long time, while the HPC has enough CPUs to run
 several of them at the same time.
 
 So let's run fastp again, but this time with one job per sample. How
@@ -2428,6 +2596,7 @@ Next, we use this text file in our job array. Store the following in
 \CommentTok{\#SBATCH {-}{-}output=logs/fastp\_array\_\%A\_\%a.out}
 \CommentTok{\#SBATCH {-}{-}error=logs/fastp\_array\_\%A\_\%a.err}
 \CommentTok{\#SBATCH {-}{-}array=1{-}4}
+\CommentTok{\#SBATCH {-}{-}ntasks=1}
 \CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=2}
 \CommentTok{\#SBATCH {-}{-}mem=5G}
 \CommentTok{\#SBATCH {-}{-}time=01:00:00}
@@ -2440,7 +2609,8 @@ Next, we use this text file in our job array. Store the following in
 \FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/fastp\_array}
 
 \CommentTok{\# SLURM\_ARRAY\_TASK\_ID is set by SLURM: 1 for the first job in the array, 2 for the second, and so on}
-\CommentTok{\# Read the sample name on that line number of samples.txt}
+\CommentTok{\# Read the sample name on that line number of samples.txt }
+\CommentTok{\# {-}n tells sed not to print every line, and 1p prints line 1}
 \VariableTok{sample}\OperatorTok{=}\VariableTok{$(}\FunctionTok{sed} \AttributeTok{{-}n} \StringTok{"}\VariableTok{$\{SLURM\_ARRAY\_TASK\_ID\}}\StringTok{p"}\NormalTok{ samples.txt}\VariableTok{)}
 
 \CommentTok{\# Print what is happening}
@@ -2479,8 +2649,8 @@ In the script, we use some new SLURM options:
   CPUs or memory? Then you might not want to run all of them at the same
   time. With \texttt{\#SBATCH\ -\/-array=1-4\%2}, SLURM runs at most 2
   jobs at the same time, and starts the next ones when these have
-  finished. Try to use no more than \textasciitilde20\% of the
-  Crunchomics cluster at the same time.
+  finished. Try to use no more than \textasciitilde20\% of Crunchomics
+  at the same time.
 \end{itemize}
 
 The script does the following:

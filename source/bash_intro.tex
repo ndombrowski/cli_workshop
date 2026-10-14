@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, boxrule=0pt, interior hidden, breakable, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, breakable, borderline west={3pt}{0pt}{shadecolor}, interior hidden, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -274,10 +274,10 @@ command line. On this page, you will:
 \section{The terminal, the shell and the
 prompt}\label{the-terminal-the-shell-and-the-prompt}
 
-In this tutorial we use the \textbf{command-line interface (CLI)}. It is
-an alternative to the \textbf{graphical user interface (GUI)} that you
-probably know better. Both let you work with your computer, but in
-different ways:
+In this tutorial we use the \textbf{command-line interface (CLI)} to
+interact with our computer. It is an alternative to the
+\textbf{graphical user interface (GUI)} that you probably know better.
+Both let you work with your computer, but in different ways:
 
 \begin{itemize}
 \tightlist
@@ -319,8 +319,8 @@ command is done, a new prompt appears and you can type the next one.
 \section{\texorpdfstring{\texttt{pwd}: Find out where we
 are}{pwd: Find out where we are}}\label{pwd-find-out-where-we-are}
 
-Now you will learn your first command. Begin by opening your terminal
-and type \texttt{pwd}, and then press enter:
+Let's type and run our first command. Begin by opening your terminal and
+type \texttt{pwd}, and then press enter:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -397,8 +397,8 @@ A command generally has three parts:
   A \textbf{command name}: the program you want to run, e.g.~\texttt{ls}
 \item
   An \textbf{option} (or \textbf{flag}): a way to change how the command
-  behaves, e.g.~\texttt{-l} changes the output from ls from long to list
-  format. Options usually start with a \texttt{-}
+  behaves, e.g.~\texttt{-l} shows the list in long format, with more
+  details. Options usually start with a \texttt{-}
 \item
   An \textbf{argument}: the input the command works on, e.g.~a file or
   folder. Some commands work without an argument
@@ -406,7 +406,7 @@ A command generally has three parts:
 
 Try the following command in your current directory to list
 (\texttt{ls}) the contents of the current folder and show details in
-long format (\texttt{-l})``:
+long format (\texttt{-l}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -417,10 +417,56 @@ long format (\texttt{-l})``:
 After running this, we see our files and folders again but as a more
 detailed list. In the example below you can now see additional
 information about who is allowed to read and change the files (the
-access modes), who owns them, how large the files are, when they were
-last modified and of course their name:
+access modes that determine exactly who can do what to a file or
+folder), who owns them, how large the files are, when they were last
+modified and of course their name:
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Using ls in practice}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Reading the access modes (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
+
+Let's look at one line from the example above:
+
+\begin{verbatim}
+drwxrwxrwx 1 ndombrowski ndombrowski 4096 Dec  1 08:51 docs
+\end{verbatim}
+
+The first column, \texttt{drwxrwxrwx}, shows the access modes. Read it
+in parts:
+
+\begin{itemize}
+\tightlist
+\item
+  The first letter tells you what kind of item it is: \texttt{d} for a
+  directory (folder), \texttt{-} for a normal file.
+\item
+  The next nine letters are three groups of three. The first group is
+  for the \textbf{owner} of the file, the second for the \textbf{group}
+  (a set of users who share access), and the third for \textbf{everyone
+  else}.
+\item
+  In each group, \texttt{r} means the user can \textbf{read} the file,
+  \texttt{w} means they can \textbf{write} (change or delete) it, and
+  \texttt{x} means they can \textbf{execute} it (run it as a program).
+  For a folder, \texttt{x} means they can open the folder. A \texttt{-}
+  in a position means that this permission is missing.
+\end{itemize}
+
+So \texttt{drwxrwxrwx} is a folder that everyone can read, change and
+open. You will often also see \texttt{-rw-r-\/-r-\/-}: a file that the
+owner can read and change, and that everyone else can only read.
+
+The third and fourth columns show the owner (here \texttt{ndombrowski})
+and the group.
+
+You don't need to change access modes in this tutorial. They become
+important when you share data with others, for example on an HPC. If you
+try to open or change a file that you don't have permission for, you get
+the error \texttt{Permission\ denied}. If the file or folder belongs to
+a colleague (check the owner column), you can't fix this yourself. Ask
+the owner to give you access, or to make a copy for you.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Using ls in practice}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Throughout this tutorial, you'll notice that we use \texttt{ls} a lot.
 There is a reason for that.
@@ -431,7 +477,7 @@ Simple commands like \texttt{ls}, \texttt{pwd}, \texttt{wc} or
 \texttt{grep} help you check what is happening to your files at every
 step of an analysis.
 
-These habits are not just for beginners, bioinformaticians rely on them
+These habits are not just for beginners. Bioinformaticians rely on them
 constantly.
 
 \end{tcolorbox}
@@ -445,7 +491,7 @@ the command name:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{man}\NormalTok{ ls}
+\FunctionTok{man}\NormalTok{ pwd}
 \end{Highlighting}
 \end{Shaded}
 
@@ -462,17 +508,22 @@ through it using:
   \texttt{q} to quit the manual
 \end{itemize}
 
+\textbf{MobaXterm users:} MobaXterm does not come with manual pages, so
+\texttt{man\ pwd} does not work. Use \texttt{pwd\ -h} instead (see
+below), or read the manual page online, for example at
+\href{https://man7.org/linux/man-pages/man1/pwd.1.html}{man7.org}.
+
 Not all programs come with such a manual. Depending on the program,
 there are a few common ways to get help that you can try:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{man\ ls}
+  \texttt{man\ pwd}
 \item
-  \texttt{ls\ -\/-help}
+  \texttt{pwd\ -\/-help}
 \item
-  \texttt{ls\ -h}
+  \texttt{pwd\ -h}
 \end{itemize}
 
 \section{\texorpdfstring{\texttt{mkdir}: Make new
@@ -526,16 +577,16 @@ home directory and the new \texttt{data\_analysis} folder in it. This is
 useful later, for example to open a report that you made with the
 command line.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{MobaXterm users: did you choose a permanent folder?}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{MobaXterm users: did you choose a permanent folder?}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 If \texttt{explorer.exe\ .} opens a folder in a temporary location,
 MobaXterm deletes your work when you close it. You can see this in the
 address bar of File Explorer: it shows \texttt{Temp}, for example
 \texttt{Local\ \textgreater{}\ Temp\ \textgreater{}\ Mxt265\ \textgreater{}\ mx86\_64b\ \textgreater{}\ tmp\ \textgreater{}\ home\_YourUserName}.
 Before you continue, follow the steps in
-\href{installation.qmd\#mobaxterm-choose-a-permanent-folder}{MobaXterm:
-choose a permanent folder} on the ``Before you start'' page. Then make
-the \texttt{data\_analysis} folder again.
+\href{installation.qmd\#windows-mobaxterm-choose-a-permanent-folder}{Windows
++ MobaXterm: choose a permanent folder} on the ``Before you start''
+page. Then make the \texttt{data\_analysis} folder again.
 
 \end{tcolorbox}
 
@@ -554,7 +605,7 @@ Next, let's make a \texttt{data} folder inside the new
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Commenting your code}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Commenting your code}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Notice how I added a \texttt{\#} and some notes above each command?
 
@@ -572,12 +623,12 @@ future you might get confused a month later.
 \section{\texorpdfstring{\texttt{touch}: Starting your
 notebook}{touch: Starting your notebook}}\label{touch-starting-your-notebook}
 
-Now that we have a project folder, it gets a \textbf{notebook}: a file
-in which you write down the commands you ran, a comment on what each one
-does, and a few words about what you saw. Think of it as the lab book of
-your analysis. Writing it while you work takes a bit of time, but it
-also makes you stop and think about what you just did. And a month from
-now, it tells you exactly how you got your results.
+Now that we have a project folder, let us generate a \textbf{notebook}:
+a file in which you write down the commands you ran, a comment on what
+each one does, and a few words about what you saw. Think of it as the
+lab book of your analysis. Writing it while you work takes a bit of
+time, but it also makes you stop and think about what you just did. And
+a month from now, it tells you exactly how you got your results.
 
 We create an empty file for the notebook with \texttt{touch}:
 
@@ -601,7 +652,7 @@ folder and then double-click \texttt{notes.md}. If it opens in a program
 other than your text editor, right-click the file, choose \textbf{Open
 with} and pick your editor (for example RStudio).
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: RStudio users, stay in Source mode}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: RStudio users, stay in Source mode}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 RStudio shows two buttons at the top left of a Markdown file:
 \textbf{Source} and \textbf{Visual}. Stay in \textbf{Source}. Then you
@@ -614,7 +665,7 @@ Markdown}\label{writing-the-notebook-in-markdown}
 
 The file ends in \texttt{.md} because we write it in \textbf{Markdown}:
 plain text with a few symbols that give it structure. For your notebook,
-you only need three of them:
+you only need to know about a few things:
 
 \begin{itemize}
 \tightlist
@@ -680,11 +731,12 @@ The file system is structured like a tree that starts from a single
 \textbf{root} directory, written as a forward slash (\texttt{/}). All
 other folders branch out from this root directory. For example, we can
 go from the root directory to the home folder, and from there into the
-folder with your user name: \texttt{/home/username}.
+folder with your user name.
 
 The location of a file or folder is written as a \textbf{path}: the
-folder names along the way, separated by \texttt{/}. There are two ways
-to write a path, for example to the data folder:
+folder names along the way, separated by \texttt{/},
+e.g.~\texttt{/home/username}. There are two ways to write a path, for
+example to the data folder:
 
 \begin{itemize}
 \tightlist
@@ -714,7 +766,7 @@ you feel that you get lost:
 \end{Highlighting}
 \end{Shaded}
 
-You now should see something like
+You should now see something like
 \texttt{/Users/YourUserName/data\_analysis}. You can use \texttt{cd} in
 multiple ways to move around:
 
@@ -723,10 +775,10 @@ multiple ways to move around:
 \CommentTok{\# Move into the data folder}
 \BuiltInTok{cd}\NormalTok{ data}
 
-\CommentTok{\# Move one level up (..), back to the data\_analysis folder}
+\CommentTok{\# Move one level up in the tree (..), back to the data\_analysis folder}
 \BuiltInTok{cd}\NormalTok{ ..}
 
-\CommentTok{\# Quickly go back home (you now should be in the home directory)}
+\CommentTok{\# Quickly go back home (you should now be in the home directory)}
 \BuiltInTok{cd}\NormalTok{ \textasciitilde{}}
 
 \CommentTok{\# Move multiple levels down at once}
@@ -746,7 +798,7 @@ absolute path to your home (e.g.~\texttt{cd\ /Users/YourUserName}), but
 much faster to type. Two dots (\texttt{..}) always mean ``the folder one
 level up''.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Command-line completion}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Command-line completion}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Here are some tips for faster navigation (and fewer typos):
 
@@ -770,7 +822,7 @@ type everything yourself.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Get familiar with these first commands:
 
@@ -808,7 +860,7 @@ Get familiar with these first commands:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding your Desktop and OneDrive folders (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding your Desktop and OneDrive folders (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 In this tutorial we stay inside the home directory. If you want to work
 with files that are somewhere else on your computer, for example on your
@@ -929,7 +981,8 @@ command}{Ctrl+C: Stopping a command}}\label{ctrlc-stopping-a-command}
 
 Sometimes a command does not finish, or you start something by mistake.
 The prompt does not come back, and you can't type a new command. Press
-\texttt{Ctrl+C} to stop the command and get your prompt back.
+\texttt{Ctrl+C} (or \texttt{Cmd+C} on a Mac) to stop the command and get
+your prompt back.
 
 Let's try it. If you give \texttt{cat} no file name, it waits for you to
 type text (we use \texttt{cat} for other things later):
@@ -947,7 +1000,7 @@ The prompt comes back.
 Keep in mind that \texttt{Ctrl+C} stops a command, but it does not undo
 what the command already did.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Finding your way}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Finding your way}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Open \texttt{notes.md} and add:
 
@@ -997,11 +1050,10 @@ Save the file.
 \section{\texorpdfstring{\texttt{wget}: Download
 data}{wget: Download data}}\label{wget-download-data}
 
-Next, let's download our sequencing data, a file called
-\texttt{seq\_project.tar.gz}, with the \texttt{wget} command. Make sure
-that you are inside your \texttt{data\_analysis} folder (check with
-\texttt{pwd}), because \texttt{wget} saves the file in the folder you
-are currently in:
+Next, let's use \texttt{wget} to download our sequencing data, a file
+called \texttt{seq\_project.tar.gz}. Make sure that you are inside your
+\texttt{data\_analysis} folder (check with \texttt{pwd}), because
+\texttt{wget} saves the file in the folder you are currently in:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1014,7 +1066,7 @@ In this example, you can also see how I documented my code: I added
 where the link came from and when I got it. This helps future me in case
 I, for example, need to look for some e-mails about the data later on.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Wget for Mac users}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Wget for Mac users}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 For Mac users \texttt{wget} is not installed by default. If you do not
 want to install it, you can use the \texttt{curl} command instead:
@@ -1033,7 +1085,7 @@ After you download any kind of data, it is always a good idea to do a
 sanity check: is the file there, and how large is it? A file size of 0
 means that something went wrong during the download.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1069,7 +1121,7 @@ data}{cp: Copying data}}\label{cp-copying-data}
 
 \texttt{cp} (short for \emph{copy}) duplicates files or folders. When
 working with many files, a good folder structure is essential to keep
-track of them (useful folders are, for example, \texttt{data},
+track of files (useful folders are, for example, \texttt{data},
 \texttt{scripts} and \texttt{results}). To keep our project folder
 organized, let's copy the \texttt{seq\_project.tar.gz} file we just
 downloaded into the \texttt{data} folder we made earlier:
@@ -1108,15 +1160,16 @@ location without creating a second copy:
 \end{Highlighting}
 \end{Shaded}
 
-Notice that \texttt{mv} moved the file and, \textbf{without asking},
-overwrote the copy that we had put into the data folder with
-\texttt{cp}. So whenever you use \texttt{mv}, make sure that you do not
-overwrite files by mistake.
+Notice that \texttt{mv} moved the file and, \textbf{without asking and
+without showing}, overwrote the copy that we had put into the data
+folder with \texttt{cp} (we only would know that if we carefully tracked
+the modification date of the file). So whenever you use \texttt{mv},
+make sure that you do not overwrite files by mistake.
 
 \texttt{mv} is also the command to rename a file: you ``move'' it to a
 new name, e.g.~\texttt{mv\ old\_name.txt\ new\_name.txt}.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Downloading directly into a folder (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Downloading directly into a folder (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Instead of downloading a file and moving it afterwards, you can tell
 \texttt{wget} directly where to save the file with the \texttt{-P}
@@ -1148,18 +1201,10 @@ you can save the file into a specific folder with
 \section{\texorpdfstring{\texttt{tar}: Work with tar
 files}{tar: Work with tar files}}\label{tar-work-with-tar-files}
 
-The data we downloaded is provided as a tar file:
-
-\begin{itemize}
-\tightlist
-\item
-  tar is short for Tape Archive, and sometimes referred to as tarball
-\item
-  The TAR file format is commonly used when storing data
-\item
-  TAR files are often compressed after being created and then become TGZ
-  files, using the tgz, tar.gz, or gz extension.
-\end{itemize}
+The data we downloaded is provided as a tar file. A tar file (also
+called a tarball) bundles many files and folders into one file. It is
+often also compressed with gzip, which gives the extension
+\texttt{.tar.gz} or \texttt{.tgz}.
 
 We can decompress the content of the tarball into our data folder using
 the following command:
@@ -1175,18 +1220,22 @@ The options we use with the \texttt{tar} command are:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{x} tells tar to extract files from the archive
+  \texttt{x} tells tar to e\textbf{x}tract files from the archive
 \item
-  \texttt{v} (verbose) prints the name of each file while it is being
-  extracted, so you can see what happens
+  \texttt{v} prints the name of each file while it is being extracted,
+  so you can see what happens (also called \textbf{v}erbose)
 \item
-  \texttt{f} specifies the file name
+  \texttt{f} specifies the \textbf{f}ile name
 \item
   \texttt{C} tells tar to change directory (so the package content will
   be unpacked there)
+\item
+  \texttt{tar} detects the compression automatically when it extracts
+  and we don't need an extra options to tell it to uncompress the file
+  in our command
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: How to generate a tarball (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: How to generate a tarball (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 If you ever want to generate a tarball you can do the following:
 
@@ -1201,15 +1250,15 @@ The options we use are:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{c} create an archive by bundling files and directories
-  together
+  \texttt{c} \textbf{c}reate an archive by bundling files and
+  directories together
 \item
-  \texttt{z} use gzip compression when generating the tar file
+  \texttt{z} use g\textbf{z}ip compression when generating the tar file
 \end{itemize}
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1217,11 +1266,12 @@ The options we use are:
 \item
   After extracting the tarball, use \texttt{ls} to explore the content
   of the folder we just extracted. Make sure that you also explore the
-  content of the folders inside it.
+  content of the folders inside it. Hint: use the Tab key (see the tip
+  on command-line completion above), so that you don't have to type
+  every single word.
 \item
   Find the path for at least one sequence file that ends with
-  \texttt{fastq.gz}. Hint: use the Tab key (see the tip on command-line
-  completion above), so that you don't have to type every single word.
+  \texttt{fastq.gz}.
 \end{enumerate}
 
 \begin{quote}
@@ -1233,7 +1283,7 @@ The options we use are:
 \FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ data/seq\_project}
 
 \CommentTok{\# Question 2:}
-\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/}
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ data/seq\_project/barcode004\_User2\_ITS\_9\_L001/Sample{-}DUMMY4\_R1.fastq.gz}
 \end{Highlighting}
 \end{Shaded}
 \end{quote}
@@ -1245,7 +1295,10 @@ folders}{rm: Remove files and folders}}\label{rm-remove-files-and-folders}
 
 To remove files and folders, we use the \texttt{rm} command (short for
 \emph{remove}). We want to remove the \texttt{seq\_project.tar.gz} file,
-since we do not need it anymore once we have extracted the data:
+since we do not need it anymore once we have extracted the data (and we
+can download it again if needed). For your own raw data, this is
+important: Make backups and only delete data if you are absolutely sure
+that you can recover it from somewhere.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1261,7 +1314,7 @@ If we want to remove a folder, we need to tell \texttt{rm} with an
 option. For this, we use \texttt{-r} (short for \emph{recursive}), which
 removes a folder together with everything inside it.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \textbf{Unix does not have an undelete command.}
 
@@ -1269,10 +1322,11 @@ This means that if you delete something with \texttt{rm}, it's gone.
 There is no recycle bin. Therefore, use \texttt{rm} with care and check
 what you wrote twice before pressing enter!
 
-Also, NEVER run \texttt{rm\ -r} or \texttt{rm\ -rf} on the root folder
-\texttt{/} or any other important path, such as your home directory.
-Always double check the path or file name before you press enter when
-using \texttt{rm}.
+Also, NEVER run \texttt{rm\ -r} or \texttt{rm\ -rf} (\texttt{-f}:
+``force: don't ask, don't complain'') on the root folder \texttt{/} or
+any other important path, such as your home directory. Always double
+check the path or file name before you press enter when using
+\texttt{rm}.
 
 \end{tcolorbox}
 
@@ -1321,7 +1375,7 @@ specific and at the same time make the output more readable.
 
 Now we can easily see for each folder how many files we have.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1336,7 +1390,8 @@ Now we can easily see for each folder how many files we have.
   the right files
 \item
   To avoid duplicates, remove the R1\_files folder from question 3 after
-  you have ensured the command you used worked
+  you have ensured the command you used worked. Use \texttt{ls} to
+  confirm that your command worked
 \end{enumerate}
 
 \begin{quote}
@@ -1363,7 +1418,7 @@ Now we can easily see for each folder how many files we have.
 
 After solving question 2 you should see:
 
-\includegraphics[width=5.09375in,height=\textheight,keepaspectratio]{../img/wildcards_3.png}
+\includegraphics[width=5.72917in,height=\textheight,keepaspectratio]{../img/wildcards_3.png}
 
 After solving question 3, we should see that all files still exist in
 their original location but are now also inside the \texttt{R1\_files}
@@ -1373,7 +1428,7 @@ easily reorganize our data?
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: More wildcards (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: More wildcards (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \texttt{*} is not the only wildcard. Another useful wildcard are square
 brackets, which match exactly \textbf{one} character, chosen from a set
@@ -1403,12 +1458,13 @@ or a range:
 \end{Highlighting}
 \end{Shaded}
 
-You find a full list of wildcards
-\href{https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm}{here}.
+You find a full list of wildcards when you open
+\href{https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm}{this
+link}.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding files with find (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Finding files with find (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 With \texttt{*/*.gz}, \texttt{ls} only looks exactly one folder deep
 inside \texttt{seq\_project}. If you don't know how deep your files are
@@ -1454,7 +1510,7 @@ Note that \texttt{find} does not sort its output alphabetically like
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Getting the data}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Getting the data}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Add a new heading \texttt{\#\#\ Getting\ the\ data} to
 \texttt{notes.md}, and below it:
@@ -1526,7 +1582,7 @@ For example, let's write a list of all fastq files into a file:
 \CommentTok{\# Write the list of fastq files into a new file instead of to the screen}
 \FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*} \OperatorTok{\textgreater{}}\NormalTok{ fastq\_paths.txt}
 
-\CommentTok{\# Check that the new file exists}
+\CommentTok{\# Check that the new file exists and that it is not empty}
 \FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ fastq\_paths.txt}
 \end{Highlighting}
 \end{Shaded}
@@ -1544,7 +1600,7 @@ Here:
   screen
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Be careful with \textgreater{}}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Be careful with \textgreater{}}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 The \texttt{\textgreater{}} operator overwrites files \textbf{without
 asking}. If a file with the same name already exists, its content is
@@ -1581,6 +1637,7 @@ file}{tail: View the last lines of a file}}\label{tail-view-the-last-lines-of-a-
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Show the last 10 lines}
+\CommentTok{\# Our file has only 8 lines, so both head and tail show everything}
 \FunctionTok{tail}\NormalTok{ fastq\_paths.txt}
 
 \CommentTok{\# Show the last 3 lines}
@@ -1617,7 +1674,7 @@ Here:
   Press \texttt{q} to quit
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Editing text files with \texttt{nano} (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Editing text files with \texttt{nano} (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 You can also change the content of a text file from the command line.
 The most common tool for this is the text editor \texttt{nano}. It comes
@@ -1663,7 +1720,7 @@ lines tells us how many files we work with:
 \end{Highlighting}
 \end{Shaded}
 
-We see that we work with 8 files. Here we could easily count them
+We see that we work with 8 files. Here we could easily count that
 ourselves, but with hundreds of files, \texttt{wc\ -l} is much faster
 and more reliable.
 
@@ -1684,7 +1741,7 @@ we work with:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{.gz }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1693,8 +1750,8 @@ Here:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{ls\ data/seq\_project/*/*} lists all files in the folders
-  inside \texttt{seq\_project}
+  \texttt{ls\ data/seq\_project/*/*.gz} lists all .gz files in the
+  folders inside \texttt{seq\_project}
 \item
   The pipe (\texttt{\textbar{}}) sends this list directly to the next
   command, instead of printing it to the screen
@@ -1705,7 +1762,7 @@ Here:
 
 Again we see 8 files, but this time without making an extra file first.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1734,10 +1791,12 @@ Again we see 8 files, but this time without making an extra file first.
 \end{Highlighting}
 \end{Shaded}
 
-Our data is \textbf{paired-end} sequencing data: each DNA fragment was
-read from both ends, which gives one R1 file and one R2 file per sample.
-Having as many R1 as R2 files is a good sanity check: it tells us that
-we received both files for every sample.
+This exercise also tells us something about our data since we see that
+for each sample we have a R1 and R2 file. This setup is also called
+\textbf{paired-end} sequencing data: each DNA fragment was read from
+both ends, which gives one R1 (forward end) file and one R2 (reverse
+end) file per sample. Having as many R1 as R2 files is a good sanity
+check: it tells us that we received both files for every sample.
 \end{quote}
 
 \end{tcolorbox}
@@ -1772,8 +1831,7 @@ each \texttt{/}, we get four fields:
   \texttt{Sample-DUMMY1\_R1.fastq.gz}
 \end{enumerate}
 
-The file name we want is the 4th field and we can then combine this and
-use cut to extract that information as follows:
+The file name is the 4th field, so we ask cut for that:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1833,9 +1891,10 @@ lists}{sort and uniq: Create unique lists}}\label{sort-and-uniq-create-unique-li
 \item
   \texttt{sort} sorts lines from A to Z
 \item
-  \texttt{uniq} removes duplicate lines, but only when they are directly
-  below each other. That is why we almost always use \texttt{sort}
-  before \texttt{uniq}: sorting puts identical lines next to each other
+  \texttt{uniq} removes duplicate lines, but only when they are sorted
+  directly below each other. That is why we almost always use
+  \texttt{sort} before \texttt{uniq} to put identical lines next to each
+  other
 \end{itemize}
 
 \begin{Shaded}
@@ -1845,7 +1904,7 @@ lists}{sort and uniq: Create unique lists}}\label{sort-and-uniq-create-unique-li
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1928,7 +1987,7 @@ Giving each analysis its own folder inside \texttt{results} keeps the
 project folder clean, and later you can see right away which files
 belong together.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 You can also combine fastq.gz files with \texttt{cat}. We don't need
 this for our data, but you might need it for your own. For example, a
@@ -1941,7 +2000,10 @@ the data is too large for a single file.
 \item
   Use a wildcard and \texttt{cat} to combine all R1 fastq.gz files into
   one file called \texttt{combined\_R1.fastq.gz}, in the
-  \texttt{results/combined} folder
+  \texttt{results/combined} folder. If you are unsure whether your
+  wildcards capture the right files, it is a good habit to first check
+  the behavior with \texttt{ls} before concatenating files with
+  \texttt{cat}
 \item
   Use \texttt{ls} to compare the size of the individual R1 files with
   the size of the combined file. Did it work?
@@ -1953,6 +2015,7 @@ the data is too large for a single file.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Question 1:}
+\FunctionTok{ls}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{R1.fastq.gz}
 \FunctionTok{cat}\NormalTok{ data/seq\_project/}\PreprocessorTok{*}\NormalTok{/}\PreprocessorTok{*}\NormalTok{R1.fastq.gz }\OperatorTok{\textgreater{}}\NormalTok{ results/combined/combined\_R1.fastq.gz}
 
 \CommentTok{\# Question 2:}
@@ -1970,7 +2033,7 @@ files together.
 \section{Exploring the content of compressed fastq
 files}\label{exploring-the-content-of-compressed-fastq-files}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2013,7 +2076,7 @@ file.
 \texttt{gzip\ -d} replaces the compressed file with the decompressed
 one. We never want to change our raw data in \texttt{data/}: if
 something goes wrong, there is no way to get the original back. So we
-instead make us of a copy:
+instead make use of a copy:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2038,7 +2101,7 @@ Now we finally see DNA sequences, plus some other information. Each
 sequence that the sequencer read from a DNA fragment is called a
 \textbf{read}. In a fastq file, every read always takes 4 lines:
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2088,7 +2151,7 @@ To compress a file again, use \texttt{gzip} without \texttt{-d}:
 \end{Shaded}
 
 We don't need the test folder anymore, so we remove it. Check the path
-twice before you press Enter, \texttt{rm\ -r} does not ask:
+twice before you press Enter. \texttt{rm\ -r} does not ask:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2116,7 +2179,7 @@ see the first lines, not millions of reads:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{\texttt{zcat} for Mac users}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{\texttt{zcat} for Mac users}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 On a Mac, \texttt{zcat} might not work as expected. Try \texttt{gzcat}
 instead:
@@ -2169,7 +2232,7 @@ path:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2195,6 +2258,9 @@ path:
 \CommentTok{\# Question 2}
 \FunctionTok{zcat}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R1.fastq.gz }\KeywordTok{|} \FunctionTok{grep} \StringTok{"AAGACG"}
 
+\CommentTok{\# Question 2, but only show the first 10 matching lines}
+\FunctionTok{zcat}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R1.fastq.gz }\KeywordTok{|} \FunctionTok{grep} \StringTok{"AAGACG"} \KeywordTok{|} \FunctionTok{head}
+
 \CommentTok{\# Question 3}
 \FunctionTok{zcat}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R1.fastq.gz }\KeywordTok{|} \FunctionTok{grep} \AttributeTok{{-}c} \StringTok{"AAGACG"}
 \end{Highlighting}
@@ -2202,6 +2268,14 @@ path:
 
 For questions 2 and 3, \texttt{grep} can't read the compressed file
 directly, so we send the output of \texttt{zcat} to it with a pipe.
+
+In question 2, without \texttt{\textbar{}\ head} the matching lines
+scroll past faster than you can read them: thousands of reads contain
+this pattern. When the output is too long for the screen, add another
+pipe at the end. \texttt{\textbar{}\ head} shows only the first lines,
+\texttt{\textbar{}\ less\ -S} lets you scroll through all of them, and
+\texttt{grep\ -c} (question 3) tells you how many there are.
+
 Commands like these are useful to check whether \textbf{adapters} or
 \textbf{primers} are still part of your reads. These are short, known
 DNA sequences that are added to or used on the DNA before sequencing.
@@ -2225,13 +2299,13 @@ read takes 4 lines, this tells us how many reads a fastq file has:
 For \texttt{Sample-DUMMY1\_R2.fastq.gz}, this gives 179,384 lines. Every
 read takes 4 lines, so the file has 179,384 / 4 = 44,846 reads.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Better counting (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Better counting (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Dividing by 4 with a calculator works, but bash can also do it for us:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{zcat}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R2.fastq.gz }\KeywordTok{|} \BuiltInTok{echo} \VariableTok{$((} \VariableTok{$(}\FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)} \OperatorTok{/}\DecValTok{4}\VariableTok{))}
+\BuiltInTok{echo} \VariableTok{$((} \VariableTok{$(}\FunctionTok{zcat}\NormalTok{ data/seq\_project/barcode001\_User1\_ITS\_1\_L001/Sample{-}DUMMY1\_R2.fastq.gz  }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)} \OperatorTok{/} \DecValTok{4} \VariableTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2241,9 +2315,10 @@ Here:
 \tightlist
 \item
   \texttt{\$(\ )} is called \textbf{command substitution}. Bash runs the
-  command inside the brackets, here \texttt{wc\ -l}, and puts its output
-  in its place. \texttt{wc\ -l} counts the lines that \texttt{zcat}
-  sends through the pipe
+  command inside the brackets, here
+  \texttt{zcat\ file\ \textbar{}\ wc\ -l}, and puts its output in its
+  place. \texttt{wc\ -l} counts the lines that \texttt{zcat} sends
+  through the pipe
 \item
   \texttt{\$((\ ))} is called \textbf{arithmetic expansion}. Bash
   calculates what is inside the double brackets, here the number of
@@ -2254,7 +2329,7 @@ Here:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Looking at the data}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Looking at the data}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Add a new heading \texttt{\#\#\ Looking\ at\ the\ data} to
 \texttt{notes.md}, and below it:
@@ -2373,7 +2448,7 @@ A few rules for variables:
 \tightlist
 \item
   The name can contain letters, numbers and underscores (\texttt{\_}),
-  but no spaces. Choose a name that tells you what is stored in it,
+  but no spaces. Choose a name that tells you what is stored in it.
   \texttt{fastq\_file} is easier to understand a year later than
   \texttt{x}.
 \item
@@ -2386,7 +2461,7 @@ A few rules for variables:
   these names, you replace bash's value, and things stop working.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: No spaces around =}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: No spaces around =}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Write \texttt{fastq\_file=data/...} without spaces around the
 \texttt{=}. If you add spaces (\texttt{fastq\_file\ =\ data/...}), bash
@@ -2487,13 +2562,14 @@ all 8 files, and only the files you expect? If yes, then you can
 continue with the next step and build up the loop for more complex
 tasks.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Typing a loop in the terminal}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Typing a loop in the terminal}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 When you press Enter after writing the first line of the loop, nothing
-runs yet. Instead, the prompt changes to \texttt{\textgreater{}}. This
-means bash waits for the rest of the loop. It only starts once you type
-\texttt{done} and press Enter. (On a Mac with zsh, this prompt may look
-slightly different, for example \texttt{for\textgreater{}}.)
+runs yet. Instead, the prompt changes to \texttt{\textgreater{}} (this
+\texttt{\textgreater{}} is only the prompt, it doesn't write anything).
+This means bash waits for the rest of the loop. It only starts once you
+type \texttt{done} and press Enter. (On a Mac with zsh, this prompt may
+look slightly different, for example \texttt{for\textgreater{}}.)
 
 If you get stuck in this \texttt{\textgreater{}} prompt, for example
 because of a typo, press \texttt{Ctrl+C} to cancel and start again.
@@ -2519,7 +2595,7 @@ Now we get 8 numbers, one per file.
 in the variables section. The only difference is that bash now runs it 8
 times, each time with a different file stored in \texttt{fastq\_file}.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Loops written on one line (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Loops written on one line (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 You might also see loops written on a single line, with \texttt{;} where
 we start a new line:
@@ -2535,7 +2611,7 @@ one short command, the version over several lines is easier to read.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2619,7 +2695,7 @@ Here:
 We will use these numbers again on day 2, to check what a quality
 filtering tool did to our data.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2664,7 +2740,7 @@ filtering tool did to our data.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Better counting in for loops (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Better counting in for loops (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 In our counts file, each file name and its count end up on two separate
 lines. With 100 files, it is much easier to read if the file name and
@@ -2710,7 +2786,7 @@ command, \texttt{\$((\ ))} calculates.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Using bash to make sample mapping files (optional)}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Using bash to make sample mapping files (optional)}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Many tools for amplicon analysis need a table that lists your files,
 often with the R1 and the R2 file of each sample in separate columns.
@@ -2813,7 +2889,7 @@ To keep our project folder tidy, we store scripts in their own folder:
 \end{Shaded}
 
 Next, we create the script with the text editor \texttt{nano} (see the
-tip ``Editing text files with \texttt{nano}'' above):
+tip \hyperref[nano-tip]{Editing text files with \texttt{nano}} above):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2825,7 +2901,7 @@ tip ``Editing text files with \texttt{nano}'' above):
 \texttt{nano:\ command\ not\ found}, install it first with
 \texttt{apt\ install\ nano}, as explained in that tip.
 
-Type or copy the following into the editor:
+Type or copy the following into the editor: code s
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2834,7 +2910,8 @@ Type or copy the following into the editor:
 \CommentTok{\# Count the number of lines in each fastq file}
 \CommentTok{\# Run this script from inside the data\_analysis folder}
 
-\CommentTok{\# Make a folder for the counts and start the counts file with a header}
+\CommentTok{\# Make a folder for the counts and start the counts file with a header }
+\CommentTok{\# We give this output a new name, so you can compare it with the file from the loop}
 \FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ results/counts}
 \BuiltInTok{echo} \StringTok{"Number of lines per fastq file"} \OperatorTok{\textgreater{}}\NormalTok{ results/counts/line\_counts\_bash.txt}
 
@@ -2851,8 +2928,9 @@ Save and exit:
 \begin{itemize}
 \tightlist
 \item
-  Press \texttt{Ctrl+X} to exit, then \texttt{Y} to confirm that you
-  want to save the file, then Enter to keep the file name
+  Press \texttt{Ctrl+X} to exit (indicated with \texttt{\^{}\^{}X} in
+  nano), then \texttt{Y} to confirm that you want to save the file, then
+  Enter to keep the file name
 \end{itemize}
 
 The commands are the same as in the
@@ -2902,8 +2980,8 @@ Why is this useful?
   job needs.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Write scripts in nano or a code editor, not in Word or
-Notepad}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Write scripts in nano or a code editor, not in Word or
+Notepad}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Windows programs such as Notepad end every line with an extra invisible
 character. Bash on Linux does not understand this character, and the
@@ -2920,9 +2998,15 @@ with \texttt{LF} line endings (in VS Code, you see \texttt{LF} or
 it). This becomes important on day 2, where the scripts run on a Linux
 computer.
 
+If you like writing in RStudio, you can write the script there and copy
+it into \texttt{nano}. Or set RStudio to save with \texttt{LF} line
+endings: in \textbf{Tools \textgreater{} Global Options \textgreater{}
+Code \textgreater{} Saving}, set \textbf{Line ending conversion} to
+\textbf{Posix (LF)}.
+
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Counting lines per file}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Counting lines per file}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 Add a new heading \texttt{\#\#\ Counting\ lines\ per\ file} to
 \texttt{notes.md}, and below it:
@@ -2952,7 +3036,7 @@ You now have a project folder with data, results, a script, and a
 notebook that explains how they got there. Before you close the
 terminal, take a few minutes to read through your notebook.
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-color-frame, left=2mm, coltitle=black, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Tidy your notebook}, colback=white, toprule=.15mm, opacityback=0, bottomtitle=1mm, rightrule=.15mm, arc=.35mm, breakable, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-color!10!white, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Notebook checkpoint: Tidy your notebook}, rightrule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, colframe=quarto-callout-color-frame, toptitle=1mm, colback=white, leftrule=.75mm, left=2mm, breakable, titlerule=0mm, bottomrule=.15mm, coltitle=black, opacityback=0]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

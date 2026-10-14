@@ -18,7 +18,7 @@ On this page you set up everything you need for this tutorial. It takes about 30
 
 Here is what you will do:
 
-1. Get access to Crunchomics, the UvA computer cluster that we will use in the second part of the tutorial. If you don't work at UvA but have access to an HPC that uses SLURM you still can follow most of the second part of this tutorial.
+1. Get access to Crunchomics, the UvA HPC that we will use in the second part of the tutorial. 
 2. Install and open a terminal on your laptop.
 3. Run check 1: test that your terminal works.
 4. Run check 2: log in to Crunchomics and log out again.
@@ -36,7 +36,7 @@ In your email, tell me which operating system you use (Windows, Mac or Linux), w
 
 ## Step 1: Request access to Crunchomics
 
-In the second part of this tutorial, we work on **Crunchomics**, a high-performance computer (**HPC**) at the UvA. An HPC is a group of powerful computers that many people share. During this tutorial you will use it for analyses that are too large or too slow for your laptop. To be able to use Crunchomics, you first need to organize for an account to be made
+In the second part of this tutorial, we work on **Crunchomics**, a high-performance computer (**HPC**) at the UvA. An HPC is a group of powerful computers that many people share. During this tutorial you will use it for analyses that are too large or too slow for your laptop. To use Crunchomics, you first need an account. If you don't work at UvA but have access to an HPC that uses SLURM you can still follow most of the second part of this tutorial.
 
 What you need to do depends on how you follow this tutorial. Choose the part that fits you.
 
@@ -67,7 +67,7 @@ For this tutorial you need a **terminal**: a window in which you type **commands
 
 ### Windows
 
-Windows does not come with a terminal that understands bash commands, so you need to install one. I recommend option 1.
+Windows does not come with a terminal that understands bash commands, so you need to install one:
 
 1. **MobaXterm** (recommended)
     - A terminal program with the most common Linux commands built in. It can also connect to an HPC.
@@ -77,7 +77,7 @@ Windows does not come with a terminal that understands bash commands, so you nee
     - After you install it, open MobaXterm and click on **Start local terminal**.
     - Then change two settings, see "MobaXterm: choose a permanent folder" below.
 2. **Windows Subsystem for Linux (WSL2)**
-    - Installs a full Linux system inside Windows. We recommend Ubuntu, which is the default and uses bash.
+    - Installs a full Linux system inside Windows. 
     - This is a heavier installation. It needs more disk space and more computer resources than MobaXterm.
     - Choose this option if you are comfortable with installing software, or if you already use the command line.
     - Follow the installation instructions from Microsoft: [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
@@ -85,16 +85,18 @@ Windows does not come with a terminal that understands bash commands, so you nee
 
 #### Windows + MobaXterm: choose a permanent folder
 
-If you installed MobaXterm, please read the text below!
+::: callout-important
+## MobaXterm users: do this step, or you may lose your work
+
+Depending on the edition, MobaXterm deletes your files when you close it. Follow the steps below once, right after you install MobaXterm.
+:::
 
 MobaXterm keeps two things in folders that you can choose:
 
 - Your **home directory**: your personal folder in the terminal, which MobaXterm calls `/home/mobaxterm`. This is where you work during the tutorial.
 - The **root directory** `/`: the system part of the terminal. Extra programs that you install into MobaXterm (for example the text editor `nano`) are stored here.
 
-Depending on the edition, MobaXterm keeps both in a temporary folder and **deletes them when you close MobaXterm** (the portable edition does this by default). Then all your work from day 1 would be gone on day 2, and you would have to install extra programs again every time.
-
-To prevent this, tell MobaXterm to use a normal folder on your computer. This has an extra advantage: you can find all your files from the tutorial in File Explorer.
+Depending on the edition, MobaXterm keeps both in a temporary folder and **deletes them when you close MobaXterm** (the portable edition does this by default). Then all your work from day 1 would be gone on day 2, and you would have to install extra programs again every time. To prevent this, tell MobaXterm to use a normal folder on your computer. This has an extra advantage: you can find all your files from the tutorial in File Explorer.
 
 1. **Make a new folder.** Open File Explorer and go to **This PC**, then the **C: drive**, then **Users**, then the folder with your user name. Make a new folder there and call it `MobaXterm_home`. The full path is then `C:\Users\YourUserName\MobaXterm_home`.
 2. **Tell MobaXterm to use it.** In MobaXterm, click on **Settings** in the top toolbar, then **Configuration**, and go to the **General** tab. Choose your new folder in two places:
@@ -112,7 +114,7 @@ Every Mac comes with a terminal. You do not need to install anything. To open it
 - In Finder, go to **Go**, then **Utilities**, and open **Terminal**.
 - Or press Cmd + Space to open Spotlight, type `Terminal` and press Return.
 
-Newer Macs (macOS Catalina and later) use zsh as their shell, not bash. That is fine. Almost everything in this tutorial works the same way in zsh, and I point out the places where I know it behaves different.
+Newer Macs (macOS Catalina and later) use zsh as their shell, not bash. That is fine. Almost everything in this tutorial works the same way in zsh, and I point out the places where I know it behaves differently.
 
 ### Linux
 
@@ -143,7 +145,7 @@ On my computer (WSL with Ubuntu), this prints:
 /bin/bash
 ```
 
-Your output may look a bit different. What matters is that you see a line that ends with `bash` or `zsh` (for example `/bin/zsh` on a newer Mac). If you see this, your terminal works.
+Your output may look a bit different. What matters is that you see a line that ends with `bash` or `zsh` (for example `/bin/zsh` on a newer Mac). If you see this, your terminal works and Check 1 is complete.
 
 ## Step 4: Check 2, log in to Crunchomics
 
@@ -208,18 +210,18 @@ If it still does not work, email me (see the box at the top of this page) and co
 
 ## Step 5: Choose a text editor for your notes
 
-While you work through the tutorial, you keep a notebook. Each time you run a command, you copy it into the notebook, with a short comment that says what it does and a few words about what you saw. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later. We write the notebook in **Markdown**, plain text with a few symbols for headings and code. You learn the few rules you need on day 1.
+While you work through the tutorial, you keep a notebook. Each time you run a command, you copy it into the notebook, with a short comment that says what it does and a few words about what you saw. This is the start of documenting your code: it lets you, and others, repeat and understand your analysis later. We write the notebook in **Markdown**, plain text with a few symbols for headings and code. You learn the few rules you need for the first part.
 
 For this you need a **plain text editor**, a program that saves only the text you type, without any layout. Do NOT use Word or a similar program. These programs change some characters, for example a straight quote `'` into a curly quote `’`. A command with a curly quote does not work anymore.
 
 Pick one of these options:
 
-- **RStudio** (recommended): it shows Markdown in color, and many of you already use it for R. Go to **File**, then **New File**, then **Markdown File**. This opens an empty Markdown file.
+- [**RStudio**](https://posit.co/downloads) (recommended): it shows Markdown in color, and many of you already use it for R. Go to **File**, then **New File**, then **Markdown File**. This opens an empty Markdown file.
 - **Notepad** (Windows, already installed) or [Notepad++](https://notepad-plus-plus.org/) (Windows, free, shows code in color).
 - **TextEdit** (Mac, already installed): first go to **Format**, then **Make Plain Text**, otherwise TextEdit saves the file with layout.
 - **Text Editor** or gedit (Linux, usually already installed).
 
-To check that it works, open your editor, create a new file, type a line of text and save it as `test.md`. You can delete this file afterwards: on day 1, we make the real notebook inside the project folder.
+To check that it works, open your editor, create a new file, type a line of text and save it as `test.md`. You can delete this file afterwards: in the first part, we make the real notebook inside the project folder.
 
 ## You are ready
 

@@ -214,7 +214,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, sharp corners, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, interior hidden, frame hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -268,10 +268,8 @@ Here is what you will do:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Get access to Crunchomics, the UvA computer cluster that we will use
-  in the second part of the tutorial. If you don't work at UvA but have
-  access to an HPC that uses SLURM you still can follow most of the
-  second part of this tutorial.
+  Get access to Crunchomics, the UvA HPC that we will use in the second
+  part of the tutorial.
 \item
   Install and open a terminal on your laptop.
 \item
@@ -282,7 +280,7 @@ Here is what you will do:
   Choose a text editor for your notes.
 \end{enumerate}
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, colback=white, toptitle=1mm, coltitle=black, opacitybacktitle=0.6, arc=.35mm, breakable, toprule=.15mm, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colframe=quarto-callout-important-color-frame]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, colback=white, rightrule=.15mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, breakable, toptitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Getting help}, bottomrule=.15mm, leftrule=.75mm, arc=.35mm]
 
 If something on this page does not work, please email Nina Dombrowski
 (n.dombrowski@uva.nl). Part of my job is to support IBED students and
@@ -306,8 +304,9 @@ In the second part of this tutorial, we work on \textbf{Crunchomics}, a
 high-performance computer (\textbf{HPC}) at the UvA. An HPC is a group
 of powerful computers that many people share. During this tutorial you
 will use it for analyses that are too large or too slow for your laptop.
-To be able to use Crunchomics, you first need to organize for an account
-to be made
+To use Crunchomics, you first need an account. If you don't work at UvA
+but have access to an HPC that uses SLURM you can still follow most of
+the second part of this tutorial.
 
 What you need to do depends on how you follow this tutorial. Choose the
 part that fits you.
@@ -363,7 +362,7 @@ are the same. This tutorial uses bash.
 \subsection{Windows}\label{windows}
 
 Windows does not come with a terminal that understands bash commands, so
-you need to install one. I recommend option 1.
+you need to install one:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -403,8 +402,7 @@ you need to install one. I recommend option 1.
   \begin{itemize}
   \tightlist
   \item
-    Installs a full Linux system inside Windows. We recommend Ubuntu,
-    which is the default and uses bash.
+    Installs a full Linux system inside Windows.
   \item
     This is a heavier installation. It needs more disk space and more
     computer resources than MobaXterm.
@@ -424,7 +422,12 @@ you need to install one. I recommend option 1.
 \subsubsection{Windows + MobaXterm: choose a permanent
 folder}\label{windows-mobaxterm-choose-a-permanent-folder}
 
-If you installed MobaXterm, please read the text below!
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, colback=white, rightrule=.15mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, breakable, toptitle=1mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{MobaXterm users: do this step, or you may lose your work}, bottomrule=.15mm, leftrule=.75mm, arc=.35mm]
+
+Depending on the edition, MobaXterm deletes your files when you close
+it. Follow the steps below once, right after you install MobaXterm.
+
+\end{tcolorbox}
 
 MobaXterm keeps two things in folders that you can choose:
 
@@ -443,9 +446,8 @@ MobaXterm keeps two things in folders that you can choose:
 Depending on the edition, MobaXterm keeps both in a temporary folder and
 \textbf{deletes them when you close MobaXterm} (the portable edition
 does this by default). Then all your work from day 1 would be gone on
-day 2, and you would have to install extra programs again every time.
-
-To prevent this, tell MobaXterm to use a normal folder on your computer.
+day 2, and you would have to install extra programs again every time. To
+prevent this, tell MobaXterm to use a normal folder on your computer.
 This has an extra advantage: you can find all your files from the
 tutorial in File Explorer.
 
@@ -505,7 +507,7 @@ open it, do one of these:
 
 Newer Macs (macOS Catalina and later) use zsh as their shell, not bash.
 That is fine. Almost everything in this tutorial works the same way in
-zsh, and I point out the places where I know it behaves different.
+zsh, and I point out the places where I know it behaves differently.
 
 \subsection{Linux}\label{linux}
 
@@ -544,7 +546,8 @@ On my computer (WSL with Ubuntu), this prints:
 
 Your output may look a bit different. What matters is that you see a
 line that ends with \texttt{bash} or \texttt{zsh} (for example
-\texttt{/bin/zsh} on a newer Mac). If you see this, your terminal works.
+\texttt{/bin/zsh} on a newer Mac). If you see this, your terminal works
+and Check 1 is complete.
 
 \section{Step 4: Check 2, log in to
 Crunchomics}\label{step-4-check-2-log-in-to-crunchomics}
@@ -662,7 +665,7 @@ says what it does and a few words about what you saw. This is the start
 of documenting your code: it lets you, and others, repeat and understand
 your analysis later. We write the notebook in \textbf{Markdown}, plain
 text with a few symbols for headings and code. You learn the few rules
-you need on day 1.
+you need for the first part.
 
 For this you need a \textbf{plain text editor}, a program that saves
 only the text you type, without any layout. Do NOT use Word or a similar
@@ -675,9 +678,10 @@ Pick one of these options:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{RStudio} (recommended): it shows Markdown in color, and many
-  of you already use it for R. Go to \textbf{File}, then \textbf{New
-  File}, then \textbf{Markdown File}. This opens an empty Markdown file.
+  \href{https://posit.co/downloads}{\textbf{RStudio}} (recommended): it
+  shows Markdown in color, and many of you already use it for R. Go to
+  \textbf{File}, then \textbf{New File}, then \textbf{Markdown File}.
+  This opens an empty Markdown file.
 \item
   \textbf{Notepad} (Windows, already installed) or
   \href{https://notepad-plus-plus.org/}{Notepad++} (Windows, free, shows
@@ -692,8 +696,8 @@ Pick one of these options:
 
 To check that it works, open your editor, create a new file, type a line
 of text and save it as \texttt{test.md}. You can delete this file
-afterwards: on day 1, we make the real notebook inside the project
-folder.
+afterwards: in the first part, we make the real notebook inside the
+project folder.
 
 \section{You are ready}\label{you-are-ready}
 

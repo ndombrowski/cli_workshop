@@ -177,7 +177,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, breakable, colback={codebgcolor}, boxrule=0pt, sharp corners, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, sharp corners, breakable, colback={codebgcolor}, frame hidden]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -214,10 +214,8 @@
 On day 2, we work on \textbf{Crunchomics}, the Genomics Compute
 Environment for SILS and IBED. Crunchomics is an \textbf{HPC}
 (high-performance computer): a group of powerful computers that many
-people share. If you work at IBED, you can get access to it by sending
-an email with your UvAnetID to Wim de Leeuw
-(\href{mailto:w.c.deleeuw@uva.nl}{\nolinkurl{w.c.deleeuw@uva.nl}}), as
-described on the \href{installation.qmd}{Before you start} page.
+people share. If you work at IBED, you can get access to it as described
+on the \href{installation.qmd}{Before you start} page.
 
 Working on an HPC is a bit different from working on your own computer.
 The figure below gives a simplified overview:
@@ -229,6 +227,10 @@ The figure below gives a simplified overview:
 \begin{itemize}
 \tightlist
 \item
+  You log in from your own computer with \texttt{ssh}, as in the check
+  on the \href{installation.qmd}{Before you start} page (the left arrow
+  in the figure).
+\item
   When you log in, you arrive on the \textbf{login node}, also called
   the \textbf{head node}. This computer is for preparing your work, for
   example moving and editing files and writing job scripts. It is not
@@ -236,11 +238,26 @@ The figure below gives a simplified overview:
 \item
   The analyses run on the \textbf{compute nodes}. These computers have
   many more CPUs and much more memory.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A \textbf{CPU} is what does the calculations, so more CPUs means
+    more work can get done at the same time.
+  \item
+    \textbf{Memory (RAM)} is the working space a program uses while it
+    runs.
+  \item
+    Memory is not the same as storage, which is where your files are
+    kept.
+  \end{itemize}
 \item
   In between is \textbf{SLURM}, a \textbf{workload manager} (also called
   a \textbf{scheduler}) that is used on many large HPCs. You send your
   analysis to SLURM as a \textbf{job}, and SLURM runs it on a compute
-  node. SLURM does three things:
+  node. In the figure, this is the arrow ``Submit to queue''.
+  \texttt{sbatch} and \texttt{srun} are the two commands that send a job
+  to SLURM. We use both on the next page. SLURM does three things:
 
   \begin{itemize}
   \tightlist
@@ -255,9 +272,7 @@ The figure below gives a simplified overview:
   \end{itemize}
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, toptitle=1mm, toprule=.15mm, leftrule=.75mm, left=2mm, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, arc=.35mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, bottomrule=.15mm, opacityback=0]
-
-\textbf{Crunchomics etiquette}
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, left=2mm, breakable, leftrule=.75mm, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, bottomrule=.15mm, bottomtitle=1mm, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, opacityback=0, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Crunchomics etiquette}]
 
 You share Crunchomics with many other people, so only ask for the
 resources that you actually use. There are no hard limits, but please
@@ -283,6 +298,9 @@ follow these rules:
   Close programs when you don't use them anymore, for example an R
   session
 \end{itemize}
+
+You learn how to ask for resources and time on the next page, please
+look back into the etiquette rules once you run your own analyses.
 
 \end{tcolorbox}
 
@@ -314,11 +332,18 @@ Good to know:
   If you need more space, or a shared folder for a larger project with
   several team members, contact the Crunchomics team
 \item
-  \textbf{Snapshots:} every day at midnight (00:00), Crunchomics makes a
-  \textbf{snapshot}, a saved copy of your files, and keeps it for 2
-  weeks. So if you delete a file by mistake, it can be restored for up
-  to 2 weeks. But this also means that files you delete still count
-  towards your storage limit for 2 weeks
+  \textbf{Snapshots:} Crunchomics automatically makes
+  \textbf{snapshots}, saved copies of your files, without you having to
+  do anything. It makes one every hour, which is kept for 24 hours, and
+  one every day around midnight, which is kept for a week. So if you
+  delete a file by mistake, you can still get it back for up to a week.
+  You can look at the snapshots and read the files in them in the hidden
+  \texttt{.zfs/snapshot} folder, for example with
+  \texttt{ls\ /zfs/omics/personal/\$USER/.zfs/snapshot}. But snapshots
+  also mean that files you delete still count towards your storage limit
+  until the last snapshot with them is removed. Keep this in mind if you
+  make many or large temporary files. If you need a file restored, or
+  snapshots removed to free up space, contact Wim de Leeuw
 \item
   Your data is stored on several disks, which protects it if one disk
   breaks. But it is not copied anywhere else. \textbf{Crunchomics is not
@@ -348,8 +373,9 @@ Good to know:
 
 On the next page, we copy the sequencing data from day 1 to Crunchomics
 and get read statistics with seqkit. Then we clean the reads with fastp,
-which we install ourselves with conda. On the way, we learn different
-ways to send jobs to the compute nodes with SLURM.
+which we install ourselves with conda, a tool to install software. On
+the way, we learn different ways to send jobs to the compute nodes with
+SLURM.
 
 
 

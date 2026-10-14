@@ -10,24 +10,24 @@ engine: knitr
 
 Tools like ChatGPT, Claude, Copilot or Gemini can write bash code in seconds, so why would you still want to learn how to use bash?
 
-For this, lets first understand what these tools are. Very briefly, all these tools are built on a **large language model (LLM)**: a program that has been trained on huge amounts of text, including a lot of code, and that writes an answer by predicting which words are likely to come next. On this page, I use "LLM" for all of these chat tools.
+For this, let's first understand what these tools are. Very briefly, all these tools are built on a **large language model (LLM)**: a program that has been trained on huge amounts of text, including a lot of code, and that writes an answer by predicting which words are likely to come next. On this page, I use "LLM" for all of these chat tools.
 
 LLMs are useful, and some of you may already use them. This page is about how to use them without losing control over your analysis. It is written based on my own experience using LLMs, for people who work with biological data and who have just started with the command line. You can read it after the workshop, at your own pace.
 
 The short version:
 
 -   **Learn the basics first**, with this tutorial, and don't let an LLM write code for you while you do. The basics give you the tools you need for all the other advice on this page
--   Especially while still learning but also when letting it generate code, use an LLM as a **tutor** that explains code, more than as a machine that writes code for you
+-   Both while you learn and later, use an LLM as a **tutor** that explains code, more than as a machine that writes code for you
 -   Treat every piece of code an LLM writes as a **first draft**: run it on one sample and check the output before you use it for real
 -   You need to be able to **explain** and **justify** every step of your analysis, whoever wrote the code
 -   You need to **understand** what each option of a tool does to your data. For the code around it, you can **check** that it does what you want with the simple commands from day 1
 
 ## Why learn the command line if an LLM can write the code?
 
-This is a fair question. My answer is that writing the code is only a small part of what is needed to be able to analyse our data. Even with an LLM, someone still has to:
+This is a fair question. In my opinion, even if you use an LLM, someone still has to:
 
--   **Run the code** in the right place: on the right computer, in the right folder, with the right paths, on the login node or as a job. The LLM does not know your folder structure, your file names or the HPC you work on
 -   **Read the code**, to know what it will do to your files before you run it. This means understanding details like how exactly the data is summarized or how the options of a command, for example fastp, affect your output
+-   **Run the code** in the right place: on the right computer, in the right folder, with the right paths, on the login node or as a job. The LLM does not know your folder structure, your file names or the HPC you work on
 -   **Check the input and output**: what does your input data look like, did every sample get processed, how many reads are left, does that make sense for your data?
 -   **Explain and justify** your choices: to your supervisor, to your co-authors, in the methods section of a paper. "The LLM chose this cutoff" is not really an acceptable answer if someone asks you about your choices
 
@@ -68,7 +68,7 @@ Everything on this page works with a free chat tool, such as UvA AI Chat: you pa
 
 ## How I suggest you use an LLM
 
-These are the rules I give the students I supervise:
+These are the rules I give the students I supervise for how to interact with an LLM. As I mentioned above, I advise students to not let an LLM write their code and not outsource their learning. Your internships are not only for you to produce results, they give you the time and space to learn about the process of producing good and reliable results. However, I am also aware that everyone has access to these tools, so these recommendations also cover how I would use LLMs for coding:
 
 -   **Ask it to explain, not only to write.** When you learn a new concept, you can even tell it not to write code, for example: "Give advice and best practices, but do NOT give me a code solution"
 -   **Ask specific questions.** Give it the actual command, the actual error message and the biological context. The more specific the question, the more useful the answer
@@ -78,16 +78,18 @@ These are the rules I give the students I supervise:
 -   **Check suggested options against the help page of the version you use.** An LLM has learned from documentation of many versions of a tool, often older ones. Remember from day 2: Crunchomics has fastp 1.0.1, and we installed 1.4.0. Options can change between versions. `fastp --help` on your own installation is always more reliable than an LLM's suggestion
 -   **Write down what each result means, in your own words.** Your notebook is not only a record of what you did. It is also a place to slow down and think. After each analysis step, write at least one sentence about what the result means for your data, for example: "fastp removed 3% of the reads" and also think about whether that number is something that you expected. Make sure to write this yourself, not with an LLM
 
-And the most important rule: **if you can't explain a step, don't use it yet.** It is completely fine to ask for help with a step you don't understand, from a person or from a LLM. Struggling with code is a normal part of learning.
+And the most important rule: **if you can't explain a step, don't use it yet.** It is completely fine to ask for help with a step you don't understand, from a person or from an LLM. Struggling with code is a normal part of learning.
 
 :::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 On day 2, we ran fastp without any filtering options. Let's use an LLM to find out whether it filtered all reads anyway:
 
-1.  Ask in the UvA AI Chat: "What does fastp do by default to filter reads? Which options control this, and what are their default values?" Write down its answer
+1.  Ask in UvA AI Chat (or another chat tool that you are allowed to use): "What does fastp do by default to filter reads? Which options control this, and what are their default values?" Write down its answer
 2.  On Crunchomics, activate the `fastp_1.4.0` environment and look at the help page. Find the options the LLM mentioned. Do the descriptions and default values match?
 3.  Deactivate the environment and look at the help page of the fastp 1.0.1 of Crunchomics. Is there anything different?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+**The help page of fastp 1.4.0 (question 2)**
+
 ```{bash}
 # Question 2: the help page of fastp 1.4.0
 conda activate fastp_1.4.0
@@ -123,13 +125,21 @@ In plain words:
 
 So yes: even without options, fastp filtered the reads on day 2. Your fastp report from day 2 shows how many reads were removed, and by which filter.
 
-Filtering is not the only thing that is on by default. The same help page says that adapter trimming is on by default (`-A` switches it off), while quality trimming with `--cut_front`, `--cut_tail` or `--cut_right` is off until you ask for it. So "fastp trims and filters my reads" is only half true, and which half depends on the option. This is exactly the kind of detail that an LLM easily blurs: its answer may sound right in general, mix up what is on and off, or describe an older version.
+Filtering is not the only thing that is on by default. The same help page says that adapter trimming is on by default (`-A` switches it off), while quality trimming with `--cut_front`, `--cut_tail` or `--cut_right` is off until you ask for it. So "fastp trims and filters my reads" is only half true, and which half depends on the option. This decides what "I ran fastp with default settings" actually means, for example in the methods section of a paper.
 
-For each step of your analysis, check in the help page whether it is on or off by default. This decides what "I ran fastp with default settings" actually means, for example in the methods section of a paper.
+**What two LLMs answered (question 1, October 2026)**
 
-Compare all this with what the LLM told you, and with the help page of the version you actually use. If they differ, the help page of your own installation wins.
+I asked this question to UvA AI Chat (with its default model) and to ChatGPT, and compared both answers with the help page of fastp 1.4.0. I used ChatGPT on purpose, without any memory of earlier chats, because it knows nothing about me. UvA AI Chat does remember my earlier conversations (see point 5 below). As a student, use UvA AI Chat (see the UvA rules above).
 
-For question 3, scrolling through two long help pages is tiring. Instead, we can save both in a file and let the computer compare them. `diff` compares two files line by line and prints only the lines that differ:
+1.  Both got every default value right, but they also didn't give me the full output of the help function. Checking this took me a few minutes, and that is the point: often the LLM is right and often it might only give you a partial answer based on what you asked. A quick look at the help page is how you know
+2.  Quality trimming was hidden in one answer, in a side note near the end, and missing from the other. Both answered the question I asked, which was about filtering. But for most of us, another relevant question is "were my reads trimmed?". With Illumina data, the quality often drops towards the end of the read, so you may want to cut those ends off. To ask about that, though, you first need to know it. As I mentioned in point 1, an LLM answers only what you ask. It may tell you only part of what matters for your data, and nothing in the answer tells you that something is missing. The help page doesn't depend on your question: it lists every option, including the ones that are off and the ones you didn't know to ask about.
+3.  Both wrote that fastp removes reads shorter than 15 bases "after trimming". That may well be true, but the help page doesn't say it. One answer also stayed vague ("fastp *can* discard a pair ... depending on ...") about what happens to the other read of a pair when one read fails, while the help page says clearly that it is discarded by default
+4.  Neither answer said which version of fastp it described
+5.  One answer ended with advice tailored to one of my own research projects, which I had not mentioned in the question. It assumed a different kind of data than the data I was asking about. The reason for that is that depending on your settings an LLM can remember earlier conversations. This can be useful for some things but you have to decide if this is what you want and whether this fits into the privacy rules of your organisation.
+
+**Differences between versions (question 3)**
+
+Scrolling through two long help pages is tiring. Instead, we can save both in a file and let the computer compare them. `diff` compares two files line by line and prints only the lines that differ:
 
 ```{bash}
 # Save the help page of each version in a file
@@ -144,7 +154,7 @@ diff help_1.0.1.txt help_1.4.0.txt
 
 On Crunchomics, this prints:
 
-```
+```         
 16c16
 <       --stdin                          input from STDIN. If the STDIN is interleaved paired-end FASTQ, please also add --interleaved_in.
 ---
@@ -159,21 +169,18 @@ On Crunchomics, this prints:
 
 Lines that start with `<` come from the first file (1.0.1), lines with `>` from the second file (1.4.0). The numbers above them say where in each file the lines are.
 
-So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to *know*, not to find a difference. Three other lines did change. The most interesting one is `--dimer_max_len`, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn't say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn't list this option at all (checked in October 2026). So even the official documentation online can lag behind the program. Yet another reason why the help page of your own installation wins.
+So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to *know*, not to find a difference. Three other lines did change. The most interesting one is `--dimer_max_len`, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn't say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn't list this option at all (checked in October 2026). So even the official documentation online can lag behind the program.
 
-**What two LLMs answered (October 2026)**
+**Key points**
 
-I asked this question to UvA AI Chat (with its default model) and to ChatGPT, and compared both answers with the help page of fastp 1.4.0:
-
-1.  Both got every default value right. Checking this took me a few minutes, and that is the point: often the LLM is right, and a quick look at the help page is how you know
-2.  Quality trimming was hidden in one answer, in a side note near the end, and missing from the other. Both answered the question I asked, which was about filtering. But for most of us, the practical question is "were my reads trimmed?", and that answer got lost. A useful follow-up question is "What does fastp *not* do by default?"
-3.  Both wrote that fastp removes reads shorter than 15 bases "after trimming". That may well be true, but the help page doesn't say it. One answer also stayed vague ("fastp *can* discard a pair ... depending on ...") about what happens to the other read of a pair when one read fails, while the help page says clearly that it is discarded by default
-4.  Neither answer said which version of fastp it described
-5.  One answer ended with advice tailored to one of my own research projects, which I had not mentioned in the question. It assumed a different kind of data than the data I was asking about. The reason for that is that depending on your settings an LLM can remember earlier conversations. This can be useful for some things but you have to decide if this is what you want and whether this fits into the privacy rules of your organisation.
+-   Often the LLM is right but it might also blur things in its response. A quick look at the help page is how you *know*
+-   An LLM answers only what you ask, and it won't tell you what you didn't ask. The help page lists every option, also the ones that are off
+-   "Default settings" only means something if you know what is on and what is off
+-   If the LLM, the online documentation and your help page differ, the help page of your own installation wins
 :::
 ::::
 
-::: {.callout-tip title="Tip: An LLM that looks something up has not always read the page" collapse="true"}
+::: {.callout-tip title="Tip: An LLM that looks something up has not always read the page (optional)" collapse="true"}
 Some LLM tools can search the web or open a link you give them. That sounds like they read the page, but often they don't read all of it. Some tools pass the page through a second, smaller model that summarises it, and the main model only sees that summary. Claude Code works like this, for example (checked in October 2026; other tools may work differently). An answer can also be based only on the short snippets that a search engine shows for each result.
 
 There is a good reason for this: a long web page is a lot of text to process, and a summary makes the answer faster and cheaper. So I don't expect this to disappear, even if the details change from tool to tool. And for many questions, a summary is all you need, for example "What is fastp used for?" or "Which tools are often used to trim reads?".
@@ -205,13 +212,13 @@ What is the difference between the -o and the -h option of fastp?
 Keep in mind that the answer you get can still be wrong. An explanation is easier to check than a full script, though: you can test each claim with a small command or by looking at the help function yourself.
 
 :::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-In the optional box at the end of the fastp section on day 2, we used this awk command:
+In the optional box at the end of the fastp section on day 2, we used this awk command (if you skipped that box, you don't have `stats_trimmed.txt`, but you can still do the checks in the answer on `stats_raw.txt`):
 
 ```{bash}
 awk -F'\t' 'FNR > 1 {print $1, $4, $7}' results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt
 ```
 
-1.  Paste the command into the UvA AI Chat and ask it to explain each part. This exercise is about practicing checking an answer from an LLM, not about getting the code answer.
+1.  Paste the command into UvA AI Chat (or another chat tool that you are allowed to use) and ask it to explain each part. This exercise is about practicing checking an answer from an LLM, not about getting the code answer.
 2.  Pick one thing the explanation claims, for example what `FNR > 1` does. How can you check this claim yourself, with the commands from day 1?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
@@ -230,8 +237,67 @@ awk -F'\t' 'FNR > 1 {print $1, $4, $7}' results/seqkit/stats_raw.txt | wc -l
 ```
 
 You don't need to know awk to do this. You only need to know what the output *should* look like. This is also a good example for how knowing basic bash commands allows you to perform the suggested checks yourself, no LLM needed.
+
+Another claim worth checking is what columns 1, 4 and 7 contain. When I asked ChatGPT (October 2026), its first answer showed an example row where column 7 was `Q30`. Further down, it did say that its examples were only illustrative. But if you skim a long answer, it is easy to miss that sentence and remember the example as a fact.
+
+The header line of the file tells you what each column really is:
+
+```{bash}
+# Print only the header line
+head -n 1 results/seqkit/stats_raw.txt
+```
+
+This prints:
+
+```         
+file    format  type    num_seqs        sum_len min_len avg_len max_len Q1      Q2      Q3      sum_gap N50       Q20(%)  Q30(%)  AvgQual GC(%)
+```
+
+If you count the columns, column 1 is `file`, column 4 is `num_seqs` and column 7 is `avg_len`, the average read length. So the command prints the file name, the number of reads and the average read length, not a quality value.
+
+What makes this mistake tricky is that the answer started out right. The command mentions `results/seqkit/`, and the example file in the answer began with the real seqkit column names: `file`, `format`, `type`, `num_seqs`. The example values for columns 2 to 6 also fit those columns. Only column 7 was suddenly a quality value. When the first part of an answer checks out, it is tempting to trust the rest as well. But an LLM doesn't get more reliable further into an answer, and one correct detail says nothing about the next one.
+
+So check the detail that matters to you, not the first one you can check. And whenever an answer depends on your own files, look at the file yourself, for example with `head`.
 :::
 ::::
+
+::: {.callout-tip title="Tip: When the answer is longer than you want to read (optional)" collapse="true"}
+LLM answers are often long. When I asked ChatGPT (October 2026) to explain the one-line awk command from the exercise above line by line, I got seven sections, two tables, example files and a summary at the end. I used ChatGPT without any memory of earlier chats on purpose, so it knew nothing about me except what I wrote in the question. Most of it was correct (the answer above shows one detail that was not). But the part I actually needed fits in one sentence, and it was near the top:
+
+```         
+Read two files, skip the first line of each file, and print columns 1, 4, and 7 from every remaining line.
+```
+
+The rest explained things like what the folder `results/` is, and why a biologist might want to use this command. The few details that really matter, such as how `FNR` is different from `NR`, were somewhere in the middle. If you are new to the command line, it is hard to tell which parts are important and which are filler. And scrolling through a long, well-written answer can feel like learning, even when not much of it sticks.
+
+You don't need a perfect question to avoid this. You can simply say what is wrong with the answer. I replied that most students would not read through this much text, and the second answer was much shorter. Its core was this table:
+
+```         
+Part                Meaning
+awk                 Reads and processes text, one line at a time.
+-F'\t'              Treats tabs as column separators.
+FNR > 1             Skips the first line of each file (usually the header).
+print $1, $4, $7    Prints columns 1, 4, and 7.
+stats_raw.txt       First input file.
+stats_trimmed.txt   Second input file.
+```
+
+That fits on one screen, and every line is something you can check. Other short follow-ups that work:
+
+```         
+Shorter please, max 5 lines.
+```
+
+```         
+Only explain what FNR > 1 does.
+```
+
+```         
+Which part of your answer should I check myself, and how?
+```
+
+Asking about one part at a time also makes each answer easier to check.
+:::
 
 ## Checking code with the commands from day 1
 
@@ -269,7 +335,7 @@ The idea: each read starts with a header line that begins with `@`, so counting 
 3.  Can you think of a reason why they don't match? Hint: look at the fastq format again. Which other line of a read could start with `@`?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
-On my computer (Git Bash on Windows), the `grep` command prints:
+On my computer (WSL on Windows), the `grep` command prints:
 
 ```         
 44882
@@ -370,7 +436,7 @@ I sort the problems from most to least serious.
 
 -   **The comments at the end of the lines break the command.** The `\` only joins two lines when it is the very last character on the line (we saw this on day 2). Here, spaces and a comment follow it. The `\` then only protects the space after it, and the command ends at the end of that line. fastp receives the input and output files, `--average_qual 20`, and one extra argument that is just a space. Bash then tries to run the lines that follow as commands of their own, and each attempt fails with `command not found`. The `--thread` line has no comment, so its `\` works again, and `--thread`, `--json` and `--html` end up together in one failing command. So fastp never gets the trimming options, `--thread`, `--json` or `--html`. I missed this myself when I first read the script, which shows that reading is not enough: you also have to run it on one sample and look at the output. See the next exercise for a small test.
 -   **The job reports success anyway.** The last line, `echo "Done"`, always works. A job counts as successful when its last command works, so SLURM reports every task as finished without problems. The errors are only visible in the `.err` files. (With `set -euo pipefail` at the top of the script, it would have stopped at the first `command not found`, and SLURM would have reported the task as failed. fastp would still have run once with the incomplete options before that. See the tip on `set -euo pipefail` further down.)
--   **The `logs` folder is made too late.** SLURM opens the log files before the script starts. If the `logs` folder doesn't exist yet, the job can't write its log files and fails without leaving a trace. Make the folder before you run `sbatch`, as we did on day 2.
+-   **The `logs` folder is made too late.** SLURM opens the log files before the script starts, so the `mkdir` for `logs` inside the script comes too late to matter. On Crunchomics, SLURM then makes a missing `logs` folder itself, but inside the folder where you typed `sbatch`, which is not always where you expect your logs (we saw this on day 2). Make the folder before you run `sbatch`, as we did on day 2, so that you know where your logs end up.
 
 **2. It makes assumptions about your data**
 
@@ -401,7 +467,7 @@ echo fastp \
 echo "Done"
 ```
 
-Then run it with `bash comment_test.sh`. On my computer (Git Bash on Windows), this prints:
+Then run it with `bash comment_test.sh`. On my computer (WSL with Ubuntu), this prints:
 
 ```         
 fastp --in1 Sample-DUMMY1_R1.fastq.gz
@@ -410,7 +476,7 @@ comment_test.sh: line 4: --thread: command not found
 Done
 ```
 
-The first line shows the full command that fastp would receive: only the R1 file. The R2 file and `--thread` never reach it.
+The first line shows the full command that fastp would receive: only the R1 file. The R2 file and `--thread` never reach it, and bash simply continues with the next lines. In the worked example, this is what makes the mistake dangerous: fastp still gets the input and output files and `--average_qual 20`, so it runs, writes trimmed files, and SLURM reports success. The output looks normal, but it was made without the trimming options you asked for.
 
 ## Less code is often better
 
@@ -505,6 +571,7 @@ There are several good answers. This one keeps the array, and takes the sample n
 #SBATCH --output=logs/fastp_array_%A_%a.out
 #SBATCH --error=logs/fastp_array_%A_%a.err
 #SBATCH --array=1-4
+#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=5G
 #SBATCH --time=01:00:00
@@ -546,7 +613,7 @@ When your code crashes or gives strange results, it is tempting to paste everyth
 
 1.  **Read the error message.** As on day 1: which command complains, and about which file? Often, the message already tells you what is wrong
 2.  **Narrow it down.** Bugs are almost always small and in one place. Run the steps one by one. Put `echo` in front of a command to see what bash actually runs, or `echo $sample` to see what is in a variable
-3.  **Then ask a specific question.** Give the LLM the one command that fails, the exact error message and a few lines of the input (no real data, see above). Ask what the error means, not for a new script
+3.  **Then ask a specific question.** Give the LLM the one command that fails, the exact error message and a few lines of the input (replace anything sensitive, see above). Ask what the error means, not for a new script
 
 A rewritten script may run without errors, but you then have to check all of it again, and you have learned nothing about why the first version failed.
 

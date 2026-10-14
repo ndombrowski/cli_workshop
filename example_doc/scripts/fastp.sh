@@ -2,6 +2,7 @@
 #SBATCH --job-name=fastp
 #SBATCH --output=logs/fastp_%j.out
 #SBATCH --error=logs/fastp_%j.err
+#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=5G
 #SBATCH --time=01:00:00

@@ -169,6 +169,13 @@ attachment) with the hidden command at the end of index.qmd.
 
 ### Done
 
+- DONE 2026-10-14 (read-through by Nina): ls -l section now defines "access modes" in plain words
+  (who can do what to a file or folder). New optional tip "Reading the access modes" after img/ls2.png:
+  d/-, owner/group/others, r/w/x (x on a folder = open it), owner + group columns, and Permission
+  denied on a colleague's file = ask the owner (example line taken from img/ls2.png).
+  Same read-through: MobaXterm note in "Getting help" (no man pages; use --help or
+  man7.org, --help in MobaXterm not tested yet). The Desktop/OneDrive tip keeps /mnt/c (MobaXterm
+  also accepts it; /drives/c not mentioned, to keep it simple).
 - DONE 2026-10-09: img/filesystem.png redrawn as /home/username/data_analysis (data, results, scripts)
   instead of /users/john/portfolio; the cd section text matches (absolute/relative path examples use
   data, plus a note that Mac paths start with /Users). Source: img/filesystem.svg.
@@ -218,6 +225,17 @@ attachment) with the hidden command at the end of index.qmd.
 
 ### Done
 
+- DONE 2026-10-14: hpc_howto.qmd wildcard scp tip: the old Mac/zsh notice (\scp, noglob, quoted LOCAL
+  wildcard) replaced by a note on quoting a REMOTE wildcard (download direction), based on
+  unix.stackexchange.com/questions/27419. Quoted remote command tested by Nina in WSL (bash). The zsh
+  "no matches found" claim is not tested on a Mac. Also added: second terminal for WSL2 (+ / arrow ->
+  Ubuntu) and Mac (Command-N, Apple guide), and rm -r transfer_test at the end of the tip.
+- DONE 2026-10-14: hpc_intro.qmd snapshot rules updated (from Nina): hourly snapshots kept 24 h, daily
+  (around midnight) kept 1 week, automatic. Browse/read them in .zfs/snapshot of the share.
+  ls /zfs/omics/personal/$USER/.zfs/snapshot checked by Nina on 2026-10-14 (lists autosnap_..._daily
+  and autosnap_..._hourly folders). No "restore with cp" on purpose (unclear what that does if new files
+  were made since): restoring files and removing snapshots go via Wim de Leeuw.
+  Confirmed by Nina: 5 nodes, 64 CPUs and 512 GB memory each, home 25 GB, personal 500 GB.
 - DONE 2026-10-09: compute node names differed (img/crunchomics1.png said omics-h01-h05, hpc_intro.qmd
   says omics-cn001 - omics-cn005; cn is right, still 5 nodes). crunchomics1.png now says
   "omics-cn001 to omics-cn005" and the "Resources" part is cropped off (it called the 500 GB folder a
@@ -592,6 +610,11 @@ Exception (2026-10-13): "License" and "Use of AI tools" are only in readme.md.
   1. Full test run of ALL code on the course data (local + Crunchomics), including answers that
      "obviously work" (e.g. the LLM page answer scripts: sed -n array script, awk exercise).
      Replace or confirm outputs on the pages. The untested items are listed in the LLM page To do.
+     STATUS 2026-10-14: first full pass done. Nina ran all code on all pages (index to llm_usage),
+     local (WSL + MobaXterm) and on Crunchomics, and fixed what broke. Still open: Mac (zsh) is not
+     tested at all; fastp report numbers in the hpc_howto fastp exercise answer (89,692 reads before
+     filtering, 496 pairs removed) not checked against the report. Plan: one more run of all code
+     on the final version, once all text changes are done, because text changes can touch code.
   2. Final review round for length and voice (LLM page grew one review point at a time; read it
      once as a participant would and cut what is not essential). Reread first-person sentences
      ("I ...") written by Claude: do they still describe what Nina did?
@@ -600,6 +623,14 @@ Exception (2026-10-13): "License" and "Use of AI tools" are only in readme.md.
      each exercise box (outside the answer)? Pro: scanners get the point. Con (Nina): readers may
      then skip the details. Also: "whether it filtered all reads anyway" (default filtering
      exercise intro) reads as "removed all reads"; maybe "whether it filtered reads at all".
+     STATUS 2026-10-14: a read-through from the student side is done for every page (Claude in the
+     role of a participant, Nina applied or approved the fixes), about clarity, undefined terms and
+     errors. Voice: done by Nina in the same read-through. She checked the "I ..." sentences and
+     extended some in her own voice (e.g. llm_usage.qmd, "These are the rules I give the students I
+     supervise ..."). DECIDED 2026-10-14 (Nina, after rereading): no length cut for the LLM page.
+     This page benefits from the extra length: the worked examples show both where LLMs help and
+     where they go wrong, and why reading and checking code matters. Still open: the one-line
+     takeaway question above.
   3. After the final version: git tag for the 2026 workshop (e.g. `workshop-2026`), so the next
      year's update can start from / compare with it. Wording reviews in between are not tagged.
 - License ownership (added 2026-10-13): CC BY 4.0 chosen (LICENSE, readme.md "License" section,
