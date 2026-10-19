@@ -16,6 +16,8 @@ The link above shows you:
 
 In the example, the notebook has its own folder, `notebook/`, next to the `scripts/` folder. In the tutorial, you kept your `notes.md` directly in `data_analysis/`. Both work. A separate folder keeps a bigger project tidy, but all commands still run from the project folder itself.
 
+The example also leaves out some steps that you wrote down during the workshop. This is on purpose. In the workshop, you worked on two computers: you downloaded the data on your own computer and copied it to Crunchomics with `scp`. In the example, I download the data directly on Crunchomics, so everything runs in one place. That is why the example has no `# On my computer` or `# On Crunchomics` comments, no `ssh` and `scp` commands, and no "Setting up on Crunchomics" section. I also moved a few steps: the line counts from day 1 and the `samples.txt` list are both part of "Looking at the data", because I like to make all list files and first checks in one place. In your own notes, keep the location comments whenever you work on more than one computer.
+
 The example uses the same data as this tutorial, so the code might only make sense after you have finished the tutorial. Feel free to come back to this page after you have written some code yourself.
 
 This is just one example to get you started. Your own notebook might look different, depending on your needs.

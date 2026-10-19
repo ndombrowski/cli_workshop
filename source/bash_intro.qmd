@@ -271,6 +271,8 @@ touch data_analysis/notes.md
 ```
 ````
 
+**Type this into `notes.md` and save it.** From now on, we add to the notebook while we learn new commands.
+
 Markdown can do more, for example lists, links and tables. You don't need these for the workshop, but if you are curious, [Markdown Basics](https://quarto.org/docs/authoring/markdown-basics.html) on the Quarto website gives an overview.
 
 From now on, you find a blue notebook box at the end of each part of the tutorial. It tells you what to add to your notebook. For the first few, you can compare your notes with mine. Your notes do not have to look the same as mine, as long as future you understands them.
@@ -476,7 +478,7 @@ A relative path starts from the folder I am in, so it only works from the right 
 Next, let's use `wget` to download our sequencing data, a file called `seq_project.tar.gz`. Make sure that you are inside your `data_analysis` folder (check with `pwd`), because `wget` saves the file in the folder you are currently in:
 
 ```{bash}
-# Download data using link provided by the sequencing center XYZ on 23.01.2023
+# Downloaded from GitHub (link provided by course instructor), on <today's date>
 wget https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
 ```
 
@@ -743,7 +745,7 @@ Add a new heading `## Getting the data` to `notes.md`, and below it:
 
 ```bash
 # Download the data
-# Link from the sequencing center XYZ, received by email on 23.01.2023
+# Downloaded from GitHub (link provided by course instructor), on 01.11.2026
 cd ~/data_analysis
 wget https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz
 
@@ -1524,7 +1526,7 @@ nano scripts/count_lines.sh
 **MobaXterm users:** if you see `nano: command not found`, install it first with `apt install nano`, as explained in that tip.
 
 Type or copy the following into the editor:
-code s
+
 ```{bash}
 #!/bin/bash
 
@@ -1582,7 +1584,7 @@ If you like writing in RStudio, you can write the script there and copy it into 
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Counting lines per file"}
 Add a new heading `## Counting lines per file` to `notes.md`, and below it:
 
-1.  The command that ran the script, with a comment that says what the script does and which file it makes. We use `results/counts/line_counts_bash.txt` again on day 2
+1.  The command that ran the script, with a comment that says what the script does and which file it makes. We use `results/counts/line_counts_bash.txt` again on day 2. You don't need the code that made `line_counts.txt`, because it has the same content. One line that says where it came from is enough.
 2.  The check you ran afterwards, and below the code block, what you expected and what you saw
 
 You don't need to copy the loop itself into your notebook, because it is saved in `scripts/count_lines.sh`. The script is part of your documentation. Your notebook only needs to say which script you ran and what it made.

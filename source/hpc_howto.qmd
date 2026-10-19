@@ -226,7 +226,7 @@ The quotes stop the shell on your own computer from looking for these files, so 
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Setting up on Crunchomics"}
 Today you keep writing in the same `notes.md` on your own computer. You copy the commands from the terminal that is logged in to Crunchomics into it.
 
-Since you now work on two computers, your notebook needs to say **where** each command ran. Start  code blocks where you switch terminals with a comment: `# On my computer` or `# On Crunchomics`.
+Since you now work on two computers, your notebook needs to say **where** each command ran. Start code blocks where you switch terminals with a comment: `# On my computer` or `# On Crunchomics`.
 
 Add a new heading `## Setting up on Crunchomics`, and below it:
 
