@@ -369,6 +369,7 @@ ul.task-list li input[type="checkbox"] {
 <li>What a code notebook can look like. The notebook is a Quarto file, which you find <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/notebook/example_notebook.qmd">here</a>. To make it easier to read for collaborators, I also turned it into an <a href="https://ndombrowski.github.io/cli_workshop/example_doc/notebook/example_notebook.html">HTML report</a>.</li>
 </ul>
 <p>In the example, the notebook has its own folder, <code>notebook/</code>, next to the <code>scripts/</code> folder. In the tutorial, you kept your <code>notes.md</code> directly in <code>data_analysis/</code>. Both work. A separate folder keeps a bigger project tidy, but all commands still run from the project folder itself.</p>
+<p>The example also leaves out some steps that you wrote down during the workshop. This is on purpose. In the workshop, you worked on two computers: you downloaded the data on your own computer and copied it to Crunchomics with <code>scp</code>. In the example, I download the data directly on Crunchomics, so everything runs in one place. That is why the example has no <code># On my computer</code> or <code># On Crunchomics</code> comments, no <code>ssh</code> and <code>scp</code> commands, and no “Setting up on Crunchomics” section. I also moved a few steps: the line counts from day 1 and the <code>samples.txt</code> list are both part of “Looking at the data”, because I like to make all list files and first checks in one place. In your own notes, keep the location comments whenever you work on more than one computer.</p>
 <p>The example uses the same data as this tutorial, so the code might only make sense after you have finished the tutorial. Feel free to come back to this page after you have written some code yourself.</p>
 <p>This is just one example to get you started. Your own notebook might look different, depending on your needs.</p>
 <p>Below, you find some hints on what to put into the different sections of the notebook.</p>
@@ -400,7 +401,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In the example above, I use Markdown not only to document my code, but also to add notes wherever I need them. Here, I wrote down what the results of seqkit stats and the fastp HTML reports actually told me.</p>
 <p>This kind of documentation can be useful for:</p>
 <ul>
-<li>Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, when I looked at the FastP HTML report I noticed a dip in quality at the end of the sequence reads. Based on that I normally would make a decision to adjust re-run FastP and enable trimming of the reads.</li>
+<li>Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, when I looked at the fastp HTML report I noticed a dip in quality at the end of the sequence reads. Based on that I normally would make a decision to adjust re-run fastp and enable trimming of the reads.</li>
 <li>Future you. If you read the report a month, or a year, later you have the key information in your report and don’t have to open any files or tables that are located elsewhere</li>
 </ul>
 </section>
@@ -427,6 +428,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Save the file and click <strong>Render</strong></li>
 </ol>
 <p>Code blocks that you wrote as <code>```bash</code>, like in your notes, are only shown on the page, not run. The <a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto tutorial for RStudio</a> explains the next steps.</p>
+<p>If you already use <strong>R Markdown</strong> (files that end in <code>.Rmd</code>), that works too. R Markdown is the older format that Quarto grew out of, and its code blocks and YAML header look almost the same. For a new notebook, I would start with Quarto: R Markdown is still maintained, but new features now go into Quarto.</p>
 </section>
 <section id="further-reading" class="level3">
 <h3 class="anchored" data-anchor-id="further-reading">Further reading</h3>
@@ -879,7 +881,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-10-13</p>
+Last modified: 2026-10-22</p>
 <div class="toc-actions"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

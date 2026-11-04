@@ -1,6 +1,7 @@
 data/
 /.quarto/
 data_analysis/
+_tests/
 CLAUDE.md
 .claude/settings.local.json
 .vscode/

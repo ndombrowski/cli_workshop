@@ -1636,6 +1636,7 @@ Important
 <div class="callout-body-container callout-body">
 <p>In scripts that you find online, or that an AI tool writes for you, variables are often written in quotes, for example <code>"$sample"</code>. That is a good habit in general. But be careful with wildcards. Inside quotes, bash does not replace the <code>*</code> with the matching file names. With <code>-i "data/seq_project/*/${sample}_R1.fastq.gz"</code>, fastp would look for a folder that is literally called <code>*</code>, and stop with an error.</p>
 <p>That is why we write the input paths without quotes, directly in the fastp command. Our names contain no spaces, so this is safe here.</p>
+<p>Why quotes around variables are a good habit is explained in the tip “Quotes” in the day 1 section “<code>echo</code> and variables”.</p>
 </div>
 </div>
 </div>
@@ -2442,7 +2443,7 @@ Important
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-10-14</p>
+Last modified: 2026-11-04</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_howto.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

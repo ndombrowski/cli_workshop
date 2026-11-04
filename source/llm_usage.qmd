@@ -4,6 +4,7 @@ code-block-border-left: "#31BAE9"
 execute:
   eval: false
 engine: knitr
+bibliography: references.bib
 ---
 
 # Using LLMs to understand and check code
@@ -620,5 +621,6 @@ A rewritten script may run without errors, but you then have to check all of it 
 ## Further reading
 
 -   [On GenAI usage](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html), at the end of the IBED for-loops page: what to look out for in loops written by an LLM
+-   @auslander2026, [Ten simple rules for responsible use of AI and LLMs in computational biology](https://doi.org/10.1371/journal.pcbi.1014882): many of the points on this page, written for researchers, plus rules on figures, statistics and manuscripts that go beyond this workshop
 -   The UvA's [AI literacy course for students](https://edu.nl/gakhm): what generative AI is, how it works and what its limits are (about 45 to 60 minutes)
 -   [UvA AI Chat](https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html) and the UvA [rules for students](https://student.uva.nl/en/information/ai-tools-and-your-studies)

@@ -31,7 +31,7 @@ announcement email (`_preworkshop_instructions.md`).
 | 35 min | Repeating things | Variables. Simple loop over a wildcard (`echo` first, then `zcat \| wc -l` for each file). `>>` to collect the counts in one file. Save the loop in a `.sh` file and run it with `bash` (prepares for `sbatch`).. Notebook checkpoint 4 at the end (no model notes from here on; the script itself is documentation). |
 | 10 min | Wrap-up | Notebook checkpoint 5 "Tidy your notebook": short description at the top, reread, every-file check, `## Questions for day 2`. |
 
-**Optional:** `nano`, advanced counting tips, sample mapping tip. (`sort` / `uniq` and `cat` stay core: commands participants meet regularly in real work, decided 2026-10-08.)
+**Optional:** `nano`, advanced counting tips, sample mapping tip, quotes tip (after the variables section: word splitting with `echo $var | cut`, double vs single quotes, wildcards in quotes; added 2026-11-04, output from a WSL test run). (`sort` / `uniq` and `cat` stay core: commands participants meet regularly in real work, decided 2026-10-08.)
 
 ## Day 2: working on Crunchomics (about 3h50)
 

@@ -177,7 +177,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, sharp corners, breakable, colback={codebgcolor}, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, colback={codebgcolor}, sharp corners, breakable, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -272,7 +272,7 @@ The figure below gives a simplified overview:
   \end{itemize}
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, left=2mm, breakable, leftrule=.75mm, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, bottomrule=.15mm, bottomtitle=1mm, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, opacityback=0, coltitle=black, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Crunchomics etiquette}]
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, bottomtitle=1mm, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Crunchomics etiquette}, arc=.35mm, toptitle=1mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, opacityback=0, breakable, colframe=quarto-callout-important-color-frame, rightrule=.15mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, colback=white, toprule=.15mm]
 
 You share Crunchomics with many other people, so only ask for the
 resources that you actually use. There are no hard limits, but please

@@ -7,27 +7,26 @@ engine: knitr
 bibliography: references.bib
 ---
 
-<div style="text-align: justify">
-
+:::::: {style="text-align: justify"}
 # Before you start
 
 On this page you set up everything you need for this tutorial. It takes about 30 to 60 minutes.
 
-- **If you join the in-person workshop:** please do this at home before day 1. Then we can use the time in class for the commands themselves.
-- **If you follow the tutorial on your own:** do this before you start with the first chapter.
+-   **If you join the in-person workshop:** please do this at home before day 1. Then we can use the time in class for the commands themselves.
+-   **If you follow the tutorial on your own:** do this before you start with the first chapter.
 
 Here is what you will do:
 
-1. Get access to Crunchomics, the UvA HPC that we will use in the second part of the tutorial. 
-2. Install and open a terminal on your laptop.
-3. Run check 1: test that your terminal works.
-4. Run check 2: log in to Crunchomics and log out again.
-5. Choose a text editor for your notes.
+1.  Get access to Crunchomics, the UvA HPC that we will use in the second part of the tutorial.
+2.  Install and open a terminal on your laptop.
+3.  Run check 1: test that your terminal works.
+4.  Run check 2: log in to Crunchomics and log out again.
+5.  Choose a text editor for your notes.
 
 ::: callout-important
 ## Getting help
 
-If something on this page does not work, please email Nina Dombrowski (n.dombrowski@uva.nl). Part of my job is to support IBED students and researchers with bioinformatics, so you can also contact me if you follow this tutorial on your own, or if you run into problems later.
+If something on this page does not work, please email Nina Dombrowski (n.dombrowski\@uva.nl). Part of my job is to support IBED students and researchers with bioinformatics, so you can also contact me if are working within IBED and if you follow this tutorial on your own, or if you run into problems later.
 
 If you join the workshop, please contact me **at the latest a few days before the workshop**. That way we can solve any problems you have with the setup before the actual workshop begins.
 
@@ -40,25 +39,23 @@ In the second part of this tutorial, we work on **Crunchomics**, a high-performa
 
 What you need to do depends on how you follow this tutorial. Choose the part that fits you.
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### I join the workshop
 
 You do not need to request an account yourself. You already gave us the information we need when you signed up for the workshop, and we request the accounts for all participants together.
 
-- We will send you an email once the accounts are ready. After that, you can do Check 2 below.
-- If you do not have this email a few days before the workshop, please contact Nina Dombrowski (n.dombrowski@uva.nl).
+-   We will send you an email once the accounts are ready. After that, you can do Check 2 below.
+-   If you do not have this email a few days before the workshop, please contact Nina Dombrowski (n.dombrowski\@uva.nl).
 
 ### I follow the tutorial on my own
 
-Getting an account usually takes 1 to 3 days, so do this step first. To request access, send an email to Wim de Leeuw (W.C.deLeeuw@uva.nl) with the following information:
+Getting an account usually takes 1 to 3 days, so do this step first. To request access, send an email to Wim de Leeuw (W.C.deLeeuw\@uva.nl) with the following information:
 
-- Ask for access to the Crunchomics HPC.
-- Include your **UvAnetID** (the ID you use to log in to UvA systems).
-- Put your PI or supervisor in cc. Each account needs to be linked to a permanent staff member.
+-   Ask for access to the Crunchomics HPC.
+-   Include your **UvAnetID** (the ID you use to log in to UvA systems).
+-   Put your PI or supervisor in cc. Each account needs to be linked to a permanent staff member.
 
 You get an email back once your account is ready. You need the account for Check 2 below.
-
 :::
 
 ## Step 2: Install or open a terminal
@@ -69,19 +66,19 @@ For this tutorial you need a **terminal**: a window in which you type **commands
 
 Windows does not come with a terminal that understands bash commands, so you need to install one:
 
-1. **MobaXterm** (recommended)
-    - A terminal program with the most common Linux commands built in. It can also connect to an HPC.
-    - Small and easy to install. This is the best option if you are new to the command line.
-    - Follow these installation instructions: [MobaXterm setup](https://hpc.ncsu.edu/Documents/mobaxterm.php). The free Home Edition is all you need.
-    - The Home Edition comes in two versions: the **installer edition** and the **portable edition**. Both work for this tutorial. The portable edition does not need administrator rights, so choose it if you cannot install software on your computer (for example on a UvA computer). You unzip it and start MobaXterm from that folder.
-    - After you install it, open MobaXterm and click on **Start local terminal**.
-    - Then change two settings, see "MobaXterm: choose a permanent folder" below.
-2. **Windows Subsystem for Linux (WSL2)**
-    - Installs a full Linux system inside Windows. 
-    - This is a heavier installation. It needs more disk space and more computer resources than MobaXterm.
-    - Choose this option if you are comfortable with installing software, or if you already use the command line.
-    - Follow the installation instructions from Microsoft: [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
-    - After you install it, open the **Ubuntu** app from the Start menu.
+1.  **MobaXterm** (recommended)
+    -   A terminal program with the most common Linux commands built in. It can also connect to an HPC.
+    -   Small and easy to install. This is the best option if you are new to the command line.
+    -   Follow these installation instructions: [MobaXterm setup](https://hpc.ncsu.edu/Documents/mobaxterm.php). The free Home Edition is all you need.
+    -   The Home Edition comes in two versions: the **installer edition** and the **portable edition**. Both work for this tutorial. The portable edition does not need administrator rights, so choose it if you cannot install software on your computer (for example on a UvA computer). You unzip it and start MobaXterm from that folder.
+    -   After you install it, open MobaXterm and click on **Start local terminal**.
+    -   Then change two settings, see "MobaXterm: choose a permanent folder" below.
+2.  **Windows Subsystem for Linux (WSL2)**
+    -   Installs a full Linux system inside Windows.
+    -   This is a heavier installation. It needs more disk space and more computer resources than MobaXterm.
+    -   Choose this option if you are comfortable with installing software, or if you already use the command line.
+    -   Follow the installation instructions from Microsoft: [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+    -   After you install it, open the **Ubuntu** app from the Start menu.
 
 #### Windows + MobaXterm: choose a permanent folder
 
@@ -93,17 +90,17 @@ Depending on the edition, MobaXterm deletes your files when you close it. Follow
 
 MobaXterm keeps two things in folders that you can choose:
 
-- Your **home directory**: your personal folder in the terminal, which MobaXterm calls `/home/mobaxterm`. This is where you work during the tutorial.
-- The **root directory** `/`: the system part of the terminal. Extra programs that you install into MobaXterm (for example the text editor `nano`) are stored here.
+-   Your **home directory**: your personal folder in the terminal, which MobaXterm calls `/home/mobaxterm`. This is where you work during the tutorial.
+-   The **root directory** `/`: the system part of the terminal. Extra programs that you install into MobaXterm (for example the text editor `nano`) are stored here.
 
 Depending on the edition, MobaXterm keeps both in a temporary folder and **deletes them when you close MobaXterm** (the portable edition does this by default). Then all your work from day 1 would be gone on day 2, and you would have to install extra programs again every time. To prevent this, tell MobaXterm to use a normal folder on your computer. This has an extra advantage: you can find all your files from the tutorial in File Explorer.
 
-1. **Make a new folder.** Open File Explorer and go to **This PC**, then the **C: drive**, then **Users**, then the folder with your user name. Make a new folder there and call it `MobaXterm_home`. The full path is then `C:\Users\YourUserName\MobaXterm_home`.
-2. **Tell MobaXterm to use it.** In MobaXterm, click on **Settings** in the top toolbar, then **Configuration**, and go to the **General** tab. Choose your new folder in two places:
-    - Next to **Terminal home directory**, click on the yellow folder icon and choose `MobaXterm_home`.
-    - Next to **Terminal root (/) directory**, click on the yellow folder icon and choose `MobaXterm_home` as well.
-    - MobaXterm then shows the folders as `_ProfileDir_\MobaXterm_home` and `_ProfileDir_\MobaXterm_home\slash`. That is fine: `_ProfileDir_` is MobaXterm's short name for `C:\Users\YourUserName`. 
-3. Click **OK**. Close MobaXterm and open it again.
+1.  **Make a new folder.** Open File Explorer and go to **This PC**, then the **C: drive**, then **Users**, then the folder with your user name. Make a new folder there and call it `MobaXterm_home`. The full path is then `C:\Users\YourUserName\MobaXterm_home`.
+2.  **Tell MobaXterm to use it.** In MobaXterm, click on **Settings** in the top toolbar, then **Configuration**, and go to the **General** tab. Choose your new folder in two places:
+    -   Next to **Terminal home directory**, click on the yellow folder icon and choose `MobaXterm_home`.
+    -   Next to **Terminal root (/) directory**, click on the yellow folder icon and choose `MobaXterm_home` as well.
+    -   MobaXterm then shows the folders as `_ProfileDir_\MobaXterm_home` and `_ProfileDir_\MobaXterm_home\slash`. That is fine: `_ProfileDir_` is MobaXterm's short name for `C:\Users\YourUserName`.
+3.  Click **OK**. Close MobaXterm and open it again.
 
 Why I would not recommend setting this to the Desktop or the Documents folder: On many computers, these folders are synced with **OneDrive**. OneDrive tries to upload every file you make there, and sequencing data can get large. A folder directly in your user folder is not synced.
 
@@ -111,8 +108,8 @@ Why I would not recommend setting this to the Desktop or the Documents folder: O
 
 Every Mac comes with a terminal. You do not need to install anything. To open it, do one of these:
 
-- In Finder, go to **Go**, then **Utilities**, and open **Terminal**.
-- Or press Cmd + Space to open Spotlight, type `Terminal` and press Return.
+-   In Finder, go to **Go**, then **Utilities**, and open **Terminal**.
+-   Or press Cmd + Space to open Spotlight, type `Terminal` and press Return.
 
 Newer Macs (macOS Catalina and later) use zsh as their shell, not bash. That is fine. Almost everything in this tutorial works the same way in zsh, and I point out the places where I know it behaves differently.
 
@@ -141,7 +138,7 @@ echo $SHELL
 
 On my computer (WSL with Ubuntu), this prints:
 
-```
+```         
 /bin/bash
 ```
 
@@ -155,8 +152,8 @@ Do this check once you have the email that your Crunchomics account is ready (se
 
 You can only connect to Crunchomics from the UvA network:
 
-- At the UvA, use the **eduroam** Wi-Fi. The open Amsterdam Science Park Wi-Fi does not work.
-- From home or anywhere else, connect to the **UvA VPN** first. If you have not set up the VPN, or it does not work, contact the UvA ICT service desk.
+-   At the UvA, use the **eduroam** Wi-Fi. The open Amsterdam Science Park Wi-Fi does not work.
+-   From home or anywhere else, connect to the **UvA VPN** first. If you have not set up the VPN, or it does not work, contact the UvA ICT service desk.
 
 ### Log in
 
@@ -169,16 +166,16 @@ ssh uvanetid@omics-h0.science.uva.nl
 
 What the parts mean:
 
-- `ssh` (secure shell) is the command that connects your terminal to another computer.
-- `uvanetid@` tells Crunchomics who you are.
-- `omics-h0.science.uva.nl` is the address of the computer you connect to.
+-   `ssh` (secure shell) is the command that connects your terminal to another computer.
+-   `uvanetid@` tells Crunchomics who you are.
+-   `omics-h0.science.uva.nl` is the address of the computer you connect to.
 
 Two things that surprise most people the first time:
 
-- The first time you connect, you may get a question that ends with `Are you sure you want to continue connecting (yes/no/[fingerprint])?`. Type `yes` and press Enter. Your computer then remembers Crunchomics and does not ask again.
-- Then you are asked for your password. Use your UvA password. **While you type the password, nothing appears on the screen.** No dots, no stars. That is normal. Type the password and press Enter.
+-   The first time you connect, you may get a question that ends with `Are you sure you want to continue connecting (yes/no/[fingerprint])?`. Type `yes` and press Enter. Your computer then remembers Crunchomics and does not ask again.
+-   Then you are asked for your password. Use your UvA password. **While you type the password, nothing appears on the screen.** No dots, no stars. That is normal. Type the password and press Enter.
 
-If the login works, you see a welcome message similar to the one below, and the prompt changes. It now shows your UvAnetID and `omics-h0`, the name of the Crunchomics computer. 
+If the login works, you see a welcome message similar to the one below, and the prompt changes. It now shows your UvAnetID and `omics-h0`, the name of the Crunchomics computer.
 
 <p align="left">
 
@@ -199,10 +196,10 @@ The prompt changes back to the one of your laptop. Check 2 is done.
 
 Check these points first:
 
-- Did you get the email that your account is ready?
-- Did you type your UvAnetID correctly, and is there an `@` between your UvAnetID and the address?
-- Did you use the correct UvA password? Remember that nothing appears while you type it.
-- Are you on eduroam (at the UvA) or connected to the VPN (outside the UvA)?
+-   Did you get the email that your account is ready?
+-   Did you type your UvAnetID correctly, and is there an `@` between your UvAnetID and the address?
+-   Did you use the correct UvA password? Remember that nothing appears while you type it.
+-   Are you on eduroam (at the UvA) or connected to the VPN (outside the UvA)?
 
 The error message also gives a hint. `Permission denied` usually means a wrong user name or password, or that the account is not ready yet. If the command takes a long time and then shows `Connection timed out`, it usually means you are not on the UvA network.
 
@@ -216,15 +213,14 @@ For this you need a **plain text editor**, a program that saves only the text yo
 
 Pick one of these options:
 
-- [**RStudio**](https://posit.co/downloads) (recommended): it shows Markdown in color, and many of you already use it for R. Go to **File**, then **New File**, then **Markdown File**. This opens an empty Markdown file.
-- **Notepad** (Windows, already installed) or [Notepad++](https://notepad-plus-plus.org/) (Windows, free, shows code in color).
-- **TextEdit** (Mac, already installed): first go to **Format**, then **Make Plain Text**, otherwise TextEdit saves the file with layout.
-- **Text Editor** or gedit (Linux, usually already installed).
+-   [**RStudio**](https://posit.co/downloads) (recommended): it shows Markdown in color, and many of you already use it for R. Go to **File**, then **New File**, then **Markdown File**. This opens an empty Markdown file.
+-   **Notepad** (Windows, already installed) or [Notepad++](https://notepad-plus-plus.org/) (Windows, free, shows code in color).
+-   **TextEdit** (Mac, already installed): first go to **Format**, then **Make Plain Text**, otherwise TextEdit saves the file with layout.
+-   **Text Editor** or gedit (Linux, usually already installed).
 
 To check that it works, open your editor, create a new file, type a line of text and save it as `test.md`. You can delete this file afterwards: in the first part, we make the real notebook inside the project folder.
 
 ## You are ready
 
 If both checks worked and your editor can save a `.md` file, you are ready to start. If you join the workshop: see you on day 1!
-
-</div>
+::::::

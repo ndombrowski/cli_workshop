@@ -1065,6 +1065,8 @@ This prints 4 fastp commands, one per sample. Read them carefully: do the R1 and
 In scripts that you find online, or that an AI tool writes for you, variables are often written in quotes, for example `"$sample"`. That is a good habit in general. But be careful with wildcards. Inside quotes, bash does not replace the `*` with the matching file names. With `-i "data/seq_project/*/${sample}_R1.fastq.gz"`, fastp would look for a folder that is literally called `*`, and stop with an error.
 
 That is why we write the input paths without quotes, directly in the fastp command. Our names contain no spaces, so this is safe here.
+
+Why quotes around variables are a good habit is explained in the tip "Quotes" in the day 1 section "`echo` and variables".
 :::
 
 ### Step 5: Run the loop as a job

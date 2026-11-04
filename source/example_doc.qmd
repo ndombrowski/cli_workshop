@@ -58,7 +58,7 @@ In the example above, I use Markdown not only to document my code, but also to a
 
 This kind of documentation can be useful for:
 
--   Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, when I looked at the FastP HTML report I noticed a dip in quality at the end of the sequence reads. Based on that I normally would make a decision to adjust re-run FastP and enable trimming of the reads.
+-   Justifying decisions further down the line. In this example, I might decide on how to clean the sequencing data. For example, when I looked at the fastp HTML report I noticed a dip in quality at the end of the sequence reads. Based on that I normally would make a decision to adjust re-run fastp and enable trimming of the reads.
 -   Future you. If you read the report a month, or a year, later you have the key information in your report and don't have to open any files or tables that are located elsewhere
 
 ### Documenting external scripts
@@ -85,6 +85,8 @@ If you want to try this in RStudio (recent versions of RStudio come with Quarto)
 3.  Save the file and click **Render**
 
 Code blocks that you wrote as ```` ```bash ````, like in your notes, are only shown on the page, not run. The [Quarto tutorial for RStudio](https://quarto.org/docs/get-started/hello/rstudio.html) explains the next steps.
+
+If you already use **R Markdown** (files that end in `.Rmd`), that works too. R Markdown is the older format that Quarto grew out of, and its code blocks and YAML header look almost the same. For a new notebook, I would start with Quarto: R Markdown is still maintained, but new features now go into Quarto.
 
 ### Further reading
 

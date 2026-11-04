@@ -571,7 +571,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>Throughout this tutorial, you’ll notice that we use <code>ls</code> a lot. There is a reason for that.</p>
 <p>When working with data, sanity checks are essential, because it is easy to make mistakes, overwrite files, or lose track of where things are. Simple commands like <code>ls</code>, <code>pwd</code>, <code>wc</code> or <code>grep</code> help you check what is happening to your files at every step of an analysis.</p>
-<p>These habits are not just for beginners. Bioinformaticians rely on them constantly.</p>
+<p>I still use these checks all the time in my own work.</p>
 </div>
 </div>
 </div>
@@ -582,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> pwd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>This opens the manual entry for the command <code>ls</code>. You can move through it using:</p>
+<p>This opens the manual entry for the command <code>pwd</code>. You can move through it using:</p>
 <ul>
 <li>the ↑ / ↓ arrow keys, or the space bar to move down one page</li>
 <li><code>b</code> to move back up one page</li>
@@ -660,14 +660,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>Notice how I added a <code>#</code> and some notes above each command?</p>
 <p>Anything written after a <code>#</code> in bash is a <strong>comment</strong>. A comment is not executed, but it helps you (and others) understand what the code does.</p>
-<p>In your own work, add short, meaningful comments above key steps. Avoid restating the obvious. Instead, explain <em>why</em> you do something or what it achieves. A good rule: add a comment wherever you think that future you might get confused a month later.</p>
+<p>In your own work, add short, meaningful comments above key steps. Avoid restating the obvious. Instead, explain <em>why</em> you do something or what it achieves. I add a comment wherever I think that future me might get confused a month later.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="touch-starting-your-notebook" class="level2">
 <h2 class="anchored" data-anchor-id="touch-starting-your-notebook"><code>touch</code>: Starting your notebook</h2>
-<p>Now that we have a project folder, let us generate a <strong>notebook</strong>: a file in which you write down the commands you ran, a comment on what each one does, and a few words about what you saw. Think of it as the lab book of your analysis. Writing it while you work takes a bit of time, but it also makes you stop and think about what you just did. And a month from now, it tells you exactly how you got your results.</p>
+<p>Now that we have a project folder, let us generate a <strong>notebook</strong>: a file in which you write down the commands you ran, a comment on what each one does, and a few words about what you saw. It works like a lab book for your analysis. Writing it takes a bit of time, but it makes you think about what you just did. It also helps a lot when you come back to the analysis after a few weeks.</p>
 <p>We create an empty file for the notebook with <code>touch</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty file called notes.md inside the data_analysis folder</span></span>
@@ -719,6 +719,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the notebook</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> data_analysis/notes.md</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Type this into <code>notes.md</code> and save it.</strong> From now on, we add to the notebook while we learn new commands.</p>
 <p>Markdown can do more, for example lists, links and tables. You don’t need these for the workshop, but if you are curious, <a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown Basics</a> on the Quarto website gives an overview.</p>
 <p>From now on, you find a blue notebook box at the end of each part of the tutorial. It tells you what to add to your notebook. For the first few, you can compare your notes with mine. Your notes do not have to look the same as mine, as long as future you understands them.</p>
 </section>
@@ -868,7 +869,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="error-messages-and-ctrlc-getting-unstuck" class="level2">
 <h2 class="anchored" data-anchor-id="error-messages-and-ctrlc-getting-unstuck">Error messages and <code>Ctrl+C</code>: Getting unstuck</h2>
-<p>Sooner or later, a command will not do what you expect. That is normal, also for people who use the command line every day. Two skills help you get unstuck: reading the error message, and stopping a command.</p>
+<p>Sooner or later, a command will not do what you expect. That is normal, also for people who use the command line every day. In this section, we look at how to read an error message and how to stop a command that does not finish.</p>
 <section id="reading-an-error-message" class="level3">
 <h3 class="anchored" data-anchor-id="reading-an-error-message">Reading an error message</h3>
 <p>Let’s make a mistake on purpose. From inside your <code>data_analysis</code> folder, list a folder with a typo in its name:</p>
@@ -892,11 +893,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The file does not exist yet, for example because an earlier step did not work.</li>
 </ul>
 <p>If you make a typo in the name of the command itself, for example <code>lss</code> instead of <code>ls</code>, the message contains <code>command not found</code>. The shell does not know a command with that name.</p>
-<p>When you ask someone for help, always copy the complete error message. It tells them much more than “it does not work”.</p>
+<p>When you ask someone for help, always copy the complete error message. With only “it does not work”, it is very hard for others to help you.</p>
 </section>
 <section id="ctrlc-stopping-a-command" class="level3">
 <h3 class="anchored" data-anchor-id="ctrlc-stopping-a-command"><code>Ctrl+C</code>: Stopping a command</h3>
-<p>Sometimes a command does not finish, or you start something by mistake. The prompt does not come back, and you can’t type a new command. Press <code>Ctrl+C</code> (or <code>Cmd+C</code> on a Mac) to stop the command and get your prompt back.</p>
+<p>Sometimes a command does not finish, or you start something by mistake. The prompt does not come back, and you can’t type a new command. Press <code>Ctrl+C</code> (also on a Mac) to stop the command and get your prompt back.</p>
 <p>Let’s try it. If you give <code>cat</code> no file name, it waits for you to type text (we use <code>cat</code> for other things later):</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cat without a file name waits for input, so the prompt does not come back</span></span>
@@ -966,7 +967,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="wget-download-data"><code>wget</code>: Download data</h2>
 <p>Next, let’s use <code>wget</code> to download our sequencing data, a file called <code>seq_project.tar.gz</code>. Make sure that you are inside your <code>data_analysis</code> folder (check with <code>pwd</code>), because <code>wget</code> saves the file in the folder you are currently in:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data using link provided by the sequencing center XYZ on 23.01.2023</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Downloaded from GitHub (link provided by course instructor), on &lt;today's date&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In this example, you can also see how I documented my code: I added where the link came from and when I got it. This helps future me in case I, for example, need to look for some e-mails about the data later on.</p>
@@ -1363,7 +1364,7 @@ Important
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the data</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Link from the sequencing center XYZ, received by email on 23.01.2023</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Downloaded from GitHub (link provided by course instructor), on 01.11.2026</span></span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/data_analysis</span>
 <span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://raw.githubusercontent.com/ndombrowski/cli_workshop/main/data/seq_project.tar.gz</span>
 <span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -1398,7 +1399,7 @@ Important
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that the new file exists and that it is not empty</span></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> fastq_paths.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Here:</p>
+<p>In this command:</p>
 <ul>
 <li><code>ls data/seq_project/*/*</code> lists all files in the folders inside <code>seq_project</code></li>
 <li><code>&gt;</code> tells the shell to write this list into a new file called <code>fastq_paths.txt</code>, instead of printing it to the screen</li>
@@ -1451,9 +1452,9 @@ Important
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> fastq_paths.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Here:</p>
+<p>The option <code>-S</code> keeps each long line on one line on the screen, instead of continuing it on the next line. Inside <code>less</code>, you can:</p>
 <ul>
-<li><code>-S</code> keeps each long line on one line on the screen, instead of continuing it on the next line. Use the → / ← arrow keys to see the rest of a long line</li>
+<li>Use the → / ← arrow keys to see the rest of a long line</li>
 <li>Move up and down with the ↑ / ↓ arrow keys, or with Page Up / Page Down</li>
 <li>Press <code>q</code> to quit</li>
 </ul>
@@ -1492,7 +1493,7 @@ Important
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> fastq_paths.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We see that we work with 8 files. Here we could easily count that ourselves, but with hundreds of files, <code>wc -l</code> is much faster and more reliable.</p>
-<p>There is one downside: to count the files, we first had to make a file with the list. If we do this for every question we have, we end up with many files that we don’t need. Pipes solve this problem.</p>
+<p>However, to count the files we first had to make a file with the list. If we do this for every question, we end up with many files that we don’t need. In the next section, we see how pipes avoid this.</p>
 </section>
 <section id="pipes" class="level2">
 <h2 class="anchored" data-anchor-id="pipes">Pipes</h2>
@@ -1969,7 +1970,7 @@ Important
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz  <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span> <span class="dv">4</span> <span class="va">))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Here:</p>
+<p>This command has three parts:</p>
 <ul>
 <li><code>$( )</code> is called <strong>command substitution</strong>. Bash runs the command inside the brackets, here <code>zcat file | wc -l</code>, and puts its output in its place. <code>wc -l</code> counts the lines that <code>zcat</code> sends through the pipe</li>
 <li><code>$(( ))</code> is called <strong>arithmetic expansion</strong>. Bash calculates what is inside the double brackets, here the number of lines divided by 4, and puts the result in its place</li>
@@ -2065,7 +2066,7 @@ Important
 <span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the variable in a command, exactly like you would use the path itself</span></span>
 <span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The second command gives the same result as typing out the full path. On its own, that does not save us much work. Variables become really useful when their value changes, and that is exactly what a for-loop does for us in the next section.</p>
+<p>The second command gives the same result as typing out the full path. On its own, that does not save us much work. Variables become useful when their value changes. We use this in the next section on for-loops.</p>
 <p>A few rules for variables:</p>
 <ul>
 <li>The name can contain letters, numbers and underscores (<code>_</code>), but no spaces. Choose a name that tells you what is stored in it. <code>fastq_file</code> is easier to understand a year later than <code>x</code>.</li>
@@ -2088,12 +2089,76 @@ Important
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Quotes (optional)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Quotes (optional)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-45" class="callout-45-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In scripts that you find online, or that an LLMs writes for you, variables are often written in double quotes, for example <code>"$fastq_file"</code>. In our examples, the quotes make no difference, because our file names contain no spaces. But quotes change how bash reads the value of a variable, and sometimes that changes the result without any error message.</p>
+<p>Let’s store the first three names from <code>fastq_files.txt</code> in a variable. <code>$( )</code> runs the command inside the brackets, and its output becomes the value of the variable:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store the first 3 lines of fastq_files.txt in a variable</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="va">first_files</span><span class="op">=</span><span class="va">$(</span><span class="fu">head</span> <span class="at">-n</span> 3 fastq_files.txt<span class="va">)</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the variable without and with quotes</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$first_files</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$first_files</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints:</p>
+<pre><code>Sample-DUMMY1_R1.fastq.gz Sample-DUMMY1_R2.fastq.gz Sample-DUMMY2_R1.fastq.gz
+
+Sample-DUMMY1_R1.fastq.gz
+Sample-DUMMY1_R2.fastq.gz
+Sample-DUMMY2_R1.fastq.gz</code></pre>
+<p>Without quotes, bash splits the value into separate words at every space and line break, and <code>echo</code> prints the words on one line. With quotes, bash keeps the value exactly as it is, including the line breaks.</p>
+<p>This matters when the next command works line by line, such as <code>cut</code>. Let’s extract the sample names:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without quotes</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$first_files</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">"_"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints only one sample name, because <code>cut</code> only sees one line:</p>
+<pre><code>Sample-DUMMY1</code></pre>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With quotes</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$first_files</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">"_"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints one sample name for each of the three files:</p>
+<pre><code>Sample-DUMMY1
+Sample-DUMMY1
+Sample-DUMMY2</code></pre>
+<p>Notice that the version without quotes gives no error. We just get 1 line instead of 3. Mistakes like this are easy to miss, so always have a quick look at the output.</p>
+<p><strong>Double or single quotes?</strong> Inside double quotes, bash still replaces <code>$fastq_file</code> with its value. Inside single quotes, bash changes nothing:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$fastq_file</span><span class="st">"</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'$fastq_file'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints:</p>
+<pre><code>data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz
+
+$fastq_file</code></pre>
+<p><strong>Quotes and wildcards:</strong> inside quotes, bash also does not replace a wildcard with the matching file names:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"data/seq_project/*/*R1.fastq.gz"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This prints the pattern itself, not the four R1 files:</p>
+<pre><code>data/seq_project/*/*R1.fastq.gz</code></pre>
+<p>As a rule, we put double quotes around variables, but not around a path with a wildcard. We use single quotes when bash should not change anything at all. You will see all three cases again on day 2.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="for-loops" class="level2">
 <h2 class="anchored" data-anchor-id="for-loops">For-loops</h2>
 <p>Imagine we want to count the lines not only in one, but in all files. Could we do something like the code below?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>When running this, we see that the command prints a single number, 869 944, but not the counts for each individual file, so something did not work right.</p>
 <p>The problem with this command is that it prints the text from all 8 fastq files and only afterwards counts the lines. We basically combined all files and then counted the lines of all 8 files together. However, what we want is to repeat the steps below, individually for each file:</p>
@@ -2109,9 +2174,9 @@ Important
 <h3 class="anchored" data-anchor-id="step-1-check-what-the-loop-works-on">Step 1: Check what the loop works on</h3>
 <p>Let’s write a first loop that does not change anything yet. It only prints the names of our sequencing files:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="va">$fastq_file</span></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="va">$fastq_file</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This prints the paths of all 8 fastq files, one per line. Let’s go through the parts of the loop:</p>
 <ul>
@@ -2121,16 +2186,16 @@ Important
 </ul>
 <p>In other words, the loop does the same as typing these commands one after the other:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You don't need to run this, it only shows what the loop does for us</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="va">fastq_file</span><span class="op">=</span>data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$fastq_file</span></span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="va">fastq_file</span><span class="op">=</span>data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$fastq_file</span></span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ... and so on, for the other 6 files</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You don't need to run this, it only shows what the loop does for us</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="va">fastq_file</span><span class="op">=</span>data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R1.fastq.gz</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$fastq_file</span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="va">fastq_file</span><span class="op">=</span>data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$fastq_file</span></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ... and so on, for the other 6 files</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Starting a loop with <code>echo</code> is a good habit. This is called a <strong>dry run</strong>: the loop shows what it would work on, without changing anything. Before you add the real command, check the list. Do you see all 8 files, and only the files you expect? If yes, then you can continue with the next step and build up the loop for more complex tasks.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Typing a loop in the terminal">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2139,7 +2204,7 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-45" class="callout-45-contents callout-collapse collapse show">
+<div id="callout-46" class="callout-46-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>When you press Enter after writing the first line of the loop, nothing runs yet. Instead, the prompt changes to <code>&gt;</code> (this <code>&gt;</code> is only the prompt, it doesn’t write anything). This means bash waits for the rest of the loop. It only starts once you type <code>done</code> and press Enter. (On a Mac with zsh, this prompt may look slightly different, for example <code>for&gt;</code>.)</p>
 <p>If you get stuck in this <code>&gt;</code> prompt, for example because of a typo, press <code>Ctrl+C</code> to cancel and start again.</p>
@@ -2151,13 +2216,13 @@ Important
 <h3 class="anchored" data-anchor-id="step-2-add-the-real-command">Step 2: Add the real command</h3>
 <p>Now that we know the loop works on the right files, we can replace <code>echo</code> with the command we actually want to run:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we get 8 numbers, one per file. <code>zcat $fastq_file | wc -l</code> is the same command as in the variables section. The only difference is that bash now runs it 8 times, each time with a different file stored in <code>fastq_file</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Loops written on one line (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-47-contents" aria-controls="callout-47" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2166,18 +2231,18 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-46" class="callout-46-contents callout-collapse collapse">
+<div id="callout-47" class="callout-47-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You might also see loops written on a single line, with <code>;</code> where we start a new line:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This does exactly the same as the loop above. For anything longer than one short command, the version over several lines is easier to read.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-49-contents" aria-controls="callout-49" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2186,13 +2251,13 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-48" class="callout-48-contents callout-collapse collapse show">
+<div id="callout-49" class="callout-49-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Use a for-loop and count how often grep finds the pattern “TAAGA” in each individual fastq.gz file</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-47-contents" aria-controls="callout-47" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2201,12 +2266,12 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-47" class="callout-47-contents callout-collapse collapse">
+<div id="callout-48" class="callout-48-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-c</span> <span class="st">"TAAGA"</span></span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-c</span> <span class="st">"TAAGA"</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -2221,22 +2286,22 @@ Important
 <p>So far, the counts only appear on the screen. We cannot see which number belongs to which file, and the numbers are gone once we close the terminal. Let’s write the file names and the counts into a file instead.</p>
 <p>In the section on I/O redirection, we have seen that <code>&gt;</code> replaces the content of a file, and that <code>&gt;&gt;</code> adds (<strong>appends</strong>) text to the end of a file. Inside a loop, this difference matters. With <code>&gt;</code>, each iteration would replace what the iteration before it wrote, and only the result for the last file would be left. So inside the loop we use <code>&gt;&gt;</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for the counts inside results</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/counts</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the counts file with a first line that describes its content</span></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Because we use &gt; here, an existing file is emptied first, so we start fresh each time</span></span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Number of lines per fastq file"</span> <span class="op">&gt;</span> results/counts/line_counts.txt</span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For each fastq file, add the file name and its number of lines to the end of the file</span></span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="va">$fastq_file</span> <span class="op">&gt;&gt;</span> results/counts/line_counts.txt</span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> <span class="op">&gt;&gt;</span> results/counts/line_counts.txt</span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the result: we expect 1 header line + 2 lines for each of the 8 files = 17 lines</span></span>
-<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/counts/line_counts.txt</span>
-<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/counts/line_counts.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for the counts inside results</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/counts</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the counts file with a first line that describes its content</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Because we use &gt; here, an existing file is emptied first, so we start fresh each time</span></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Number of lines per fastq file"</span> <span class="op">&gt;</span> results/counts/line_counts.txt</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For each fastq file, add the file name and its number of lines to the end of the file</span></span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="va">$fastq_file</span> <span class="op">&gt;&gt;</span> results/counts/line_counts.txt</span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> <span class="op">&gt;&gt;</span> results/counts/line_counts.txt</span>
+<span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the result: we expect 1 header line + 2 lines for each of the 8 files = 17 lines</span></span>
+<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/counts/line_counts.txt</span>
+<span id="cb87-16"><a href="#cb87-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/counts/line_counts.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here:</p>
 <ul>
@@ -2246,7 +2311,7 @@ Important
 </ul>
 <p>We will use these numbers again on day 2, to check what a quality filtering tool did to our data.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-51-contents" aria-controls="callout-51" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2255,7 +2320,7 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-50" class="callout-50-contents callout-collapse collapse show">
+<div id="callout-51" class="callout-51-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Run only the for-loop from the code above a second time, without the <code>echo</code> line before it. How many lines does <code>line_counts.txt</code> have now? Why?</li>
@@ -2263,7 +2328,7 @@ Important
 <li>What do you think would happen if we used <code>&gt;</code> instead of <code>&gt;&gt;</code> inside the loop? Think about it first, then try it. Afterwards, run the code with <code>&gt;&gt;</code> once more, so that <code>line_counts.txt</code> is correct again.</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-49-contents" aria-controls="callout-49" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2272,7 +2337,7 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-49" class="callout-49-contents callout-collapse collapse">
+<div id="callout-50" class="callout-50-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>The file now has 33 lines. The loop added its 16 lines a second time to the end of the file, so all counts appear twice. This is something to watch out for whenever you use <code>&gt;&gt;</code>.</li>
@@ -2286,7 +2351,7 @@ Important
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Better counting in for loops (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-51-contents" aria-controls="callout-51" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2295,13 +2360,13 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-51" class="callout-51-contents callout-collapse collapse">
+<div id="callout-52" class="callout-52-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In our counts file, each file name and its count end up on two separate lines. With 100 files, it is much easier to read if the file name and its count are on the same line. We can do this with the command substitution from the tip “Better counting” in the section “<code>wc</code>: Count things II”:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$fastq_file</span><span class="st">: </span><span class="va">$(</span><span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$fastq_file</span><span class="st">: </span><span class="va">$(</span><span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here:</p>
 <ul>
@@ -2310,16 +2375,16 @@ Important
 </ul>
 <p>To get the number of reads, we also divide by 4 with the arithmetic expansion <code>$(( ))</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$fastq_file</span><span class="st">: </span><span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span><span class="dv">4</span> <span class="va">))</span><span class="st">"</span></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$fastq_file</span><span class="st">: </span><span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span><span class="dv">4</span> <span class="va">))</span><span class="st">"</span></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Notice the single and the double brackets: <code>$( )</code> runs a command, <code>$(( ))</code> calculates.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Using bash to make sample mapping files (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-53-contents" aria-controls="callout-53" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2328,18 +2393,18 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-52" class="callout-52-contents callout-collapse collapse">
+<div id="callout-53" class="callout-53-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Many tools for amplicon analysis need a table that lists your files, often with the R1 and the R2 file of each sample in separate columns. This is called a <strong>sample mapping file</strong>. Let’s have a look at how we could automatically make one with bash.</p>
 <p>The code below uses a few things we have not covered. We won’t go into every detail but the goal is to show you what is possible with bash.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
-<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here:</p>
 <ol type="1">
@@ -2351,25 +2416,25 @@ Important
 </ol>
 <p>We can add a column with the name of the sample folder, with <code>cut</code> from above:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">sample_name</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span> <span class="va">)</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$sample_name</span><span class="st">,</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
-<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">sample_name</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span> <span class="va">)</span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$sample_name</span><span class="st">,</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Or, with a second <code>cut</code>, we could only add the barcode:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">sample_name</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span>  <span class="kw">|</span><span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">"_"</span> <span class="va">)</span></span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
-<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
-<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$sample_name</span><span class="st">,</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
-<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$file</span> <span class="ot">==</span> <span class="pp">*</span>_R1.fastq.gz <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">sample_name</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">"/"</span>  <span class="kw">|</span><span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">"_"</span> <span class="va">)</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">r1_file</span><span class="op">=</span><span class="va">$file</span></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">r2_file</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$file</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/_R1/_R2/'</span><span class="va">)</span></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"</span><span class="va">$sample_name</span><span class="st">,</span><span class="va">$r1_file</span><span class="st">,</span><span class="va">$r2_file</span><span class="st">"</span></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -2380,38 +2445,38 @@ Important
 <p>Our counting loop is now a few lines long, and we might want to run it again later, for example when new data arrives. Instead of typing or copying the loop each time, we can save it in a file. A text file that contains commands is called a <strong>script</strong>. Bash scripts usually end with <code>.sh</code>.</p>
 <p>To keep our project folder tidy, we store scripts in their own folder:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for scripts inside data_analysis</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that the folder was created</span></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for scripts inside data_analysis</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that the folder was created</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we create the script with the text editor <code>nano</code> (see the tip <a href="#nano-tip">Editing text files with <code>nano</code></a> above):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> scripts/count_lines.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> scripts/count_lines.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>MobaXterm users:</strong> if you see <code>nano: command not found</code>, install it first with <code>apt install nano</code>, as explained in that tip.</p>
-<p>Type or copy the following into the editor: code s</p>
+<p>Type or copy the following into the editor:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of lines in each fastq file</span></span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this script from inside the data_analysis folder</span></span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for the counts and start the counts file with a header </span></span>
-<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We give this output a new name, so you can compare it with the file from the loop</span></span>
-<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/counts</span>
-<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Number of lines per fastq file"</span> <span class="op">&gt;</span> results/counts/line_counts_bash.txt</span>
-<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-11"><a href="#cb85-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For each fastq file, add the file name and its number of lines to the end of the file</span></span>
-<span id="cb85-12"><a href="#cb85-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb85-13"><a href="#cb85-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="va">$fastq_file</span> <span class="op">&gt;&gt;</span> results/counts/line_counts_bash.txt</span>
-<span id="cb85-14"><a href="#cb85-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> <span class="op">&gt;&gt;</span> results/counts/line_counts_bash.txt</span>
-<span id="cb85-15"><a href="#cb85-15" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of lines in each fastq file</span></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this script from inside the data_analysis folder</span></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for the counts and start the counts file with a header </span></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We give this output a new name, so you can compare it with the file from the loop</span></span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/counts</span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Number of lines per fastq file"</span> <span class="op">&gt;</span> results/counts/line_counts_bash.txt</span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For each fastq file, add the file name and its number of lines to the end of the file</span></span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fastq_file <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="va">$fastq_file</span> <span class="op">&gt;&gt;</span> results/counts/line_counts_bash.txt</span>
+<span id="cb95-14"><a href="#cb95-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">zcat</span> <span class="va">$fastq_file</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> <span class="op">&gt;&gt;</span> results/counts/line_counts_bash.txt</span>
+<span id="cb95-15"><a href="#cb95-15" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Save and exit:</p>
 <ul>
-<li>Press <code>Ctrl+X</code> to exit (indicated with <code>^^X</code> in nano), then <code>Y</code> to confirm that you want to save the file, then Enter to keep the file name</li>
+<li>Press <code>Ctrl+X</code> to exit (indicated with <code>^X</code> in nano), then <code>Y</code> to confirm that you want to save the file, then Enter to keep the file name</li>
 </ul>
 <p>The commands are the same as in the <code>&gt;&gt;</code> section. Two things are new:</p>
 <ul>
@@ -2420,22 +2485,17 @@ Important
 </ul>
 <p>Now we can run the whole script with a single command:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the script with bash</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/count_lines.sh</span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the output: we again expect 17 lines</span></span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/counts/line_counts_bash.txt</span>
-<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/counts/line_counts_bash.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the script with bash</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/count_lines.sh</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the output: we again expect 17 lines</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/counts/line_counts_bash.txt</span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/counts/line_counts_bash.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The script itself prints nothing to the screen, because all output goes into <code>line_counts_bash.txt</code>. That is why we check the file afterwards.</p>
-<p>Why is this useful?</p>
-<ul>
-<li>You can run the same analysis again, with exactly the same commands, without typing mistakes.</li>
-<li>The script documents what you did. Together with your notebook (<code>notes.md</code>), it tells future you how a result was made.</li>
-<li>On day 2, we use exactly this kind of script on the HPC. There, we add a few extra lines at the top that tell the HPC how many resources our job needs.</li>
-</ul>
+<p>Saving your commands in a script has a few advantages. You can run the same analysis again, with exactly the same commands and without typing mistakes. Together with your notebook (<code>notes.md</code>), the script also documents how you made a result. On day 2, we use exactly this kind of script on the HPC. There, we add a few extra lines at the top that tell the HPC how many resources our job needs.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Important: Write scripts in nano or a code editor, not in Word or Notepad">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-53-contents" aria-controls="callout-53" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-54-contents" aria-controls="callout-54" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2444,7 +2504,7 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-53" class="callout-53-contents callout-collapse collapse show">
+<div id="callout-54" class="callout-54-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Windows programs such as Notepad end every line with an extra invisible character. Bash on Linux does not understand this character, and the script fails with errors such as <code>$'\r': command not found</code> or <code>syntax error near unexpected token</code>. Word processors such as Word also add formatting and can change straight quotes (<code>"</code>) into curly quotes.</p>
 <p>To avoid this, write your scripts with <code>nano</code>. If you prefer a code editor such as RStudio or VS Code, check that it saves the file with <code>LF</code> line endings (in VS Code, you see <code>LF</code> or <code>CRLF</code> in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.</p>
@@ -2453,7 +2513,7 @@ Important
 </div>
 </div>
 <div class="callout callout-style-default callout-notebook callout-titled" title="Notebook checkpoint: Counting lines per file">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-54-contents" aria-controls="callout-54" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2462,11 +2522,11 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-54" class="callout-54-contents callout-collapse collapse show">
+<div id="callout-55" class="callout-55-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Add a new heading <code>## Counting lines per file</code> to <code>notes.md</code>, and below it:</p>
 <ol type="1">
-<li>The command that ran the script, with a comment that says what the script does and which file it makes. We use <code>results/counts/line_counts_bash.txt</code> again on day 2</li>
+<li>The command that ran the script, with a comment that says what the script does and which file it makes. We use <code>results/counts/line_counts_bash.txt</code> again on day 2. You don’t need the code that made <code>line_counts.txt</code>, because it has the same content. One line that says where it came from is enough.</li>
 <li>The check you ran afterwards, and below the code block, what you expected and what you saw</li>
 </ol>
 <p>You don’t need to copy the loop itself into your notebook, because it is saved in <code>scripts/count_lines.sh</code>. The script is part of your documentation. Your notebook only needs to say which script you ran and what it made.</p>
@@ -2476,9 +2536,9 @@ Important
 </section>
 <section id="wrapping-up-day-1" class="level2">
 <h2 class="anchored" data-anchor-id="wrapping-up-day-1">Wrapping up day 1</h2>
-<p>You now have a project folder with data, results, a script, and a notebook that explains how they got there. Before you close the terminal, take a few minutes to read through your notebook.</p>
+<p>At the end of day 1, your project folder contains the data, some results, a script and your notebook. Before you close the terminal, take a few minutes to read through your notebook.</p>
 <div class="callout callout-style-default callout-notebook callout-titled" title="Notebook checkpoint: Tidy your notebook">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-56-contents" aria-controls="callout-56" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2487,7 +2547,7 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-55" class="callout-55-contents callout-collapse collapse show">
+<div id="callout-56" class="callout-56-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Below the main heading at the top of <code>notes.md</code>, add 2 or 3 sentences: what data this is, where it came from, and what you did with it today</li>
@@ -2943,7 +3003,7 @@ Important
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-10-14</p>
+Last modified: 2026-11-04</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/bash_intro.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

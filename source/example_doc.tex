@@ -161,7 +161,7 @@
 \@ifundefined{codebgcolor}{\definecolor{codebgcolor}{HTML}{D3D3D3}}{}
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={codebgcolor}, enhanced, boxrule=0pt, frame hidden, sharp corners, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, boxrule=0pt, sharp corners, colback={codebgcolor}, breakable]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -224,6 +224,19 @@ next to the \texttt{scripts/} folder. In the tutorial, you kept your
 \texttt{notes.md} directly in \texttt{data\_analysis/}. Both work. A
 separate folder keeps a bigger project tidy, but all commands still run
 from the project folder itself.
+
+The example also leaves out some steps that you wrote down during the
+workshop. This is on purpose. In the workshop, you worked on two
+computers: you downloaded the data on your own computer and copied it to
+Crunchomics with \texttt{scp}. In the example, I download the data
+directly on Crunchomics, so everything runs in one place. That is why
+the example has no \texttt{\#\ On\ my\ computer} or
+\texttt{\#\ On\ Crunchomics} comments, no \texttt{ssh} and \texttt{scp}
+commands, and no ``Setting up on Crunchomics'' section. I also moved a
+few steps: the line counts from day 1 and the \texttt{samples.txt} list
+are both part of ``Looking at the data'', because I like to make all
+list files and first checks in one place. In your own notes, keep the
+location comments whenever you work on more than one computer.
 
 The example uses the same data as this tutorial, so the code might only
 make sense after you have finished the tutorial. Feel free to come back
@@ -311,9 +324,9 @@ This kind of documentation can be useful for:
 \item
   Justifying decisions further down the line. In this example, I might
   decide on how to clean the sequencing data. For example, when I looked
-  at the FastP HTML report I noticed a dip in quality at the end of the
+  at the fastp HTML report I noticed a dip in quality at the end of the
   sequence reads. Based on that I normally would make a decision to
-  adjust re-run FastP and enable trimming of the reads.
+  adjust re-run fastp and enable trimming of the reads.
 \item
   Future you. If you read the report a month, or a year, later you have
   the key information in your report and don't have to open any files or
@@ -386,6 +399,12 @@ Code blocks that you wrote as
 in your notes, are only shown on the page, not run. The
 \href{https://quarto.org/docs/get-started/hello/rstudio.html}{Quarto
 tutorial for RStudio} explains the next steps.
+
+If you already use \textbf{R Markdown} (files that end in
+\texttt{.Rmd}), that works too. R Markdown is the older format that
+Quarto grew out of, and its code blocks and YAML header look almost the
+same. For a new notebook, I would start with Quarto: R Markdown is still
+maintained, but new features now go into Quarto.
 
 \subsection{Further reading}\label{further-reading}
 

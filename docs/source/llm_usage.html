@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -1121,15 +1141,21 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 <h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
 <ul>
 <li><a href="https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html">On GenAI usage</a>, at the end of the IBED for-loops page: what to look out for in loops written by an LLM</li>
+<li><span class="citation" data-cites="auslander2026">Auslander (<a href="#ref-auslander2026" role="doc-biblioref">2026</a>)</span>, <a href="https://doi.org/10.1371/journal.pcbi.1014882">Ten simple rules for responsible use of AI and LLMs in computational biology</a>: many of the points on this page, written for researchers, plus rules on figures, statistics and manuscripts that go beyond this workshop</li>
 <li>The UvA’s <a href="https://edu.nl/gakhm">AI literacy course for students</a>: what generative AI is, how it works and what its limits are (about 45 to 60 minutes)</li>
 <li><a href="https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html">UvA AI Chat</a> and the UvA <a href="https://student.uva.nl/en/information/ai-tools-and-your-studies">rules for students</a></li>
 </ul>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-auslander2026" class="csl-entry" role="listitem">
+Auslander, Noam. 2026. <span>“Ten Simple Rules for Responsible Use of <span>AI</span> and <span>LLMs</span> in Computational Biology.”</span> <em>PLOS Computational Biology</em> 22 (10): e1014882. <a href="https://doi.org/10.1371/journal.pcbi.1014882">https://doi.org/10.1371/journal.pcbi.1014882</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1565,7 +1591,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-10-14</p>
+Last modified: 2026-10-23</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/llm_usage.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
