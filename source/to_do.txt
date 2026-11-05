@@ -166,6 +166,10 @@ attachment) with the hidden command at the end of index.qmd.
   run of day 1 on the course data. Same later for day 2 (outputs from Crunchomics).
   Existing screenshots (img/ls.png etc.): keep where the look matters, otherwise replace by text.
 - Make figure for cut.
+- Timing (review 2026-11-04, see Risks in _course_schedule.md): day 1 is the tight day. In the next
+  run, time the blocks "Looking at the data" and "Repeating things" and compare with the schedule.
+  Keep the skip list at hand (advanced grep questions, cat combine exercise, gzip size exercise,
+  TAAGA loop exercise).
 
 ### Done
 
@@ -222,8 +226,23 @@ attachment) with the hidden command at the end of index.qmd.
   - MicEco has a tip for the RStudio app server (https://omics-app01.science.uva.nl/) to view files
     without scp --> checked and its still avail. and could be added as a tip for faster viewing of files without download
   - What the prompt looks like inside `srun --pty bash` (page only says "the name of the compute node").
+- New Step 7 "Write your own job script" (added 2026-11-04, hpc_howto.qmd, end of the fastp section):
+  run it once on Crunchomics as a participant would (cp seqkit.sh -> seqkit_trimmed.sh, edit in nano,
+  ls check = 8 files, sbatch, stats_trimmed.txt = 9 lines, Sample-DUMMY1_R1 trimmed = 44,350 reads as in
+  the Step 6 answer). Time it (estimate about 10 min).
+  - The answer script has comment lines (copied from seqkit.sh); example_doc/scripts/seqkit_trimmed.sh
+    has none. Same commands. Decide: add the comments to the example script, or leave it.
+- sinfo: listed in the "First jobs" block of _course_schedule.md, but not on hpc_howto.qmd since the
+  rewrite (the old page had a sinfo section + img/sinfo.png). Decide: add it back (short) or drop it
+  from the schedule.
 
 ### Done
+
+- DONE 2026-11-04: Step 7 added to hpc_howto.qmd (exercise + answer). Knock-on changes: checkpoint 4
+  item 1 also asks for the seqkit_trimmed.sh sbatch command; the optional "Comparing reads before and
+  after trimming" box lost its own srun block and starts from the Step 7 table; wrap-up comment lists
+  seqkit_trimmed.sh; llm_usage.qmd awk exercise no longer says "if you skipped that box, you don't have
+  stats_trimmed.txt". _course_schedule.md: fastp block 45 -> 55 min, day 2 total 4h00.
 
 - DONE 2026-10-14: hpc_howto.qmd wildcard scp tip: the old Mac/zsh notice (\scp, noglob, quoted LOCAL
   wildcard) replaced by a note on quoting a REMOTE wildcard (download direction), based on
@@ -317,6 +336,13 @@ attachment) with the hidden command at the end of index.qmd.
 
 ### Done
 
+- DONE 2026-11-04: notebook checkpoints shortened for class time (rule: commands with a comment + one
+  line on what you saw; decision row "Checkpoint length" in _course_schedule.md). New sentence in the
+  bash_intro notebook section. Day 1 checkpoint 3: 2 items (gzip note and every-file check removed;
+  the check now lives only in checkpoint 5, item 3, with the "practice file, not needed" hint; the
+  results/combined line removed from the model notes). Day 2 checkpoint 2: "which run made the table"
+  removed. Day 2 checkpoint 4: 5 items -> 3. Day 2 checkpoint 5: comparison with the example notebook
+  moved to a sentence after the box (after the workshop).
 - Make documentation a thread through both days. Decisions in _course_schedule.md (2026-10-08):
   ~/data_analysis/notes.md, Markdown, RStudio recommended, blue checkpoint box per schedule block.
   PILOT DONE 2026-10-08 (bash_intro.qmd): new section "touch: Starting your notebook" after mkdir,
@@ -422,7 +448,8 @@ attachment) with the hidden command at the end of index.qmd.
     "reports success anyway" bullet says set -e would have stopped the task; backslash explanation now
     mentions the stray " " argument and the joined --thread/--json/--html line.
   - Added 2026-10-13 (review point): exercise after the rules list in "How I suggest you use an LLM":
-    ask an LLM about fastp's default read filtering, compare with fastp --help of 1.4.0 and 1.0.1.
+    ask an LLM about fastp's default read filtering, compare with fastp --help of 1.4.0 and 1.0.1
+    (1.0.1 part moved to an optional tip on 2026-11-05, see below).
     DONE 2026-10-13: answer now shows the real fastp 1.4.0 --help lines from Crunchomics (pasted by
     Nina): -Q/-q 15/-u 40/-n 5/-e 0/-L/-l 15, plus a plain-words list. Same values as the README.
     Also confirmed by that help: -h/-j default fastp.html/fastp.json (--dont_overwrite off by
@@ -446,6 +473,12 @@ attachment) with the hidden command at the end of index.qmd.
     Crunchomics (run by Nina): filtering/trimming lines identical; 3 differences (--stdin note, new
     --dimer_max_len, --dup_calc_accuracy 24G -> 32G). Page introduces diff in one sentence. README at
     tags v1.0.1/v1.4.0 (raw fetch) has no --dimer_max_len: page says the README lags behind the program.
+    CHANGED 2026-11-05: question 3 (1.0.1 vs 1.4.0) removed from the exercise, which now has 2
+    questions. The diff part is now an optional tip box right after the exercise: "Tip: Compare the
+    help pages of two versions (optional)". The README finding and the sentence "LLM, online docs and
+    help page differ -> own help page wins" moved into that box. Last key point of the exercise now
+    reads "If the LLM and the help page of your own installation differ, the help page wins".
+    Reason: question 3 was a side lesson (versions, diff) with a "nothing changed" result for filtering.
   - The "google how to activate conda" bridge is gone from hpc_howto.qmd (the page now explains
     source ~/.bashrc), so it is not used on the LLM page.
   - Decorative "──" lines in the LLM script replaced by "--" (pdflatex), page says so.
@@ -615,6 +648,7 @@ Exception (2026-10-13): "License" and "Use of AI tools" are only in readme.md.
      tested at all; fastp report numbers in the hpc_howto fastp exercise answer (89,692 reads before
      filtering, 496 pairs removed) not checked against the report. Plan: one more run of all code
      on the final version, once all text changes are done, because text changes can touch code.
+     New since the first pass: Step 7 in hpc_howto.qmd (2026-11-04, see Day 2 To do).
   2. Final review round for length and voice (LLM page grew one review point at a time; read it
      once as a participant would and cut what is not essential). Reread first-person sentences
      ("I ...") written by Claude: do they still describe what Nina did?

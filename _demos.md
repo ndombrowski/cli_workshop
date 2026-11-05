@@ -235,7 +235,7 @@ awk -F'\t' 'NR > 1 {sum = sum + $4} END {print sum}' results/seqkit/stats_raw.tx
 columns before the session.
 
 **Check the result:** compare the total with the day 1 counts (sum of the line counts in
-`line_counts_bash.txt`, divided by 4). Two methods, one answer.
+`line_counts.txt`, divided by 4). Two methods, one answer.
 
 **Point out:**
 - `head -n 1` first: never guess column numbers.

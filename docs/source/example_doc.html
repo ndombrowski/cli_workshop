@@ -361,16 +361,15 @@ ul.task-list li input[type="checkbox"] {
 <div style="text-align: justify">
 <section id="an-example-notebook" class="level2">
 <h2 class="anchored" data-anchor-id="an-example-notebook">An example notebook</h2>
-<p>If you want to see an example of documented code, have a look at <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">a notebook</a> that I wrote for the analysis we do in this tutorial. You can think of it as a cleaned-up version of the <code>notes.md</code> notebook that you kept during the workshop.</p>
+<p>If you want to see what documented code can look like, have a look at <a href="https://github.com/ndombrowski/cli_workshop/tree/main/example_doc">an example project</a> that I made for the analysis we do in this tutorial. It is a folder on GitHub with a <code>README.md</code>, a notebook and the job scripts. You can think of the notebook as a cleaned-up version of the notes.md file that you kept during the workshop.</p>
 <p>The link above shows you:</p>
 <ul>
-<li>How you can use GitHub to make your code available to others</li>
-<li>How you can organize a project folder, with a <code>README.md</code> file that explains what is in the folder and where to start</li>
+<li>How I use GitHub to make my code available to others</li>
+<li>How I organize a project folder, with a <code>README.md</code> file that explains what is in the folder and where to start</li>
 <li>What a code notebook can look like. The notebook is a Quarto file, which you find <a href="https://github.com/ndombrowski/cli_workshop/blob/main/example_doc/notebook/example_notebook.qmd">here</a>. To make it easier to read for collaborators, I also turned it into an <a href="https://ndombrowski.github.io/cli_workshop/example_doc/notebook/example_notebook.html">HTML report</a>.</li>
 </ul>
 <p>In the example, the notebook has its own folder, <code>notebook/</code>, next to the <code>scripts/</code> folder. In the tutorial, you kept your <code>notes.md</code> directly in <code>data_analysis/</code>. Both work. A separate folder keeps a bigger project tidy, but all commands still run from the project folder itself.</p>
 <p>The example also leaves out some steps that you wrote down during the workshop. This is on purpose. In the workshop, you worked on two computers: you downloaded the data on your own computer and copied it to Crunchomics with <code>scp</code>. In the example, I download the data directly on Crunchomics, so everything runs in one place. That is why the example has no <code># On my computer</code> or <code># On Crunchomics</code> comments, no <code>ssh</code> and <code>scp</code> commands, and no “Setting up on Crunchomics” section. I also moved a few steps: the line counts from day 1 and the <code>samples.txt</code> list are both part of “Looking at the data”, because I like to make all list files and first checks in one place. In your own notes, keep the location comments whenever you work on more than one computer.</p>
-<p>The example uses the same data as this tutorial, so the code might only make sense after you have finished the tutorial. Feel free to come back to this page after you have written some code yourself.</p>
 <p>This is just one example to get you started. Your own notebook might look different, depending on your needs.</p>
 <p>Below, you find some hints on what to put into the different sections of the notebook.</p>
 <section id="yaml-headers" class="level3">
@@ -420,7 +419,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="going-further">Going further</h2>
 <section id="from-notes.md-to-a-quarto-document" class="level3">
 <h3 class="anchored" data-anchor-id="from-notes.md-to-a-quarto-document">From <code>notes.md</code> to a Quarto document</h3>
-<p>Your <code>notes.md</code> and my example notebook are written in the same way: Markdown text with code blocks. The difference is that the example notebook is a <strong>Quarto</strong> document (it ends in <code>.qmd</code>). Quarto turns such a file into a web page (HTML), a PDF or a Word file, with a table of contents and colored code. That makes it easier to share your notebook with others, for example with your supervisor or together with a paper.</p>
+<p>Your <code>notes.md</code> and my example notebook are written in the same way: Markdown text with code blocks. The difference is that the example notebook is a <strong>Quarto</strong> document (it ends in <code>.qmd</code>). Quarto can turn such a file into a web page (HTML), a PDF or a Word file, with a table of contents and colored code. That makes it easier to share your notebook with others, for example with your supervisor or together with a paper.</p>
 <p>If you want to try this in RStudio (recent versions of RStudio come with Quarto):</p>
 <ol type="1">
 <li>Go to <strong>File</strong>, then <strong>New File</strong>, then <strong>Quarto Document</strong></li>
@@ -881,7 +880,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-10-22</p>
+Last modified: 2026-11-05</p>
 <div class="toc-actions"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/example_doc.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

@@ -416,6 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-4-a-dry-run-of-the-full-command" id="toc-step-4-a-dry-run-of-the-full-command" class="nav-link" data-scroll-target="#step-4-a-dry-run-of-the-full-command">Step 4: A dry run of the full command</a></li>
   <li><a href="#step-5-run-the-loop-as-a-job" id="toc-step-5-run-the-loop-as-a-job" class="nav-link" data-scroll-target="#step-5-run-the-loop-as-a-job">Step 5: Run the loop as a job</a></li>
   <li><a href="#step-6-check-the-output" id="toc-step-6-check-the-output" class="nav-link" data-scroll-target="#step-6-check-the-output">Step 6: Check the output</a></li>
+  <li><a href="#step-7-write-your-own-job-script" id="toc-step-7-write-your-own-job-script" class="nav-link" data-scroll-target="#step-7-write-your-own-job-script">Step 7: Write your own job script</a></li>
   </ul></li>
   <li><a href="#wrapping-up-day-2" id="toc-wrapping-up-day-2" class="nav-link" data-scroll-target="#wrapping-up-day-2">Wrapping up day 2</a></li>
   <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further">Going further</a></li>
@@ -854,7 +855,7 @@ Important
 <p>Since we work with little data, this runs fast despite only using 1 CPU. It may even finish within a few seconds. If you are logged in to Crunchomics in a second terminal and run <code>squeue</code> while your job is running, you should see it (in the example below, the job is named after the software and got the job ID 379646):</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="../img/squeue2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
+<p><img src="../img/squeue2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 <p>It is a good habit to look at the outputs of whatever software you run, not only to understand your data but also to make sure that the software ran correctly:</p>
@@ -903,7 +904,7 @@ Important
 <div id="callout-11" class="callout-11-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>On day 1, we counted the lines in each fastq file (<code>results/counts/line_counts_bash.txt</code> on your own computer). Use this to work out how many reads <code>Sample-DUMMY1_R2.fastq.gz</code> has. Does this match <code>num_seqs</code> in the seqkit table?</li>
+<li>On day 1, we counted the lines in each fastq file (<code>results/counts/line_counts.txt</code> on your own computer). Use this to work out how many reads <code>Sample-DUMMY1_R2.fastq.gz</code> has. Does this match <code>num_seqs</code> in the seqkit table?</li>
 <li>Use <code>grep</code> to print only the rows for the R1 and the R2 file of <code>Sample-DUMMY1</code>. Compare their <code>num_seqs</code>. What do you notice?</li>
 <li>Use <code>cut</code> to print only the columns <code>file</code> and <code>num_seqs</code> of the table. Is what you noticed in question 2 true for all samples?</li>
 </ol>
@@ -922,12 +923,12 @@ Important
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1:</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># On your own computer: find the file name, plus the line after it (-A 1), which holds the count</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A</span> 1 <span class="st">"Sample-DUMMY1_R2.fastq.gz"</span> results/counts/line_counts_bash.txt</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A</span> 1 <span class="st">"Sample-DUMMY1_R2.fastq.gz"</span> results/counts/line_counts.txt</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Let bash divide the number of lines by 4</span></span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Here, we use the command substitution for our previous command and combine it with tail -n 1 </span></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to only extract the counts themselves</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="va">$(</span><span class="fu">grep</span> <span class="at">-A</span> 1 <span class="st">"Sample-DUMMY1_R2.fastq.gz"</span> results/counts/line_counts_bash.txt <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1<span class="va">)</span> <span class="op">/</span> <span class="dv">4</span> <span class="va">))</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="va">$(</span><span class="fu">grep</span> <span class="at">-A</span> 1 <span class="st">"Sample-DUMMY1_R2.fastq.gz"</span> results/counts/line_counts.txt <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1<span class="va">)</span> <span class="op">/</span> <span class="dv">4</span> <span class="va">))</span></span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># On Crunchomics: print only the row for this file from the seqkit table</span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Sample-DUMMY1_R2"</span> results/seqkit/stats_raw.txt</span>
@@ -941,7 +942,7 @@ Important
 <span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># cut uses tabs to split columns by default, so we don't need -d here</span></span>
 <span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f1,4</span> results/seqkit/stats_raw.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>In <code>line_counts_bash.txt</code>, each file name and its count are on two separate lines. A plain <code>grep</code> only prints the line with the file name. The option <code>-A 1</code> (<em>after</em>) also prints the line after each match, which holds the count. With 8 files, you can also just read the whole file with <code>cat</code>. With 100 files, <code>grep</code> finds the right line much faster.</p>
+<p>In <code>line_counts.txt</code>, each file name and its count are on two separate lines. A plain <code>grep</code> only prints the line with the file name. The option <code>-A 1</code> (<em>after</em>) also prints the line after each match, which holds the count. With 8 files, you can also just read the whole file with <code>cat</code>. With 100 files, <code>grep</code> finds the right line much faster.</p>
 <p>For question 1: each read takes up 4 lines in a fastq file, so the number of reads is the number of lines divided by 4. <code>Sample-DUMMY1_R2.fastq.gz</code> has 179,384 lines, which is 44,846 reads. seqkit reports the same number. When two different methods give the same answer, we can trust the result a lot more.</p>
 <p>For question 2: the R1 and R2 file of the same sample always have the same number of reads. Each read in R1 has its partner read in R2. This is what you expect for paired-end sequencing data and is a good sanity check that no reads went missing in R1 or R2.</p>
 <p>For question 3: with only two columns left, you can check all 8 files at a glance. For every sample, the R1 and the R2 file have the same number of reads, so we can safely continue with the next steps of our analysis.</p>
@@ -1204,8 +1205,7 @@ Important
 <ol type="1">
 <li>Which tool you used, and which version. Run <code>seqkit version</code> to find out, and write the version in the comment above the command</li>
 <li>The <code>sbatch</code> command, with a comment that names the script and the file it makes. Below the code block, write down the job ID that <code>sbatch</code> printed (<code>Submitted batch job ...</code>). The job ID is also part of the names of the log files, so with it you can find the logs of this run later</li>
-<li>We ran seqkit twice, first with <code>srun</code> and then with <code>sbatch</code>, and the second run replaced the table of the first one. Write down which run made the table that is there now</li>
-<li>Below the code block: does the number of reads of <code>Sample-DUMMY1_R2</code> match your count from day 1?</li>
+<li>Below the code block, one line: does the number of reads of <code>Sample-DUMMY1_R2</code> match your count from day 1?</li>
 </ol>
 <p>You don’t need to copy the content of the job script into your notebook. It is saved in <code>scripts/seqkit.sh</code>, and at the end of the day, we copy it to your own computer.</p>
 </div>
@@ -1354,7 +1354,7 @@ Important
 </div>
 <p>On Crunchomics, <code>uname</code> prints <code>Linux</code> and <code>uname -m</code> prints:</p>
 <pre><code>x86_64</code></pre>
-<p>In the download command, we wrote <code>$(uname)</code> and <code>$(uname -m)</code> instead of typing <code>Linux</code> and <code>x86_64</code> ourselves. This is the command substitution from day 1: bash runs the command inside <code>$( )</code> and puts its output in its place. So on Crunchomics, bash turns <code>Miniforge3-$(uname)-$(uname -m).sh</code> into <code>Miniforge3-Linux-x86_64.sh</code>.</p>
+<p>In the download command, we wrote <code>$(uname)</code> and <code>$(uname -m)</code> instead of typing <code>Linux</code> and <code>x86_64</code> ourselves. This is called command substitution from day 1: bash runs the command inside <code>$( )</code> and puts its output in its place. So on Crunchomics, bash turns <code>Miniforge3-$(uname)-$(uname -m).sh</code> into <code>Miniforge3-Linux-x86_64.sh</code>.</p>
 <p>The advantage is that the same command also works on mostother computers. On a Mac with an Apple chip, for example, <code>uname</code> prints <code>Darwin</code> and <code>uname -m</code> prints <code>arm64</code>, and Miniforge has an installer called <code>Miniforge3-Darwin-arm64.sh</code>. So you can use the same commands if you later want to install Miniforge on your own Mac or in WSL.</p>
 </div>
 </div>
@@ -1571,7 +1571,7 @@ Important
 </div>
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>You can also type a list file yourself, one sample name per line. Use <code>nano</code> for this, not Notepad or Word. As we saw on day 1, Windows programs add an invisible character at the end of each line. In a list file, this character becomes part of each sample name, and the loop then looks for files that don’t exist.</p>
+<p>You can also type a list file yourself, one sample name per line. Use <code>nano</code> for this, not Notepad or Word. Windows programs such as Notepad add an invisible character at the end of each line, which bash on Linux does not understand. In a list file, this character becomes part of each sample name, and the loop then looks for files that don’t exist.</p>
 </div>
 </div>
 </div>
@@ -1585,7 +1585,7 @@ Important
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This should print the 4 sample names. Let’s look closer at <code>$(cat samples.txt)</code>. <code>cat samples.txt</code> prints the content of the file. The <code>$( )</code> around it takes this printed text and puts it into the command, at the place where it stands. This is the <strong>command substitution</strong> we already used on day 1. So for bash, the first line becomes <code>for sample in Sample-DUMMY1 Sample-DUMMY2 Sample-DUMMY3 Sample-DUMMY4; do</code>.</p>
-<p><strong>Important</strong>: Bash splits the text from <code>samples.txt</code> at every new line, but also at every space. So each line in the list file must contain one name, without spaces.</p>
+<p><strong>Important</strong>: Bash splits the text from <code>samples.txt</code> at every new line, but also at every space. So each line in the list file must contain one name, without spaces. Ideally, make list files on the command line, as we did here. But often the information comes from a table that was made in Excel or that you received someone else, e.g.&nbsp;a sequencing center. Such files can contain invisible characters that the <code>echo</code> loop above doesn’t show, but the <code>ls</code> check below does (look for <code>$'\r'</code> in the error message). So check them with <code>file samples.txt</code> before you use them: it should print only <code>ASCII text</code>. If it prints more, the <a href="https://ndombrowski.github.io/AWK_tutorial/source/sed_basics.html#windows-line-endings">AWK tutorial</a> shows how to fix the file.</p>
 <p>Next, we check that we find the right input files for each sample. We use <code>ls</code> instead of <code>echo</code>, because <code>ls</code> shows us which files the wildcard actually matches:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
@@ -1727,7 +1727,7 @@ Important
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Copy the 4 HTML reports to your own computer and open the report for Sample-DUMMY1. Remember that on your computer you can use <code>explorer.exe .</code> (Windows) and <code>open .</code> to open the folder you are to get easy access to the HTMLs you just downloaded.</li>
-<li>On day 1, we counted the lines in each fastq file (<code>results/counts/line_counts_bash.txt</code> on your own computer). How many reads did Sample-DUMMY1 have before filtering? Does this match the number in the fastp report?</li>
+<li>On day 1, we counted the lines in each fastq file (<code>results/counts/line_counts.txt</code> on your own computer). How many reads did Sample-DUMMY1 have before filtering? Does this match the number in the fastp report?</li>
 <li>Count the lines in <code>results/fastp/Sample-DUMMY1_R1.trimmed.fastq.gz</code> on Crunchomics. How many reads are left after filtering?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
@@ -1752,7 +1752,7 @@ Important
 <span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2:</span></span>
 <span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="co"># On your own computer we get 179 384</span></span>
-<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A</span> 1 <span class="st">"Sample-DUMMY1"</span> results/counts/line_counts_bash.txt</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A</span> 1 <span class="st">"Sample-DUMMY1"</span> results/counts/line_counts.txt</span>
 <span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 3:</span></span>
 <span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a><span class="co"># On Crunchomics we get 177 400</span></span>
@@ -1766,8 +1766,107 @@ Important
 </div>
 </div>
 </div>
+</section>
+<section id="step-7-write-your-own-job-script" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-write-your-own-job-script">Step 7: Write your own job script</h3>
+<p>So far, you got every job script from this page. Now it is your turn. We want the same read statistics for the trimmed reads as we made for the raw reads at the start of the day. Then we can see what fastp changed.</p>
+<p>You don’t need to start from an empty file. A good way to write a new job script is to copy one that works, and change only what is different.</p>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Make a copy of <code>scripts/seqkit.sh</code> called <code>scripts/seqkit_trimmed.sh</code></li>
+<li>Open the copy with <code>nano</code> and change it, so that it runs <code>seqkit stats</code> on the 8 trimmed fastq files in <code>results/fastp</code>, and writes the table to <code>results/seqkit/stats_trimmed.txt</code>. Which lines do you need to change? Think about the input, the output, the job name and the names of the log files</li>
+<li>Before you submit the script, use <code>ls</code> to check that your input path matches exactly the 8 trimmed fastq files, and nothing else</li>
+<li>Submit the script, and check the log files and the output table. How many lines do you expect in <code>stats_trimmed.txt</code>?</li>
+<li>Find <code>num_seqs</code> for <code>Sample-DUMMY1_R1.trimmed.fastq.gz</code> in the new table. Does it match the number of reads that you counted in question 3 of the Step 6 exercise?</li>
+</ol>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1: copy the working script</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> scripts/seqkit.sh scripts/seqkit_trimmed.sh</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> scripts</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2: open the copy and change it</span></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> scripts/seqkit_trimmed.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>After your changes, the script could look like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=seqkit_trimmed</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/seqkit_trimmed_%j.out</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/seqkit_trimmed_%j.err</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks=1</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This script generates a tsv with read statistics for the trimmed reads</span></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Run it from inside the data_analysis folder with `sbatch scripts/seqkit_trimmed.sh`</span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit job started on:"</span></span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Run seqkit stats on the trimmed reads from fastp</span></span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-b</span> <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/stats_trimmed.txt results/fastp/<span class="pp">*</span>trimmed.fastq.gz <span class="at">--threads</span> 1</span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"seqkit job finished on:"</span></span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>I changed four things:</p>
+<ul>
+<li>The job name, and the names of the two log files. If you keep <code>seqkit</code> here, you can’t tell the logs of the two seqkit jobs apart later</li>
+<li>The input: <code>results/fastp/*trimmed.fastq.gz</code> instead of <code>data/seq_project/*/*gz</code></li>
+<li>The output: <code>stats_trimmed.txt</code> instead of <code>stats_raw.txt</code>. If you forget this one, the new table replaces the table of the raw reads, without any warning</li>
+<li>The comments, so that they describe what this script does</li>
+</ul>
+<p>The resources stay the same. The trimmed files are a bit smaller than the raw files, so what worked for the raw reads is enough here.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 3: check what the input path matches. We expect 8 files</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> results/fastp/<span class="pp">*</span>trimmed.fastq.gz</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> results/fastp/<span class="pp">*</span>trimmed.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 4: submit the script and check the outputs</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/seqkit_trimmed.sh</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> logs</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> logs/seqkit_trimmed_<span class="pp">*</span>.out</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 9 lines: 1 header line and 1 line per trimmed file</span></span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/seqkit/stats_trimmed.txt</span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 5: the row for the trimmed R1 file of Sample-DUMMY1</span></span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Sample-DUMMY1_R1"</span> results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For question 5: in the Step 6 exercise, <code>Sample-DUMMY1_R1.trimmed.fastq.gz</code> had 177,400 lines, which is 44,350 reads. seqkit should report the same number. This is the same check as for the raw reads this morning: two different methods, one answer.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-notebook callout-titled" title="Notebook checkpoint: Quality filtering with fastp">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1776,22 +1875,20 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-28" class="callout-28-contents callout-collapse collapse show">
+<div id="callout-30" class="callout-30-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Add a new heading <code>## Quality filtering with fastp</code> to <code>notes.md</code>, and below it:</p>
 <ol type="1">
-<li>The command that made <code>samples.txt</code>, and the check</li>
-<li>The <code>sbatch</code> command with a comment that names the script, and below the code block, the job ID</li>
-<li>The checks on the output: what you expected and what you saw</li>
-<li>The <code>scp</code> command that copied the reports to your computer (remember: <code># On my computer</code>)</li>
-<li>Below the code block, in your own words: what did the fastp report show for Sample-DUMMY1? How many reads were there before and after filtering? Did anything surprise you?</li>
+<li>One code block with comments: the command that made <code>samples.txt</code> and its check, the <code>sbatch</code> command with the name of the script, the checks on the output, the <code>scp</code> command that copied the reports (remember: <code># On my computer</code>), and the <code>sbatch</code> command for <code>seqkit_trimmed.sh</code></li>
+<li>Below the code block: the job ID, and in one line what you expected and what you saw in the checks</li>
+<li>From the fastp report: how many reads Sample-DUMMY1 had before and after filtering</li>
 </ol>
 <p>The test run on one sample was a detour, so you don’t need its commands. One sentence on what it taught you is enough, for example that fastp writes its reports to <code>fastp.html</code> and <code>fastp.json</code> unless you give other names.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Comparing reads before and after trimming (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1800,21 +1897,12 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>At the start of the day, we made a table with <code>seqkit stats</code> for the raw reads. If we make the same table for the trimmed reads, we can see what fastp changed:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run seqkit stats on the trimmed reads</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--ntasks</span><span class="op">=</span>1 <span class="at">--cpus-per-task</span><span class="op">=</span>1 <span class="at">--mem</span><span class="op">=</span>5G <span class="at">--time</span><span class="op">=</span>00:30:00 seqkit stats <span class="at">-b</span> <span class="at">-a</span> <span class="at">-T</span> <span class="at">-o</span> results/seqkit/stats_trimmed.txt results/fastp/<span class="pp">*</span>trimmed.fastq.gz <span class="at">--threads</span> 1</span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the output: we expect a header line and 8 lines, one per trimmed file</span></span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> results/seqkit/stats_trimmed.txt</span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Both tables have many columns, which makes them hard to compare by eye. On day 1, we used <code>cut</code> to select columns. Here, we take a brief look into <strong>awk</strong>, a small programming language for working with tables in text files. awk reads a file line by line, splits each line into columns, and lets us choose what to do with each line.</p>
+<p>In Step 7, you made the same table for the trimmed reads as for the raw reads. Both tables have many columns, which makes them hard to compare by eye. On day 1, we used <code>cut</code> to select columns. Here, we take a brief look into <strong>awk</strong>, a small programming language for working with tables in text files. awk reads a file line by line, splits each line into columns, and lets us choose what to do with each line.</p>
 <p>Let’s print the file name, the number of reads and the average read length (columns 1, 4 and 7) of both tables:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here:</p>
 <ul>
@@ -1825,11 +1913,12 @@ Important
 <li>We give awk two files, and it works through them one after the other</li>
 </ul>
 <p>This prints 16 lines: first the 8 raw files, then the 8 trimmed files. Compare the number of reads and the average length of Sample-DUMMY1 before and after trimming.</p>
+<p>If you want to learn more awk, my <a href="https://ndombrowski.github.io/AWK_tutorial/">AWK tutorial</a> uses awk and sed on tables, FASTA and FASTQ files.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Finding R2 without a list file (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1838,15 +1927,15 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For those who want to learn more bash: we can also write this loop without <code>samples.txt</code>. We then loop directly over the R1 files, and let bash work out the matching R2 file and the sample name:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>_R1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">R2</span><span class="op">=</span><span class="va">${R1</span><span class="op">/</span><span class="ss">_R1</span><span class="op">/</span>_R2<span class="va">}</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$R1</span> _R1.fastq.gz<span class="va">)</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Sample: </span><span class="va">$sample</span><span class="st">, R1: </span><span class="va">$R1</span><span class="st">, R2: </span><span class="va">$R2</span><span class="st">"</span></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> data/seq_project/<span class="pp">*</span>/<span class="pp">*</span>_R1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">R2</span><span class="op">=</span><span class="va">${R1</span><span class="op">/</span><span class="ss">_R1</span><span class="op">/</span>_R2<span class="va">}</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$R1</span> _R1.fastq.gz<span class="va">)</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Sample: </span><span class="va">$sample</span><span class="st">, R1: </span><span class="va">$R1</span><span class="st">, R2: </span><span class="va">$R2</span><span class="st">"</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><code>${R1/_R1/_R2}</code>: takes the value of <code>R1</code> and replaces the first <code>_R1</code> with <code>_R2</code>. This turns the path to the R1 file into the path to the R2 file</li>
@@ -1864,16 +1953,20 @@ Important
 <h2 class="anchored" data-anchor-id="wrapping-up-day-2">Wrapping up day 2</h2>
 <p>Your analysis now lives in two places: the data, results and job scripts on Crunchomics, and the notebook on your own computer. The notebook mentions the job scripts, so let’s copy them next to it. Run this in the terminal on your <strong>own</strong> computer:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this on your OWN computer, inside your local data_analysis folder</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace both instances of 'username' with your UvAnetID</span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="st">'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/scripts/*.sh'</span> scripts/</span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check: we expect count_lines.sh from day 1, and seqkit.sh and fastp.sh from today</span></span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> scripts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this on your OWN computer, inside your local data_analysis folder</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the scripts folder, in case you did not make it on day 1</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace both instances of 'username' with your UvAnetID</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="st">'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/scripts/*.sh'</span> scripts/</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check: we expect seqkit.sh, fastp.sh and seqkit_trimmed.sh from today</span></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="co"># and count_lines.sh, if you made it on day 1</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> scripts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As in the fastp exercise, the quotes around the path stop your own computer from using the wildcard, so that Crunchomics can use it to find the files.</p>
 <div class="callout callout-style-default callout-notebook callout-titled" title="Notebook checkpoint: Tidy your notebook (day 2)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1882,23 +1975,23 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-31" class="callout-31-contents callout-collapse collapse show">
+<div id="callout-33" class="callout-33-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Add the <code>scp</code> command that copied the scripts to your notebook</li>
 <li>Update the description at the top of <code>notes.md</code>, so that it covers both days</li>
 <li>Check that your notebook explains every file and folder in your project on Crunchomics. Run these inside <code>~/personal/data_analysis</code>: <code>ls</code>, <code>ls results/*</code> and <code>ls scripts logs</code>. Can you tell which log file belongs to which job?</li>
-<li>Compare your notebook with my <a href="../source/example_doc.html">example notebook</a>. What does it have that yours doesn’t? Is there anything you want to add?</li>
 </ol>
 </div>
 </div>
 </div>
+<p>After the workshop, compare your notebook with my <a href="../source/example_doc.html">example notebook</a>. What does it have that yours doesn’t? Is there anything you want to add?</p>
 <p>You now know enough to write and, just as important, to check your own code. Many of you will also use AI chat tools such as ChatGPT or UvA AI Chat for coding. On the page <a href="../source/llm_usage.html">Using LLMs</a>, I describe how I suggest you use them: as a tutor that explains code, and always with the checks from these two days. You can read it after the workshop, at your own pace.</p>
 </section>
 <section id="going-further" class="level2">
 <h2 class="anchored" data-anchor-id="going-further">Going further</h2>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Running many samples in parallel with job arrays (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1907,7 +2000,7 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Our fastp loop runs inside a single job, so the samples are processed one after another. With 4 small samples, that is fine. With hundreds of samples, it can take a long time, while the HPC has enough CPUs to run several of them at the same time.</p>
 <p>So let’s run fastp again, but this time with one job per sample. How would we run such jobs efficiently?</p>
@@ -1918,46 +2011,46 @@ Important
 </ul>
 <p>We already have a list with one sample name per line, <code>samples.txt</code>, which we made for the fastp loop. Check that it is still there:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the list: we expect 4 sample names</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the list: we expect 4 sample names</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we use this text file in our job array. Store the following in <code>scripts/fastp_array.sh</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_array</span></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_array_%A_%a.out</span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_array_%A_%a.err</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks=1</span></span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Make conda available in the job, and activate the environment with fastp</span></span>
-<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
-<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
-<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a new output folder, so that we don't overwrite the results of the loop</span></span>
-<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastp_array</span>
-<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a><span class="co"># SLURM_ARRAY_TASK_ID is set by SLURM: 1 for the first job in the array, 2 for the second, and so on</span></span>
-<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the sample name on that line number of samples.txt </span></span>
-<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="co"># -n tells sed not to print every line, and 1p prints line 1</span></span>
-<span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">p"</span> samples.txt<span class="va">)</span></span>
-<span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Print what is happening</span></span>
-<span id="cb66-24"><a href="#cb66-24" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Now job </span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st"> runs fastp for: </span><span class="va">${sample}</span><span class="st">"</span></span>
-<span id="cb66-25"><a href="#cb66-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-26"><a href="#cb66-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastp on the R1 and R2 file of this one sample</span></span>
-<span id="cb66-27"><a href="#cb66-27" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
-<span id="cb66-28"><a href="#cb66-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">-i</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dt">\</span></span>
-<span id="cb66-29"><a href="#cb66-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">-I</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R2.fastq.gz <span class="dt">\</span></span>
-<span id="cb66-30"><a href="#cb66-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> results/fastp_array/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="dt">\</span></span>
-<span id="cb66-31"><a href="#cb66-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> results/fastp_array/<span class="va">${sample}</span>_R2.trimmed.fastq.gz <span class="dt">\</span></span>
-<span id="cb66-32"><a href="#cb66-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">-h</span> results/fastp_array/<span class="va">${sample}</span>.html <span class="dt">\</span></span>
-<span id="cb66-33"><a href="#cb66-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">-j</span> results/fastp_array/<span class="va">${sample}</span>.json <span class="dt">\</span></span>
-<span id="cb66-34"><a href="#cb66-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">--thread</span> 2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastp_array</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/fastp_array_%A_%a.out</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/fastp_array_%A_%a.err</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks=1</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=5G</span></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Make conda available in the job, and activate the environment with fastp</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a new output folder, so that we don't overwrite the results of the loop</span></span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastp_array</span>
+<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a><span class="co"># SLURM_ARRAY_TASK_ID is set by SLURM: 1 for the first job in the array, 2 for the second, and so on</span></span>
+<span id="cb68-19"><a href="#cb68-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the sample name on that line number of samples.txt </span></span>
+<span id="cb68-20"><a href="#cb68-20" aria-hidden="true" tabindex="-1"></a><span class="co"># -n tells sed not to print every line, and 1p prints line 1</span></span>
+<span id="cb68-21"><a href="#cb68-21" aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st">p"</span> samples.txt<span class="va">)</span></span>
+<span id="cb68-22"><a href="#cb68-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-23"><a href="#cb68-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Print what is happening</span></span>
+<span id="cb68-24"><a href="#cb68-24" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Now job </span><span class="va">${SLURM_ARRAY_TASK_ID}</span><span class="st"> runs fastp for: </span><span class="va">${sample}</span><span class="st">"</span></span>
+<span id="cb68-25"><a href="#cb68-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-26"><a href="#cb68-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastp on the R1 and R2 file of this one sample</span></span>
+<span id="cb68-27"><a href="#cb68-27" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
+<span id="cb68-28"><a href="#cb68-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">-i</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R1.fastq.gz <span class="dt">\</span></span>
+<span id="cb68-29"><a href="#cb68-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">-I</span> data/seq_project/<span class="pp">*</span>/<span class="va">${sample}</span>_R2.fastq.gz <span class="dt">\</span></span>
+<span id="cb68-30"><a href="#cb68-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> results/fastp_array/<span class="va">${sample}</span>_R1.trimmed.fastq.gz <span class="dt">\</span></span>
+<span id="cb68-31"><a href="#cb68-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> results/fastp_array/<span class="va">${sample}</span>_R2.trimmed.fastq.gz <span class="dt">\</span></span>
+<span id="cb68-32"><a href="#cb68-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">-h</span> results/fastp_array/<span class="va">${sample}</span>.html <span class="dt">\</span></span>
+<span id="cb68-33"><a href="#cb68-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">-j</span> results/fastp_array/<span class="va">${sample}</span>.json <span class="dt">\</span></span>
+<span id="cb68-34"><a href="#cb68-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">--thread</span> 2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In the script, we use some new SLURM options:</p>
 <ul>
@@ -1976,24 +2069,24 @@ Important
 <p>Compare this with the loop in <code>scripts/fastp.sh</code>. In the loop, bash goes through <code>samples.txt</code> line by line inside one job. In the array, SLURM starts one job per line, and each job picks its own line with <code>sed</code>.</p>
 <p>Before we submit the script, let’s check that <code>sed</code> picks the right sample. <code>SLURM_ARRAY_TASK_ID</code> only exists inside an array job, so we test the line selection on the login node with a number in its place:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which sample would job 1 get? And job 4?</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"1p"</span> samples.txt</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"4p"</span> samples.txt</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with the full list</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which sample would job 1 get? And job 4?</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"1p"</span> samples.txt</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">"4p"</span> samples.txt</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with the full list</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Each <code>sed</code> command should print exactly one sample name: the first and the last line of <code>samples.txt</code>. Testing a small part of a script like this takes seconds, and it is much faster than finding a mistake in the log files of 4 jobs.</p>
 <p>Submit the script with <code>sbatch scripts/fastp_array.sh</code>. If you check what is happening right after submitting with <code>squeue</code>, you see one line per job in the array, with the array number after an underscore in the job ID (for example <code>&lt;jobID&gt;_1</code>).</p>
 <p>In the <code>logs</code> folder, you get an output and an error file for each job in the array. In each output file, you see the message from <code>echo</code>, for example <code>Now job 1 runs fastp for: Sample-DUMMY1</code>. The fastp summary for each sample is in the log files of its job.</p>
 <p>Check that each job wrote its files:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 2 log files per job, so 8 in total</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> logs/fastp_array_<span class="pp">*</span></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 4 files per sample (2 trimmed files, 1 HTML and 1 JSON report), so 16 in total</span></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/fastp_array</span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> results/fastp_array <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 2 log files per job, so 8 in total</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> logs/fastp_array_<span class="pp">*</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We expect 4 files per sample (2 trimmed files, 1 HTML and 1 JSON report), so 16 in total</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/fastp_array</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> results/fastp_array <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>More about arrays and other SLURM options can be found on the <a href="https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/cli/slurm_basics.html">IBED SLURM basics page</a>.</p>
 </div>
@@ -2443,7 +2536,7 @@ Important
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-11-04</p>
+Last modified: 2026-11-05</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/hpc_howto.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

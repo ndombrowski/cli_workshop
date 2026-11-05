@@ -22,6 +22,7 @@ The short version:
 -   Treat every piece of code an LLM writes as a **first draft**: run it on one sample and check the output before you use it for real
 -   You need to be able to **explain** and **justify** every step of your analysis, whoever wrote the code
 -   You need to **understand** what each option of a tool does to your data. For the code around it, you can **check** that it does what you want with the simple commands from day 1
+-   **Be critical of new tools and websites** made with LLMs. Most of these look very polished but this says very little about whether the content is right
 
 ## Why learn the command line if an LLM can write the code?
 
@@ -77,6 +78,7 @@ These are the rules I give the students I supervise for how to interact with an 
 -   **Treat generated code as a first draft.** Run it on one sample, look at the output, and check that it makes biological sense before you run it on all samples
 -   **Don't let it rewrite code that fails.** This usually replaces code you don't understand with more code you don't understand. Ask it to explain the error or a specific line instead (more on this [below](#when-your-code-does-not-work))
 -   **Check suggested options against the help page of the version you use.** An LLM has learned from documentation of many versions of a tool, often older ones. Remember from day 2: Crunchomics has fastp 1.0.1, and we installed 1.4.0. Options can change between versions. `fastp --help` on your own installation is always more reliable than an LLM's suggestion
+-   **Look at your data before you accept the settings.** An LLM has not seen your data, but it still picks settings for you: sometimes the defaults, sometimes other values, and the choice can change with the wording of your question (see the tip after the worked example below). Only your own data, for example the fastp report, tells you which settings you need
 -   **Write down what each result means, in your own words.** Your notebook is not only a record of what you did. It is also a place to slow down and think. After each analysis step, write at least one sentence about what the result means for your data, for example: "fastp removed 3% of the reads" and also think about whether that number is something that you expected. Make sure to write this yourself, not with an LLM
 
 And the most important rule: **if you can't explain a step, don't use it yet.** It is completely fine to ask for help with a step you don't understand, from a person or from an LLM. Struggling with code is a normal part of learning.
@@ -86,7 +88,6 @@ On day 2, we ran fastp without any filtering options. Let's use an LLM to find o
 
 1.  Ask in UvA AI Chat (or another chat tool that you are allowed to use): "What does fastp do by default to filter reads? Which options control this, and what are their default values?" Write down its answer
 2.  On Crunchomics, activate the `fastp_1.4.0` environment and look at the help page. Find the options the LLM mentioned. Do the descriptions and default values match?
-3.  Deactivate the environment and look at the help page of the fastp 1.0.1 of Crunchomics. Is there anything different?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
 **The help page of fastp 1.4.0 (question 2)**
@@ -94,11 +95,6 @@ On day 2, we ran fastp without any filtering options. Let's use an LLM to find o
 ```{bash}
 # Question 2: the help page of fastp 1.4.0
 conda activate fastp_1.4.0
-fastp --version
-fastp --help 2>&1 | less
-
-# Question 3: the help page of the fastp of Crunchomics
-conda deactivate
 fastp --version
 fastp --help 2>&1 | less
 ```
@@ -138,7 +134,17 @@ I asked this question to UvA AI Chat (with its default model) and to ChatGPT, an
 4.  Neither answer said which version of fastp it described
 5.  One answer ended with advice tailored to one of my own research projects, which I had not mentioned in the question. It assumed a different kind of data than the data I was asking about. The reason for that is that depending on your settings an LLM can remember earlier conversations. This can be useful for some things but you have to decide if this is what you want and whether this fits into the privacy rules of your organisation.
 
-**Differences between versions (question 3)**
+**Key points**
+
+-   Often the LLM is right but it might also blur things in its response. A quick look at the help page is how you *know*
+-   An LLM answers only what you ask, and it won't tell you what you didn't ask. The help page lists every option, also the ones that are off
+-   "Default settings" only means something if you know what is on and what is off
+-   If the LLM and the help page of your own installation differ, the help page wins
+:::
+::::
+
+::: {.callout-tip title="Tip: Compare the help pages of two versions (optional)" collapse="true"}
+Crunchomics has fastp 1.0.1, and on day 2 we installed fastp 1.4.0. Are the filtering options from the exercise above the same in both versions?
 
 Scrolling through two long help pages is tiring. Instead, we can save both in a file and let the computer compare them. `diff` compares two files line by line and prints only the lines that differ:
 
@@ -170,16 +176,8 @@ On Crunchomics, this prints:
 
 Lines that start with `<` come from the first file (1.0.1), lines with `>` from the second file (1.4.0). The numbers above them say where in each file the lines are.
 
-So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to *know*, not to find a difference. Three other lines did change. The most interesting one is `--dimer_max_len`, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn't say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn't list this option at all (checked in October 2026). So even the official documentation online can lag behind the program.
-
-**Key points**
-
--   Often the LLM is right but it might also blur things in its response. A quick look at the help page is how you *know*
--   An LLM answers only what you ask, and it won't tell you what you didn't ask. The help page lists every option, also the ones that are off
--   "Default settings" only means something if you know what is on and what is off
--   If the LLM, the online documentation and your help page differ, the help page of your own installation wins
+So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to *know*, not to find a difference. Three other lines did change. The most interesting one is `--dimer_max_len`, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn't say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn't list this option at all (checked in October 2026). So even the official documentation online can lag behind the program. If the LLM, the online documentation and your help page differ, the help page of your own installation wins.
 :::
-::::
 
 ::: {.callout-tip title="Tip: An LLM that looks something up has not always read the page (optional)" collapse="true"}
 Some LLM tools can search the web or open a link you give them. That sounds like they read the page, but often they don't read all of it. Some tools pass the page through a second, smaller model that summarises it, and the main model only sees that summary. Claude Code works like this, for example (checked in October 2026; other tools may work differently). An answer can also be based only on the short snippets that a search engine shows for each result.
@@ -213,7 +211,7 @@ What is the difference between the -o and the -h option of fastp?
 Keep in mind that the answer you get can still be wrong. An explanation is easier to check than a full script, though: you can test each claim with a small command or by looking at the help function yourself.
 
 :::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-In the optional box at the end of the fastp section on day 2, we used this awk command (if you skipped that box, you don't have `stats_trimmed.txt`, but you can still do the checks in the answer on `stats_raw.txt`):
+In the optional box at the end of the fastp section on day 2, we used this awk command:
 
 ```{bash}
 awk -F'\t' 'FNR > 1 {print $1, $4, $7}' results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt
@@ -271,7 +269,7 @@ Read two files, skip the first line of each file, and print columns 1, 4, and 7 
 
 The rest explained things like what the folder `results/` is, and why a biologist might want to use this command. The few details that really matter, such as how `FNR` is different from `NR`, were somewhere in the middle. If you are new to the command line, it is hard to tell which parts are important and which are filler. And scrolling through a long, well-written answer can feel like learning, even when not much of it sticks.
 
-You don't need a perfect question to avoid this. You can simply say what is wrong with the answer. I replied that most students would not read through this much text, and the second answer was much shorter. Its core was this table:
+You don't need a perfect prompt to avoid this. You can simply say what is wrong with the answer. I replied that most students would not read through this much text, and the second answer was much shorter. Its core was this table:
 
 ```         
 Part                Meaning
@@ -304,8 +302,8 @@ Asking about one part at a time also makes each answer easier to check.
 
 This is the main point of this page. Not all code needs the same level of understanding:
 
--   **The analysis itself: understand every option.** The options of a tool like fastp decide what happens to your data: which reads are removed, and how much of each read is trimmed. These are scientific choices. You need to know what each option does and why you use it, whether you or an LLM wrote the command. Look them up with `fastp --help` or in the manual, and ask an LLM to explain an option if the manual is unclear
--   **The code around it: know what it should do, then check.** Some code only organises the work: an `if`/`else` block that skips finished samples, or a `sed` or `awk` command that picks lines from a file. You may not understand every detail of how it works. But you must know what it is supposed to do to your files, and check that it really does
+-   **The analysis itself: understand every option.** The options of a tool like fastp decide what happens to your data: which reads are removed, and how much of each read is trimmed. These are scientific choices. The options you don't type matter just as much: fastp, and other tools, also apply defaults, for example quality and length filtering, and leaves other steps off unless you switch them on (see the exercise on default filtering above). You need to know what each option does and why you use it, whether you or an LLM wrote the command. Look them up with `fastp --help` or in the manual, and ask an LLM to explain an option if the manual is unclear
+-   **The code around it: know what it should do, then check.** Some code only organises the work: an `if`/`else` block that skips finished samples, or a `sed` or `awk` command that picks lines from a file. You may not understand every detail of how it works. But you must know what it is supposed to do to your files, and check that it really does the correct thing
 
 For these checks, the commands from day 1 are enough:
 
@@ -437,12 +435,11 @@ I sort the problems from most to least serious.
 
 -   **The comments at the end of the lines break the command.** The `\` only joins two lines when it is the very last character on the line (we saw this on day 2). Here, spaces and a comment follow it. The `\` then only protects the space after it, and the command ends at the end of that line. fastp receives the input and output files, `--average_qual 20`, and one extra argument that is just a space. Bash then tries to run the lines that follow as commands of their own, and each attempt fails with `command not found`. The `--thread` line has no comment, so its `\` works again, and `--thread`, `--json` and `--html` end up together in one failing command. So fastp never gets the trimming options, `--thread`, `--json` or `--html`. I missed this myself when I first read the script, which shows that reading is not enough: you also have to run it on one sample and look at the output. See the next exercise for a small test.
 -   **The job reports success anyway.** The last line, `echo "Done"`, always works. A job counts as successful when its last command works, so SLURM reports every task as finished without problems. The errors are only visible in the `.err` files. (With `set -euo pipefail` at the top of the script, it would have stopped at the first `command not found`, and SLURM would have reported the task as failed. fastp would still have run once with the incomplete options before that. See the tip on `set -euo pipefail` further down.)
--   **The `logs` folder is made too late.** SLURM opens the log files before the script starts, so the `mkdir` for `logs` inside the script comes too late to matter. On Crunchomics, SLURM then makes a missing `logs` folder itself, but inside the folder where you typed `sbatch`, which is not always where you expect your logs (we saw this on day 2). Make the folder before you run `sbatch`, as we did on day 2, so that you know where your logs end up.
+-   **The `logs` folder is made too late.** On most systems SLURM opens the log files before the script starts, so the `mkdir` for `logs` inside the script comes too late for such systems. On Crunchomics, SLURM  makes a missing `logs` folder itself, but inside the folder where you typed `sbatch`, which is not always where you expect your logs (we saw this on day 2). Make the folder before you run `sbatch`, as we did on day 2, so that you know where your logs end up.
 
 **2. It makes assumptions about your data**
 
--   **The file names are invented.** `S${SLURM_ARRAY_TASK_ID}` only works because the prompt said "S1-S100". Real file names rarely look like that. In this workshop, the files are called `Sample-DUMMY1_R1.fastq.gz` and are in separate folders. A list file like `samples.txt` works with any names, and you can open it to see which samples will be processed.
--   **It chose a trimming method for you.** The prompt was not clear about how to trim, so the LLM chose trimming from both ends of the read (without asking me for clarification). Is that what you want? fastp 1.4.0 offers three methods, each with a window of 4 bases that moves along the read: `--cut_front` (from the start of the read, removes bases until the quality is good enough), `--cut_tail` (the same, from the end of the read) and `--cut_right` (from the start; at the first window with low quality, it removes that window and everything after it). Which one fits depends on your data. `--cut_mean_quality` only sets the quality threshold that these three methods use. On its own, it does nothing: fastp only trims by quality if you also add `--cut_front`, `--cut_tail` or `--cut_right`. (And 20 is already the default threshold, so the script would trim the same way without this line.) And fastp already filters reads by default, also without any of these options (see the exercise on default filtering above). Check `fastp --help` for the version you use, and ask yourself (or the LLM) why these options and not others.
+-   **It chose a trimming method for you.** The prompt was not clear about how to trim, so the LLM chose trimming from both ends of the read (without asking me for clarification). Is that what you want? fastp 1.4.0 offers three methods, each with a window of 4 bases that moves along the read: `--cut_front` (from the start of the read, removes bases until the quality is good enough), `--cut_tail` (the same, from the end of the read) and `--cut_right` (from the start; at the first window with low quality, it removes that window and everything after it). Which one fits depends on your data. `--cut_mean_quality` only sets the quality threshold that these three methods use. On its own, it does nothing: fastp only trims by quality if you also add `--cut_front`, `--cut_tail` or `--cut_right`. (And 20 is already the default threshold, so the script would trim the same way without this line.) Check `fastp --help` for the version you use, and ask yourself (or the LLM) why these options and not others.
 -   **The resources are guesses.** 8 CPUs, 16 GB of memory and 4 hours per sample are not based on your data. Asking for too much time means a longer wait in the queue. Run one sample first, then check what it actually used (the optional `sacct` box on day 2).
 -   **No software is activated.** There is no `conda activate`, so the script doesn't say which fastp it needs. Which one the job uses then depends on your terminal at the moment you submit the job: SLURM normally copies its settings, including the PATH, into the job. If the `fastp_1.4.0` environment happened to be active, the job uses fastp 1.4.0. If not, it uses the fastp 1.0.1 of Crunchomics. Your results should not depend on such an accident.
 
@@ -478,6 +475,29 @@ Done
 ```
 
 The first line shows the full command that fastp would receive: only the R1 file. The R2 file and `--thread` never reach it, and bash simply continues with the next lines. In the worked example, this is what makes the mistake dangerous: fastp still gets the input and output files and `--average_qual 20`, so it runs, writes trimmed files, and SLURM reports success. The output looks normal, but it was made without the trimming options you asked for.
+
+::: {.callout-tip title="Tip: Same question, different script (optional)" collapse="true"}
+An LLM does not give the same answer twice. The same question can give a different script, and a small change in the wording can change what the script does to your data. To see how much, I asked ChatGPT (without any memory of earlier chats, November 2026) two more times:
+
+-   Run 1: the same question as in the worked example
+-   Run 2: a vaguer question: "I work with samples S1-S100. I want to run fastp for quality cleaning. Can you write a script to process all these samples at once on a HPC with slurm?"
+
+This is what the three scripts asked fastp to do. The default values come from the help page of fastp 1.4.0 (see the exercise on default filtering above):
+
+|                           | Quality trimming                                                    | `-q` (default 15)                    | `-e` (default 0) | `-l` (default 15) |
+|---------------------------|---------------------------------------------------------------------|--------------------------------------|------------------|-------------------|
+| Worked example            | from both ends (`--cut_front`, `--cut_tail`)                        | 15                                   | 20               | 15                |
+| Run 1, same question      | none in the script, both ends only in a second "if you want" version | 20 (first version), 15 (second version) | 20               | 15                |
+| Run 2, "quality cleaning" | none                                                                | 20                                   | 0                | 30                |
+
+A few things stand out:
+
+-   **Same question, two different scripts.** The worked example trims from both ends. The script of run 1 doesn't trim at all, although the question asked for it. The answer even says that `-q` "alone does not perform quality trimming", and offers trimming only as an extra
+-   **Two versions in one answer, and they filter differently.** With `-q 20`, a base only counts as good from Q20 on, and a read is still removed if more than 40% of its bases are not good (`-u`). So the first version removes more reads. The second version drops `-q 20` again, without saying so
+-   **"Cleaning" was left to the LLM.** In run 2, I didn't say what cleaning means, so the LLM decided. It did no quality trimming, but it changed two defaults (`-q` and `-l`) and added `--detect_adapter_for_pe`, without any reason from my data (see the exercise on default filtering for what `-q` and `-l` do). But I could only have asked for trimming if I knew that it exists. This is the same problem as in the exercise on default filtering: you can't ask about something you don't know about, and the answer won't tell you what is missing
+
+So a question that once gave a good script can give a worse one next time. Check every script you get, every time: look up the options in the help page, and run it on one sample first. And write down in your notebook which options you used and why. "I ran fastp" can mean three quite different things.
+:::
 
 ## Less code is often better
 
@@ -618,9 +638,99 @@ When your code crashes or gives strange results, it is tempting to paste everyth
 
 A rewritten script may run without errors, but you then have to check all of it again, and you have learned nothing about why the first version failed.
 
+## New tools and websites made with LLMs
+
+LLMs don't only write code. They also make it much cheaper to build a website or an app for others. I expect that you will come across more and more of these: tools that build a command for you, explain every option, write your job script, or turn a paper into a workflow. Many are made with good intentions, often by people who struggled with the same problems as you. Some of these might be useful but all require a careful look.
+
+Before LLMs, a polished look was a sign that someone had put a lot of time into a tool. Now a clean design, well-written text and green check marks are easy to make, and none of them tell you whether the content is correct.
+
+Before you use such a tool for your analysis, ask yourself:
+
+-   **What do I actually need?** Often the answer is a for-loop in a job script, as on day 2. A new tool may try to solve a problem you don't have
+-   **Who made it, and is it maintained?** Is there a place to report errors? What happens to your work if the website disappears next year?
+-   **What does it check, and what does that prove?** "Every option exists in the help page" does not mean that the command does what you want. A command can use only real options and still point to the wrong files, or ask for far more CPUs, memory and time than it needs
+-   **Where can I check the steps in between?** A tool that goes from raw files to a finished figure in one click skips the places where you would normally look: how many reads were removed, which samples failed, which thresholds were used. If you can't see these, you can't check them, and you can't write them in your notebook
+-   **Can I explain every line it gives me?** This includes lines that look like good practice, such as `set -euo pipefail` (see the optional box on skipping samples above), and the settings the tool picked for you, often without saying so. Check in the help page what they do to your data, as we did for fastp
+-   **Where does my input go?** Code, error messages or papers that you paste may be sent to an LLM provider. The UvA rules above apply here too. This also goes for signing up: if a tool asks for an account or your email address before you can try it, think about who gets these details, and whether the tool is worth it
+-   **Does it help me understand, or does it replace understanding?** Be careful with promises like "you never need to read a help page again". For a beginner, the help page is where you learn what the options do, and where you find the options that are off
+
+Treat the output of such a tool like code from a chat: run it on one sample, and check the result with the commands from day 1.
+
+:::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+Below are two pieces of code from real websites made with the help of an LLM. Both websites look very polished. I typed the code over and left out the names of the websites so that we can focus on the content in this exercise.
+
+1.  A command builder website made this job script for FastQC (a tool that makes a quality report for each fastq file, see the optional FastQC box on day 2). In the website, `{sample}` was shown in a different colour, as a box to fill in. The website tells you to start it with `mkdir -p logs` and `sbatch run_fastqc.sh`. Predict what happens if you do exactly that, and check if you can find any problems in the script. Think of a check that you can test on your own computer, without FastQC
+
+```{bash}
+#!/bin/bash
+#SBATCH --job-name=fastqc
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --time=12:00:00
+#SBATCH --output=logs/%x_%j.out
+
+set -euo pipefail
+
+fastqc -t 8 --outdir qc/ raw/{sample}_R1.fq.gz raw/{sample}_R2.fq.gz
+
+echo "Done"
+```
+
+2.  A website for saving commands shows this loop to run fastp on many samples. Compare it with the fastp loop from day 2. What is missing, and what would happen to your results?
+
+```{bash}
+for s in $(cat samples.txt); do
+  fastp -i ${s}_R1.fq.gz -I ${s}_R2.fq.gz -o trim/${s}_R1.fq.gz -O trim/${s}_R2.fq.gz -w 8
+done
+```
+
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+**Question 1**
+
+-   **`{sample}` is not filled in.** On the website, `{sample}` is a box to fill in. In bash, it means nothing special, and bash leaves it as it is. You can test this with `echo` and `ls`, as on day 1:
+
+```{bash}
+echo raw/{sample}_R1.fq.gz
+ls raw/{sample}_R1.fq.gz
+```
+
+On my computer, this prints:
+
+```
+raw/{sample}_R1.fq.gz
+ls: cannot access 'raw/{sample}_R1.fq.gz': No such file or directory
+```
+
+So FastQC looks for a file that is literally called `{sample}_R1.fq.gz`. And even if you fill in a name by hand, the script only works for one sample. There is no loop. Written as `${sample}`, the same line would work inside a for-loop like the one from day 2.
+
+-   **The output folder is never made.** The script makes no `qc/` folder, and FastQC doesn't make it either. FastQC would stop with `[ERROR] Output dir qc/ does not exist`. Remember from day 2: make the output folder in the script, with `mkdir -p`.
+-   **No software is activated.** There is no `conda activate` and no `module load`, so which FastQC runs (if any) depends on your terminal at the moment you submit the job. See the worked example above.
+-   **The resources are guesses.** 32 GB of memory and 12 hours for two fastq files likely is too much. Asking for too much means a longer wait in the queue, and resources that others on Crunchomics can't use. Run one sample and check what it used (the optional `sacct` box on day 2). Whether FastQC can even use 8 CPUs depends on the version: check `fastqc --help` for how many threads one file can use.
+-   **`set -euo pipefail`** stops the script at the first error. Here that helps, because the job fails instead of reporting "Done". But do you know why it is there? See the optional box on skipping samples above.
+-   **The parts don't fit together.** In the log name, `%x` is replaced by the job name and `%j` by the job ID. So the script makes one log file per job, not one per sample. The log names and the single script say "one job for all samples", but the command handles one sample at most. Each line looks fine on its own. Reading the script as a whole is what shows the problem.
+
+I typed this script over from a screenshot of the website. The file you get with its download button might be different, for example with a loop or with real sample names. I didn't test that, because it needs an account, and I didn't want to give my details to a website that I don't know. But when a website shows you a script as ready to submit, and that script can't work, that is a good sign not to trust the rest of the website too readily.
+
+**Question 2**
+
+-   **No report names.** There is no `-h` and `-j`, so fastp writes the reports of every sample to `fastp.html` and `fastp.json` inside your working directory. Each sample overwrites the reports of the sample before. After a for-loop, you only have the reports of the last sample. On day 2, we found this in the test run with one sample.
+-   **The `trim/` folder is never made.** fastp doesn't make it either, and stops with `ERROR: Failed to open for pwrite: trim/S1_R1.fq.gz`.
+-   **`-w 8`** is the short form of `--thread 8` (we used `--thread 2` on day 2). Nothing in the snippet says where the 8 comes from. In a job script, it should match `--cpus-per-task`.
+-   **The input files must be in the folder where you run the loop.** Our files are in `data/seq_project/`, one folder per sample, so this loop finds none of them. For this website the files might be well inside the working directory but that is not a habit I recommend. Instead, I recommend that you use a clean folder organization to separate different parts of the analysis.
+
+**Key points**
+
+-   A polished website says nothing about whether the code works
+-   The basics from day 1 and day 2 are enough to find most of these problems: `echo`, `ls`, output folders and a test run with one sample
+:::
+::::
+
+The same goes for tutorials, blog posts and courses, including this one. I revised this tutorial with help from an LLM, and the [readme of this course](https://github.com/ndombrowski/cli_workshop#use-of-ai-tools) describes how.
+
 ## Further reading
 
 -   [On GenAI usage](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html), at the end of the IBED for-loops page: what to look out for in loops written by an LLM
+-   [Checking code from an LLM](https://ndombrowski.github.io/AWK_tutorial/source/check_llm_code.html), in my AWK tutorial: a short routine to check any awk or sed command, with real LLM answers checked step by step
 -   @auslander2026, [Ten simple rules for responsible use of AI and LLMs in computational biology](https://doi.org/10.1371/journal.pcbi.1014882): many of the points on this page, written for researchers, plus rules on figures, statistics and manuscripts that go beyond this workshop
 -   The UvA's [AI literacy course for students](https://edu.nl/gakhm): what generative AI is, how it works and what its limits are (about 45 to 60 minutes)
 -   [UvA AI Chat](https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html) and the UvA [rules for students](https://student.uva.nl/en/information/ai-tools-and-your-studies)

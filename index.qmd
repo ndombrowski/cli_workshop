@@ -13,9 +13,9 @@ You will first learn how to set up a terminal, a tool that lets you type command
 
 I wrote this tutorial for researchers at the Institute for Biodiversity and Ecosystem Dynamics (IBED) at the University of Amsterdam, who can get access to Crunchomics, the Genomics Compute Environment for SILS and IBED. If you don't have access to Crunchomics or another HPC that uses SLURM, you can still follow most of the tutorial on your own computer.
 
-AI chat tools such as ChatGPT can write bash code for you, so why learn it yourself? Someone still has to read the code, understand what the code does for your data, run the code, and verify the output, and that is what this tutorial teaches. At the end, the page [Using LLMs](source/llm_usage.qmd) describes how I suggest you use these tools once you know the basics.
+Since AI chat tools can write bash code for you, you might wonder if it is still worth learning how to use the command line. I strongly believe it is, because the analysis stays yours, whoever writes the code. You need to read the code, understand what it does to your data, and look at your files to see whether the result makes sense. This tutorial teaches you how. At the end, the page [Using LLMs](source/llm_usage.qmd) describes how I suggest you use these tools once you know the basics.
 
-For topics that this tutorial does not cover, have a look at [IBED's bioinformatics guidance page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/).
+For topics that this tutorial does not cover, have a look at [IBED's bioinformatics guidance page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/). To work with tables and sequence files after this workshop, you could continue with my [AWK tutorial](https://ndombrowski.github.io/AWK_tutorial/), which teaches awk and sed.
 
 <!--
 Maintainer note (not shown on the page): build a self-contained installation page

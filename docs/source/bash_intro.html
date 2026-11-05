@@ -545,7 +545,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>Let’s look at one line from the example above:</p>
 <pre><code>drwxrwxrwx 1 ndombrowski ndombrowski 4096 Dec  1 08:51 docs</code></pre>
-<p>The first column, <code>drwxrwxrwx</code>, shows the access modes. Read it in parts:</p>
+<p>The first column, <code>drwxrwxrwx</code>, shows the access modes for my <code>docs/</code> folder. You can read it in parts:</p>
 <ul>
 <li>The first letter tells you what kind of item it is: <code>d</code> for a directory (folder), <code>-</code> for a normal file.</li>
 <li>The next nine letters are three groups of three. The first group is for the <strong>owner</strong> of the file, the second for the <strong>group</strong> (a set of users who share access), and the third for <strong>everyone else</strong>.</li>
@@ -722,6 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Type this into <code>notes.md</code> and save it.</strong> From now on, we add to the notebook while we learn new commands.</p>
 <p>Markdown can do more, for example lists, links and tables. You don’t need these for the workshop, but if you are curious, <a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown Basics</a> on the Quarto website gives an overview.</p>
 <p>From now on, you find a blue notebook box at the end of each part of the tutorial. It tells you what to add to your notebook. For the first few, you can compare your notes with mine. Your notes do not have to look the same as mine, as long as future you understands them.</p>
+<p>While following this tutorial, keep your notes short: copy the commands with a comment, and write one line about what you saw. At the end of each of the two blocks, take a few minutes to tidy up the notebook.</p>
 </section>
 </section>
 <section id="cd-move-around-folders" class="level2">
@@ -1100,7 +1101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>x</code> tells tar to e<strong>x</strong>tract files from the archive</li>
 <li><code>v</code> prints the name of each file while it is being extracted, so you can see what happens (also called <strong>v</strong>erbose)</li>
 <li><code>f</code> specifies the <strong>f</strong>ile name</li>
-<li><code>C</code> tells tar to change directory (so the package content will be unpacked there)</li>
+<li><code>C</code> tells tar to <strong>c</strong>hange directory (so the package content will be unpacked there)</li>
 <li><code>tar</code> detects the compression automatically when it extracts and we don’t need an extra options to tell it to uncompress the file in our command</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: How to generate a tarball (optional)">
@@ -1140,7 +1141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-18" class="callout-18-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>After extracting the tarball, use <code>ls</code> to explore the content of the folder we just extracted. Make sure that you also explore the content of the folders inside it. Hint: use the Tab key (see the tip on command-line completion above), so that you don’t have to type every single word.</li>
+<li>After extracting the tarball, use <code>ls</code> to explore the content of the folder we just extracted. Also explore the content of the folders inside it. How many folders do you see in seq_project, and how many files are in each of these folders? Hint: use the Tab key (see the tip on command-line completion above), so that you don’t have to type every single word.</li>
 <li>Find the path for at least one sequence file that ends with <code>fastq.gz</code>.</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
@@ -1165,6 +1166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>We see that <code>seq_project</code> contains 4 folders. Each folder contains 2 files, one R1 and one R2 file, so we work with 8 <code>.fastq.gz</code> files in total.</p>
 </div>
 </div>
 </div>
@@ -1663,7 +1665,7 @@ Important
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the whole file to the screen</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> fastq_paths.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Unlike <code>less</code>, <code>cat</code> prints the whole file at once. So only use it for short files.</p>
+<p>Unlike <code>less</code>, <code>cat</code> prints the whole file at once. So only use it for short files or pipe the output from <code>cat</code> into <code>head</code>.</p>
 <p>To combine files:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for the combined files inside results</span></span>
@@ -1766,7 +1768,7 @@ Important
 <h3 class="anchored" data-anchor-id="gzip-decompress-files"><code>gzip</code>: (De)compress files</h3>
 <p>You might have noticed that our sequence files end with <code>.gz</code>. This extension is used for files that are compressed with a tool called <code>gzip</code>. Compressing makes a file smaller, which saves space, but it also makes the file unreadable for a human. That is why <code>head</code> showed us random characters.</p>
 <p>To view the content of a compressed file, we can decompress it first. We do this with the <code>gzip</code> command together with the <code>-d</code> (decompress) option. Without <code>-d</code>, <code>gzip</code> compresses a file.</p>
-<p><code>gzip -d</code> replaces the compressed file with the decompressed one. We never want to change our raw data in <code>data/</code>: if something goes wrong, there is no way to get the original back. So we instead make use of a copy:</p>
+<p><code>gzip -d</code> replaces the compressed file with the decompressed one. Since we don’t want to change the raw data in <code>data/</code>, we work on a copy:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a folder for this test, so that the raw data in data/ stays as it is</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/gzip_test</span>
@@ -1838,7 +1840,7 @@ Important
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that this worked</span></span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> results/gzip_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We don’t need the test folder anymore, so we remove it. Check the path twice before you press Enter. <code>rm -r</code> does not ask:</p>
+<p>We don’t need the test folder anymore, so we remove it. Check the path twice before you press Enter to not delete the wrong folder by mistake:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the test folder and everything inside it</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> results/gzip_test</span>
@@ -1993,12 +1995,8 @@ Important
 <div class="callout-body-container callout-body">
 <p>Add a new heading <code>## Looking at the data</code> to <code>notes.md</code>, and below it:</p>
 <ol type="1">
-<li>A code block with the commands that made the two file lists, <code>fastq_paths.txt</code> and <code>fastq_files.txt</code></li>
-<li>In the same code block, the checks that told you something about the data: how many files there are, whether there are as many R1 as R2 files, what the first lines of a fastq file look like, and how many lines one file has</li>
-<li>In normal text below the code block: what you learned about the data. How many lines does one read take?</li>
-<li>Leave out the <code>gzip</code> test on a copy, because we removed the test folder again. A short note on why we use <code>zcat</code> is enough</li>
+<li>A code block with the commands that made the two file lists, <code>fastq_paths.txt</code> and <code>fastq_files.txt</code>, and the checks that told you something about the data: how many files there are, whether there are as many R1 as R2 files, what the first lines of a fastq file look like, and how many lines one file has</li>
 </ol>
-<p>Then a check that we come back to: run <code>ls</code> and <code>ls results</code> inside <code>data_analysis</code>. Can your notebook explain where every file and folder came from? If not, add a line about it, even if it is “practice file, not needed”.</p>
 <div class="callout callout-style-default callout-notebook-answer callout-titled" title="Compare with my notes">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -2035,10 +2033,7 @@ Important
 <span id="cb67-22"><a href="#cb67-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb67-23"><a href="#cb67-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-24"><a href="#cb67-24" aria-hidden="true" tabindex="-1"></a>There are 8 files, 4 R1 and 4 R2, so every sample has both.</span>
-<span id="cb67-25"><a href="#cb67-25" aria-hidden="true" tabindex="-1"></a>In a fastq file, each read takes 4 lines: identifier, sequence, separator (<span class="in">`+`</span>) and quality scores.</span>
-<span id="cb67-26"><a href="#cb67-26" aria-hidden="true" tabindex="-1"></a>Sample-DUMMY1_R2 has 179,384 lines, so 179,384 / 4 = 44,846 reads.</span>
-<span id="cb67-27"><a href="#cb67-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-28"><a href="#cb67-28" aria-hidden="true" tabindex="-1"></a><span class="in">`results/combined/`</span> has the practice files from the <span class="in">`cat`</span> section. Not needed for the analysis.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb67-25"><a href="#cb67-25" aria-hidden="true" tabindex="-1"></a>Sample-DUMMY1_R2 has 179,384 lines, so 179,384 / 4 = 44,846 reads.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -2411,7 +2406,7 @@ $fastq_file</code></pre>
 <li><code>for file in data/seq_project/*/*.gz</code>: loop over all fastq.gz files</li>
 <li><code>if [[ $file == *_R1.fastq.gz ]]; then</code> … <code>fi</code>: run the lines between <code>then</code> and <code>fi</code> only if the file name ends in <code>_R1.fastq.gz</code>. So the loop skips the R2 files</li>
 <li><code>r1_file=$file</code>: store the path of the R1 file in the variable <code>r1_file</code></li>
-<li><code>r2_file=$(echo $file | sed 's/_R1/_R2/')</code>: the command <code>sed</code> replaces <code>_R1</code> with <code>_R2</code> in the path. This gives the path of the matching R2 file, which we store in the variable <code>r2_file</code></li>
+<li><code>r2_file=$(echo $file | sed 's/_R1/_R2/')</code>: the command <code>sed</code> replaces <code>_R1</code> with <code>_R2</code> in the path. This gives the path of the matching R2 file, which we store in the variable <code>r2_file</code>. The <a href="https://ndombrowski.github.io/AWK_tutorial/source/sed_basics.html#the-shape-of-a-sed-command">AWK tutorial</a> explains <code>sed</code> in more detail</li>
 <li><code>echo "$r1_file,$r2_file"</code>: print both paths on one line, separated by a comma</li>
 </ol>
 <p>We can add a column with the name of the sample folder, with <code>cut</code> from above:</p>
@@ -2507,7 +2502,7 @@ $fastq_file</code></pre>
 <div id="callout-54" class="callout-54-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Windows programs such as Notepad end every line with an extra invisible character. Bash on Linux does not understand this character, and the script fails with errors such as <code>$'\r': command not found</code> or <code>syntax error near unexpected token</code>. Word processors such as Word also add formatting and can change straight quotes (<code>"</code>) into curly quotes.</p>
-<p>To avoid this, write your scripts with <code>nano</code>. If you prefer a code editor such as RStudio or VS Code, check that it saves the file with <code>LF</code> line endings (in VS Code, you see <code>LF</code> or <code>CRLF</code> in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.</p>
+<p>To avoid this, write your scripts with <code>nano</code>. If you prefer a code editor such as RStudio or VS Code, check that it saves the file with <code>LF</code> line endings (in VS Code, you see <code>LF</code> or <code>CRLF</code> in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer. Lists and tables made in Excel or Notepad can have the same problem. We come back to this on day 2.</p>
 <p>If you like writing in RStudio, you can write the script there and copy it into <code>nano</code>. Or set RStudio to save with <code>LF</code> line endings: in <strong>Tools &gt; Global Options &gt; Code &gt; Saving</strong>, set <strong>Line ending conversion</strong> to <strong>Posix (LF)</strong>.</p>
 </div>
 </div>
@@ -2526,7 +2521,7 @@ $fastq_file</code></pre>
 <div class="callout-body-container callout-body">
 <p>Add a new heading <code>## Counting lines per file</code> to <code>notes.md</code>, and below it:</p>
 <ol type="1">
-<li>The command that ran the script, with a comment that says what the script does and which file it makes. We use <code>results/counts/line_counts_bash.txt</code> again on day 2. You don’t need the code that made <code>line_counts.txt</code>, because it has the same content. One line that says where it came from is enough.</li>
+<li>The command that ran the script, with a comment that says what the script does and which file it makes. Also add one line that says where <code>results/counts/line_counts.txt</code> came from (the loop in the <code>&gt;&gt;</code> section, the same commands as in the script). We use <code>line_counts.txt</code> again on day 2.</li>
 <li>The check you ran afterwards, and below the code block, what you expected and what you saw</li>
 </ol>
 <p>You don’t need to copy the loop itself into your notebook, because it is saved in <code>scripts/count_lines.sh</code>. The script is part of your documentation. Your notebook only needs to say which script you ran and what it made.</p>
@@ -2552,7 +2547,7 @@ $fastq_file</code></pre>
 <ol type="1">
 <li>Below the main heading at the top of <code>notes.md</code>, add 2 or 3 sentences: what data this is, where it came from, and what you did with it today</li>
 <li>Read your notebook from the top. Could you redo today’s analysis from it alone, without this tutorial? Add what is missing</li>
-<li>Check once more that your notebook explains every file and folder in your project. Run these inside <code>data_analysis</code>: <code>ls</code>, <code>ls results/*</code> and <code>ls scripts</code></li>
+<li>Check that your notebook explains every file and folder in your project. Run these inside <code>data_analysis</code>: <code>ls</code>, <code>ls results/*</code> and <code>ls scripts</code>. If something is not explained, add a line about it, even if it is “practice file, not needed”</li>
 <li>Add a heading <code>## Questions for day 2</code> and write down anything that is still unclear. This is also handy for a real analysis and lets you keep track of loose ends.</li>
 </ol>
 <p>On day 2, you keep writing in the same <code>notes.md</code> on your own computer, also for the commands that you run on the HPC.</p>
@@ -3003,7 +2998,7 @@ $fastq_file</code></pre>
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-11-04</p>
+Last modified: 2026-11-05</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/bash_intro.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

@@ -9,9 +9,9 @@ You will first learn how to set up a terminal, a tool that lets you type command
 
 I wrote this tutorial for researchers at the Institute for Biodiversity and Ecosystem Dynamics (IBED) at the University of Amsterdam, who can get access to Crunchomics, the Genomics Compute Environment for SILS and IBED. If you don't have access to Crunchomics or another HPC that uses SLURM, you can still follow most of the tutorial on your own computer.
 
-AI chat tools such as ChatGPT can write bash code for you, so why learn it yourself? Someone still has to read the code, understand what the code does for your data, run the code, and verify the output, and that is what this tutorial teaches. At the end, the page [Using LLMs](https://ndombrowski.github.io/cli_workshop/source/llm_usage.html) describes how I suggest you use these tools once you know the basics.
+Since AI chat tools can write bash code for you, you might wonder if it is still worth learning how to use the CLI. I strongly believe it is, because the analysis stays yours, whoever writes the code. You need to read the code, understand what it does to your data, and look at your files to see whether the result makes sense. This tutorial teaches you how. At the end, the page [Using LLMs](source/llm_usage.qmd) describes how I suggest you use these tools once you know the basics.
 
-For topics that this tutorial does not cover, have a look at [IBED's bioinformatics guidance page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/).
+For topics that this tutorial does not cover, have a look at [IBED's bioinformatics guidance page](https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/). To work with tables and sequence files after this workshop, continue with my [AWK tutorial](https://ndombrowski.github.io/AWK_tutorial/), which teaches awk and sed.
 
 ## License
 
@@ -30,4 +30,4 @@ In 2026, I revised this tutorial with help from Claude Code (Anthropic), an AI c
 - test commands on the course data and check facts against documentation (for example fastp, SLURM and the UvA rules on AI use)
 - keep track of open tasks and check the pages for consistency
 
-I decided on the content, the course structure and the teaching approach, and I reviewed every change. I test the workshop commands on Crunchomics before each workshop. Any remaining errors are mine.
+I decided on the content, the course structure and the teaching approach, and I reviewed every change. I ran every command on the pages myself, on my own computer (WSL and MobaXterm) and on Crunchomics, and fixed what did not work. I test the commands again before each workshop. I have not tested them on a Mac. Any remaining errors are mine.

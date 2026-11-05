@@ -419,6 +419,7 @@ div.csl-indent {
   <li><a href="#worked-example-an-llm-writes-a-fastp-job-script" id="toc-worked-example-an-llm-writes-a-fastp-job-script" class="nav-link" data-scroll-target="#worked-example-an-llm-writes-a-fastp-job-script">Worked example: an LLM writes a fastp job script</a></li>
   <li><a href="#less-code-is-often-better" id="toc-less-code-is-often-better" class="nav-link" data-scroll-target="#less-code-is-often-better">Less code is often better</a></li>
   <li><a href="#when-your-code-does-not-work" id="toc-when-your-code-does-not-work" class="nav-link" data-scroll-target="#when-your-code-does-not-work">When your code does not work</a></li>
+  <li><a href="#new-tools-and-websites-made-with-llms" id="toc-new-tools-and-websites-made-with-llms" class="nav-link" data-scroll-target="#new-tools-and-websites-made-with-llms">New tools and websites made with LLMs</a></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul></li>
   </ul>
@@ -446,6 +447,7 @@ div.csl-indent {
 <li>Treat every piece of code an LLM writes as a <strong>first draft</strong>: run it on one sample and check the output before you use it for real</li>
 <li>You need to be able to <strong>explain</strong> and <strong>justify</strong> every step of your analysis, whoever wrote the code</li>
 <li>You need to <strong>understand</strong> what each option of a tool does to your data. For the code around it, you can <strong>check</strong> that it does what you want with the simple commands from day 1</li>
+<li><strong>Be critical of new tools and websites</strong> made with LLMs. Most of these look very polished but this says very little about whether the content is right</li>
 </ul>
 <section id="why-learn-the-command-line-if-an-llm-can-write-the-code" class="level2">
 <h2 class="anchored" data-anchor-id="why-learn-the-command-line-if-an-llm-can-write-the-code">Why learn the command line if an LLM can write the code?</h2>
@@ -512,6 +514,7 @@ div.csl-indent {
 <li><strong>Treat generated code as a first draft.</strong> Run it on one sample, look at the output, and check that it makes biological sense before you run it on all samples</li>
 <li><strong>Don’t let it rewrite code that fails.</strong> This usually replaces code you don’t understand with more code you don’t understand. Ask it to explain the error or a specific line instead (more on this <a href="#when-your-code-does-not-work">below</a>)</li>
 <li><strong>Check suggested options against the help page of the version you use.</strong> An LLM has learned from documentation of many versions of a tool, often older ones. Remember from day 2: Crunchomics has fastp 1.0.1, and we installed 1.4.0. Options can change between versions. <code>fastp --help</code> on your own installation is always more reliable than an LLM’s suggestion</li>
+<li><strong>Look at your data before you accept the settings.</strong> An LLM has not seen your data, but it still picks settings for you: sometimes the defaults, sometimes other values, and the choice can change with the wording of your question (see the tip after the worked example below). Only your own data, for example the fastp report, tells you which settings you need</li>
 <li><strong>Write down what each result means, in your own words.</strong> Your notebook is not only a record of what you did. It is also a place to slow down and think. After each analysis step, write at least one sentence about what the result means for your data, for example: “fastp removed 3% of the reads” and also think about whether that number is something that you expected. Make sure to write this yourself, not with an LLM</li>
 </ul>
 <p>And the most important rule: <strong>if you can’t explain a step, don’t use it yet.</strong> It is completely fine to ask for help with a step you don’t understand, from a person or from an LLM. Struggling with code is a normal part of learning.</p>
@@ -531,7 +534,6 @@ div.csl-indent {
 <ol type="1">
 <li>Ask in UvA AI Chat (or another chat tool that you are allowed to use): “What does fastp do by default to filter reads? Which options control this, and what are their default values?” Write down its answer</li>
 <li>On Crunchomics, activate the <code>fastp_1.4.0</code> environment and look at the help page. Find the options the LLM mentioned. Do the descriptions and default values match?</li>
-<li>Deactivate the environment and look at the help page of the fastp 1.0.1 of Crunchomics. Is there anything different?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -550,12 +552,7 @@ div.csl-indent {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2: the help page of fastp 1.4.0</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate fastp_1.4.0</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--version</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--help</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">less</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 3: the help page of the fastp of Crunchomics</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--version</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--help</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--help</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>2&gt;&amp;1</code> sends the error output to the same place as the normal output. Some tools print their help page as error output, and then <code>less</code> would not get it. Inside <code>less</code>, type <code>/quality</code> and press Enter to jump to the word “quality”, and <code>n</code> to jump to the next match.</p>
 <p>Look for the options about quality and length filtering. For fastp 1.4.0 on Crunchomics, these are the lines:</p>
@@ -584,7 +581,32 @@ div.csl-indent {
 <li>Neither answer said which version of fastp it described</li>
 <li>One answer ended with advice tailored to one of my own research projects, which I had not mentioned in the question. It assumed a different kind of data than the data I was asking about. The reason for that is that depending on your settings an LLM can remember earlier conversations. This can be useful for some things but you have to decide if this is what you want and whether this fits into the privacy rules of your organisation.</li>
 </ol>
-<p><strong>Differences between versions (question 3)</strong></p>
+<p><strong>Key points</strong></p>
+<ul>
+<li>Often the LLM is right but it might also blur things in its response. A quick look at the help page is how you <em>know</em></li>
+<li>An LLM answers only what you ask, and it won’t tell you what you didn’t ask. The help page lists every option, also the ones that are off</li>
+<li>“Default settings” only means something if you know what is on and what is off</li>
+<li>If the LLM and the help page of your own installation differ, the help page wins</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Compare the help pages of two versions (optional)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Compare the help pages of two versions (optional)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Crunchomics has fastp 1.0.1, and on day 2 we installed fastp 1.4.0. Are the filtering options from the exercise above the same in both versions?</p>
 <p>Scrolling through two long help pages is tiring. Instead, we can save both in a file and let the computer compare them. <code>diff</code> compares two files line by line and prints only the lines that differ:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the help page of each version in a file</span></span>
@@ -608,22 +630,12 @@ div.csl-indent {
 ---
 &gt;       --dup_calc_accuracy              accuracy level to calculate duplication (1~6), higher level uses more memory (1G, 2G, 4G, 8G, 16G, 32G). Default 1 for no-dedup mode, and 3 for dedup mode. (int [=0])</code></pre>
 <p>Lines that start with <code>&lt;</code> come from the first file (1.0.1), lines with <code>&gt;</code> from the second file (1.4.0). The numbers above them say where in each file the lines are.</p>
-<p>So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to <em>know</em>, not to find a difference. Three other lines did change. The most interesting one is <code>--dimer_max_len</code>, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn’t say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn’t list this option at all (checked in October 2026). So even the official documentation online can lag behind the program.</p>
-<p><strong>Key points</strong></p>
-<ul>
-<li>Often the LLM is right but it might also blur things in its response. A quick look at the help page is how you <em>know</em></li>
-<li>An LLM answers only what you ask, and it won’t tell you what you didn’t ask. The help page lists every option, also the ones that are off</li>
-<li>“Default settings” only means something if you know what is on and what is off</li>
-<li>If the LLM, the online documentation and your help page differ, the help page of your own installation wins</li>
-</ul>
-</div>
-</div>
-</div>
+<p>So for the filtering options, nothing changed between 1.0.1 and 1.4.0. That is a good outcome too: the point of the check is to <em>know</em>, not to find a difference. Three other lines did change. The most interesting one is <code>--dimer_max_len</code>, a new option for adapter trimming in 1.4.0. Reads of 2 bases or less would be removed by the length filter anyway, but the help page doesn’t say whether the new option changes anything else. Interestingly, the fastp README on GitHub for version 1.4.0 doesn’t list this option at all (checked in October 2026). So even the official documentation online can lag behind the program. If the LLM, the online documentation and your help page differ, the help page of your own installation wins.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: An LLM that looks something up has not always read the page (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -632,7 +644,7 @@ div.csl-indent {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Some LLM tools can search the web or open a link you give them. That sounds like they read the page, but often they don’t read all of it. Some tools pass the page through a second, smaller model that summarises it, and the main model only sees that summary. Claude Code works like this, for example (checked in October 2026; other tools may work differently). An answer can also be based only on the short snippets that a search engine shows for each result.</p>
 <p>There is a good reason for this: a long web page is a lot of text to process, and a summary makes the answer faster and cheaper. So I don’t expect this to disappear, even if the details change from tool to tool. And for many questions, a summary is all you need, for example “What is fastp used for?” or “Which tools are often used to trim reads?”.</p>
@@ -653,7 +665,7 @@ What happens if one of the input files is missing?</code></pre>
 <pre><code>What is the difference between the -o and the -h option of fastp?</code></pre>
 <p>Keep in mind that the answer you get can still be wrong. An explanation is easier to check than a full script, though: you can test each claim with a small command or by looking at the help function yourself.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -662,9 +674,9 @@ What happens if one of the input files is missing?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>In the optional box at the end of the fastp section on day 2, we used this awk command (if you skipped that box, you don’t have <code>stats_trimmed.txt</code>, but you can still do the checks in the answer on <code>stats_raw.txt</code>):</p>
+<p>In the optional box at the end of the fastp section on day 2, we used this awk command:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'FNR &gt; 1 {print $1, $4, $7}'</span> results/seqkit/stats_raw.txt results/seqkit/stats_trimmed.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -673,7 +685,7 @@ What happens if one of the input files is missing?</code></pre>
 <li>Pick one thing the explanation claims, for example what <code>FNR &gt; 1</code> does. How can you check this claim yourself, with the commands from day 1?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -682,7 +694,7 @@ What happens if one of the input files is missing?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For question 2: the explanation should say that <code>FNR &gt; 1</code> skips the first line of each file, the header. You can check this by comparing the input with the output:</p>
 <div class="cell">
@@ -715,7 +727,7 @@ What happens if one of the input files is missing?</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: When the answer is longer than you want to read (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -724,12 +736,12 @@ What happens if one of the input files is missing?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>LLM answers are often long. When I asked ChatGPT (October 2026) to explain the one-line awk command from the exercise above line by line, I got seven sections, two tables, example files and a summary at the end. I used ChatGPT without any memory of earlier chats on purpose, so it knew nothing about me except what I wrote in the question. Most of it was correct (the answer above shows one detail that was not). But the part I actually needed fits in one sentence, and it was near the top:</p>
 <pre><code>Read two files, skip the first line of each file, and print columns 1, 4, and 7 from every remaining line.</code></pre>
 <p>The rest explained things like what the folder <code>results/</code> is, and why a biologist might want to use this command. The few details that really matter, such as how <code>FNR</code> is different from <code>NR</code>, were somewhere in the middle. If you are new to the command line, it is hard to tell which parts are important and which are filler. And scrolling through a long, well-written answer can feel like learning, even when not much of it sticks.</p>
-<p>You don’t need a perfect question to avoid this. You can simply say what is wrong with the answer. I replied that most students would not read through this much text, and the second answer was much shorter. Its core was this table:</p>
+<p>You don’t need a perfect prompt to avoid this. You can simply say what is wrong with the answer. I replied that most students would not read through this much text, and the second answer was much shorter. Its core was this table:</p>
 <pre><code>Part                Meaning
 awk                 Reads and processes text, one line at a time.
 -F'\t'              Treats tabs as column separators.
@@ -750,8 +762,8 @@ stats_trimmed.txt   Second input file.</code></pre>
 <h2 class="anchored" data-anchor-id="checking-code-with-the-commands-from-day-1">Checking code with the commands from day 1</h2>
 <p>This is the main point of this page. Not all code needs the same level of understanding:</p>
 <ul>
-<li><strong>The analysis itself: understand every option.</strong> The options of a tool like fastp decide what happens to your data: which reads are removed, and how much of each read is trimmed. These are scientific choices. You need to know what each option does and why you use it, whether you or an LLM wrote the command. Look them up with <code>fastp --help</code> or in the manual, and ask an LLM to explain an option if the manual is unclear</li>
-<li><strong>The code around it: know what it should do, then check.</strong> Some code only organises the work: an <code>if</code>/<code>else</code> block that skips finished samples, or a <code>sed</code> or <code>awk</code> command that picks lines from a file. You may not understand every detail of how it works. But you must know what it is supposed to do to your files, and check that it really does</li>
+<li><strong>The analysis itself: understand every option.</strong> The options of a tool like fastp decide what happens to your data: which reads are removed, and how much of each read is trimmed. These are scientific choices. The options you don’t type matter just as much: fastp, and other tools, also apply defaults, for example quality and length filtering, and leaves other steps off unless you switch them on (see the exercise on default filtering above). You need to know what each option does and why you use it, whether you or an LLM wrote the command. Look them up with <code>fastp --help</code> or in the manual, and ask an LLM to explain an option if the manual is unclear</li>
+<li><strong>The code around it: know what it should do, then check.</strong> Some code only organises the work: an <code>if</code>/<code>else</code> block that skips finished samples, or a <code>sed</code> or <code>awk</code> command that picks lines from a file. You may not understand every detail of how it works. But you must know what it is supposed to do to your files, and check that it really does the correct thing</li>
 </ul>
 <p>For these checks, the commands from day 1 are enough:</p>
 <table class="caption-top table">
@@ -802,7 +814,7 @@ stats_trimmed.txt   Second input file.</code></pre>
 </table>
 <p>Before you run anything, think about what you expect: how many samples, how many files, roughly how many reads. Then compare. If the numbers don’t match, you have found a problem, even if you can’t yet say where it is.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -811,7 +823,7 @@ stats_trimmed.txt   Second input file.</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Imagine you ask an LLM how to count the reads in a fastq file, and it suggests:</p>
 <div class="cell">
@@ -824,7 +836,7 @@ stats_trimmed.txt   Second input file.</code></pre>
 <li>Can you think of a reason why they don’t match? Hint: look at the fastq format again. Which other line of a read could start with <code>@</code>?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -833,7 +845,7 @@ stats_trimmed.txt   Second input file.</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>On my computer (WSL on Windows), the <code>grep</code> command prints:</p>
 <pre><code>44882</code></pre>
@@ -906,7 +918,7 @@ process all these samples at once on a HPC with slurm?</code></pre>
 </div>
 <p>It looks professional: tidy comments, a check on the input files, separate log files per sample. It uses a <strong>job array</strong>, which we only saw in an optional box on day 2: SLURM starts the same script many times (here 100 times), and each copy gets its own number in the variable <code>SLURM_ARRAY_TASK_ID</code>. The script uses the long names of the fastp options (<code>--in1</code> instead of <code>-i</code>, <code>--out1</code> instead of <code>-o</code>); both forms do the same thing.</p>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -915,7 +927,7 @@ process all these samples at once on a HPC with slurm?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Read the script carefully, as if you were going to run it on your own data. Write down everything you would check or change. Some questions to guide you:</p>
 <ol type="1">
@@ -926,7 +938,7 @@ process all these samples at once on a HPC with slurm?</code></pre>
 <li>Compare it with the fastp script from day 2. Is it wrong, or just different?</li>
 </ol>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -935,19 +947,18 @@ process all these samples at once on a HPC with slurm?</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>I sort the problems from most to least serious.</p>
 <p><strong>1. It runs, but does the wrong thing</strong></p>
 <ul>
 <li><strong>The comments at the end of the lines break the command.</strong> The <code>\</code> only joins two lines when it is the very last character on the line (we saw this on day 2). Here, spaces and a comment follow it. The <code>\</code> then only protects the space after it, and the command ends at the end of that line. fastp receives the input and output files, <code>--average_qual 20</code>, and one extra argument that is just a space. Bash then tries to run the lines that follow as commands of their own, and each attempt fails with <code>command not found</code>. The <code>--thread</code> line has no comment, so its <code>\</code> works again, and <code>--thread</code>, <code>--json</code> and <code>--html</code> end up together in one failing command. So fastp never gets the trimming options, <code>--thread</code>, <code>--json</code> or <code>--html</code>. I missed this myself when I first read the script, which shows that reading is not enough: you also have to run it on one sample and look at the output. See the next exercise for a small test.</li>
 <li><strong>The job reports success anyway.</strong> The last line, <code>echo "Done"</code>, always works. A job counts as successful when its last command works, so SLURM reports every task as finished without problems. The errors are only visible in the <code>.err</code> files. (With <code>set -euo pipefail</code> at the top of the script, it would have stopped at the first <code>command not found</code>, and SLURM would have reported the task as failed. fastp would still have run once with the incomplete options before that. See the tip on <code>set -euo pipefail</code> further down.)</li>
-<li><strong>The <code>logs</code> folder is made too late.</strong> SLURM opens the log files before the script starts, so the <code>mkdir</code> for <code>logs</code> inside the script comes too late to matter. On Crunchomics, SLURM then makes a missing <code>logs</code> folder itself, but inside the folder where you typed <code>sbatch</code>, which is not always where you expect your logs (we saw this on day 2). Make the folder before you run <code>sbatch</code>, as we did on day 2, so that you know where your logs end up.</li>
+<li><strong>The <code>logs</code> folder is made too late.</strong> On most systems SLURM opens the log files before the script starts, so the <code>mkdir</code> for <code>logs</code> inside the script comes too late for such systems. On Crunchomics, SLURM makes a missing <code>logs</code> folder itself, but inside the folder where you typed <code>sbatch</code>, which is not always where you expect your logs (we saw this on day 2). Make the folder before you run <code>sbatch</code>, as we did on day 2, so that you know where your logs end up.</li>
 </ul>
 <p><strong>2. It makes assumptions about your data</strong></p>
 <ul>
-<li><strong>The file names are invented.</strong> <code>S${SLURM_ARRAY_TASK_ID}</code> only works because the prompt said “S1-S100”. Real file names rarely look like that. In this workshop, the files are called <code>Sample-DUMMY1_R1.fastq.gz</code> and are in separate folders. A list file like <code>samples.txt</code> works with any names, and you can open it to see which samples will be processed.</li>
-<li><strong>It chose a trimming method for you.</strong> The prompt was not clear about how to trim, so the LLM chose trimming from both ends of the read (without asking me for clarification). Is that what you want? fastp 1.4.0 offers three methods, each with a window of 4 bases that moves along the read: <code>--cut_front</code> (from the start of the read, removes bases until the quality is good enough), <code>--cut_tail</code> (the same, from the end of the read) and <code>--cut_right</code> (from the start; at the first window with low quality, it removes that window and everything after it). Which one fits depends on your data. <code>--cut_mean_quality</code> only sets the quality threshold that these three methods use. On its own, it does nothing: fastp only trims by quality if you also add <code>--cut_front</code>, <code>--cut_tail</code> or <code>--cut_right</code>. (And 20 is already the default threshold, so the script would trim the same way without this line.) And fastp already filters reads by default, also without any of these options (see the exercise on default filtering above). Check <code>fastp --help</code> for the version you use, and ask yourself (or the LLM) why these options and not others.</li>
+<li><strong>It chose a trimming method for you.</strong> The prompt was not clear about how to trim, so the LLM chose trimming from both ends of the read (without asking me for clarification). Is that what you want? fastp 1.4.0 offers three methods, each with a window of 4 bases that moves along the read: <code>--cut_front</code> (from the start of the read, removes bases until the quality is good enough), <code>--cut_tail</code> (the same, from the end of the read) and <code>--cut_right</code> (from the start; at the first window with low quality, it removes that window and everything after it). Which one fits depends on your data. <code>--cut_mean_quality</code> only sets the quality threshold that these three methods use. On its own, it does nothing: fastp only trims by quality if you also add <code>--cut_front</code>, <code>--cut_tail</code> or <code>--cut_right</code>. (And 20 is already the default threshold, so the script would trim the same way without this line.) Check <code>fastp --help</code> for the version you use, and ask yourself (or the LLM) why these options and not others.</li>
 <li><strong>The resources are guesses.</strong> 8 CPUs, 16 GB of memory and 4 hours per sample are not based on your data. Asking for too much time means a longer wait in the queue. Run one sample first, then check what it actually used (the optional <code>sacct</code> box on day 2).</li>
 <li><strong>No software is activated.</strong> There is no <code>conda activate</code>, so the script doesn’t say which fastp it needs. Which one the job uses then depends on your terminal at the moment you submit the job: SLURM normally copies its settings, including the PATH, into the job. If the <code>fastp_1.4.0</code> environment happened to be active, the job uses fastp 1.4.0. If not, it uses the fastp 1.0.1 of Crunchomics. Your results should not depend on such an accident.</li>
 </ul>
@@ -979,6 +990,75 @@ comment_test.sh: line 3: --in2: command not found
 comment_test.sh: line 4: --thread: command not found
 Done</code></pre>
 <p>The first line shows the full command that fastp would receive: only the R1 file. The R2 file and <code>--thread</code> never reach it, and bash simply continues with the next lines. In the worked example, this is what makes the mistake dangerous: fastp still gets the input and output files and <code>--average_qual 20</code>, so it runs, writes trimmed files, and SLURM reports success. The output looks normal, but it was made without the trimming options you asked for.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip: Same question, different script (optional)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip: Same question, different script (optional)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An LLM does not give the same answer twice. The same question can give a different script, and a small change in the wording can change what the script does to your data. To see how much, I asked ChatGPT (without any memory of earlier chats, November 2026) two more times:</p>
+<ul>
+<li>Run 1: the same question as in the worked example</li>
+<li>Run 2: a vaguer question: “I work with samples S1-S100. I want to run fastp for quality cleaning. Can you write a script to process all these samples at once on a HPC with slurm?”</li>
+</ul>
+<p>This is what the three scripts asked fastp to do. The default values come from the help page of fastp 1.4.0 (see the exercise on default filtering above):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 40%">
+<col style="width: 22%">
+<col style="width: 10%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Quality trimming</th>
+<th><code>-q</code> (default 15)</th>
+<th><code>-e</code> (default 0)</th>
+<th><code>-l</code> (default 15)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Worked example</td>
+<td>from both ends (<code>--cut_front</code>, <code>--cut_tail</code>)</td>
+<td>15</td>
+<td>20</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>Run 1, same question</td>
+<td>none in the script, both ends only in a second “if you want” version</td>
+<td>20 (first version), 15 (second version)</td>
+<td>20</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>Run 2, “quality cleaning”</td>
+<td>none</td>
+<td>20</td>
+<td>0</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>A few things stand out:</p>
+<ul>
+<li><strong>Same question, two different scripts.</strong> The worked example trims from both ends. The script of run 1 doesn’t trim at all, although the question asked for it. The answer even says that <code>-q</code> “alone does not perform quality trimming”, and offers trimming only as an extra</li>
+<li><strong>Two versions in one answer, and they filter differently.</strong> With <code>-q 20</code>, a base only counts as good from Q20 on, and a read is still removed if more than 40% of its bases are not good (<code>-u</code>). So the first version removes more reads. The second version drops <code>-q 20</code> again, without saying so</li>
+<li><strong>“Cleaning” was left to the LLM.</strong> In run 2, I didn’t say what cleaning means, so the LLM decided. It did no quality trimming, but it changed two defaults (<code>-q</code> and <code>-l</code>) and added <code>--detect_adapter_for_pe</code>, without any reason from my data (see the exercise on default filtering for what <code>-q</code> and <code>-l</code> do). But I could only have asked for trimming if I knew that it exists. This is the same problem as in the exercise on default filtering: you can’t ask about something you don’t know about, and the answer won’t tell you what is missing</li>
+</ul>
+<p>So a question that once gave a good script can give a worse one next time. Check every script you get, every time: look up the options in the help page, and run it on one sample first. And write down in your notebook which options you used and why. “I ran fastp” can mean three quite different things.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="less-code-is-often-better" class="level2">
 <h2 class="anchored" data-anchor-id="less-code-is-often-better">Less code is often better</h2>
@@ -1019,7 +1099,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 <p>The simple loop has no check at all, and that is exactly why the problem is visible: the error message appears right below the sample name, and ends up in the log file of a job. Together with a check of the output (4 samples in, 16 files out), you would notice the missing sample right away.</p>
 <p>So knowing your own data and checking it with basic commands often works better than adding checks to the code. Before you submit a job, check the inputs with <code>cat samples.txt</code>, <code>wc -l samples.txt</code> and an <code>ls</code> loop like the one above. After the job, count the outputs.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tip: Skipping samples that are already done (optional)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1028,7 +1108,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Sometimes a check in the loop does make sense. Say a job stopped halfway, and you don’t want to run fastp again for the samples that are already done. Then write the check so that you can read it, and so that every skip shows up in the log:</p>
 <div class="cell">
@@ -1055,7 +1135,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 </div>
 <div class="callout callout-style-default callout-question callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1064,12 +1144,12 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Take the LLM script from the worked example, and change it into a script that works for the data of this workshop, in the style of day 2. Keep the job array if you like, or use a for-loop.</p>
 <p>Then answer: which lines did you remove, and why? Which lines did you add?</p>
 <div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1078,7 +1158,7 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are several good answers. This one keeps the array, and takes the sample name from <code>samples.txt</code>. Make the <code>logs</code> folder before you submit it.</p>
 <div class="cell">
@@ -1137,10 +1217,116 @@ data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz</code></p
 </ol>
 <p>A rewritten script may run without errors, but you then have to check all of it again, and you have learned nothing about why the first version failed.</p>
 </section>
+<section id="new-tools-and-websites-made-with-llms" class="level2">
+<h2 class="anchored" data-anchor-id="new-tools-and-websites-made-with-llms">New tools and websites made with LLMs</h2>
+<p>LLMs don’t only write code. They also make it much cheaper to build a website or an app for others. I expect that you will come across more and more of these: tools that build a command for you, explain every option, write your job script, or turn a paper into a workflow. Many are made with good intentions, often by people who struggled with the same problems as you. Some of these might be useful but all require a careful look.</p>
+<p>Before LLMs, a polished look was a sign that someone had put a lot of time into a tool. Now a clean design, well-written text and green check marks are easy to make, and none of them tell you whether the content is correct.</p>
+<p>Before you use such a tool for your analysis, ask yourself:</p>
+<ul>
+<li><strong>What do I actually need?</strong> Often the answer is a for-loop in a job script, as on day 2. A new tool may try to solve a problem you don’t have</li>
+<li><strong>Who made it, and is it maintained?</strong> Is there a place to report errors? What happens to your work if the website disappears next year?</li>
+<li><strong>What does it check, and what does that prove?</strong> “Every option exists in the help page” does not mean that the command does what you want. A command can use only real options and still point to the wrong files, or ask for far more CPUs, memory and time than it needs</li>
+<li><strong>Where can I check the steps in between?</strong> A tool that goes from raw files to a finished figure in one click skips the places where you would normally look: how many reads were removed, which samples failed, which thresholds were used. If you can’t see these, you can’t check them, and you can’t write them in your notebook</li>
+<li><strong>Can I explain every line it gives me?</strong> This includes lines that look like good practice, such as <code>set -euo pipefail</code> (see the optional box on skipping samples above), and the settings the tool picked for you, often without saying so. Check in the help page what they do to your data, as we did for fastp</li>
+<li><strong>Where does my input go?</strong> Code, error messages or papers that you paste may be sent to an LLM provider. The UvA rules above apply here too. This also goes for signing up: if a tool asks for an account or your email address before you can try it, think about who gets these details, and whether the tool is worth it</li>
+<li><strong>Does it help me understand, or does it replace understanding?</strong> Be careful with promises like “you never need to read a help page again”. For a beginner, the help page is where you learn what the options do, and where you find the options that are off</li>
+</ul>
+<p>Treat the output of such a tool like code from a chat: run it on one sample, and check the result with the commands from day 1.</p>
+<div class="callout callout-style-default callout-question callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Question</span>Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Below are two pieces of code from real websites made with the help of an LLM. Both websites look very polished. I typed the code over and left out the names of the websites so that we can focus on the content in this exercise.</p>
+<ol type="1">
+<li>A command builder website made this job script for FastQC (a tool that makes a quality report for each fastq file, see the optional FastQC box on day 2). In the website, <code>{sample}</code> was shown in a different colour, as a box to fill in. The website tells you to start it with <code>mkdir -p logs</code> and <code>sbatch run_fastqc.sh</code>. Predict what happens if you do exactly that, and check if you can find any problems in the script. Think of a check that you can test on your own computer, without FastQC</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastqc</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=32G</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=12:00:00</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/%x_%j.out</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-t</span> 8 <span class="at">--outdir</span> qc/ raw/{sample}_R1.fq.gz raw/{sample}_R2.fq.gz</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>A website for saving commands shows this loop to run fastp on many samples. Compare it with the fastp loop from day 2. What is missing, and what would happen to your results?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">fastp</span> <span class="at">-i</span> <span class="va">${s}</span>_R1.fq.gz <span class="at">-I</span> <span class="va">${s}</span>_R2.fq.gz <span class="at">-o</span> trim/<span class="va">${s}</span>_R1.fq.gz <span class="at">-O</span> trim/<span class="va">${s}</span>_R2.fq.gz <span class="at">-w</span> 8</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-answer callout-titled" title="Click me to see an answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Answer</span>Click me to see an answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Question 1</strong></p>
+<ul>
+<li><strong><code>{sample}</code> is not filled in.</strong> On the website, <code>{sample}</code> is a box to fill in. In bash, it means nothing special, and bash leaves it as it is. You can test this with <code>echo</code> and <code>ls</code>, as on day 1:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> raw/{sample}_R1.fq.gz</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> raw/{sample}_R1.fq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>On my computer, this prints:</p>
+<pre><code>raw/{sample}_R1.fq.gz
+ls: cannot access 'raw/{sample}_R1.fq.gz': No such file or directory</code></pre>
+<p>So FastQC looks for a file that is literally called <code>{sample}_R1.fq.gz</code>. And even if you fill in a name by hand, the script only works for one sample. There is no loop. Written as <code>${sample}</code>, the same line would work inside a for-loop like the one from day 2.</p>
+<ul>
+<li><strong>The output folder is never made.</strong> The script makes no <code>qc/</code> folder, and FastQC doesn’t make it either. FastQC would stop with <code>[ERROR] Output dir qc/ does not exist</code>. Remember from day 2: make the output folder in the script, with <code>mkdir -p</code>.</li>
+<li><strong>No software is activated.</strong> There is no <code>conda activate</code> and no <code>module load</code>, so which FastQC runs (if any) depends on your terminal at the moment you submit the job. See the worked example above.</li>
+<li><strong>The resources are guesses.</strong> 32 GB of memory and 12 hours for two fastq files likely is too much. Asking for too much means a longer wait in the queue, and resources that others on Crunchomics can’t use. Run one sample and check what it used (the optional <code>sacct</code> box on day 2). Whether FastQC can even use 8 CPUs depends on the version: check <code>fastqc --help</code> for how many threads one file can use.</li>
+<li><strong><code>set -euo pipefail</code></strong> stops the script at the first error. Here that helps, because the job fails instead of reporting “Done”. But do you know why it is there? See the optional box on skipping samples above.</li>
+<li><strong>The parts don’t fit together.</strong> In the log name, <code>%x</code> is replaced by the job name and <code>%j</code> by the job ID. So the script makes one log file per job, not one per sample. The log names and the single script say “one job for all samples”, but the command handles one sample at most. Each line looks fine on its own. Reading the script as a whole is what shows the problem.</li>
+</ul>
+<p>I typed this script over from a screenshot of the website. The file you get with its download button might be different, for example with a loop or with real sample names. I didn’t test that, because it needs an account, and I didn’t want to give my details to a website that I don’t know. But when a website shows you a script as ready to submit, and that script can’t work, that is a good sign not to trust the rest of the website too readily.</p>
+<p><strong>Question 2</strong></p>
+<ul>
+<li><strong>No report names.</strong> There is no <code>-h</code> and <code>-j</code>, so fastp writes the reports of every sample to <code>fastp.html</code> and <code>fastp.json</code> inside your working directory. Each sample overwrites the reports of the sample before. After a for-loop, you only have the reports of the last sample. On day 2, we found this in the test run with one sample.</li>
+<li><strong>The <code>trim/</code> folder is never made.</strong> fastp doesn’t make it either, and stops with <code>ERROR: Failed to open for pwrite: trim/S1_R1.fq.gz</code>.</li>
+<li><strong><code>-w 8</code></strong> is the short form of <code>--thread 8</code> (we used <code>--thread 2</code> on day 2). Nothing in the snippet says where the 8 comes from. In a job script, it should match <code>--cpus-per-task</code>.</li>
+<li><strong>The input files must be in the folder where you run the loop.</strong> Our files are in <code>data/seq_project/</code>, one folder per sample, so this loop finds none of them. For this website the files might be well inside the working directory but that is not a habit I recommend. Instead, I recommend that you use a clean folder organization to separate different parts of the analysis.</li>
+</ul>
+<p><strong>Key points</strong></p>
+<ul>
+<li>A polished website says nothing about whether the code works</li>
+<li>The basics from day 1 and day 2 are enough to find most of these problems: <code>echo</code>, <code>ls</code>, output folders and a test run with one sample</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The same goes for tutorials, blog posts and courses, including this one. I revised this tutorial with help from an LLM, and the <a href="https://github.com/ndombrowski/cli_workshop#use-of-ai-tools">readme of this course</a> describes how.</p>
+</section>
 <section id="further-reading" class="level2">
 <h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
 <ul>
 <li><a href="https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html">On GenAI usage</a>, at the end of the IBED for-loops page: what to look out for in loops written by an LLM</li>
+<li><a href="https://ndombrowski.github.io/AWK_tutorial/source/check_llm_code.html">Checking code from an LLM</a>, in my AWK tutorial: a short routine to check any awk or sed command, with real LLM answers checked step by step</li>
 <li><span class="citation" data-cites="auslander2026">Auslander (<a href="#ref-auslander2026" role="doc-biblioref">2026</a>)</span>, <a href="https://doi.org/10.1371/journal.pcbi.1014882">Ten simple rules for responsible use of AI and LLMs in computational biology</a>: many of the points on this page, written for researchers, plus rules on figures, statistics and manuscripts that go beyond this workshop</li>
 <li>The UvA’s <a href="https://edu.nl/gakhm">AI literacy course for students</a>: what generative AI is, how it works and what its limits are (about 45 to 60 minutes)</li>
 <li><a href="https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html">UvA AI Chat</a> and the UvA <a href="https://student.uva.nl/en/information/ai-tools-and-your-studies">rules for students</a></li>
@@ -1591,7 +1777,7 @@ Auslander, Noam. 2026. <span>“Ten Simple Rules for Responsible Use of <span>AI
     </div>   
     <div class="nav-footer-center">
 <p>© 2024-2026 Nina Dombrowski, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>
-Last modified: 2026-10-23</p>
+Last modified: 2026-11-05</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ndombrowski/cli_workshop/blob/main/source/llm_usage.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ndombrowski/cli_workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

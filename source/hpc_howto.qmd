@@ -386,7 +386,7 @@ Here:
 
 Since we work with little data, this runs fast despite only using 1 CPU. It may even finish within a few seconds. If you are logged in to Crunchomics in a second terminal and run `squeue` while your job is running, you should see it (in the example below, the job is named after the software and got the job ID 379646):
 
-![](../img/squeue2.png){width="50%" fig-align="left"}
+![](../img/squeue2.png){width="70%" fig-align="left"}
 
 It is a good habit to look at the outputs of whatever software you run, not only to understand your data but also to make sure that the software ran correctly:
 
@@ -410,7 +410,7 @@ The most useful columns for us are:
 :::
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  On day 1, we counted the lines in each fastq file (`results/counts/line_counts_bash.txt` on your own computer). Use this to work out how many reads `Sample-DUMMY1_R2.fastq.gz` has. Does this match `num_seqs` in the seqkit table?
+1.  On day 1, we counted the lines in each fastq file (`results/counts/line_counts.txt` on your own computer). Use this to work out how many reads `Sample-DUMMY1_R2.fastq.gz` has. Does this match `num_seqs` in the seqkit table?
 2.  Use `grep` to print only the rows for the R1 and the R2 file of `Sample-DUMMY1`. Compare their `num_seqs`. What do you notice?
 3.  Use `cut` to print only the columns `file` and `num_seqs` of the table. Is what you noticed in question 2 true for all samples?
 
@@ -418,12 +418,12 @@ The most useful columns for us are:
 ```{bash}
 # Question 1:
 # On your own computer: find the file name, plus the line after it (-A 1), which holds the count
-grep -A 1 "Sample-DUMMY1_R2.fastq.gz" results/counts/line_counts_bash.txt
+grep -A 1 "Sample-DUMMY1_R2.fastq.gz" results/counts/line_counts.txt
 
 # Let bash divide the number of lines by 4
 # Here, we use the command substitution for our previous command and combine it with tail -n 1 
 # to only extract the counts themselves
-echo $(( $(grep -A 1 "Sample-DUMMY1_R2.fastq.gz" results/counts/line_counts_bash.txt | tail -n 1) / 4 ))
+echo $(( $(grep -A 1 "Sample-DUMMY1_R2.fastq.gz" results/counts/line_counts.txt | tail -n 1) / 4 ))
 
 # On Crunchomics: print only the row for this file from the seqkit table
 grep "Sample-DUMMY1_R2" results/seqkit/stats_raw.txt
@@ -438,7 +438,7 @@ grep "Sample-DUMMY1" results/seqkit/stats_raw.txt
 cut -f1,4 results/seqkit/stats_raw.txt
 ```
 
-In `line_counts_bash.txt`, each file name and its count are on two separate lines. A plain `grep` only prints the line with the file name. The option `-A 1` (*after*) also prints the line after each match, which holds the count. With 8 files, you can also just read the whole file with `cat`. With 100 files, `grep` finds the right line much faster.
+In `line_counts.txt`, each file name and its count are on two separate lines. A plain `grep` only prints the line with the file name. The option `-A 1` (*after*) also prints the line after each match, which holds the count. With 8 files, you can also just read the whole file with `cat`. With 100 files, `grep` finds the right line much faster.
 
 For question 1: each read takes up 4 lines in a fastq file, so the number of reads is the number of lines divided by 4. `Sample-DUMMY1_R2.fastq.gz` has 179,384 lines, which is 44,846 reads. seqkit reports the same number. When two different methods give the same answer, we can trust the result a lot more.
 
@@ -674,8 +674,7 @@ Add a new heading `## Read statistics with seqkit` to `notes.md`, and below it:
 
 1.  Which tool you used, and which version. Run `seqkit version` to find out, and write the version in the comment above the command
 2.  The `sbatch` command, with a comment that names the script and the file it makes. Below the code block, write down the job ID that `sbatch` printed (`Submitted batch job ...`). The job ID is also part of the names of the log files, so with it you can find the logs of this run later
-3.  We ran seqkit twice, first with `srun` and then with `sbatch`, and the second run replaced the table of the first one. Write down which run made the table that is there now
-4.  Below the code block: does the number of reads of `Sample-DUMMY1_R2` match your count from day 1?
+3.  Below the code block, one line: does the number of reads of `Sample-DUMMY1_R2` match your count from day 1?
 
 You don't need to copy the content of the job script into your notebook. It is saved in `scripts/seqkit.sh`, and at the end of the day, we copy it to your own computer.
 :::
@@ -809,7 +808,7 @@ On Crunchomics, `uname` prints `Linux` and `uname -m` prints:
 x86_64
 ```
 
-In the download command, we wrote `$(uname)` and `$(uname -m)` instead of typing `Linux` and `x86_64` ourselves. This is the command substitution from day 1: bash runs the command inside `$( )` and puts its output in its place. So on Crunchomics, bash turns `Miniforge3-$(uname)-$(uname -m).sh` into `Miniforge3-Linux-x86_64.sh`.
+In the download command, we wrote `$(uname)` and `$(uname -m)` instead of typing `Linux` and `x86_64` ourselves. This is called command substitution from day 1: bash runs the command inside `$( )` and puts its output in its place. So on Crunchomics, bash turns `Miniforge3-$(uname)-$(uname -m).sh` into `Miniforge3-Linux-x86_64.sh`.
 
 The advantage is that the same command also works on mostother computers. On a Mac with an Apple chip, for example, `uname` prints `Darwin` and `uname -m` prints `arm64`, and Miniforge has an installer called `Miniforge3-Darwin-arm64.sh`. So you can use the same commands if you later want to install Miniforge on your own Mac or in WSL.
 :::
@@ -1002,7 +1001,7 @@ wc -l samples.txt
 A list file like `samples.txt` has a few advantages. You can open it and see exactly which samples the loop will work on. And if you later want to rerun only some samples, you can make a shorter list without changing the loop.
 
 ::: {.callout-tip title="Tip: Making a list file by hand (optional)" collapse="true"}
-You can also type a list file yourself, one sample name per line. Use `nano` for this, not Notepad or Word. As we saw on day 1, Windows programs add an invisible character at the end of each line. In a list file, this character becomes part of each sample name, and the loop then looks for files that don't exist.
+You can also type a list file yourself, one sample name per line. Use `nano` for this, not Notepad or Word. Windows programs such as Notepad add an invisible character at the end of each line, which bash on Linux does not understand. In a list file, this character becomes part of each sample name, and the loop then looks for files that don't exist.
 :::
 
 ### Step 3: Build the loop with `echo`
@@ -1017,7 +1016,7 @@ done
 
 This should print the 4 sample names. Let's look closer at `$(cat samples.txt)`. `cat samples.txt` prints the content of the file. The `$( )` around it takes this printed text and puts it into the command, at the place where it stands. This is the **command substitution** we already used on day 1. So for bash, the first line becomes `for sample in Sample-DUMMY1 Sample-DUMMY2 Sample-DUMMY3 Sample-DUMMY4; do`.
 
-**Important**: Bash splits the text from `samples.txt` at every new line, but also at every space. So each line in the list file must contain one name, without spaces.
+**Important**: Bash splits the text from `samples.txt` at every new line, but also at every space. So each line in the list file must contain one name, without spaces. Ideally, make list files on the command line, as we did here. But often the information comes from a table that was made in Excel or that you received someone else, e.g. a sequencing center. Such files can contain invisible characters that the `echo` loop above doesn't show, but the `ls` check below does (look for `$'\r'` in the error message). So check them with `file samples.txt` before you use them: it should print only `ASCII text`. If it prints more, the [AWK tutorial](https://ndombrowski.github.io/AWK_tutorial/source/sed_basics.html#windows-line-endings) shows how to fix the file.
 
 Next, we check that we find the right input files for each sample. We use `ls` instead of `echo`, because `ls` shows us which files the wildcard actually matches:
 
@@ -1153,7 +1152,7 @@ Also check that none of the files is empty (a size of 0 in the `ls -l` output), 
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
 1.  Copy the 4 HTML reports to your own computer and open the report for Sample-DUMMY1. Remember that on your computer you can use `explorer.exe .` (Windows) and `open .` to open the folder you are to get easy access to the HTMLs you just downloaded.
-2.  On day 1, we counted the lines in each fastq file (`results/counts/line_counts_bash.txt` on your own computer). How many reads did Sample-DUMMY1 have before filtering? Does this match the number in the fastp report?
+2.  On day 1, we counted the lines in each fastq file (`results/counts/line_counts.txt` on your own computer). How many reads did Sample-DUMMY1 have before filtering? Does this match the number in the fastp report?
 3.  Count the lines in `results/fastp/Sample-DUMMY1_R1.trimmed.fastq.gz` on Crunchomics. How many reads are left after filtering?
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
@@ -1167,7 +1166,7 @@ ls -l results/fastp
 
 # Question 2:
 # On your own computer we get 179 384
-grep -A 1 "Sample-DUMMY1" results/counts/line_counts_bash.txt
+grep -A 1 "Sample-DUMMY1" results/counts/line_counts.txt
 
 # Question 3:
 # On Crunchomics we get 177 400
@@ -1180,31 +1179,97 @@ For question 3: the number should be the same as, or smaller than, before filter
 :::
 :::
 
+### Step 7: Write your own job script
+
+So far, you got every job script from this page. Now it is your turn. We want the same read statistics for the trimmed reads as we made for the raw reads at the start of the day. Then we can see what fastp changed.
+
+You don't need to start from an empty file. A good way to write a new job script is to copy one that works, and change only what is different.
+
+::: {.callout-question .callout-warning collapse="false" title="Exercise"}
+1.  Make a copy of `scripts/seqkit.sh` called `scripts/seqkit_trimmed.sh`
+2.  Open the copy with `nano` and change it, so that it runs `seqkit stats` on the 8 trimmed fastq files in `results/fastp`, and writes the table to `results/seqkit/stats_trimmed.txt`. Which lines do you need to change? Think about the input, the output, the job name and the names of the log files
+3.  Before you submit the script, use `ls` to check that your input path matches exactly the 8 trimmed fastq files, and nothing else
+4.  Submit the script, and check the log files and the output table. How many lines do you expect in `stats_trimmed.txt`?
+5.  Find `num_seqs` for `Sample-DUMMY1_R1.trimmed.fastq.gz` in the new table. Does it match the number of reads that you counted in question 3 of the Step 6 exercise?
+
+::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
+```{bash}
+# Question 1: copy the working script
+cp scripts/seqkit.sh scripts/seqkit_trimmed.sh
+ls -l scripts
+
+# Question 2: open the copy and change it
+nano scripts/seqkit_trimmed.sh
+```
+
+After your changes, the script could look like this:
+
+```{bash}
+#!/bin/bash
+#SBATCH --job-name=seqkit_trimmed
+#SBATCH --output=logs/seqkit_trimmed_%j.out
+#SBATCH --error=logs/seqkit_trimmed_%j.err
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=5G
+#SBATCH --time=01:00:00
+
+# This script generates a tsv with read statistics for the trimmed reads
+# Run it from inside the data_analysis folder with `sbatch scripts/seqkit_trimmed.sh`
+
+echo "seqkit job started on:"
+date
+
+# Run seqkit stats on the trimmed reads from fastp
+seqkit stats -b -a -T -o results/seqkit/stats_trimmed.txt results/fastp/*trimmed.fastq.gz --threads 1
+
+echo "seqkit job finished on:"
+date
+```
+
+I changed four things:
+
+-   The job name, and the names of the two log files. If you keep `seqkit` here, you can't tell the logs of the two seqkit jobs apart later
+-   The input: `results/fastp/*trimmed.fastq.gz` instead of `data/seq_project/*/*gz`
+-   The output: `stats_trimmed.txt` instead of `stats_raw.txt`. If you forget this one, the new table replaces the table of the raw reads, without any warning
+-   The comments, so that they describe what this script does
+
+The resources stay the same. The trimmed files are a bit smaller than the raw files, so what worked for the raw reads is enough here.
+
+```{bash}
+# Question 3: check what the input path matches. We expect 8 files
+ls results/fastp/*trimmed.fastq.gz
+ls results/fastp/*trimmed.fastq.gz | wc -l
+
+# Question 4: submit the script and check the outputs
+sbatch scripts/seqkit_trimmed.sh
+squeue -u $USER
+ls -l logs
+cat logs/seqkit_trimmed_*.out
+
+# We expect 9 lines: 1 header line and 1 line per trimmed file
+wc -l results/seqkit/stats_trimmed.txt
+
+# Question 5: the row for the trimmed R1 file of Sample-DUMMY1
+grep "Sample-DUMMY1_R1" results/seqkit/stats_trimmed.txt
+```
+
+For question 5: in the Step 6 exercise, `Sample-DUMMY1_R1.trimmed.fastq.gz` had 177,400 lines, which is 44,350 reads. seqkit should report the same number. This is the same check as for the raw reads this morning: two different methods, one answer.
+:::
+:::
+
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Quality filtering with fastp"}
 Add a new heading `## Quality filtering with fastp` to `notes.md`, and below it:
 
-1.  The command that made `samples.txt`, and the check
-2.  The `sbatch` command with a comment that names the script, and below the code block, the job ID
-3.  The checks on the output: what you expected and what you saw
-4.  The `scp` command that copied the reports to your computer (remember: `# On my computer`)
-5.  Below the code block, in your own words: what did the fastp report show for Sample-DUMMY1? How many reads were there before and after filtering? Did anything surprise you?
+1.  One code block with comments: the command that made `samples.txt` and its check, the `sbatch` command with the name of the script, the checks on the output, the `scp` command that copied the reports (remember: `# On my computer`), and the `sbatch` command for `seqkit_trimmed.sh`
+2.  Below the code block: the job ID, and in one line what you expected and what you saw in the checks
+3.  From the fastp report: how many reads Sample-DUMMY1 had before and after filtering
 
 The test run on one sample was a detour, so you don't need its commands. One sentence on what it taught you is enough, for example that fastp writes its reports to `fastp.html` and `fastp.json` unless you give other names.
 :::
 
 ::: {.callout-tip title="Tip: Comparing reads before and after trimming (optional)" collapse="true"}
-At the start of the day, we made a table with `seqkit stats` for the raw reads. If we make the same table for the trimmed reads, we can see what fastp changed:
-
-```{bash}
-# Run seqkit stats on the trimmed reads
-srun --ntasks=1 --cpus-per-task=1 --mem=5G --time=00:30:00 seqkit stats -b -a -T -o results/seqkit/stats_trimmed.txt results/fastp/*trimmed.fastq.gz --threads 1
-
-# Check the output: we expect a header line and 8 lines, one per trimmed file
-wc -l results/seqkit/stats_trimmed.txt
-cat results/seqkit/stats_trimmed.txt
-```
-
-Both tables have many columns, which makes them hard to compare by eye. On day 1, we used `cut` to select columns. Here, we take a brief look into **awk**, a small programming language for working with tables in text files. awk reads a file line by line, splits each line into columns, and lets us choose what to do with each line.
+In Step 7, you made the same table for the trimmed reads as for the raw reads. Both tables have many columns, which makes them hard to compare by eye. On day 1, we used `cut` to select columns. Here, we take a brief look into **awk**, a small programming language for working with tables in text files. awk reads a file line by line, splits each line into columns, and lets us choose what to do with each line.
 
 Let's print the file name, the number of reads and the average read length (columns 1, 4 and 7) of both tables:
 
@@ -1221,6 +1286,8 @@ Here:
 -   We give awk two files, and it works through them one after the other
 
 This prints 16 lines: first the 8 raw files, then the 8 trimmed files. Compare the number of reads and the average length of Sample-DUMMY1 before and after trimming.
+
+If you want to learn more awk, my [AWK tutorial](https://ndombrowski.github.io/AWK_tutorial/) uses awk and sed on tables, FASTA and FASTQ files.
 
 :::
 
@@ -1250,10 +1317,14 @@ Your analysis now lives in two places: the data, results and job scripts on Crun
 
 ```{bash}
 # Run this on your OWN computer, inside your local data_analysis folder
+# Make the scripts folder, in case you did not make it on day 1
+mkdir -p scripts
+
 # Replace both instances of 'username' with your UvAnetID
 scp 'username@omics-h0.science.uva.nl:/home/username/personal/data_analysis/scripts/*.sh' scripts/
 
-# Check: we expect count_lines.sh from day 1, and seqkit.sh and fastp.sh from today
+# Check: we expect seqkit.sh, fastp.sh and seqkit_trimmed.sh from today
+# and count_lines.sh, if you made it on day 1
 ls -l scripts
 ```
 
@@ -1263,8 +1334,9 @@ As in the fastp exercise, the quotes around the path stop your own computer from
 1.  Add the `scp` command that copied the scripts to your notebook
 2.  Update the description at the top of `notes.md`, so that it covers both days
 3.  Check that your notebook explains every file and folder in your project on Crunchomics. Run these inside `~/personal/data_analysis`: `ls`, `ls results/*` and `ls scripts logs`. Can you tell which log file belongs to which job?
-4.  Compare your notebook with my [example notebook](example_doc.qmd). What does it have that yours doesn't? Is there anything you want to add?
 :::
+
+After the workshop, compare your notebook with my [example notebook](example_doc.qmd). What does it have that yours doesn't? Is there anything you want to add?
 
 You now know enough to write and, just as important, to check your own code. Many of you will also use AI chat tools such as ChatGPT or UvA AI Chat for coding. On the page [Using LLMs](llm_usage.qmd), I describe how I suggest you use them: as a tutor that explains code, and always with the checks from these two days. You can read it after the workshop, at your own pace.
 

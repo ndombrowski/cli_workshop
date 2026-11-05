@@ -247,7 +247,7 @@
 \makeatletter
 \makeatother
 \makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, breakable, interior hidden, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 \makeatother
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -318,6 +318,10 @@ The short version:
   You need to \textbf{understand} what each option of a tool does to
   your data. For the code around it, you can \textbf{check} that it does
   what you want with the simple commands from day 1
+\item
+  \textbf{Be critical of new tools and websites} made with LLMs. Most of
+  these look very polished but this says very little about whether the
+  content is right
 \end{itemize}
 
 \section{Why learn the command line if an LLM can write the
@@ -416,7 +420,7 @@ UvA (checked in October 2026, rules may change):
 
 If you are not at the UvA, check the rules of your own institution.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-important-color-frame, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't paste your data into an LLM}, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important: Don't paste your data into an LLM}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-important-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 Don't share confidential information, unpublished data, sequences or
 results with an LLM. You rarely need to. To ask about a problem, a few
@@ -485,6 +489,13 @@ recommendations also cover how I would use LLMs for coding:
   \texttt{fastp\ -\/-help} on your own installation is always more
   reliable than an LLM's suggestion
 \item
+  \textbf{Look at your data before you accept the settings.} An LLM has
+  not seen your data, but it still picks settings for you: sometimes the
+  defaults, sometimes other values, and the choice can change with the
+  wording of your question (see the tip after the worked example below).
+  Only your own data, for example the fastp report, tells you which
+  settings you need
+\item
   \textbf{Write down what each result means, in your own words.} Your
   notebook is not only a record of what you did. It is also a place to
   slow down and think. After each analysis step, write at least one
@@ -499,7 +510,7 @@ use it yet.} It is completely fine to ask for help with a step you don't
 understand, from a person or from an LLM. Struggling with code is a
 normal part of learning.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-color-frame, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toptitle=1mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 On day 2, we ran fastp without any filtering options. Let's use an LLM
 to find out whether it filtered all reads anyway:
@@ -515,9 +526,6 @@ to find out whether it filtered all reads anyway:
   On Crunchomics, activate the \texttt{fastp\_1.4.0} environment and
   look at the help page. Find the options the LLM mentioned. Do the
   descriptions and default values match?
-\item
-  Deactivate the environment and look at the help page of the fastp
-  1.0.1 of Crunchomics. Is there anything different?
 \end{enumerate}
 
 \begin{quote}
@@ -529,11 +537,6 @@ to find out whether it filtered all reads anyway:
 \begin{Highlighting}[]
 \CommentTok{\# Question 2: the help page of fastp 1.4.0}
 \ExtensionTok{conda}\NormalTok{ activate fastp\_1.4.0}
-\ExtensionTok{fastp} \AttributeTok{{-}{-}version}
-\ExtensionTok{fastp} \AttributeTok{{-}{-}help} \DecValTok{2}\OperatorTok{\textgreater{}\&}\DecValTok{1} \KeywordTok{|} \FunctionTok{less}
-
-\CommentTok{\# Question 3: the help page of the fastp of Crunchomics}
-\ExtensionTok{conda}\NormalTok{ deactivate}
 \ExtensionTok{fastp} \AttributeTok{{-}{-}version}
 \ExtensionTok{fastp} \AttributeTok{{-}{-}help} \DecValTok{2}\OperatorTok{\textgreater{}\&}\DecValTok{1} \KeywordTok{|} \FunctionTok{less}
 \end{Highlighting}
@@ -638,7 +641,32 @@ the UvA rules above).
   privacy rules of your organisation.
 \end{enumerate}
 
-\textbf{Differences between versions (question 3)}
+\textbf{Key points}
+
+\begin{itemize}
+\tightlist
+\item
+  Often the LLM is right but it might also blur things in its response.
+  A quick look at the help page is how you \emph{know}
+\item
+  An LLM answers only what you ask, and it won't tell you what you
+  didn't ask. The help page lists every option, also the ones that are
+  off
+\item
+  ``Default settings'' only means something if you know what is on and
+  what is off
+\item
+  If the LLM and the help page of your own installation differ, the help
+  page wins
+\end{itemize}
+\end{quote}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Compare the help pages of two versions (optional)}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
+
+Crunchomics has fastp 1.0.1, and on day 2 we installed fastp 1.4.0. Are
+the filtering options from the exercise above the same in both versions?
 
 Scrolling through two long help pages is tiring. Instead, we can save
 both in a file and let the computer compare them. \texttt{diff} compares
@@ -685,32 +713,13 @@ the length filter anyway, but the help page doesn't say whether the new
 option changes anything else. Interestingly, the fastp README on GitHub
 for version 1.4.0 doesn't list this option at all (checked in October
 2026). So even the official documentation online can lag behind the
-program.
-
-\textbf{Key points}
-
-\begin{itemize}
-\tightlist
-\item
-  Often the LLM is right but it might also blur things in its response.
-  A quick look at the help page is how you \emph{know}
-\item
-  An LLM answers only what you ask, and it won't tell you what you
-  didn't ask. The help page lists every option, also the ones that are
-  off
-\item
-  ``Default settings'' only means something if you know what is on and
-  what is off
-\item
-  If the LLM, the online documentation and your help page differ, the
-  help page of your own installation wins
-\end{itemize}
-\end{quote}
+program. If the LLM, the online documentation and your help page differ,
+the help page of your own installation wins.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: An LLM that looks something up has not always read the page
-(optional)}, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: An LLM that looks something up has not always read the page
+(optional)}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 Some LLM tools can search the web or open a link you give them. That
 sounds like they read the page, but often they don't read all of it.
@@ -763,12 +772,10 @@ Keep in mind that the answer you get can still be wrong. An explanation
 is easier to check than a full script, though: you can test each claim
 with a small command or by looking at the help function yourself.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-color-frame, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toptitle=1mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 In the optional box at the end of the fastp section on day 2, we used
-this awk command (if you skipped that box, you don't have
-\texttt{stats\_trimmed.txt}, but you can still do the checks in the
-answer on \texttt{stats\_raw.txt}):
+this awk command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -859,7 +866,7 @@ file yourself, for example with \texttt{head}.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: When the answer is longer than you want to read (optional)}, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: When the answer is longer than you want to read (optional)}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 LLM answers are often long. When I asked ChatGPT (October 2026) to
 explain the one-line awk command from the exercise above line by line, I
@@ -881,7 +888,7 @@ hard to tell which parts are important and which are filler. And
 scrolling through a long, well-written answer can feel like learning,
 even when not much of it sticks.
 
-You don't need a perfect question to avoid this. You can simply say what
+You don't need a perfect prompt to avoid this. You can simply say what
 is wrong with the answer. I replied that most students would not read
 through this much text, and the second answer was much shorter. Its core
 was this table:
@@ -927,17 +934,20 @@ of understanding:
   \textbf{The analysis itself: understand every option.} The options of
   a tool like fastp decide what happens to your data: which reads are
   removed, and how much of each read is trimmed. These are scientific
-  choices. You need to know what each option does and why you use it,
-  whether you or an LLM wrote the command. Look them up with
-  \texttt{fastp\ -\/-help} or in the manual, and ask an LLM to explain
-  an option if the manual is unclear
+  choices. The options you don't type matter just as much: fastp, and
+  other tools, also apply defaults, for example quality and length
+  filtering, and leaves other steps off unless you switch them on (see
+  the exercise on default filtering above). You need to know what each
+  option does and why you use it, whether you or an LLM wrote the
+  command. Look them up with \texttt{fastp\ -\/-help} or in the manual,
+  and ask an LLM to explain an option if the manual is unclear
 \item
   \textbf{The code around it: know what it should do, then check.} Some
   code only organises the work: an \texttt{if}/\texttt{else} block that
   skips finished samples, or a \texttt{sed} or \texttt{awk} command that
   picks lines from a file. You may not understand every detail of how it
   works. But you must know what it is supposed to do to your files, and
-  check that it really does
+  check that it really does the correct thing
 \end{itemize}
 
 For these checks, the commands from day 1 are enough:
@@ -978,7 +988,7 @@ how many files, roughly how many reads. Then compare. If the numbers
 don't match, you have found a problem, even if you can't yet say where
 it is.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-color-frame, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toptitle=1mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 Imagine you ask an LLM how to count the reads in a fastq file, and it
 suggests:
@@ -1114,7 +1124,7 @@ variable \texttt{SLURM\_ARRAY\_TASK\_ID}. The script uses the long names
 of the fastp options (\texttt{-\/-in1} instead of \texttt{-i},
 \texttt{-\/-out1} instead of \texttt{-o}); both forms do the same thing.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-color-frame, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toptitle=1mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 Read the script carefully, as if you were going to run it on your own
 data. Write down everything you would check or change. Some questions to
@@ -1176,28 +1186,20 @@ I sort the problems from most to least serious.
   run once with the incomplete options before that. See the tip on
   \texttt{set\ -euo\ pipefail} further down.)
 \item
-  \textbf{The \texttt{logs} folder is made too late.} SLURM opens the
-  log files before the script starts, so the \texttt{mkdir} for
-  \texttt{logs} inside the script comes too late to matter. On
-  Crunchomics, SLURM then makes a missing \texttt{logs} folder itself,
-  but inside the folder where you typed \texttt{sbatch}, which is not
-  always where you expect your logs (we saw this on day 2). Make the
-  folder before you run \texttt{sbatch}, as we did on day 2, so that you
-  know where your logs end up.
+  \textbf{The \texttt{logs} folder is made too late.} On most systems
+  SLURM opens the log files before the script starts, so the
+  \texttt{mkdir} for \texttt{logs} inside the script comes too late for
+  such systems. On Crunchomics, SLURM makes a missing \texttt{logs}
+  folder itself, but inside the folder where you typed \texttt{sbatch},
+  which is not always where you expect your logs (we saw this on day 2).
+  Make the folder before you run \texttt{sbatch}, as we did on day 2, so
+  that you know where your logs end up.
 \end{itemize}
 
 \textbf{2. It makes assumptions about your data}
 
 \begin{itemize}
 \tightlist
-\item
-  \textbf{The file names are invented.}
-  \texttt{S\$\{SLURM\_ARRAY\_TASK\_ID\}} only works because the prompt
-  said ``S1-S100''. Real file names rarely look like that. In this
-  workshop, the files are called \texttt{Sample-DUMMY1\_R1.fastq.gz} and
-  are in separate folders. A list file like \texttt{samples.txt} works
-  with any names, and you can open it to see which samples will be
-  processed.
 \item
   \textbf{It chose a trimming method for you.} The prompt was not clear
   about how to trim, so the LLM chose trimming from both ends of the
@@ -1213,9 +1215,7 @@ I sort the problems from most to least serious.
   does nothing: fastp only trims by quality if you also add
   \texttt{-\/-cut\_front}, \texttt{-\/-cut\_tail} or
   \texttt{-\/-cut\_right}. (And 20 is already the default threshold, so
-  the script would trim the same way without this line.) And fastp
-  already filters reads by default, also without any of these options
-  (see the exercise on default filtering above). Check
+  the script would trim the same way without this line.) Check
   \texttt{fastp\ -\/-help} for the version you use, and ask yourself (or
   the LLM) why these options and not others.
 \item
@@ -1309,6 +1309,92 @@ files and \texttt{-\/-average\_qual\ 20}, so it runs, writes trimmed
 files, and SLURM reports success. The output looks normal, but it was
 made without the trimming options you asked for.
 
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Same question, different script (optional)}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
+
+An LLM does not give the same answer twice. The same question can give a
+different script, and a small change in the wording can change what the
+script does to your data. To see how much, I asked ChatGPT (without any
+memory of earlier chats, November 2026) two more times:
+
+\begin{itemize}
+\tightlist
+\item
+  Run 1: the same question as in the worked example
+\item
+  Run 2: a vaguer question: ``I work with samples S1-S100. I want to run
+  fastp for quality cleaning. Can you write a script to process all
+  these samples at once on a HPC with slurm?''
+\end{itemize}
+
+This is what the three scripts asked fastp to do. The default values
+come from the help page of fastp 1.4.0 (see the exercise on default
+filtering above):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1579}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4035}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1053}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1111}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Quality trimming
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\texttt{-q} (default 15)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\texttt{-e} (default 0)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\texttt{-l} (default 15)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Worked example & from both ends (\texttt{-\/-cut\_front},
+\texttt{-\/-cut\_tail}) & 15 & 20 & 15 \\
+Run 1, same question & none in the script, both ends only in a second
+``if you want'' version & 20 (first version), 15 (second version) & 20 &
+15 \\
+Run 2, ``quality cleaning'' & none & 20 & 0 & 30 \\
+\end{longtable}
+
+A few things stand out:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Same question, two different scripts.} The worked example
+  trims from both ends. The script of run 1 doesn't trim at all,
+  although the question asked for it. The answer even says that
+  \texttt{-q} ``alone does not perform quality trimming'', and offers
+  trimming only as an extra
+\item
+  \textbf{Two versions in one answer, and they filter differently.} With
+  \texttt{-q\ 20}, a base only counts as good from Q20 on, and a read is
+  still removed if more than 40\% of its bases are not good
+  (\texttt{-u}). So the first version removes more reads. The second
+  version drops \texttt{-q\ 20} again, without saying so
+\item
+  \textbf{``Cleaning'' was left to the LLM.} In run 2, I didn't say what
+  cleaning means, so the LLM decided. It did no quality trimming, but it
+  changed two defaults (\texttt{-q} and \texttt{-l}) and added
+  \texttt{-\/-detect\_adapter\_for\_pe}, without any reason from my data
+  (see the exercise on default filtering for what \texttt{-q} and
+  \texttt{-l} do). But I could only have asked for trimming if I knew
+  that it exists. This is the same problem as in the exercise on default
+  filtering: you can't ask about something you don't know about, and the
+  answer won't tell you what is missing
+\end{itemize}
+
+So a question that once gave a good script can give a worse one next
+time. Check every script you get, every time: look up the options in the
+help page, and run it on one sample first. And write down in your
+notebook which options you used and why. ``I ran fastp'' can mean three
+quite different things.
+
+\end{tcolorbox}
+
 \section{Less code is often better}\label{less-code-is-often-better}
 
 LLMs have learned from a lot of code written for large, automated
@@ -1388,7 +1474,7 @@ the inputs with \texttt{cat\ samples.txt}, \texttt{wc\ -l\ samples.txt}
 and an \texttt{ls} loop like the one above. After the job, count the
 outputs.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Skipping samples that are already done (optional)}, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip: Skipping samples that are already done (optional)}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-tip-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 Sometimes a check in the loop does make sense. Say a job stopped
 halfway, and you don't want to run fastp again for the samples that are
@@ -1452,7 +1538,7 @@ note on code written by LLMs:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, titlerule=0mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, left=2mm, colframe=quarto-callout-color-frame, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, toptitle=1mm, colbacktitle=quarto-callout-color!10!white, rightrule=.15mm, toprule=.15mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
 
 Take the LLM script from the worked example, and change it into a script
 that works for the data of this workshop, in the style of day 2. Keep
@@ -1570,6 +1656,247 @@ A rewritten script may run without errors, but you then have to check
 all of it again, and you have learned nothing about why the first
 version failed.
 
+\section{New tools and websites made with
+LLMs}\label{new-tools-and-websites-made-with-llms}
+
+LLMs don't only write code. They also make it much cheaper to build a
+website or an app for others. I expect that you will come across more
+and more of these: tools that build a command for you, explain every
+option, write your job script, or turn a paper into a workflow. Many are
+made with good intentions, often by people who struggled with the same
+problems as you. Some of these might be useful but all require a careful
+look.
+
+Before LLMs, a polished look was a sign that someone had put a lot of
+time into a tool. Now a clean design, well-written text and green check
+marks are easy to make, and none of them tell you whether the content is
+correct.
+
+Before you use such a tool for your analysis, ask yourself:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{What do I actually need?} Often the answer is a for-loop in a
+  job script, as on day 2. A new tool may try to solve a problem you
+  don't have
+\item
+  \textbf{Who made it, and is it maintained?} Is there a place to report
+  errors? What happens to your work if the website disappears next year?
+\item
+  \textbf{What does it check, and what does that prove?} ``Every option
+  exists in the help page'' does not mean that the command does what you
+  want. A command can use only real options and still point to the wrong
+  files, or ask for far more CPUs, memory and time than it needs
+\item
+  \textbf{Where can I check the steps in between?} A tool that goes from
+  raw files to a finished figure in one click skips the places where you
+  would normally look: how many reads were removed, which samples
+  failed, which thresholds were used. If you can't see these, you can't
+  check them, and you can't write them in your notebook
+\item
+  \textbf{Can I explain every line it gives me?} This includes lines
+  that look like good practice, such as \texttt{set\ -euo\ pipefail}
+  (see the optional box on skipping samples above), and the settings the
+  tool picked for you, often without saying so. Check in the help page
+  what they do to your data, as we did for fastp
+\item
+  \textbf{Where does my input go?} Code, error messages or papers that
+  you paste may be sent to an LLM provider. The UvA rules above apply
+  here too. This also goes for signing up: if a tool asks for an account
+  or your email address before you can try it, think about who gets
+  these details, and whether the tool is worth it
+\item
+  \textbf{Does it help me understand, or does it replace understanding?}
+  Be careful with promises like ``you never need to read a help page
+  again''. For a beginner, the help page is where you learn what the
+  options do, and where you find the options that are off
+\end{itemize}
+
+Treat the output of such a tool like code from a chat: run it on one
+sample, and check the result with the commands from day 1.
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-color}{\faInfo}\hspace{0.5em}{Exercise}, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-color-frame, toprule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-color!10!white, bottomtitle=1mm, toptitle=1mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, bottomrule=.15mm, breakable, opacityback=0, colback=white, coltitle=black]
+
+Below are two pieces of code from real websites made with the help of an
+LLM. Both websites look very polished. I typed the code over and left
+out the names of the websites so that we can focus on the content in
+this exercise.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A command builder website made this job script for FastQC (a tool that
+  makes a quality report for each fastq file, see the optional FastQC
+  box on day 2). In the website, \texttt{\{sample\}} was shown in a
+  different colour, as a box to fill in. The website tells you to start
+  it with \texttt{mkdir\ -p\ logs} and \texttt{sbatch\ run\_fastqc.sh}.
+  Predict what happens if you do exactly that, and check if you can find
+  any problems in the script. Think of a check that you can test on your
+  own computer, without FastQC
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=fastqc}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=8}
+\CommentTok{\#SBATCH {-}{-}mem=32G}
+\CommentTok{\#SBATCH {-}{-}time=12:00:00}
+\CommentTok{\#SBATCH {-}{-}output=logs/\%x\_\%j.out}
+
+\BuiltInTok{set} \AttributeTok{{-}euo}\NormalTok{ pipefail}
+
+\ExtensionTok{fastqc} \AttributeTok{{-}t}\NormalTok{ 8 }\AttributeTok{{-}{-}outdir}\NormalTok{ qc/ raw/\{sample\}\_R1.fq.gz raw/\{sample\}\_R2.fq.gz}
+
+\BuiltInTok{echo} \StringTok{"Done"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  A website for saving commands shows this loop to run fastp on many
+  samples. Compare it with the fastp loop from day 2. What is missing,
+  and what would happen to your results?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ s }\KeywordTok{in} \VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples.txt}\VariableTok{)}\KeywordTok{;} \ControlFlowTok{do}
+  \ExtensionTok{fastp} \AttributeTok{{-}i} \VariableTok{$\{s\}}\NormalTok{\_R1.fq.gz }\AttributeTok{{-}I} \VariableTok{$\{s\}}\NormalTok{\_R2.fq.gz }\AttributeTok{{-}o}\NormalTok{ trim/}\VariableTok{$\{s\}}\NormalTok{\_R1.fq.gz }\AttributeTok{{-}O}\NormalTok{ trim/}\VariableTok{$\{s\}}\NormalTok{\_R2.fq.gz }\AttributeTok{{-}w}\NormalTok{ 8}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{Click me to see an answer}
+
+\textbf{Question 1}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{\{sample\}} is not filled in.} On the website,
+  \texttt{\{sample\}} is a box to fill in. In bash, it means nothing
+  special, and bash leaves it as it is. You can test this with
+  \texttt{echo} and \texttt{ls}, as on day 1:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{echo}\NormalTok{ raw/\{sample\}\_R1.fq.gz}
+\FunctionTok{ls}\NormalTok{ raw/\{sample\}\_R1.fq.gz}
+\end{Highlighting}
+\end{Shaded}
+
+On my computer, this prints:
+
+\begin{verbatim}
+raw/{sample}_R1.fq.gz
+ls: cannot access 'raw/{sample}_R1.fq.gz': No such file or directory
+\end{verbatim}
+
+So FastQC looks for a file that is literally called
+\texttt{\{sample\}\_R1.fq.gz}. And even if you fill in a name by hand,
+the script only works for one sample. There is no loop. Written as
+\texttt{\$\{sample\}}, the same line would work inside a for-loop like
+the one from day 2.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{The output folder is never made.} The script makes no
+  \texttt{qc/} folder, and FastQC doesn't make it either. FastQC would
+  stop with \texttt{{[}ERROR{]}\ Output\ dir\ qc/\ does\ not\ exist}.
+  Remember from day 2: make the output folder in the script, with
+  \texttt{mkdir\ -p}.
+\item
+  \textbf{No software is activated.} There is no
+  \texttt{conda\ activate} and no \texttt{module\ load}, so which FastQC
+  runs (if any) depends on your terminal at the moment you submit the
+  job. See the worked example above.
+\item
+  \textbf{The resources are guesses.} 32 GB of memory and 12 hours for
+  two fastq files likely is too much. Asking for too much means a longer
+  wait in the queue, and resources that others on Crunchomics can't use.
+  Run one sample and check what it used (the optional \texttt{sacct} box
+  on day 2). Whether FastQC can even use 8 CPUs depends on the version:
+  check \texttt{fastqc\ -\/-help} for how many threads one file can use.
+\item
+  \textbf{\texttt{set\ -euo\ pipefail}} stops the script at the first
+  error. Here that helps, because the job fails instead of reporting
+  ``Done''. But do you know why it is there? See the optional box on
+  skipping samples above.
+\item
+  \textbf{The parts don't fit together.} In the log name, \texttt{\%x}
+  is replaced by the job name and \texttt{\%j} by the job ID. So the
+  script makes one log file per job, not one per sample. The log names
+  and the single script say ``one job for all samples'', but the command
+  handles one sample at most. Each line looks fine on its own. Reading
+  the script as a whole is what shows the problem.
+\end{itemize}
+
+I typed this script over from a screenshot of the website. The file you
+get with its download button might be different, for example with a loop
+or with real sample names. I didn't test that, because it needs an
+account, and I didn't want to give my details to a website that I don't
+know. But when a website shows you a script as ready to submit, and that
+script can't work, that is a good sign not to trust the rest of the
+website too readily.
+
+\textbf{Question 2}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{No report names.} There is no \texttt{-h} and \texttt{-j}, so
+  fastp writes the reports of every sample to \texttt{fastp.html} and
+  \texttt{fastp.json} inside your working directory. Each sample
+  overwrites the reports of the sample before. After a for-loop, you
+  only have the reports of the last sample. On day 2, we found this in
+  the test run with one sample.
+\item
+  \textbf{The \texttt{trim/} folder is never made.} fastp doesn't make
+  it either, and stops with
+  \texttt{ERROR:\ Failed\ to\ open\ for\ pwrite:\ trim/S1\_R1.fq.gz}.
+\item
+  \textbf{\texttt{-w\ 8}} is the short form of \texttt{-\/-thread\ 8}
+  (we used \texttt{-\/-thread\ 2} on day 2). Nothing in the snippet says
+  where the 8 comes from. In a job script, it should match
+  \texttt{-\/-cpus-per-task}.
+\item
+  \textbf{The input files must be in the folder where you run the loop.}
+  Our files are in \texttt{data/seq\_project/}, one folder per sample,
+  so this loop finds none of them. For this website the files might be
+  well inside the working directory but that is not a habit I recommend.
+  Instead, I recommend that you use a clean folder organization to
+  separate different parts of the analysis.
+\end{itemize}
+
+\textbf{Key points}
+
+\begin{itemize}
+\tightlist
+\item
+  A polished website says nothing about whether the code works
+\item
+  The basics from day 1 and day 2 are enough to find most of these
+  problems: \texttt{echo}, \texttt{ls}, output folders and a test run
+  with one sample
+\end{itemize}
+\end{quote}
+
+\end{tcolorbox}
+
+The same goes for tutorials, blog posts and courses, including this one.
+I revised this tutorial with help from an LLM, and the
+\href{https://github.com/ndombrowski/cli_workshop\#use-of-ai-tools}{readme
+of this course} describes how.
+
 \section{Further reading}\label{further-reading}
 
 \begin{itemize}
@@ -1578,6 +1905,10 @@ version failed.
   \href{https://scienceparkstudygroup.github.io/ibed-bioinformatics-page/source/core_tools/bash-for-loops.html}{On
   GenAI usage}, at the end of the IBED for-loops page: what to look out
   for in loops written by an LLM
+\item
+  \href{https://ndombrowski.github.io/AWK_tutorial/source/check_llm_code.html}{Checking
+  code from an LLM}, in my AWK tutorial: a short routine to check any
+  awk or sed command, with real LLM answers checked step by step
 \item
   Auslander (2026),
   \href{https://doi.org/10.1371/journal.pcbi.1014882}{Ten simple rules

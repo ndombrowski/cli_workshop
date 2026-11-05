@@ -121,7 +121,7 @@ Let's look at one line from the example above:
 drwxrwxrwx 1 ndombrowski ndombrowski 4096 Dec  1 08:51 docs
 ```
 
-The first column, `drwxrwxrwx`, shows the access modes. Read it in parts:
+The first column, `drwxrwxrwx`, shows the access modes for my `docs/` folder. You can read it in parts:
 
 -   The first letter tells you what kind of item it is: `d` for a directory (folder), `-` for a normal file.
 -   The next nine letters are three groups of three. The first group is for the **owner** of the file, the second for the **group** (a set of users who share access), and the third for **everyone else**.
@@ -276,6 +276,8 @@ touch data_analysis/notes.md
 Markdown can do more, for example lists, links and tables. You don't need these for the workshop, but if you are curious, [Markdown Basics](https://quarto.org/docs/authoring/markdown-basics.html) on the Quarto website gives an overview.
 
 From now on, you find a blue notebook box at the end of each part of the tutorial. It tells you what to add to your notebook. For the first few, you can compare your notes with mine. Your notes do not have to look the same as mine, as long as future you understands them.
+
+While following this tutorial, keep your notes short: copy the commands with a comment, and write one line about what you saw. At the end of each of the two blocks, take a few minutes to tidy up the notebook.
 
 ## `cd`: Move around folders
 
@@ -576,7 +578,7 @@ The options we use with the `tar` command are:
 -   `x` tells tar to e**x**tract files from the archive
 -   `v` prints the name of each file while it is being extracted, so you can see what happens (also called **v**erbose)
 -   `f` specifies the **f**ile name
--   `C` tells tar to change directory (so the package content will be unpacked there)
+-   `C` tells tar to **c**hange directory (so the package content will be unpacked there)
 -   `tar` detects the compression automatically when it extracts and we don't need an extra options to tell it to uncompress the file in our command
 
 ::: {.callout-tip title="Tip: How to generate a tarball (optional)" collapse="true"}
@@ -593,7 +595,7 @@ The options we use are:
 :::
 
 ::: {.callout-question .callout-warning collapse="false" title="Exercise"}
-1.  After extracting the tarball, use `ls` to explore the content of the folder we just extracted. Make sure that you also explore the content of the folders inside it. Hint: use the Tab key (see the tip on command-line completion above), so that you don't have to type every single word.
+1.  After extracting the tarball, use `ls` to explore the content of the folder we just extracted. Also explore the content of the folders inside it. How many folders do you see in seq_project, and how many files are in each of these folders? Hint: use the Tab key (see the tip on command-line completion above), so that you don't have to type every single word.
 2.  Find the path for at least one sequence file that ends with `fastq.gz`. 
 
 ::: {.callout-answer .callout-warning collapse="true" title="Click me to see an answer"}
@@ -605,6 +607,9 @@ ls -l data/seq_project
 ls -l data/seq_project/barcode004_User2_ITS_9_L001/Sample-DUMMY4_R1.fastq.gz
 ```
 :::
+
+We see that `seq_project` contains 4 folders. Each folder contains 2 files, one R1 and one R2 file, so we work with 8 `.fastq.gz` files in total.
+
 :::
 
 ## `rm`: Remove files and folders
@@ -988,7 +993,7 @@ To print a file:
 cat fastq_paths.txt
 ```
 
-Unlike `less`, `cat` prints the whole file at once. So only use it for short files.
+Unlike `less`, `cat` prints the whole file at once. So only use it for short files or pipe the output from `cat` into `head`.
 
 To combine files:
 
@@ -1047,7 +1052,7 @@ You might have noticed that our sequence files end with `.gz`. This extension is
 
 To view the content of a compressed file, we can decompress it first. We do this with the `gzip` command together with the `-d` (decompress) option. Without `-d`, `gzip` compresses a file.
 
-`gzip -d` replaces the compressed file with the decompressed one. We never want to change our raw data in `data/`: if something goes wrong, there is no way to get the original back. So we instead make use of a copy:
+`gzip -d` replaces the compressed file with the decompressed one. Since we don't want to change the raw data in `data/`, we work on a copy:
 
 ```{bash}
 # Make a folder for this test, so that the raw data in data/ stays as it is
@@ -1103,7 +1108,7 @@ gzip results/gzip_test/Sample-DUMMY1_R1.fastq
 ls -l results/gzip_test
 ```
 
-We don't need the test folder anymore, so we remove it. Check the path twice before you press Enter. `rm -r` does not ask:
+We don't need the test folder anymore, so we remove it. Check the path twice before you press Enter to not delete the wrong folder by mistake:
 
 ```{bash}
 # Remove the test folder and everything inside it
@@ -1214,12 +1219,7 @@ This command has three parts:
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Looking at the data"}
 Add a new heading `## Looking at the data` to `notes.md`, and below it:
 
-1.  A code block with the commands that made the two file lists, `fastq_paths.txt` and `fastq_files.txt`
-2.  In the same code block, the checks that told you something about the data: how many files there are, whether there are as many R1 as R2 files, what the first lines of a fastq file look like, and how many lines one file has
-3.  In normal text below the code block: what you learned about the data. How many lines does one read take?
-4.  Leave out the `gzip` test on a copy, because we removed the test folder again. A short note on why we use `zcat` is enough
-
-Then a check that we come back to: run `ls` and `ls results` inside `data_analysis`. Can your notebook explain where every file and folder came from? If not, add a line about it, even if it is "practice file, not needed".
+1.  A code block with the commands that made the two file lists, `fastq_paths.txt` and `fastq_files.txt`, and the checks that told you something about the data: how many files there are, whether there are as many R1 as R2 files, what the first lines of a fastq file look like, and how many lines one file has
 
 ::: {.callout-notebook-answer .callout-note collapse="true" title="Compare with my notes"}
 ```` markdown
@@ -1247,10 +1247,7 @@ zcat data/seq_project/barcode001_User1_ITS_1_L001/Sample-DUMMY1_R2.fastq.gz | wc
 ```
 
 There are 8 files, 4 R1 and 4 R2, so every sample has both.
-In a fastq file, each read takes 4 lines: identifier, sequence, separator (`+`) and quality scores.
 Sample-DUMMY1_R2 has 179,384 lines, so 179,384 / 4 = 44,846 reads.
-
-`results/combined/` has the practice files from the `cat` section. Not needed for the analysis.
 ````
 :::
 :::
@@ -1557,7 +1554,7 @@ Here:
 1.  `for file in data/seq_project/*/*.gz`: loop over all fastq.gz files
 2.  `if [[ $file == *_R1.fastq.gz ]]; then` ... `fi`: run the lines between `then` and `fi` only if the file name ends in `_R1.fastq.gz`. So the loop skips the R2 files
 3.  `r1_file=$file`: store the path of the R1 file in the variable `r1_file`
-4.  `r2_file=$(echo $file | sed 's/_R1/_R2/')`: the command `sed` replaces `_R1` with `_R2` in the path. This gives the path of the matching R2 file, which we store in the variable `r2_file`
+4.  `r2_file=$(echo $file | sed 's/_R1/_R2/')`: the command `sed` replaces `_R1` with `_R2` in the path. This gives the path of the matching R2 file, which we store in the variable `r2_file`. The [AWK tutorial](https://ndombrowski.github.io/AWK_tutorial/source/sed_basics.html#the-shape-of-a-sed-command) explains `sed` in more detail
 5.  `echo "$r1_file,$r2_file"`: print both paths on one line, separated by a comma
 
 We can add a column with the name of the sample folder, with `cut` from above:
@@ -1656,7 +1653,7 @@ Saving your commands in a script has a few advantages. You can run the same anal
 ::: {.callout-important title="Important: Write scripts in nano or a code editor, not in Word or Notepad" collapse="false"}
 Windows programs such as Notepad end every line with an extra invisible character. Bash on Linux does not understand this character, and the script fails with errors such as `$'\r': command not found` or `syntax error near unexpected token`. Word processors such as Word also add formatting and can change straight quotes (`"`) into curly quotes.
 
-To avoid this, write your scripts with `nano`. If you prefer a code editor such as RStudio or VS Code, check that it saves the file with `LF` line endings (in VS Code, you see `LF` or `CRLF` in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer.
+To avoid this, write your scripts with `nano`. If you prefer a code editor such as RStudio or VS Code, check that it saves the file with `LF` line endings (in VS Code, you see `LF` or `CRLF` in the bar at the bottom right, and can click it to change it). This becomes important on day 2, where the scripts run on a Linux computer. Lists and tables made in Excel or Notepad can have the same problem. We come back to this on day 2.
 
 If you like writing in RStudio, you can write the script there and copy it into `nano`. Or set RStudio to save with `LF` line endings: in **Tools > Global Options > Code > Saving**, set **Line ending conversion** to **Posix (LF)**.
 :::
@@ -1664,7 +1661,7 @@ If you like writing in RStudio, you can write the script there and copy it into 
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Counting lines per file"}
 Add a new heading `## Counting lines per file` to `notes.md`, and below it:
 
-1.  The command that ran the script, with a comment that says what the script does and which file it makes. We use `results/counts/line_counts_bash.txt` again on day 2. You don't need the code that made `line_counts.txt`, because it has the same content. One line that says where it came from is enough.
+1.  The command that ran the script, with a comment that says what the script does and which file it makes. Also add one line that says where `results/counts/line_counts.txt` came from (the loop in the `>>` section, the same commands as in the script). We use `line_counts.txt` again on day 2.
 2.  The check you ran afterwards, and below the code block, what you expected and what you saw
 
 You don't need to copy the loop itself into your notebook, because it is saved in `scripts/count_lines.sh`. The script is part of your documentation. Your notebook only needs to say which script you ran and what it made.
@@ -1677,7 +1674,7 @@ At the end of day 1, your project folder contains the data, some results, a scri
 ::: {.callout-notebook .callout-note collapse="false" title="Notebook checkpoint: Tidy your notebook"}
 1.  Below the main heading at the top of `notes.md`, add 2 or 3 sentences: what data this is, where it came from, and what you did with it today
 2.  Read your notebook from the top. Could you redo today's analysis from it alone, without this tutorial? Add what is missing
-3.  Check once more that your notebook explains every file and folder in your project. Run these inside `data_analysis`: `ls`, `ls results/*` and `ls scripts`
+3.  Check that your notebook explains every file and folder in your project. Run these inside `data_analysis`: `ls`, `ls results/*` and `ls scripts`. If something is not explained, add a line about it, even if it is "practice file, not needed"
 4.  Add a heading `## Questions for day 2` and write down anything that is still unclear. This is also handy for a real analysis and lets you keep track of loose ends.
 
 On day 2, you keep writing in the same `notes.md` on your own computer, also for the commands that you run on the HPC.
